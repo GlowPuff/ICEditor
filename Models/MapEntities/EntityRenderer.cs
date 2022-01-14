@@ -43,8 +43,8 @@ namespace Imperial_Commander_Editor
 
     public void BuildShape( TokenShape tokenShape )
     {
-      var ww = Application.Current.MainWindow.Width;
-      var hh = Application.Current.MainWindow.Height;
+      var ww = Utils.mainWindow.Width;
+      var hh = Utils.mainWindow.Height;
       var tx = Math.Abs( Math.Min( 0, where.X ) ) + (ww / 2) - (showPanel ? 225 : 0);
       var ty = Math.Abs( Math.Min( 0, where.Y ) ) + (hh / 2) - 125;
 
@@ -90,8 +90,8 @@ namespace Imperial_Commander_Editor
 
     public void BuildImage( string imageURI )
     {
-      var ww = Application.Current.MainWindow.Width;
-      var hh = Application.Current.MainWindow.Height;
+      var ww = Utils.mainWindow.Width;
+      var hh = Utils.mainWindow.Height;
       var tx = Math.Abs( Math.Min( 0, where.X ) ) + (ww / 2) - (showPanel ? 225 : 0);
       var ty = Math.Abs( Math.Min( 0, where.Y ) ) + (hh / 2) - 125;
 

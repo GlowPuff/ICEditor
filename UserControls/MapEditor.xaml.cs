@@ -257,8 +257,8 @@ namespace Imperial_Commander_Editor
 
     private void CenterMap()
     {
-      var w = Application.Current.MainWindow.Width;
-      var h = Application.Current.MainWindow.Height;
+      var w = Utils.mainWindow.Width;
+      var h = Utils.mainWindow.Height;
       mScale = 1;
       scaleTransform.ScaleX = mScale;
       scaleTransform.ScaleY = mScale;
@@ -367,8 +367,8 @@ namespace Imperial_Commander_Editor
     {
       if ( e != null )
       {
-        var w = Application.Current.MainWindow.Width;
-        var h = Application.Current.MainWindow.Height;
+        var w = Utils.mainWindow.Width;
+        var h = Utils.mainWindow.Height;
         mScale = 1;
         scaleTransform.ScaleX = mScale;
         scaleTransform.ScaleY = mScale;

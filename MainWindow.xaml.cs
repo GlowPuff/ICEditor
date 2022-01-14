@@ -17,7 +17,7 @@ namespace Imperial_Commander_Editor
   public partial class MainWindow : Window, INotifyPropertyChanged
   {
     MapSection _activeSection;
-    bool loadMap = false;
+    string _mainTitle;
 
     public event PropertyChangedEventHandler PropertyChanged;
 
@@ -62,6 +62,7 @@ namespace Imperial_Commander_Editor
         return trigs;
       }
     }
+    public string mainTitle { get { return _mainTitle; } set { _mainTitle = value; PC(); } }
 
     public void PC( [CallerMemberName] string n = "" )
     {
@@ -91,9 +92,15 @@ namespace Imperial_Commander_Editor
 
       mission = s ?? new();
       if ( s == null )
+      {
         mission.InitDefaultData();
+        mainTitle = "Imperial Commander Mission Editor - New Mission (unsaved)";
+      }
       else
+      {
         mapEditor.LoadMap();
+        mainTitle = $"Imperial Commander Mission Editor - {mission.fileName}";
+      }
 
       DataContext = this;
 
@@ -140,9 +147,10 @@ namespace Imperial_Commander_Editor
     private void saveMissionButton_Click( object sender, RoutedEventArgs e )
     {
       if ( FileManager.Save( mission ) )
-        mapSections.infoSnackbar.MessageQueue?.Enqueue( "Mission Saved" );
-      else
-        mapSections.infoSnackbar.MessageQueue?.Enqueue( "Error Saving Mission" );
+        mainTitle = $"Imperial Commander Mission Editor - {mission.fileName}";
+      //  mapSections.infoSnackbar.MessageQueue?.Enqueue( "Mission Saved" );
+      //else
+      //  mapSections.infoSnackbar.MessageQueue?.Enqueue( "Error Saving Mission" );
     }
 
     private void addTriggerButton_Click( object sender, RoutedEventArgs e )

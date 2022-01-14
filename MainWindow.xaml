@@ -8,7 +8,7 @@
 				Style="{StaticResource dws}"
 				ResizeMode="CanResize"
 				WindowStyle="SingleBorderWindow"
-				xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" Title="Imperial Commander Mission Editor" Height="800" Width="1100" MinWidth="400" WindowStartupLocation="CenterScreen" d:DesignHeight="600" d:DesignWidth="800" Loaded="Window_Loaded">
+				xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" Title="{Binding mainTitle}" Height="800" Width="1100" MinWidth="400" WindowStartupLocation="CenterScreen" d:DesignHeight="600" d:DesignWidth="800" Loaded="Window_Loaded">
 
   <Grid>
     <!--<materialDesign:Snackbar x:Name="infoSnackbar" Foreground="White" IsActive="False" MessageQueue="{materialDesign:MessageQueue}" Background="MediumPurple"/>-->

@@ -166,6 +166,7 @@ namespace Imperial_Commander_Editor
     private void addBlockButton_Click( object sender, RoutedEventArgs e )
     {
       var n = new MapSection();
+      n.Init();
       mission.mapSections.Add( n );
       activeSection = n;
     }

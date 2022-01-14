@@ -50,6 +50,10 @@ namespace Imperial_Commander_Editor
       GUID = Guid.NewGuid();
       name = "New Section";
       _invisibleUntilActivated = false;
+    }
+
+    public void Init()
+    {
       triggers = new ObservableCollection<Trigger>()
         {
           new()

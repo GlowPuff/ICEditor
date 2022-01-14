@@ -75,13 +75,6 @@ namespace Imperial_Commander_Editor
         entityShape.Fill = new SolidColorBrush( Colors.Transparent );
         Canvas.SetLeft( entityShape, tx / scale );
         Canvas.SetTop( entityShape, ty / scale );
-        //the visible door rect
-        //subShape = new Rectangle();
-        //subShape.Width = 10 * dims.X;
-        //subShape.Height = 5 * dims.Y;
-        //subShape.Fill = new SolidColorBrush( Colors.Orange );
-        //Canvas.SetLeft( subShape, tx / scale );
-        //Canvas.SetTop( subShape, ty / scale );
       }
 
       entityShape.DataContext = mapEntity;
@@ -143,6 +136,7 @@ namespace Imperial_Commander_Editor
       entityShape.RenderTransform = new RotateTransform( t.Angle );
       if ( entityImage != null )
         entityImage.RenderTransform = new RotateTransform( t.Angle );
+      mapEntity.entityRotation = t.Angle;
     }
     public void RoundPosition()
     {
@@ -156,6 +150,9 @@ namespace Imperial_Commander_Editor
         Canvas.SetLeft( entityImage, mx );
         Canvas.SetTop( entityImage, my );
       }
+
+      where = GetPosition();
+      mapEntity.entityPosition = where;
     }
     public void Select()
     {
@@ -202,6 +199,15 @@ namespace Imperial_Commander_Editor
       var mx = Canvas.GetLeft( entityShape );
       var my = Canvas.GetTop( entityShape );
       return new( mx, my );
+    }
+    public void SetRotation( double r )
+    {
+      mapEntity.entityRotation = r;
+      var t = entityShape.RenderTransform as RotateTransform ?? new RotateTransform();
+      t.Angle = r;
+      entityShape.RenderTransform = new RotateTransform( t.Angle );
+      if ( entityImage != null )
+        entityImage.RenderTransform = new RotateTransform( t.Angle );
     }
   }
 }

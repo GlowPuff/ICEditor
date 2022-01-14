@@ -70,13 +70,16 @@ namespace Imperial_Commander_Editor
 
     public void InitDefaultData()
     {
-      mapSections.Add( new()
+      MapSection mapSection = new()
       {
         name = "Start Section",
         GUID = Guid.Parse( "11111111-1111-1111-1111-111111111111" ),//Guid.Empty,
         canRemove = false,
         isActive = true
-      } );
+      };
+      mapSection.Init();
+
+      mapSections.Add( mapSection );
 
       //default global NONE trigger
       globalTriggers.Add( new()
@@ -89,7 +92,7 @@ namespace Imperial_Commander_Editor
       globalEvents.Add( new() { name = "None (Global)", GUID = Guid.Empty } );
 
       //debug
-      mapSections.Add( new() { name = "blah" } );
+      //mapSections.Add( new() { name = "blah" } );
     }
 
     public bool TriggerExists( Trigger t )

@@ -19,6 +19,7 @@ namespace Imperial_Commander_Editor
     public string name { get { return _name; } set { _name = value; PC(); } }
     public EntityType entityType { get; set; }
     public Vector entityPosition { get; set; }
+    public double entityRotation { get; set; }
     [JsonIgnore]
     public EntityRenderer mapRenderer { get; set; }
     public EntityProperties entityProperties { get; set; }

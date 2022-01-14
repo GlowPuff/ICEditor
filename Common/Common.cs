@@ -115,7 +115,8 @@ namespace Imperial_Commander_Editor
     Guid GUID { get; set; }
     string name { get; set; }
     EntityType entityType { get; set; }
-    Vector entityPosition { get { return mapRenderer.where; } set { } }
+    Vector entityPosition { get; set; }
+    double entityRotation { get; set; }
     [JsonIgnore]
     EntityRenderer mapRenderer { get; set; }
     EntityProperties entityProperties { get; set; }

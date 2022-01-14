@@ -19,6 +19,7 @@ namespace Imperial_Commander_Editor
     public string name { get; set; }
     public EntityType entityType { get; set; }
     public Vector entityPosition { get; set; }
+    public double entityRotation { get; set; }
 
     //tile props
     public string tileID { get { return _tileID; } set { _tileID = value; PC(); } }

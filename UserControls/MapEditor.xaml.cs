@@ -434,13 +434,19 @@ namespace Imperial_Commander_Editor
       {
         foreach ( var tile in s.mapTiles )
         {
-          ((MapTile)tile).BuildRenderer( MainCanvas, tile.entityPosition, true, mScale );
+          Vector p = tile.entityPosition;
+          ((MapTile)tile).BuildRenderer( MainCanvas, p, true, mScale );
+          tile.mapRenderer.SetPosition( p );
+          tile.mapRenderer.SetRotation( tile.entityRotation );
           selectedEntity = tile;
         }
       }
       foreach ( var item in Utils.mainWindow.mission.mapEntities )
       {
-        item.BuildRenderer( MainCanvas, item.entityPosition, showPanel, mScale );
+        Vector p = item.entityPosition;
+        item.BuildRenderer( MainCanvas, p, showPanel, mScale );
+        item.mapRenderer.SetPosition( p );
+        item.mapRenderer.SetRotation( item.entityRotation );
         selectedEntity = item;
       }
     }

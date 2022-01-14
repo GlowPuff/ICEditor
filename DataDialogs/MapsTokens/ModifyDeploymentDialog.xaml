@@ -1,0 +1,85 @@
+﻿<Window x:Class="Imperial_Commander_Editor.ModifyDeploymentDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Imperial_Commander_Editor"
+        mc:Ignorable="d"
+        Style="{StaticResource dws}"
+       	xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+				Title="Modify Deployment" Width="575" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown" SizeToContent="Height">
+
+	<Window.Resources>
+		<DataTemplate x:Key="k1">
+			<Grid Margin="0,10,0,10">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="2*" />
+					<ColumnDefinition Width="1*" />
+					<ColumnDefinition Width="1.5*"/>
+					<ColumnDefinition Width=".5*"/>
+				</Grid.ColumnDefinitions>
+
+				<TextBlock Text="{Binding name}" VerticalAlignment="Center"/>
+				<CheckBox IsChecked="{Binding isActive}" Grid.Column="1" HorizontalAlignment="Center"/>
+				<ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectedValue="{Binding deploymentColor}" ItemsSource="{Binding deploymentColors, RelativeSource={RelativeSource AncestorType=Window}}" DisplayMemberPath="name" Grid.Column="2"/>
+				<Button x:Name="remDPButton" Content="{materialDesign:PackIcon Kind=RemoveBold}" Foreground="Red" Click="remDPButton_Click" Grid.Column="3" HorizontalAlignment="Center" Style="{StaticResource MaterialDesignFloatingActionButton}" Margin="10,0,0,0" Width="35" Height="35"/>
+			</Grid>
+		</DataTemplate>
+	</Window.Resources>
+
+	<Border BorderBrush="MediumPurple" BorderThickness="2">
+		<GroupBox Header="Modify Deployment Event Action" Style="{DynamicResource MaterialDesignGroupBox}">
+			<Grid>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="*"/>
+					<RowDefinition Height="auto"/>
+				</Grid.RowDefinitions>
+
+				<StackPanel>
+					<materialDesign:Card Padding="10" Background="MediumPurple" MaxWidth="350">
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="*" />
+								<ColumnDefinition Width="auto" />
+							</Grid.ColumnDefinitions>
+
+							<ComboBox x:Name="dpCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectedValue="{Binding selectedDP, RelativeSource={RelativeSource AncestorType=Window}}" DisplayMemberPath="name"/>
+
+							<Button x:Name="addDPButton" Grid.Column="1" Content="{materialDesign:PackIcon Kind=AddBold}" Margin="10,0,0,0" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35" Click="addDPButton_Click"/>
+						</Grid>
+					</materialDesign:Card>
+
+					<Grid Margin="0,10,0,10">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="2*" />
+							<ColumnDefinition Width=".5*" />
+							<ColumnDefinition Width="1.5*"/>
+							<ColumnDefinition Width=".5*"/>
+						</Grid.ColumnDefinitions>
+
+						<TextBlock Text="Name"/>
+						<TextBlock Text="Is Active?" Grid.Column="1" HorizontalAlignment="Center"/>
+						<TextBlock Text="Change Color To:" Grid.Column="2" HorizontalAlignment="Center"/>
+					</Grid>
+
+					<!--LIST BOX-->
+					<materialDesign:Card Background="Purple" Padding="10">
+						<ListBox ItemsSource="{Binding deploymentModifiers}" HorizontalContentAlignment="Stretch" ItemTemplate="{StaticResource k1}">
+							<ListBox.ItemContainerStyle>
+								<Style TargetType="ListBoxItem" BasedOn="{StaticResource MaterialDesignListBoxItem}">
+									<Setter Property="materialDesign:ListBoxItemAssist.ShowSelection" Value="False" />
+								</Style>
+							</ListBox.ItemContainerStyle>
+						</ListBox>
+
+					</materialDesign:Card>
+				</StackPanel>
+
+				<StackPanel Grid.Row="1" Margin="0,10,0,0">
+					<Separator Margin="0,0,0,10"/>
+					<Button x:Name="okButton" Content="ACCEPT" Click="okButton_Click" IsDefault="True" HorizontalAlignment="Right"/>
+				</StackPanel>
+			</Grid>
+		</GroupBox>
+	</Border>
+</Window>

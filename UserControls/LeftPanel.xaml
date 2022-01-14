@@ -1,0 +1,74 @@
+﻿<UserControl x:Class="Imperial_Commander_Editor.LeftPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+						 xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:Imperial_Commander_Editor"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="225">
+
+	<Grid Background="#FF3A3349">
+		<Border Padding="10" BorderThickness="0,0,1,0" BorderBrush="MediumPurple">
+			<ScrollViewer VerticalScrollBarVisibility="Auto">
+				<StackPanel>
+					<materialDesign:Card Background="MediumPurple" Padding="5" Margin="0,0,0,10">
+						<Grid>
+							<TextBlock x:Name="localText" HorizontalAlignment="Center" FontWeight="Bold" Text="{Binding activeSection.name, StringFormat=Displaying \'{0}\'}" Style="{StaticResource MaterialDesignBody1TextBlock}" Foreground="White" TextWrapping="Wrap"/>
+							<TextBlock x:Name="globalText" HorizontalAlignment="Center" FontWeight="Bold" Style="{StaticResource MaterialDesignBody1TextBlock}" Foreground="White" TextWrapping="Wrap" Visibility="Hidden" Text="Displaying Global Data"/>
+						</Grid>
+					</materialDesign:Card>
+
+					<!--global switch-->
+					<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
+						<TextBlock Text="Show Global Items" Margin="0,0,10,0" Foreground="White"/>
+						<ToggleButton x:Name="showGlobalToggle" IsChecked="{Binding showGlobal}" Click="showGlobalToggle_Click"/>
+					</StackPanel>
+
+					<!--triggers-->
+					<materialDesign:Card Background="#FF7952C0" Padding="10" Margin="0,0,0,10">
+						<StackPanel>
+							<TextBlock HorizontalAlignment="Center" Text="Trigger Variables" Foreground="White"/>
+							<ComboBox Margin="10,5,10,10"
+    x:Name="triggersCB"
+    Style="{StaticResource MaterialDesignOutlinedComboBox}" DisplayMemberPath="name"/>
+							<UniformGrid Columns="3">
+								<Button x:Name="addTriggerButton" Grid.Column="0" Click="addTriggerButton_Click">
+									<materialDesign:PackIcon Kind="AddBold" Width="24" Height="24" HorizontalAlignment="Center" Foreground="Lime"/>
+								</Button>
+								<Button x:Name="remTriggerButton" Grid.Column="1" Margin="5,0" Click="remTriggerButton_Click">
+									<materialDesign:PackIcon Kind="RemoveBold" Width="24" Height="24" HorizontalAlignment="Center" Foreground="Red"/>
+								</Button>
+								<Button x:Name="editTriggerButton" Grid.Column="3" Click="editTriggerButton_Click">
+									<materialDesign:PackIcon Kind="Settings" Width="24" Height="24" HorizontalAlignment="Center"/>
+								</Button>
+							</UniformGrid>
+						</StackPanel>
+					</materialDesign:Card>
+
+
+					<!--events-->
+					<materialDesign:Card Background="#FF7952C0" Padding="10">
+						<StackPanel>
+							<TextBlock HorizontalAlignment="Center" Text="Events" Foreground="White"/>
+							<ComboBox Margin="10,5,10,10"
+    x:Name="eventsCB"
+    Style="{StaticResource MaterialDesignOutlinedComboBox}" DisplayMemberPath="name"/>
+							<UniformGrid Columns="3">
+								<Button x:Name="addEventButton" Grid.Column="0" Click="addEventButton_Click">
+									<materialDesign:PackIcon Kind="AddBold" Width="24" Height="24" HorizontalAlignment="Center" Foreground="Lime"/>
+								</Button>
+								<Button x:Name="remEventButton" Grid.Column="1" Margin="5,0" Click="remEventButton_Click">
+									<materialDesign:PackIcon Kind="RemoveBold" Width="24" Height="24" HorizontalAlignment="Center" Foreground="Red"/>
+								</Button>
+								<Button x:Name="editEventButton" Grid.Column="3" Click="editEventButton_Click">
+									<materialDesign:PackIcon Kind="Settings" Width="24" Height="24" HorizontalAlignment="Center"/>
+								</Button>
+							</UniformGrid>
+						</StackPanel>
+					</materialDesign:Card>
+				</StackPanel>
+			</ScrollViewer>
+		</Border>
+	</Grid>
+</UserControl>

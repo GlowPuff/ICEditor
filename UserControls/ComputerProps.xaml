@@ -1,0 +1,61 @@
+﻿<UserControl x:Class="Imperial_Commander_Editor.ComputerProps"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Imperial_Commander_Editor"
+             mc:Ignorable="d" 
+						 xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" d:DesignWidth="200">
+
+	<Grid Background="#FF503B7C">
+		<StackPanel>
+			<materialDesign:Card Background="MediumPurple" Padding="10">
+				<StackPanel>
+					<TextBlock Text="COMPUTER CONSOLE" HorizontalAlignment="Center"/>
+					<TextBox Text="{Binding name}" materialDesign:HintAssist.Hint="Entity Name" Style="{StaticResource MaterialDesignOutlinedTextBox}" Margin="0,10,0,0"/>
+				</StackPanel>
+			</materialDesign:Card>
+
+			<!--ACTIVE-->
+			<materialDesign:Card Background="MediumPurple" Padding="10" Margin="0,10">
+				<StackPanel>
+					<TextBlock Text="Is Active?" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+					<UniformGrid Columns="3">
+						<TextBlock Text="No" HorizontalAlignment="Right"/>
+						<ToggleButton IsChecked="{Binding entityProperties.isActive}"/>
+						<TextBlock Text="Yes"/>
+					</UniformGrid>
+				</StackPanel>
+			</materialDesign:Card>
+
+			<!--ENTITY PROPS-->
+			<materialDesign:Card Background="MediumPurple" Padding="10">
+				<StackPanel>
+					<Button x:Name="editPropsBtn" Click="editPropsBtn_Click" Content="EDIT PROPERTIES"/>
+				</StackPanel>
+			</materialDesign:Card>
+
+			<!--button text-->
+			<!--<materialDesign:Card Background="MediumPurple" Margin="0,10" Padding="10">
+				<StackPanel>
+					<TextBox Text="{Binding buttonText}" CharacterCasing="Upper" Style="{StaticResource MaterialDesignOutlinedTextBox}" materialDesign:HintAssist.Hint="Button Text"/>
+				</StackPanel>
+			</materialDesign:Card>-->
+
+			<!--description-->
+			<!--<materialDesign:Card Background="MediumPurple" Padding="10">
+				<StackPanel>
+					<TextBlock Text="Description:" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+					<UniformGrid Columns="2">
+						<TextBlock Text="{Binding setInfo}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+						<Button x:Name="setDescButton" Content="SET TEXT" HorizontalAlignment="Center" Click="setDescButton_Click"/>
+					</UniformGrid>
+				</StackPanel>
+			</materialDesign:Card>-->
+
+			<!--event-->
+			<!--<TextBlock Text="Fire This Event:" HorizontalAlignment="Center" Margin="0,10"/>
+			<ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectedValue="{Binding missionEvent}" SelectedValuePath="GUID" ItemsSource="{Binding DataContext.localEvents, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" DisplayMemberPath="name"/>-->
+		</StackPanel>
+	</Grid>
+</UserControl>

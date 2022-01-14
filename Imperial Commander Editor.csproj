@@ -1,0 +1,223 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <RootNamespace>Imperial_Commander_Editor</RootNamespace>
+    <UseWPF>true</UseWPF>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
+    <Win32Resource />
+    <StartupObject>Imperial_Commander_Editor.App</StartupObject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Assets\addblock.png" />
+    <None Remove="Assets\addevent.png" />
+    <None Remove="Assets\addtrigger.png" />
+    <None Remove="Assets\bg.png" />
+    <None Remove="Assets\cancel.png" />
+    <None Remove="Assets\Data\allies.json" />
+    <None Remove="Assets\Data\dimensions.json" />
+    <None Remove="Assets\Data\enemies.json" />
+    <None Remove="Assets\Data\heroes.json" />
+    <None Remove="Assets\Data\villains.json" />
+    <None Remove="Assets\edit.png" />
+    <None Remove="Assets\enemy.png" />
+    <None Remove="Assets\imperial.png" />
+    <None Remove="Assets\ok.png" />
+    <None Remove="Assets\open.png" />
+    <None Remove="Assets\remove2.png" />
+    <None Remove="Assets\save.png" />
+    <None Remove="Assets\settings.png" />
+    <None Remove="Assets\Tiles\Core\1A.jpg" />
+    <None Remove="Assets\Tiles\Core\1B.jpg" />
+    <None Remove="Assets\Tiles\Core\Core_10A.jpg" />
+    <None Remove="Assets\Tiles\Core\Core_10B.jpg" />
+    <None Remove="Assets\Tiles\Core\Core_11A.jpg" />
+    <None Remove="Assets\Tiles\Core\Core_11B.jpg" />
+    <None Remove="Assets\Tiles\Core\Core_12A.jpg" />
+    <None Remove="Assets\Tiles\Core\Core_12B.jpg" />
+    <None Remove="Assets\Tiles\Core\Core_13A.jpg" />
+    <None Remove="Assets\Tiles\Core\Core_13B.jpg" />
+    <None Remove="Assets\Tiles\Core\Core_14A.jpg" />
+    <None Remove="Assets\Tiles\Core\Core_14B.jpg" />
+    <None Remove="Assets\Tiles\Core\Core_15A.jpg" />
+    <None Remove="Assets\Tiles\Core\Core_15B.jpg" />
+    <None Remove="Assets\Tiles\Core\Core_16A.jpg" />
+    <None Remove="Assets\Tiles\Core\Core_16B.jpg" />
+    <None Remove="Assets\Tiles\Core\Core_17A.jpg" />
+    <None Remove="Assets\Tiles\Core\Core_17B.jpg" />
+    <None Remove="Assets\Tiles\Core\Core_18A.jpg" />
+    <None Remove="Assets\Tiles\Core\Core_18B.jpg" />
+    <None Remove="Assets\Tiles\Core\Core_19A.jpg" />
+    <None Remove="Assets\Tiles\Core\Core_19B.jpg" />
+    <None Remove="Assets\Tiles\Core\Core_1A.jpg" />
+    <None Remove="Assets\Tiles\Core\Core_1B.jpg" />
+    <None Remove="Assets\Tiles\Core\Core_20A.jpg" />
+    <None Remove="Assets\Tiles\Core\Core_20B.jpg" />
+    <None Remove="Assets\Tiles\Core\Core_21A.jpg" />
+    <None Remove="Assets\Tiles\Core\Core_21B.jpg" />
+    <None Remove="Assets\Tiles\Core\Core_22A.jpg" />
+    <None Remove="Assets\Tiles\Core\Core_22B.jpg" />
+    <None Remove="Assets\Tiles\Core\Core_23A.jpg" />
+    <None Remove="Assets\Tiles\Core\Core_23B.jpg" />
+    <None Remove="Assets\Tiles\Core\Core_24A.jpg" />
+    <None Remove="Assets\Tiles\Core\Core_24B.jpg" />
+    <None Remove="Assets\Tiles\Core\Core_25A.jpg" />
+    <None Remove="Assets\Tiles\Core\Core_25B.jpg" />
+    <None Remove="Assets\Tiles\Core\Core_26A.jpg" />
+    <None Remove="Assets\Tiles\Core\Core_26B.jpg" />
+    <None Remove="Assets\Tiles\Core\Core_27A.jpg" />
+    <None Remove="Assets\Tiles\Core\Core_27B.jpg" />
+    <None Remove="Assets\Tiles\Core\Core_28A.jpg" />
+    <None Remove="Assets\Tiles\Core\Core_28B.jpg" />
+    <None Remove="Assets\Tiles\Core\Core_29A.jpg" />
+    <None Remove="Assets\Tiles\Core\Core_29B.jpg" />
+    <None Remove="Assets\Tiles\Core\Core_2A.jpg" />
+    <None Remove="Assets\Tiles\Core\Core_2B.jpg" />
+    <None Remove="Assets\Tiles\Core\Core_30A.jpg" />
+    <None Remove="Assets\Tiles\Core\Core_30B.jpg" />
+    <None Remove="Assets\Tiles\Core\Core_31A.jpg" />
+    <None Remove="Assets\Tiles\Core\Core_31B.jpg" />
+    <None Remove="Assets\Tiles\Core\Core_32A.jpg" />
+    <None Remove="Assets\Tiles\Core\Core_32B.jpg" />
+    <None Remove="Assets\Tiles\Core\Core_33A.jpg" />
+    <None Remove="Assets\Tiles\Core\Core_33B.jpg" />
+    <None Remove="Assets\Tiles\Core\Core_34A.jpg" />
+    <None Remove="Assets\Tiles\Core\Core_34B.jpg" />
+    <None Remove="Assets\Tiles\Core\Core_35A.jpg" />
+    <None Remove="Assets\Tiles\Core\Core_35B.jpg" />
+    <None Remove="Assets\Tiles\Core\Core_36A.jpg" />
+    <None Remove="Assets\Tiles\Core\Core_36B.jpg" />
+    <None Remove="Assets\Tiles\Core\Core_37A.jpg" />
+    <None Remove="Assets\Tiles\Core\Core_37B.jpg" />
+    <None Remove="Assets\Tiles\Core\Core_38A.jpg" />
+    <None Remove="Assets\Tiles\Core\Core_38B.jpg" />
+    <None Remove="Assets\Tiles\Core\Core_39A.jpg" />
+    <None Remove="Assets\Tiles\Core\Core_39B.jpg" />
+    <None Remove="Assets\Tiles\Core\Core_3A.jpg" />
+    <None Remove="Assets\Tiles\Core\Core_3B.jpg" />
+    <None Remove="Assets\Tiles\Core\Core_4A.jpg" />
+    <None Remove="Assets\Tiles\Core\Core_4B.jpg" />
+    <None Remove="Assets\Tiles\Core\Core_5A.jpg" />
+    <None Remove="Assets\Tiles\Core\Core_5B.jpg" />
+    <None Remove="Assets\Tiles\Core\Core_6A.jpg" />
+    <None Remove="Assets\Tiles\Core\Core_6B.jpg" />
+    <None Remove="Assets\Tiles\Core\Core_7A.jpg" />
+    <None Remove="Assets\Tiles\Core\Core_7B.jpg" />
+    <None Remove="Assets\Tiles\Core\Core_8A.jpg" />
+    <None Remove="Assets\Tiles\Core\Core_8B.jpg" />
+    <None Remove="Assets\Tiles\Core\Core_9A.jpg" />
+    <None Remove="Assets\Tiles\Core\Core_9B.jpg" />
+    <None Remove="Assets\Tiles\door.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MaterialDesignThemes" Version="4.2.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\addblock.png" />
+    <Resource Include="Assets\addevent.png" />
+    <Resource Include="Assets\addtrigger.png" />
+    <Resource Include="Assets\bg.png" />
+    <Resource Include="Assets\cancel.png" />
+    <EmbeddedResource Include="Assets\Data\allies.json" />
+    <EmbeddedResource Include="Assets\Data\dimensions.json" />
+    <EmbeddedResource Include="Assets\Data\enemies.json" />
+    <EmbeddedResource Include="Assets\Data\heroes.json" />
+    <EmbeddedResource Include="Assets\Data\villains.json" />
+    <Resource Include="Assets\edit.png" />
+    <Resource Include="Assets\enemy.png" />
+    <Resource Include="Assets\imperial.png" />
+    <Resource Include="Assets\new mission.png" />
+    <Resource Include="Assets\ok.png" />
+    <Resource Include="Assets\open.png" />
+    <Resource Include="Assets\remove2.png" />
+    <Resource Include="Assets\save.png" />
+    <Resource Include="Assets\settings.png" />
+    <Resource Include="Assets\Tiles\Core\1A.jpg" />
+    <Resource Include="Assets\Tiles\Core\1B.jpg" />
+    <Resource Include="Assets\Tiles\Core\Core_10A.jpg" />
+    <Resource Include="Assets\Tiles\Core\Core_10B.jpg" />
+    <Resource Include="Assets\Tiles\Core\Core_11A.jpg" />
+    <Resource Include="Assets\Tiles\Core\Core_11B.jpg" />
+    <Resource Include="Assets\Tiles\Core\Core_12A.jpg" />
+    <Resource Include="Assets\Tiles\Core\Core_12B.jpg" />
+    <Resource Include="Assets\Tiles\Core\Core_13A.jpg" />
+    <Resource Include="Assets\Tiles\Core\Core_13B.jpg" />
+    <Resource Include="Assets\Tiles\Core\Core_14A.jpg" />
+    <Resource Include="Assets\Tiles\Core\Core_14B.jpg" />
+    <Resource Include="Assets\Tiles\Core\Core_15A.jpg" />
+    <Resource Include="Assets\Tiles\Core\Core_15B.jpg" />
+    <Resource Include="Assets\Tiles\Core\Core_16A.jpg" />
+    <Resource Include="Assets\Tiles\Core\Core_16B.jpg" />
+    <Resource Include="Assets\Tiles\Core\Core_17A.jpg" />
+    <Resource Include="Assets\Tiles\Core\Core_17B.jpg" />
+    <Resource Include="Assets\Tiles\Core\Core_18A.jpg" />
+    <Resource Include="Assets\Tiles\Core\Core_18B.jpg" />
+    <Resource Include="Assets\Tiles\Core\Core_19A.jpg" />
+    <Resource Include="Assets\Tiles\Core\Core_19B.jpg" />
+    <Resource Include="Assets\Tiles\Core\Core_1A.jpg" />
+    <Resource Include="Assets\Tiles\Core\Core_1B.jpg" />
+    <Resource Include="Assets\Tiles\Core\Core_20A.jpg" />
+    <Resource Include="Assets\Tiles\Core\Core_20B.jpg" />
+    <Resource Include="Assets\Tiles\Core\Core_21A.jpg" />
+    <Resource Include="Assets\Tiles\Core\Core_21B.jpg" />
+    <Resource Include="Assets\Tiles\Core\Core_22A.jpg" />
+    <Resource Include="Assets\Tiles\Core\Core_22B.jpg" />
+    <Resource Include="Assets\Tiles\Core\Core_23A.jpg" />
+    <Resource Include="Assets\Tiles\Core\Core_23B.jpg" />
+    <Resource Include="Assets\Tiles\Core\Core_24A.jpg" />
+    <Resource Include="Assets\Tiles\Core\Core_24B.jpg" />
+    <Resource Include="Assets\Tiles\Core\Core_25A.jpg" />
+    <Resource Include="Assets\Tiles\Core\Core_25B.jpg" />
+    <Resource Include="Assets\Tiles\Core\Core_26A.jpg" />
+    <Resource Include="Assets\Tiles\Core\Core_26B.jpg" />
+    <Resource Include="Assets\Tiles\Core\Core_27A.jpg" />
+    <Resource Include="Assets\Tiles\Core\Core_27B.jpg" />
+    <Resource Include="Assets\Tiles\Core\Core_28A.jpg" />
+    <Resource Include="Assets\Tiles\Core\Core_28B.jpg" />
+    <Resource Include="Assets\Tiles\Core\Core_29A.jpg" />
+    <Resource Include="Assets\Tiles\Core\Core_29B.jpg" />
+    <Resource Include="Assets\Tiles\Core\Core_2A.jpg" />
+    <Resource Include="Assets\Tiles\Core\Core_2B.jpg" />
+    <Resource Include="Assets\Tiles\Core\Core_30A.jpg" />
+    <Resource Include="Assets\Tiles\Core\Core_30B.jpg" />
+    <Resource Include="Assets\Tiles\Core\Core_31A.jpg" />
+    <Resource Include="Assets\Tiles\Core\Core_31B.jpg" />
+    <Resource Include="Assets\Tiles\Core\Core_32A.jpg" />
+    <Resource Include="Assets\Tiles\Core\Core_32B.jpg" />
+    <Resource Include="Assets\Tiles\Core\Core_33A.jpg" />
+    <Resource Include="Assets\Tiles\Core\Core_33B.jpg" />
+    <Resource Include="Assets\Tiles\Core\Core_34A.jpg" />
+    <Resource Include="Assets\Tiles\Core\Core_34B.jpg" />
+    <Resource Include="Assets\Tiles\Core\Core_35A.jpg" />
+    <Resource Include="Assets\Tiles\Core\Core_35B.jpg" />
+    <Resource Include="Assets\Tiles\Core\Core_36A.jpg" />
+    <Resource Include="Assets\Tiles\Core\Core_36B.jpg" />
+    <Resource Include="Assets\Tiles\Core\Core_37A.jpg" />
+    <Resource Include="Assets\Tiles\Core\Core_37B.jpg" />
+    <Resource Include="Assets\Tiles\Core\Core_38A.jpg" />
+    <Resource Include="Assets\Tiles\Core\Core_38B.jpg" />
+    <Resource Include="Assets\Tiles\Core\Core_39A.jpg" />
+    <Resource Include="Assets\Tiles\Core\Core_39B.jpg" />
+    <Resource Include="Assets\Tiles\Core\Core_3A.jpg" />
+    <Resource Include="Assets\Tiles\Core\Core_3B.jpg" />
+    <Resource Include="Assets\Tiles\Core\Core_4A.jpg" />
+    <Resource Include="Assets\Tiles\Core\Core_4B.jpg" />
+    <Resource Include="Assets\Tiles\Core\Core_5A.jpg" />
+    <Resource Include="Assets\Tiles\Core\Core_5B.jpg" />
+    <Resource Include="Assets\Tiles\Core\Core_6A.jpg" />
+    <Resource Include="Assets\Tiles\Core\Core_6B.jpg" />
+    <Resource Include="Assets\Tiles\Core\Core_7A.jpg" />
+    <Resource Include="Assets\Tiles\Core\Core_7B.jpg" />
+    <Resource Include="Assets\Tiles\Core\Core_8A.jpg" />
+    <Resource Include="Assets\Tiles\Core\Core_8B.jpg" />
+    <Resource Include="Assets\Tiles\Core\Core_9A.jpg" />
+    <Resource Include="Assets\Tiles\Core\Core_9B.jpg" />
+    <Resource Include="Assets\Tiles\door.png" />
+  </ItemGroup>
+
+</Project>

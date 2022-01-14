@@ -1,0 +1,156 @@
+﻿<Window x:Class="Imperial_Commander_Editor.EnemyDeploymentDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Imperial_Commander_Editor"
+				xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+				Style="{StaticResource dws}"
+        Title="Enemy Deployment" Width="700" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown" SizeToContent="Height">
+
+	<Window.Resources>
+		<local:RadioBoolToIntConverter x:Key="rbConv" />
+	</Window.Resources>
+
+	<Border BorderBrush="MediumPurple" BorderThickness="2">
+		<GroupBox Header="Enemy Deployment Event Action" Style="{DynamicResource MaterialDesignGroupBox}">
+			<Grid Margin="-9">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="*"/>
+					<RowDefinition Height="auto"/>
+				</Grid.RowDefinitions>
+
+				<TabControl x:Name="tabControl"
+  Style="{StaticResource MaterialDesignNavigatilRailTabControl}"
+  materialDesign:ColorZoneAssist.Mode="PrimaryMid"
+  materialDesign:NavigationRailAssist.ShowSelectionBackground="True">
+					<TabControl.Background>
+						<SolidColorBrush Color="#FF3A3349"/>
+					</TabControl.Background>
+
+					<TabItem Width="90">
+						<TabItem.Header>
+							<TextBlock Text="General" HorizontalAlignment="Center" />
+						</TabItem.Header>
+						<UniformGrid Columns="2" Margin="5,10,5,0">
+							<StackPanel Margin="5,0">
+								<ComboBox x:Name="enemyCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectedValue="{Binding deploymentGroup}" SelectedValuePath="id">
+									<ComboBox.ItemTemplate>
+										<DataTemplate>
+											<TextBlock>
+												<TextBlock.Text>
+													<MultiBinding StringFormat="{}{0}: {1}">
+														<Binding Path="name"/>
+														<Binding Path="id"/>
+													</MultiBinding>
+												</TextBlock.Text>
+											</TextBlock>
+										</DataTemplate>
+									</ComboBox.ItemTemplate>
+								</ComboBox>
+
+								<!--SOURCE-->
+								<materialDesign:Card Margin="0,10" Padding="10" Background="MediumPurple">
+									<StackPanel>
+										<RadioButton GroupName="source" Content="Initial / Reserved" VerticalAlignment="Center" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding Path=sourceType, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:SourceType.InitialReserved}}"/>
+
+										<RadioButton GroupName="source" Content="Manual" VerticalAlignment="Center" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding Path=sourceType, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:SourceType.Manual}}"/>
+
+										<RadioButton GroupName="source" Content="Hand" VerticalAlignment="Center" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding Path=sourceType, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:SourceType.Hand}}"/>
+									</StackPanel>
+								</materialDesign:Card>
+
+								<!--OPTIONS-->
+								<materialDesign:Card Padding="10" Background="MediumPurple">
+									<StackPanel>
+										<CheckBox Content="Can Be Reinforced" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding canReinforce}"/>
+										<CheckBox Content="Can Be Redeployed" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding canRedeploy}"/>
+									</StackPanel>
+								</materialDesign:Card>
+
+								<!--ON DEFEAT-->
+								<GroupBox Header="On Defeated, Set +1:" Margin="0,10,0,0">
+									<ComboBox x:Name="triggersCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" DisplayMemberPath="name" SelectedValue="{Binding setTrigger}" SelectedValuePath="GUID"/>
+								</GroupBox>
+							</StackPanel>
+
+							<!--COLUMN 2-->
+							<StackPanel Margin="5,0">
+								<!--event name-->
+								<GroupBox Header="Rename Enemy">
+									<TextBox x:Name="nameTB" Style="{StaticResource MaterialDesignOutlinedTextBox}" Text="{Binding enemyName}" materialDesign:HintAssist.Hint="Blank for default"/>
+								</GroupBox>
+
+								<!--DEPLOYMENT POINT-->
+								<GroupBox Header="Deployment Point" Margin="0,10">
+									<StackPanel>
+										<RadioButton GroupName="dpoint" Content="Active Deployment Point" VerticalAlignment="Center" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding Path=deploymentPoint, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:DeploymentSpot.Active}}"/>
+
+										<RadioButton x:Name="sdp" GroupName="dpoint" Content="Specific Deployment Point:" VerticalAlignment="Center" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding Path=deploymentPoint, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:DeploymentSpot.Specific}}"/>
+										<ComboBox x:Name="dpCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectedValue="{Binding specificDeploymentPoint}" SelectedValuePath="GUID" IsEnabled="{Binding Path=IsChecked, ElementName=sdp}"/>
+									</StackPanel>
+								</GroupBox>
+
+								<!--OPTIONS-->
+								<materialDesign:Card Padding="10" Background="MediumPurple">
+									<StackPanel>
+										<UniformGrid Columns="2">
+											<CheckBox Content="Threat Cost" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding useThreat}"/>
+											<TextBox Text="{Binding threatCost}" VerticalAlignment="Center" Margin="10,0,0,0"/>
+										</UniformGrid>
+										<Grid>
+											<Grid.ColumnDefinitions>
+												<ColumnDefinition Width="auto" />
+												<ColumnDefinition Width="*" />
+											</Grid.ColumnDefinitions>
+											<CheckBox Content="Show Modification" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding showMod}"/>
+											<TextBox Text="{Binding modification}" Grid.Column="1" VerticalAlignment="Center" Margin="10,0,0,0"/>
+										</Grid>
+									</StackPanel>
+								</materialDesign:Card>
+							</StackPanel>
+						</UniformGrid>
+					</TabItem>
+
+					<TabItem Width="90">
+						<TabItem.Header>
+							<StackPanel>
+								<TextBlock Text="Custom" HorizontalAlignment="Center" TextWrapping="Wrap" />
+								<TextBlock Text="Instructions" HorizontalAlignment="Center" TextWrapping="Wrap" />
+							</StackPanel>
+						</TabItem.Header>
+						<StackPanel Margin="10,0">
+							<UniformGrid Columns="2" Margin="0,10,0,0">
+								<!--USE CUSTOM-->
+								<CheckBox Content="Use Custom Instructions" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding useCustomInstructions}"/>
+								<!--OPTIONS-->
+								<materialDesign:Card Padding="10" Background="MediumPurple">
+									<StackPanel>
+										<TextBlock Text="Placement" HorizontalAlignment="Center"/>
+										<UniformGrid Columns="3">
+
+											<RadioButton GroupName="coptions" Content="Top" VerticalAlignment="Center" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding Path=customInstructionType, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:CustomInstructionType.Top}}"/>
+
+											<RadioButton GroupName="coptions" Content="Bottom" VerticalAlignment="Center" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding Path=customInstructionType, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:CustomInstructionType.Bottom}}"/>
+
+											<RadioButton GroupName="coptions" Content="Replace" VerticalAlignment="Center" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding Path=customInstructionType, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:CustomInstructionType.Replace}}"/>
+										</UniformGrid>
+									</StackPanel>
+								</materialDesign:Card>
+							</UniformGrid>
+
+							<!--TEXT-->
+							<TextBox x:Name="textbox" BorderThickness="2" BorderBrush="MediumPurple" AcceptsReturn="True" Foreground="White" CaretBrush="White" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap" Text="{Binding customText}" MinHeight="200" Margin="0,10,0,0"/>
+						</StackPanel>
+					</TabItem>
+				</TabControl>
+
+				<StackPanel Grid.Row="1">
+					<Separator Margin="0,0,0,10"/>
+					<Button x:Name="okButton" Content="ACCEPT" Click="okButton_Click" IsDefault="True" HorizontalAlignment="Right" Margin="0,0,10,10"/>
+				</StackPanel>
+			</Grid>
+		</GroupBox>
+	</Border>
+</Window>

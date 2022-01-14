@@ -1,0 +1,111 @@
+﻿<Window x:Class="Imperial_Commander_Editor.TileGallery"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Imperial_Commander_Editor"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+		Style="{StaticResource dws}"
+		ResizeMode="CanResize"
+        WindowStyle="None"
+        Title="Tile Gallery" Height="600" Width="800"
+        WindowStartupLocation="CenterScreen" 
+        MouseDown="Window_MouseDown">
+
+  <!--<Window.Resources>
+    <local:TileSideConverter x:Key="tsc"/>
+  </Window.Resources>-->
+
+  <Border BorderBrush="MediumPurple" BorderThickness="2">
+    <GroupBox x:Name="gbox" Header="Tile Gallery" Style="{DynamicResource MaterialDesignGroupBox}">
+
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="*"/>
+          <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+
+        <!--TILES-->
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="10">
+          <ItemsControl x:Name="items" Padding="5" ItemsSource="{Binding tileObserverA}">
+            <ItemsControl.ItemsPanel>
+              <ItemsPanelTemplate>
+                <WrapPanel IsItemsHost="True" />
+              </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+
+            <ItemsControl.ItemTemplate>
+              <DataTemplate>
+                <StackPanel>
+                  <!--Background="{Binding selected, Converter={StaticResource b2c}}"-->
+                  <Button x:Name="tileButton"  Width="150" Height="150" DataContext="{Binding}" Click="tileButton_Click" MouseDoubleClick="tileButton_MouseDoubleClick" ToolTipService.InitialShowDelay="1000" ToolTipService.ShowDuration="20000">
+                    <Image Source="{Binding source}" Stretch="Uniform"/>
+                    <Button.ToolTip>
+                      <Image Source="{Binding source}" Width="512" Stretch="Uniform" MaxHeight="512"/>
+                    </Button.ToolTip>
+                  </Button>
+                  <StackPanel Margin="0,5,0,10" HorizontalAlignment="Center">
+                    <TextBlock Text="{Binding tileNumber, StringFormat=Tile {0}}"/>
+                    <!--<TextBlock Text="{Binding tileSide, StringFormat=Side {0}}"/>-->
+                  </StackPanel>
+                </StackPanel>
+              </DataTemplate>
+            </ItemsControl.ItemTemplate>
+          </ItemsControl>
+        </ScrollViewer>
+
+        <!--PROPS-->
+        <materialDesign:Card Grid.Column="1" Background="MediumPurple" Width="200" Padding="10">
+          <Grid>
+            <Grid.RowDefinitions>
+              <RowDefinition Height="auto" />
+              <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <StackPanel>
+              <GroupBox Header="EXPANSION" Background="#FF503B7C">
+                <StackPanel>
+                  <ComboBox x:Name="expansionCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" ItemsSource="{Binding expansionsList}" SelectedValue="{Binding selectedExpansion}"/>
+                  <UniformGrid Columns="3" Margin="0,10,0,0">
+                    <TextBlock Text="Side B"/>
+                    <ToggleButton IsChecked="{Binding selectedTileSideA}"/>
+                    <TextBlock Text="Side A" HorizontalAlignment="Right"/>
+                  </UniformGrid>
+                </StackPanel>
+              </GroupBox>
+
+              <!--FILTER-->
+              <!--<GroupBox Header="FILTER BY TILE NUMBER" Background="#FF503B7C" Margin="0,10,0,0">
+                <TextBox x:Name="filterTB" Style="{StaticResource MaterialDesignOutlinedTextBox}" TextChanged="filterTB_TextChanged" CaretBrush="White"/>
+              </GroupBox>-->
+
+              <!--FLIP SIDE-->
+              <GroupBox Header="SELECTED TILE" Margin="0,10,0,0" Background="#FF503B7C">
+                <StackPanel>
+                  <UniformGrid Columns="2">
+                    <TextBlock Text="EXPANSION:"/>
+                    <TextBlock Text="{Binding selectedTile.selectedExpansion}" HorizontalAlignment="Right"/>
+                  </UniformGrid>
+
+                  <UniformGrid Columns="2">
+                    <TextBlock Text="TILE #:"/>
+                    <TextBlock Text="{Binding selectedTile.tileNumber}" HorizontalAlignment="Right"/>
+                  </UniformGrid>
+
+                  <UniformGrid Columns="2">
+                    <TextBlock Text="SIDE:"/>
+                    <TextBlock Text="{Binding selectedTile.tileSide}" HorizontalAlignment="Right"/>
+                  </UniformGrid>
+                </StackPanel>
+              </GroupBox>
+
+              <Button x:Name="addSelectedBtn" Content="ADD SELECTED TILE" Click="addSelectedBtn_Click" Margin="0,10,0,0" IsEnabled="{Binding tileIsSelected}" IsDefault="True"/>
+            </StackPanel>
+
+            <Button x:Name="closeBtn" Grid.Row="1" Content="CANCEL" Click="closeBtn_Click" VerticalAlignment="Bottom" IsCancel="True"/>
+          </Grid>
+        </materialDesign:Card>
+      </Grid>
+    </GroupBox>
+  </Border>
+</Window>

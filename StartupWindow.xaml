@@ -1,0 +1,164 @@
+﻿<Window x:Class="Imperial_Commander_Editor.StartupWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Imperial_Commander_Editor"
+        mc:Ignorable="d" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Background="{DynamicResource MaterialDesignDarkBackground}"
+        TextElement.FontWeight="Medium"
+        TextElement.FontSize="14"
+        FontFamily="{materialDesign:MaterialDesignFont}"
+        Title="Project Manager" Height="475" Width="800" WindowStartupLocation="CenterScreen" WindowStyle="None" MouseDown="Window_MouseDown" ResizeMode="NoResize">
+
+	<Window.Resources>
+		<Style TargetType="ScrollBar">
+			<Setter Property="Background" Value="#333337"/>
+			<Setter Property="BorderBrush" Value="Transparent"/>
+		</Style>
+		<local:BoolToScrollbarVisibilityConverter x:Key="b2sv"/>
+	</Window.Resources>
+
+	<Grid Margin="30">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="1.85*"/>
+			<ColumnDefinition Width="*"/>
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="auto"/>
+			<RowDefinition Height="auto"/>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="auto"/>
+		</Grid.RowDefinitions>
+
+		<!--title-->
+		<TextBlock Style="{StaticResource MaterialDesignHeadline4TextBlock}" Text="Imperial Commander Editor" Foreground="White"/>
+		<TextBlock Grid.Column="1" HorizontalAlignment="Right" FontSize="14" VerticalAlignment="Center" Foreground="White">
+			A Mission Editor For <Italic>Imperial Assault</Italic>
+		</TextBlock>
+
+		<!--recents title-->
+		<TextBlock Grid.Row="1" Text="Open Recent Mission"  Margin="0,10" FontSize="16" Foreground="White"/>
+		<!--new project-->
+		<TextBlock Grid.Row="1" Grid.Column="1" Text="Missions"  Margin="0,10" FontSize="16"  Foreground="White" HorizontalAlignment="Center"/>
+
+		<StackPanel Grid.Row="2" Grid.Column="1">
+			<!--missions-->
+			<Button x:Name="newMissionButton" Click="newMissionButton_Click" Height="70">
+				<StackPanel Orientation="Horizontal" Width="230">
+					<Image Grid.RowSpan="2" Source="Assets/new mission.png" Width="50" Margin="0,0,10,0"/>
+
+					<Grid Margin="0,10">
+						<Grid.RowDefinitions>
+							<RowDefinition Height="auto"/>
+							<RowDefinition Height="auto"/>
+						</Grid.RowDefinitions>
+
+						<TextBlock Grid.Column="1" Text="NEW MISSION" />
+
+						<TextBlock Grid.Column="1" Grid.Row="1" Text="Create a new Mission." TextWrapping="Wrap"/>
+					</Grid>
+				</StackPanel>
+			</Button>
+
+			<Button x:Name="loadMissionButton" Click="loadMissionButton_Click" Height="70" Margin="0,10,0,0">
+				<StackPanel Orientation="Horizontal" Width="230">
+					<Image Grid.RowSpan="2" Source="Assets/open.png" Width="50" Margin="0,0,10,0"/>
+
+					<Grid Margin="0,10">
+						<Grid.RowDefinitions>
+							<RowDefinition Height="auto"/>
+							<RowDefinition Height="auto"/>
+						</Grid.RowDefinitions>
+
+						<TextBlock Grid.Column="1" Text="OPEN MISSION" />
+
+						<TextBlock Grid.Column="1" Grid.Row="1" Text="Load a Mission from a file." TextWrapping="Wrap"/>
+					</Grid>
+				</StackPanel>
+			</Button>
+
+			<!--campaigns-->
+			<TextBlock Text="Campaigns"  Margin="0,25,0,0" FontSize="16"  Foreground="White" HorizontalAlignment="Center"/>
+
+			<Button x:Name="editorButton" Height="70" Margin="0,10,0,0" Click="editorButton_Click">
+				<StackPanel Orientation="Horizontal" Width="230">
+					<Image Grid.RowSpan="2" Source="Assets/imperial.png" Width="50" Margin="0,0,10,0"/>
+
+					<Grid Margin="0,10">
+						<Grid.RowDefinitions>
+							<RowDefinition Height="auto"/>
+							<RowDefinition Height="auto"/>
+						</Grid.RowDefinitions>
+
+						<TextBlock Grid.Column="1" Text="CAMPAIGN EDITOR" />
+
+						<TextBlock Grid.Column="1" Grid.Row="1" Text="Create or edit a Campaign."/>
+					</Grid>
+				</StackPanel>
+			</Button>
+		</StackPanel>
+
+		<Grid Grid.Column="1" Grid.Row="3">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="auto"/>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="auto"/>
+			</Grid.ColumnDefinitions>
+
+			<TextBlock x:Name="formatVersion" Grid.Column="1" Text="Version: " Foreground="White" VerticalAlignment="Center"/>
+
+			<Button x:Name="cancelButton" Grid.Column="2" Width="100" HorizontalAlignment="Right" Click="cancelButton_Click">
+				<TextBlock Text="CANCEL" Margin="0,5"/>
+			</Button>
+		</Grid>
+
+		<!--recents-->
+		<ScrollViewer Grid.Row="2" Grid.RowSpan="2" PreviewMouseWheel="ScrollViewer_PreviewMouseWheel" Margin="0,0,20,0" MouseEnter="ScrollViewer_MouseEnter" MouseLeave="ScrollViewer_MouseLeave" VerticalScrollBarVisibility="{Binding scrollVisible, Converter={StaticResource b2sv}}">
+			<ListView x:Name="projectLV" BorderThickness="0" Margin="0,0,10,0" SelectionChanged="projectLV_SelectionChanged" HorizontalContentAlignment="Stretch">
+				<ListView.ItemTemplate>
+					<DataTemplate>
+						<Grid Margin="10" HorizontalAlignment="Stretch">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="auto"/>
+								<ColumnDefinition Width="*"/>
+								<ColumnDefinition Width="auto"/>
+							</Grid.ColumnDefinitions>
+							<!--Source="{Binding projectType, Converter={StaticResource ptypeConverter}}"-->
+
+							<!--imperial icon-->
+							<Image Margin="0,5,0,0" VerticalAlignment="Top" Width="50" Source="Assets/imperial.png"/>
+
+							<!--remove button-->
+							<Button x:Name="removeButton" Grid.Column="2" Style="{StaticResource MaterialDesignFlatButton}" Click="removeButton_Click" Width="60" Height="60">
+								<Image Source="Assets/remove2.png" Width="20"/>
+							</Button>
+
+							<!--mission info text-->
+							<StackPanel Grid.Column="1" Margin="10,0">
+								<TextBlock Text="{Binding Title}" Foreground="White" FontSize="16" Margin="0,0"/>
+								<Grid>
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="auto"/>
+										<ColumnDefinition Width="*"/>
+									</Grid.ColumnDefinitions>
+									<!--<TextBlock Grid.Column="0" Text="{Binding projectType}" Foreground="White" FontSize="12" Margin="0,0"/>-->
+									<StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
+										<TextBlock Text="v." Foreground="White"/>
+										<TextBlock Grid.Column="1" Text="{Binding fileVersion}" Foreground="White" FontSize="12" Margin="0,0"/>
+									</StackPanel>
+
+									<TextBlock Grid.Column="0" Text="{Binding Date}" Style="{StaticResource MaterialDesignCaptionTextBlock}" HorizontalAlignment="Right" Foreground="White"/>
+								</Grid>
+
+								<!--<TextBlock Text="{Binding Description}" TextTrimming="WordEllipsis" Foreground="White" FontSize="12" Margin="0,5,0,0"/>-->
+							</StackPanel>
+						</Grid>
+					</DataTemplate>
+				</ListView.ItemTemplate>
+
+			</ListView>
+		</ScrollViewer>
+	</Grid>
+</Window>

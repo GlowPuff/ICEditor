@@ -1,26 +1,30 @@
-﻿using System.Windows.Controls;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Windows.Controls;
 
 namespace Imperial_Commander_Editor
 {
-	/// <summary>
-	/// Interaction logic for HighlightProps.xaml
-	/// </summary>
-	public partial class HighlightProps : UserControl, IPropertyModel
-	{
-		public HighlightProps()
-		{
-			InitializeComponent();
-		}
+  /// <summary>
+  /// Interaction logic for HighlightProps.xaml
+  /// </summary>
+  public partial class HighlightProps : UserControl, IPropertyModel
+  {
+    public List<DeploymentColor> deploymentColors { get { return Utils.deploymentColors.ToList(); } }
 
-		private void editPropsBtn_Click( object sender, System.Windows.RoutedEventArgs e )
-		{
-			EditEntityProperties dlg = new( (DataContext as SpaceHighlight).entityProperties );
-			dlg.ShowDialog();
-		}
+    public HighlightProps()
+    {
+      InitializeComponent();
+    }
 
-		private void applyBtn_Click( object sender, System.Windows.RoutedEventArgs e )
-		{
-			(DataContext as SpaceHighlight).Rebuild();
-		}
-	}
+    private void editPropsBtn_Click( object sender, System.Windows.RoutedEventArgs e )
+    {
+      EditEntityProperties dlg = new( (DataContext as SpaceHighlight).entityProperties );
+      dlg.ShowDialog();
+    }
+
+    private void applyBtn_Click( object sender, System.Windows.RoutedEventArgs e )
+    {
+      (DataContext as SpaceHighlight).Rebuild();
+    }
+  }
 }

@@ -25,8 +25,8 @@ namespace Imperial_Commander_Editor
     public EntityProperties entityProperties { get; set; }
 
     //deployment props
-    [JsonIgnore]
-    public List<DeploymentColor> deploymentColors { get; set; }
+    //[JsonIgnore]
+    //public List<DeploymentColor> deploymentColors { get; set; }
     public DeploymentColor deploymentColor
     {
       get { return _deploymentColor; }
@@ -52,18 +52,13 @@ namespace Imperial_Commander_Editor
 
     public DeploymentPoint()
     {
-
-    }
-
-    public DeploymentPoint( DeploymentColor[] dc )
-    {
       GUID = Guid.NewGuid();
       name = "New Deployment Point";
       entityType = EntityType.DeploymentPoint;
       entityProperties = new();
 
-      deploymentColors = new List<DeploymentColor>( dc );
-      _deploymentColor = dc[0];//gray
+      //deploymentColors = new List<DeploymentColor>( dc );
+      _deploymentColor = new( "Gray", Utils.ColorFromFloats( .3301887f, .3301887f, .3301887f ) );//dc[0];//gray
     }
 
     public void BuildRenderer( Canvas c, Vector where, bool showPanel, double scale )

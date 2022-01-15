@@ -7,67 +7,67 @@
              mc:Ignorable="d" 
 						 xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              d:DesignWidth="200">
-	<Grid Background="#FF503B7C">
-		<StackPanel>
-			<materialDesign:Card Background="MediumPurple" Padding="10">
-				<StackPanel>
-					<TextBlock Text="HIGHLIGHT" HorizontalAlignment="Center"/>
-					<TextBox Text="{Binding name}" materialDesign:HintAssist.Hint="Entity Name" Style="{StaticResource MaterialDesignOutlinedTextBox}" Margin="0,10,0,0"/>
-				</StackPanel>
-			</materialDesign:Card>
+  <Grid Background="#FF503B7C">
+    <StackPanel>
+      <materialDesign:Card Background="MediumPurple" Padding="10">
+        <StackPanel>
+          <TextBlock Text="HIGHLIGHT" HorizontalAlignment="Center"/>
+          <TextBox Text="{Binding name}" materialDesign:HintAssist.Hint="Entity Name" Style="{StaticResource MaterialDesignOutlinedTextBox}" Margin="0,10,0,0"/>
+        </StackPanel>
+      </materialDesign:Card>
 
-			<!--ACTIVE-->
-			<materialDesign:Card Background="MediumPurple" Padding="10" Margin="0,10">
-				<StackPanel>
-					<TextBlock Text="Is Active?" HorizontalAlignment="Center" Margin="0,0,0,10"/>
-					<UniformGrid Columns="3">
-						<TextBlock Text="No" HorizontalAlignment="Right"/>
-						<ToggleButton IsChecked="{Binding entityProperties.isActive}"/>
-						<TextBlock Text="Yes"/>
-					</UniformGrid>
-				</StackPanel>
-			</materialDesign:Card>
+      <!--ACTIVE-->
+      <materialDesign:Card Background="MediumPurple" Padding="10" Margin="0,10">
+        <StackPanel>
+          <TextBlock Text="Is Active?" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+          <UniformGrid Columns="3">
+            <TextBlock Text="No" HorizontalAlignment="Right"/>
+            <ToggleButton IsChecked="{Binding entityProperties.isActive}"/>
+            <TextBlock Text="Yes"/>
+          </UniformGrid>
+        </StackPanel>
+      </materialDesign:Card>
 
-			<!--size-->
-			<materialDesign:Card Background="MediumPurple" Margin="0,0,0,10" Padding="10">
-				<StackPanel>
-					<TextBlock Text="Duration In Rounds" HorizontalAlignment="Center"/>
-					<TextBlock Text="(0 = Infinite)" HorizontalAlignment="Center" Margin="0,0,0,10"/>
-					<TextBox Text="{Binding Duration}" Width="50"/>
-				</StackPanel>
-			</materialDesign:Card>
+      <!--size-->
+      <materialDesign:Card Background="MediumPurple" Margin="0,0,0,10" Padding="10">
+        <StackPanel>
+          <TextBlock Text="Duration In Rounds" HorizontalAlignment="Center"/>
+          <TextBlock Text="(0 = Infinite)" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+          <TextBox Text="{Binding Duration}" Width="50"/>
+        </StackPanel>
+      </materialDesign:Card>
 
-			<!--size-->
-			<materialDesign:Card Background="MediumPurple" Padding="10" Margin="0,0,0,10">
-				<StackPanel>
-					<TextBlock Text="Size" HorizontalAlignment="Center" Margin="0,0,0,10"/>
-					<UniformGrid Columns="2" Margin="0,0,0,10">
-						<TextBlock Text="Width:" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-						<TextBox HorizontalAlignment="Center" Width="50" Text="{Binding Width}"/>
-					</UniformGrid>
-					<UniformGrid Columns="2" Margin="0,0,0,10">
-						<TextBlock Text="Height:" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-						<TextBox HorizontalAlignment="Center" Width="50" Text="{Binding Height}"/>
-					</UniformGrid>
-					<Button Content="APPLY" Name="applyBtn" Click="applyBtn_Click"/>
-				</StackPanel>
-			</materialDesign:Card>
+      <!--size-->
+      <materialDesign:Card Background="MediumPurple" Padding="10" Margin="0,0,0,10">
+        <StackPanel>
+          <TextBlock Text="Size" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+          <UniformGrid Columns="2" Margin="0,0,0,10">
+            <TextBlock Text="Width:" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBox HorizontalAlignment="Center" Width="50" Text="{Binding Width}"/>
+          </UniformGrid>
+          <UniformGrid Columns="2" Margin="0,0,0,10">
+            <TextBlock Text="Height:" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBox HorizontalAlignment="Center" Width="50" Text="{Binding Height}"/>
+          </UniformGrid>
+          <Button Content="APPLY" Name="applyBtn" Click="applyBtn_Click"/>
+        </StackPanel>
+      </materialDesign:Card>
 
-			<!--color-->
-			<materialDesign:Card Background="MediumPurple" Padding="10" Margin="0,0,0,10">
-				<StackPanel>
-					<TextBlock Text="Space Color" HorizontalAlignment="Center" Margin="0,0,0,10"/>
-					<ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectedValue="{Binding deploymentColor}" ItemsSource="{Binding deploymentColors}" DisplayMemberPath="name"/>
-				</StackPanel>
-			</materialDesign:Card>
+      <!--color-->
+      <materialDesign:Card Background="MediumPurple" Padding="10" Margin="0,0,0,10">
+        <StackPanel>
+          <TextBlock Text="Space Color" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+          <ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectedValue="{Binding deploymentColor}" ItemsSource="{Binding deploymentColors, RelativeSource={RelativeSource AncestorType=local:HighlightProps}}" DisplayMemberPath="name"/>
+        </StackPanel>
+      </materialDesign:Card>
 
-			<!--ENTITY PROPS-->
-			<materialDesign:Card Background="MediumPurple" Padding="10">
-				<StackPanel>
-					<Button x:Name="editPropsBtn" Click="editPropsBtn_Click" Content="EDIT PROPERTIES"/>
-				</StackPanel>
-			</materialDesign:Card>
+      <!--ENTITY PROPS-->
+      <materialDesign:Card Background="MediumPurple" Padding="10">
+        <StackPanel>
+          <Button x:Name="editPropsBtn" Click="editPropsBtn_Click" Content="EDIT PROPERTIES"/>
+        </StackPanel>
+      </materialDesign:Card>
 
-		</StackPanel>
-	</Grid>
+    </StackPanel>
+  </Grid>
 </UserControl>

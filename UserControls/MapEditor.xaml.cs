@@ -227,7 +227,7 @@ namespace Imperial_Commander_Editor
 
     private void addDeploymentButton_Click( object sender, RoutedEventArgs e )
     {
-      AddEntity( new DeploymentPoint( Utils.deploymentColors ) );
+      AddEntity( new DeploymentPoint() );
     }
 
     private void addTileButton_Click( object sender, RoutedEventArgs e )
@@ -247,7 +247,7 @@ namespace Imperial_Commander_Editor
 
     private void addHighlightButton_Click( object sender, RoutedEventArgs e )
     {
-      AddEntity( new SpaceHighlight( Utils.deploymentColors ) );
+      AddEntity( new SpaceHighlight() );
     }
 
     private void centerButton_Click( object sender, RoutedEventArgs e )

@@ -31,7 +31,7 @@
       <materialDesign:Card Background="MediumPurple" Padding="10">
         <StackPanel>
           <TextBlock Text="Deployment Color" HorizontalAlignment="Center" Margin="0,0,0,10"/>
-          <ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectedValue="{Binding deploymentColor}" ItemsSource="{Binding deploymentColors}" DisplayMemberPath="name"/>
+          <ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectedValue="{Binding deploymentColor}" ItemsSource="{Binding deploymentColors, RelativeSource={RelativeSource AncestorType=local:DeploymentProps}}" DisplayMemberPath="name"/>
         </StackPanel>
       </materialDesign:Card>
     </StackPanel>

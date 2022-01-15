@@ -26,8 +26,8 @@ namespace Imperial_Commander_Editor
     public EntityProperties entityProperties { get; set; }
 
     //highlight props
-    [JsonIgnore]
-    public List<DeploymentColor> deploymentColors { get; set; }
+    //[JsonIgnore]
+    //public List<DeploymentColor> deploymentColors { get; set; }
     public DeploymentColor deploymentColor
     {
       get { return _deploymentColor; }
@@ -56,7 +56,7 @@ namespace Imperial_Commander_Editor
 
     public event PropertyChangedEventHandler PropertyChanged;
 
-    public SpaceHighlight( DeploymentColor[] dc )
+    public SpaceHighlight()
     {
       GUID = Guid.NewGuid();
       name = "New Highlight";
@@ -67,8 +67,8 @@ namespace Imperial_Commander_Editor
       Height = 1;
       Duration = 0;
 
-      deploymentColors = new List<DeploymentColor>( dc );
-      _deploymentColor = dc[4];
+      //deploymentColors = new List<DeploymentColor>( dc );
+      _deploymentColor = new( "Green", Utils.ColorFromFloats( 0, 0.735849f, 0.1056484f ) );//dc[4];
     }
 
     public void Rebuild()

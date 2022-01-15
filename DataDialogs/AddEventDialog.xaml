@@ -47,7 +47,7 @@
             <UniformGrid Columns="2">
               <!--event name-->
               <GroupBox Header="Event Name" Margin="0,0,10,0">
-                <TextBox x:Name="nameTB" Style="{StaticResource MaterialDesignOutlinedTextBox}"  Text="{Binding name}"/>
+                <TextBox x:Name="nameTB" Style="{StaticResource MaterialDesignOutlinedTextBox}"  Text="{Binding name}" CaretBrush="White"/>
               </GroupBox>
               <!--event text-->
               <GroupBox Header="Event Text" Margin="10,0,0,0">

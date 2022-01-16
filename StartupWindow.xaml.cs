@@ -29,6 +29,8 @@ namespace Imperial_Commander_Editor
       DataContext = this;
       scrollVisible = false;
 
+      Utils.InitColors();
+
       PopulateRecents();
 
       formatVersion.Text = "Format Version: v." + Utils.formatVersion;

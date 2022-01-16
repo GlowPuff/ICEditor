@@ -12,7 +12,7 @@
       <materialDesign:Card Background="MediumPurple" Padding="10">
         <StackPanel>
           <TextBlock Text="HIGHLIGHT" HorizontalAlignment="Center"/>
-          <TextBox Text="{Binding name}" materialDesign:HintAssist.Hint="Entity Name" Style="{StaticResource MaterialDesignOutlinedTextBox}" Margin="0,10,0,0"/>
+          <TextBox Text="{Binding name}" materialDesign:HintAssist.Hint="Entity Name" Style="{StaticResource MaterialDesignOutlinedTextBox}" Margin="0,10,0,0" CaretBrush="White"/>
         </StackPanel>
       </materialDesign:Card>
 
@@ -33,7 +33,7 @@
         <StackPanel>
           <TextBlock Text="Duration In Rounds" HorizontalAlignment="Center"/>
           <TextBlock Text="(0 = Infinite)" HorizontalAlignment="Center" Margin="0,0,0,10"/>
-          <TextBox Text="{Binding Duration}" Width="50"/>
+          <TextBox Text="{Binding Duration}" Width="50" CaretBrush="White"/>
         </StackPanel>
       </materialDesign:Card>
 
@@ -43,11 +43,11 @@
           <TextBlock Text="Size" HorizontalAlignment="Center" Margin="0,0,0,10"/>
           <UniformGrid Columns="2" Margin="0,0,0,10">
             <TextBlock Text="Width:" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <TextBox HorizontalAlignment="Center" Width="50" Text="{Binding Width}"/>
+            <TextBox HorizontalAlignment="Center" Width="50" Text="{Binding Width}" CaretBrush="White"/>
           </UniformGrid>
           <UniformGrid Columns="2" Margin="0,0,0,10">
             <TextBlock Text="Height:" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <TextBox HorizontalAlignment="Center" Width="50" Text="{Binding Height}"/>
+            <TextBox HorizontalAlignment="Center" Width="50" Text="{Binding Height}" CaretBrush="White"/>
           </UniformGrid>
           <Button Content="APPLY" Name="applyBtn" Click="applyBtn_Click"/>
         </StackPanel>

@@ -410,6 +410,7 @@ namespace Imperial_Commander_Editor
           else
             selectedMapSection.mapTiles.Remove( selectedEntity as MapTile );
           selectedEntity = null;
+          this.Focus();
         }
       }
     }

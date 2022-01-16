@@ -20,10 +20,8 @@ namespace Imperial_Commander_Editor
 
     public static MainWindow mainWindow;
 
-    public static void Init( MainWindow mw )
+    public static void InitColors()
     {
-      mainWindow = mw;
-
       deploymentColors = new DeploymentColor[6];
       deploymentColors[0] = new( "Gray", ColorFromFloats( .3301887f, .3301887f, .3301887f ) );
       deploymentColors[1] = new( "Purple", ColorFromFloats( .6784314f, 0f, 1f ) );
@@ -31,6 +29,13 @@ namespace Imperial_Commander_Editor
       deploymentColors[3] = new( "Blue", ColorFromFloats( 0, 0.3294118f, 1 ) );
       deploymentColors[4] = new( "Green", ColorFromFloats( 0, 0.735849f, 0.1056484f ) );
       deploymentColors[5] = new( "Red", ColorFromFloats( 1, 0, 0 ) );
+    }
+
+    public static void Init( MainWindow mw )
+    {
+      mainWindow = mw;
+
+      //InitColors();
 
       LoadCardData();
       tileData = TileDescriptor.LoadData();

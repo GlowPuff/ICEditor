@@ -8,6 +8,10 @@
 						 mc:Ignorable="d" 
              d:DesignWidth="200">
 
+	<UserControl.Resources>
+		<local:RadioBoolToIntConverter x:Key="rbConv" />
+	</UserControl.Resources>
+
 	<Grid Background="#FF503B7C">
 		<StackPanel>
 			<materialDesign:Card Background="MediumPurple" Padding="10">
@@ -27,12 +31,29 @@
 						<ToggleButton IsChecked="{Binding entityProperties.isActive}"/>
 						<TextBlock Text="Yes"/>
 					</UniformGrid>
+				</StackPanel>
+			</materialDesign:Card>
 
+			<!--color-->
+			<materialDesign:Card Background="MediumPurple" Padding="10">
+				<StackPanel>
+					<TextBlock Text="Deployment Color" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+					<ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectedValue="{Binding tokenColor}" ItemsSource="{Binding tokenColors, RelativeSource={RelativeSource AncestorType=local:TokenProps}}" SelectedValuePath="name" DisplayMemberPath="name"/>
+				</StackPanel>
+			</materialDesign:Card>
+
+			<!--marker type-->
+			<materialDesign:Card Background="MediumPurple" Padding="10" Margin="0,10,0,0">
+				<StackPanel>
+					<TextBlock Text="Marker Type" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+					<RadioButton GroupName="mtype" Content="Neutral" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding markerType, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:MarkerType.Neutral}}"/>
+					<RadioButton GroupName="mtype" Content="Rebel" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding markerType, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:MarkerType.Rebel}}"/>
+					<RadioButton GroupName="mtype" Content="Imperial" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding markerType, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:MarkerType.Imperial}}"/>
 				</StackPanel>
 			</materialDesign:Card>
 
 			<!--ENTITY PROPS-->
-			<materialDesign:Card Background="MediumPurple" Padding="10">
+			<materialDesign:Card Background="MediumPurple" Padding="10" Margin="0,10,0,0">
 				<StackPanel>
 					<Button x:Name="editPropsBtn" Click="editPropsBtn_Click" Content="EDIT PROPERTIES"/>
 				</StackPanel>

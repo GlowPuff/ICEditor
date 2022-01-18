@@ -11,6 +11,8 @@ namespace Imperial_Commander_Editor
 	public class Token : INotifyPropertyChanged, IMapEntity
 	{
 		string _name;
+		string _tokenColor;
+		MarkerType _markerType;
 
 		//common props
 		public Guid GUID { get; set; }
@@ -22,6 +24,42 @@ namespace Imperial_Commander_Editor
 		public EntityRenderer mapRenderer { get; set; }
 		public EntityProperties entityProperties { get; set; }
 		public Guid mapSectionOwner { get; set; }
+
+		//token props
+		public string tokenColor
+		{
+			get { return _tokenColor; }
+			set
+			{
+				_tokenColor = value;
+				PC();
+				if ( mapRenderer != null )
+				{
+					Color c = Utils.ColorFromName( _tokenColor ).color;
+					mapRenderer.entityShape.Fill = new SolidColorBrush( c );
+					mapRenderer.unselectedBGColor = new SolidColorBrush( c );
+					mapRenderer.selectedBGColor = new SolidColorBrush( c );
+				}
+			}
+		}
+		public MarkerType markerType
+		{
+			get { return _markerType; }
+			set
+			{
+				_markerType = value;
+				PC();
+				Color c = Utils.ColorFromName( _tokenColor ).color;
+				Color ol = Colors.Gray;
+				if ( markerType == MarkerType.Rebel )
+					ol = Colors.CornflowerBlue;
+				else if ( markerType == MarkerType.Imperial )
+					ol = Colors.Red;
+				if ( mapRenderer != null )
+					mapRenderer.unselectedStrokeColor = new( ol );
+			}
+		}
+
 
 		public event PropertyChangedEventHandler PropertyChanged;
 		public void PC( [CallerMemberName] string n = "" )
@@ -41,6 +79,9 @@ namespace Imperial_Commander_Editor
 			entityType = EntityType.Token;
 			entityProperties = new();
 			mapSectionOwner = ownderGUID;
+
+			tokenColor = "Gray";
+			markerType = MarkerType.Neutral;
 		}
 
 		public IMapEntity Duplicate()
@@ -52,19 +93,23 @@ namespace Imperial_Commander_Editor
 			dupe.entityPosition = entityPosition;
 			dupe.entityRotation = entityRotation;
 			dupe.mapSectionOwner = mapSectionOwner;
+			dupe.tokenColor = tokenColor;
 			return dupe;
 		}
 
-		public void BuildRenderer( Canvas c, Vector where, bool showPanel, double scale )
+		public void BuildRenderer( Canvas canvas, Vector where, bool showPanel, double scale )
 		{
+			Color c = Utils.ColorFromName( _tokenColor ).color;
+
 			mapRenderer = new( this, where, showPanel, scale, new( 1, 1 ) )
 			{
 				selectedZ = 300,
-				unselectedBGColor = new( Colors.Orange ),
-				selectedBGColor = new( Colors.Orange )
+				selectedBGColor = new( c ),
+				unselectedBGColor = new( c ),
+				unselectedStrokeColor = new( Colors.Gray )
 			};
 			mapRenderer.BuildShape( TokenShape.Circle );
-			c.Children.Add( mapRenderer.entityShape );
+			canvas.Children.Add( mapRenderer.entityShape );
 		}
 	}
 }

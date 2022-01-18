@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System.Collections.ObjectModel;
+using System.Windows.Controls;
 
 namespace Imperial_Commander_Editor
 {
@@ -7,6 +8,11 @@ namespace Imperial_Commander_Editor
 	/// </summary>
 	public partial class TokenProps : UserControl, IPropertyModel
 	{
+		public ObservableCollection<DeploymentColor> tokenColors
+		{
+			get { return Utils.deploymentColors; }
+		}
+
 		public TokenProps()
 		{
 			InitializeComponent();

@@ -64,46 +64,7 @@ namespace Imperial_Commander_Editor
 
 		private void editTriggerButton_Click( object sender, RoutedEventArgs e )
 		{
-			var t = triggersCB.SelectedItem as Trigger;
-			if ( t.GUID == Guid.Empty )
-				return;
-
-			var index = triggersCB.SelectedIndex;
-			var dlg = new AddTriggerDialog( t );
-			if ( dlg.ShowDialog().Value )
-			{
-				//make sure edited trigger is same TYPE
-				if ( dlg.trigger.isGlobal && dlg.editedTrigger.isGlobal )
-				{
-					var idx = Utils.mainWindow.mission.globalTriggers.IndexOf( dlg.editedTrigger );
-					Utils.mainWindow.mission.globalTriggers[idx] = dlg.trigger;
-					triggersCB.SelectedIndex = index;
-				}
-				else if ( !dlg.trigger.isGlobal && !dlg.editedTrigger.isGlobal )
-				{
-					var idx = Utils.mainWindow.activeSection.triggers.IndexOf( dlg.editedTrigger );
-					Utils.mainWindow.activeSection.triggers[idx] = dlg.trigger;
-					triggersCB.SelectedIndex = index;
-				}
-				else if ( dlg.trigger.isGlobal && !dlg.editedTrigger.isGlobal )
-				{
-					Utils.mainWindow.mission.globalTriggers.Add( dlg.trigger );
-					Utils.mainWindow.activeSection.triggers.Remove( dlg.editedTrigger );
-					if ( showGlobal )
-						triggersCB.SelectedItem = dlg.trigger;
-					else
-						triggersCB.SelectedIndex = 0;
-				}
-				else if ( !dlg.trigger.isGlobal && dlg.editedTrigger.isGlobal )
-				{
-					Utils.mainWindow.mission.globalTriggers.Remove( dlg.editedTrigger );
-					Utils.mainWindow.activeSection.triggers.Add( dlg.trigger );
-					if ( showGlobal )
-						triggersCB.SelectedIndex = 0;
-					else
-						triggersCB.SelectedItem = dlg.trigger;
-				}
-			}
+			EditTrigger();
 		}
 
 		public void addTriggerButton_Click( object sender, RoutedEventArgs e )
@@ -181,6 +142,65 @@ namespace Imperial_Commander_Editor
 		}
 
 		private void editEventButton_Click( object sender, RoutedEventArgs e )
+		{
+			EditEvent();
+		}
+
+		private void eventsCB_MouseDoubleClick( object sender, System.Windows.Input.MouseButtonEventArgs e )
+		{
+			EditEvent();
+		}
+
+		private void triggersCB_MouseDoubleClick( object sender, System.Windows.Input.MouseButtonEventArgs e )
+		{
+			EditTrigger();
+		}
+
+		private void EditTrigger()
+		{
+			var t = triggersCB.SelectedItem as Trigger;
+			if ( t.GUID == Guid.Empty )
+				return;
+
+			var index = triggersCB.SelectedIndex;
+			var dlg = new AddTriggerDialog( t );
+			if ( dlg.ShowDialog().Value )
+			{
+				//make sure edited trigger is same TYPE
+				if ( dlg.trigger.isGlobal && dlg.editedTrigger.isGlobal )
+				{
+					var idx = Utils.mainWindow.mission.globalTriggers.IndexOf( dlg.editedTrigger );
+					Utils.mainWindow.mission.globalTriggers[idx] = dlg.trigger;
+					triggersCB.SelectedIndex = index;
+				}
+				else if ( !dlg.trigger.isGlobal && !dlg.editedTrigger.isGlobal )
+				{
+					var idx = Utils.mainWindow.activeSection.triggers.IndexOf( dlg.editedTrigger );
+					Utils.mainWindow.activeSection.triggers[idx] = dlg.trigger;
+					triggersCB.SelectedIndex = index;
+				}
+				else if ( dlg.trigger.isGlobal && !dlg.editedTrigger.isGlobal )
+				{
+					Utils.mainWindow.mission.globalTriggers.Add( dlg.trigger );
+					Utils.mainWindow.activeSection.triggers.Remove( dlg.editedTrigger );
+					if ( showGlobal )
+						triggersCB.SelectedItem = dlg.trigger;
+					else
+						triggersCB.SelectedIndex = 0;
+				}
+				else if ( !dlg.trigger.isGlobal && dlg.editedTrigger.isGlobal )
+				{
+					Utils.mainWindow.mission.globalTriggers.Remove( dlg.editedTrigger );
+					Utils.mainWindow.activeSection.triggers.Add( dlg.trigger );
+					if ( showGlobal )
+						triggersCB.SelectedIndex = 0;
+					else
+						triggersCB.SelectedItem = dlg.trigger;
+				}
+			}
+		}
+
+		private void EditEvent()
 		{
 			var t = eventsCB.SelectedItem as MissionEvent;
 			if ( t.GUID == Guid.Empty )

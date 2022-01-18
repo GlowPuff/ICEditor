@@ -10,27 +10,48 @@
 
 	<Grid Background="#FF3A3349">
 		<Border Padding="10" BorderThickness="0,0,1,0" BorderBrush="MediumPurple">
-			<ScrollViewer VerticalScrollBarVisibility="Auto">
-				<StackPanel>
-					<materialDesign:Card Background="MediumPurple" Padding="5" Margin="0,0,0,10">
-						<Grid>
-							<TextBlock x:Name="localText" HorizontalAlignment="Center" FontWeight="Bold" Text="{Binding activeSection.name, StringFormat=Displaying \'{0}\'}" Style="{StaticResource MaterialDesignBody1TextBlock}" Foreground="White" TextWrapping="Wrap"/>
-							<TextBlock x:Name="globalText" HorizontalAlignment="Center" FontWeight="Bold" Style="{StaticResource MaterialDesignBody1TextBlock}" Foreground="White" TextWrapping="Wrap" Visibility="Hidden" Text="Displaying Global Data"/>
-						</Grid>
-					</materialDesign:Card>
+			<!--<ScrollViewer VerticalScrollBarVisibility="Auto">-->
+			<Grid>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="auto" />
+					<RowDefinition Height="auto" />
+					<RowDefinition Height="1*" />
+				</Grid.RowDefinitions>
 
-					<!--global switch-->
-					<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
-						<TextBlock Text="Show Global Items" Margin="0,0,10,0" Foreground="White"/>
-						<ToggleButton x:Name="showGlobalToggle" IsChecked="{Binding showGlobal}" Click="showGlobalToggle_Click"/>
-					</StackPanel>
+				<materialDesign:Card Grid.Row="0" Background="MediumPurple" Padding="5" Margin="0,0,0,10">
+					<Grid>
+						<TextBlock x:Name="localText" HorizontalAlignment="Center" FontWeight="Bold" Text="{Binding activeSection.name, StringFormat=Displaying \'{0}\'}" Style="{StaticResource MaterialDesignBody1TextBlock}" Foreground="White" TextWrapping="Wrap"/>
+						<TextBlock x:Name="globalText" HorizontalAlignment="Center" FontWeight="Bold" Style="{StaticResource MaterialDesignBody1TextBlock}" Foreground="White" TextWrapping="Wrap" Visibility="Hidden" Text="Displaying Global Data"/>
+					</Grid>
+				</materialDesign:Card>
+
+				<!--global switch-->
+				<StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
+					<TextBlock Text="Show Global Items" Margin="0,0,10,0" Foreground="White"/>
+					<ToggleButton x:Name="showGlobalToggle" IsChecked="{Binding showGlobal}" Click="showGlobalToggle_Click"/>
+				</StackPanel>
+
+				<Grid Grid.Row="2" >
+					<Grid.RowDefinitions>
+						<RowDefinition Height="*" />
+						<RowDefinition Height="*" />
+					</Grid.RowDefinitions>
 
 					<!--triggers-->
-					<materialDesign:Card Background="#FF7952C0" Padding="10" Margin="0,0,0,10">
-						<StackPanel>
-							<TextBlock HorizontalAlignment="Center" Text="Trigger Variables" Foreground="White"/>
-							<ComboBox Margin="10,5,10,10" x:Name="triggersCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" DisplayMemberPath="name"/>
-							<UniformGrid Columns="3">
+					<materialDesign:Card Grid.Row="0" Background="#FF7952C0" Padding="10" Margin="0,0,0,10">
+						<Grid>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="auto" />
+								<RowDefinition Height="*" />
+								<RowDefinition Height="auto" />
+							</Grid.RowDefinitions>
+							<TextBlock Grid.Row="0" HorizontalAlignment="Center" Text="Trigger Variables" Foreground="White"/>
+							<!--<ComboBox Margin="10,5,10,10" x:Name="triggersCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" DisplayMemberPath="name"/>-->
+							<ScrollViewer Grid.Row="1">
+								<ListBox Grid.Row="1" Margin="10,5,10,10" x:Name="triggersCB" DisplayMemberPath="name" MouseDoubleClick="triggersCB_MouseDoubleClick"/>
+							</ScrollViewer>
+
+							<UniformGrid Grid.Row="2" Columns="3" VerticalAlignment="Bottom">
 								<Button x:Name="addTriggerButton" Grid.Column="0" Click="addTriggerButton_Click">
 									<materialDesign:PackIcon Kind="AddBold" Width="24" Height="24" HorizontalAlignment="Center" Foreground="Lime"/>
 								</Button>
@@ -41,18 +62,25 @@
 									<materialDesign:PackIcon Kind="Settings" Width="24" Height="24" HorizontalAlignment="Center"/>
 								</Button>
 							</UniformGrid>
-						</StackPanel>
+						</Grid>
 					</materialDesign:Card>
 
-
 					<!--events-->
-					<materialDesign:Card Background="#FF7952C0" Padding="10">
-						<StackPanel>
+					<materialDesign:Card Grid.Row="1" Background="#FF7952C0" Padding="10">
+						<Grid>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="auto" />
+								<RowDefinition Height="*" />
+								<RowDefinition Height="auto" />
+							</Grid.RowDefinitions>
+
 							<TextBlock HorizontalAlignment="Center" Text="Events" Foreground="White"/>
-							<ComboBox Margin="10,5,10,10"
-    x:Name="eventsCB"
-    Style="{StaticResource MaterialDesignOutlinedComboBox}" DisplayMemberPath="name"/>
-							<UniformGrid Columns="3">
+							<!--<ComboBox Margin="10,5,10,10" x:Name="eventsCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" DisplayMemberPath="name"/>-->
+							<ScrollViewer Grid.Row="1">
+								<ListBox Grid.Row="1" x:Name="eventsCB" Margin="10,5,10,10" DisplayMemberPath="name" MouseDoubleClick="eventsCB_MouseDoubleClick"/>
+							</ScrollViewer>
+
+							<UniformGrid Grid.Row="2" Columns="3" VerticalAlignment="Bottom">
 								<Button x:Name="addEventButton" Grid.Column="0" Click="addEventButton_Click">
 									<materialDesign:PackIcon Kind="AddBold" Width="24" Height="24" HorizontalAlignment="Center" Foreground="Lime"/>
 								</Button>
@@ -63,18 +91,11 @@
 									<materialDesign:PackIcon Kind="Settings" Width="24" Height="24" HorizontalAlignment="Center"/>
 								</Button>
 							</UniformGrid>
-						</StackPanel>
+						</Grid>
 					</materialDesign:Card>
-
-					<!--event groups-->
-					<!--<materialDesign:Card Background="#FF7952C0" Padding="10" Margin="0,10,0,0">
-						<StackPanel>
-							<TextBlock HorizontalAlignment="Center" Text="Event Groups" Foreground="White"/>
-
-						</StackPanel>
-					</materialDesign:Card>-->
-				</StackPanel>
-			</ScrollViewer>
+				</Grid>
+			</Grid>
+			<!--</ScrollViewer>-->
 		</Border>
 	</Grid>
 </UserControl>

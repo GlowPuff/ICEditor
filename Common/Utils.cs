@@ -81,6 +81,8 @@ namespace Imperial_Commander_Editor
 			enemyData = DeploymentCard.LoadData( "enemies.json" );
 			villainData = DeploymentCard.LoadData( "villains.json" );
 			heroData = DeploymentCard.LoadData( "heroes.json" );
+
+			enemyData = enemyData.Concat( villainData ).ToList();
 		}
 
 		///EXTENSIONS

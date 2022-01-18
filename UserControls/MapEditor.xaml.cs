@@ -30,6 +30,7 @@ namespace Imperial_Commander_Editor
 		private MapTile _selectedMapTile;
 		private UIElement mcap;
 		private IMapEntity _selectedEntity;
+		private MapSection _selectedMapSection;
 
 		public double mScale = 1;
 		public MainWindow parent
@@ -45,7 +46,7 @@ namespace Imperial_Commander_Editor
 		public bool entityPropsEnabled { get { return _entityPropsEnabled; } set { _entityPropsEnabled = value; PC(); } }
 		public bool nothingSelected { get { return _nothingSelected; } set { _nothingSelected = value; PC(); } }
 		public IPropertyModel propModel { get { return _propModel; } set { _propModel = value; PC(); nothingSelected = _propModel == null; } }
-		public MapSection selectedMapSection { get { return parent.activeSection; } }
+		public MapSection selectedMapSection { get { return _selectedMapSection; } set { _selectedMapSection = value; PC(); } }
 		public IMapEntity selectedEntity
 		{
 			get { return _selectedEntity; }
@@ -94,6 +95,11 @@ namespace Imperial_Commander_Editor
 			showPanel = true;
 			selectedEntity = null;
 			selectedMapTile = null;
+		}
+
+		public void UpdateUI( MapSection ms )
+		{
+			selectedMapSection = ms;
 		}
 
 		public void SetSelectedPropertyPanel()

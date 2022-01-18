@@ -40,6 +40,7 @@ namespace Imperial_Commander_Editor
 				_activeSection = value;
 				_activeSection.isActive = true;
 				properties.Populate( _activeSection );
+				mapEditor.UpdateUI( _activeSection );
 				if ( !leftPanel.showGlobal )
 				{
 					leftPanel.triggersCB.ItemsSource = activeSection.triggers;

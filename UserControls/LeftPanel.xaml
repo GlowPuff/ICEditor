@@ -29,9 +29,7 @@
 					<materialDesign:Card Background="#FF7952C0" Padding="10" Margin="0,0,0,10">
 						<StackPanel>
 							<TextBlock HorizontalAlignment="Center" Text="Trigger Variables" Foreground="White"/>
-							<ComboBox Margin="10,5,10,10"
-    x:Name="triggersCB"
-    Style="{StaticResource MaterialDesignOutlinedComboBox}" DisplayMemberPath="name"/>
+							<ComboBox Margin="10,5,10,10" x:Name="triggersCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" DisplayMemberPath="name"/>
 							<UniformGrid Columns="3">
 								<Button x:Name="addTriggerButton" Grid.Column="0" Click="addTriggerButton_Click">
 									<materialDesign:PackIcon Kind="AddBold" Width="24" Height="24" HorizontalAlignment="Center" Foreground="Lime"/>
@@ -67,6 +65,14 @@
 							</UniformGrid>
 						</StackPanel>
 					</materialDesign:Card>
+
+					<!--event groups-->
+					<!--<materialDesign:Card Background="#FF7952C0" Padding="10" Margin="0,10,0,0">
+						<StackPanel>
+							<TextBlock HorizontalAlignment="Center" Text="Event Groups" Foreground="White"/>
+
+						</StackPanel>
+					</materialDesign:Card>-->
 				</StackPanel>
 			</ScrollViewer>
 		</Border>

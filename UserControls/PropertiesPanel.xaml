@@ -8,52 +8,74 @@
 						 xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              d:DesignHeight="450" d:DesignWidth="800">
 
-  <Grid>
-    <Grid.Background>
-      <SolidColorBrush Color="#FF3A3349" Opacity=".25"/>
-    </Grid.Background>
+	<Grid>
+		<Grid.Background>
+			<SolidColorBrush Color="#FF3A3349" Opacity=".25"/>
+		</Grid.Background>
 
-    <StackPanel Margin="10">
-      <UniformGrid Columns="2">
-        <!--LEFT-->
-        <StackPanel Margin="10">
-          <UniformGrid Columns="2">
-            <TextBlock Text="Properties for" Style="{StaticResource MaterialDesignHeadline6TextBlock}" VerticalAlignment="Center"/>
-            <TextBox Text="{Binding name}" Style="{StaticResource MaterialDesignOutlinedTextBox}" KeyDown="TextBox_KeyDown" CaretBrush="White"/>
-          </UniformGrid>
+		<StackPanel Margin="10">
+			<UniformGrid Columns="2">
+				<!--LEFT-->
+				<materialDesign:Card x:Name="leftCard" Background="MediumPurple" Margin="0,0,5,0">
+					<StackPanel Margin="10">
+						<UniformGrid Columns="2">
+							<TextBlock Text="Properties for" Style="{StaticResource MaterialDesignHeadline6TextBlock}" VerticalAlignment="Center"/>
+							<TextBox Text="{Binding name}" Style="{StaticResource MaterialDesignOutlinedTextBox}" KeyDown="TextBox_KeyDown" CaretBrush="White"/>
+						</UniformGrid>
 
-          <Separator Margin="0,10"/>
+						<Separator Margin="0,10"/>
 
-          <UniformGrid Columns="2">
-            <TextBlock Text="Invisible Until Activated" VerticalAlignment="Center"/>
-            <StackPanel Orientation="Horizontal">
-              <TextBlock Text="No"/>
-              <ToggleButton IsChecked="{Binding invisibleUntilActivated}" Margin="10,0"/>
-              <TextBlock Text="Yes"/>
-            </StackPanel>
-          </UniformGrid>
+						<UniformGrid Columns="2">
+							<TextBlock Text="Invisible Until Activated" VerticalAlignment="Center"/>
+							<StackPanel Orientation="Horizontal">
+								<TextBlock Text="No"/>
+								<ToggleButton IsChecked="{Binding invisibleUntilActivated}" Margin="10,0"/>
+								<TextBlock Text="Yes"/>
+							</StackPanel>
+						</UniformGrid>
 
-          <UniformGrid Columns="2" Margin="0,10,0,0">
-            <TextBlock Text="Tile Count"/>
-            <TextBlock Text="{Binding mapTiles.Count}"/>
-          </UniformGrid>
+						<UniformGrid Columns="2" Margin="0,10,0,0">
+							<TextBlock Text="Tile Count"/>
+							<TextBlock Text="{Binding mapTiles.Count}"/>
+						</UniformGrid>
 
-          <UniformGrid Columns="2" Margin="0,10,0,0">
-            <TextBlock Text="Trigger Count"/>
-            <TextBlock Text="{Binding triggers.Count}"/>
-          </UniformGrid>
+						<UniformGrid Columns="3" Margin="0,10,0,0">
+							<TextBlock Text="Trigger Count"/>
+							<TextBlock Text="{Binding triggers.Count}"/>
+							<TextBlock Text="(Includes 'None')"/>
+						</UniformGrid>
 
-          <UniformGrid Columns="2" Margin="0,10,0,0">
-            <TextBlock Text="Event Count"/>
-            <TextBlock Text="{Binding missionEvents.Count}"/>
-          </UniformGrid>
-        </StackPanel>
+						<UniformGrid Columns="3" Margin="0,10,0,0">
+							<TextBlock Text="Event Count"/>
+							<TextBlock Text="{Binding missionEvents.Count}"/>
+							<TextBlock Text="(Includes 'None')"/>
+						</UniformGrid>
+					</StackPanel>
+				</materialDesign:Card>
 
-        <!--RIGHT-->
-        <StackPanel>
+				<!--RIGHT-->
+				<materialDesign:Card x:Name="rightCard" Background="MediumPurple" Margin="5,0,0,0">
+					<StackPanel Margin="10">
+						<TextBlock Text="Global Properties" Style="{StaticResource MaterialDesignHeadline6TextBlock}" VerticalAlignment="Center"/>
 
-        </StackPanel>
-      </UniformGrid>
-    </StackPanel>
-  </Grid>
+						<Separator Margin="0,10"/>
+
+						<TextBlock Text="Event Groups" Margin="0,0,0,5"/>
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="*" />
+								<ColumnDefinition Width="auto" />
+							</Grid.ColumnDefinitions>
+							<ComboBox x:Name="groupCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" HorizontalAlignment="Stretch" ItemsSource="{Binding eventGroups}" DisplayMemberPath="name" SelectedValue="{Binding selectedEventGroup}"/>
+							<StackPanel Orientation="Horizontal" Grid.Column="1">
+								<Button x:Name="newGroupBtn" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35" Content="{materialDesign:PackIcon Kind=AddBold}" Margin="10,0" Click="newGroupBtn_Click" ToolTip="Create New Event Group"/>
+								<Button x:Name="editGroupBtn" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35" Content="{materialDesign:PackIcon Kind=Edit}" Click="editGroupBtn_Click" ToolTip="Edit Event Group" IsEnabled="{Binding editEnabled}" Margin="0,0,10,0"/>
+								<Button x:Name="remGroupBtn" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35" Content="{materialDesign:PackIcon Kind=RemoveBold}" Foreground="Red" Click="remGroupBtn_Click" ToolTip="Remove Event Group" IsEnabled="{Binding editEnabled}"/>
+							</StackPanel>
+						</Grid>
+					</StackPanel>
+				</materialDesign:Card>
+			</UniformGrid>
+		</StackPanel>
+	</Grid>
 </UserControl>

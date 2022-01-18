@@ -10,71 +10,77 @@ using System.Windows.Media.Imaging;
 
 namespace Imperial_Commander_Editor
 {
-  public class MapTile : INotifyPropertyChanged, IMapEntity
-  {
-    string _tileID, _tileSide;
-    Expansion _expansion;
+	public class MapTile : INotifyPropertyChanged, IMapEntity
+	{
+		string _tileID, _tileSide;
+		Expansion _expansion;
 
-    public Guid GUID { get; set; }
-    public string name { get; set; }
-    public EntityType entityType { get; set; }
-    public Vector entityPosition { get; set; }
-    public double entityRotation { get; set; }
+		public Guid GUID { get; set; }
+		public string name { get; set; }
+		public EntityType entityType { get; set; }
+		public Vector entityPosition { get; set; }
+		public double entityRotation { get; set; }
 
-    //tile props
-    public string tileID { get { return _tileID; } set { _tileID = value; PC(); } }
-    public string tileSide { get { return _tileSide; } set { _tileSide = value.ToUpper(); SetSide(); PC(); } }
-    public Expansion expansion { get { return _expansion; } set { _expansion = value; PC(); } }
-    public EntityProperties entityProperties { get; set; }
+		//tile props
+		public string tileID { get { return _tileID; } set { _tileID = value; PC(); } }
+		public string tileSide { get { return _tileSide; } set { _tileSide = value.ToUpper(); SetSide(); PC(); } }
+		public Expansion expansion { get { return _expansion; } set { _expansion = value; PC(); } }
+		public EntityProperties entityProperties { get; set; }
+		public Guid mapSectionOwner { get; set; }
+		[JsonIgnore]
+		public EntityRenderer mapRenderer { get; set; }
 
-    [JsonIgnore]
-    public EntityRenderer mapRenderer { get; set; }
+		public event PropertyChangedEventHandler PropertyChanged;
+		public void PC( [CallerMemberName] string n = "" )
+		{
+			if ( !string.IsNullOrEmpty( n ) )
+				PropertyChanged?.Invoke( this, new PropertyChangedEventArgs( n ) );
+		}
 
-    public event PropertyChangedEventHandler PropertyChanged;
-    public void PC( [CallerMemberName] string n = "" )
-    {
-      if ( !string.IsNullOrEmpty( n ) )
-        PropertyChanged?.Invoke( this, new PropertyChangedEventArgs( n ) );
-    }
+		public MapTile() { }
 
-    public MapTile() { }
+		public MapTile( string id, string exp = "Core", string side = "A" )
+		{
+			GUID = Guid.NewGuid();
+			_tileSide = side;
+			_tileID = id;
+			_expansion = (Expansion)Enum.Parse( typeof( Expansion ), exp, true );
+			entityType = EntityType.Tile;
+			entityProperties = new();
+			mapSectionOwner = Utils.mainWindow.activeSection.GUID;
+		}
 
-    public MapTile( string id, string exp = "Core", string side = "A" )
-    {
-      GUID = Guid.NewGuid();
-      _tileSide = side;
-      _tileID = id;
-      _expansion = (Expansion)Enum.Parse( typeof( Expansion ), exp, true );
-      entityType = EntityType.Tile;
-      entityProperties = new();
-    }
+		public IMapEntity Duplicate()
+		{
+			return null;
+		}
 
-    public void BuildRenderer( Canvas c, Vector where, bool showPanel, double scale )
-    {
-      var desc = Utils.tileData
-        .Where(
-        x => x.expansion.ToLower() == expansion.ToString().ToLower()
-        && x.id.ToString() == _tileID
-        ).First();
+		public void BuildRenderer( Canvas c, Vector where, bool showPanel, double scale )
+		{
+			var desc = Utils.tileData
+				.Where(
+				x => x.expansion.ToLower() == expansion.ToString().ToLower()
+				&& x.id.ToString() == _tileID
+				).First();
 
-      mapRenderer = new( this, where, showPanel, scale, new( desc.width, desc.height ) )
-      {
-        selectedZ = 100,
-        unselectedStrokeWidth = .25d,
-      };
-      mapRenderer.BuildShape( TokenShape.Square );
-      mapRenderer.BuildImage( $"pack://application:,,,/Imperial Commander Editor;component/Assets/Tiles/{expansion}/{expansion}_{tileID + tileSide}.jpg" );
-      c.Children.Add( mapRenderer.entityImage );
-      c.Children.Add( mapRenderer.entityShape );
-    }
+			mapRenderer = new( this, where, showPanel, scale, new( desc.width, desc.height ) )
+			{
+				selectedZ = 100,
+				unselectedStrokeWidth = .25d,
+			};
+			mapRenderer.BuildShape( TokenShape.Square );
+			mapRenderer.BuildImage( $"pack://application:,,,/Imperial Commander Editor;component/Assets/Tiles/{expansion}/{expansion}_{tileID + tileSide}.jpg" );
+			c.Children.Add( mapRenderer.entityImage );
+			c.Children.Add( mapRenderer.entityShape );
+		}
 
-    public void SetSide()
-    {
-      if ( mapRenderer != null )
-      {
-        ImageSource image = new BitmapImage( new Uri( $"pack://application:,,,/Imperial Commander Editor;component/Assets/Tiles/{expansion}/{expansion}_{tileID + tileSide}.jpg" ) );
-        mapRenderer.entityImage.Source = image;
-      }
-    }
-  }
+		public void SetSide()
+		{
+			if ( mapRenderer != null )
+			{
+				ImageSource image = new BitmapImage( new Uri( $"pack://application:,,,/Imperial Commander Editor;component/Assets/Tiles/{expansion}/{expansion}_{tileID + tileSide}.jpg" ) );
+				mapRenderer.entityImage.Source = image;
+			}
+		}
+	}
 }

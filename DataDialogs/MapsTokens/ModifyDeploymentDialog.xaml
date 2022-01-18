@@ -21,7 +21,7 @@
 
 				<TextBlock Text="{Binding name}" VerticalAlignment="Center"/>
 				<CheckBox IsChecked="{Binding isActive}" Grid.Column="1" HorizontalAlignment="Center"/>
-				<ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectedValue="{Binding deploymentColor}" ItemsSource="{Binding deploymentColors, RelativeSource={RelativeSource AncestorType=Window}}" DisplayMemberPath="name" Grid.Column="2"/>
+				<ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectedValue="{Binding deploymentColor}" ItemsSource="{Binding deploymentColors, RelativeSource={RelativeSource AncestorType=Window}}" DisplayMemberPath="name" Grid.Column="2" SelectedValuePath="name"/>
 				<Button x:Name="remDPButton" Content="{materialDesign:PackIcon Kind=RemoveBold}" Foreground="Red" Click="remDPButton_Click" Grid.Column="3" HorizontalAlignment="Center" Style="{StaticResource MaterialDesignFloatingActionButton}" Margin="10,0,0,0" Width="35" Height="35"/>
 			</Grid>
 		</DataTemplate>
@@ -45,7 +45,7 @@
 
 							<ComboBox x:Name="dpCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectedValue="{Binding selectedDP, RelativeSource={RelativeSource AncestorType=Window}}" DisplayMemberPath="name"/>
 
-							<Button x:Name="addDPButton" Grid.Column="1" Content="{materialDesign:PackIcon Kind=AddBold}" Margin="10,0,0,0" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35" Click="addDPButton_Click"/>
+							<Button x:Name="addDPButton" Grid.Column="1" Content="{materialDesign:PackIcon Kind=AddBold}" Margin="10,0,0,0" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35" Click="addDPButton_Click" ToolTip="Add Deployment Point"/>
 						</Grid>
 					</materialDesign:Card>
 

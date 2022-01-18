@@ -39,11 +39,15 @@ namespace Imperial_Commander_Editor
 
 		private void removeButton_Click( object sender, RoutedEventArgs e )
 		{
-			var m = ((Button)sender).DataContext as MapSection;
-			if ( m.GUID != System.Guid.Empty )
+			var res = MessageBox.Show( $"Are you sure you want to remove this Map Section?\r\n\r\n{(((Button)sender).DataContext as MapSection).name}", "Remove Map Section", MessageBoxButton.YesNo, MessageBoxImage.Warning );
+			if ( res == MessageBoxResult.Yes )
 			{
-				parent.activeSection = parent.mission.mapSections[0];
-				parent.mission.mapSections.Remove( m );
+				var m = ((Button)sender).DataContext as MapSection;
+				if ( m.GUID != System.Guid.Empty )
+				{
+					parent.activeSection = parent.mission.mapSections[0];
+					parent.mission.mapSections.Remove( m );
+				}
 			}
 		}
 	}

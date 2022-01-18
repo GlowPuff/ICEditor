@@ -30,7 +30,7 @@ namespace Imperial_Commander_Editor
 		/// <summary>
 		/// saves a mission to base project folder
 		/// </summary>
-		public static bool Save( Mission mission )
+		public static bool Save( Mission mission, bool saveAs )
 		{
 			//if ( missionID == Guid.Empty )
 			//	return Save( false, Path.Combine( Environment.GetFolderPath( Environment.SpecialFolder.MyDocuments ), "Your Journey" ) );
@@ -48,7 +48,7 @@ namespace Imperial_Commander_Editor
 			}
 
 			string filePath;
-			if ( string.IsNullOrEmpty( mission.fileName ) )
+			if ( saveAs || string.IsNullOrEmpty( mission.fileName ) )
 			{
 				SaveFileDialog saveFileDialog = new();
 				saveFileDialog.DefaultExt = ".json";

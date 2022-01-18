@@ -53,11 +53,11 @@
 								<!--SOURCE-->
 								<materialDesign:Card Margin="0,10" Padding="10" Background="MediumPurple">
 									<StackPanel>
-										<RadioButton GroupName="source" Content="Initial / Reserved" VerticalAlignment="Center" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding Path=sourceType, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:SourceType.InitialReserved}}"/>
+										<RadioButton x:Name="initialRB" GroupName="source" Content="Initial / Reserved" VerticalAlignment="Center" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding Path=sourceType, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:SourceType.InitialReserved}}" Click="initialRB_Click"/>
 
-										<RadioButton GroupName="source" Content="Manual" VerticalAlignment="Center" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding Path=sourceType, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:SourceType.Manual}}"/>
+										<RadioButton x:Name="manualRB" GroupName="source" Content="Manual" VerticalAlignment="Center" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding Path=sourceType, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:SourceType.Manual}}" Click="manualRB_Click"/>
 
-										<RadioButton GroupName="source" Content="Hand" VerticalAlignment="Center" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding Path=sourceType, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:SourceType.Hand}}"/>
+										<RadioButton x:Name="handRB" GroupName="source" Content="Hand" VerticalAlignment="Center" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding Path=sourceType, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:SourceType.Hand}}" Click="handRB_Click"/>
 									</StackPanel>
 								</materialDesign:Card>
 
@@ -88,7 +88,7 @@
 										<RadioButton GroupName="dpoint" Content="Active Deployment Point" VerticalAlignment="Center" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding Path=deploymentPoint, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:DeploymentSpot.Active}}"/>
 
 										<RadioButton x:Name="sdp" GroupName="dpoint" Content="Specific Deployment Point:" VerticalAlignment="Center" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding Path=deploymentPoint, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:DeploymentSpot.Specific}}"/>
-										<ComboBox x:Name="dpCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectedValue="{Binding specificDeploymentPoint}" SelectedValuePath="GUID" IsEnabled="{Binding Path=IsChecked, ElementName=sdp}"/>
+										<ComboBox x:Name="dpCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectedValue="{Binding specificDeploymentPoint}" SelectedValuePath="GUID" IsEnabled="{Binding Path=IsChecked, ElementName=sdp}" DisplayMemberPath="name"/>
 									</StackPanel>
 								</GroupBox>
 

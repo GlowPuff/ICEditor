@@ -29,7 +29,7 @@
 						</Grid.ColumnDefinitions>
 
 						<TextBlock Text="Name:" VerticalAlignment="Center"/>
-						<TextBox Grid.Column="1" x:Name="nameTB" Text="{Binding trigger.name}" Margin="10,0,10,0" Foreground="White" Width="200" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+						<TextBox Grid.Column="1" x:Name="nameTB" Text="{Binding trigger.name}" Margin="10,0,10,0" Foreground="White" Width="200" Style="{StaticResource MaterialDesignOutlinedTextBox}" KeyDown="nameTB_KeyDown"/>
 						<TextBlock Grid.Column="2"/>
 						<TextBlock Grid.Column="3" Text="Global?" Margin="0,0,10,0" VerticalAlignment="Center"/>
 						<ToggleButton Grid.Column="4" x:Name="globalToggle" IsChecked="{Binding trigger.isGlobal}"/>
@@ -39,7 +39,7 @@
 						<StackPanel>
 							<StackPanel Orientation="Horizontal">
 								<TextBlock Text="Initial Value:" VerticalAlignment="Center" Margin="0,0,10,0"/>
-								<TextBox Text="{Binding trigger.initialValue}" Width="64"/>
+								<TextBox Text="{Binding trigger.initialValue}" Width="64" KeyDown="nameTB_KeyDown"/>
 							</StackPanel>
 							<CheckBox Content="Reset Value To 0 (Zero) Upon Triggering" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding trigger.useReset}" Margin="0,10,4,4"/>
 						</StackPanel>

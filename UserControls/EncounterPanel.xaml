@@ -80,7 +80,7 @@
                 <TextBlock Text="DEPLOYMENT POINT" Margin="0,10,0,5" HorizontalAlignment="Center"/>
                 <ComboBox x:Name="dpCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectedValue="{Binding deploymentPoint}" DisplayMemberPath="name"/>
 
-                <Button x:Name="addInitialGroupButton" Grid.Column="1" Content="ADD GROUP" Margin="0,10,0,0" Click="addInitialGroupButton_Click"/>
+                <Button x:Name="addInitialGroupButton" Grid.Column="1" Content="ADD GROUP" Margin="0,10,0,0" Click="addInitialGroupButton_Click" IsEnabled="{Binding buttonEnabled}"/>
               </StackPanel>
             </materialDesign:Card>
 

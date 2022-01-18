@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
 
 namespace Imperial_Commander_Editor
@@ -11,7 +12,10 @@ namespace Imperial_Commander_Editor
 		public IEventAction eventAction { get; set; }
 		public DeploymentPoint selectedDP { get; set; }
 
-		public DeploymentColor[] deploymentColors { get; set; }
+		public ObservableCollection<DeploymentColor> deploymentColors
+		{
+			get { return Utils.deploymentColors; }
+		}
 
 		public ModifyDeploymentDialog( string dname, EventActionType et, IEventAction ea = null )
 		{
@@ -21,7 +25,6 @@ namespace Imperial_Commander_Editor
 			DataContext = eventAction;
 
 			dpCB.ItemsSource = Utils.mainWindow.mission.mapEntities.Where( x => x.entityType == EntityType.DeploymentPoint );
-			deploymentColors = Utils.deploymentColors;
 
 			//verify dp still exists
 			for ( int i = (eventAction as ModifyDeployment).deploymentModifiers.Count - 1; i >= 0; i-- )

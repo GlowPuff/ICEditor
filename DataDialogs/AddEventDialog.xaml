@@ -7,235 +7,263 @@
         mc:Ignorable="d"
 				xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
 				Style="{StaticResource dws}"
-        Title="Add New Event" Width="900" Height="610" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown" ContentRendered="Window_ContentRendered">
+        Title="Add New Event" Width="900" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown" ContentRendered="Window_ContentRendered" SizeToContent="Height">
 
-  <Window.Resources>
-    <ResourceDictionary>
-      <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.PopupBox.xaml"/>
-      </ResourceDictionary.MergedDictionaries>
+	<Window.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.PopupBox.xaml"/>
+			</ResourceDictionary.MergedDictionaries>
 
-      <DataTemplate DataType="{x:Type local:Trigger}" x:Key="k1">
-        <UniformGrid Columns="3">
-          <TextBlock Text="{Binding name}" VerticalAlignment="Center"/>
-          <TextBox Text="{Binding triggerValue}" VerticalAlignment="Center"/>
-          <Button x:Name="removeAdditionalTriggerButton" HorizontalAlignment="Right" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="25" Height="25" Click="removeAdditionalTriggerButton_Click">
-            <materialDesign:PackIcon Kind="Remove" Width="20" Height="20" Foreground="Red"/>
-          </Button>
-        </UniformGrid>
-      </DataTemplate>
-    </ResourceDictionary>
-  </Window.Resources>
+			<DataTemplate DataType="{x:Type local:Trigger}" x:Key="k1">
+				<UniformGrid Columns="3">
+					<TextBlock Text="{Binding name}" VerticalAlignment="Center"/>
+					<TextBox Text="{Binding triggerValue}" VerticalAlignment="Center"/>
+					<Button x:Name="removeAdditionalTriggerButton" HorizontalAlignment="Right" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="25" Height="25" Click="removeAdditionalTriggerButton_Click">
+						<materialDesign:PackIcon Kind="Remove" Width="20" Height="20" Foreground="Red"/>
+					</Button>
+				</UniformGrid>
+			</DataTemplate>
+		</ResourceDictionary>
+	</Window.Resources>
 
-  <Border BorderBrush="MediumPurple" BorderThickness="2">
-    <GroupBox Header="Add New Event" Style="{DynamicResource MaterialDesignGroupBox}">
-      <Grid>
-        <Grid.RowDefinitions>
-          <RowDefinition Height="*"/>
-          <RowDefinition Height="auto"/>
-        </Grid.RowDefinitions>
+	<Border BorderBrush="MediumPurple" BorderThickness="2">
+		<GroupBox Header="Add New Event" Style="{DynamicResource MaterialDesignGroupBox}">
+			<Grid>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="*"/>
+					<RowDefinition Height="auto"/>
+				</Grid.RowDefinitions>
 
-        <UniformGrid Columns="2">
-          <!--column 1-->
-          <Grid Margin="0,0,10,0">
-            <Grid.RowDefinitions>
-              <RowDefinition Height="auto"/>
-              <RowDefinition Height="auto"/>
-              <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
+				<UniformGrid Columns="2">
+					<!--column 1-->
+					<Grid Margin="0,0,10,0">
+						<Grid.RowDefinitions>
+							<RowDefinition Height="auto"/>
+							<RowDefinition Height="auto"/>
+							<RowDefinition Height="*"/>
+						</Grid.RowDefinitions>
 
-            <UniformGrid Columns="2">
-              <!--event name-->
-              <GroupBox Header="Event Name" Margin="0,0,10,0">
-                <TextBox x:Name="nameTB" Style="{StaticResource MaterialDesignOutlinedTextBox}"  Text="{Binding name}" CaretBrush="White"/>
-              </GroupBox>
-              <!--event text-->
-              <GroupBox Header="Event Text" Margin="10,0,0,0">
-                <StackPanel Orientation="Horizontal">
-                  <TextBlock x:Name="etInfo" Margin="0,0,10,0" Text="Text Not Set" VerticalAlignment="Center"/>
-                  <Button x:Name="editTextButton" Content="Edit Text..." Click="editTextButton_Click"/>
-                </StackPanel>
-              </GroupBox>
-            </UniformGrid>
-            <!--event actions-->
-            <GroupBox Grid.Row="1" Header="Event Actions" Margin="0,10,0,0">
-              <Grid>
-                <Grid.ColumnDefinitions>
-                  <ColumnDefinition Width="2*"/>
-                  <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <ComboBox x:Name="eventActionsCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" ItemsSource="{Binding eventActions}" DisplayMemberPath="displayName" SelectedValue="{Binding selectedEventAction, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"/>
-                <!--buttons-->
-                <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right">
-                  <materialDesign:PopupBox Style="{StaticResource MaterialDesignMultiFloatingActionPopupBox}" Width="35" Height="35">
-                    <materialDesign:Card Margin="5" MaxHeight="200" BorderBrush="MediumPurple" BorderThickness="2">
-                      <StackPanel>
-                        <Menu Background="Purple">
-                          <MenuItem Header="General">
-                            <MenuItem Header="Mission Management" Click="MenuItem_Click" Tag="G1"/>
-                            <MenuItem Header="Change Mission Info" Click="MenuItem_Click" Tag="G2"/>
-                            <MenuItem Header="Change Objective" Click="MenuItem_Click" Tag="G3"/>
-                            <MenuItem Header="Modify Variable(s)" Click="MenuItem_Click" Tag="G4"/>
-                            <MenuItem Header="Modify Threat" Click="MenuItem_Click" Tag="G5"/>
-                            <MenuItem Header="Question Prompt" Click="MenuItem_Click" Tag="G6"/>
-                          </MenuItem>
-                          <MenuItem Header="Deployment">
-                            <MenuItem Header="Enemy Deployment" Click="MenuItem_Click" Tag="D1"/>
-                            <MenuItem Header="Ally Deployment" Click="MenuItem_Click" Tag="D2"/>
-                            <MenuItem Header="Optional Deployment" Click="MenuItem_Click" Tag="D3"/>
-                            <MenuItem Header="Random Deployment" Click="MenuItem_Click" Tag="D4"/>
-                            <MenuItem Header="Add Group(s) to Deployment Hand" Click="MenuItem_Click" Tag="D5"/>
-                          </MenuItem>
-                          <MenuItem Header="Group Manipulation">
-                            <MenuItem Header="Change Mission Instructions" Click="MenuItem_Click" Tag="GM1"/>
-                            <MenuItem Header="Change Priority Target" Click="MenuItem_Click" Tag="GM2"/>
-                            <MenuItem Header="Ready / Exhaust a Group" Click="MenuItem_Click" Tag="GM3"/>
-                          </MenuItem>
-                          <MenuItem Header="Map and Tokens">
-                            <MenuItem Header="Map Management" Click="MenuItem_Click" Tag="M1"/>
-                            <MenuItem Header="Modify Deployment Points" Click="MenuItem_Click" Tag="M2"/>
-                            <MenuItem Header="Modify Map Entity" Click="MenuItem_Click" Tag="M3"/>
-                            <!--<MenuItem Header="Discard Token(s)" Click="MenuItem_Click" Tag="M4"/>
+						<UniformGrid Columns="2">
+							<!--event name-->
+							<GroupBox Header="Event Name" Margin="0,0,10,0">
+								<TextBox x:Name="nameTB" Style="{StaticResource MaterialDesignOutlinedTextBox}"  Text="{Binding name}" CaretBrush="White" KeyDown="nameTB_KeyDown"/>
+							</GroupBox>
+							<!--event text-->
+							<GroupBox Header="Event Text" Margin="10,0,0,0">
+								<StackPanel Orientation="Horizontal">
+									<TextBlock x:Name="etInfo" Margin="0,0,10,0" Text="Text Not Set" VerticalAlignment="Center"/>
+									<Button x:Name="editTextButton" Content="Edit Text..." Click="editTextButton_Click"/>
+								</StackPanel>
+							</GroupBox>
+						</UniformGrid>
+						<!--event actions-->
+						<GroupBox Grid.Row="1" Header="Event Actions" Margin="0,10,0,0">
+							<Grid>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="2*"/>
+									<ColumnDefinition Width="*"/>
+								</Grid.ColumnDefinitions>
+								<ComboBox x:Name="eventActionsCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" ItemsSource="{Binding eventActions}" DisplayMemberPath="displayName" SelectedValue="{Binding selectedEventAction, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"/>
+								<!--buttons-->
+								<StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right">
+									<materialDesign:PopupBox Style="{StaticResource MaterialDesignMultiFloatingActionPopupBox}" Width="35" Height="35">
+										<materialDesign:Card Margin="5" MaxHeight="200" BorderBrush="MediumPurple" BorderThickness="2">
+											<StackPanel>
+												<Menu Background="Purple">
+													<MenuItem Header="General">
+														<MenuItem Header="Mission Management" Click="MenuItem_Click" Tag="G1"/>
+														<MenuItem Header="Change Mission Info" Click="MenuItem_Click" Tag="G2"/>
+														<MenuItem Header="Change Objective" Click="MenuItem_Click" Tag="G3"/>
+														<MenuItem Header="Modify Variable(s)" Click="MenuItem_Click" Tag="G4"/>
+														<MenuItem Header="Modify Threat" Click="MenuItem_Click" Tag="G5"/>
+														<MenuItem Header="Question Prompt" Click="MenuItem_Click" Tag="G6"/>
+													</MenuItem>
+													<MenuItem Header="Deployment">
+														<MenuItem Header="Enemy Deployment" Click="MenuItem_Click" Tag="D1"/>
+														<MenuItem Header="Ally Deployment" Click="MenuItem_Click" Tag="D2"/>
+														<MenuItem Header="Optional Deployment" Click="MenuItem_Click" Tag="D3"/>
+														<MenuItem Header="Random Deployment" Click="MenuItem_Click" Tag="D4"/>
+														<MenuItem Header="Add Group(s) to Deployment Hand" Click="MenuItem_Click" Tag="D5"/>
+													</MenuItem>
+													<MenuItem Header="Group Manipulation">
+														<MenuItem Header="Change Mission Instructions" Click="MenuItem_Click" Tag="GM1"/>
+														<MenuItem Header="Change Priority Target" Click="MenuItem_Click" Tag="GM2"/>
+														<MenuItem Header="Ready / Exhaust a Group" Click="MenuItem_Click" Tag="GM3"/>
+													</MenuItem>
+													<MenuItem Header="Map and Tokens">
+														<MenuItem Header="Map Management" Click="MenuItem_Click" Tag="M1"/>
+														<MenuItem Header="Modify Deployment Points" Click="MenuItem_Click" Tag="M2"/>
+														<MenuItem Header="Modify Map Entity" Click="MenuItem_Click" Tag="M3"/>
+														<!--<MenuItem Header="Discard Token(s)" Click="MenuItem_Click" Tag="M4"/>
 														<MenuItem Header="Change Token" Click="MenuItem_Click" Tag="M5"/>-->
-                            <MenuItem Header="Highlight Space(s)" Click="MenuItem_Click" Tag="M4"/>
-                          </MenuItem>
-                        </Menu>
-                      </StackPanel>
-                    </materialDesign:Card>
-                  </materialDesign:PopupBox>
-                  <Button x:Name="modifyActionButton" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35" Click="modifyActionButton_Click" Margin="10,0,10,0">
-                    <materialDesign:PackIcon Kind="Edit" Width="20" Height="20"/>
-                  </Button>
-                  <Button x:Name="removeActionButton" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35" Click="removeActionButton_Click">
-                    <materialDesign:PackIcon Kind="RemoveBold" Width="20" Height="20" Foreground="Red"/>
-                  </Button>
-                </StackPanel>
-              </Grid>
-            </GroupBox>
-            <!--additional triggers-->
-            <GroupBox Grid.Row="2" Header="Triggered By Additional Triggers" Margin="0,10,0,0">
-              <ScrollViewer VerticalScrollBarVisibility="Auto">
-                <StackPanel Margin="5">
-                  <UniformGrid Columns="3">
-                    <TextBlock Text="Trigger" VerticalAlignment="Center"/>
-                    <TextBlock Text="When Value Is..." VerticalAlignment="Center"/>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                      <!--add existing-->
-                      <materialDesign:PopupBox Width="25" Height="25" Margin="0,0,10,0" StaysOpen="True" ToolTip="Add Existing Trigger">
-                        <Border Margin="5" MaxHeight="200">
-                          <ScrollViewer VerticalScrollBarVisibility="Auto">
-                            <ListBox x:Name="existingTriggersLB" DisplayMemberPath="name" SelectionChanged="existingTriggersLB_SelectionChanged"/>
-                          </ScrollViewer>
-                        </Border>
-                      </materialDesign:PopupBox>
-                      <!--add new-->
-                      <Button x:Name="addAdditionalTriggerButton" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="25" Height="25" Click="addAdditionalTriggerButton_Click" ToolTip="Add New Trigger">
-                        <materialDesign:PackIcon Kind="AddBold" Width="20" Height="20"/>
-                      </Button>
-                    </StackPanel>
-                  </UniformGrid>
-                  <Separator/>
-                  <!--LIST BOX-->
-                  <ListBox ItemsSource="{Binding additionalTriggers}" HorizontalContentAlignment="Stretch" ItemTemplate="{StaticResource k1}">
-                    <ListBox.ItemContainerStyle>
-                      <Style TargetType="ListBoxItem" BasedOn="{StaticResource MaterialDesignListBoxItem}">
-                        <Setter Property="materialDesign:ListBoxItemAssist.ShowSelection" Value="False" />
-                      </Style>
-                    </ListBox.ItemContainerStyle>
-                  </ListBox>
-                </StackPanel>
-              </ScrollViewer>
-            </GroupBox>
-          </Grid>
+														<MenuItem Header="Highlight Space(s)" Click="MenuItem_Click" Tag="M4"/>
+													</MenuItem>
+												</Menu>
+											</StackPanel>
+										</materialDesign:Card>
+									</materialDesign:PopupBox>
+									<Button x:Name="modifyActionButton" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35" Click="modifyActionButton_Click" Margin="10,0,10,0">
+										<materialDesign:PackIcon Kind="Edit" Width="20" Height="20"/>
+									</Button>
+									<Button x:Name="removeActionButton" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35" Click="removeActionButton_Click">
+										<materialDesign:PackIcon Kind="RemoveBold" Width="20" Height="20" Foreground="Red"/>
+									</Button>
+								</StackPanel>
+							</Grid>
+						</GroupBox>
+						<!--additional triggers-->
+						<GroupBox Grid.Row="2" Header="Triggered By Additional Triggers" Margin="0,10,0,0">
+							<ScrollViewer VerticalScrollBarVisibility="Auto">
+								<StackPanel Margin="5">
+									<UniformGrid Columns="3">
+										<TextBlock Text="Trigger" VerticalAlignment="Center"/>
+										<TextBlock Text="When Value Is..." VerticalAlignment="Center"/>
+										<StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+											<!--add existing-->
+											<materialDesign:PopupBox Width="25" Height="25" Margin="0,0,10,0" StaysOpen="True" ToolTip="Add Existing Trigger">
+												<Border Margin="5" MaxHeight="200">
+													<ScrollViewer VerticalScrollBarVisibility="Auto">
+														<ListBox x:Name="existingTriggersLB" DisplayMemberPath="name" SelectionChanged="existingTriggersLB_SelectionChanged"/>
+													</ScrollViewer>
+												</Border>
+											</materialDesign:PopupBox>
+											<!--add new-->
+											<Button x:Name="addAdditionalTriggerButton" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35" Click="addAdditionalTriggerButton_Click" ToolTip="Add New Trigger">
+												<Image Source="../Assets/addtrigger.png" Height="20"/>
+											</Button>
+										</StackPanel>
+									</UniformGrid>
 
-          <!--column 2-->
-          <StackPanel Margin="10,0,0,0">
-            <GroupBox Header="Event Scope" Margin="0,0,0,5">
-              <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Global?" Margin="0,0,10,0"/>
-                <ToggleButton x:Name="globalToggle" IsChecked="{Binding isGlobal}"/>
-              </StackPanel>
-            </GroupBox>
+									<Separator Margin="0,5,0,2"/>
 
-            <GroupBox Header="Triggered By General Triggers" Margin="0,10,0,5">
-              <Grid>
-                <Grid.RowDefinitions>
-                  <RowDefinition Height="auto"/>
-                  <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
+									<!--LIST BOX-->
+									<ListBox ItemsSource="{Binding additionalTriggers}" HorizontalContentAlignment="Stretch" ItemTemplate="{StaticResource k1}">
+										<ListBox.ItemContainerStyle>
+											<Style TargetType="ListBoxItem" BasedOn="{StaticResource MaterialDesignListBoxItem}">
+												<Setter Property="materialDesign:ListBoxItemAssist.ShowSelection" Value="False" />
+											</Style>
+										</ListBox.ItemContainerStyle>
+									</ListBox>
+								</StackPanel>
+							</ScrollViewer>
+						</GroupBox>
+					</Grid>
 
-                <UniformGrid Columns="2">
-                  <!--left-->
-                  <StackPanel>
-                    <!--start of round-->
-                    <StackPanel Orientation="Horizontal">
-                      <CheckBox Content="Start of Round" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding useStartOfRound}"/>
-                      <TextBox Margin="10,0" Width="30" Text="{Binding startOfRound}" VerticalAlignment="Center"/>
-                    </StackPanel>
-                    <!--end of round-->
-                    <StackPanel Orientation="Horizontal">
-                      <CheckBox Content="End of Round" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding useEndOfRound}"/>
-                      <TextBox Margin="10,0" Width="30" Text="{Binding endOfRound}" VerticalAlignment="Center"/>
-                    </StackPanel>
-                    <CheckBox Content="All Enemy Groups Defeated" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding useAllGroupsDefeated}"/>
-                  </StackPanel>
-                  <!--right-->
-                  <StackPanel Margin="0,0,0,10">
-                    <CheckBox Content="Start of Each Round" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding useStartOfEachRound}"/>
-                    <CheckBox Content="End of Each Round" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding useEndOfEachRound}"/>
-                    <CheckBox Content="All Heroes Are Wounded" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding useAllHeroesWounded}"/>
-                  </StackPanel>
-                </UniformGrid>
+					<!--column 2-->
+					<StackPanel Margin="10,0,0,0">
+						<GroupBox Header="Event Scope and Trigger Behavior" Margin="0,0,0,5">
+							<StackPanel>
+								<StackPanel Orientation="Horizontal">
+									<TextBlock Text="Global Scope:" Margin="0,0,10,0"/>
+									<UniformGrid Columns="3">
+										<TextBlock Text="No" HorizontalAlignment="Right"/>
+										<ToggleButton x:Name="globalToggle" IsChecked="{Binding isGlobal}" Margin="10,0"/>
+										<TextBlock Text="Yes" HorizontalAlignment="Left"/>
+									</UniformGrid>
+								</StackPanel>
 
-                <!--bottom half-->
-                <StackPanel Grid.Row="1">
-                  <Grid>
-                    <Grid.ColumnDefinitions>
-                      <ColumnDefinition Width="1*" />
-                      <ColumnDefinition Width="2*" />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                      <RowDefinition Height="1*" />
-                      <RowDefinition Height="1*"/>
-                      <RowDefinition Height="1*" />
-                      <RowDefinition Height="1*" />
-                    </Grid.RowDefinitions>
-                    <!--ally defeated-->
-                    <CheckBox Grid.Row="0" Grid.Column="0" Content="Ally Defeated" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding useAllyDefeated}"/>
-                    <ComboBox Grid.Row="0" Grid.Column="1" x:Name="alliesCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" DisplayMemberPath="name" SelectedValue="{Binding allyDefeated}" SelectedValuePath="name"/>
+								<materialDesign:Card Grid.Row="0" Background="MediumPurple" Padding="10" Margin="0,10,0,0">
+									<Grid>
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="*" />
+											<ColumnDefinition Width="auto" />
+										</Grid.ColumnDefinitions>
+										<StackPanel>
+											<TextBlock Text="Trigger Behavior" Margin="0,0,0,5" Foreground="Purple"/>
+											<TextBlock Text="This includes 'Additional Triggers'" Margin="0,0,0,0"/>
+										</StackPanel>
 
-                    <!--hero wounded-->
-                    <CheckBox Grid.Row="1" Grid.Column="0" Content="Hero Wounded" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding useHeroWounded}"/>
-                    <ComboBox Grid.Row="1" Grid.Column="1" x:Name="woundedCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" DisplayMemberPath="name" Margin="0,5" SelectedValue="{Binding heroWounded}" SelectedValuePath="name"/>
+										<StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
+											<TextBlock Text="Any" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+											<ToggleButton IsChecked="{Binding behaviorAll}" Margin="10,0"/>
+											<TextBlock Text="All" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+										</StackPanel>
+									</Grid>
+								</materialDesign:Card>
+							</StackPanel>
+						</GroupBox>
 
-                    <!--hero withdraws-->
-                    <CheckBox Grid.Row="2" Grid.Column="0" Content="Hero Withdraws" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding useHeroWithdraws}"/>
-                    <ComboBox Grid.Row="2" Grid.Column="1" x:Name="withdrawsCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" DisplayMemberPath="name" SelectedValue="{Binding heroWithdraws}" SelectedValuePath="name"/>
+						<GroupBox Header="Triggered By General Triggers" Margin="0,10,0,5">
+							<Grid>
+								<Grid.RowDefinitions>
+									<RowDefinition Height="auto"/>
+									<RowDefinition Height="*"/>
+								</Grid.RowDefinitions>
 
-                    <!--activation-->
-                    <CheckBox Grid.Row="3" Grid.Column="0" Content="Activation Of" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding useActivation}"/>
-                    <ComboBox Grid.Row="3" Grid.Column="1" x:Name="activationCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" Margin="0,5" SelectedValue="{Binding activationOf}" SelectedValuePath="id">
-                      <ComboBox.ItemTemplate>
-                        <DataTemplate>
-                          <TextBlock>
-                            <TextBlock.Text>
-                              <MultiBinding StringFormat="{}{0}: {1}">
-                                <Binding Path="name"/>
-                                <Binding Path="id"/>
-                              </MultiBinding>
-                            </TextBlock.Text>
-                          </TextBlock>
-                        </DataTemplate>
-                      </ComboBox.ItemTemplate>
-                    </ComboBox>
+								<UniformGrid Columns="2" Grid.Row="0">
+									<!--left-->
+									<StackPanel>
+										<!--start of round-->
+										<StackPanel Orientation="Horizontal">
+											<CheckBox Content="Start of Round" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding useStartOfRound}"/>
+											<TextBox Margin="10,0" Width="30" Text="{Binding startOfRound}" VerticalAlignment="Center" KeyDown="nameTB_KeyDown"/>
+										</StackPanel>
+										<!--end of round-->
+										<StackPanel Orientation="Horizontal">
+											<CheckBox Content="End of Round" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding useEndOfRound}"/>
+											<TextBox Margin="10,0" Width="30" Text="{Binding endOfRound}" VerticalAlignment="Center" KeyDown="nameTB_KeyDown"/>
+										</StackPanel>
+										<CheckBox Content="All Enemy Groups Defeated" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding useAllGroupsDefeated}"/>
+										<CheckBox Content="All Heroes Are Wounded" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding useAllHeroesWounded}"/>
+									</StackPanel>
+									<!--right-->
+									<StackPanel Margin="0,0,0,10">
+										<CheckBox Content="Start of Each Round" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding useStartOfEachRound}"/>
+										<CheckBox Content="End of Each Round" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding useEndOfEachRound}"/>
+										<CheckBox Content="End of Current Round" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding useEndOfCurrentRound}"/>
+									</StackPanel>
+								</UniformGrid>
 
-                  </Grid>
-                </StackPanel>
-              </Grid>
-            </GroupBox>
-          </StackPanel>
+								<!--bottom half-->
+								<StackPanel Grid.Row="1" Margin="0,10,0,0">
+									<Grid>
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="1*" />
+											<ColumnDefinition Width="2*" />
+										</Grid.ColumnDefinitions>
+										<Grid.RowDefinitions>
+											<RowDefinition Height="1*" />
+											<RowDefinition Height="1*"/>
+											<RowDefinition Height="1*" />
+											<RowDefinition Height="1*" />
+										</Grid.RowDefinitions>
+										<!--ally defeated-->
+										<CheckBox Grid.Row="0" Grid.Column="0" Content="Ally Defeated" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding useAllyDefeated}"/>
+										<ComboBox Grid.Row="0" Grid.Column="1" x:Name="alliesCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" DisplayMemberPath="name" SelectedValue="{Binding allyDefeated}" SelectedValuePath="name"/>
 
-          <!--<materialDesign:PopupBox Style="{StaticResource MaterialDesignMultiFloatingActionPopupBox}"
+										<!--hero wounded-->
+										<CheckBox Grid.Row="1" Grid.Column="0" Content="Hero Wounded" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding useHeroWounded}"/>
+										<ComboBox Grid.Row="1" Grid.Column="1" x:Name="woundedCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" DisplayMemberPath="name" Margin="0,5" SelectedValue="{Binding heroWounded}" SelectedValuePath="name"/>
+
+										<!--hero withdraws-->
+										<CheckBox Grid.Row="2" Grid.Column="0" Content="Hero Withdraws" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding useHeroWithdraws}"/>
+										<ComboBox Grid.Row="2" Grid.Column="1" x:Name="withdrawsCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" DisplayMemberPath="name" SelectedValue="{Binding heroWithdraws}" SelectedValuePath="name"/>
+
+										<!--activation-->
+										<CheckBox Grid.Row="3" Grid.Column="0" Content="Activation Of" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding useActivation}"/>
+										<ComboBox Grid.Row="3" Grid.Column="1" x:Name="activationCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" Margin="0,5" SelectedValue="{Binding activationOf}" SelectedValuePath="id">
+											<ComboBox.ItemTemplate>
+												<DataTemplate>
+													<TextBlock>
+														<TextBlock.Text>
+															<MultiBinding StringFormat="{}{0}: {1}">
+																<Binding Path="name"/>
+																<Binding Path="id"/>
+															</MultiBinding>
+														</TextBlock.Text>
+													</TextBlock>
+												</DataTemplate>
+											</ComboBox.ItemTemplate>
+										</ComboBox>
+
+									</Grid>
+								</StackPanel>
+							</Grid>
+						</GroupBox>
+					</StackPanel>
+
+					<!--<materialDesign:PopupBox Style="{StaticResource MaterialDesignMultiFloatingActionPopupBox}"
   PlacementMode="BottomAndAlignCentres"
   ToolTipService.Placement="Right"
   ToolTip="PopupBox, Style MaterialDesignMultiFloatingActionPopupBox">
@@ -245,16 +273,16 @@
 						<Button ToolTip="Three" Content="3" />
 					</StackPanel>
 				</materialDesign:PopupBox>-->
-        </UniformGrid>
+				</UniformGrid>
 
-        <StackPanel Grid.Row="1">
-          <Separator Margin="0,10,0,10"/>
-          <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button x:Name="okButton" Content="ACCEPT" Click="okButton_Click" IsDefault="True"/>
-            <Button x:Name="cancelButton" Content="CANCEL" Click="cancelButton_Click" IsDefault="True" HorizontalAlignment="Right" Margin="10,0,0,0" Visibility="{Binding showCancelBtn, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource BooleanToVisibilityConverter}}"/>
-          </StackPanel>
-        </StackPanel>
-      </Grid>
-    </GroupBox>
-  </Border>
+				<StackPanel Grid.Row="1">
+					<Separator Margin="0,10,0,10"/>
+					<StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+						<Button x:Name="okButton" Content="ACCEPT" Click="okButton_Click" IsDefault="True"/>
+						<Button x:Name="cancelButton" Content="CANCEL" Click="cancelButton_Click" IsCancel="True" HorizontalAlignment="Right" Margin="10,0,0,0" Visibility="{Binding showCancelBtn, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+					</StackPanel>
+				</StackPanel>
+			</Grid>
+		</GroupBox>
+	</Border>
 </Window>

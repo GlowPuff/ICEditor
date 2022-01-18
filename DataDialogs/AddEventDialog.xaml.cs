@@ -183,5 +183,11 @@ namespace Imperial_Commander_Editor
 			DialogResult = false;
 			Close();
 		}
+
+		private void nameTB_KeyDown( object sender, System.Windows.Input.KeyEventArgs e )
+		{
+			if ( e.Key == System.Windows.Input.Key.Enter )
+				Utils.LoseFocus( sender as Control );
+		}
 	}
 }

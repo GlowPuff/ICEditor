@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace Imperial_Commander_Editor
 {
@@ -76,6 +77,12 @@ namespace Imperial_Commander_Editor
 		{
 			nameTB.Focus();
 			nameTB.SelectAll();
+		}
+
+		private void nameTB_KeyDown( object sender, System.Windows.Input.KeyEventArgs e )
+		{
+			if ( e.Key == System.Windows.Input.Key.Enter )
+				Utils.LoseFocus( sender as Control );
 		}
 	}
 }

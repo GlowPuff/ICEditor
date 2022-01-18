@@ -41,8 +41,6 @@
 			<ImageBrush ImageSource="pack://application:,,,/Imperial Commander Editor;component/Assets/bg.png" Stretch="Uniform" Opacity="0.25"/>
 		</Grid.Background>
 
-		<materialDesign:Snackbar x:Name="infoSnackbar" Foreground="White" IsActive="False" MessageQueue="{materialDesign:MessageQueue}" Background="MediumPurple"/>
-
 		<ScrollViewer VerticalScrollBarVisibility="Auto">
 			<ItemsControl x:Name="mapSectionItems" Padding="10">
 

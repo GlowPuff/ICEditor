@@ -1,19 +1,29 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.ObjectModel;
 using System.Windows.Controls;
 
 namespace Imperial_Commander_Editor
 {
-  /// <summary>
-  /// Interaction logic for DeploymentProps.xaml
-  /// </summary>
-  public partial class DeploymentProps : UserControl, IPropertyModel
-  {
-    public List<DeploymentColor> deploymentColors { get { return Utils.deploymentColors.ToList(); } }
+	/// <summary>
+	/// Interaction logic for DeploymentProps.xaml
+	/// </summary>
+	public partial class DeploymentProps : UserControl, IPropertyModel
+	{
+		public ObservableCollection<DeploymentColor> deploymentColors
+		{
+			get { return Utils.deploymentColors; }
+		}
 
-    public DeploymentProps()
-    {
-      InitializeComponent();
-    }
-  }
+		public DeploymentProps()
+		{
+			InitializeComponent();
+		}
+
+		private void eName_KeyDown( object sender, System.Windows.Input.KeyEventArgs e )
+		{
+			if ( e.Key == System.Windows.Input.Key.Enter )
+			{
+				Utils.LoseFocus( sender as Control );
+			}
+		}
+	}
 }

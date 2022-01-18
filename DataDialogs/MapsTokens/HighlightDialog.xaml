@@ -38,7 +38,10 @@
 								<ColumnDefinition Width="auto" />
 							</Grid.ColumnDefinitions>
 
-							<ComboBox x:Name="tlist" Style="{StaticResource MaterialDesignOutlinedComboBox}" ItemsSource="{Binding highlightList, RelativeSource={RelativeSource AncestorType=Window}}" SelectedValue="{Binding selectedSpace, RelativeSource={RelativeSource AncestorType=Window}}" DisplayMemberPath="name"/>
+              <StackPanel>
+                <TextBlock Text="Choose a Highlight Space to Activate:" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+                <ComboBox x:Name="tlist" Style="{StaticResource MaterialDesignOutlinedComboBox}" ItemsSource="{Binding highlightList, RelativeSource={RelativeSource AncestorType=Window}}" SelectedValue="{Binding selectedSpace, RelativeSource={RelativeSource AncestorType=Window}}" DisplayMemberPath="name"/>
+              </StackPanel>
 
 							<Button x:Name="addTriggerButton" Content="{materialDesign:PackIcon Kind=AddBold}" Grid.Column="1" Margin="10,0,0,0" Click="addTriggerButton_Click" ToolTip="Add Highlight" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35"/>
 						</Grid>

@@ -12,7 +12,7 @@ namespace Imperial_Commander_Editor
 
 		string _eventName, _eventText, _allyDefeated, _heroWounded, _heroWithdraws, _activationOf;
 		int _startOfRound, _endOfRound;
-		bool _useStartOfRound, _useEndOfRound, _useStartOfEachRound, _useEndOfEachRound, _useAllGroupsDefeated, _useAllHeroesWounded, _useAllyDefeated, _useHeroWounded, _useHeroWithdraws, _useActivation;
+		bool _useStartOfRound, _useEndOfRound, _useStartOfEachRound, _useEndOfEachRound, _useAllGroupsDefeated, _useAllHeroesWounded, _useAllyDefeated, _useHeroWounded, _useHeroWithdraws, _useActivation, _useEndOfCurrentRound, _behaviorAll;
 		bool _isGlobal;
 
 		public Guid GUID { get; set; }
@@ -71,6 +71,11 @@ namespace Imperial_Commander_Editor
 			get { return _useEndOfRound; }
 			set { _useEndOfRound = value; PC(); }
 		}
+		public bool useEndOfCurrentRound
+		{
+			get { return _useEndOfCurrentRound; }
+			set { _useEndOfCurrentRound = value; PC(); }
+		}
 		public bool useStartOfEachRound
 		{
 			get { return _useStartOfEachRound; }
@@ -111,6 +116,7 @@ namespace Imperial_Commander_Editor
 			get { return _useActivation; }
 			set { _useActivation = value; PC(); }
 		}
+		public bool behaviorAll { get { return _behaviorAll; } set { _behaviorAll = value; PC(); } }
 		public ObservableCollection<Trigger> additionalTriggers { get; set; }
 
 		[JsonConverter( typeof( EventActionConverter ) )]
@@ -129,7 +135,8 @@ namespace Imperial_Commander_Editor
 			isGlobal = false;
 			eventText = "";
 			startOfRound = endOfRound = 1;
-			useStartOfRound = useEndOfRound = useStartOfEachRound = useEndOfEachRound = useAllGroupsDefeated = useAllHeroesWounded = useAllyDefeated = useHeroWounded = useHeroWithdraws = useActivation = false;
+			useStartOfRound = useEndOfRound = useStartOfEachRound = useEndOfEachRound = useAllGroupsDefeated = useAllHeroesWounded = useAllyDefeated = useHeroWounded = useHeroWithdraws = useActivation = useEndOfCurrentRound = false;
+			behaviorAll = true;
 			additionalTriggers = new();
 			eventActions = new();
 

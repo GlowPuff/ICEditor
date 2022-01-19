@@ -79,7 +79,7 @@
 							<StackPanel Margin="5,0">
 								<!--event name-->
 								<GroupBox Header="Rename Enemy">
-									<TextBox x:Name="nameTB" Style="{StaticResource MaterialDesignOutlinedTextBox}" Text="{Binding enemyName}" materialDesign:HintAssist.Hint="Blank for default"/>
+									<TextBox x:Name="nameTB" Style="{StaticResource MaterialDesignOutlinedTextBox}" Text="{Binding enemyName}" materialDesign:HintAssist.Hint="Blank for default" KeyDown="nameTB_KeyDown"/>
 								</GroupBox>
 
 								<!--DEPLOYMENT POINT-->
@@ -88,7 +88,16 @@
 										<RadioButton GroupName="dpoint" Content="Active Deployment Point" VerticalAlignment="Center" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding Path=deploymentPoint, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:DeploymentSpot.Active}}"/>
 
 										<RadioButton x:Name="sdp" GroupName="dpoint" Content="Specific Deployment Point:" VerticalAlignment="Center" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding Path=deploymentPoint, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:DeploymentSpot.Specific}}"/>
-										<ComboBox x:Name="dpCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectedValue="{Binding specificDeploymentPoint}" SelectedValuePath="GUID" IsEnabled="{Binding Path=IsChecked, ElementName=sdp}" DisplayMemberPath="name"/>
+
+										<Grid>
+											<Grid.ColumnDefinitions>
+												<ColumnDefinition Width="1*" />
+												<ColumnDefinition Width="auto" />
+												<ColumnDefinition Width="auto" />
+											</Grid.ColumnDefinitions>
+											<ComboBox x:Name="dpCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectedValue="{Binding specificDeploymentPoint}" SelectedValuePath="GUID" IsEnabled="{Binding Path=IsChecked, ElementName=sdp}" DisplayMemberPath="name"/>
+											<Button Grid.Column="1" x:Name="editGroup" Content="{materialDesign:PackIcon Kind=Edit}" Click="editGroup_Click" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35" Margin="10,0,0,0" IsEnabled="{Binding Path=IsChecked, ElementName=sdp}"/>
+										</Grid>
 									</StackPanel>
 								</GroupBox>
 
@@ -97,7 +106,7 @@
 									<StackPanel>
 										<UniformGrid Columns="2">
 											<CheckBox Content="Threat Cost" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding useThreat}"/>
-											<TextBox Text="{Binding threatCost}" VerticalAlignment="Center" Margin="10,0,0,0"/>
+											<TextBox Text="{Binding threatCost}" VerticalAlignment="Center" Margin="10,0,0,0" KeyDown="nameTB_KeyDown"/>
 										</UniformGrid>
 										<Grid>
 											<Grid.ColumnDefinitions>
@@ -105,7 +114,7 @@
 												<ColumnDefinition Width="*" />
 											</Grid.ColumnDefinitions>
 											<CheckBox Content="Show Modification" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding showMod}"/>
-											<TextBox Text="{Binding modification}" Grid.Column="1" VerticalAlignment="Center" Margin="10,0,0,0"/>
+											<TextBox Text="{Binding modification}" Grid.Column="1" VerticalAlignment="Center" Margin="10,0,0,0" KeyDown="nameTB_KeyDown"/>
 										</Grid>
 									</StackPanel>
 								</materialDesign:Card>
@@ -148,7 +157,7 @@
 
 				<StackPanel Grid.Row="1">
 					<Separator Margin="0,0,0,10"/>
-					<Button x:Name="okButton" Content="ACCEPT" Click="okButton_Click" IsDefault="True" HorizontalAlignment="Right" Margin="0,0,10,10"/>
+					<Button x:Name="okButton" Content="ACCEPT" Click="okButton_Click" HorizontalAlignment="Right" Margin="0,0,10,10"/>
 				</StackPanel>
 			</Grid>
 		</GroupBox>

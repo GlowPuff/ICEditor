@@ -33,5 +33,11 @@ namespace Imperial_Commander_Editor
 				Utils.LoseFocus( sender as Control );
 			}
 		}
+
+		private void ownerChangeBtn_Click( object sender, RoutedEventArgs e )
+		{
+			((sender as FrameworkElement).DataContext as Console).mapSectionOwner = Utils.mainWindow.activeSection.GUID;
+			Utils.mainWindow.SetStatus( $"Owner Set To '{Utils.mainWindow.activeSection.name}'" );
+		}
 	}
 }

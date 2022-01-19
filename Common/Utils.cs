@@ -85,6 +85,21 @@ namespace Imperial_Commander_Editor
 			enemyData = enemyData.Concat( villainData ).ToList();
 		}
 
+		public static bool ValidateTrigger( Guid guid )
+		{
+			return mainWindow.mission.TriggerExists( guid );
+		}
+
+		public static bool ValidateEvent( Guid guid )
+		{
+			return mainWindow.mission.EventExists( guid );
+		}
+
+		public static bool ValidateMapEntity( Guid guid )
+		{
+			return mainWindow.mission.EntityExists( guid );
+		}
+
 		///EXTENSIONS
 		public static double RoundOff( this double i, double value )
 		{

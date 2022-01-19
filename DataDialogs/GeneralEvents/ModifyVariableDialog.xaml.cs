@@ -25,7 +25,7 @@ namespace Imperial_Commander_Editor
 			//validate triggers
 			for ( int i = (eventAction as ModifyVariable).triggerList.Count - 1; i >= 0; i-- )
 			{
-				if ( !Utils.mainWindow.mission.TriggerExists( (eventAction as ModifyVariable).triggerList[i] ) )
+				if ( !Utils.ValidateTrigger( (eventAction as ModifyVariable).triggerList[i] ) )
 					(eventAction as ModifyVariable).triggerList[i] = Guid.Empty;
 			}
 

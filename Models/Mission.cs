@@ -37,7 +37,7 @@ namespace Imperial_Commander_Editor
 
 		[JsonConverter( typeof( MapEntityConverter ) )]
 		public ObservableCollection<IMapEntity> mapEntities { get; set; }
-		public ObservableCollection<InitialGroupData> initialDeploymentGroups { get; set; }
+		public ObservableCollection<EnemyGroupData> initialDeploymentGroups { get; set; }
 		public ObservableCollection<DeploymentCard> reservedDeploymentGroups { get; set; }
 		public ObservableCollection<EventGroup> eventGroups { get; set; }
 

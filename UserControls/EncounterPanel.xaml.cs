@@ -30,7 +30,7 @@ namespace Imperial_Commander_Editor
 		public DeploymentPoint modifyDeploymentPoint { get; set; }
 		public string selectedGroup { get; set; }
 		public string selectedResGroup { get; set; }
-		public ObservableCollection<InitialGroupData> initialGroups
+		public ObservableCollection<EnemyGroupData> initialGroups
 		{
 			get { return Utils.mainWindow.mission.initialDeploymentGroups; }
 			set { Utils.mainWindow.mission.initialDeploymentGroups = value; }
@@ -83,7 +83,7 @@ namespace Imperial_Commander_Editor
 
 		private void addInitialGroupButton_Click( object sender, RoutedEventArgs e )
 		{
-			var ig = new InitialGroupData( Utils.enemyData.Where( x => x.id == selectedGroup ).First(), deploymentPoint );
+			var ig = new EnemyGroupData( Utils.enemyData.Where( x => x.id == selectedGroup ).First(), deploymentPoint );
 
 			Utils.mainWindow.mission.initialDeploymentGroups.Add( ig );
 			deploymentPoint = null;
@@ -91,7 +91,7 @@ namespace Imperial_Commander_Editor
 
 		private void remInitialGroupButton_Click( object sender, RoutedEventArgs e )
 		{
-			Utils.mainWindow.mission.initialDeploymentGroups.Remove( (sender as FrameworkElement).DataContext as InitialGroupData );
+			Utils.mainWindow.mission.initialDeploymentGroups.Remove( (sender as FrameworkElement).DataContext as EnemyGroupData );
 		}
 
 		private void remReservedGroupButton_Click( object sender, RoutedEventArgs e )
@@ -101,7 +101,7 @@ namespace Imperial_Commander_Editor
 
 		private void editGroup_Click( object sender, RoutedEventArgs e )
 		{
-			EditInitialGroupDialog dialog = new EditInitialGroupDialog( (sender as FrameworkElement).DataContext as InitialGroupData );
+			EditInitialGroupDialog dialog = new EditInitialGroupDialog( (sender as FrameworkElement).DataContext as EnemyGroupData );
 			dialog.ShowDialog();
 		}
 	}

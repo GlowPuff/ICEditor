@@ -9,56 +9,56 @@
 				Style="{StaticResource dws}"
         Title="Edit Initial Group" Width="500" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown" SizeToContent="Height">
 
-  <Window.Resources>
-    <DataTemplate x:Key="k1">
-      <Grid>
-        <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="1*" />
-        </Grid.ColumnDefinitions>
+	<Window.Resources>
+		<DataTemplate x:Key="k1">
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="1*" />
+				</Grid.ColumnDefinitions>
 
-        <ComboBox Grid.Column="1" ItemsSource="{Binding deploymentPoints, RelativeSource={RelativeSource AncestorType=Window}}" DisplayMemberPath="name" SelectedValue="{Binding GUID}" SelectedValuePath="GUID"/>
-      </Grid>
-    </DataTemplate>
-  </Window.Resources>
+				<ComboBox Grid.Column="1" ItemsSource="{Binding deploymentPoints, RelativeSource={RelativeSource AncestorType=Window}}" DisplayMemberPath="name" SelectedValue="{Binding GUID}" SelectedValuePath="GUID"/>
+			</Grid>
+		</DataTemplate>
+	</Window.Resources>
 
-  <Border BorderBrush="MediumPurple" BorderThickness="2">
-    <GroupBox Header="Edit Initial Group" Style="{DynamicResource MaterialDesignGroupBox}">
-      <Grid>
-        <Grid.RowDefinitions>
-          <RowDefinition Height="*"/>
-          <RowDefinition Height="auto"/>
-        </Grid.RowDefinitions>
+	<Border BorderBrush="MediumPurple" BorderThickness="2">
+		<GroupBox Header="Set Deployment Points" Style="{DynamicResource MaterialDesignGroupBox}">
+			<Grid>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="*"/>
+					<RowDefinition Height="auto"/>
+				</Grid.RowDefinitions>
 
-        <StackPanel>
-          <TextBlock HorizontalAlignment="Center" Style="{StaticResource MaterialDesignHeadline6TextBlock}">
-            <TextBlock.Text>
-              <MultiBinding StringFormat="{}{0}: {1}">
-                <Binding Path="initialGroupData.card.name"/>
-                <Binding Path="initialGroupData.card.id"/>
-              </MultiBinding>
-            </TextBlock.Text>
-          </TextBlock>
-          <TextBlock Text="Set Individual Deployment Points" HorizontalAlignment="Center" Margin="0,10,0,0"/>
-          <!--LIST BOX-->
-          <materialDesign:Card Background="Purple" Padding="10" Margin="0,10,0,0">
-            <ListBox ItemsSource="{Binding initialGroupData.pointList}" HorizontalContentAlignment="Stretch" ItemTemplate="{StaticResource k1}">
-              <ListBox.ItemContainerStyle>
-                <Style TargetType="ListBoxItem" BasedOn="{StaticResource MaterialDesignListBoxItem}">
-                  <Setter Property="materialDesign:ListBoxItemAssist.ShowSelection" Value="False" />
-                </Style>
-              </ListBox.ItemContainerStyle>
-            </ListBox>
-          </materialDesign:Card>
+				<StackPanel>
+					<TextBlock HorizontalAlignment="Center" Style="{StaticResource MaterialDesignHeadline6TextBlock}">
+						<TextBlock.Text>
+							<MultiBinding StringFormat="{}{0}: {1}">
+								<Binding Path="initialGroupData.card.name"/>
+								<Binding Path="initialGroupData.card.id"/>
+							</MultiBinding>
+						</TextBlock.Text>
+					</TextBlock>
+					<TextBlock Text="Set Individual Deployment Points" HorizontalAlignment="Center" Margin="0,10,0,0"/>
+					<!--LIST BOX-->
+					<materialDesign:Card Background="Purple" Padding="10" Margin="0,10,0,0">
+						<ListBox ItemsSource="{Binding initialGroupData.pointList}" HorizontalContentAlignment="Stretch" ItemTemplate="{StaticResource k1}">
+							<ListBox.ItemContainerStyle>
+								<Style TargetType="ListBoxItem" BasedOn="{StaticResource MaterialDesignListBoxItem}">
+									<Setter Property="materialDesign:ListBoxItemAssist.ShowSelection" Value="False" />
+								</Style>
+							</ListBox.ItemContainerStyle>
+						</ListBox>
+					</materialDesign:Card>
 
-        </StackPanel>
+				</StackPanel>
 
-        <StackPanel Grid.Row="1" Margin="0,10,0,0">
-          <Separator Margin="0,0,0,10"/>
-          <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right" >
-            <Button x:Name="okButton" Content="ACCEPT" Click="okButton_Click" IsDefault="True"/>
-          </StackPanel>
-        </StackPanel>
-      </Grid>
-    </GroupBox>
-  </Border>
+				<StackPanel Grid.Row="1" Margin="0,10,0,0">
+					<Separator Margin="0,0,0,10"/>
+					<StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right" >
+						<Button x:Name="okButton" Content="ACCEPT" Click="okButton_Click" IsDefault="True"/>
+					</StackPanel>
+				</StackPanel>
+			</Grid>
+		</GroupBox>
+	</Border>
 </Window>

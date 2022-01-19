@@ -145,5 +145,16 @@ namespace Imperial_Commander_Editor
 			allyDefeated = "Luke Skywalker (Hero)";
 			activationOf = "DG001";
 		}
+
+		public bool Validate()
+		{
+			if ( !Utils.ValidateEvent( GUID ) )
+			{
+				name = "None (Global)";
+				GUID = Guid.Empty;
+				return false;
+			}
+			return true;
+		}
 	}
 }

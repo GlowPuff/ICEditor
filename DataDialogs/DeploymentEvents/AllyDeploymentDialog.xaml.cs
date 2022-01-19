@@ -23,11 +23,11 @@ namespace Imperial_Commander_Editor
 			dpCB.ItemsSource = Utils.mainWindow.mission.mapEntities.Where( x => x.entityType == EntityType.DeploymentPoint );
 
 			//verify trigger and dp still exist
-			if ( !Utils.mainWindow.mission.EntityExists( (eventAction as AllyDeployment).specificDeploymentPoint ) )
+			if ( !Utils.ValidateMapEntity( (eventAction as AllyDeployment).specificDeploymentPoint ) )
 			{
 				(eventAction as AllyDeployment).specificDeploymentPoint = Guid.Empty;
 			}
-			if ( !Utils.mainWindow.mission.TriggerExists( (eventAction as AllyDeployment).setTrigger ) )
+			if ( !Utils.ValidateTrigger( (eventAction as AllyDeployment).setTrigger ) )
 			{
 				(eventAction as AllyDeployment).setTrigger = Guid.Empty;
 			}

@@ -29,7 +29,7 @@ namespace Imperial_Commander_Editor
 			//verify dp still exists
 			for ( int i = (eventAction as ModifyDeployment).deploymentModifiers.Count - 1; i >= 0; i-- )
 			{
-				if ( !Utils.mainWindow.mission.EntityExists( (eventAction as ModifyDeployment).deploymentModifiers[i].GUID ) )
+				if ( !Utils.ValidateMapEntity( (eventAction as ModifyDeployment).deploymentModifiers[i].GUID ) )
 					(eventAction as ModifyDeployment).deploymentModifiers.RemoveAt( i );
 			}
 		}

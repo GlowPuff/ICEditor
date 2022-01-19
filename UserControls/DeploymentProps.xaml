@@ -14,6 +14,8 @@
 					<TextBlock Text="DEPLOYMENT POINT" HorizontalAlignment="Center"/>
 					<!--name-->
 					<TextBox x:Name="eName" Text="{Binding name}" materialDesign:HintAssist.Hint="Entity Name" Style="{StaticResource MaterialDesignOutlinedTextBox}" Margin="0,10,0,0" CaretBrush="White" KeyDown="eName_KeyDown"/>
+					<Button x:Name="dupeBtn" Content="ADD DUPLICATE" Margin="0,10,0,0" Click="dupeBtn_Click"/>
+					<Button x:Name="ownerChangeBtn" Content="CHANGE OWNER" Margin="0,10,0,0" Click="ownerChangeBtn_Click"/>
 				</StackPanel>
 			</materialDesign:Card>
 

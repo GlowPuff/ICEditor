@@ -21,7 +21,7 @@ namespace Imperial_Commander_Editor
 			dpCB.ItemsSource = Utils.mainWindow.mission.mapEntities.Where( x => x.entityType == EntityType.DeploymentPoint );
 
 			//verify dp still exists
-			if ( !Utils.mainWindow.mission.EntityExists( (eventAction as RandomDeployment).specificDeploymentPoint ) )
+			if ( !Utils.ValidateMapEntity( (eventAction as RandomDeployment).specificDeploymentPoint ) )
 			{
 				(eventAction as RandomDeployment).specificDeploymentPoint = Guid.Empty;
 			}

@@ -92,5 +92,16 @@ namespace Imperial_Commander_Editor
 			setValue = 0;
 			modifyValue = 0;
 		}
+
+		public bool Validate()
+		{
+			if ( !Utils.ValidateTrigger( GUID ) )
+			{
+				name = "None (Global)";
+				GUID = Guid.Empty;
+				return false;
+			}
+			return true;
+		}
 	}
 }

@@ -80,7 +80,7 @@ namespace Imperial_Commander_Editor
 		//public event PropertyChangedEventHandler PropertyChanged;
 	}
 
-	public class InitialGroupData : INotifyPropertyChanged
+	public class EnemyGroupData : INotifyPropertyChanged
 	{
 		public Guid GUID { get; set; }
 		public DeploymentCard card { get; set; }
@@ -93,12 +93,12 @@ namespace Imperial_Commander_Editor
 		}
 		public event PropertyChangedEventHandler PropertyChanged;
 
-		public InitialGroupData()
+		public EnemyGroupData()
 		{
 
 		}
 
-		public InitialGroupData( DeploymentCard dc, DeploymentPoint dp )
+		public EnemyGroupData( DeploymentCard dc, DeploymentPoint dp )
 		{
 			GUID = Guid.NewGuid();
 			card = dc;
@@ -123,6 +123,7 @@ namespace Imperial_Commander_Editor
 		Guid mapSectionOwner { get; set; }
 		void BuildRenderer( Canvas c, Vector where, bool showPanel, double scale );
 		IMapEntity Duplicate();
+		bool Validate();
 	}
 	public interface IEventActionDialog
 	{

@@ -27,7 +27,7 @@ namespace Imperial_Commander_Editor
 			{
 				for ( int ii = 0; ii < (eventAction as ModifyEntity).entitiesToModify[i].buttonActions.Count; ii++ )
 				{
-					if ( !Utils.mainWindow.mission.TriggerExists( (eventAction as ModifyEntity).entitiesToModify[i].buttonActions[ii].triggerGUID ) )
+					if ( !Utils.ValidateTrigger( (eventAction as ModifyEntity).entitiesToModify[i].buttonActions[ii].triggerGUID ) )
 						(eventAction as ModifyEntity).entitiesToModify[i].buttonActions[ii].triggerGUID = Guid.Empty;
 					(eventAction as ModifyEntity).entitiesToModify[i].buttonActions[ii].triggerName = Utils.mainWindow.mission.GetTriggerFromGUID( (eventAction as ModifyEntity).entitiesToModify[i].buttonActions[ii].triggerGUID ).name;
 				}

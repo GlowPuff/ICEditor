@@ -1,16 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace Imperial_Commander_Editor
 {
 	/// <summary>
 	/// Interaction logic for EnemyDeploymentDialog.xaml
 	/// </summary>
-	public partial class EnemyDeploymentDialog : Window, IEventActionDialog
+	public partial class EnemyDeploymentDialog : Window, IEventActionDialog, INotifyPropertyChanged
 	{
 		public IEventAction eventAction { get; set; }
+
+		public void PC( [CallerMemberName] string n = "" )
+		{
+			if ( !string.IsNullOrEmpty( n ) )
+				PropertyChanged?.Invoke( this, new PropertyChangedEventArgs( n ) );
+		}
+		public event PropertyChangedEventHandler PropertyChanged;
 
 		public EnemyDeploymentDialog( string dname, EventActionType et, IEventAction ea = null )
 		{
@@ -34,11 +44,16 @@ namespace Imperial_Commander_Editor
 			dpCB.ItemsSource = Utils.mainWindow.mission.mapEntities.Where( x => x.entityType == EntityType.DeploymentPoint );
 
 			//verify trigger and dp still exist
-			if ( !Utils.mainWindow.mission.EntityExists( (eventAction as EnemyDeployment).specificDeploymentPoint ) )
+			if ( !Utils.ValidateMapEntity( (eventAction as EnemyDeployment).specificDeploymentPoint ) )
 			{
 				(eventAction as EnemyDeployment).specificDeploymentPoint = Guid.Empty;
 			}
-			if ( !Utils.mainWindow.mission.TriggerExists( (eventAction as EnemyDeployment).setTrigger ) )
+			for ( int i = 0; i < (eventAction as EnemyDeployment).enemyGroupData.pointList.Count; i++ )
+			{
+				if ( !Utils.ValidateMapEntity( (eventAction as EnemyDeployment).enemyGroupData.pointList[i].GUID ) )
+					(eventAction as EnemyDeployment).enemyGroupData.pointList[i].GUID = Guid.Empty;
+			}
+			if ( !Utils.ValidateTrigger( (eventAction as EnemyDeployment).setTrigger ) )
 			{
 				(eventAction as EnemyDeployment).setTrigger = Guid.Empty;
 			}
@@ -71,6 +86,18 @@ namespace Imperial_Commander_Editor
 		private void handRB_Click( object sender, RoutedEventArgs e )
 		{
 			enemyCB.ItemsSource = Utils.enemyData;
+		}
+
+		private void nameTB_KeyDown( object sender, System.Windows.Input.KeyEventArgs e )
+		{
+			if ( e.Key == System.Windows.Input.Key.Enter )
+				Utils.LoseFocus( sender as Control );
+		}
+
+		private void editGroup_Click( object sender, RoutedEventArgs e )
+		{
+			EditInitialGroupDialog dialog = new EditInitialGroupDialog( (eventAction as EnemyDeployment).enemyGroupData );
+			dialog.ShowDialog();
 		}
 	}
 }

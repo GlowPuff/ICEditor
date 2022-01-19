@@ -28,7 +28,7 @@ namespace Imperial_Commander_Editor
 			//validate eventAction's buttonList.trigger (GUID) exists
 			for ( int i = 0; i < (eventAction as QuestionPrompt).buttonList.Count; i++ )
 			{
-				if ( !mainWindow.mission.TriggerExists( (eventAction as QuestionPrompt).buttonList[i].triggerGUID ) )
+				if ( !Utils.ValidateTrigger( (eventAction as QuestionPrompt).buttonList[i].triggerGUID ) )
 					(eventAction as QuestionPrompt).buttonList[i].triggerGUID = Guid.Empty;
 			}
 		}

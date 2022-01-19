@@ -254,6 +254,10 @@ namespace Imperial_Commander_Editor
 					SetStatus( "Mission Saved" );
 				}
 			}
+			if ( e.Key == Key.F9 || (e.Key == Key.L && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control) )
+			{
+				openMissionButton_Click( null, null );
+			}
 		}
 	}
 }

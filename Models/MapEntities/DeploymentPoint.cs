@@ -92,5 +92,17 @@ namespace Imperial_Commander_Editor
 			mapRenderer.BuildShape( TokenShape.Circle );
 			canvas.Children.Add( mapRenderer.entityShape );
 		}
+
+		public bool Validate()
+		{
+			if ( !Utils.mainWindow.mission.EntityExists( GUID ) )
+			{
+				if ( GUID != Guid.Empty )
+					name += " (NO LONGER VALID)";
+				GUID = Guid.Empty;
+				return false;
+			}
+			return true;
+		}
 	}
 }

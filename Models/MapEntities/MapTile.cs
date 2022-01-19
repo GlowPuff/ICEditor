@@ -82,5 +82,10 @@ namespace Imperial_Commander_Editor
 				mapRenderer.entityImage.Source = image;
 			}
 		}
+
+		public bool Validate()
+		{
+			return true;
+		}
 	}
 }

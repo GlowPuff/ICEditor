@@ -116,6 +116,8 @@ namespace Imperial_Commander_Editor
 				propModel = new HighlightProps() { DataContext = selectedEntity };
 			else if ( selectedEntity is Door )
 				propModel = new DoorProps() { DataContext = selectedEntity };
+			else if ( selectedEntity is MapTile )
+				propModel = new TileProps() { DataContext = selectedEntity };
 			else
 				propModel = null;
 		}
@@ -205,10 +207,10 @@ namespace Imperial_Commander_Editor
 			scale = Math.Clamp( scale, .5d, 7d );
 			mScale = scale;
 			//calculate centers
-			double centerX = (point.X - translateTransform.X) / scaleTransform.ScaleX;
-			double centerY = (point.Y - translateTransform.Y) / scaleTransform.ScaleY;
+			//double centerX = (point.X - translateTransform.X) / scaleTransform.ScaleX;
+			//double centerY = (point.Y - translateTransform.Y) / scaleTransform.ScaleY;
 			Utils.Log( "==============" );
-			Utils.Log( $"CENTER: {centerX}, {centerY}" );
+			//Utils.Log( $"CENTER: {centerX}, {centerY}" );
 			Utils.Log( $"SCALE: {mScale}" );
 
 			var w = Utils.mainWindow.ActualWidth;
@@ -218,11 +220,14 @@ namespace Imperial_Commander_Editor
 			{
 				cx = (-selectedEntity.entityPosition.X * mScale) + (w / 2) - 225;
 				cy = (-selectedEntity.entityPosition.Y * mScale) + (h / 2) - 125;
+				translateTransform.X = cx;
+				translateTransform.Y = cy;
 			}
 			else
 			{
-				cx = (-point.X * mScale) + (w / 2) - 225;
-				cy = (-point.Y * mScale) + (h / 2) - 125;
+				cx = (-1000 * mScale) + (w / 2) - 225;//(-point.X * mScale) + (w / 2) - 225;
+				cy = (-1000 * mScale) + (h / 2) - 125;//(-point.Y * mScale) + (h / 2) - 125;
+				CenterMap( new( point.X, point.Y ) );
 			}
 			Utils.Log( $"CX/Y: {cx}, {cy}" );
 
@@ -232,8 +237,8 @@ namespace Imperial_Commander_Editor
 			//translateTransform.X = point.X - centerX * scaleTransform.ScaleX;
 			//translateTransform.Y = point.Y - centerY * scaleTransform.ScaleY;
 
-			translateTransform.X = cx;
-			translateTransform.Y = cy;
+			//translateTransform.X = cx;
+			//translateTransform.Y = cy;
 
 			Utils.Log( $"TRANS: {translateTransform.X}, {translateTransform.Y}" );
 			Utils.Log( $"MOUSE: {point.X}, {point.Y}" );
@@ -292,18 +297,22 @@ namespace Imperial_Commander_Editor
 
 		private void centerButton_Click( object sender, RoutedEventArgs e )
 		{
-			CenterMap();
+			CenterMap( new( 1000, 1000 ) );
 		}
 
-		private void CenterMap()
+		private void CenterMap( Vector e )
 		{
 			var w = Utils.mainWindow.ActualWidth;
 			var h = Utils.mainWindow.ActualHeight;
-			mScale = 1;
-			scaleTransform.ScaleX = mScale;
-			scaleTransform.ScaleY = mScale;
-			translateTransform.X = -1000 + (w / 2) - 225;
-			translateTransform.Y = -1000 + (h / 2) - 125;
+			var cx = (-e.X * mScale) + (w / 2) - 225;
+			var cy = (-e.Y * mScale) + (h / 2) - 125;
+			translateTransform.X = cx;
+			translateTransform.Y = cy;
+			//mScale = 1;
+			//scaleTransform.ScaleX = mScale;
+			//scaleTransform.ScaleY = mScale;
+			//translateTransform.X = -1000 + (w / 2) - 225;
+			//translateTransform.Y = -1000 + (h / 2) - 125;
 
 			//Utils.Log( $"{translateTransform.X}, {translateTransform.Y}" );
 		}
@@ -426,7 +435,7 @@ namespace Imperial_Commander_Editor
 
 			if ( e.Key == Key.M )
 			{
-				CenterMap();
+				CenterMap( new( 1000, 1000 ) );
 			}
 			if ( e.Key == Key.S && selectedEntity != null )
 			{
@@ -463,10 +472,7 @@ namespace Imperial_Commander_Editor
 			}
 		}
 
-		private void UserControl_PreviewKeyDown( object sender, KeyEventArgs e )
-		{
-
-		}
+		private void UserControl_PreviewKeyDown( object sender, KeyEventArgs e ) { }
 
 		private void OnAddTile()
 		{
@@ -496,6 +502,12 @@ namespace Imperial_Commander_Editor
 			}
 		}
 
+		private void TextBox_KeyDown( object sender, KeyEventArgs e )
+		{
+			if ( e.Key == Key.Enter )
+				Utils.LoseFocus( sender as Control );
+		}
+
 		public void LoadMap()
 		{
 			foreach ( var s in Utils.mainWindow.mission.mapSections )
@@ -521,7 +533,7 @@ namespace Imperial_Commander_Editor
 
 		public void OnWindowLoaded()
 		{
-			CenterMap();
+			CenterMap( new( 1000, 1000 ) );
 		}
 	}
 }

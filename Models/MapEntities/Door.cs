@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
@@ -10,18 +11,37 @@ namespace Imperial_Commander_Editor
 {
 	public class Door : INotifyPropertyChanged, IMapEntity
 	{
-		string _name;
+		string _name, _ownerName;
+		Guid _mapSectionOwner;
 
 		//common props
 		public Guid GUID { get; set; }
-		public string name { get { return _name; } set { _name = value; PC(); } }
+		public string name
+		{
+			get { return _name; }
+			set
+			{
+				_name = string.IsNullOrEmpty( value ) ? "New Door" : value;
+				PC();
+			}
+		}
 		public EntityType entityType { get; set; }
 		public Vector entityPosition { get; set; }
 		public double entityRotation { get; set; }
 		[JsonIgnore]
 		public EntityRenderer mapRenderer { get; set; }
 		public EntityProperties entityProperties { get; set; }
-		public Guid mapSectionOwner { get; set; }
+		public Guid mapSectionOwner
+		{
+			get { return _mapSectionOwner; }
+			set
+			{
+				_mapSectionOwner = value;
+				PC();
+				ownerName = Utils.mainWindow.mission.mapSections.First( x => x.GUID == _mapSectionOwner ).name;
+			}
+		}
+		public string ownerName { get { return _ownerName; } set { _ownerName = value; PC(); } }
 
 		public event PropertyChangedEventHandler PropertyChanged;
 		public void PC( [CallerMemberName] string n = "" )

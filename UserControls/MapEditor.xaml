@@ -38,11 +38,15 @@
 								<Button x:Name="tileGalleryBtn" Content="SELECT FROM GALLERY" Click="tileGalleryBtn_Click"/>
 							</GroupBox>
 							<!--TILE PROPS-->
-							<GroupBox Header="SELECTED TILE PROPERTIES" Background="#FF503B7C" Foreground="White" DataContext="{Binding}" Margin="0,10,0,0">
+							<GroupBox Header="TILES" Background="#FF503B7C" Foreground="White" DataContext="{Binding}" Margin="0,10,0,0">
 								<StackPanel>
+									<!--NAME-->
+									<!--<TextBlock Text="NAME" HorizontalAlignment="Center"/>-->
+									<!--<TextBox Margin="0,5,0,0" Text="{Binding selectedEntity.name}" Style="{StaticResource MaterialDesignOutlinedTextBox}" KeyDown="TextBox_KeyDown" materialDesign:HintAssist.Hint="Empty For Default" IsEnabled="{Binding tilePropsEnabled}"/>-->
+
 									<!--SELECTED TILE-->
-									<ComboBox x:Name="tileCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" Margin="0,5" SelectedValue="{Binding selectedEntity}" ItemsSource="{Binding selectedMapSection.mapTiles}">
-										<ComboBox.ItemTemplate>
+									<ComboBox x:Name="tileCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" Margin="0,0,0,5" SelectedValue="{Binding selectedEntity}" DisplayMemberPath="name" ItemsSource="{Binding selectedMapSection.mapTiles}">
+										<!--<ComboBox.ItemTemplate>
 											<DataTemplate>
 												<TextBlock>
 													<TextBlock.Text>
@@ -54,18 +58,18 @@
 													</TextBlock.Text>
 												</TextBlock>
 											</DataTemplate>
-										</ComboBox.ItemTemplate>
+										</ComboBox.ItemTemplate>-->
 									</ComboBox>
 
 									<!--FLIP SIDE-->
-									<UniformGrid Columns="3">
+									<!--<UniformGrid Columns="3">
 										<TextBlock Text="Side A" HorizontalAlignment="Right"/>
 										<ToggleButton IsChecked="{Binding selectedMapTile.tileSide, Converter={StaticResource tsc}}" IsEnabled="{Binding tilePropsEnabled}"/>
 										<TextBlock Text="Side B"/>
-									</UniformGrid>
+									</UniformGrid>-->
 
 									<!--TOGGLE TRIGGERED-->
-									<CheckBox Content="Starts Activated" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" HorizontalAlignment="Center" Margin="0,10,0,0" ToolTip="Uncheck to make this tile invisible until it's activated by the Map Management Event Action." IsChecked="{Binding selectedMapTile.entityProperties.isActive}"/>
+									<!--<CheckBox Content="Starts Activated" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" HorizontalAlignment="Center" Margin="0,10,0,0" ToolTip="Uncheck to make this tile invisible until it's activated by the Map Management Event Action." IsChecked="{Binding selectedMapTile.entityProperties.isActive}"/>-->
 
 									<!--CENTER-->
 									<Button x:Name="centerTileButton" Content="CENTER ON TILE" Margin="0,10,0,0" Click="centerTileButton_Click" IsEnabled="{Binding tilePropsEnabled}"/>
@@ -75,7 +79,7 @@
 							</GroupBox>
 
 							<!--ALL ENTITIES-->
-							<GroupBox Header="ALL ENTITIES" Background="#FF503B7C" Foreground="White" Margin="0,10">
+							<GroupBox Header="ENTITIES" Background="#FF503B7C" Foreground="White" Margin="0,10">
 								<StackPanel>
 									<ComboBox x:Name="entitiesCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" ItemsSource="{Binding parent.mission.mapEntities}" DisplayMemberPath="name" SelectedValue="{Binding selectedEntity}"/>
 									<!--REMOVE-->
@@ -156,7 +160,7 @@
 							<materialDesign:PackIcon Kind="Dot" VerticalAlignment="Center" Foreground="MediumOrchid"/>
 
 							<TextBlock Text="Rotate Tile" VerticalAlignment="Center"/>
-							<materialDesign:Chip Content="[ and ]" Style="{StaticResource  MaterialDesignFlatSecondaryButton}"/>
+							<materialDesign:Chip Content="[ and ], Right Click Entity" Style="{StaticResource  MaterialDesignFlatSecondaryButton}"/>
 
 							<materialDesign:PackIcon Kind="Dot" VerticalAlignment="Center" Foreground="MediumOrchid"/>
 

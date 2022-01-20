@@ -12,11 +12,23 @@ namespace Imperial_Commander_Editor
 {
 	public class MapTile : INotifyPropertyChanged, IMapEntity
 	{
-		string _tileID, _tileSide;
+		string _tileID, _tileSide, _name, _ownerName;
 		Expansion _expansion;
+		Guid _mapSectionOwner;
 
 		public Guid GUID { get; set; }
-		public string name { get; set; }
+		public string name
+		{
+			get { return _name; }
+			set
+			{
+				if ( !string.IsNullOrEmpty( value ) )
+					_name = value;
+				else
+					_name = $"{_expansion}{_tileID}{_tileSide}";
+				PC();
+			}
+		}
 		public EntityType entityType { get; set; }
 		public Vector entityPosition { get; set; }
 		public double entityRotation { get; set; }
@@ -26,7 +38,17 @@ namespace Imperial_Commander_Editor
 		public string tileSide { get { return _tileSide; } set { _tileSide = value.ToUpper(); SetSide(); PC(); } }
 		public Expansion expansion { get { return _expansion; } set { _expansion = value; PC(); } }
 		public EntityProperties entityProperties { get; set; }
-		public Guid mapSectionOwner { get; set; }
+		public Guid mapSectionOwner
+		{
+			get { return _mapSectionOwner; }
+			set
+			{
+				_mapSectionOwner = value;
+				PC();
+				ownerName = Utils.mainWindow.mission.mapSections.First( x => x.GUID == _mapSectionOwner ).name;
+			}
+		}
+		public string ownerName { get { return _ownerName; } set { _ownerName = value; PC(); } }
 		[JsonIgnore]
 		public EntityRenderer mapRenderer { get; set; }
 
@@ -45,6 +67,7 @@ namespace Imperial_Commander_Editor
 			_tileSide = side;
 			_tileID = id;
 			_expansion = (Expansion)Enum.Parse( typeof( Expansion ), exp, true );
+			_name = $"{_expansion}{_tileID}{_tileSide}";
 			entityType = EntityType.Tile;
 			entityProperties = new();
 			mapSectionOwner = Utils.mainWindow.activeSection.GUID;

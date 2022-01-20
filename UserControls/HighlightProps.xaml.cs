@@ -25,10 +25,10 @@ namespace Imperial_Commander_Editor
 			dlg.ShowDialog();
 		}
 
-		private void applyBtn_Click( object sender, System.Windows.RoutedEventArgs e )
-		{
-			(DataContext as SpaceHighlight).Rebuild();
-		}
+		//private void applyBtn_Click( object sender, System.Windows.RoutedEventArgs e )
+		//{
+		//	(DataContext as SpaceHighlight).Rebuild();
+		//}
 
 		private void dupeBtn_Click( object sender, System.Windows.RoutedEventArgs e )
 		{
@@ -48,6 +48,15 @@ namespace Imperial_Commander_Editor
 		{
 			((sender as FrameworkElement).DataContext as SpaceHighlight).mapSectionOwner = Utils.mainWindow.activeSection.GUID;
 			Utils.mainWindow.SetStatus( $"Owner Set To '{Utils.mainWindow.activeSection.name}'" );
+		}
+
+		private void sizeKeyDown( object sender, System.Windows.Input.KeyEventArgs e )
+		{
+			if ( e.Key == System.Windows.Input.Key.Enter )
+			{
+				Utils.LoseFocus( sender as Control );
+				(DataContext as SpaceHighlight).Rebuild();
+			}
 		}
 	}
 }

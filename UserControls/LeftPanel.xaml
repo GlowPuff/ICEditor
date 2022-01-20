@@ -28,7 +28,7 @@
 				<!--global switch-->
 				<StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
 					<TextBlock Text="Show Global Items" Margin="0,0,10,0" Foreground="White"/>
-					<ToggleButton x:Name="showGlobalToggle" IsChecked="{Binding showGlobal}" Click="showGlobalToggle_Click"/>
+					<ToggleButton x:Name="showGlobalToggle" IsChecked="{Binding showGlobal}"/>
 				</StackPanel>
 
 				<Grid Grid.Row="2" >

@@ -992,5 +992,20 @@
 			"expansion": "Other",
 			"ignored": "Coordinated Raid",
 			"isElite": true
+		},
+		{
+			"name": "Custom Group",
+			"id": "DG070",
+			"tier": 1,
+			"faction": "None",
+			"priority": 2,
+			"cost": 0,
+			"rcost": 0,
+			"size": 1,
+			"fame": 0,
+			"reimb": 4,
+			"expansion": "Other",
+			"ignored": "",
+			"isElite": true
 		}
 ]

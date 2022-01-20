@@ -85,7 +85,7 @@ namespace Imperial_Commander_Editor
 		{
 			GUID = Guid.NewGuid();
 			eventGUID = Guid.Empty;
-			isGlobal = false;
+			isGlobal = true;
 			useReset = false;
 			triggerValue = 0;
 			initialValue = 0;

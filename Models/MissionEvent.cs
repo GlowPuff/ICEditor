@@ -132,7 +132,7 @@ namespace Imperial_Commander_Editor
 		{
 			GUID = Guid.NewGuid();
 			name = "Event Name";
-			isGlobal = false;
+			isGlobal = true;
 			eventText = "";
 			startOfRound = endOfRound = 1;
 			useStartOfRound = useEndOfRound = useStartOfEachRound = useEndOfEachRound = useAllGroupsDefeated = useAllHeroesWounded = useAllyDefeated = useHeroWounded = useHeroWithdraws = useActivation = useEndOfCurrentRound = false;

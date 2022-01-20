@@ -80,6 +80,7 @@ namespace Imperial_Commander_Editor
 			entityType = EntityType.DeploymentPoint;
 			entityProperties = new();
 			mapSectionOwner = ownderGUID;
+			entityProperties.isActive = false;
 
 			deploymentColor = "Gray";
 		}

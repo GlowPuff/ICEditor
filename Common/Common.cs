@@ -1,15 +1,14 @@
 ﻿//using System.Runtime.InteropServices;
 //using System.Windows;
 
-using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using Newtonsoft.Json;
 
 namespace Imperial_Commander_Editor
 {

@@ -86,6 +86,8 @@ namespace Imperial_Commander_Editor
 
 		public MainWindow( Mission s = null )
 		{
+			Utils.Init( this );
+
 			InitializeComponent();
 
 			System.Threading.Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.InvariantCulture;
@@ -97,7 +99,6 @@ namespace Imperial_Commander_Editor
 			theme.SetBaseTheme( Theme.Dark );
 			paletteHelper.SetTheme( theme );
 
-			Utils.Init( this );
 			infoTimer = new Timer( 3000 );
 			infoTimer.AutoReset = false;
 			infoTimer.Elapsed += infoTimerFunc;
@@ -129,6 +130,8 @@ namespace Imperial_Commander_Editor
 
 			appVersion.Text = Utils.appVersion;
 			formatVersion.Text = Utils.formatVersion;
+
+			leftPanel.showGlobal = true;
 		}
 
 		public void SetStatus( string s )

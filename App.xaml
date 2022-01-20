@@ -33,7 +33,6 @@
 			<Style TargetType="CheckBox" BasedOn="{StaticResource MaterialDesignCheckBox}">
 				<Setter Property="Background" Value="MediumPurple"/>
 			</Style>
-
 		</ResourceDictionary>
 	</Application.Resources>
 </Application>

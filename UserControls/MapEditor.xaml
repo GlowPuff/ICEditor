@@ -23,10 +23,11 @@
 			<SolidColorBrush Color="#FF3A3349" Opacity=".25"/>
 		</Grid.Background>
 
-		<DockPanel LastChildFill="True" ClipToBounds="True">
+		<DockPanel x:Name="mapContainer" LastChildFill="True" ClipToBounds="True">
 			<!--MAIN PANEL-->
+			<!--Visibility="{Binding showPanel, Converter={StaticResource BooleanToVisibilityConverter}}"-->
 			<ScrollViewer VerticalScrollBarVisibility="Auto" DockPanel.Dock="Right">
-				<Border Width="225" Visibility="{Binding showPanel, Converter={StaticResource BooleanToVisibilityConverter}}" Background="#FF3A3349" BorderThickness="1,0,0,0" BorderBrush="Black">
+				<Border Width="225" Background="#FF3A3349" BorderThickness="1,0,0,0" BorderBrush="Black">
 					<Grid>
 						<Grid.RowDefinitions>
 							<RowDefinition Height="*" />
@@ -138,7 +139,7 @@
 
 							<Button x:Name="centerSelectedButton" Margin="0,5,10,5" Content="{materialDesign:PackIcon Kind=TagText}" Click="centerSelectedButton_Click" ToolTip="Center Selected Entity"/>
 
-							<Button x:Name="panelToggleButton" Margin="0,5,10,5" Content="{materialDesign:PackIcon Kind=ArrowRight}" Click="panelToggleButton_Click" ToolTip="Show/Hide Properties"/>
+							<!--<Button x:Name="panelToggleButton" Margin="0,5,10,5" Content="{materialDesign:PackIcon Kind=ArrowRight}" Click="panelToggleButton_Click" ToolTip="Show/Hide Properties"/>-->
 						</StackPanel>
 
 					</Grid>
@@ -173,14 +174,6 @@
 
 			<Canvas x:Name="MainCanvas" Width="2000" Height="2000" RenderTransformOrigin="0,0" MouseDown="MainCanvas_MouseDown" MouseUp="MainCanvas_MouseUp" MouseRightButtonDown="MainCanvas_MouseRightButtonDown" MouseMove="MainCanvas_MouseMove" 
 			MouseWheel="MainCanvas_MouseWheel" Panel.ZIndex="-1" ClipToBounds="True">
-				<Canvas.RenderTransform>
-					<TransformGroup>
-						<ScaleTransform/>
-						<SkewTransform/>
-						<RotateTransform/>
-						<TranslateTransform X="0" Y="0"/>
-					</TransformGroup>
-				</Canvas.RenderTransform>
 				<Canvas.Background>
 					<!--DRAW GRID-->
 					<VisualBrush TileMode="FlipXY"
@@ -198,9 +191,10 @@
                 ToolTipService.BetweenShowDelay="10000" 
                 ToolTip="This is a tool tip." Panel.ZIndex="100" />-->
 
-				<!--DEMO SHAPES-->
+				<!--center crosshair-->
 				<Rectangle Canvas.Left="999" Canvas.Top="975" Width="2" Height="50" Fill="#2632A0FB"/>
 				<Rectangle Canvas.Left="975" Canvas.Top="999" Width="50" Height="2" Fill="#2632A0FB"/>
+				<!--DEMO SHAPES-->
 				<!--<Rectangle Canvas.Left="500" Canvas.Top="500" Width="50" Height="50" Fill="#FFFB3232" />
 				<Rectangle Canvas.Left="500" Canvas.Top="600" Width="50" Height="50" Fill="#FFFB3232" />
 				<Rectangle Canvas.Left="650" Canvas.Top="500" Width="50" Height="50" Fill="#FFFB3232" />

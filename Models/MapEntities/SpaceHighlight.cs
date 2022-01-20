@@ -80,6 +80,8 @@ namespace Imperial_Commander_Editor
 			dupe.GUID = Guid.NewGuid();
 			dupe.name = name + " (Duplicate)";
 			dupe.entityType = entityType;
+			dupe.entityProperties = new();
+			dupe.entityProperties.CopyFrom( this );
 			dupe.entityPosition = entityPosition;
 			dupe.entityRotation = entityRotation;
 			dupe.mapSectionOwner = mapSectionOwner;
@@ -99,7 +101,7 @@ namespace Imperial_Commander_Editor
 
 			Color c = Utils.ColorFromName( _deploymentColor ).color;
 
-			mapRenderer = new( this, mapRenderer.where, Utils.mainWindow.mapEditor.showPanel, Utils.mainWindow.mapEditor.mScale, new( Width, Height ) )
+			mapRenderer = new( this, mapRenderer.where, Utils.mainWindow.mapEditor.mScale, new( Width, Height ) )
 			{
 				selectedBGColor = new SolidColorBrush( Color.FromArgb( 100, c.R, c.G, c.B ) ),
 				unselectedBGColor = new SolidColorBrush( Color.FromArgb( 100, c.R, c.G, c.B ) ),
@@ -113,11 +115,11 @@ namespace Imperial_Commander_Editor
 			mapRenderer.SetPosition( w );
 		}
 
-		public void BuildRenderer( Canvas canvas, Vector where, bool showPanel, double scale )
+		public void BuildRenderer( Canvas canvas, Vector where, double scale )
 		{
 			Color c = Utils.ColorFromName( _deploymentColor ).color;
 
-			mapRenderer = new( this, where, showPanel, scale, new( Width, Height ) )
+			mapRenderer = new( this, where, scale, new( Width, Height ) )
 			{
 				selectedBGColor = new SolidColorBrush( Color.FromArgb( 100, c.R, c.G, c.B ) ),
 				unselectedBGColor = new SolidColorBrush( Color.FromArgb( 100, c.R, c.G, c.B ) ),

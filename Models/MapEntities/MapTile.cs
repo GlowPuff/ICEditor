@@ -55,7 +55,7 @@ namespace Imperial_Commander_Editor
 			return null;
 		}
 
-		public void BuildRenderer( Canvas c, Vector where, bool showPanel, double scale )
+		public void BuildRenderer( Canvas c, Vector where, double scale )
 		{
 			var desc = Utils.tileData
 				.Where(
@@ -63,7 +63,7 @@ namespace Imperial_Commander_Editor
 				&& x.id.ToString() == _tileID
 				).First();
 
-			mapRenderer = new( this, where, showPanel, scale, new( desc.width, desc.height ) )
+			mapRenderer = new( this, where, scale, new( desc.width, desc.height ) )
 			{
 				selectedZ = 100,
 				unselectedStrokeWidth = .25d,

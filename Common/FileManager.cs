@@ -136,15 +136,22 @@ namespace Imperial_Commander_Editor
 			DirectoryInfo di = new( basePath );
 			FileInfo[] files = di.GetFiles().Where( file => file.Extension == ".json" ).ToArray();
 
-			//find mission files
-			foreach ( FileInfo fi in files )
+			try
 			{
-				//Debug.Log( fi.FullName );
-				Mission s = LoadMission( fi.FullName );
-				if ( s != null )
-					items.Add( new ProjectItem() { Title = s.missionProperties.missionName, Date = s.saveDate, fileName = s.fileName, relativePath = s.relativePath, fileVersion = s.fileVersion } );
+				//find mission files
+				foreach ( FileInfo fi in files )
+				{
+					//Debug.Log( fi.FullName );
+					Mission s = LoadMission( fi.FullName );
+					if ( s != null )
+						items.Add( new ProjectItem() { Title = s.missionProperties.missionName, Date = s.saveDate, fileName = s.fileName, relativePath = s.relativePath, fileVersion = s.fileVersion } );
+				}
+				return items;
 			}
-			return items;
+			catch ( Exception )
+			{
+				return null;
+			}
 		}
 
 		/// <summary>

@@ -24,7 +24,12 @@ namespace Imperial_Commander_Editor
 			isActive = me.entityProperties.isActive;
 			theText = me.entityProperties.theText;
 			foreach ( ButtonAction ba in me.entityProperties.buttonActions )
-				buttonActions.Add( ba );
+				buttonActions.Add( new()
+				{
+					buttonText = ba.buttonText,
+					triggerGUID = ba.triggerGUID,
+					triggerName = ba.triggerName
+				} );
 		}
 
 		public void PC( [CallerMemberName] string n = "" )

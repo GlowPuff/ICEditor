@@ -49,15 +49,17 @@ namespace Imperial_Commander_Editor
 			dupe.GUID = Guid.NewGuid();
 			dupe.name = name + " (Duplicate)";
 			dupe.entityType = entityType;
+			dupe.entityProperties = new();
+			dupe.entityProperties.CopyFrom( this );
 			dupe.entityPosition = entityPosition;
 			dupe.entityRotation = entityRotation;
 			dupe.mapSectionOwner = mapSectionOwner;
 			return dupe;
 		}
 
-		public void BuildRenderer( Canvas c, Vector where, bool showPanel, double scale )
+		public void BuildRenderer( Canvas c, Vector where, double scale )
 		{
-			mapRenderer = new( this, where, showPanel, scale, new( 2, 2 ) )
+			mapRenderer = new( this, where, scale, new( 2, 2 ) )
 			{
 				unselectedBGColor = new SolidColorBrush( Colors.Transparent ),
 				selectedBGColor = new SolidColorBrush( Colors.Transparent ),

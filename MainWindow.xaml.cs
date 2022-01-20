@@ -242,6 +242,7 @@ namespace Imperial_Commander_Editor
 		private void Window_Loaded( object sender, RoutedEventArgs e )
 		{
 			missionProps.Refresh();
+			mapEditor.OnWindowLoaded();
 		}
 
 		private void Window_PreviewKeyDown( object sender, KeyEventArgs e )
@@ -258,6 +259,9 @@ namespace Imperial_Commander_Editor
 			{
 				openMissionButton_Click( null, null );
 			}
+
+			if ( tabControl.SelectedIndex == 2 )
+				mapEditor.ProcessKey( e );
 		}
 	}
 }

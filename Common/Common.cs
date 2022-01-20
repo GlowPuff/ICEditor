@@ -121,7 +121,7 @@ namespace Imperial_Commander_Editor
 		EntityRenderer mapRenderer { get; set; }
 		EntityProperties entityProperties { get; set; }
 		Guid mapSectionOwner { get; set; }
-		void BuildRenderer( Canvas c, Vector where, bool showPanel, double scale );
+		void BuildRenderer( Canvas c, Vector where, double scale );
 		IMapEntity Duplicate();
 		bool Validate();
 	}

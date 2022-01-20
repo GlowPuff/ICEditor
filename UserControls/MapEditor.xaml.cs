@@ -5,8 +5,10 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Media3D;
 using System.Windows.Shapes;
 using MaterialDesignThemes.Wpf;
+using static System.Formats.Asn1.AsnWriter;
 
 namespace Imperial_Commander_Editor
 {
@@ -25,7 +27,7 @@ namespace Imperial_Commander_Editor
 		private bool shapeDown = false;
 		private IMapEntity shapeDragging = null;
 
-		private bool _showPanel, _nothingSelected, _tilePropsEnabled, _entityPropsEnabled;
+		private bool _nothingSelected, _tilePropsEnabled, _entityPropsEnabled;
 		private IPropertyModel _propModel;
 		private MapTile _selectedMapTile;
 		private UIElement mcap;
@@ -41,7 +43,6 @@ namespace Imperial_Commander_Editor
 			}
 		}
 
-		public bool showPanel { get { return _showPanel; } set { _showPanel = value; PC(); } }
 		public bool tilePropsEnabled { get { return _tilePropsEnabled; } set { _tilePropsEnabled = value; PC(); } }
 		public bool entityPropsEnabled { get { return _entityPropsEnabled; } set { _entityPropsEnabled = value; PC(); } }
 		public bool nothingSelected { get { return _nothingSelected; } set { _nothingSelected = value; PC(); } }
@@ -92,7 +93,6 @@ namespace Imperial_Commander_Editor
 			MainCanvas.RenderTransform = transformGroup;
 
 			nothingSelected = true;
-			showPanel = true;
 			selectedEntity = null;
 			selectedMapTile = null;
 		}
@@ -124,7 +124,7 @@ namespace Imperial_Commander_Editor
 		{
 			item.entityPosition = new( item.entityPosition.X + 10, item.entityPosition.Y + 10 );
 			Vector p = item.entityPosition;
-			item.BuildRenderer( MainCanvas, p, showPanel, mScale );
+			item.BuildRenderer( MainCanvas, p, mScale );
 			item.mapRenderer.SetPosition( p );
 			item.mapRenderer.SetRotation( item.entityRotation );
 			parent.mission.mapEntities.Add( item );
@@ -156,7 +156,6 @@ namespace Imperial_Commander_Editor
 			//set TranslateTransform
 			translateTransform.X = MainCanvas.RenderTransform.Value.OffsetX - (pointOnClick.X - pointOnMove.X);
 			translateTransform.Y = MainCanvas.RenderTransform.Value.OffsetY - (pointOnClick.Y - pointOnMove.Y);
-			//clamp to bounds
 
 			//Update pointOnClick
 			pointOnClick = e.GetPosition( (FrameworkElement)MainCanvas.Parent );
@@ -183,21 +182,21 @@ namespace Imperial_Commander_Editor
 
 		private void MainCanvas_MouseWheel( object sender, MouseWheelEventArgs e )
 		{
-			//Point de la souris
 			Point mousePosition = e.GetPosition( MainCanvas );
 			//Actual Zoom
 			double zoomNow = Math.Round( MainCanvas.RenderTransform.Value.M11, 1 );
+
 			//ZoomScale
 			double zoomScale = 0.1;
+			if ( (Keyboard.Modifiers & ModifierKeys.Shift) == ModifierKeys.Shift )
+				zoomScale = .025f;
 			double zoomCorrected = zoomScale * scaleTransform.ScaleX;
 			//Positive or negative zoom
 			double valZoom = e.Delta > 0 ? zoomScale + zoomCorrected : -(zoomScale + zoomCorrected);
 
-			//Point de la souris pour le panning et zoom/dezoom
-			//Point pointOnMove = e.GetPosition( (FrameworkElement)MainCanvas.Parent );
-			//RenderTransformOrigin (doesn't fully working)
-			//MainCanvas.RenderTransformOrigin = new Point( mousePosition.X / MainCanvas.ActualWidth, mousePosition.Y / MainCanvas.ActualHeight );
-			//Appel du zoom
+			if ( zoomNow + valZoom >= 7 || zoomNow + valZoom <= .5 )
+				return;
+
 			Zoom( new Point( mousePosition.X, mousePosition.Y ), zoomNow + valZoom );
 		}
 
@@ -208,26 +207,50 @@ namespace Imperial_Commander_Editor
 			//calculate centers
 			double centerX = (point.X - translateTransform.X) / scaleTransform.ScaleX;
 			double centerY = (point.Y - translateTransform.Y) / scaleTransform.ScaleY;
+			Utils.Log( "==============" );
+			Utils.Log( $"CENTER: {centerX}, {centerY}" );
+			Utils.Log( $"SCALE: {mScale}" );
+
+			var w = Utils.mainWindow.ActualWidth;
+			var h = Utils.mainWindow.ActualHeight;
+			double cx = 0, cy = 0;
+			if ( selectedEntity != null && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control )
+			{
+				cx = (-selectedEntity.entityPosition.X * mScale) + (w / 2) - 225;
+				cy = (-selectedEntity.entityPosition.Y * mScale) + (h / 2) - 125;
+			}
+			else
+			{
+				cx = (-point.X * mScale) + (w / 2) - 225;
+				cy = (-point.Y * mScale) + (h / 2) - 125;
+			}
+			Utils.Log( $"CX/Y: {cx}, {cy}" );
 
 			scaleTransform.ScaleX = scale;
 			scaleTransform.ScaleY = scale;
 
-			translateTransform.X = point.X - centerX * scaleTransform.ScaleX;
-			translateTransform.Y = point.Y - centerY * scaleTransform.ScaleY;
+			//translateTransform.X = point.X - centerX * scaleTransform.ScaleX;
+			//translateTransform.Y = point.Y - centerY * scaleTransform.ScaleY;
+
+			translateTransform.X = cx;
+			translateTransform.Y = cy;
+
+			Utils.Log( $"TRANS: {translateTransform.X}, {translateTransform.Y}" );
+			Utils.Log( $"MOUSE: {point.X}, {point.Y}" );
 		}
 
 		private void panelToggleButton_Click( object sender, RoutedEventArgs e )
 		{
-			showPanel = !showPanel;
-			if ( !showPanel )
-				panelToggleButton.Content = new PackIcon() { Kind = PackIconKind.ArrowLeft };
-			else
-				panelToggleButton.Content = new PackIcon() { Kind = PackIconKind.ArrowRight };
+			//showPanel = !showPanel;
+			//if ( !showPanel )
+			//	panelToggleButton.Content = new PackIcon() { Kind = PackIconKind.ArrowLeft };
+			//else
+			//	panelToggleButton.Content = new PackIcon() { Kind = PackIconKind.ArrowRight };
 		}
 
 		private void AddEntity( IMapEntity e )
 		{
-			e.BuildRenderer( MainCanvas, new Vector( translateTransform.X, translateTransform.Y ), showPanel, mScale );
+			e.BuildRenderer( MainCanvas, new Vector( translateTransform.X, translateTransform.Y ), mScale );
 			parent.mission.mapEntities.Add( e );
 			selectedEntity = e;
 		}
@@ -274,13 +297,15 @@ namespace Imperial_Commander_Editor
 
 		private void CenterMap()
 		{
-			var w = Utils.mainWindow.Width;
-			var h = Utils.mainWindow.Height;
+			var w = Utils.mainWindow.ActualWidth;
+			var h = Utils.mainWindow.ActualHeight;
 			mScale = 1;
 			scaleTransform.ScaleX = mScale;
 			scaleTransform.ScaleY = mScale;
-			translateTransform.X = -1000 + (w / 2) - (showPanel ? 225 : 0);
+			translateTransform.X = -1000 + (w / 2) - 225;
 			translateTransform.Y = -1000 + (h / 2) - 125;
+
+			//Utils.Log( $"{translateTransform.X}, {translateTransform.Y}" );
 		}
 
 		private void MainCanvas_MouseDown( object sender, MouseButtonEventArgs e )
@@ -384,22 +409,16 @@ namespace Imperial_Commander_Editor
 		{
 			if ( e != null )
 			{
-				var w = Utils.mainWindow.Width;
-				var h = Utils.mainWindow.Height;
-				mScale = 1;
-				scaleTransform.ScaleX = mScale;
-				scaleTransform.ScaleY = mScale;
-
-				var sx = Canvas.GetLeft( e.mapRenderer.entityShape );
-				var sy = Canvas.GetTop( e.mapRenderer.entityShape );
-				sx = 0 - sx;
-				sy = 0 - sy;
-				translateTransform.X = sx + (w / 2) - (showPanel ? 225 : 0);
-				translateTransform.Y = sy + (h / 2) - 125;
+				var w = Utils.mainWindow.ActualWidth;
+				var h = Utils.mainWindow.ActualHeight;
+				var cx = (-e.entityPosition.X * mScale) + (w / 2) - 225;
+				var cy = (-e.entityPosition.Y * mScale) + (h / 2) - 125;
+				translateTransform.X = cx;
+				translateTransform.Y = cy;
 			}
 		}
 
-		private void UserControl_PreviewKeyDown( object sender, KeyEventArgs e )
+		public void ProcessKey( KeyEventArgs e )
 		{
 			IInputElement focusedControl = Keyboard.FocusedElement;
 			if ( focusedControl != null && focusedControl is TextBox )
@@ -421,7 +440,7 @@ namespace Imperial_Commander_Editor
 			{
 				selectedEntity?.mapRenderer.Rotate( -1 );
 			}
-			else if ( e.Key == Key.X )//&& (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control )
+			else if ( e.Key == Key.X )
 			{
 				if ( selectedEntity != null )
 				{
@@ -444,6 +463,11 @@ namespace Imperial_Commander_Editor
 			}
 		}
 
+		private void UserControl_PreviewKeyDown( object sender, KeyEventArgs e )
+		{
+
+		}
+
 		private void OnAddTile()
 		{
 			var tg = new TileGallery();
@@ -454,7 +478,7 @@ namespace Imperial_Commander_Editor
 				{
 					GalleryTile gt = tg.selectedTile;
 					MapTile t = new( gt.tileNumber.ToString(), gt.selectedExpansion, gt.tileSide );
-					t.BuildRenderer( MainCanvas, new Vector( translateTransform.X, translateTransform.Y ), showPanel, mScale );
+					t.BuildRenderer( MainCanvas, new Vector( translateTransform.X, translateTransform.Y ), mScale );
 					parent.activeSection.mapTiles.Add( t );
 					selectedEntity = t;
 				}
@@ -464,7 +488,7 @@ namespace Imperial_Commander_Editor
 					{
 						GalleryTile gt = item;
 						MapTile t = new( gt.tileNumber.ToString(), gt.selectedExpansion, gt.tileSide );
-						t.BuildRenderer( MainCanvas, new Vector( translateTransform.X, translateTransform.Y ), showPanel, mScale );
+						t.BuildRenderer( MainCanvas, new Vector( translateTransform.X, translateTransform.Y ), mScale );
 						parent.activeSection.mapTiles.Add( t );
 						selectedEntity = t;
 					}
@@ -479,7 +503,7 @@ namespace Imperial_Commander_Editor
 				foreach ( var tile in s.mapTiles )
 				{
 					Vector p = tile.entityPosition;
-					((MapTile)tile).BuildRenderer( MainCanvas, p, true, mScale );
+					((MapTile)tile).BuildRenderer( MainCanvas, p, mScale );
 					tile.mapRenderer.SetPosition( p );
 					tile.mapRenderer.SetRotation( tile.entityRotation );
 					selectedEntity = tile;
@@ -488,11 +512,16 @@ namespace Imperial_Commander_Editor
 			foreach ( var item in Utils.mainWindow.mission.mapEntities )
 			{
 				Vector p = item.entityPosition;
-				item.BuildRenderer( MainCanvas, p, showPanel, mScale );
+				item.BuildRenderer( MainCanvas, p, mScale );
 				item.mapRenderer.SetPosition( p );
 				item.mapRenderer.SetRotation( item.entityRotation );
 				selectedEntity = item;
 			}
+		}
+
+		public void OnWindowLoaded()
+		{
+			CenterMap();
 		}
 	}
 }

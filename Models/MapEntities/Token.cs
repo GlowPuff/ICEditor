@@ -90,6 +90,8 @@ namespace Imperial_Commander_Editor
 			dupe.GUID = Guid.NewGuid();
 			dupe.name = name + " (Duplicate)";
 			dupe.entityType = entityType;
+			dupe.entityProperties = new();
+			dupe.entityProperties.CopyFrom( this );
 			dupe.entityPosition = entityPosition;
 			dupe.entityRotation = entityRotation;
 			dupe.mapSectionOwner = mapSectionOwner;
@@ -97,11 +99,11 @@ namespace Imperial_Commander_Editor
 			return dupe;
 		}
 
-		public void BuildRenderer( Canvas canvas, Vector where, bool showPanel, double scale )
+		public void BuildRenderer( Canvas canvas, Vector where, double scale )
 		{
 			Color c = Utils.ColorFromName( _tokenColor ).color;
 
-			mapRenderer = new( this, where, showPanel, scale, new( 1, 1 ) )
+			mapRenderer = new( this, where, scale, new( 1, 1 ) )
 			{
 				selectedZ = 300,
 				selectedBGColor = new( c ),

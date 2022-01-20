@@ -72,7 +72,9 @@ namespace Imperial_Commander_Editor
 
 		public static void Log( string s )
 		{
+#if DEBUG
 			Debug.WriteLine( s );
+#endif
 		}
 
 		public static void LoadCardData()

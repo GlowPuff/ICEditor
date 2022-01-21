@@ -38,20 +38,19 @@
 					</Grid.RowDefinitions>
 
 					<!--triggers-->
-					<materialDesign:Card Grid.Row="0" Background="#FF7952C0" Padding="10" Margin="0,0,0,10">
+					<GroupBox Header="TRIGGER VARIABLES" Grid.Row="0" Background="#FF7952C0" Padding="10" Margin="0,0,0,10">
 						<Grid>
 							<Grid.RowDefinitions>
-								<RowDefinition Height="auto" />
 								<RowDefinition Height="*" />
 								<RowDefinition Height="auto" />
 							</Grid.RowDefinitions>
-							<TextBlock Grid.Row="0" HorizontalAlignment="Center" Text="Trigger Variables" Foreground="White"/>
+							<!--<TextBlock Grid.Row="0" HorizontalAlignment="Center" Text="Trigger Variables" Foreground="White"/>-->
 							<!--<ComboBox Margin="10,5,10,10" x:Name="triggersCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" DisplayMemberPath="name"/>-->
-							<ScrollViewer Grid.Row="1">
-								<ListBox Grid.Row="1" Margin="10,5,10,10" x:Name="triggersCB" DisplayMemberPath="name" MouseDoubleClick="triggersCB_MouseDoubleClick"/>
+							<ScrollViewer Grid.Row="0">
+								<ListBox Grid.Row="1" x:Name="triggersCB" DisplayMemberPath="name" MouseDoubleClick="triggersCB_MouseDoubleClick"/>
 							</ScrollViewer>
 
-							<UniformGrid Grid.Row="2" Columns="3" VerticalAlignment="Bottom">
+							<UniformGrid Grid.Row="1" Columns="3" VerticalAlignment="Bottom">
 								<Button x:Name="addTriggerButton" Grid.Column="0" Click="addTriggerButton_Click">
 									<materialDesign:PackIcon Kind="AddBold" Width="24" Height="24" HorizontalAlignment="Center" Foreground="Lime"/>
 								</Button>
@@ -63,24 +62,23 @@
 								</Button>
 							</UniformGrid>
 						</Grid>
-					</materialDesign:Card>
+					</GroupBox>
 
 					<!--events-->
-					<materialDesign:Card Grid.Row="1" Background="#FF7952C0" Padding="10">
+					<GroupBox Header="EVENTS" Grid.Row="1" Background="#FF7952C0" Padding="10">
 						<Grid>
 							<Grid.RowDefinitions>
-								<RowDefinition Height="auto" />
 								<RowDefinition Height="*" />
 								<RowDefinition Height="auto" />
 							</Grid.RowDefinitions>
 
-							<TextBlock HorizontalAlignment="Center" Text="Events" Foreground="White"/>
+							<!--<TextBlock HorizontalAlignment="Center" Text="Events" Foreground="White"/>-->
 							<!--<ComboBox Margin="10,5,10,10" x:Name="eventsCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" DisplayMemberPath="name"/>-->
-							<ScrollViewer Grid.Row="1">
-								<ListBox Grid.Row="1" x:Name="eventsCB" Margin="10,5,10,10" DisplayMemberPath="name" MouseDoubleClick="eventsCB_MouseDoubleClick"/>
+							<ScrollViewer Grid.Row="0">
+								<ListBox Grid.Row="1" x:Name="eventsCB" DisplayMemberPath="name" MouseDoubleClick="eventsCB_MouseDoubleClick"/>
 							</ScrollViewer>
 
-							<UniformGrid Grid.Row="2" Columns="3" VerticalAlignment="Bottom">
+							<UniformGrid Grid.Row="1" Columns="3" VerticalAlignment="Bottom">
 								<Button x:Name="addEventButton" Grid.Column="0" Click="addEventButton_Click">
 									<materialDesign:PackIcon Kind="AddBold" Width="24" Height="24" HorizontalAlignment="Center" Foreground="Lime"/>
 								</Button>
@@ -92,7 +90,7 @@
 								</Button>
 							</UniformGrid>
 						</Grid>
-					</materialDesign:Card>
+					</GroupBox>
 				</Grid>
 			</Grid>
 			<!--</ScrollViewer>-->

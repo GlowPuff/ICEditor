@@ -89,7 +89,7 @@
 
 			<Grid>
 				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="225"/>
+					<ColumnDefinition Width="235"/>
 					<!--<ColumnDefinition Width="3"/>-->
 					<ColumnDefinition Width="*"/>
 				</Grid.ColumnDefinitions>

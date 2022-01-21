@@ -45,7 +45,8 @@ namespace Imperial_Commander_Editor
 			{
 				_mapSectionOwner = value;
 				PC();
-				ownerName = Utils.mainWindow.mission.mapSections.First( x => x.GUID == _mapSectionOwner ).name;
+
+				ownerName = Utils.mainWindow?.mission.mapSections.First( x => x.GUID == _mapSectionOwner ).name;
 			}
 		}
 		public string ownerName { get { return _ownerName; } set { _ownerName = value; PC(); } }

@@ -50,16 +50,7 @@ namespace Imperial_Commander_Editor
 				}
 			}
 		}
-		public Guid mapSectionOwner
-		{
-			get { return _mapSectionOwner; }
-			set
-			{
-				_mapSectionOwner = value;
-				PC();
-				ownerName = Utils.mainWindow?.mission.mapSections.First( x => x.GUID == _mapSectionOwner ).name;
-			}
-		}
+		public Guid mapSectionOwner { get { return _mapSectionOwner; } set { _mapSectionOwner = value; PC(); } }
 		public string ownerName { get { return _ownerName; } set { _ownerName = value; PC(); } }
 
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -80,6 +71,8 @@ namespace Imperial_Commander_Editor
 			entityType = EntityType.DeploymentPoint;
 			entityProperties = new();
 			mapSectionOwner = ownderGUID;
+			ownerName = Utils.mainWindow?.mission.mapSections.First( x => x.GUID == mapSectionOwner ).name;
+
 			entityProperties.isActive = false;
 
 			deploymentColor = "Gray";
@@ -96,6 +89,7 @@ namespace Imperial_Commander_Editor
 			dupe.entityPosition = entityPosition;
 			dupe.entityRotation = entityRotation;
 			dupe.mapSectionOwner = mapSectionOwner;
+			dupe.ownerName = ownerName;
 			dupe.deploymentColor = deploymentColor;
 			return dupe;
 		}

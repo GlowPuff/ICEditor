@@ -26,10 +26,11 @@ namespace Imperial_Commander_Editor
 		{
 			InitializeComponent();
 
+			Utils.LoadAllCardData();
+			Utils.InitColors();
+
 			DataContext = this;
 			scrollVisible = false;
-
-			Utils.InitColors();
 
 			PopulateRecents();
 
@@ -58,7 +59,7 @@ namespace Imperial_Commander_Editor
 			else
 			{
 				//throw new Exception( "Could not properly load mission projects." );
-				MessageBox.Show( "Could not properly load mission projects.", "Error::PopulateRecents()" );
+				MessageBox.Show( "Could not load mission projects.", "Error::PopulateRecents()" );
 			}
 		}
 

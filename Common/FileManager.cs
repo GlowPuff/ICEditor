@@ -10,31 +10,13 @@ namespace Imperial_Commander_Editor
 {
 	public class FileManager
 	{
-		//public string fileName;
-		//public string fileVersion;
-		//public Guid missionID;//usually set to MISSIONXX where XX is the mission number
-		//public string missionName;
-		//public string saveDate;
-
 		public FileManager() { }
-
-		//public FileManager( Mission source )
-		//{
-		//	fileName = source.fileName;
-		//	fileVersion = source.fileVersion;
-		//	missionID = source.missionID;
-		//	missionName = source.missionName;
-		//	saveDate = source.saveDate;
-		//}
 
 		/// <summary>
 		/// saves a mission to base project folder
 		/// </summary>
 		public static bool Save( Mission mission, bool saveAs )
 		{
-			//if ( missionID == Guid.Empty )
-			//	return Save( false, Path.Combine( Environment.GetFolderPath( Environment.SpecialFolder.MyDocuments ), "Your Journey" ) );
-
 			string basePath = Path.Combine( Environment.GetFolderPath( Environment.SpecialFolder.MyDocuments ), "ImperialCommander" );
 
 			if ( !Directory.Exists( basePath ) )
@@ -58,7 +40,7 @@ namespace Imperial_Commander_Editor
 				if ( saveFileDialog.ShowDialog() == true )
 				{
 					filePath = saveFileDialog.FileName;
-					mission.relativePath = mission.relativePath = Path.GetRelativePath( basePath, new DirectoryInfo( filePath ).FullName );
+					mission.relativePath = Path.GetRelativePath( basePath, new DirectoryInfo( filePath ).FullName );
 				}
 				else
 					return false;
@@ -70,6 +52,7 @@ namespace Imperial_Commander_Editor
 			FileInfo fi = new( filePath );
 			mission.fileName = fi.Name;
 			mission.saveDate = DateTime.Now.ToString( "M/d/yyyy" );
+			mission.fileVersion = Utils.formatVersion;
 
 			string output = JsonConvert.SerializeObject( mission, Formatting.Indented );
 			string outpath = Path.Combine( basePath, mission.relativePath );
@@ -96,6 +79,8 @@ namespace Imperial_Commander_Editor
 		public static Mission LoadMission( string filename )
 		{
 			string json = "";
+			string basePath = Path.Combine( Environment.GetFolderPath( Environment.SpecialFolder.MyDocuments ), "ImperialCommander" );
+
 			try
 			{
 				using ( StreamReader sr = new( filename ) )
@@ -104,6 +89,11 @@ namespace Imperial_Commander_Editor
 				}
 
 				var m = JsonConvert.DeserializeObject<Mission>( json );
+				//overwrite fileName, relativePath and fileVersion properties so they are up-to-date
+				FileInfo fi = new FileInfo( filename );
+				m.fileName = fi.Name;
+				m.relativePath = Path.GetRelativePath( basePath, new DirectoryInfo( filename ).FullName );
+				m.fileVersion = Utils.formatVersion;
 				return m;
 			}
 			catch ( Exception e )
@@ -111,6 +101,35 @@ namespace Imperial_Commander_Editor
 				MessageBox.Show( "Could not load the Mission.\r\n\r\nException:\r\n" + e.Message, "App Exception", MessageBoxButton.OK, MessageBoxImage.Error );
 				return null;
 			}
+		}
+
+		public static ProjectItem CreateProjectItem( string filename )
+		{
+			ProjectItem projectItem = new();
+			FileInfo fi = new FileInfo( filename );
+			string basePath = Path.Combine( Environment.GetFolderPath( Environment.SpecialFolder.MyDocuments ), "ImperialCommander" );
+
+			string[] text = File.ReadAllLines( filename );
+			foreach ( var line in text )
+			{
+				//manually parse each line
+				string[] split = line.Split( ':' );
+				if ( split.Length == 2 )
+				{
+					projectItem.fileName = fi.Name;
+					projectItem.relativePath = Path.GetRelativePath( basePath, new DirectoryInfo( filename ).FullName );
+
+					split[0] = split[0].Replace( "\"", "" ).Replace( ",", "" ).Trim();
+					split[1] = split[1].Replace( "\"", "" ).Replace( ",", "" ).Trim();
+					if ( split[0] == "missionName" )
+						projectItem.Title = split[1];
+					if ( split[0] == "saveDate" )
+						projectItem.Date = split[1];
+					if ( split[0] == "fileVersion" )
+						projectItem.fileVersion = split[1];
+				}
+			}
+			return projectItem;
 		}
 
 
@@ -141,10 +160,8 @@ namespace Imperial_Commander_Editor
 				//find mission files
 				foreach ( FileInfo fi in files )
 				{
-					//Debug.Log( fi.FullName );
-					Mission s = LoadMission( fi.FullName );
-					if ( s != null )
-						items.Add( new ProjectItem() { Title = s.missionProperties.missionName, Date = s.saveDate, fileName = s.fileName, relativePath = s.relativePath, fileVersion = s.fileVersion } );
+					var pi = CreateProjectItem( fi.FullName );
+					items.Add( pi );
 				}
 				return items;
 			}
@@ -157,7 +174,7 @@ namespace Imperial_Commander_Editor
 		/// <summary>
 		/// Load a mission from its .json file
 		/// </summary>
-		/// <param name="relativePath">The RELATIVE PATH withing basePath</param>
+		/// <param name="relativePath">The RELATIVE PATH within basePath</param>
 		/// <returns></returns>
 		public static Mission LoadMissionRelativePath( string relativePath )
 		{
@@ -176,8 +193,14 @@ namespace Imperial_Commander_Editor
 					json = sr.ReadToEnd();
 				}
 
-				var c = JsonConvert.DeserializeObject<Mission>( json, new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Populate } );
-				return c;
+				var m = JsonConvert.DeserializeObject<Mission>( json, new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Populate } );
+				//overwrite fileName, relativePath and fileVersion properties so they are up-to-date
+				FileInfo fi = new FileInfo( Path.Combine( basePath, relativePath ) );
+				m.fileName = fi.Name;
+				m.relativePath = Path.GetRelativePath( basePath, new DirectoryInfo( Path.Combine( basePath, relativePath ) ).FullName );
+				m.fileVersion = Utils.formatVersion;
+
+				return m;
 			}
 			catch ( Exception e )
 			{

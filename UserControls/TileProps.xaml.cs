@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace Imperial_Commander_Editor
@@ -21,7 +22,9 @@ namespace Imperial_Commander_Editor
 
 		private void ownerChangeBtn_Click( object sender, System.Windows.RoutedEventArgs e )
 		{
-			((sender as FrameworkElement).DataContext as MapTile).mapSectionOwner = Utils.mainWindow.activeSection.GUID;
+			MapTile tile = (sender as FrameworkElement).DataContext as MapTile;
+			tile.mapSectionOwner = Utils.mainWindow.activeSection.GUID;
+			tile.ownerName = Utils.mainWindow.mission.mapSections.First( x => x.GUID == tile.mapSectionOwner ).name;
 			Utils.mainWindow.SetStatus( $"Owner Set To '{Utils.mainWindow.activeSection.name}'" );
 		}
 	}

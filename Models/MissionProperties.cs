@@ -8,9 +8,9 @@ namespace Imperial_Commander_Editor
 	{
 		public event PropertyChangedEventHandler PropertyChanged;
 
-		string _missionName, _missionID, _fixedAlly, _customInstructionText, _specificAlly, _specificHero, _priorityOther;
+		string _missionName, _missionID, _fixedAlly, _bannedAlly, _customInstructionText, _specificAlly, _specificHero, _priorityOther, _missionDescription;
 		bool _optionalDeployment, _factionImperial, _factionMercenary;
-		YesNo _useFixedAlly;
+		YesNo _useFixedAlly, _useBannedAlly;
 		CustomInstructionType _customInstructionType;
 		ThreatModifierType _initialThreatType;
 		PriorityTargetType _priorityTargetType;
@@ -22,10 +22,20 @@ namespace Imperial_Commander_Editor
 			get { return _missionName; }
 			set { _missionName = value; PC(); }
 		}
+		public string missionDescription
+		{
+			get { return _missionDescription; }
+			set { _missionDescription = value; PC(); }
+		}
 		public string fixedAlly
 		{
 			get { return _fixedAlly; }
 			set { _fixedAlly = value; PC(); }
+		}
+		public string bannedAlly
+		{
+			get { return _bannedAlly; }
+			set { _bannedAlly = value; PC(); }
 		}
 
 		//set to EXPANSIONXX where XX is the mission number and EXPANSION is the expansion name (ie: CORE, EMPIRE)
@@ -57,6 +67,11 @@ namespace Imperial_Commander_Editor
 		{
 			get { return _useFixedAlly; }
 			set { _useFixedAlly = value; PC(); }
+		}
+		public YesNo useBannedAlly
+		{
+			get { return _useBannedAlly; }
+			set { _useBannedAlly = value; PC(); }
 		}
 
 		public CustomInstructionType customInstructionType
@@ -129,8 +144,10 @@ namespace Imperial_Commander_Editor
 		{
 			missionID = "Unique Mission ID";
 			missionName = "Mission Name";
+			missionDescription = "";
 			customInstructionText = "";
-			fixedAlly = "Luke Skywalker (Hero)";
+			fixedAlly = "A001";
+			bannedAlly = "A001";
 			priorityOther = "";
 			specificAlly = "A001";
 			specificHero = "H1";
@@ -139,6 +156,7 @@ namespace Imperial_Commander_Editor
 			factionMercenary = true;
 			customInstructionType = CustomInstructionType.Replace;
 			useFixedAlly = YesNo.No;
+			useBannedAlly = YesNo.No;
 			initialThreatType = ThreatModifierType.None;
 			priorityTargetType = PriorityTargetType.Rebel;
 			fixedValue = 0;

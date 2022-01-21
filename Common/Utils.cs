@@ -13,7 +13,7 @@ namespace Imperial_Commander_Editor
 	public static class Utils
 	{
 		public const string formatVersion = "2";
-		public const string appVersion = ".2";
+		public const string appVersion = ".4";
 
 		public static List<DeploymentCard> allyData;
 		public static List<DeploymentCard> enemyData;
@@ -40,7 +40,10 @@ namespace Imperial_Commander_Editor
 		public static void Init( MainWindow mw )
 		{
 			mainWindow = mw;
+		}
 
+		public static void LoadAllCardData()
+		{
 			LoadCardData();
 			tileData = TileDescriptor.LoadData();
 		}

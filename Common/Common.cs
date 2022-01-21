@@ -34,7 +34,6 @@ namespace Imperial_Commander_Editor
 		public string Title { get; set; }
 		public string Date { get; set; }
 		public string Description { get; set; }
-		//public ProjectType projectType { get; set; }
 		public string fileName { get; set; }
 		public string relativePath { get; set; }
 		public string fileVersion { get; set; }

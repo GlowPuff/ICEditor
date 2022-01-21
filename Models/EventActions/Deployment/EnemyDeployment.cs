@@ -14,17 +14,7 @@ namespace Imperial_Commander_Editor
 		CustomInstructionType _customInstructionType;
 
 		public string enemyName { get { return _enemyName; } set { _enemyName = value; PC(); } }
-		public string deploymentGroup
-		{
-			get { return _deploymentGroup; }
-			set
-			{
-				_deploymentGroup = value;
-				PC();
-				DeploymentCard card = Utils.enemyData.First( x => x.id == _deploymentGroup );
-				enemyGroupData.card = card;
-			}
-		}
+		public string deploymentGroup { get { return _deploymentGroup; } set { _deploymentGroup = value; PC(); } }
 		public int threatCost { get { return _threatCost; } set { _threatCost = value; PC(); } }
 		public string modification { get { return _modification; } set { _modification = value; PC(); } }
 		public string customText { get { return _customText; } set { _customText = value; PC(); } }

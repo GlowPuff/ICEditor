@@ -33,16 +33,7 @@ namespace Imperial_Commander_Editor
 		[JsonIgnore]
 		public EntityRenderer mapRenderer { get; set; }
 		public EntityProperties entityProperties { get; set; }
-		public Guid mapSectionOwner
-		{
-			get { return _mapSectionOwner; }
-			set
-			{
-				_mapSectionOwner = value;
-				PC();
-				ownerName = Utils.mainWindow?.mission.mapSections.First( x => x.GUID == _mapSectionOwner ).name;
-			}
-		}
+		public Guid mapSectionOwner { get { return _mapSectionOwner; } set { _mapSectionOwner = value; PC(); } }
 		public string ownerName { get { return _ownerName; } set { _ownerName = value; PC(); } }
 
 		//highlight props
@@ -87,6 +78,8 @@ namespace Imperial_Commander_Editor
 			//defaults NOT ACTIVE, unlike other entities
 			entityProperties = new() { isActive = false };
 			mapSectionOwner = ownderGUID;
+			ownerName = Utils.mainWindow?.mission.mapSections.First( x => x.GUID == mapSectionOwner ).name;
+
 			Width = 1;
 			Height = 1;
 			Duration = 0;
@@ -105,6 +98,7 @@ namespace Imperial_Commander_Editor
 			dupe.entityPosition = entityPosition;
 			dupe.entityRotation = entityRotation;
 			dupe.mapSectionOwner = mapSectionOwner;
+			dupe.ownerName = ownerName;
 			dupe.deploymentColor = deploymentColor;
 			dupe.Width = Width;
 			dupe.Height = Height;

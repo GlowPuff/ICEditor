@@ -32,6 +32,7 @@ namespace Imperial_Commander_Editor
 
 			allyCB.ItemsSource = Utils.allyData;
 			fixedAllyCB.ItemsSource = Utils.allyData;
+			bannedAllyCB.ItemsSource = Utils.allyData;
 			heroCB.ItemsSource = Utils.heroData;
 			var items = from e in Utils.mainWindow.mission.globalEvents where e.isGlobal select e;
 			eventCB.ItemsSource = Utils.mainWindow.localEvents;
@@ -54,6 +55,13 @@ namespace Imperial_Commander_Editor
 			eventCB.GotFocus -= eventCB_GotFocus;
 			eventCB.ItemsSource = Utils.mainWindow.localEvents;
 			eventCB.GotFocus += eventCB_GotFocus;
+		}
+
+		private void descriptionBtn_Click( object sender, System.Windows.RoutedEventArgs e )
+		{
+			var dlg = new GenericTextDialog( "Mission Description", Utils.mainWindow.mission.missionProperties.missionDescription );
+			dlg.ShowDialog();
+			Utils.mainWindow.mission.missionProperties.missionDescription = dlg.theText;
 		}
 	}
 }

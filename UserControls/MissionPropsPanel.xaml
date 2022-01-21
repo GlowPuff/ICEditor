@@ -5,8 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Imperial_Commander_Editor"
 							xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
-             mc:Ignorable="d" 
-             d:DesignHeight="650" d:DesignWidth="800">
+             mc:Ignorable="d" d:DesignWidth="800">
 
 	<UserControl.Resources>
 		<local:RadioBoolToIntConverter x:Key="rbConv" />
@@ -17,8 +16,15 @@
 			<!--left side-->
 			<StackPanel Margin="0,0,10,0">
 				<!--mission name-->
-				<GroupBox Header="Mission Name" Margin="0,0,0,5">
-					<TextBox x:Name="mnameTB" Style="{StaticResource MaterialDesignOutlinedTextBox}"  Text="{Binding missionName}" KeyDown="Validate_KeyDown" CaretBrush="White"/>
+				<GroupBox Header="Mission Name and Description" Margin="0,0,0,5">
+					<Grid>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="*" />
+							<ColumnDefinition Width="auto" />
+						</Grid.ColumnDefinitions>
+						<TextBox x:Name="mnameTB" Style="{StaticResource MaterialDesignOutlinedTextBox}"  Text="{Binding missionName}" KeyDown="Validate_KeyDown" CaretBrush="White"/>
+						<Button x:Name="descriptionBtn" Grid.Column="1" Content="EDIT DESCRIPTION" HorizontalAlignment="Right" Margin="10,0,0,0" Click="descriptionBtn_Click"/>
+					</Grid>
 				</GroupBox>
 
 				<!--optional deployment-->
@@ -54,12 +60,23 @@
 				</GroupBox>
 
 				<!--ally-->
-				<GroupBox Header="Fixed Ally" Margin="0,5,0,0">
+				<GroupBox Header="Fixed Ally" Margin="0,5">
 					<StackPanel>
 						<RadioButton Content="No" GroupName="ally" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding useFixedAlly, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:YesNo.No}}"/>
 						<StackPanel Orientation="Horizontal">
 							<RadioButton Content="Yes" GroupName="ally" VerticalAlignment="Center" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding useFixedAlly, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:YesNo.Yes}}"/>
-							<ComboBox x:Name="fixedAllyCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" Margin="10,0,0,0" DisplayMemberPath="name" SelectedValue="{Binding fixedAlly}" SelectedValuePath="name"/>
+							<ComboBox x:Name="fixedAllyCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" Margin="10,0,0,0" DisplayMemberPath="name" SelectedValue="{Binding fixedAlly}" SelectedValuePath="id"/>
+						</StackPanel>
+					</StackPanel>
+				</GroupBox>
+
+				<!--banned ally-->
+				<GroupBox Header="Banned Ally" Margin="0,5,0,0">
+					<StackPanel>
+						<RadioButton Content="No" GroupName="bannedally" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding useBannedAlly, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:YesNo.No}}"/>
+						<StackPanel Orientation="Horizontal">
+							<RadioButton Content="Yes" GroupName="bannedally" VerticalAlignment="Center" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding useBannedAlly, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:YesNo.Yes}}"/>
+							<ComboBox x:Name="bannedAllyCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" Margin="10,0,0,0" DisplayMemberPath="name" SelectedValue="{Binding bannedAlly}" SelectedValuePath="id"/>
 						</StackPanel>
 					</StackPanel>
 				</GroupBox>

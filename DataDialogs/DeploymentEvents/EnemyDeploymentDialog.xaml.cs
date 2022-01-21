@@ -99,5 +99,11 @@ namespace Imperial_Commander_Editor
 			EditInitialGroupDialog dialog = new EditInitialGroupDialog( (eventAction as EnemyDeployment).enemyGroupData );
 			dialog.ShowDialog();
 		}
+
+		private void enemyCB_SelectionChanged( object sender, SelectionChangedEventArgs e )
+		{
+			DeploymentCard card = Utils.enemyData.First( x => x.id == (eventAction as EnemyDeployment).deploymentGroup );
+			(eventAction as EnemyDeployment).enemyGroupData.card = card;
+		}
 	}
 }

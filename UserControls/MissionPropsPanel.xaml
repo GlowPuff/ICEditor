@@ -62,9 +62,9 @@
 				<!--ally-->
 				<GroupBox Header="Fixed Ally" Margin="0,5">
 					<StackPanel>
-						<RadioButton Content="No" GroupName="ally" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding useFixedAlly, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:YesNo.No}}"/>
+						<RadioButton Content="No" GroupName="ally" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding useFixedAlly, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:YesNoAll.No}}"/>
 						<StackPanel Orientation="Horizontal">
-							<RadioButton Content="Yes" GroupName="ally" VerticalAlignment="Center" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding useFixedAlly, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:YesNo.Yes}}"/>
+							<RadioButton Content="Yes" GroupName="ally" VerticalAlignment="Center" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding useFixedAlly, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:YesNoAll.Yes}}"/>
 							<ComboBox x:Name="fixedAllyCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" Margin="10,0,0,0" DisplayMemberPath="name" SelectedValue="{Binding fixedAlly}" SelectedValuePath="id"/>
 						</StackPanel>
 					</StackPanel>
@@ -73,12 +73,14 @@
 				<!--banned ally-->
 				<GroupBox Header="Banned Ally" Margin="0,5,0,0">
 					<StackPanel>
-						<RadioButton Content="No" GroupName="bannedally" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding useBannedAlly, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:YesNo.No}}"/>
+						<CheckBox x:Name="banCB" Content="Ban All Allies" IsChecked="{Binding useBannedAlly, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:YesNoAll.All}}" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}"/>
+						<RadioButton Content="No" GroupName="bannedally" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding useBannedAlly, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:YesNoAll.No}}"/>
 						<StackPanel Orientation="Horizontal">
-							<RadioButton Content="Yes" GroupName="bannedally" VerticalAlignment="Center" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding useBannedAlly, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:YesNo.Yes}}"/>
+							<RadioButton Content="Yes" GroupName="bannedally" VerticalAlignment="Center" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding useBannedAlly, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:YesNoAll.Yes}}"/>
 							<ComboBox x:Name="bannedAllyCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" Margin="10,0,0,0" DisplayMemberPath="name" SelectedValue="{Binding bannedAlly}" SelectedValuePath="id"/>
 						</StackPanel>
 					</StackPanel>
+
 				</GroupBox>
 			</StackPanel>
 

@@ -9,63 +9,63 @@
 				Style="{StaticResource dws}"
         Title="Modify Variables" Width="460" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown" SizeToContent="Height" MaxHeight="500">
 
-  <Window.Resources>
-    <DataTemplate DataType="{x:Type local:Trigger}" x:Key="k1">
-      <UniformGrid Columns="2">
-        <TextBlock Text="{Binding name}" />
-        <UniformGrid Columns="3">
-          <TextBox Text="{Binding setValue}" HorizontalAlignment="Center" Width="50"/>
-          <TextBox Text="{Binding modifyValue}" HorizontalAlignment="Center" Width="50"/>
-          <Button x:Name="remTriggerButton" Content="{materialDesign:PackIcon Kind=RemoveBold}" Foreground="Red" Margin="10,0,0,0" Click="remTriggerButton_Click" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35"/>
-        </UniformGrid>
-      </UniformGrid>
-    </DataTemplate>
-  </Window.Resources>
+	<Window.Resources>
+		<DataTemplate DataType="{x:Type local:Trigger}" x:Key="k1">
+			<UniformGrid Columns="2">
+				<TextBlock Text="{Binding name}" VerticalAlignment="Center"/>
+				<UniformGrid Columns="3">
+					<TextBox Text="{Binding setValue}" HorizontalAlignment="Center" Width="50"/>
+					<TextBox Text="{Binding modifyValue}" HorizontalAlignment="Center" Width="50"/>
+					<Button x:Name="remTriggerButton" Content="{materialDesign:PackIcon Kind=RemoveBold}" Foreground="Red" Margin="10,0,0,0" Click="remTriggerButton_Click" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35"/>
+				</UniformGrid>
+			</UniformGrid>
+		</DataTemplate>
+	</Window.Resources>
 
-  <Border BorderBrush="MediumPurple" BorderThickness="2">
-    <GroupBox Header="Modify Variables Event Action" Style="{DynamicResource MaterialDesignGroupBox}">
-      <Grid>
-        <Grid.RowDefinitions>
-          <RowDefinition Height="*"/>
-          <RowDefinition Height="auto"/>
-        </Grid.RowDefinitions>
+	<Border BorderBrush="MediumPurple" BorderThickness="2">
+		<GroupBox Header="Modify Variables Event Action" Style="{DynamicResource MaterialDesignGroupBox}">
+			<Grid>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="*"/>
+					<RowDefinition Height="auto"/>
+				</Grid.RowDefinitions>
 
-        <ScrollViewer VerticalScrollBarVisibility="Auto">
-          <StackPanel>
-            <materialDesign:Card Padding="10" Background="#FF7952C0">
-              <Grid>
-                <Grid.ColumnDefinitions>
-                  <ColumnDefinition Width="*" />
-                  <ColumnDefinition Width="auto" />
-                  <ColumnDefinition Width="auto" />
-                </Grid.ColumnDefinitions>
+				<ScrollViewer VerticalScrollBarVisibility="Auto">
+					<StackPanel>
+						<materialDesign:Card Padding="10" Background="#FF7952C0">
+							<Grid>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="*" />
+									<ColumnDefinition Width="auto" />
+									<ColumnDefinition Width="auto" />
+								</Grid.ColumnDefinitions>
 
-                <ComboBox x:Name="tlist" Style="{StaticResource MaterialDesignOutlinedComboBox}" ItemsSource="{Binding mainWindow.localTriggers}" SelectedValue="{Binding selectedTrigger}" DisplayMemberPath="name" GotFocus="tlist_GotFocus"/>
+								<ComboBox x:Name="tlist" Style="{StaticResource MaterialDesignOutlinedComboBox}" ItemsSource="{Binding mainWindow.localTriggers}" SelectedValue="{Binding selectedTrigger}" DisplayMemberPath="name" GotFocus="tlist_GotFocus"/>
 
-                <Button x:Name="addTriggerButton" Content="{materialDesign:PackIcon Kind=AddBold}" Grid.Column="1" Margin="10,0,0,0" Click="addTriggerButton_Click" ToolTip="Add Existing Trigger" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35"/>
-                <Button x:Name="addNewTriggerButton" Grid.Column="2" Margin="10,0,0,0" Click="addNewTriggerButton_Click" ToolTip="Add New Trigger" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35">
-                  <Image Source="../../Assets/addtrigger.png" Height="20"/>
-                </Button>
-              </Grid>
-            </materialDesign:Card>
+								<Button x:Name="addTriggerButton" Content="{materialDesign:PackIcon Kind=AddBold}" Grid.Column="1" Margin="10,0,0,0" Click="addTriggerButton_Click" ToolTip="Add Existing Trigger" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35"/>
+								<Button x:Name="addNewTriggerButton" Grid.Column="2" Margin="10,0,0,0" Click="addNewTriggerButton_Click" ToolTip="Add New Trigger" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35">
+									<Image Source="../../Assets/addtrigger.png" Height="20"/>
+								</Button>
+							</Grid>
+						</materialDesign:Card>
 
-            <UniformGrid Columns="2" Margin="0,10">
-              <TextBlock Text="Trigger Name"/>
-              <UniformGrid Columns="3">
-                <TextBlock Text="Set" HorizontalAlignment="Center"/>
-                <TextBlock Text="Modify (+/-)" HorizontalAlignment="Center"/>
-              </UniformGrid>
-            </UniformGrid>
+						<UniformGrid Columns="2" Margin="0,10">
+							<TextBlock Text="Trigger Name"/>
+							<UniformGrid Columns="3">
+								<TextBlock Text="Set" HorizontalAlignment="Center"/>
+								<TextBlock Text="Modify (+/-)" HorizontalAlignment="Center"/>
+							</UniformGrid>
+						</UniformGrid>
 
-            <ListBox HorizontalContentAlignment="Stretch" ItemTemplate="{StaticResource k1}" ItemsSource="{Binding selectedTriggers}"/>
-          </StackPanel>
-        </ScrollViewer>
+						<ListBox HorizontalContentAlignment="Stretch" ItemTemplate="{StaticResource k1}" ItemsSource="{Binding selectedTriggers}"/>
+					</StackPanel>
+				</ScrollViewer>
 
-        <StackPanel Grid.Row="1">
-          <Separator Margin="0,10,0,10"/>
-          <Button x:Name="okButton" Content="ACCEPT" Click="okButton_Click" IsDefault="True" HorizontalAlignment="Right"/>
-        </StackPanel>
-      </Grid>
-    </GroupBox>
-  </Border>
+				<StackPanel Grid.Row="1">
+					<Separator Margin="0,10,0,10"/>
+					<Button x:Name="okButton" Content="ACCEPT" Click="okButton_Click" IsDefault="True" HorizontalAlignment="Right"/>
+				</StackPanel>
+			</Grid>
+		</GroupBox>
+	</Border>
 </Window>

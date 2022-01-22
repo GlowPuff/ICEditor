@@ -101,11 +101,7 @@ namespace Imperial_Commander_Editor
 
 		private void modifyActionButton_Click( object sender, RoutedEventArgs e )
 		{
-			if ( selectedEventAction != null )
-			{
-				Window dlg = GetDialog( selectedEventAction.displayName, selectedEventAction.eventActionType, selectedEventAction );
-				dlg?.ShowDialog();
-			}
+			EditEventAction();
 		}
 
 		private Window GetDialog( string dname, EventActionType et, IEventAction ea = null ) => et switch
@@ -188,6 +184,27 @@ namespace Imperial_Commander_Editor
 		{
 			if ( e.Key == System.Windows.Input.Key.Enter )
 				Utils.LoseFocus( sender as Control );
+		}
+
+		private void eventActionsCB_MouseDoubleClick( object sender, System.Windows.Input.MouseButtonEventArgs e )
+		{
+			EditEventAction();
+		}
+
+		private void EditEventAction()
+		{
+			if ( selectedEventAction != null )
+			{
+				Window dlg = GetDialog( selectedEventAction.displayName, selectedEventAction.eventActionType, selectedEventAction );
+				dlg?.ShowDialog();
+			}
+		}
+
+		private void ScrollViewer_PreviewMouseWheel( object sender, System.Windows.Input.MouseWheelEventArgs e )
+		{
+			ScrollViewer scv = (ScrollViewer)sender;
+			scv.ScrollToVerticalOffset( scv.VerticalOffset - e.Delta );
+			e.Handled = true;
 		}
 	}
 }

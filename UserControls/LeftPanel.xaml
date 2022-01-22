@@ -46,7 +46,7 @@
 							</Grid.RowDefinitions>
 							<!--<TextBlock Grid.Row="0" HorizontalAlignment="Center" Text="Trigger Variables" Foreground="White"/>-->
 							<!--<ComboBox Margin="10,5,10,10" x:Name="triggersCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" DisplayMemberPath="name"/>-->
-							<ScrollViewer Grid.Row="0">
+							<ScrollViewer Grid.Row="0" PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">
 								<ListBox Grid.Row="1" x:Name="triggersCB" DisplayMemberPath="name" MouseDoubleClick="triggersCB_MouseDoubleClick"/>
 							</ScrollViewer>
 
@@ -74,7 +74,7 @@
 
 							<!--<TextBlock HorizontalAlignment="Center" Text="Events" Foreground="White"/>-->
 							<!--<ComboBox Margin="10,5,10,10" x:Name="eventsCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" DisplayMemberPath="name"/>-->
-							<ScrollViewer Grid.Row="0">
+							<ScrollViewer Grid.Row="0" PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">
 								<ListBox Grid.Row="1" x:Name="eventsCB" DisplayMemberPath="name" MouseDoubleClick="eventsCB_MouseDoubleClick"/>
 							</ScrollViewer>
 

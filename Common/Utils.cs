@@ -12,7 +12,7 @@ namespace Imperial_Commander_Editor
 {
 	public static class Utils
 	{
-		public const string formatVersion = "2";
+		public const string formatVersion = "3";
 		public const string appVersion = ".4";
 
 		public static List<DeploymentCard> allyData;
@@ -50,6 +50,8 @@ namespace Imperial_Commander_Editor
 
 		public static DeploymentColor ColorFromName( string n )
 		{
+			if ( string.IsNullOrEmpty( n ) )
+				return deploymentColors[0];
 			return deploymentColors.Where( x => x.name == n ).First();
 		}
 

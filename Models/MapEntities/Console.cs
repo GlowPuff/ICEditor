@@ -13,6 +13,7 @@ namespace Imperial_Commander_Editor
 	{
 		string _name, _ownerName;
 		Guid _mapSectionOwner;
+		string _deploymentColor;
 
 		//common props
 		public Guid GUID { get; set; }
@@ -34,6 +35,25 @@ namespace Imperial_Commander_Editor
 		public Guid mapSectionOwner { get { return _mapSectionOwner; } set { _mapSectionOwner = value; PC(); } }
 		public string ownerName { get { return _ownerName; } set { _ownerName = value; PC(); } }
 
+
+		//console props
+		public string deploymentColor
+		{
+			get { return _deploymentColor; }
+			set
+			{
+				_deploymentColor = value;
+				PC();
+				if ( mapRenderer != null )
+				{
+					Color c = Utils.ColorFromName( _deploymentColor ).color;
+					mapRenderer.entityShape.Fill = new SolidColorBrush( c );
+					mapRenderer.unselectedBGColor = new SolidColorBrush( c );
+					mapRenderer.selectedBGColor = new SolidColorBrush( c );
+				}
+			}
+		}
+
 		public event PropertyChangedEventHandler PropertyChanged;
 		public void PC( [CallerMemberName] string n = "" )
 		{
@@ -53,6 +73,8 @@ namespace Imperial_Commander_Editor
 			entityProperties = new();
 			mapSectionOwner = ownderGUID;
 			ownerName = Utils.mainWindow?.mission.mapSections.First( x => x.GUID == mapSectionOwner ).name;
+
+			deploymentColor = "Gray";
 		}
 
 		public IMapEntity Duplicate()
@@ -67,19 +89,22 @@ namespace Imperial_Commander_Editor
 			dupe.entityRotation = entityRotation;
 			dupe.mapSectionOwner = mapSectionOwner;
 			dupe.ownerName = ownerName;
+			dupe.deploymentColor = deploymentColor;
 			return dupe;
 		}
 
-		public void BuildRenderer( Canvas c, Vector where, double scale )
+		public void BuildRenderer( Canvas canvas, Vector where, double scale )
 		{
+			Color c = Utils.ColorFromName( _deploymentColor ).color;
+
 			mapRenderer = new( this, where, scale, new( 1, 1 ) )
 			{
 				selectedZ = 300,
-				unselectedBGColor = new( Colors.SkyBlue ),
-				selectedBGColor = new( Colors.SkyBlue )
+				unselectedBGColor = new( c ),
+				selectedBGColor = new( c )
 			};
 			mapRenderer.BuildShape( TokenShape.Square );
-			c.Children.Add( mapRenderer.entityShape );
+			canvas.Children.Add( mapRenderer.entityShape );
 		}
 
 		public bool Validate()

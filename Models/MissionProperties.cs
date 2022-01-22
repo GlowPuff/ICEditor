@@ -10,7 +10,7 @@ namespace Imperial_Commander_Editor
 
 		string _missionName, _missionID, _fixedAlly, _bannedAlly, _customInstructionText, _specificAlly, _specificHero, _priorityOther, _missionDescription;
 		bool _optionalDeployment, _factionImperial, _factionMercenary;
-		YesNo _useFixedAlly, _useBannedAlly;
+		YesNoAll _useFixedAlly, _useBannedAlly, _banAllAllies;
 		CustomInstructionType _customInstructionType;
 		ThreatModifierType _initialThreatType;
 		PriorityTargetType _priorityTargetType;
@@ -62,13 +62,18 @@ namespace Imperial_Commander_Editor
 			get { return _factionMercenary; }
 			set { _factionMercenary = value; PC(); }
 		}
+		public YesNoAll banAllAllies
+		{
+			get { return _banAllAllies; }
+			set { _banAllAllies = value; PC(); }
+		}
 
-		public YesNo useFixedAlly
+		public YesNoAll useFixedAlly
 		{
 			get { return _useFixedAlly; }
 			set { _useFixedAlly = value; PC(); }
 		}
-		public YesNo useBannedAlly
+		public YesNoAll useBannedAlly
 		{
 			get { return _useBannedAlly; }
 			set { _useBannedAlly = value; PC(); }
@@ -155,8 +160,9 @@ namespace Imperial_Commander_Editor
 			factionImperial = true;
 			factionMercenary = true;
 			customInstructionType = CustomInstructionType.Replace;
-			useFixedAlly = YesNo.No;
-			useBannedAlly = YesNo.No;
+			useFixedAlly = YesNoAll.No;
+			useBannedAlly = YesNoAll.No;
+			banAllAllies = YesNoAll.No;
 			initialThreatType = ThreatModifierType.None;
 			priorityTargetType = PriorityTargetType.Rebel;
 			fixedValue = 0;

@@ -17,7 +17,7 @@ namespace Imperial_Commander_Editor
 	//public enum EventActionType { General, Deployment, GroupManipulation, MapAndTokens }
 	public enum EventActionSubtype { }
 	public enum ThreatModifierType { None, Fixed, Multiple }
-	public enum YesNo { Yes, No }
+	public enum YesNoAll { Yes, No, All }
 	public enum PriorityTargetType { Rebel, Hero, Ally, Other }
 	public enum Expansion { Core }
 	public enum EntityType { Tile, Console, Crate, DeploymentPoint, Token, Highlight, Door }

@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace Imperial_Commander_Editor
@@ -8,6 +9,11 @@ namespace Imperial_Commander_Editor
 	/// </summary>
 	public partial class CrateProps : UserControl, IPropertyModel
 	{
+		public ObservableCollection<DeploymentColor> deploymentColors
+		{
+			get { return Utils.deploymentColors; }
+		}
+
 		public CrateProps()
 		{
 			InitializeComponent();

@@ -7,7 +7,7 @@
         mc:Ignorable="d"
 				xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
 				Style="{StaticResource dws}"
-        Title="Add New Event" Width="900" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown" ContentRendered="Window_ContentRendered" SizeToContent="Height">
+        Title="Add New Event" Width="900" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown" ContentRendered="Window_ContentRendered" SizeToContent="Height" MaxHeight="800">
 
 	<Window.Resources>
 		<ResourceDictionary>
@@ -58,15 +58,18 @@
 							</GroupBox>
 						</UniformGrid>
 						<!--event actions-->
-						<GroupBox Grid.Row="1" Header="Event Actions" Margin="0,10,0,0">
+						<GroupBox Grid.Row="1" Header="Event Actions" Margin="0,10,0,0" MaxHeight="275">
 							<Grid>
 								<Grid.ColumnDefinitions>
 									<ColumnDefinition Width="2*"/>
 									<ColumnDefinition Width="*"/>
 								</Grid.ColumnDefinitions>
-								<ComboBox x:Name="eventActionsCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" ItemsSource="{Binding eventActions}" DisplayMemberPath="displayName" SelectedValue="{Binding selectedEventAction, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"/>
+								<ScrollViewer PreviewMouseWheel="ScrollViewer_PreviewMouseWheel" VerticalScrollBarVisibility="Auto">
+									<ListView x:Name="eventActionsCB" ItemsSource="{Binding eventActions}" DisplayMemberPath="displayName" SelectedValue="{Binding selectedEventAction, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" d:ItemsSource="{d:SampleData ItemCount=5}" MouseDoubleClick="eventActionsCB_MouseDoubleClick"/>
+								</ScrollViewer>
+								<!--<ComboBox x:Name="eventActionsCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" ItemsSource="{Binding eventActions}" DisplayMemberPath="displayName" SelectedValue="{Binding selectedEventAction, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"/>-->
 								<!--buttons-->
-								<StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right">
+								<StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Top">
 									<materialDesign:PopupBox Style="{StaticResource MaterialDesignMultiFloatingActionPopupBox}" Width="35" Height="35">
 										<materialDesign:Card Margin="5" MaxHeight="200" BorderBrush="MediumPurple" BorderThickness="2">
 											<StackPanel>
@@ -114,30 +117,36 @@
 						</GroupBox>
 						<!--additional triggers-->
 						<GroupBox Grid.Row="2" Header="Triggered By Additional Triggers" Margin="0,10,0,0">
-							<ScrollViewer VerticalScrollBarVisibility="Auto">
-								<StackPanel Margin="5">
-									<UniformGrid Columns="3">
-										<TextBlock Text="Trigger" VerticalAlignment="Center"/>
-										<TextBlock Text="When Value Is..." VerticalAlignment="Center"/>
-										<StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-											<!--add existing-->
-											<materialDesign:PopupBox Width="25" Height="25" Margin="0,0,10,0" StaysOpen="True" ToolTip="Add Existing Trigger">
-												<Border Margin="5" MaxHeight="200">
-													<ScrollViewer VerticalScrollBarVisibility="Auto">
-														<ListBox x:Name="existingTriggersLB" DisplayMemberPath="name" SelectionChanged="existingTriggersLB_SelectionChanged"/>
-													</ScrollViewer>
-												</Border>
-											</materialDesign:PopupBox>
-											<!--add new-->
-											<Button x:Name="addAdditionalTriggerButton" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35" Click="addAdditionalTriggerButton_Click" ToolTip="Add New Trigger">
-												<Image Source="../Assets/addtrigger.png" Height="20"/>
-											</Button>
-										</StackPanel>
-									</UniformGrid>
+							<Grid Margin="5">
+								<Grid.RowDefinitions>
+									<RowDefinition Height="auto" />
+									<RowDefinition Height="auto" />
+									<RowDefinition Height="1*" />
+								</Grid.RowDefinitions>
 
-									<Separator Margin="0,5,0,2"/>
+								<UniformGrid Columns="3">
+									<TextBlock Text="Trigger" VerticalAlignment="Center"/>
+									<TextBlock Text="When Value Is..." VerticalAlignment="Center"/>
+									<StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+										<!--add existing-->
+										<materialDesign:PopupBox Width="25" Height="25" Margin="0,0,10,0" StaysOpen="True" ToolTip="Add Existing Trigger">
+											<Border Margin="5" MaxHeight="200">
+												<ScrollViewer VerticalScrollBarVisibility="Auto">
+													<ListBox x:Name="existingTriggersLB" DisplayMemberPath="name" SelectionChanged="existingTriggersLB_SelectionChanged"/>
+												</ScrollViewer>
+											</Border>
+										</materialDesign:PopupBox>
+										<!--add new-->
+										<Button x:Name="addAdditionalTriggerButton" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35" Click="addAdditionalTriggerButton_Click" ToolTip="Add New Trigger">
+											<Image Source="../Assets/addtrigger.png" Height="20"/>
+										</Button>
+									</StackPanel>
+								</UniformGrid>
 
-									<!--LIST BOX-->
+								<Separator Grid.Row="1" Margin="0,5,0,2"/>
+
+								<!--LIST BOX-->
+								<ScrollViewer Grid.Row="2" PreviewMouseWheel="ScrollViewer_PreviewMouseWheel" VerticalScrollBarVisibility="Auto">
 									<ListBox ItemsSource="{Binding additionalTriggers}" HorizontalContentAlignment="Stretch" ItemTemplate="{StaticResource k1}">
 										<ListBox.ItemContainerStyle>
 											<Style TargetType="ListBoxItem" BasedOn="{StaticResource MaterialDesignListBoxItem}">
@@ -145,8 +154,9 @@
 											</Style>
 										</ListBox.ItemContainerStyle>
 									</ListBox>
-								</StackPanel>
-							</ScrollViewer>
+								</ScrollViewer>
+
+							</Grid>
 						</GroupBox>
 					</Grid>
 

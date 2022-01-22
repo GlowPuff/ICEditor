@@ -55,24 +55,32 @@
 
 				<!--RIGHT-->
 				<materialDesign:Card x:Name="rightCard" Background="MediumPurple" Margin="5,0,0,0">
+
 					<StackPanel Margin="10">
 						<TextBlock Text="Global Properties" Style="{StaticResource MaterialDesignHeadline6TextBlock}" VerticalAlignment="Center"/>
 
 						<Separator Margin="0,10"/>
 
-						<TextBlock Text="Event Groups" Margin="0,0,0,5"/>
-						<Grid>
-							<Grid.ColumnDefinitions>
-								<ColumnDefinition Width="*" />
-								<ColumnDefinition Width="auto" />
-							</Grid.ColumnDefinitions>
-							<ComboBox x:Name="groupCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" HorizontalAlignment="Stretch" ItemsSource="{Binding eventGroups}" DisplayMemberPath="name" SelectedValue="{Binding selectedEventGroup}"/>
-							<StackPanel Orientation="Horizontal" Grid.Column="1">
-								<Button x:Name="newGroupBtn" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35" Content="{materialDesign:PackIcon Kind=AddBold}" Margin="10,0" Click="newGroupBtn_Click" ToolTip="Create New Event Group"/>
-								<Button x:Name="editGroupBtn" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35" Content="{materialDesign:PackIcon Kind=Edit}" Click="editGroupBtn_Click" ToolTip="Edit Event Group" IsEnabled="{Binding editEnabled}" Margin="0,0,10,0"/>
-								<Button x:Name="remGroupBtn" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35" Content="{materialDesign:PackIcon Kind=RemoveBold}" Foreground="Red" Click="remGroupBtn_Click" ToolTip="Remove Event Group" IsEnabled="{Binding editEnabled}"/>
+						<GroupBox Header="EVENT GROUPS">
+							<Grid>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="*" />
+									<ColumnDefinition Width="auto" />
+								</Grid.ColumnDefinitions>
+								<ComboBox x:Name="groupCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" HorizontalAlignment="Stretch" ItemsSource="{Binding eventGroups}" DisplayMemberPath="name" SelectedValue="{Binding selectedEventGroup}"/>
+								<StackPanel Orientation="Horizontal" Grid.Column="1">
+									<Button x:Name="newGroupBtn" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35" Content="{materialDesign:PackIcon Kind=AddBold}" Margin="10,0" Click="newGroupBtn_Click" ToolTip="Create New Event Group"/>
+									<Button x:Name="editGroupBtn" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35" Content="{materialDesign:PackIcon Kind=Edit}" Click="editGroupBtn_Click" ToolTip="Edit Event Group" IsEnabled="{Binding editEnabled}" Margin="0,0,10,0"/>
+									<Button x:Name="remGroupBtn" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35" Content="{materialDesign:PackIcon Kind=RemoveBold}" Foreground="Red" Click="remGroupBtn_Click" ToolTip="Remove Event Group" IsEnabled="{Binding editEnabled}"/>
+								</StackPanel>
+							</Grid>
+						</GroupBox>
+
+						<GroupBox Header="RANDOM TRIGGER GROUPS" Margin="0,10,0,0">
+							<StackPanel>
+
 							</StackPanel>
-						</Grid>
+						</GroupBox>
 					</StackPanel>
 				</materialDesign:Card>
 			</UniformGrid>

@@ -16,7 +16,7 @@
 			<!--left side-->
 			<StackPanel Margin="0,0,10,0">
 				<!--mission name-->
-				<GroupBox Header="Mission Name and Description" Margin="0,0,0,5">
+				<GroupBox Header="MISSION NAME AND DESCRIPTION" Margin="0,0,0,5">
 					<Grid>
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition Width="*" />
@@ -28,7 +28,7 @@
 				</GroupBox>
 
 				<!--optional deployment-->
-				<GroupBox Header="Optional Deployment" Margin="0,5">
+				<GroupBox Header="OPTIONAL DEPLOYMENT" Margin="0,5">
 					<StackPanel Orientation="Horizontal">
 						<TextBlock Text="No" VerticalAlignment="Center"/>
 						<ToggleButton Margin="10,0" IsChecked="{Binding optionalDeployment}"/>
@@ -37,7 +37,7 @@
 				</GroupBox>
 
 				<!--initial threat-->
-				<GroupBox Header="Inital Threat" Margin="0,5">
+				<GroupBox Header="INITIAL THREAT" Margin="0,5">
 					<StackPanel>
 						<RadioButton Content="None" GroupName="ithreat" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding Path=initialThreatType, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:ThreatModifierType.None}}"/>
 						<StackPanel Orientation="Horizontal">
@@ -52,7 +52,7 @@
 				</GroupBox>
 
 				<!--factions-->
-				<GroupBox Header="Include Factions" Margin="0,5">
+				<GroupBox Header="INCLUDE FACTIONS" Margin="0,5">
 					<StackPanel Orientation="Horizontal">
 						<CheckBox Content="Imperial" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding factionImperial}"/>
 						<CheckBox Content="Mercenary" Margin="10,0" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding factionMercenary}"/>
@@ -60,7 +60,7 @@
 				</GroupBox>
 
 				<!--ally-->
-				<GroupBox Header="Fixed Ally" Margin="0,5">
+				<GroupBox Header="FIXED ALLY" Margin="0,5">
 					<StackPanel>
 						<RadioButton Content="No" GroupName="ally" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding useFixedAlly, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:YesNoAll.No}}"/>
 						<StackPanel Orientation="Horizontal">
@@ -71,7 +71,7 @@
 				</GroupBox>
 
 				<!--banned ally-->
-				<GroupBox Header="Banned Ally" Margin="0,5,0,0">
+				<GroupBox Header="BANNED ALLY" Margin="0,5,0,0">
 					<StackPanel>
 						<CheckBox x:Name="banCB" Content="Ban All Allies" IsChecked="{Binding useBannedAlly, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:YesNoAll.All}}" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}"/>
 						<RadioButton Content="No" GroupName="bannedally" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding useBannedAlly, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:YesNoAll.No}}"/>
@@ -87,12 +87,12 @@
 			<!--right side-->
 			<!--mission name-->
 			<StackPanel Margin="10,0,0,0">
-				<GroupBox Header="Mission ID" Margin="0,0,0,5">
+				<GroupBox Header="MISSION ID" Margin="0,0,0,5">
 					<TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}" Text="{Binding missionID}" materialDesign:HintAssist.Hint="Example: CORE01" CharacterCasing="Upper" KeyDown="Validate_KeyDown" CaretBrush="White"/>
 				</GroupBox>
 
 				<!--priority target-->
-				<GroupBox Header="Priority Target" Margin="0,5">
+				<GroupBox Header="PRIORITY TARGET" Margin="0,5">
 					<StackPanel>
 						<RadioButton GroupName="priority" Content="Any Rebel Figure" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding Path=priorityTargetType, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:PriorityTargetType.Rebel}}"/>
 						<StackPanel Orientation="Horizontal">
@@ -111,12 +111,12 @@
 				</GroupBox>
 
 				<!--starting event-->
-				<GroupBox Header="Starting Event" Margin="0,5,0,0">
+				<GroupBox Header="STARTING EVENT" Margin="0,5">
 					<ComboBox x:Name="eventCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" Foreground="White" GotFocus="eventCB_GotFocus" DisplayMemberPath="name" SelectedValuePath="GUID" SelectedValue="{Binding startingEvent}"/>
 				</GroupBox>
 
 				<!--custom instructions-->
-				<GroupBox Header="Custom Instructions" Margin="0,5,0,0">
+				<GroupBox Header="CUSTOM INSTRUCTIONS" Margin="0,5">
 					<StackPanel>
 						<Grid>
 							<Grid.ColumnDefinitions >
@@ -135,7 +135,56 @@
 								<RadioButton Content="Replace" GroupName="addto" x:Name="ciReplace" IsChecked="{Binding Path=customInstructionType, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:CustomInstructionType.Replace}}" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}"/>
 							</StackPanel>
 						</materialDesign:Card>
+					</StackPanel>
+				</GroupBox>
 
+				<GroupBox Header="BANNED ENEMY GROUPS" Margin="0,5,0,0">
+					<StackPanel>
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="*" />
+								<ColumnDefinition Width="auto" />
+							</Grid.ColumnDefinitions>
+
+							<ComboBox x:Name="banGroupsCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectedValue="{Binding selectedBanGroupAdd, RelativeSource={RelativeSource AncestorType=local:MissionPropsPanel}}" ItemsSource="{Binding deploymentGroups, RelativeSource={RelativeSource AncestorType=local:MissionPropsPanel}}">
+								<ComboBox.ItemTemplate>
+									<DataTemplate>
+										<TextBlock>
+											<TextBlock.Text>
+												<MultiBinding StringFormat="{}{0}: {1}">
+													<Binding Path="name"/>
+													<Binding Path="id"/>
+												</MultiBinding>
+											</TextBlock.Text>
+										</TextBlock>
+									</DataTemplate>
+								</ComboBox.ItemTemplate>
+							</ComboBox>
+							<Button x:Name="addmBanBtn" Grid.Column="1" Content="{materialDesign:PackIcon Kind=AddBold}" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35" Margin="10,0,0,0" Click="addmBanBtn_Click" ToolTip="Add Group To Banned List."/>
+						</Grid>
+
+						<Grid Margin="0,10,0,0">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="*" />
+								<ColumnDefinition Width="auto" />
+							</Grid.ColumnDefinitions>
+
+							<ComboBox x:Name="bannedCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectedValue="{Binding selectedBanGroupRemove, RelativeSource={RelativeSource AncestorType=local:MissionPropsPanel}}" ItemsSource="{Binding bannedGroups, RelativeSource={RelativeSource AncestorType=local:MissionPropsPanel}}">
+								<ComboBox.ItemTemplate>
+									<DataTemplate>
+										<TextBlock>
+											<TextBlock.Text>
+												<MultiBinding StringFormat="{}{0}: {1}">
+													<Binding Path="name"/>
+													<Binding Path="id"/>
+												</MultiBinding>
+											</TextBlock.Text>
+										</TextBlock>
+									</DataTemplate>
+								</ComboBox.ItemTemplate>
+							</ComboBox>
+							<Button x:Name="remBanBtn" Grid.Column="1" Content="{materialDesign:PackIcon Kind=RemoveBold}" Foreground="Red" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35" Margin="10,0,0,0" Click="remBanBtn_Click" ToolTip="Remove Group From Banned List."/>
+						</Grid>
 					</StackPanel>
 				</GroupBox>
 			</StackPanel>

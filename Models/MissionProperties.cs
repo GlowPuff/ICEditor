@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
@@ -138,6 +139,8 @@ namespace Imperial_Commander_Editor
 			get { return _threatLevel; }
 			set { _threatLevel = value; PC(); }
 		}
+
+		public ObservableCollection<string> bannedGroups { get; set; } = new();
 
 		public void PC( [CallerMemberName] string n = "" )
 		{

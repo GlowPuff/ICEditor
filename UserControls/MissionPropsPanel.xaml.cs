@@ -1,4 +1,8 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -7,8 +11,23 @@ namespace Imperial_Commander_Editor
 	/// <summary>
 	/// Interaction logic for MissionPropsPanel.xaml
 	/// </summary>
-	public partial class MissionPropsPanel : UserControl
+	public partial class MissionPropsPanel : UserControl, INotifyPropertyChanged
 	{
+		DeploymentCard _selectedBanGroupRemove;
+		DeploymentCard _selectedBanGroupAdd;
+
+		public List<DeploymentCard> deploymentGroups { get { return Utils.enemyData; } }
+		public ObservableCollection<DeploymentCard> bannedGroups { get; set; } = new();
+		public DeploymentCard selectedBanGroupRemove { get { return _selectedBanGroupRemove; } set { _selectedBanGroupRemove = value; PC(); } }
+		public DeploymentCard selectedBanGroupAdd { get { return _selectedBanGroupAdd; } set { _selectedBanGroupAdd = value; PC(); } }
+
+		public void PC( [CallerMemberName] string n = "" )
+		{
+			if ( !string.IsNullOrEmpty( n ) )
+				PropertyChanged?.Invoke( this, new PropertyChangedEventArgs( n ) );
+		}
+		public event PropertyChangedEventHandler PropertyChanged;
+
 		public MissionPropsPanel()
 		{
 			InitializeComponent();
@@ -38,6 +57,13 @@ namespace Imperial_Commander_Editor
 			eventCB.ItemsSource = Utils.mainWindow.localEvents;
 
 			ciInfo.Text = string.IsNullOrEmpty( Utils.mainWindow.mission.missionProperties.customInstructionText ) ? "Text Not Set" : "Text Set";
+
+			selectedBanGroupAdd = Utils.enemyData.First( x => x.id == "DG001" );
+			foreach ( var item in Utils.mainWindow.mission.missionProperties.bannedGroups )
+			{
+				bannedGroups.Add( Utils.enemyData.First( x => x.id == item ) );
+				selectedBanGroupRemove = Utils.enemyData.First( x => x.id == item );
+			}
 		}
 
 		private void Validate_KeyDown( object sender, System.Windows.Input.KeyEventArgs e )
@@ -62,6 +88,20 @@ namespace Imperial_Commander_Editor
 			var dlg = new GenericTextDialog( "Mission Description", Utils.mainWindow.mission.missionProperties.missionDescription );
 			dlg.ShowDialog();
 			Utils.mainWindow.mission.missionProperties.missionDescription = dlg.theText;
+		}
+
+		private void addmBanBtn_Click( object sender, System.Windows.RoutedEventArgs e )
+		{
+			Utils.mainWindow.mission.missionProperties.bannedGroups.Add( selectedBanGroupAdd.id );
+			bannedGroups.Add( selectedBanGroupAdd );
+			selectedBanGroupRemove = selectedBanGroupAdd;
+		}
+
+		private void remBanBtn_Click( object sender, System.Windows.RoutedEventArgs e )
+		{
+			DeploymentCard card = Utils.enemyData.First( x => x.id == selectedBanGroupRemove.id );
+			Utils.mainWindow.mission.missionProperties.bannedGroups.Remove( selectedBanGroupRemove.id );
+			bannedGroups.Remove( card );
 		}
 	}
 }

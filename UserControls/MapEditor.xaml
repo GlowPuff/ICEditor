@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Imperial_Commander_Editor"
              mc:Ignorable="d" 
 						 xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             d:DesignHeight="450" d:DesignWidth="950" PreviewKeyDown="UserControl_PreviewKeyDown">
+             d:DesignHeight="550" d:DesignWidth="950" PreviewKeyDown="UserControl_PreviewKeyDown">
 
 	<UserControl.Resources>
 		<Style TargetType="GroupBox" BasedOn="{StaticResource MaterialDesignGroupBox}">
@@ -30,23 +30,26 @@
 				<Border Width="225" Background="#FF3A3349" BorderThickness="1,0,0,0" BorderBrush="Black">
 					<Grid>
 						<Grid.RowDefinitions>
-							<RowDefinition Height="*" />
+							<RowDefinition Height="auto" />
+							<RowDefinition Height="auto" />
+							<RowDefinition Height="auto" />
+							<RowDefinition Height="auto" />
 						</Grid.RowDefinitions>
-						<StackPanel>
-							<GroupBox Header="ADD NEW TILE" Background="#FF503B7C">
-								<!--TILE GALLERY-->
-								<Button x:Name="tileGalleryBtn" Content="SELECT FROM GALLERY" Click="tileGalleryBtn_Click"/>
-							</GroupBox>
-							<!--TILE PROPS-->
-							<GroupBox Header="TILES" Background="#FF503B7C" Foreground="White" DataContext="{Binding}" Margin="0,10,0,0">
-								<StackPanel>
-									<!--NAME-->
-									<!--<TextBlock Text="NAME" HorizontalAlignment="Center"/>-->
-									<!--<TextBox Margin="0,5,0,0" Text="{Binding selectedEntity.name}" Style="{StaticResource MaterialDesignOutlinedTextBox}" KeyDown="TextBox_KeyDown" materialDesign:HintAssist.Hint="Empty For Default" IsEnabled="{Binding tilePropsEnabled}"/>-->
+						<!--<StackPanel>-->
+						<GroupBox Header="ADD NEW TILE" Background="#FF503B7C">
+							<!--TILE GALLERY-->
+							<Button x:Name="tileGalleryBtn" Content="SELECT FROM GALLERY" Click="tileGalleryBtn_Click"/>
+						</GroupBox>
+						<!--TILE PROPS-->
+						<GroupBox Grid.Row="1" Header="TILES" Background="#FF503B7C" Foreground="White" DataContext="{Binding}" Margin="0,10,0,0">
+							<StackPanel>
+								<!--NAME-->
+								<!--<TextBlock Text="NAME" HorizontalAlignment="Center"/>-->
+								<!--<TextBox Margin="0,5,0,0" Text="{Binding selectedEntity.name}" Style="{StaticResource MaterialDesignOutlinedTextBox}" KeyDown="TextBox_KeyDown" materialDesign:HintAssist.Hint="Empty For Default" IsEnabled="{Binding tilePropsEnabled}"/>-->
 
-									<!--SELECTED TILE-->
-									<ComboBox x:Name="tileCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" Margin="0,0,0,5" SelectedValue="{Binding selectedEntity}" DisplayMemberPath="name" ItemsSource="{Binding selectedMapSection.mapTiles}">
-										<!--<ComboBox.ItemTemplate>
+								<!--SELECTED TILE-->
+								<ComboBox x:Name="tileCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" Margin="0,0,0,5" SelectedValue="{Binding selectedEntity}" DisplayMemberPath="name" ItemsSource="{Binding selectedMapSection.mapTiles}">
+									<!--<ComboBox.ItemTemplate>
 											<DataTemplate>
 												<TextBlock>
 													<TextBlock.Text>
@@ -59,50 +62,45 @@
 												</TextBlock>
 											</DataTemplate>
 										</ComboBox.ItemTemplate>-->
-									</ComboBox>
+								</ComboBox>
 
-									<!--FLIP SIDE-->
-									<!--<UniformGrid Columns="3">
+								<!--FLIP SIDE-->
+								<!--<UniformGrid Columns="3">
 										<TextBlock Text="Side A" HorizontalAlignment="Right"/>
 										<ToggleButton IsChecked="{Binding selectedMapTile.tileSide, Converter={StaticResource tsc}}" IsEnabled="{Binding tilePropsEnabled}"/>
 										<TextBlock Text="Side B"/>
 									</UniformGrid>-->
 
-									<!--TOGGLE TRIGGERED-->
-									<!--<CheckBox Content="Starts Activated" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" HorizontalAlignment="Center" Margin="0,10,0,0" ToolTip="Uncheck to make this tile invisible until it's activated by the Map Management Event Action." IsChecked="{Binding selectedMapTile.entityProperties.isActive}"/>-->
+								<!--TOGGLE TRIGGERED-->
+								<!--<CheckBox Content="Starts Activated" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" HorizontalAlignment="Center" Margin="0,10,0,0" ToolTip="Uncheck to make this tile invisible until it's activated by the Map Management Event Action." IsChecked="{Binding selectedMapTile.entityProperties.isActive}"/>-->
 
-									<!--CENTER-->
-									<Button x:Name="centerTileButton" Content="CENTER ON TILE" Margin="0,10,0,0" Click="centerTileButton_Click" IsEnabled="{Binding tilePropsEnabled}"/>
-									<!--REMOVE-->
-									<Button x:Name="removeTileButton" Content="REMOVE TILE" Margin="0,10,0,0" Click="removeTileButton_Click" IsEnabled="{Binding tilePropsEnabled}" Foreground="Red"/>
-								</StackPanel>
-							</GroupBox>
-
-							<!--ALL ENTITIES-->
-							<GroupBox Header="ENTITIES" Background="#FF503B7C" Foreground="White" Margin="0,10">
-								<StackPanel>
-									<ComboBox x:Name="entitiesCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" ItemsSource="{Binding parent.mission.mapEntities}" DisplayMemberPath="name" SelectedValue="{Binding selectedEntity}"/>
-									<!--REMOVE-->
-									<Button x:Name="removeEntityButton" Content="REMOVE ENTITY" Margin="0,10,0,0" Click="removeEntityButton_Click" IsEnabled="{Binding entityPropsEnabled}" Foreground="Red"/>
-								</StackPanel>
-							</GroupBox>
-
-							<!--SELECTED ENTITY PROPERTIES (crate, token, door, etc)-->
-							<GroupBox Header="SELECTED ENTITY PROPERTIES" Background="#FF503B7C" Foreground="White">
-								<StackPanel>
-									<TextBlock Text="Nothing Selected" HorizontalAlignment="Center" Visibility="{Binding nothingSelected,Converter={StaticResource BooleanToVisibilityConverter}}"/>
-									<ContentControl Content="{Binding propModel}" />
-								</StackPanel>
-							</GroupBox>
-						</StackPanel>
-
-						<!--SECTION PROPS-->
-						<!--<GroupBox Grid.Row="1" Header="MAP SECTION PROPERTIES" Background="#FF503B7C" Foreground="White" Margin="0,10,0,0">
-							<StackPanel>
-								<TextBlock Text="ACTIVE CRATE" HorizontalAlignment="Center"/>
-								<ComboBox x:Name="crateCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" Margin="0,5"/>
+								<!--CENTER-->
+								<Button x:Name="centerTileButton" Content="CENTER ON TILE" Margin="0,10,0,0" Click="centerTileButton_Click" IsEnabled="{Binding tilePropsEnabled}"/>
+								<!--REMOVE-->
+								<Button x:Name="removeTileButton" Content="REMOVE TILE" Margin="0,10,0,0" Click="removeTileButton_Click" IsEnabled="{Binding tilePropsEnabled}" Foreground="Red"/>
 							</StackPanel>
-						</GroupBox>-->
+						</GroupBox>
+
+						<!--ALL ENTITIES-->
+						<GroupBox Grid.Row="2" Header="ENTITIES" Background="#FF503B7C" Foreground="White" Margin="0,10">
+							<StackPanel>
+								<CheckBox x:Name="filterCheck" Content="Filter By Active Map Section" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" HorizontalAlignment="Center" Margin="4,4,4,10" Click="filterCheck_Click" IsChecked="{Binding filterBySection}"/>
+								<ListBox x:Name="entitiesCB" ItemsSource="{Binding mapEntities}"  SelectedValue="{Binding selectedEntity}" MaxHeight="300" DisplayMemberPath="name" ItemContainerStyle="{StaticResource lbitem}"/>
+								<!--SWITCH TO SECTION-->
+								<Button x:Name="switchSectionBtn" Content="SWITCH MAP SECTION" Margin="0,10,0,0" IsEnabled="{Binding entityPropsEnabled}" Click="switchSectionBtn_Click" ToolTip="Switch The Active Map Section To This Entity's Owner"/>
+								<!--REMOVE-->
+								<Button x:Name="removeEntityButton" Content="REMOVE ENTITY" Margin="0,10,0,0" Click="removeEntityButton_Click" IsEnabled="{Binding entityPropsEnabled}" Foreground="Red"/>
+							</StackPanel>
+						</GroupBox>
+
+						<!--SELECTED ENTITY PROPERTIES (crate, token, door, etc)-->
+						<GroupBox Grid.Row="3" Header="SELECTED ENTITY PROPERTIES" Background="#FF503B7C" Foreground="White">
+							<StackPanel>
+								<TextBlock Text="Nothing Selected" HorizontalAlignment="Center" Visibility="{Binding nothingSelected,Converter={StaticResource BooleanToVisibilityConverter}}"/>
+								<ContentControl Content="{Binding propModel}" />
+							</StackPanel>
+						</GroupBox>
+						<!--</StackPanel>-->
 					</Grid>
 				</Border>
 			</ScrollViewer>

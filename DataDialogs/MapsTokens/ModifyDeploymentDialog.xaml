@@ -64,7 +64,7 @@
 
 					<!--LIST BOX-->
 					<materialDesign:Card Background="Purple" Padding="10">
-						<ListBox ItemsSource="{Binding deploymentModifiers}" HorizontalContentAlignment="Stretch" ItemTemplate="{StaticResource k1}">
+						<ListBox ItemsSource="{Binding deploymentModifiers}" HorizontalContentAlignment="Stretch" ItemTemplate="{StaticResource k1}" MaxHeight="350">
 							<ListBox.ItemContainerStyle>
 								<Style TargetType="ListBoxItem" BasedOn="{StaticResource MaterialDesignListBoxItem}">
 									<Setter Property="materialDesign:ListBoxItemAssist.ShowSelection" Value="False" />

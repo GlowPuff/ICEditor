@@ -33,6 +33,19 @@
 			<Style TargetType="CheckBox" BasedOn="{StaticResource MaterialDesignCheckBox}">
 				<Setter Property="Background" Value="MediumPurple"/>
 			</Style>
+
+			<!--selected list box item-->
+			<Style x:Key="lbitem" TargetType="ListBoxItem" BasedOn="{StaticResource MaterialDesignListBoxItem}">
+				<Style.Triggers>
+					<Trigger Property="IsSelected" Value="True" >
+						<Setter Property="Background" Value="MediumPurple" />
+						<Setter Property="Foreground" Value="White" />
+					</Trigger>
+				</Style.Triggers>
+				<Style.Resources>
+					<SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"/>
+				</Style.Resources>
+			</Style>
 		</ResourceDictionary>
 	</Application.Resources>
 </Application>

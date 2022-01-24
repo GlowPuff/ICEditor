@@ -163,7 +163,8 @@
 							<Button x:Name="addmBanBtn" Grid.Column="1" Content="{materialDesign:PackIcon Kind=AddBold}" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35" Margin="10,0,0,0" Click="addmBanBtn_Click" ToolTip="Add Group To Banned List."/>
 						</Grid>
 
-						<Grid Margin="0,10,0,0">
+						<TextBlock Text="BANNED LIST" HorizontalAlignment="Center" Margin="0,10,0,0"/>
+						<Grid Margin="0,5,0,0">
 							<Grid.ColumnDefinitions>
 								<ColumnDefinition Width="*" />
 								<ColumnDefinition Width="auto" />

@@ -11,8 +11,6 @@ namespace Imperial_Commander_Editor
 	/// </summary>
 	public partial class PropertiesPanel : UserControl, INotifyPropertyChanged
 	{
-		//private MapSection _mapSection;
-		//public MapSection mapSection { get { return _mapSection; } set { _mapSection = value; PC(); } }
 		bool _editEnabled;
 		EventGroup _selectedEventGroup;
 
@@ -40,12 +38,12 @@ namespace Imperial_Commander_Editor
 		{
 			InitializeComponent();
 			rightCard.DataContext = this;
-
 		}
 
-		public void Populate( MapSection ms )
+		public void UpdateUI( MapSection ms )
 		{
 			leftCard.DataContext = ms;
+			meTB.DataContext = Utils.mainWindow.mission;
 		}
 
 		private void TextBox_KeyDown( object sender, KeyEventArgs e )

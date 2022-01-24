@@ -33,8 +33,8 @@
 					<TextBlock HorizontalAlignment="Center" Style="{StaticResource MaterialDesignHeadline6TextBlock}">
 						<TextBlock.Text>
 							<MultiBinding StringFormat="{}{0}: {1}">
-								<Binding Path="initialGroupData.card.name"/>
-								<Binding Path="initialGroupData.card.id"/>
+								<Binding Path="initialGroupData.cardName"/>
+								<Binding Path="initialGroupData.cardID"/>
 							</MultiBinding>
 						</TextBlock.Text>
 					</TextBlock>

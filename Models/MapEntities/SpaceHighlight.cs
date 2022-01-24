@@ -11,7 +11,7 @@ namespace Imperial_Commander_Editor
 {
 	public class SpaceHighlight : INotifyPropertyChanged, IMapEntity
 	{
-		string _name, _ownerName;
+		string _name;
 		string _deploymentColor;
 		int _width, _height, _duration;
 		Guid _mapSectionOwner;
@@ -34,7 +34,6 @@ namespace Imperial_Commander_Editor
 		public EntityRenderer mapRenderer { get; set; }
 		public EntityProperties entityProperties { get; set; }
 		public Guid mapSectionOwner { get { return _mapSectionOwner; } set { _mapSectionOwner = value; PC(); } }
-		public string ownerName { get { return _ownerName; } set { _ownerName = value; PC(); } }
 
 		//highlight props
 		public string deploymentColor
@@ -78,7 +77,6 @@ namespace Imperial_Commander_Editor
 			//defaults NOT ACTIVE, unlike other entities
 			entityProperties = new() { isActive = false };
 			mapSectionOwner = ownderGUID;
-			ownerName = Utils.mainWindow?.mission.mapSections.First( x => x.GUID == mapSectionOwner ).name;
 
 			Width = 1;
 			Height = 1;
@@ -98,7 +96,6 @@ namespace Imperial_Commander_Editor
 			dupe.entityPosition = entityPosition;
 			dupe.entityRotation = entityRotation;
 			dupe.mapSectionOwner = mapSectionOwner;
-			dupe.ownerName = ownerName;
 			dupe.deploymentColor = deploymentColor;
 			dupe.Width = Width;
 			dupe.Height = Height;

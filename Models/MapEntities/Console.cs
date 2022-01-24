@@ -11,7 +11,7 @@ namespace Imperial_Commander_Editor
 {
 	public class Console : INotifyPropertyChanged, IMapEntity
 	{
-		string _name, _ownerName;
+		string _name;
 		Guid _mapSectionOwner;
 		string _deploymentColor;
 
@@ -33,8 +33,6 @@ namespace Imperial_Commander_Editor
 		public EntityRenderer mapRenderer { get; set; }
 		public EntityProperties entityProperties { get; set; }
 		public Guid mapSectionOwner { get { return _mapSectionOwner; } set { _mapSectionOwner = value; PC(); } }
-		public string ownerName { get { return _ownerName; } set { _ownerName = value; PC(); } }
-
 
 		//console props
 		public string deploymentColor
@@ -72,7 +70,6 @@ namespace Imperial_Commander_Editor
 			entityType = EntityType.Console;
 			entityProperties = new();
 			mapSectionOwner = ownderGUID;
-			ownerName = Utils.mainWindow?.mission.mapSections.First( x => x.GUID == mapSectionOwner ).name;
 
 			deploymentColor = "Gray";
 		}
@@ -88,7 +85,6 @@ namespace Imperial_Commander_Editor
 			dupe.entityPosition = entityPosition;
 			dupe.entityRotation = entityRotation;
 			dupe.mapSectionOwner = mapSectionOwner;
-			dupe.ownerName = ownerName;
 			dupe.deploymentColor = deploymentColor;
 			return dupe;
 		}

@@ -32,8 +32,8 @@ namespace Imperial_Commander_Editor
 			if ( (eventAction as EnemyDeployment).sourceType == SourceType.InitialReserved )
 			{
 				var items = new List<DeploymentCard>();
-				items = items.Concat( Utils.enemyData.Where( x => Utils.mainWindow.mission.initialDeploymentGroups.Any( y => y.card.id == x.id ) ) ).ToList();
-				items = items.Concat( Utils.enemyData.Where( x => Utils.mainWindow.mission.reservedDeploymentGroups.Any( y => y.id == x.id ) ) ).ToList();
+				items = items.Concat( Utils.enemyData.Where( x => Utils.mainWindow.mission.initialDeploymentGroups.Any( y => y.cardID == x.id ) ) ).ToList();
+				items = items.Concat( Utils.enemyData.Where( x => Utils.mainWindow.mission.reservedDeploymentGroups.Any( y => y.cardID == x.id ) ) ).ToList();
 
 				enemyCB.ItemsSource = items;
 			}
@@ -72,8 +72,8 @@ namespace Imperial_Commander_Editor
 		private void initialRB_Click( object sender, RoutedEventArgs e )
 		{
 			var items = new List<DeploymentCard>();
-			items = items.Concat( Utils.enemyData.Where( x => Utils.mainWindow.mission.initialDeploymentGroups.Any( y => y.card.id == x.id ) ) ).ToList();
-			items = items.Concat( Utils.enemyData.Where( x => Utils.mainWindow.mission.reservedDeploymentGroups.Any( y => y.id == x.id ) ) ).ToList();
+			items = items.Concat( Utils.enemyData.Where( x => Utils.mainWindow.mission.initialDeploymentGroups.Any( y => y.cardID == x.id ) ) ).ToList();
+			items = items.Concat( Utils.enemyData.Where( x => Utils.mainWindow.mission.reservedDeploymentGroups.Any( y => y.cardID == x.id ) ) ).ToList();
 
 			enemyCB.ItemsSource = items;
 		}
@@ -102,8 +102,12 @@ namespace Imperial_Commander_Editor
 
 		private void enemyCB_SelectionChanged( object sender, SelectionChangedEventArgs e )
 		{
-			DeploymentCard card = Utils.enemyData.First( x => x.id == (eventAction as EnemyDeployment).deploymentGroup );
-			(eventAction as EnemyDeployment).enemyGroupData.card = card;
+			if ( Utils.enemyData.Any( x => x.id == (eventAction as EnemyDeployment).deploymentGroup ) )
+			{
+				DeploymentCard card = Utils.enemyData.First( x => x.id == (eventAction as EnemyDeployment).deploymentGroup );
+				(eventAction as EnemyDeployment).enemyGroupData.cardName = card.name;
+				(eventAction as EnemyDeployment).enemyGroupData.cardID = card.id;
+			}
 		}
 	}
 }

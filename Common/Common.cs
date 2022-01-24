@@ -80,8 +80,15 @@ namespace Imperial_Commander_Editor
 
 	public class EnemyGroupData : INotifyPropertyChanged
 	{
+		CustomInstructionType _customInstructionType;
+		string _customText, _cardName, _cardID;
+
 		public Guid GUID { get; set; }
-		public DeploymentCard card { get; set; }
+		public string cardName { get { return _cardName; } set { _cardName = value; PC(); } }
+		public string cardID { get { return _cardID; } set { _cardID = value; PC(); } }
+		//public DeploymentCard card { get; set; }
+		public CustomInstructionType customInstructionType { get { return _customInstructionType; } set { _customInstructionType = value; PC(); } }
+		public string customText { get { return _customText; } set { _customText = value; PC(); } }
 		public ObservableCollection<DPData> pointList { get; set; } = new();
 
 		public void PC( [CallerMemberName] string n = "" )
@@ -99,8 +106,12 @@ namespace Imperial_Commander_Editor
 		public EnemyGroupData( DeploymentCard dc, DeploymentPoint dp )
 		{
 			GUID = Guid.NewGuid();
-			card = dc;
-			for ( int i = 0; i < card.size; i++ )
+			//card = dc;
+			cardName = dc.name;
+			cardID = dc.id;
+			customText = "";
+			customInstructionType = CustomInstructionType.Replace;
+			for ( int i = 0; i < dc.size; i++ )
 			{
 				pointList.Add( new() { GUID = dp.GUID } );
 			}

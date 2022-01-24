@@ -12,7 +12,7 @@ namespace Imperial_Commander_Editor
 {
 	public class MapTile : INotifyPropertyChanged, IMapEntity
 	{
-		string _tileID, _tileSide, _name, _ownerName;
+		string _tileID, _tileSide, _name;
 		Expansion _expansion;
 		Guid _mapSectionOwner;
 
@@ -39,7 +39,6 @@ namespace Imperial_Commander_Editor
 		public Expansion expansion { get { return _expansion; } set { _expansion = value; PC(); } }
 		public EntityProperties entityProperties { get; set; }
 		public Guid mapSectionOwner { get { return _mapSectionOwner; } set { _mapSectionOwner = value; PC(); } }
-		public string ownerName { get { return _ownerName; } set { _ownerName = value; PC(); } }
 		[JsonIgnore]
 		public EntityRenderer mapRenderer { get; set; }
 
@@ -62,7 +61,6 @@ namespace Imperial_Commander_Editor
 			entityType = EntityType.Tile;
 			entityProperties = new();
 			mapSectionOwner = Utils.mainWindow.activeSection.GUID;
-			ownerName = Utils.mainWindow?.mission.mapSections.First( x => x.GUID == mapSectionOwner ).name;
 		}
 
 		public IMapEntity Duplicate()

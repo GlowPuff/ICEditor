@@ -39,7 +39,7 @@ namespace Imperial_Commander_Editor
 					_activeSection.isActive = false;
 				_activeSection = value;
 				_activeSection.isActive = true;
-				properties.Populate( _activeSection );
+				properties.UpdateUI( _activeSection );
 				mapEditor.UpdateUI( _activeSection );
 				if ( !leftPanel.showGlobal )
 				{
@@ -71,6 +71,18 @@ namespace Imperial_Commander_Editor
 				return trigs;
 			}
 		}
+		//public List<IMapEntity> mapEntities
+		//{
+		//	get
+		//	{
+		//		var ents = new List<IMapEntity>();
+		//		foreach ( var section in mission.mapSections )
+		//		{
+		//			ents = ents.Concat( section.mapEntities ).ToList();
+		//		}
+		//		return ents;
+		//	}
+		//}
 		public string mainTitle { get { return _mainTitle; } set { _mainTitle = value; PC(); } }
 
 		public void PC( [CallerMemberName] string n = "" )
@@ -237,9 +249,9 @@ namespace Imperial_Commander_Editor
 		private void tabControl_SelectionChanged( object sender, SelectionChangedEventArgs e )
 		{
 			if ( (sender as TabControl).SelectedIndex == 4 )
-				properties.Populate( activeSection );
+				properties.UpdateUI( activeSection );
 			else if ( (sender as TabControl).SelectedIndex == 3 )
-				encounters.Populate();
+				encounters.UpdateUI();
 		}
 
 		private void Window_Loaded( object sender, RoutedEventArgs e )

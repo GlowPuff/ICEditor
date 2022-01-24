@@ -1,14 +1,13 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Media3D;
 using System.Windows.Shapes;
-using MaterialDesignThemes.Wpf;
-using static System.Formats.Asn1.AsnWriter;
 
 namespace Imperial_Commander_Editor
 {
@@ -27,7 +26,7 @@ namespace Imperial_Commander_Editor
 		private bool shapeDown = false;
 		private IMapEntity shapeDragging = null;
 
-		private bool _nothingSelected, _tilePropsEnabled, _entityPropsEnabled;
+		private bool _nothingSelected, _tilePropsEnabled, _entityPropsEnabled, _filterBySection;
 		private IPropertyModel _propModel;
 		private MapTile _selectedMapTile;
 		private UIElement mcap;
@@ -44,6 +43,7 @@ namespace Imperial_Commander_Editor
 		}
 
 		public bool tilePropsEnabled { get { return _tilePropsEnabled; } set { _tilePropsEnabled = value; PC(); } }
+		public bool filterBySection { get { return _filterBySection; } set { _filterBySection = value; PC(); } }
 		public bool entityPropsEnabled { get { return _entityPropsEnabled; } set { _entityPropsEnabled = value; PC(); } }
 		public bool nothingSelected { get { return _nothingSelected; } set { _nothingSelected = value; PC(); } }
 		public IPropertyModel propModel { get { return _propModel; } set { _propModel = value; PC(); nothingSelected = _propModel == null; } }
@@ -67,6 +67,7 @@ namespace Imperial_Commander_Editor
 			}
 		}
 		public MapTile selectedMapTile { get { return _selectedMapTile; } set { _selectedMapTile = value; PC(); } }
+		public ObservableCollection<IMapEntity> mapEntities { get; set; } = new();
 
 		public event PropertyChangedEventHandler PropertyChanged;
 		public void PC( [CallerMemberName] string n = "" )
@@ -95,29 +96,50 @@ namespace Imperial_Commander_Editor
 			nothingSelected = true;
 			selectedEntity = null;
 			selectedMapTile = null;
+			filterBySection = false;
 		}
 
-		public void UpdateUI( MapSection ms )
+		public void UpdateUI( MapSection ms = null )
 		{
-			selectedMapSection = ms;
+			selectedMapSection = ms ?? selectedMapSection;
+			if ( filterBySection )
+			{
+				IMapEntity prev = selectedEntity;
+				mapEntities.Clear();
+				foreach ( var item in parent.mission.mapEntities.Where( x => x.mapSectionOwner == selectedMapSection.GUID ) )
+				{
+					mapEntities.Add( item );
+				}
+				selectedEntity = prev;
+			}
+			else
+			{
+				IMapEntity prev = selectedEntity;
+				mapEntities.Clear();
+				foreach ( var item in parent.mission.mapEntities )
+				{
+					mapEntities.Add( item );
+				}
+				selectedEntity = prev;
+			}
 		}
 
 		public void SetSelectedPropertyPanel()
 		{
 			if ( selectedEntity is Crate )
-				propModel = new CrateProps() { DataContext = selectedEntity };
+				propModel = new CrateProps( selectedEntity as Crate );
 			else if ( selectedEntity is DeploymentPoint )
-				propModel = new DeploymentProps() { DataContext = selectedEntity };
+				propModel = new DeploymentProps( selectedEntity as DeploymentPoint );
 			else if ( selectedEntity is Token )
-				propModel = new TokenProps() { DataContext = selectedEntity };
+				propModel = new TokenProps( selectedEntity as Token );
 			else if ( selectedEntity is Console )
-				propModel = new ComputerProps() { DataContext = selectedEntity };
+				propModel = new ComputerProps( selectedEntity as Console );
 			else if ( selectedEntity is SpaceHighlight )
-				propModel = new HighlightProps() { DataContext = selectedEntity };
+				propModel = new HighlightProps( selectedEntity as SpaceHighlight );
 			else if ( selectedEntity is Door )
-				propModel = new DoorProps() { DataContext = selectedEntity };
+				propModel = new DoorProps( selectedEntity as Door );
 			else if ( selectedEntity is MapTile )
-				propModel = new TileProps() { DataContext = selectedEntity };
+				propModel = new TileProps( selectedEntity as MapTile );
 			else
 				propModel = null;
 		}
@@ -258,6 +280,7 @@ namespace Imperial_Commander_Editor
 			e.BuildRenderer( MainCanvas, new Vector( translateTransform.X, translateTransform.Y ), mScale );
 			parent.mission.mapEntities.Add( e );
 			selectedEntity = e;
+			UpdateUI();
 		}
 
 		private void addCrateButton_Click( object sender, RoutedEventArgs e )
@@ -411,6 +434,7 @@ namespace Imperial_Commander_Editor
 			{
 				selectedEntity?.mapRenderer.RemoveVisual();
 				parent.mission.mapEntities.Remove( selectedEntity );
+				UpdateUI();
 			}
 		}
 
@@ -455,7 +479,10 @@ namespace Imperial_Commander_Editor
 				{
 					selectedEntity?.mapRenderer.RemoveVisual();
 					if ( !(selectedEntity is MapTile) )
+					{
 						parent.mission.mapEntities.Remove( selectedEntity );
+						UpdateUI();
+					}
 					else
 						selectedMapSection.mapTiles.Remove( selectedEntity as MapTile );
 					selectedEntity = null;
@@ -468,6 +495,7 @@ namespace Imperial_Commander_Editor
 				{
 					var item = selectedEntity.Duplicate();
 					InsertDuplicateEntity( item );
+					UpdateUI();
 				}
 			}
 		}
@@ -502,6 +530,22 @@ namespace Imperial_Commander_Editor
 			}
 		}
 
+		private void filterCheck_Click( object sender, RoutedEventArgs e )
+		{
+			UpdateUI();
+		}
+
+		private void switchSectionBtn_Click( object sender, RoutedEventArgs e )
+		{
+			if ( selectedEntity != null )
+			{
+				if ( Utils.mainWindow.mission.mapSections.Any( x => x.GUID == selectedEntity.mapSectionOwner ) )
+				{
+					Utils.mainWindow.activeSection = Utils.mainWindow.mission.mapSections.First( x => x.GUID == selectedEntity.mapSectionOwner );
+				}
+			}
+		}
+
 		private void TextBox_KeyDown( object sender, KeyEventArgs e )
 		{
 			if ( e.Key == Key.Enter )
@@ -521,6 +565,8 @@ namespace Imperial_Commander_Editor
 					selectedEntity = tile;
 				}
 			}
+			//foreach ( var section in Utils.mainWindow.mission.mapSections )
+			//{
 			foreach ( var item in Utils.mainWindow.mission.mapEntities )
 			{
 				Vector p = item.entityPosition;
@@ -529,6 +575,7 @@ namespace Imperial_Commander_Editor
 				item.mapRenderer.SetRotation( item.entityRotation );
 				selectedEntity = item;
 			}
+			//}
 		}
 
 		public void OnWindowLoaded()

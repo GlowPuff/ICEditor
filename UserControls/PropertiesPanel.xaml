@@ -39,6 +39,11 @@
 							<TextBlock Text="{Binding mapTiles.Count}"/>
 						</UniformGrid>
 
+						<UniformGrid Columns="2" Margin="0,10,0,0">
+							<TextBlock Text="Map Entity Count"/>
+							<TextBlock x:Name="meTB" Text="{Binding mapEntities.Count}"/>
+						</UniformGrid>
+
 						<UniformGrid Columns="3" Margin="0,10,0,0">
 							<TextBlock Text="Trigger Count"/>
 							<TextBlock Text="{Binding triggers.Count}"/>
@@ -50,6 +55,7 @@
 							<TextBlock Text="{Binding missionEvents.Count}"/>
 							<TextBlock Text="(Includes 'None')"/>
 						</UniformGrid>
+
 					</StackPanel>
 				</materialDesign:Card>
 

@@ -100,14 +100,13 @@ namespace Imperial_Commander_Editor
 
 		public void RemoveVisual()
 		{
+			Canvas c = Utils.mainWindow.mapEditor.MainCanvas;
 			if ( entityShape != null )
 			{
-				Canvas c = entityShape.Parent as Canvas;
 				c.Children.Remove( entityShape );
 			}
 			if ( entityImage != null )
 			{
-				Canvas c = entityImage.Parent as Canvas;
 				c.Children.Remove( entityImage );
 			}
 		}

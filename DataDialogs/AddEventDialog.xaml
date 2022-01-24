@@ -65,7 +65,7 @@
 									<ColumnDefinition Width="*"/>
 								</Grid.ColumnDefinitions>
 								<ScrollViewer PreviewMouseWheel="ScrollViewer_PreviewMouseWheel" VerticalScrollBarVisibility="Auto">
-									<ListView x:Name="eventActionsCB" ItemsSource="{Binding eventActions}" DisplayMemberPath="displayName" SelectedValue="{Binding selectedEventAction, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" d:ItemsSource="{d:SampleData ItemCount=5}" MouseDoubleClick="eventActionsCB_MouseDoubleClick"/>
+									<ListView x:Name="eventActionsCB" ItemContainerStyle="{StaticResource lbitem}" ItemsSource="{Binding eventActions}" DisplayMemberPath="displayName" SelectedValue="{Binding selectedEventAction, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" d:ItemsSource="{d:SampleData ItemCount=5}" MouseDoubleClick="eventActionsCB_MouseDoubleClick"/>
 								</ScrollViewer>
 								<!--<ComboBox x:Name="eventActionsCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" ItemsSource="{Binding eventActions}" DisplayMemberPath="displayName" SelectedValue="{Binding selectedEventAction, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"/>-->
 								<!--buttons-->

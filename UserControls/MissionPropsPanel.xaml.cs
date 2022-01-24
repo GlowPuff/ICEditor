@@ -102,6 +102,8 @@ namespace Imperial_Commander_Editor
 			DeploymentCard card = Utils.enemyData.First( x => x.id == selectedBanGroupRemove.id );
 			Utils.mainWindow.mission.missionProperties.bannedGroups.Remove( selectedBanGroupRemove.id );
 			bannedGroups.Remove( card );
+			if ( Utils.mainWindow.mission.missionProperties.bannedGroups.Count > 0 )
+				selectedBanGroupRemove = Utils.enemyData.First( x => x.id == Utils.mainWindow.mission.missionProperties.bannedGroups[0] );
 		}
 	}
 }

@@ -11,7 +11,7 @@ namespace Imperial_Commander_Editor
 {
 	public class Token : INotifyPropertyChanged, IMapEntity
 	{
-		string _name, _ownerName;
+		string _name;
 		string _tokenColor;
 		MarkerType _markerType;
 		Guid _mapSectionOwner;
@@ -34,7 +34,6 @@ namespace Imperial_Commander_Editor
 		public EntityRenderer mapRenderer { get; set; }
 		public EntityProperties entityProperties { get; set; }
 		public Guid mapSectionOwner { get { return _mapSectionOwner; } set { _mapSectionOwner = value; PC(); } }
-		public string ownerName { get { return _ownerName; } set { _ownerName = value; PC(); } }
 
 		//token props
 		public string tokenColor
@@ -90,7 +89,6 @@ namespace Imperial_Commander_Editor
 			entityType = EntityType.Token;
 			entityProperties = new();
 			mapSectionOwner = ownderGUID;
-			ownerName = Utils.mainWindow?.mission.mapSections.First( x => x.GUID == mapSectionOwner ).name;
 
 			tokenColor = "Gray";
 			markerType = MarkerType.Neutral;
@@ -107,7 +105,6 @@ namespace Imperial_Commander_Editor
 			dupe.entityPosition = entityPosition;
 			dupe.entityRotation = entityRotation;
 			dupe.mapSectionOwner = mapSectionOwner;
-			dupe.ownerName = ownerName;
 			dupe.tokenColor = tokenColor;
 			return dupe;
 		}

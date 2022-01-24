@@ -38,7 +38,7 @@ namespace Imperial_Commander_Editor
 		[JsonConverter( typeof( MapEntityConverter ) )]
 		public ObservableCollection<IMapEntity> mapEntities { get; set; }
 		public ObservableCollection<EnemyGroupData> initialDeploymentGroups { get; set; }
-		public ObservableCollection<DeploymentCard> reservedDeploymentGroups { get; set; }
+		public ObservableCollection<EnemyGroupData> reservedDeploymentGroups { get; set; }
 		public ObservableCollection<EventGroup> eventGroups { get; set; }
 
 		public void PC( [CallerMemberName] string n = "" )
@@ -46,11 +46,6 @@ namespace Imperial_Commander_Editor
 			if ( !string.IsNullOrEmpty( n ) )
 				PropertyChanged?.Invoke( this, new PropertyChangedEventArgs( n ) );
 		}
-
-		//public static Mission CreateInstance( FileManager fm )
-		//{
-		//	return null;
-		//}
 
 		public Mission()
 		{

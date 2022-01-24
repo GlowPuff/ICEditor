@@ -40,6 +40,7 @@ namespace Imperial_Commander_Editor
 		public ObservableCollection<EnemyGroupData> initialDeploymentGroups { get; set; }
 		public ObservableCollection<EnemyGroupData> reservedDeploymentGroups { get; set; }
 		public ObservableCollection<EventGroup> eventGroups { get; set; }
+		public ObservableCollection<EntityGroup> entityGroups { get; set; }
 
 		public void PC( [CallerMemberName] string n = "" )
 		{
@@ -63,6 +64,7 @@ namespace Imperial_Commander_Editor
 			initialDeploymentGroups = new();
 			reservedDeploymentGroups = new();
 			eventGroups = new();
+			entityGroups = new();
 		}
 
 		public void InitDefaultData()

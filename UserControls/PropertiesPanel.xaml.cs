@@ -11,11 +11,14 @@ namespace Imperial_Commander_Editor
 	/// </summary>
 	public partial class PropertiesPanel : UserControl, INotifyPropertyChanged
 	{
-		bool _editEnabled;
+		bool _editEnabled, _editEGEnabled;
 		EventGroup _selectedEventGroup;
+		EntityGroup _selectedEntityGroup;
 
 		public bool editEnabled { get { return _editEnabled; } set { _editEnabled = value; PC(); } }
+		public bool editEGEnabled { get { return _editEGEnabled; } set { _editEGEnabled = value; PC(); } }
 		public ObservableCollection<EventGroup> eventGroups { get { return Utils.mainWindow.mission.eventGroups; } }
+		public ObservableCollection<EntityGroup> entityGroups { get { return Utils.mainWindow.mission.entityGroups; } }
 		public EventGroup selectedEventGroup
 		{
 			get { return _selectedEventGroup; }
@@ -24,6 +27,16 @@ namespace Imperial_Commander_Editor
 				_selectedEventGroup = value;
 				PC();
 				editEnabled = _selectedEventGroup != null;
+			}
+		}
+		public EntityGroup selectedEntityGroup
+		{
+			get { return _selectedEntityGroup; }
+			set
+			{
+				_selectedEntityGroup = value;
+				PC();
+				editEGEnabled = _selectedEntityGroup != null;
 			}
 		}
 
@@ -78,6 +91,34 @@ namespace Imperial_Commander_Editor
 				return;
 			Utils.mainWindow.mission.eventGroups.Remove( selectedEventGroup );
 			selectedEventGroup = null;
+		}
+
+		private void remTokenGroupBtn_Click( object sender, System.Windows.RoutedEventArgs e )
+		{
+			if ( selectedEntityGroup == null )
+				return;
+			Utils.mainWindow.mission.entityGroups.Remove( selectedEntityGroup );
+			selectedEntityGroup = null;
+		}
+
+		private void editTokenGroupBtn_Click( object sender, System.Windows.RoutedEventArgs e )
+		{
+			if ( selectedEntityGroup == null )
+				return;
+
+			var dlg = new EntityGroupDialog( selectedEntityGroup );
+			dlg.ShowDialog();
+		}
+
+		private void newTokenGroupBtn_Click( object sender, System.Windows.RoutedEventArgs e )
+		{
+			var dlg = new EntityGroupDialog();
+			dlg.ShowDialog();
+			if ( dlg.DialogResult == true )
+			{
+				Utils.mainWindow.mission.entityGroups.Add( dlg.entityGroup );
+				selectedEntityGroup = dlg.entityGroup;
+			}
 		}
 	}
 }

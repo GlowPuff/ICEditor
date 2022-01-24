@@ -82,10 +82,20 @@
 							</Grid>
 						</GroupBox>
 
-						<GroupBox Header="RANDOM TRIGGER GROUPS" Margin="0,10,0,0">
-							<StackPanel>
+						<GroupBox Header="RANDOM MAP ENTITY GROUPS" Margin="0,10,0,0">
+							<Grid>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="*" />
+									<ColumnDefinition Width="auto" />
+								</Grid.ColumnDefinitions>
 
-							</StackPanel>
+								<ComboBox x:Name="triggerGroupCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" HorizontalAlignment="Stretch" ItemsSource="{Binding entityGroups}" DisplayMemberPath="name" SelectedValue="{Binding selectedEntityGroup}"/>
+								<StackPanel Orientation="Horizontal" Grid.Column="1">
+									<Button x:Name="newTokenGroupBtn" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35" Content="{materialDesign:PackIcon Kind=AddBold}" Margin="10,0" Click="newTokenGroupBtn_Click" ToolTip="Create New Event Group"/>
+									<Button x:Name="editTokenGroupBtn" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35" Content="{materialDesign:PackIcon Kind=Edit}" Click="editTokenGroupBtn_Click" ToolTip="Edit Event Group" IsEnabled="{Binding editEGEnabled}" Margin="0,0,10,0"/>
+									<Button x:Name="remTokenGroupBtn" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35" Content="{materialDesign:PackIcon Kind=RemoveBold}" Foreground="Red" Click="remTokenGroupBtn_Click" ToolTip="Remove Event Group" IsEnabled="{Binding editEGEnabled}"/>
+								</StackPanel>
+							</Grid>
 						</GroupBox>
 					</StackPanel>
 				</materialDesign:Card>

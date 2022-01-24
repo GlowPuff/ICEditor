@@ -69,6 +69,7 @@ namespace Imperial_Commander_Editor
 		}
 		public MapTile selectedMapTile { get { return _selectedMapTile; } set { _selectedMapTile = value; PC(); } }
 		public ObservableCollection<IMapEntity> mapEntities { get; set; } = new();
+		public ObservableCollection<MapSection> mapTiles { get; set; } = new();
 
 		public event PropertyChangedEventHandler PropertyChanged;
 		public void PC( [CallerMemberName] string n = "" )
@@ -125,6 +126,8 @@ namespace Imperial_Commander_Editor
 				mapEntities.Sort<IMapEntity>();
 				selectedEntity = prev;
 			}
+
+
 		}
 
 		public void SetSelectedPropertyPanel()

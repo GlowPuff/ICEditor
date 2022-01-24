@@ -65,7 +65,7 @@
 									<ColumnDefinition Width="*"/>
 								</Grid.ColumnDefinitions>
 								<ScrollViewer PreviewMouseWheel="ScrollViewer_PreviewMouseWheel" VerticalScrollBarVisibility="Auto">
-									<ListView x:Name="eventActionsCB" ItemContainerStyle="{StaticResource lbitem}" ItemsSource="{Binding eventActions}" DisplayMemberPath="displayName" SelectedValue="{Binding selectedEventAction, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" d:ItemsSource="{d:SampleData ItemCount=5}" MouseDoubleClick="eventActionsCB_MouseDoubleClick"/>
+									<ListView x:Name="eventActionsCB" ItemContainerStyle="{StaticResource lbitem}" ItemsSource="{Binding eventActions}" DisplayMemberPath="displayName" SelectedValue="{Binding selectedEventAction, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" d:ItemsSource="{d:SampleData ItemCount=3}" MouseDoubleClick="eventActionsCB_MouseDoubleClick"/>
 								</ScrollViewer>
 								<!--<ComboBox x:Name="eventActionsCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" ItemsSource="{Binding eventActions}" DisplayMemberPath="displayName" SelectedValue="{Binding selectedEventAction, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"/>-->
 								<!--buttons-->
@@ -106,10 +106,10 @@
 											</StackPanel>
 										</materialDesign:Card>
 									</materialDesign:PopupBox>
-									<Button x:Name="modifyActionButton" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35" Click="modifyActionButton_Click" Margin="10,0,10,0">
+									<!--<Button x:Name="modifyActionButton" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35" Click="modifyActionButton_Click" Margin="10,0,10,0">
 										<materialDesign:PackIcon Kind="Edit" Width="20" Height="20"/>
-									</Button>
-									<Button x:Name="removeActionButton" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35" Click="removeActionButton_Click">
+									</Button>-->
+									<Button x:Name="removeActionButton" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35" Click="removeActionButton_Click" Margin="10,0,0,0">
 										<materialDesign:PackIcon Kind="RemoveBold" Width="20" Height="20" Foreground="Red"/>
 									</Button>
 								</StackPanel>
@@ -146,15 +146,15 @@
 								<Separator Grid.Row="1" Margin="0,5,0,2"/>
 
 								<!--LIST BOX-->
-								<ScrollViewer Grid.Row="2" PreviewMouseWheel="ScrollViewer_PreviewMouseWheel" VerticalScrollBarVisibility="Auto">
-									<ListBox ItemsSource="{Binding additionalTriggers}" HorizontalContentAlignment="Stretch" ItemTemplate="{StaticResource k1}">
-										<ListBox.ItemContainerStyle>
-											<Style TargetType="ListBoxItem" BasedOn="{StaticResource MaterialDesignListBoxItem}">
-												<Setter Property="materialDesign:ListBoxItemAssist.ShowSelection" Value="False" />
-											</Style>
-										</ListBox.ItemContainerStyle>
-									</ListBox>
-								</ScrollViewer>
+								<!--<ScrollViewer Grid.Row="2" PreviewMouseWheel="ScrollViewer_PreviewMouseWheel" VerticalScrollBarVisibility="Auto">-->
+								<ListBox Grid.Row="2" ItemsSource="{Binding additionalTriggers}" HorizontalContentAlignment="Stretch" ItemTemplate="{StaticResource k1}">
+									<ListBox.ItemContainerStyle>
+										<Style TargetType="ListBoxItem" BasedOn="{StaticResource MaterialDesignListBoxItem}">
+											<Setter Property="materialDesign:ListBoxItemAssist.ShowSelection" Value="False" />
+										</Style>
+									</ListBox.ItemContainerStyle>
+								</ListBox>
+								<!--</ScrollViewer>-->
 
 							</Grid>
 						</GroupBox>

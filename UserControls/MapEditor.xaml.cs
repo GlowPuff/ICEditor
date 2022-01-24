@@ -27,7 +27,7 @@ namespace Imperial_Commander_Editor
 		private bool shapeDown = false;
 		private IMapEntity shapeDragging = null;
 
-		private bool _nothingSelected, _tilePropsEnabled, _entityPropsEnabled, _filterBySection;
+		private bool _nothingSelected, _entityPropsEnabled, _filterBySection, _filterTilesBySection, _canDuplicate;
 		private IPropertyModel _propModel;
 		private MapTile _selectedMapTile;
 		private UIElement mcap;
@@ -43,8 +43,8 @@ namespace Imperial_Commander_Editor
 			}
 		}
 
-		public bool tilePropsEnabled { get { return _tilePropsEnabled; } set { _tilePropsEnabled = value; PC(); } }
 		public bool filterBySection { get { return _filterBySection; } set { _filterBySection = value; PC(); } }
+		public bool filterTilesBySection { get { return _filterTilesBySection; } set { _filterTilesBySection = value; PC(); } }
 		public bool entityPropsEnabled { get { return _entityPropsEnabled; } set { _entityPropsEnabled = value; PC(); } }
 		public bool nothingSelected { get { return _nothingSelected; } set { _nothingSelected = value; PC(); } }
 		public IPropertyModel propModel { get { return _propModel; } set { _propModel = value; PC(); nothingSelected = _propModel == null; } }
@@ -59,17 +59,13 @@ namespace Imperial_Commander_Editor
 				_selectedEntity?.mapRenderer.Select();
 				PC();
 				SetSelectedPropertyPanel();
-				tilePropsEnabled = _selectedEntity is MapTile;
-				entityPropsEnabled = !(_selectedEntity is MapTile) && _selectedEntity != null;
-				if ( _selectedEntity is MapTile )
-					selectedMapTile = _selectedEntity as MapTile;
-				else
-					selectedMapTile = null;
+				entityPropsEnabled = _selectedEntity != null;
+				canDuplicate = !(_selectedEntity is MapTile) && _selectedEntity != null;
 			}
 		}
-		public MapTile selectedMapTile { get { return _selectedMapTile; } set { _selectedMapTile = value; PC(); } }
+		public bool canDuplicate { get { return _canDuplicate; } set { _canDuplicate = value; PC(); } }
 		public ObservableCollection<IMapEntity> mapEntities { get; set; } = new();
-		public ObservableCollection<MapSection> mapTiles { get; set; } = new();
+		public ObservableCollection<MapTile> mapTiles { get; set; } = new();
 
 		public event PropertyChangedEventHandler PropertyChanged;
 		public void PC( [CallerMemberName] string n = "" )
@@ -97,37 +93,51 @@ namespace Imperial_Commander_Editor
 
 			nothingSelected = true;
 			selectedEntity = null;
-			selectedMapTile = null;
-			filterBySection = false;
+			filterBySection = filterTilesBySection = canDuplicate = false;
 		}
 
 		public void UpdateUI( MapSection ms = null )
 		{
 			selectedMapSection = ms ?? selectedMapSection;
+			IMapEntity prev = selectedEntity;
+
+			mapEntities.Clear();
+			mapTiles.Clear();
+
 			if ( filterBySection )
 			{
-				IMapEntity prev = selectedEntity;
-				mapEntities.Clear();
 				foreach ( var item in parent.mission.mapEntities.Where( x => x.mapSectionOwner == selectedMapSection.GUID ) )
 				{
 					mapEntities.Add( item );
 				}
 				mapEntities.Sort<IMapEntity>();
-				selectedEntity = prev;
 			}
 			else
 			{
-				IMapEntity prev = selectedEntity;
-				mapEntities.Clear();
 				foreach ( var item in parent.mission.mapEntities )
 				{
 					mapEntities.Add( item );
 				}
 				mapEntities.Sort<IMapEntity>();
-				selectedEntity = prev;
 			}
 
+			if ( filterTilesBySection )
+			{
+				foreach ( var tile in parent.activeSection.mapTiles )
+				{
+					mapTiles.Add( tile );
+				}
+			}
+			else
+			{
+				var alltiles = (from section in Utils.mainWindow.mission.mapSections from tile in section.mapTiles select tile).ToList();
+				foreach ( var tile in alltiles )
+				{
+					mapTiles.Add( tile );
+				}
+			}
 
+			selectedEntity = prev;
 		}
 
 		public void SetSelectedPropertyPanel()
@@ -159,6 +169,7 @@ namespace Imperial_Commander_Editor
 			item.mapRenderer.SetRotation( item.entityRotation );
 			parent.mission.mapEntities.Add( item );
 			selectedEntity = item;
+			UpdateUI();
 		}
 
 		private void MoveObject( MouseEventArgs e )
@@ -410,38 +421,9 @@ namespace Imperial_Commander_Editor
 			}
 		}
 
-		private void centerTileButton_Click( object sender, RoutedEventArgs e )
-		{
-			if ( selectedMapTile != null )
-				CenterSelection( selectedMapTile );
-		}
-
-		private void removeTileButton_Click( object sender, RoutedEventArgs e )
-		{
-			if ( selectedEntity != null )
-			{
-				selectedEntity?.mapRenderer.RemoveVisual();
-				if ( !(selectedEntity is MapTile) )
-					parent.mission.mapEntities.Remove( selectedEntity );
-				else
-					selectedMapSection.mapTiles.Remove( selectedEntity as MapTile );
-				selectedEntity = null;
-			}
-		}
-
-		private void tileGalleryBtn_Click( object sender, RoutedEventArgs e )
-		{
-			OnAddTile();
-		}
-
 		private void removeEntityButton_Click( object sender, RoutedEventArgs e )
 		{
-			if ( !(selectedEntity is MapTile) && selectedEntity != null )
-			{
-				selectedEntity?.mapRenderer.RemoveVisual();
-				parent.mission.mapEntities.Remove( selectedEntity );
-				UpdateUI();
-			}
+			RemoveEntity();
 		}
 
 		private void CenterSelection( IMapEntity e )
@@ -481,19 +463,7 @@ namespace Imperial_Commander_Editor
 			}
 			else if ( e.Key == Key.X )
 			{
-				if ( selectedEntity != null )
-				{
-					selectedEntity?.mapRenderer.RemoveVisual();
-					if ( !(selectedEntity is MapTile) )
-					{
-						parent.mission.mapEntities.Remove( selectedEntity );
-						UpdateUI();
-					}
-					else
-						selectedMapSection.mapTiles.Remove( selectedEntity as MapTile );
-					selectedEntity = null;
-					this.Focus();
-				}
+				RemoveEntity();
 			}
 			else if ( e.Key == Key.D )
 			{
@@ -501,7 +471,6 @@ namespace Imperial_Commander_Editor
 				{
 					var item = selectedEntity.Duplicate();
 					InsertDuplicateEntity( item );
-					UpdateUI();
 				}
 			}
 		}
@@ -533,6 +502,8 @@ namespace Imperial_Commander_Editor
 						selectedEntity = t;
 					}
 				}
+
+				UpdateUI();
 			}
 		}
 
@@ -549,6 +520,46 @@ namespace Imperial_Commander_Editor
 				{
 					Utils.mainWindow.activeSection = Utils.mainWindow.mission.mapSections.First( x => x.GUID == selectedEntity.mapSectionOwner );
 				}
+				Utils.mainWindow.SetStatus( "Owner Map Section Not Found" );
+			}
+		}
+
+		private void RemoveEntity()
+		{
+			if ( selectedEntity != null )
+			{
+				selectedEntity.mapRenderer.RemoveVisual();
+
+				if ( !(selectedEntity is MapTile) )
+				{
+					parent.mission.mapEntities.Remove( selectedEntity );
+				}
+				else
+				{
+					foreach ( var section in Utils.mainWindow.mission.mapSections )
+					{
+						foreach ( var tile in section.mapTiles )
+						{
+							if ( selectedEntity == tile )
+							{
+								section.mapTiles.Remove( tile );
+								break;
+							}
+						}
+					}
+				}
+				selectedEntity = null;
+				UpdateUI();
+				this.Focus();
+			}
+		}
+
+		private void dupeBtn_Click( object sender, RoutedEventArgs e )
+		{
+			if ( selectedEntity != null )
+			{
+				var dupe = selectedEntity.Duplicate();
+				InsertDuplicateEntity( dupe );
 			}
 		}
 

@@ -45,7 +45,23 @@ namespace Imperial_Commander_Editor
 		private void ownerChangeBtn_Click( object sender, System.Windows.RoutedEventArgs e )
 		{
 			MapTile tile = (sender as FrameworkElement).DataContext as MapTile;
+
+			var prevSection = Utils.mainWindow.mission.mapSections.Where( x => x.GUID == tile.mapSectionOwner ).FirstOr( null );
+
+			foreach ( var section in Utils.mainWindow.mission.mapSections )
+			{
+				foreach ( var t in section.mapTiles )
+				{
+					if ( tile == t )
+					{
+						section.mapTiles.Remove( t );
+						break;
+					}
+				}
+			}
+
 			tile.mapSectionOwner = Utils.mainWindow.activeSection.GUID;
+			Utils.mainWindow.activeSection.mapTiles.Add( tile );
 			Utils.mainWindow.SetStatus( $"Owner Set To '{Utils.mainWindow.activeSection.name}'" );
 			ownerName = Utils.mainWindow.activeSection.name;
 			Utils.mainWindow.mapEditor.UpdateUI();

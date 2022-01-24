@@ -48,12 +48,6 @@ namespace Imperial_Commander_Editor
 			}
 		}
 
-		private void dupeBtn_Click( object sender, System.Windows.RoutedEventArgs e )
-		{
-			var dupe = (DataContext as DeploymentPoint).Duplicate();
-			Utils.mainWindow.mapEditor.InsertDuplicateEntity( dupe );
-		}
-
 		private void ownerChangeBtn_Click( object sender, System.Windows.RoutedEventArgs e )
 		{
 			((sender as FrameworkElement).DataContext as DeploymentPoint).mapSectionOwner = Utils.mainWindow.activeSection.GUID;

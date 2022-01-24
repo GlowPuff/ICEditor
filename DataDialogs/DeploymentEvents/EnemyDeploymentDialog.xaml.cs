@@ -61,6 +61,7 @@ namespace Imperial_Commander_Editor
 
 		private void okButton_Click( object sender, RoutedEventArgs e )
 		{
+			eventAction.displayName = "Deploy: " + (eventAction as EnemyDeployment).deploymentGroup + "/" + (eventAction as EnemyDeployment).enemyGroupData.cardName;
 			Close();
 		}
 

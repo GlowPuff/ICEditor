@@ -71,18 +71,6 @@ namespace Imperial_Commander_Editor
 				return trigs;
 			}
 		}
-		//public List<IMapEntity> mapEntities
-		//{
-		//	get
-		//	{
-		//		var ents = new List<IMapEntity>();
-		//		foreach ( var section in mission.mapSections )
-		//		{
-		//			ents = ents.Concat( section.mapEntities ).ToList();
-		//		}
-		//		return ents;
-		//	}
-		//}
 		public string mainTitle { get { return _mainTitle; } set { _mainTitle = value; PC(); } }
 
 		public void PC( [CallerMemberName] string n = "" )

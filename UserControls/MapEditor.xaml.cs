@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -110,6 +111,7 @@ namespace Imperial_Commander_Editor
 				{
 					mapEntities.Add( item );
 				}
+				mapEntities.Sort<IMapEntity>();
 				selectedEntity = prev;
 			}
 			else
@@ -120,6 +122,7 @@ namespace Imperial_Commander_Editor
 				{
 					mapEntities.Add( item );
 				}
+				mapEntities.Sort<IMapEntity>();
 				selectedEntity = prev;
 			}
 		}

@@ -112,5 +112,15 @@ namespace Imperial_Commander_Editor
 		{
 			return ((double)Math.Round( i / value )) * value;
 		}
+
+		public static ObservableCollection<IMapEntity> Sort<T>( this ObservableCollection<IMapEntity> collection )
+		{
+			ObservableCollection<IMapEntity> temp;
+			temp = new ObservableCollection<IMapEntity>( collection.OrderBy( p => p.name ) );
+			collection.Clear();
+			foreach ( IMapEntity j in temp )
+				collection.Add( j );
+			return collection;
+		}
 	}
 }

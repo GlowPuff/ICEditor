@@ -56,6 +56,7 @@ namespace Imperial_Commander_Editor
 			if ( e.Key == System.Windows.Input.Key.Enter )
 			{
 				Utils.LoseFocus( sender as Control );
+				Utils.mainWindow.mapEditor.UpdateUI();
 			}
 		}
 

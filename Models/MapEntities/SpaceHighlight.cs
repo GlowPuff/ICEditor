@@ -75,7 +75,7 @@ namespace Imperial_Commander_Editor
 			name = "New Highlight";
 			entityType = EntityType.Highlight;
 			//defaults NOT ACTIVE, unlike other entities
-			entityProperties = new() { isActive = false };
+			entityProperties = new() { isActive = false, name = name };
 			mapSectionOwner = ownderGUID;
 
 			Width = 1;
@@ -93,6 +93,7 @@ namespace Imperial_Commander_Editor
 			dupe.entityType = entityType;
 			dupe.entityProperties = new();
 			dupe.entityProperties.CopyFrom( this );
+			dupe.entityProperties.name = dupe.name;
 			dupe.entityPosition = entityPosition;
 			dupe.entityRotation = entityRotation;
 			dupe.mapSectionOwner = mapSectionOwner;

@@ -49,7 +49,7 @@ namespace Imperial_Commander_Editor
 			GUID = Guid.NewGuid();
 			name = "New Door";
 			entityType = EntityType.Door;
-			entityProperties = new();
+			entityProperties = new() { name = name };
 			mapSectionOwner = ownderGUID;
 		}
 
@@ -61,6 +61,7 @@ namespace Imperial_Commander_Editor
 			dupe.entityType = entityType;
 			dupe.entityProperties = new();
 			dupe.entityProperties.CopyFrom( this );
+			dupe.entityProperties.name = dupe.name;
 			dupe.entityPosition = entityPosition;
 			dupe.entityRotation = entityRotation;
 			dupe.mapSectionOwner = mapSectionOwner;

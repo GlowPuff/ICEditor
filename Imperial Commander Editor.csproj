@@ -30,6 +30,7 @@
     <None Remove="Assets\save.png" />
     <None Remove="Assets\saveas.png" />
     <None Remove="Assets\settings.png" />
+    <None Remove="Assets\Tiles\console.png" />
     <None Remove="Assets\Tiles\Core\1A.jpg" />
     <None Remove="Assets\Tiles\Core\1B.jpg" />
     <None Remove="Assets\Tiles\Core\Core_10A.jpg" />
@@ -110,7 +111,15 @@
     <None Remove="Assets\Tiles\Core\Core_8B.jpg" />
     <None Remove="Assets\Tiles\Core\Core_9A.jpg" />
     <None Remove="Assets\Tiles\Core\Core_9B.jpg" />
+    <None Remove="Assets\Tiles\crate.png" />
     <None Remove="Assets\Tiles\door.png" />
+    <None Remove="Assets\Tiles\dp.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\Tiles\console.png" />
+    <Resource Include="Assets\Tiles\crate.png" />
+    <Resource Include="Assets\Tiles\dp.png" />
   </ItemGroup>
 
   <ItemGroup>

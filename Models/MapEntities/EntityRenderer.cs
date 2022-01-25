@@ -24,7 +24,7 @@ namespace Imperial_Commander_Editor
 		public IMapEntity mapEntity;
 		public Vector where;
 		public double scale;
-		public int selectedZ;
+		public int selectedZ, selectedImageZ;
 
 		public EntityRenderer( IMapEntity entity, Vector where, double scale, Point dimensions )
 		{
@@ -33,7 +33,7 @@ namespace Imperial_Commander_Editor
 			this.scale = scale;
 			mapEntity = entity;
 			this.mapEntity.entityPosition = where;
-			selectedZ = 100;
+			selectedZ = selectedImageZ = 100;
 			selectedStrokeWidth = 1;
 			unselectedStrokeWidth = 1;
 			highlightStrokeWidth = 1;
@@ -158,7 +158,7 @@ namespace Imperial_Commander_Editor
 			entityShape.Fill = selectedBGColor;
 			Panel.SetZIndex( entityShape, selectedZ );
 			if ( entityImage != null )
-				Panel.SetZIndex( entityImage, selectedZ - 1 );
+				Panel.SetZIndex( entityImage, selectedImageZ - 1 );
 		}
 		public void Unselect()
 		{
@@ -167,7 +167,7 @@ namespace Imperial_Commander_Editor
 			entityShape.Fill = unselectedBGColor;
 			Panel.SetZIndex( entityShape, selectedZ - 10 );
 			if ( entityImage != null )
-				Panel.SetZIndex( entityImage, selectedZ - 10 - 1 );
+				Panel.SetZIndex( entityImage, selectedImageZ - 10 - 1 );
 		}
 		public void Highlight()
 		{

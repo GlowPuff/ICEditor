@@ -7,7 +7,7 @@
         mc:Ignorable="d"
 				xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
 				Style="{StaticResource dws}"
-				Title="Add New Trigger" Width="400" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown" ContentRendered="Window_ContentRendered" SizeToContent="Height">
+				Title="Add New Trigger" Width="500" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown" ContentRendered="Window_ContentRendered" SizeToContent="Height">
 
 	<Border BorderBrush="MediumPurple" BorderThickness="2">
 		<GroupBox x:Name="gbox" Header="Add A New Trigger Variable" Style="{DynamicResource MaterialDesignGroupBox}">
@@ -46,10 +46,14 @@
 					</materialDesign:Card>
 
 					<materialDesign:Card Background="MediumPurple" Padding="10">
-						<UniformGrid Columns="2">
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="auto" />
+								<ColumnDefinition Width="*" />
+							</Grid.ColumnDefinitions>
 							<TextBlock Text="Fire Event Upon Triggering:" VerticalAlignment="Center" Margin="0,0,10,0"/>
-							<ComboBox x:Name="elist" Style="{StaticResource MaterialDesignOutlinedComboBox}" ItemsSource="{Binding mainWindow.localEvents}" SelectedValue="{Binding trigger.eventGUID}" DisplayMemberPath="name" SelectedValuePath="GUID"/>
-						</UniformGrid>
+							<ComboBox Grid.Column="1" x:Name="elist" Style="{StaticResource MaterialDesignOutlinedComboBox}" ItemsSource="{Binding mainWindow.localEvents}" SelectedValue="{Binding trigger.eventGUID}" DisplayMemberPath="name" SelectedValuePath="GUID"/>
+						</Grid>
 					</materialDesign:Card>
 				</StackPanel>
 

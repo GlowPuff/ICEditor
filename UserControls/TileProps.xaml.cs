@@ -39,6 +39,7 @@ namespace Imperial_Commander_Editor
 			{
 				Utils.LoseFocus( sender as Control );
 				Utils.mainWindow.mapEditor.UpdateUI();
+				(DataContext as MapTile).entityProperties.name = (DataContext as MapTile).name;
 			}
 		}
 

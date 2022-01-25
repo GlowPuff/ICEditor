@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -29,7 +28,6 @@ namespace Imperial_Commander_Editor
 
 		private bool _nothingSelected, _entityPropsEnabled, _filterBySection, _filterTilesBySection, _canDuplicate;
 		private IPropertyModel _propModel;
-		private MapTile _selectedMapTile;
 		private UIElement mcap;
 		private IMapEntity _selectedEntity;
 		private MapSection _selectedMapSection;
@@ -520,7 +518,8 @@ namespace Imperial_Commander_Editor
 				{
 					Utils.mainWindow.activeSection = Utils.mainWindow.mission.mapSections.First( x => x.GUID == selectedEntity.mapSectionOwner );
 				}
-				Utils.mainWindow.SetStatus( "Owner Map Section Not Found" );
+				else
+					Utils.mainWindow.SetStatus( "Owner Map Section Not Found" );
 			}
 		}
 
@@ -548,6 +547,7 @@ namespace Imperial_Commander_Editor
 						}
 					}
 				}
+				Utils.mainWindow.SetStatus( $"'{selectedEntity.name}' Removed" );
 				selectedEntity = null;
 				UpdateUI();
 				this.Focus();

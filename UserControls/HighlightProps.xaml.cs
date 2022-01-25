@@ -52,6 +52,7 @@ namespace Imperial_Commander_Editor
 			{
 				Utils.LoseFocus( sender as Control );
 				Utils.mainWindow.mapEditor.UpdateUI();
+				(DataContext as SpaceHighlight).entityProperties.name = (DataContext as SpaceHighlight).name;
 			}
 		}
 

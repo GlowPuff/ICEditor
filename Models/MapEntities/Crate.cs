@@ -68,7 +68,7 @@ namespace Imperial_Commander_Editor
 			GUID = Guid.NewGuid();
 			name = "New Crate";
 			entityType = EntityType.Crate;
-			entityProperties = new();
+			entityProperties = new() { name = name };
 			mapSectionOwner = ownderGUID;
 
 			deploymentColor = "Gray";
@@ -82,6 +82,7 @@ namespace Imperial_Commander_Editor
 			dupe.entityType = entityType;
 			dupe.entityProperties = new();
 			dupe.entityProperties.CopyFrom( this );
+			dupe.entityProperties.name = dupe.name;
 			dupe.entityPosition = entityPosition;
 			dupe.entityRotation = entityRotation;
 			dupe.mapSectionOwner = mapSectionOwner;
@@ -97,9 +98,12 @@ namespace Imperial_Commander_Editor
 			{
 				unselectedBGColor = new SolidColorBrush( c ),
 				selectedBGColor = new SolidColorBrush( c ),
+				selectedImageZ = 305,
 				selectedZ = 300
 			};
 			mapRenderer.BuildShape( TokenShape.Square );
+			mapRenderer.BuildImage( "pack://application:,,,/Imperial Commander Editor;component/Assets/Tiles/crate.png" );
+			canvas.Children.Add( mapRenderer.entityImage );
 			canvas.Children.Add( mapRenderer.entityShape );
 		}
 

@@ -68,7 +68,7 @@ namespace Imperial_Commander_Editor
 			GUID = Guid.NewGuid();
 			name = "New Deployment Point";
 			entityType = EntityType.DeploymentPoint;
-			entityProperties = new();
+			entityProperties = new() { name = name };
 			mapSectionOwner = ownderGUID;
 
 			entityProperties.isActive = false;
@@ -84,6 +84,7 @@ namespace Imperial_Commander_Editor
 			dupe.entityType = entityType;
 			dupe.entityProperties = new();
 			dupe.entityProperties.CopyFrom( this );
+			dupe.entityProperties.name = dupe.name;
 			dupe.entityPosition = entityPosition;
 			dupe.entityRotation = entityRotation;
 			dupe.mapSectionOwner = mapSectionOwner;
@@ -98,11 +99,14 @@ namespace Imperial_Commander_Editor
 			mapRenderer = new( this, where, scale, new( 1, 1 ) )
 			{
 				selectedZ = 300,
+				selectedImageZ = 305,
 				selectedBGColor = new( c ),
 				unselectedBGColor = new( c ),
 				unselectedStrokeColor = new( Colors.Red )
 			};
 			mapRenderer.BuildShape( TokenShape.Circle );
+			mapRenderer.BuildImage( "pack://application:,,,/Imperial Commander Editor;component/Assets/Tiles/dp.png" );
+			canvas.Children.Add( mapRenderer.entityImage );
 			canvas.Children.Add( mapRenderer.entityShape );
 		}
 

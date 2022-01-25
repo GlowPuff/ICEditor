@@ -68,7 +68,7 @@ namespace Imperial_Commander_Editor
 			GUID = Guid.NewGuid();
 			name = "New Console";
 			entityType = EntityType.Console;
-			entityProperties = new();
+			entityProperties = new() { name = name };
 			mapSectionOwner = ownderGUID;
 
 			deploymentColor = "Gray";
@@ -82,6 +82,7 @@ namespace Imperial_Commander_Editor
 			dupe.entityType = entityType;
 			dupe.entityProperties = new();
 			dupe.entityProperties.CopyFrom( this );
+			dupe.entityProperties.name = dupe.name;
 			dupe.entityPosition = entityPosition;
 			dupe.entityRotation = entityRotation;
 			dupe.mapSectionOwner = mapSectionOwner;
@@ -95,11 +96,14 @@ namespace Imperial_Commander_Editor
 
 			mapRenderer = new( this, where, scale, new( 1, 1 ) )
 			{
+				selectedImageZ = 305,
 				selectedZ = 300,
 				unselectedBGColor = new( c ),
 				selectedBGColor = new( c )
 			};
 			mapRenderer.BuildShape( TokenShape.Square );
+			mapRenderer.BuildImage( "pack://application:,,,/Imperial Commander Editor;component/Assets/Tiles/console.png" );
+			canvas.Children.Add( mapRenderer.entityImage );
 			canvas.Children.Add( mapRenderer.entityShape );
 		}
 

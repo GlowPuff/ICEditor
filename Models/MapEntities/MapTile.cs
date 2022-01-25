@@ -59,7 +59,7 @@ namespace Imperial_Commander_Editor
 			_expansion = (Expansion)Enum.Parse( typeof( Expansion ), exp, true );
 			_name = $"{_expansion}{_tileID}{_tileSide}";
 			entityType = EntityType.Tile;
-			entityProperties = new();
+			entityProperties = new() { name = name };
 			mapSectionOwner = Utils.mainWindow.activeSection.GUID;
 		}
 

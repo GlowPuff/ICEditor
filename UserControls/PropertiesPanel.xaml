@@ -41,7 +41,7 @@
 
 						<UniformGrid Columns="2" Margin="0,10,0,0">
 							<TextBlock Text="Map Entity Count"/>
-							<TextBlock x:Name="meTB" Text="{Binding mapEntities.Count}"/>
+							<TextBlock x:Name="meTB" Text="{Binding mapEntityCount, RelativeSource={RelativeSource AncestorType=local:PropertiesPanel}}"/>
 						</UniformGrid>
 
 						<UniformGrid Columns="3" Margin="0,10,0,0">

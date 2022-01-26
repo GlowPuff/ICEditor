@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -14,11 +15,13 @@ namespace Imperial_Commander_Editor
 		bool _editEnabled, _editEGEnabled;
 		EventGroup _selectedEventGroup;
 		EntityGroup _selectedEntityGroup;
+		int _mapEntityCount;
 
 		public bool editEnabled { get { return _editEnabled; } set { _editEnabled = value; PC(); } }
 		public bool editEGEnabled { get { return _editEGEnabled; } set { _editEGEnabled = value; PC(); } }
 		public ObservableCollection<EventGroup> eventGroups { get { return Utils.mainWindow.mission.eventGroups; } }
 		public ObservableCollection<EntityGroup> entityGroups { get { return Utils.mainWindow.mission.entityGroups; } }
+		public int mapEntityCount { get { return _mapEntityCount; } set { _mapEntityCount = value; PC(); } }
 		public EventGroup selectedEventGroup
 		{
 			get { return _selectedEventGroup; }
@@ -53,10 +56,12 @@ namespace Imperial_Commander_Editor
 			rightCard.DataContext = this;
 		}
 
-		public void UpdateUI( MapSection ms )
+		public void UpdateUI( MapSection ms = null )
 		{
-			leftCard.DataContext = ms;
+			leftCard.DataContext = ms ?? leftCard.DataContext;
 			meTB.DataContext = Utils.mainWindow.mission;
+
+			mapEntityCount = Utils.mainWindow.mission.mapEntities.Where( x => x.mapSectionOwner == Utils.mainWindow.activeSection.GUID ).Count();
 		}
 
 		private void TextBox_KeyDown( object sender, KeyEventArgs e )

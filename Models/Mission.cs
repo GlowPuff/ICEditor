@@ -137,6 +137,8 @@ namespace Imperial_Commander_Editor
 
 		public bool EntityExists( Guid guid )
 		{
+			if ( guid == Guid.Empty )
+				return true;
 			return mapEntities.Any( x => x.GUID == guid );
 		}
 

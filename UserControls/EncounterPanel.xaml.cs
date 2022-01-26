@@ -18,6 +18,8 @@ namespace Imperial_Commander_Editor
 		DeploymentPoint _deploymentPoint;
 		string _selectedGroup, _customName, _customInstructions;
 
+		private DeploymentPoint emptyDP = new() { name = "None", GUID = Guid.Empty };
+
 		public DeploymentPoint deploymentPoint
 		{
 			get { return _deploymentPoint; }
@@ -41,6 +43,7 @@ namespace Imperial_Commander_Editor
 			get { return Utils.mainWindow.mission.reservedDeploymentGroups; }
 			set { Utils.mainWindow.mission.reservedDeploymentGroups = value; }
 		}
+		public ObservableCollection<DeploymentPoint> deploymentPoints { get; set; } = new();
 		public List<DeploymentPoint> allPoints { get; set; }
 		public bool buttonEnabled { get { return _buttonEnabled; } set { _buttonEnabled = value; PC(); } }
 		public CustomInstructionType customInstructionType { get; set; } = CustomInstructionType.Replace;
@@ -61,13 +64,20 @@ namespace Imperial_Commander_Editor
 			DataContext = this;
 			selectedGroup = "DG001";
 			customInstructions = customName = "";
+			deploymentPoints.Add( emptyDP );
+			deploymentPoint = emptyDP;
 		}
 
 		public void UpdateUI()
 		{
 			gCB_initial.ItemsSource = Utils.enemyData;
-			//dpCB_reserved.ItemsSource = Utils.enemyData;
-			dpCB.ItemsSource = Utils.mainWindow.mission.mapEntities.OfType<DeploymentPoint>();
+
+			foreach ( var ee in Utils.mainWindow.mission.mapEntities.OfType<DeploymentPoint>() )
+			{
+				if ( !deploymentPoints.Contains( ee ) )
+					deploymentPoints.Add( ee );
+			}
+
 			allPoints = Utils.mainWindow.mission.mapEntities.OfType<DeploymentPoint>().ToList();
 
 			//verify dp's exist
@@ -104,7 +114,7 @@ namespace Imperial_Commander_Editor
 			ig.customText = customInstructions;
 
 			Utils.mainWindow.mission.initialDeploymentGroups.Add( ig );
-			deploymentPoint = null;
+			deploymentPoint = deploymentPoints[0];
 			customName = customInstructions = "";
 		}
 

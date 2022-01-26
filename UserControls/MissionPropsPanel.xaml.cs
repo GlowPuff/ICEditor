@@ -71,8 +71,6 @@ namespace Imperial_Commander_Editor
 			if ( e.Key == Key.Enter )
 			{
 				Utils.LoseFocus( sender as Control );
-				//Utils.mainWindow.tabControl.SelectedIndex = 1;
-				//Utils.mainWindow.tabControl.SelectedIndex = 0;
 			}
 		}
 

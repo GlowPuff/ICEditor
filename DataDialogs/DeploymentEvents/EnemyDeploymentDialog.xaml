@@ -95,7 +95,7 @@
 												<ColumnDefinition Width="auto" />
 												<ColumnDefinition Width="auto" />
 											</Grid.ColumnDefinitions>
-											<ComboBox x:Name="dpCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectedValue="{Binding specificDeploymentPoint}" SelectedValuePath="GUID" IsEnabled="{Binding Path=IsChecked, ElementName=sdp}" DisplayMemberPath="name"/>
+											<ComboBox x:Name="dpCB" ItemsSource="{Binding deploymentPoints, RelativeSource={RelativeSource AncestorType=Window}}" Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectedValue="{Binding specificDeploymentPoint}" SelectedValuePath="GUID" IsEnabled="{Binding Path=IsChecked, ElementName=sdp}" DisplayMemberPath="name" SelectionChanged="dpCB_SelectionChanged"/>
 											<Button Grid.Column="1" x:Name="editGroup" Content="{materialDesign:PackIcon Kind=Edit}" Click="editGroup_Click" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35" Margin="10,0,0,0" IsEnabled="{Binding Path=IsChecked, ElementName=sdp}"/>
 										</Grid>
 									</StackPanel>

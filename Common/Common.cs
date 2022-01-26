@@ -5,6 +5,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Runtime.Intrinsics.Arm;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -72,10 +73,9 @@ namespace Imperial_Commander_Editor
 		public string triggerName { get; set; }
 	}
 
-	public class DPData //: INotifyPropertyChanged
+	public class DPData
 	{
 		public Guid GUID { get; set; }
-		//public event PropertyChangedEventHandler PropertyChanged;
 	}
 
 	public class EnemyGroupData : INotifyPropertyChanged
@@ -86,7 +86,6 @@ namespace Imperial_Commander_Editor
 		public Guid GUID { get; set; }
 		public string cardName { get { return _cardName; } set { _cardName = value; PC(); } }
 		public string cardID { get { return _cardID; } set { _cardID = value; PC(); } }
-		//public DeploymentCard card { get; set; }
 		public CustomInstructionType customInstructionType { get { return _customInstructionType; } set { _customInstructionType = value; PC(); } }
 		public string customText { get { return _customText; } set { _customText = value; PC(); } }
 		public ObservableCollection<DPData> pointList { get; set; } = new();
@@ -106,7 +105,6 @@ namespace Imperial_Commander_Editor
 		public EnemyGroupData( DeploymentCard dc, DeploymentPoint dp )
 		{
 			GUID = Guid.NewGuid();
-			//card = dc;
 			cardName = dc.name;
 			cardID = dc.id;
 			customText = "";
@@ -114,6 +112,16 @@ namespace Imperial_Commander_Editor
 			for ( int i = 0; i < dc.size; i++ )
 			{
 				pointList.Add( new() { GUID = dp.GUID } );
+			}
+		}
+
+		public void SetDP( Guid guid )
+		{
+			int c = pointList.Count;
+			pointList.Clear();
+			for ( int i = 0; i < c; i++ )
+			{
+				pointList.Add( new() { GUID = guid } );
 			}
 		}
 	}

@@ -16,7 +16,12 @@ namespace Imperial_Commander_Editor
 
 		public List<DeploymentPoint> deploymentPoints
 		{
-			get { return Utils.mainWindow.mission.mapEntities.OfType<DeploymentPoint>().ToList(); }
+			get
+			{
+				var deps = new List<DeploymentPoint>( new DeploymentPoint[] { new DeploymentPoint() { name = "None", GUID = Guid.Empty } } );
+				deps = deps.Concat( Utils.mainWindow.mission.mapEntities.OfType<DeploymentPoint>() ).ToList();
+				return deps;
+			}
 		}
 
 		public EditInitialGroupDialog( EnemyGroupData data )

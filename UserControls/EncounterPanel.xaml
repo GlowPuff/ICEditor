@@ -101,7 +101,7 @@
 								</GroupBox>
 
 								<GroupBox Header="DEPLOYMENT POINT" Margin="0,10,0,0">
-									<ComboBox x:Name="dpCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectedValue="{Binding deploymentPoint}" DisplayMemberPath="name"/>
+									<ComboBox x:Name="dpCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectedValue="{Binding deploymentPoint}" DisplayMemberPath="name" ItemsSource="{Binding deploymentPoints}"/>
 								</GroupBox>
 
 								<UniformGrid Columns="2">

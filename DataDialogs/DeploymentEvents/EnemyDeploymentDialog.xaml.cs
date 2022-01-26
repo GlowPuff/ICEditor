@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -13,7 +14,10 @@ namespace Imperial_Commander_Editor
 	/// </summary>
 	public partial class EnemyDeploymentDialog : Window, IEventActionDialog, INotifyPropertyChanged
 	{
+		Guid selectedDP, initialDP;
+
 		public IEventAction eventAction { get; set; }
+		public ObservableCollection<DeploymentPoint> deploymentPoints { get; set; } = new();
 
 		public void PC( [CallerMemberName] string n = "" )
 		{
@@ -29,6 +33,8 @@ namespace Imperial_Commander_Editor
 			eventAction = ea ?? new EnemyDeployment( dname, et );
 			DataContext = eventAction;
 
+			initialDP = (eventAction as EnemyDeployment).specificDeploymentPoint;
+
 			if ( (eventAction as EnemyDeployment).sourceType == SourceType.InitialReserved )
 			{
 				var items = new List<DeploymentCard>();
@@ -41,7 +47,12 @@ namespace Imperial_Commander_Editor
 				enemyCB.ItemsSource = Utils.enemyData;
 
 			triggersCB.ItemsSource = Utils.mainWindow.localTriggers;
-			dpCB.ItemsSource = Utils.mainWindow.mission.mapEntities.Where( x => x.entityType == EntityType.DeploymentPoint );
+
+			deploymentPoints.Add( new() { GUID = Guid.Empty, name = "None" } );
+			foreach ( var e in Utils.mainWindow.mission.mapEntities.OfType<DeploymentPoint>() )
+			{
+				deploymentPoints.Add( e );
+			}
 
 			//verify trigger and dp still exist
 			if ( !Utils.ValidateMapEntity( (eventAction as EnemyDeployment).specificDeploymentPoint ) )
@@ -61,6 +72,11 @@ namespace Imperial_Commander_Editor
 
 		private void okButton_Click( object sender, RoutedEventArgs e )
 		{
+			//if ( initialDP != selectedDP )
+			//{
+			//	(eventAction as EnemyDeployment).enemyGroupData.SetDP( (eventAction as EnemyDeployment).specificDeploymentPoint );
+			//}
+
 			eventAction.displayName = "Deploy: " + (eventAction as EnemyDeployment).deploymentGroup + "/" + (eventAction as EnemyDeployment).enemyGroupData.cardName;
 			Close();
 		}
@@ -108,6 +124,16 @@ namespace Imperial_Commander_Editor
 				DeploymentCard card = Utils.enemyData.First( x => x.id == (eventAction as EnemyDeployment).deploymentGroup );
 				(eventAction as EnemyDeployment).enemyGroupData.cardName = card.name;
 				(eventAction as EnemyDeployment).enemyGroupData.cardID = card.id;
+			}
+		}
+
+		private void dpCB_SelectionChanged( object sender, SelectionChangedEventArgs e )
+		{
+			selectedDP = (eventAction as EnemyDeployment).specificDeploymentPoint;
+			if ( initialDP != selectedDP )
+			{
+				initialDP = selectedDP;
+				(eventAction as EnemyDeployment).enemyGroupData.SetDP( (eventAction as EnemyDeployment).specificDeploymentPoint );
 			}
 		}
 	}

@@ -9,9 +9,11 @@ namespace Imperial_Commander_Editor
 	{
 		string _name;
 		Guid _GUID, _triggerGUID;
+		bool _repeateable;
 
 		public string name { get { return _name; } set { _name = value; PC(); } }
 		public Guid GUID { get { return _GUID; } set { _GUID = value; PC(); } }
+		public bool repeateable { get { return _repeateable; } set { _repeateable = value; PC(); } }
 		public Guid triggerGUID { get { return _triggerGUID; } set { _triggerGUID = value; PC(); } }
 		public ObservableCollection<Guid> missionEvents { get; set; }
 
@@ -27,6 +29,7 @@ namespace Imperial_Commander_Editor
 			GUID = Guid.NewGuid();
 			triggerGUID = Guid.Empty;
 			missionEvents = new();
+			repeateable = false;
 		}
 	}
 }

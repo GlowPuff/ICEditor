@@ -24,6 +24,22 @@
 					</Button>
 				</UniformGrid>
 			</DataTemplate>
+
+			<DataTemplate x:Key="eaction">
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="auto" />
+					</Grid.ColumnDefinitions>
+
+					<TextBlock Text="{Binding displayName}" VerticalAlignment="Center"/>
+
+					<UniformGrid Columns="2" Grid.Column="1">
+						<Button x:Name="upBtn" Content="{materialDesign:PackIcon Kind=ChevronUp}" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="25" Height="25" Click="upBtn_Click"/>
+						<Button x:Name="downBtn" Content="{materialDesign:PackIcon Kind=ChevronDown}" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="25" Height="25" Margin="5,0,0,0" Click="downBtn_Click"/>
+					</UniformGrid>
+				</Grid>
+			</DataTemplate>
 		</ResourceDictionary>
 	</Window.Resources>
 
@@ -61,16 +77,14 @@
 						<GroupBox Grid.Row="1" Header="Event Actions" Margin="0,10,0,0" MaxHeight="275">
 							<Grid>
 								<Grid.ColumnDefinitions>
-									<ColumnDefinition Width="2*"/>
 									<ColumnDefinition Width="*"/>
+									<ColumnDefinition Width="auto"/>
 								</Grid.ColumnDefinitions>
-								<ScrollViewer PreviewMouseWheel="ScrollViewer_PreviewMouseWheel" VerticalScrollBarVisibility="Auto">
-									<ListView x:Name="eventActionsCB" ItemContainerStyle="{StaticResource lbitem}" ItemsSource="{Binding eventActions}" DisplayMemberPath="displayName" SelectedValue="{Binding selectedEventAction, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" d:ItemsSource="{d:SampleData ItemCount=3}" MouseDoubleClick="eventActionsCB_MouseDoubleClick"/>
-								</ScrollViewer>
-								<!--<ComboBox x:Name="eventActionsCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" ItemsSource="{Binding eventActions}" DisplayMemberPath="displayName" SelectedValue="{Binding selectedEventAction, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"/>-->
+								<ListView x:Name="eventActionsCB" ItemContainerStyle="{StaticResource lbitem}" ItemsSource="{Binding eventActions}" SelectedValue="{Binding selectedEventAction, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" d:ItemsSource="{d:SampleData ItemCount=3}" MouseDoubleClick="eventActionsCB_MouseDoubleClick" ItemTemplate="{StaticResource eaction}" HorizontalContentAlignment="Stretch"/>
+
 								<!--buttons-->
 								<StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Top">
-									<materialDesign:PopupBox Style="{StaticResource MaterialDesignMultiFloatingActionPopupBox}" Width="35" Height="35">
+									<materialDesign:PopupBox Style="{StaticResource MaterialDesignMultiFloatingActionPopupBox}" Width="35" Height="35" Margin="10,0,0,0">
 										<materialDesign:Card Margin="5" MaxHeight="200" BorderBrush="MediumPurple" BorderThickness="2">
 											<StackPanel>
 												<Menu Background="Purple">
@@ -106,10 +120,7 @@
 											</StackPanel>
 										</materialDesign:Card>
 									</materialDesign:PopupBox>
-									<!--<Button x:Name="modifyActionButton" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35" Click="modifyActionButton_Click" Margin="10,0,10,0">
-										<materialDesign:PackIcon Kind="Edit" Width="20" Height="20"/>
-									</Button>-->
-									<Button x:Name="removeActionButton" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35" Click="removeActionButton_Click" Margin="10,0,0,0">
+									<Button x:Name="removeActionButton" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35" Click="removeActionButton_Click" Margin="5,0,0,0">
 										<materialDesign:PackIcon Kind="RemoveBold" Width="20" Height="20" Foreground="Red"/>
 									</Button>
 								</StackPanel>
@@ -146,7 +157,6 @@
 								<Separator Grid.Row="1" Margin="0,5,0,2"/>
 
 								<!--LIST BOX-->
-								<!--<ScrollViewer Grid.Row="2" PreviewMouseWheel="ScrollViewer_PreviewMouseWheel" VerticalScrollBarVisibility="Auto">-->
 								<ListBox Grid.Row="2" ItemsSource="{Binding additionalTriggers}" HorizontalContentAlignment="Stretch" ItemTemplate="{StaticResource k1}">
 									<ListBox.ItemContainerStyle>
 										<Style TargetType="ListBoxItem" BasedOn="{StaticResource MaterialDesignListBoxItem}">
@@ -154,8 +164,6 @@
 										</Style>
 									</ListBox.ItemContainerStyle>
 								</ListBox>
-								<!--</ScrollViewer>-->
-
 							</Grid>
 						</GroupBox>
 					</Grid>

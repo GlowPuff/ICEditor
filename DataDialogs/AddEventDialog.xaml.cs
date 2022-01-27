@@ -200,11 +200,18 @@ namespace Imperial_Commander_Editor
 			}
 		}
 
-		private void ScrollViewer_PreviewMouseWheel( object sender, System.Windows.Input.MouseWheelEventArgs e )
+		private void upBtn_Click( object sender, RoutedEventArgs e )
 		{
-			ScrollViewer scv = (ScrollViewer)sender;
-			scv.ScrollToVerticalOffset( scv.VerticalOffset - e.Delta );
-			e.Handled = true;
+			IEventAction ea = (sender as Control).DataContext as IEventAction;
+			int idx = missionEvent.eventActions.IndexOf( ea );
+			missionEvent.eventActions.Move( idx, Math.Max( 0, idx - 1 ) );
+		}
+
+		private void downBtn_Click( object sender, RoutedEventArgs e )
+		{
+			IEventAction ea = (sender as Control).DataContext as IEventAction;
+			int idx = missionEvent.eventActions.IndexOf( ea );
+			missionEvent.eventActions.Move( idx, Math.Min( missionEvent.eventActions.Count - 1, idx + 1 ) );
 		}
 	}
 }

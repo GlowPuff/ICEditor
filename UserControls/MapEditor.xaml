@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Imperial_Commander_Editor"
              mc:Ignorable="d" 
 						 xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             d:DesignHeight="550" d:DesignWidth="950" PreviewKeyDown="UserControl_PreviewKeyDown">
+             d:DesignHeight="550" d:DesignWidth="1100" PreviewKeyDown="UserControl_PreviewKeyDown">
 
 	<UserControl.Resources>
 		<Style TargetType="GroupBox" BasedOn="{StaticResource MaterialDesignGroupBox}">
@@ -139,6 +139,11 @@
 
 							<TextBlock Text="Center Selected" VerticalAlignment="Center"/>
 							<materialDesign:Chip Content="S" Style="{StaticResource  MaterialDesignFlatSecondaryButton}"/>
+
+							<materialDesign:PackIcon Kind="Dot" VerticalAlignment="Center" Foreground="MediumOrchid"/>
+
+							<TextBlock Text="Switch Section" VerticalAlignment="Center"/>
+							<materialDesign:Chip Content="W" Style="{StaticResource  MaterialDesignFlatSecondaryButton}"/>
 						</StackPanel>
 					</Border>
 				</StackPanel>

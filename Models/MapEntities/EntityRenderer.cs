@@ -206,5 +206,12 @@ namespace Imperial_Commander_Editor
 			if ( entityImage != null )
 				entityImage.RenderTransform = new RotateTransform( t.Angle );
 		}
+		public void Dim( bool dim )
+		{
+			if ( entityImage != null )
+			{
+				entityImage.Opacity = dim ? .5d : 1;
+			}
+		}
 	}
 }

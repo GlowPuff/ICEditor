@@ -135,6 +135,15 @@ namespace Imperial_Commander_Editor
 				}
 			}
 
+			//dim tiles that are NOT in active map section
+			foreach ( var section in Utils.mainWindow.mission.mapSections )
+			{
+				foreach ( var tile in section.mapTiles )
+				{
+					tile.Dim( Utils.mainWindow.activeSection.GUID );
+				}
+			}
+
 			selectedEntity = prev;
 		}
 
@@ -470,6 +479,10 @@ namespace Imperial_Commander_Editor
 					var item = selectedEntity.Duplicate();
 					InsertDuplicateEntity( item );
 				}
+			}
+			else if ( e.Key == Key.W )
+			{
+				switchSectionBtn_Click( null, null );
 			}
 		}
 

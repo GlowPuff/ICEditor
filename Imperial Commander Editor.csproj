@@ -30,6 +30,7 @@
     <None Remove="Assets\save.png" />
     <None Remove="Assets\saveas.png" />
     <None Remove="Assets\settings.png" />
+    <None Remove="Assets\SymbolTable.jpg" />
     <None Remove="Assets\Tiles\console.png" />
     <None Remove="Assets\Tiles\Core\1A.jpg" />
     <None Remove="Assets\Tiles\Core\1B.jpg" />
@@ -114,6 +115,10 @@
     <None Remove="Assets\Tiles\crate.png" />
     <None Remove="Assets\Tiles\door.png" />
     <None Remove="Assets\Tiles\dp.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\SymbolTable.jpg" />
   </ItemGroup>
 
   <ItemGroup>

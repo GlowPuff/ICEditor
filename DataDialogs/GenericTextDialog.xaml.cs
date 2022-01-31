@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
 
@@ -10,6 +11,8 @@ namespace Imperial_Commander_Editor
 	public partial class GenericTextDialog : Window, INotifyPropertyChanged
 	{
 		string _theText, _header, _textHint;
+		SymbolsWindow symbolsWindow;
+		FormattingWindow formattingWindow;
 
 		public Mission mission { get; set; }
 		public string theText { get { return _theText; } set { _theText = value; PC(); } }
@@ -41,7 +44,34 @@ namespace Imperial_Commander_Editor
 
 		private void okButton_Click( object sender, RoutedEventArgs e )
 		{
+			symbolsWindow?.Close();
+			formattingWindow?.Close();
 			Close();
+		}
+
+		private void infoBtn_Click( object sender, RoutedEventArgs e )
+		{
+			if ( !IsWindowOpen<SymbolsWindow>() )
+			{
+				symbolsWindow = new SymbolsWindow();
+				symbolsWindow.Show();
+			}
+		}
+
+		private void formatBtn_Click( object sender, RoutedEventArgs e )
+		{
+			if ( !IsWindowOpen<FormattingWindow>() )
+			{
+				formattingWindow = new FormattingWindow();
+				formattingWindow.Show();
+			}
+		}
+
+		private static bool IsWindowOpen<T>( string name = "" ) where T : Window
+		{
+			return string.IsNullOrEmpty( name )
+				 ? Application.Current.Windows.OfType<T>().Any()
+				 : Application.Current.Windows.OfType<T>().Any( w => w.Name.Equals( name ) );
 		}
 
 		private void Window_ContentRendered( object sender, System.EventArgs e )

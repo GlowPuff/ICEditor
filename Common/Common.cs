@@ -135,6 +135,8 @@ namespace Imperial_Commander_Editor
 		Vector entityPosition { get; set; }
 		double entityRotation { get; set; }
 		[JsonIgnore]
+		bool hasProperties { get; }
+		[JsonIgnore]
 		EntityRenderer mapRenderer { get; set; }
 		EntityProperties entityProperties { get; set; }
 		Guid mapSectionOwner { get; set; }

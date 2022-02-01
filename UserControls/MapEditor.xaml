@@ -59,7 +59,7 @@
 						<GroupBox Grid.Row="2" Header="ENTITIES" Background="#FF503B7C" Foreground="White" Margin="0,10">
 							<StackPanel>
 								<CheckBox x:Name="filterCheck" Content="Filter By Active Map Section" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" HorizontalAlignment="Center" Margin="4,4,4,5" Click="filterCheck_Click" IsChecked="{Binding filterBySection}"/>
-								<ListBox x:Name="entitiesCB" ItemsSource="{Binding mapEntities}"  SelectedValue="{Binding selectedEntity}" MaxHeight="300" DisplayMemberPath="name" ItemContainerStyle="{StaticResource lbitem}"/>
+								<ListBox x:Name="entitiesCB" ItemsSource="{Binding mapEntities}"  SelectedValue="{Binding selectedEntity}" MaxHeight="300" DisplayMemberPath="name" ItemContainerStyle="{StaticResource lbitem}" MouseDoubleClick="entitiesCB_MouseDoubleClick"/>
 							</StackPanel>
 						</GroupBox>
 

@@ -366,27 +366,47 @@ namespace Imperial_Commander_Editor
 
 		private void MainCanvas_MouseDown( object sender, MouseButtonEventArgs e )
 		{
-			if ( e.ChangedButton == MouseButton.Middle || (e.ChangedButton == MouseButton.Left && !(e.OriginalSource is Shape)) )
+			if ( e.ChangedButton == MouseButton.Left && e.ClickCount == 2 )
 			{
-				canvasDown = true;
-			}
-			else if ( e.ChangedButton == MouseButton.Left && e.OriginalSource is Shape shape )
-			{
-				shapeDragging = shape.DataContext as IMapEntity;
-				if ( shapeDragging is IMapEntity )
+				if ( e.OriginalSource is Shape shape )
 				{
-					selectedEntity = shapeDragging;
-					selectedEntity.mapRenderer.Select();
+					shapeDragging = shape.DataContext as IMapEntity;
+					if ( shapeDragging is IMapEntity )
+					{
+						selectedEntity = shapeDragging;
+						selectedEntity.mapRenderer.Select();
+					}
+					if ( shapeDragging.hasProperties )
+					{
+						EditEntityProperties dlg = new( shapeDragging.entityProperties );
+						dlg.ShowDialog();
+					}
 				}
-				shapeDown = true;
 			}
+			else
+			{
+				if ( e.ChangedButton == MouseButton.Middle || (e.ChangedButton == MouseButton.Left && !(e.OriginalSource is Shape)) )
+				{
+					canvasDown = true;
+				}
+				else if ( e.ChangedButton == MouseButton.Left && e.OriginalSource is Shape shape )
+				{
+					shapeDragging = shape.DataContext as IMapEntity;
+					if ( shapeDragging is IMapEntity )
+					{
+						selectedEntity = shapeDragging;
+						selectedEntity.mapRenderer.Select();
+					}
+					shapeDown = true;
+				}
 
-			mcap = (UIElement)e.OriginalSource;
-			mcap.CaptureMouse();
+				mcap = (UIElement)e.OriginalSource;
+				mcap.CaptureMouse();
 
-			//Store click position relation to Parent of the canvas
-			pointOnClick = e.GetPosition( (FrameworkElement)MainCanvas.Parent );
-			lastMTx = pointOnClick;
+				//Store click position relation to Parent of the canvas
+				pointOnClick = e.GetPosition( (FrameworkElement)MainCanvas.Parent );
+				lastMTx = pointOnClick;
+			}
 		}
 
 		private void MainCanvas_MouseUp( object sender, MouseButtonEventArgs e )
@@ -564,6 +584,15 @@ namespace Imperial_Commander_Editor
 				selectedEntity = null;
 				UpdateUI();
 				this.Focus();
+			}
+		}
+
+		private void entitiesCB_MouseDoubleClick( object sender, MouseButtonEventArgs e )
+		{
+			if ( selectedEntity != null && selectedEntity.hasProperties )
+			{
+				EditEntityProperties dlg = new( selectedEntity.entityProperties );
+				dlg.ShowDialog();
 			}
 		}
 

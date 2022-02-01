@@ -34,6 +34,7 @@ namespace Imperial_Commander_Editor
 		public EntityRenderer mapRenderer { get; set; }
 		public EntityProperties entityProperties { get; set; }
 		public Guid mapSectionOwner { get { return _mapSectionOwner; } set { _mapSectionOwner = value; PC(); } }
+		public bool hasProperties { get { return true; } }
 
 		//highlight props
 		public string deploymentColor
@@ -55,7 +56,6 @@ namespace Imperial_Commander_Editor
 		public int Width { get { return _width; } set { _width = value; PC(); } }
 		public int Height { get { return _height; } set { _height = value; PC(); } }
 		public int Duration { get { return _duration; } set { _duration = value; PC(); } }
-
 
 		public void PC( [CallerMemberName] string n = "" )
 		{

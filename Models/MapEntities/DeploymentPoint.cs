@@ -32,6 +32,7 @@ namespace Imperial_Commander_Editor
 		[JsonIgnore]
 		public EntityRenderer mapRenderer { get; set; }
 		public EntityProperties entityProperties { get; set; }
+		public bool hasProperties { get { return false; } }
 
 		//dp props
 		public string deploymentColor

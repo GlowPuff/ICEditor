@@ -34,6 +34,7 @@ namespace Imperial_Commander_Editor
 		public EntityRenderer mapRenderer { get; set; }
 		public EntityProperties entityProperties { get; set; }
 		public Guid mapSectionOwner { get { return _mapSectionOwner; } set { _mapSectionOwner = value; PC(); } }
+		public bool hasProperties { get { return true; } }
 
 		//token props
 		public string tokenColor

@@ -35,7 +35,8 @@ namespace Imperial_Commander_Editor
 
 		private void Window_MouseDown( object sender, MouseButtonEventArgs e )
 		{
-			DragMove();
+			if ( e.LeftButton == System.Windows.Input.MouseButtonState.Pressed )
+				DragMove();
 		}
 
 		private void Window_ContentRendered( object sender, EventArgs e )

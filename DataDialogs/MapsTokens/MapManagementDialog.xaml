@@ -9,65 +9,65 @@
 				mc:Ignorable="d"
         Title="Map Management" Width="600" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown" SizeToContent="Height">
 
-  <Border BorderBrush="MediumPurple" BorderThickness="2">
-    <GroupBox Header="Map Management Event Action" Style="{DynamicResource MaterialDesignGroupBox}">
-      <Grid Margin="-9">
-        <Grid.RowDefinitions>
-          <RowDefinition Height="*"/>
-          <RowDefinition Height="auto"/>
-        </Grid.RowDefinitions>
+	<Border BorderBrush="MediumPurple" BorderThickness="2">
+		<GroupBox Header="Map Management Event Action" Style="{DynamicResource MaterialDesignGroupBox}">
+			<Grid Margin="-9">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="*"/>
+					<RowDefinition Height="auto"/>
+				</Grid.RowDefinitions>
 
-        <TabControl x:Name="tabControl"
+				<TabControl x:Name="tabControl"
   Style="{StaticResource MaterialDesignNavigatilRailTabControl}"
   materialDesign:ColorZoneAssist.Mode="PrimaryMid"
   materialDesign:NavigationRailAssist.ShowSelectionBackground="True">
-          <TabControl.Background>
-            <SolidColorBrush Color="#FF3A3349"/>
-          </TabControl.Background>
+					<TabControl.Background>
+						<SolidColorBrush Color="#FF3A3349"/>
+					</TabControl.Background>
 
-          <TabItem Width="90">
-            <TabItem.Header>
-              <TextBlock Text="Activate" HorizontalAlignment="Center" />
-            </TabItem.Header>
-            <StackPanel Margin="10">
-              <TextBlock Text="Activate either a Map Section OR an individual Tile, or BOTH." Margin="0,0,10,0"/>
-              <TextBlock Text="Only Map Sections with 'Invisible Until Activated' CHECKED appear in the Sections list." Margin="0,0,10,0" TextWrapping="Wrap"/>
-              <TextBlock Text="Only Tiles with 'Starts Activated' UNCHECKED appear in the Tiles list." Margin="0,0,10,10"/>
-              <UniformGrid Columns="2" Margin="0,0,10,0">
-                <GroupBox Header="Map Section" Margin="0,0,5,0">
-                  <ComboBox x:Name="msCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectedValue="{Binding mapSection}" SelectedValuePath="GUID" DisplayMemberPath="name" VerticalAlignment="Top"/>
-                </GroupBox>
-                <GroupBox Header="Individual Tile" Margin="5,0,0,0">
-                  <ComboBox x:Name="tileCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectedValue="{Binding mapTile}" SelectedValuePath="GUID" DisplayMemberPath="tileID" VerticalAlignment="Top"/>
-                </GroupBox>
-              </UniformGrid>
-            </StackPanel>
-          </TabItem>
+					<TabItem Width="90">
+						<TabItem.Header>
+							<TextBlock Text="Activate" HorizontalAlignment="Center" />
+						</TabItem.Header>
+						<StackPanel Margin="10">
+							<TextBlock Text="Activate either a Map Section OR an individual Tile, or BOTH." Margin="0,0,10,0"/>
+							<TextBlock Text="Only Map Sections with 'Invisible Until Activated' CHECKED appear in the Sections list." Margin="0,0,10,0" TextWrapping="Wrap"/>
+							<TextBlock Text="Only Tiles with 'Starts Activated' UNCHECKED appear in the Tiles list." Margin="0,0,10,10"/>
+							<UniformGrid Columns="2" Margin="0,0,10,0">
+								<GroupBox Header="Map Section" Margin="0,0,5,0">
+									<ComboBox x:Name="msCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectedValue="{Binding mapSection}" SelectedValuePath="GUID" DisplayMemberPath="name" VerticalAlignment="Top"/>
+								</GroupBox>
+								<GroupBox Header="Individual Tile" Margin="5,0,0,0">
+									<ComboBox x:Name="tileCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectedValue="{Binding mapTile}" SelectedValuePath="GUID" DisplayMemberPath="name" VerticalAlignment="Top"/>
+								</GroupBox>
+							</UniformGrid>
+						</StackPanel>
+					</TabItem>
 
-          <TabItem Width="90">
-            <TabItem.Header>
-              <TextBlock Text="Deactivate" HorizontalAlignment="Center" />
-            </TabItem.Header>
-            <StackPanel Margin="10">
-              <TextBlock Text="Deactivate either a Map Section OR an individual Tile, or BOTH." Margin="0,0,0,10"/>
+					<TabItem Width="90">
+						<TabItem.Header>
+							<TextBlock Text="Deactivate" HorizontalAlignment="Center" />
+						</TabItem.Header>
+						<StackPanel Margin="10">
+							<TextBlock Text="Deactivate either a Map Section OR an individual Tile, or BOTH." Margin="0,0,0,10"/>
 
-              <UniformGrid Columns="2">
-                <GroupBox Header="Map Section" Margin="0,0,5,0">
-                  <ComboBox x:Name="ms2CB" Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectedValue="{Binding mapSectionRemove}" SelectedValuePath="GUID" DisplayMemberPath="name" VerticalAlignment="Top"/>
-                </GroupBox>
-                <GroupBox Header="Individual Tile" Margin="5,0,0,0">
-                  <ComboBox x:Name="tile2CB" Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectedValue="{Binding mapTileRemove}" SelectedValuePath="GUID" DisplayMemberPath="tileID" VerticalAlignment="Top"/>
-                </GroupBox>
-              </UniformGrid>
-            </StackPanel>
-          </TabItem>
-        </TabControl>
+							<UniformGrid Columns="2">
+								<GroupBox Header="Map Section" Margin="0,0,5,0">
+									<ComboBox x:Name="ms2CB" Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectedValue="{Binding mapSectionRemove}" SelectedValuePath="GUID" DisplayMemberPath="name" VerticalAlignment="Top"/>
+								</GroupBox>
+								<GroupBox Header="Individual Tile" Margin="5,0,0,0">
+									<ComboBox x:Name="tile2CB" Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectedValue="{Binding mapTileRemove}" SelectedValuePath="GUID" DisplayMemberPath="tileID" VerticalAlignment="Top"/>
+								</GroupBox>
+							</UniformGrid>
+						</StackPanel>
+					</TabItem>
+				</TabControl>
 
-        <StackPanel Grid.Row="1">
-          <Separator Margin="0,0,0,10"/>
-          <Button x:Name="okButton" Content="ACCEPT" Click="okButton_Click" IsDefault="True" HorizontalAlignment="Right" Margin="0,0,10,10"/>
-        </StackPanel>
-      </Grid>
-    </GroupBox>
-  </Border>
+				<StackPanel Grid.Row="1">
+					<Separator Margin="0,0,0,10"/>
+					<Button x:Name="okButton" Content="ACCEPT" Click="okButton_Click" IsDefault="True" HorizontalAlignment="Right" Margin="0,0,10,10"/>
+				</StackPanel>
+			</Grid>
+		</GroupBox>
+	</Border>
 </Window>

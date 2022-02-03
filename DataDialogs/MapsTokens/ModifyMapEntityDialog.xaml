@@ -65,14 +65,29 @@
 					</materialDesign:Card>
 
 					<!--LIST BOX-->
-					<materialDesign:Card Background="Purple" Padding="10" Margin="10,10,0,0">
-						<ListBox ItemsSource="{Binding entitiesToModify}" HorizontalContentAlignment="Stretch" ItemTemplate="{StaticResource k1}" d:ItemsSource="{d:SampleData ItemCount=1}">
-							<ListBox.ItemContainerStyle>
-								<Style TargetType="ListBoxItem" BasedOn="{StaticResource MaterialDesignListBoxItem}">
-									<Setter Property="materialDesign:ListBoxItemAssist.ShowSelection" Value="False" />
-								</Style>
-							</ListBox.ItemContainerStyle>
-						</ListBox>
+					<materialDesign:Card Background="Purple" Padding="10" Margin="0,10,0,0">
+						<StackPanel>
+							<Grid>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="1.2*" />
+									<ColumnDefinition Width="1*" />
+									<ColumnDefinition Width="1*" />
+								</Grid.ColumnDefinitions>
+								<TextBlock Text="Name"/>
+								<TextBlock Text="Activated?" Grid.Column="1"/>
+								<TextBlock Text="Color" Grid.Column="2"/>
+							</Grid>
+
+							<Separator Margin="0,5,0,5"/>
+
+							<ListBox ItemsSource="{Binding entitiesToModify}" HorizontalContentAlignment="Stretch" ItemTemplate="{StaticResource k1}" d:ItemsSource="{d:SampleData ItemCount=1}">
+								<ListBox.ItemContainerStyle>
+									<Style TargetType="ListBoxItem" BasedOn="{StaticResource MaterialDesignListBoxItem}">
+										<Setter Property="materialDesign:ListBoxItemAssist.ShowSelection" Value="False" />
+									</Style>
+								</ListBox.ItemContainerStyle>
+							</ListBox>
+						</StackPanel>
 					</materialDesign:Card>
 				</StackPanel>
 

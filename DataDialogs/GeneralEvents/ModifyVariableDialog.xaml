@@ -49,15 +49,21 @@
 							</Grid>
 						</materialDesign:Card>
 
-						<UniformGrid Columns="2" Margin="0,10">
-							<TextBlock Text="Trigger Name"/>
-							<UniformGrid Columns="3">
-								<TextBlock Text="Set" HorizontalAlignment="Center"/>
-								<TextBlock Text="Modify (+/-)" HorizontalAlignment="Center"/>
-							</UniformGrid>
-						</UniformGrid>
+						<materialDesign:Card Background="Purple" Padding="10" Margin="0,10,0,0">
+							<StackPanel>
+								<UniformGrid Columns="2">
+									<TextBlock Text="Trigger Name"/>
+									<UniformGrid Columns="3">
+										<TextBlock Text="Set" HorizontalAlignment="Center"/>
+										<TextBlock Text="+/-" HorizontalAlignment="Center"/>
+									</UniformGrid>
+								</UniformGrid>
 
-						<ListBox HorizontalContentAlignment="Stretch" ItemTemplate="{StaticResource k1}" ItemsSource="{Binding selectedTriggers}"/>
+								<Separator Margin="0,5,0,5"/>
+
+								<ListBox HorizontalContentAlignment="Stretch" ItemTemplate="{StaticResource k1}" ItemsSource="{Binding selectedTriggers}" d:ItemsSource="{d:SampleData ItemCount=1}"/>
+							</StackPanel>
+						</materialDesign:Card>
 					</StackPanel>
 				</ScrollViewer>
 

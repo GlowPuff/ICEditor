@@ -35,8 +35,8 @@
 					<!--MODIFIER-->
 					<materialDesign:Card Background="MediumPurple" Padding="10">
 						<StackPanel>
-							<CheckBox Content="Threat Cost" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding useThreat}"/>
-							<StackPanel Orientation="Horizontal">
+							<CheckBox x:Name="tcostcb" Content="Threat Cost" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding useThreat}"/>
+							<StackPanel Orientation="Horizontal" IsEnabled="{Binding Path=IsChecked, ElementName=tcostcb}">
 								<TextBlock Text="Modifier:" VerticalAlignment="Center"/>
 								<TextBox Text="{Binding threatCost}" Margin="10,0" Width="50"/>
 							</StackPanel>

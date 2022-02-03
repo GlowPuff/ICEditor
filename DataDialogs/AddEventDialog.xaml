@@ -110,11 +110,7 @@
 													</MenuItem>
 													<MenuItem Header="Map and Tokens">
 														<MenuItem Header="Map Management" Click="MenuItem_Click" Tag="M1"/>
-														<MenuItem Header="Modify Deployment Points" Click="MenuItem_Click" Tag="M2"/>
-														<MenuItem Header="Modify Map Entity" Click="MenuItem_Click" Tag="M3"/>
-														<!--<MenuItem Header="Discard Token(s)" Click="MenuItem_Click" Tag="M4"/>
-														<MenuItem Header="Change Token" Click="MenuItem_Click" Tag="M5"/>-->
-														<MenuItem Header="Highlight Space(s)" Click="MenuItem_Click" Tag="M4"/>
+														<MenuItem Header="Modify Map Entity" Click="MenuItem_Click" Tag="M2"/>
 													</MenuItem>
 												</Menu>
 											</StackPanel>

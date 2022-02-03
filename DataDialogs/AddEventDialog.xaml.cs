@@ -122,9 +122,7 @@ namespace Imperial_Commander_Editor
 			EventActionType.GM2 => new ChangeTargetDialog( dname, et, ea ),
 			EventActionType.GM3 => new ChangeGroupStatusDialog( dname, et, ea ),
 			EventActionType.M1 => new MapManagementDialog( dname, et, ea ),
-			EventActionType.M2 => new ModifyDeploymentDialog( dname, et, ea ),
-			EventActionType.M3 => new ModifyEntityDialog( dname, et, ea ),
-			EventActionType.M4 => new HighlightDialog( dname, et, ea ),
+			EventActionType.M2 => new ModifyMapEntityDialog( dname, et, ea ),
 			_ => null
 		};
 

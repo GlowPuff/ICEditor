@@ -12,7 +12,6 @@ namespace Imperial_Commander_Editor
 	public class Token : INotifyPropertyChanged, IMapEntity
 	{
 		string _name;
-		string _tokenColor;
 		MarkerType _markerType;
 		Guid _mapSectionOwner;
 
@@ -35,18 +34,19 @@ namespace Imperial_Commander_Editor
 		public EntityProperties entityProperties { get; set; }
 		public Guid mapSectionOwner { get { return _mapSectionOwner; } set { _mapSectionOwner = value; PC(); } }
 		public bool hasProperties { get { return true; } }
+		public bool hasColor { get { return true; } }
 
 		//token props
 		public string tokenColor
 		{
-			get { return _tokenColor; }
+			get { return entityProperties.entityColor; }
 			set
 			{
-				_tokenColor = value;
+				entityProperties.entityColor = value;
 				PC();
 				if ( mapRenderer != null )
 				{
-					Color c = Utils.ColorFromName( _tokenColor ).color;
+					Color c = Utils.ColorFromName( entityProperties.entityColor ).color;
 					mapRenderer.entityShape.Fill = new SolidColorBrush( c );
 					mapRenderer.unselectedBGColor = new SolidColorBrush( c );
 					mapRenderer.selectedBGColor = new SolidColorBrush( c );
@@ -60,7 +60,7 @@ namespace Imperial_Commander_Editor
 			{
 				_markerType = value;
 				PC();
-				Color c = Utils.ColorFromName( _tokenColor ).color;
+				Color c = Utils.ColorFromName( entityProperties.entityColor ).color;
 				Color ol = Colors.Gray;
 				if ( markerType == MarkerType.Rebel )
 					ol = Colors.CornflowerBlue;
@@ -113,7 +113,7 @@ namespace Imperial_Commander_Editor
 
 		public void BuildRenderer( Canvas canvas, Vector where, double scale )
 		{
-			Color c = Utils.ColorFromName( _tokenColor ).color;
+			Color c = Utils.ColorFromName( entityProperties.entityColor ).color;
 
 			mapRenderer = new( this, where, scale, new( 1, 1 ) )
 			{

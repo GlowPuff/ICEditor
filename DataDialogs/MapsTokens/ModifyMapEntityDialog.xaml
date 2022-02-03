@@ -1,0 +1,82 @@
+﻿<Window x:Class="Imperial_Commander_Editor.ModifyMapEntityDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Imperial_Commander_Editor"
+        mc:Ignorable="d"
+        Style="{StaticResource dws}"
+       	xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+				Title="Modify Map Entity" Width="650" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown" SizeToContent="Height">
+
+	<Window.Resources>
+		<DataTemplate x:Key="k1">
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<!--name-->
+					<ColumnDefinition Width="2*" />
+					<!--is active-->
+					<ColumnDefinition Width="auto" />
+					<!--color optional-->
+					<ColumnDefinition Width="2*" />
+					<!--props optional-->
+					<ColumnDefinition Width="auto" />
+				</Grid.ColumnDefinitions>
+
+				<TextBlock Text="{Binding entityProperties.name}" VerticalAlignment="Center"/>
+
+				<UniformGrid Columns="3" Grid.Column="1" VerticalAlignment="Center">
+					<TextBlock Text="No" HorizontalAlignment="Right"/>
+					<ToggleButton IsChecked="{Binding entityProperties.isActive}" Margin="10,0"/>
+					<TextBlock Text="Yes" HorizontalAlignment="Left"/>
+				</UniformGrid>
+
+				<ComboBox Grid.Column="2" Style="{StaticResource MaterialDesignOutlinedComboBox}" ItemsSource="{Binding deploymentColors, RelativeSource={RelativeSource AncestorType=Window}}" SelectedValue="{Binding entityProperties.entityColor}" IsEnabled="{Binding hasColor}" DisplayMemberPath="name" SelectedValuePath="name"/>
+
+				<Button Grid.Column="3" x:Name="editPropsBtn" Content="PROPERTIES" IsEnabled="{Binding hasProperties}" Margin="10,0,0,0" Click="editPropsBtn_Click"/>
+			</Grid>
+		</DataTemplate>
+	</Window.Resources>
+
+	<Border BorderBrush="MediumPurple" BorderThickness="2">
+		<GroupBox Header="Modify Map Entity Event Action" Style="{DynamicResource MaterialDesignGroupBox}">
+			<Grid>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="*"/>
+					<RowDefinition Height="auto"/>
+				</Grid.RowDefinitions>
+
+				<StackPanel>
+					<materialDesign:Card Padding="10" Background="#FF7952C0" Margin="10,0,0,0" Width="350">
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="*" />
+								<ColumnDefinition Width="auto" />
+							</Grid.ColumnDefinitions>
+
+							<ComboBox x:Name="elist" Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectedValue="{Binding selectedEntity, RelativeSource={RelativeSource AncestorType=Window}}" DisplayMemberPath="name"/>
+
+							<Button Content="{materialDesign:PackIcon Kind=AddBold}" Grid.Column="1" Margin="10,0,0,0" Click="addModifyEntityButton_Click" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35" ToolTip="Add Map Entity"/>
+						</Grid>
+					</materialDesign:Card>
+
+					<!--LIST BOX-->
+					<materialDesign:Card Background="Purple" Padding="10" Margin="10,10,0,0">
+						<ListBox ItemsSource="{Binding entitiesToModify}" HorizontalContentAlignment="Stretch" ItemTemplate="{StaticResource k1}" d:ItemsSource="{d:SampleData ItemCount=1}">
+							<ListBox.ItemContainerStyle>
+								<Style TargetType="ListBoxItem" BasedOn="{StaticResource MaterialDesignListBoxItem}">
+									<Setter Property="materialDesign:ListBoxItemAssist.ShowSelection" Value="False" />
+								</Style>
+							</ListBox.ItemContainerStyle>
+						</ListBox>
+					</materialDesign:Card>
+				</StackPanel>
+
+				<StackPanel Grid.Row="1" Margin="0,10,0,0">
+					<Separator Margin="0,0,0,10"/>
+					<Button x:Name="okButton" Content="ACCEPT" Click="okButton_Click" IsDefault="True" HorizontalAlignment="Right"/>
+				</StackPanel>
+			</Grid>
+		</GroupBox>
+	</Border>
+</Window>

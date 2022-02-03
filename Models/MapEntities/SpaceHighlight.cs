@@ -12,7 +12,6 @@ namespace Imperial_Commander_Editor
 	public class SpaceHighlight : INotifyPropertyChanged, IMapEntity
 	{
 		string _name;
-		string _deploymentColor;
 		int _width, _height, _duration;
 		Guid _mapSectionOwner;
 
@@ -35,18 +34,19 @@ namespace Imperial_Commander_Editor
 		public EntityProperties entityProperties { get; set; }
 		public Guid mapSectionOwner { get { return _mapSectionOwner; } set { _mapSectionOwner = value; PC(); } }
 		public bool hasProperties { get { return true; } }
+		public bool hasColor { get { return true; } }
 
 		//highlight props
 		public string deploymentColor
 		{
-			get { return _deploymentColor; }
+			get { return entityProperties.entityColor; }
 			set
 			{
-				_deploymentColor = value;
+				entityProperties.entityColor = value;
 				PC();
 				if ( mapRenderer != null )
 				{
-					Color c = Utils.ColorFromName( _deploymentColor ).color;
+					Color c = Utils.ColorFromName( entityProperties.entityColor ).color;
 					mapRenderer.entityShape.Fill = new SolidColorBrush( Color.FromArgb( 100, c.R, c.G, c.B ) );
 					mapRenderer.unselectedBGColor = new SolidColorBrush( Color.FromArgb( 100, c.R, c.G, c.B ) );
 					mapRenderer.selectedBGColor = new SolidColorBrush( Color.FromArgb( 100, c.R, c.G, c.B ) );
@@ -111,7 +111,7 @@ namespace Imperial_Commander_Editor
 
 			mapRenderer.RemoveVisual();
 
-			Color c = Utils.ColorFromName( _deploymentColor ).color;
+			Color c = Utils.ColorFromName( entityProperties.entityColor ).color;
 
 			mapRenderer = new( this, mapRenderer.where, Utils.mainWindow.mapEditor.mScale, new( Width, Height ) )
 			{
@@ -129,7 +129,7 @@ namespace Imperial_Commander_Editor
 
 		public void BuildRenderer( Canvas canvas, Vector where, double scale )
 		{
-			Color c = Utils.ColorFromName( _deploymentColor ).color;
+			Color c = Utils.ColorFromName( entityProperties.entityColor ).color;
 
 			mapRenderer = new( this, where, scale, new( Width, Height ) )
 			{

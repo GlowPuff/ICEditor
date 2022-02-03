@@ -33,6 +33,7 @@ namespace Imperial_Commander_Editor
 		public Vector entityPosition { get; set; }
 		public double entityRotation { get; set; }
 		public bool hasProperties { get { return false; } }
+		public bool hasColor { get { return false; } }
 
 		//tile props
 		public string tileID { get { return _tileID; } set { _tileID = value; PC(); } }

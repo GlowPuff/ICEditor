@@ -24,7 +24,7 @@ namespace Imperial_Commander_Editor
 		{
 			_deploymentPoint = DeploymentSpot.Active;
 			_threatCost = 0;
-			_useThreat = false;
+			_useThreat = true;
 			_specificDeploymentPoint = Guid.Empty;
 		}
 	}

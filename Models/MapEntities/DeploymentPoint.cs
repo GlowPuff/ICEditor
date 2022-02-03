@@ -13,7 +13,6 @@ namespace Imperial_Commander_Editor
 	{
 		string _name;
 		Guid _mapSectionOwner;
-		string _deploymentColor;
 
 		//common props
 		public Guid GUID { get; set; }
@@ -33,18 +32,19 @@ namespace Imperial_Commander_Editor
 		public EntityRenderer mapRenderer { get; set; }
 		public EntityProperties entityProperties { get; set; }
 		public bool hasProperties { get { return false; } }
+		public bool hasColor { get { return true; } }
 
 		//dp props
 		public string deploymentColor
 		{
-			get { return _deploymentColor; }
+			get { return entityProperties.entityColor; }
 			set
 			{
-				_deploymentColor = value;
+				entityProperties.entityColor = value;
 				PC();
 				if ( mapRenderer != null )
 				{
-					Color c = Utils.ColorFromName( _deploymentColor ).color;
+					Color c = Utils.ColorFromName( entityProperties.entityColor ).color;
 					mapRenderer.entityShape.Fill = new SolidColorBrush( c );
 					mapRenderer.unselectedBGColor = new SolidColorBrush( c );
 					mapRenderer.selectedBGColor = new SolidColorBrush( c );
@@ -95,7 +95,7 @@ namespace Imperial_Commander_Editor
 
 		public void BuildRenderer( Canvas canvas, Vector where, double scale )
 		{
-			Color c = Utils.ColorFromName( _deploymentColor ).color;
+			Color c = Utils.ColorFromName( entityProperties.entityColor ).color;
 
 			mapRenderer = new( this, where, scale, new( 1, 1 ) )
 			{

@@ -177,6 +177,7 @@ namespace Imperial_Commander_Editor
 			parent.mission.mapEntities.Add( item );
 			selectedEntity = item;
 			UpdateUI();
+			Utils.mainWindow.SetStatus( "Entity Duplicated" );
 		}
 
 		private void MoveObject( MouseEventArgs e )
@@ -550,6 +551,7 @@ namespace Imperial_Commander_Editor
 				if ( Utils.mainWindow.mission.mapSections.Any( x => x.GUID == selectedEntity.mapSectionOwner ) )
 				{
 					Utils.mainWindow.activeSection = Utils.mainWindow.mission.mapSections.First( x => x.GUID == selectedEntity.mapSectionOwner );
+					Utils.mainWindow.SetStatus( $"Active Section Switched to '{Utils.mainWindow.activeSection.name}'" );
 				}
 				else
 					Utils.mainWindow.SetStatus( "Owner Map Section Not Found" );

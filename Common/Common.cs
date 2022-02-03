@@ -5,7 +5,6 @@ using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Runtime.Intrinsics.Arm;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -23,7 +22,7 @@ namespace Imperial_Commander_Editor
 	public enum Expansion { Core }
 	public enum EntityType { Tile, Console, Crate, DeploymentPoint, Token, Highlight, Door }
 	public enum TokenShape { Circle, Square, Rectangle }
-	public enum EventActionType { G1, G2, G3, G4, G5, G6, D1, D2, D3, D4, D5, GM1, GM2, GM3, M1, M2, M3, M4 }
+	public enum EventActionType { G1, G2, G3, G4, G5, G6, D1, D2, D3, D4, D5, GM1, GM2, GM3, M1, M2 }
 	public enum ThreatAction { Add, Remove }
 	public enum SourceType { InitialReserved, Manual, Hand }
 	public enum DeploymentSpot { Active, Specific }
@@ -58,12 +57,13 @@ namespace Imperial_Commander_Editor
 		public Guid triggerGUID { get; set; }
 	}
 
-	public class DeploymentModifier
+	public class EntityModifier
 	{
-		public string name { get; set; }
-		public Guid GUID { get; set; }
-		public bool isActive { get; set; }
-		public string deploymentColor { get; set; }
+		public Guid sourceGUID { get; set; }
+		public bool hasColor { get; set; }
+		public bool hasProperties { get; set; }
+		public EntityProperties entityProperties { get; set; }
+
 	}
 
 	public class ButtonAction
@@ -136,6 +136,8 @@ namespace Imperial_Commander_Editor
 		double entityRotation { get; set; }
 		[JsonIgnore]
 		bool hasProperties { get; }
+		[JsonIgnore]
+		bool hasColor { get; }
 		[JsonIgnore]
 		EntityRenderer mapRenderer { get; set; }
 		EntityProperties entityProperties { get; set; }

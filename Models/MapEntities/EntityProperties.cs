@@ -6,12 +6,20 @@ namespace Imperial_Commander_Editor
 {
 	public class EntityProperties : INotifyPropertyChanged
 	{
-		public event PropertyChangedEventHandler PropertyChanged;
+		string _entityColor;
 
 		public string name { get; set; }
 		public bool isActive { get; set; }
 		public string theText { get; set; }
+		public string entityColor { get { return _entityColor; } set { _entityColor = value; PC(); } }
 		public ObservableCollection<ButtonAction> buttonActions { get; set; } = new();
+
+		public event PropertyChangedEventHandler PropertyChanged;
+		public void PC( [CallerMemberName] string n = "" )
+		{
+			if ( !string.IsNullOrEmpty( n ) )
+				PropertyChanged?.Invoke( this, new PropertyChangedEventArgs( n ) );
+		}
 
 		public EntityProperties()
 		{
@@ -23,6 +31,7 @@ namespace Imperial_Commander_Editor
 			name = me.name;
 			isActive = me.entityProperties.isActive;
 			theText = me.entityProperties.theText;
+			entityColor = me.entityProperties.entityColor;
 			foreach ( ButtonAction ba in me.entityProperties.buttonActions )
 				buttonActions.Add( new()
 				{
@@ -30,12 +39,6 @@ namespace Imperial_Commander_Editor
 					triggerGUID = ba.triggerGUID,
 					triggerName = ba.triggerName
 				} );
-		}
-
-		public void PC( [CallerMemberName] string n = "" )
-		{
-			if ( !string.IsNullOrEmpty( n ) )
-				PropertyChanged?.Invoke( this, new PropertyChangedEventArgs( n ) );
 		}
 	}
 }

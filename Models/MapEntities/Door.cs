@@ -33,6 +33,7 @@ namespace Imperial_Commander_Editor
 		public EntityProperties entityProperties { get; set; }
 		public Guid mapSectionOwner { get { return _mapSectionOwner; } set { _mapSectionOwner = value; PC(); } }
 		public bool hasProperties { get { return true; } }
+		public bool hasColor { get { return false; } }
 
 		public event PropertyChangedEventHandler PropertyChanged;
 		public void PC( [CallerMemberName] string n = "" )

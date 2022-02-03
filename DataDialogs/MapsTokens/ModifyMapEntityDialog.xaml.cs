@@ -64,5 +64,10 @@ namespace Imperial_Commander_Editor
 			EditEntityProperties dlg = new( (((FrameworkElement)sender).DataContext as EntityModifier).entityProperties );
 			dlg.ShowDialog();
 		}
+
+		private void remBtn_Click( object sender, RoutedEventArgs e )
+		{
+			(eventAction as ModifyMapEntity).entitiesToModify.Remove( ((FrameworkElement)sender).DataContext as EntityModifier );
+		}
 	}
 }

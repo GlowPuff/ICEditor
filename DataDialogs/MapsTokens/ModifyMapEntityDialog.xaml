@@ -7,19 +7,21 @@
         mc:Ignorable="d"
         Style="{StaticResource dws}"
        	xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-				Title="Modify Map Entity" Width="650" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown" SizeToContent="Height">
+				Title="Modify Map Entity" Width="600" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown" SizeToContent="Height">
 
 	<Window.Resources>
 		<DataTemplate x:Key="k1">
 			<Grid>
 				<Grid.ColumnDefinitions>
 					<!--name-->
-					<ColumnDefinition Width="2*" />
+					<ColumnDefinition Width="2.5*" />
 					<!--is active-->
 					<ColumnDefinition Width="auto" />
 					<!--color optional-->
 					<ColumnDefinition Width="2*" />
 					<!--props optional-->
+					<ColumnDefinition Width="auto" />
+					<!--remove btn-->
 					<ColumnDefinition Width="auto" />
 				</Grid.ColumnDefinitions>
 
@@ -33,7 +35,9 @@
 
 				<ComboBox Grid.Column="2" Style="{StaticResource MaterialDesignOutlinedComboBox}" ItemsSource="{Binding deploymentColors, RelativeSource={RelativeSource AncestorType=Window}}" SelectedValue="{Binding entityProperties.entityColor}" IsEnabled="{Binding hasColor}" DisplayMemberPath="name" SelectedValuePath="name"/>
 
-				<Button Grid.Column="3" x:Name="editPropsBtn" Content="PROPERTIES" IsEnabled="{Binding hasProperties}" Margin="10,0,0,0" Click="editPropsBtn_Click"/>
+				<Button Grid.Column="3" x:Name="editPropsBtn" Content="{materialDesign:PackIcon Kind=Edit}" Style="{StaticResource MaterialDesignFloatingActionButton}" IsEnabled="{Binding hasProperties}" Margin="10,0,10,0" Click="editPropsBtn_Click" Width="35" Height="35" ToolTip="Edit Entity Properties"/>
+
+				<Button x:Name="remBtn" Grid.Column="4" Content="{materialDesign:PackIcon Kind=RemoveBold}" Foreground="Red" Width="35" Height="35" Style="{StaticResource MaterialDesignFloatingActionButton}" Click="remBtn_Click" ToolTip="Remove Entity"/>
 			</Grid>
 		</DataTemplate>
 	</Window.Resources>

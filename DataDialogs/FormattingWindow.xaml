@@ -7,7 +7,7 @@
         mc:Ignorable="d"
          xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
 				Style="{StaticResource dws}"
-       Title="FormattingWindow" Width="450" MouseDown="Window_MouseDown" WindowStartupLocation="CenterScreen" SizeToContent="Height">
+       Title="FormattingWindow" Width="550" MouseDown="Window_MouseDown" WindowStartupLocation="CenterScreen" SizeToContent="Height">
 
 	<Border BorderBrush="MediumPurple" BorderThickness="2">
 		<GroupBox x:Name="gbox" Header="TEXT FORMATTING" Style="{DynamicResource MaterialDesignGroupBox}">
@@ -17,43 +17,62 @@
 					<RowDefinition Height="auto"/>
 				</Grid.RowDefinitions>
 
-				<Grid>
-					<Grid.ColumnDefinitions>
-						<ColumnDefinition Width="1*" />
-						<ColumnDefinition Width="2*" />
-						<ColumnDefinition Width="1*" />
-					</Grid.ColumnDefinitions>
-					<Grid.RowDefinitions>
-						<RowDefinition Height="1*" />
-						<RowDefinition Height="1*" />
-						<RowDefinition Height="1*" />
-						<RowDefinition Height="1*" />
-						<RowDefinition Height="1*" />
-						<RowDefinition Height="1*" />
-					</Grid.RowDefinitions>
+				<StackPanel>
+					<materialDesign:Card Background="Purple" Padding="10" Margin="0,0,0,10">
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="1*" />
+								<ColumnDefinition Width="2*" />
+								<ColumnDefinition Width="1*" />
+							</Grid.ColumnDefinitions>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="1*" />
+								<RowDefinition Height="1*" />
+								<RowDefinition Height="1*" />
+								<RowDefinition Height="1*" />
+								<RowDefinition Height="1*" />
+								<RowDefinition Height="1*" />
+							</Grid.RowDefinitions>
 
-					<TextBlock Text="TEXT EFFECT" FontWeight="Bold" Grid.Column="0" Grid.Row="0"/>
-					<TextBlock Text="CODE" FontWeight="Bold" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center"/>
-					<TextBlock Text="OUTPUT" FontWeight="Bold" Grid.Column="2" Grid.Row="0"/>
+							<TextBlock Text="TEXT EFFECT" FontWeight="Bold" Grid.Column="0" Grid.Row="0"/>
+							<TextBlock Text="CODE" FontWeight="Bold" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center"/>
+							<TextBlock Text="OUTPUT" FontWeight="Bold" Grid.Column="2" Grid.Row="0" HorizontalAlignment="Center"/>
 
-					<Separator Grid.Row="1" Grid.ColumnSpan="4" Margin="0,0,0,5"/>
+							<Separator Grid.Row="1" Grid.ColumnSpan="4" Margin="0,0,0,5"/>
 
-					<TextBlock Text="Bold text" Grid.Column="0" Grid.Row="2"/>
-					<TextBlock Text="&lt;b&gt;Example&lt;/b&gt;" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center"/>
-					<TextBlock Text="Example" Grid.Column="2" Grid.Row="2" FontWeight="ExtraBold" Margin="0,0,0,10"/>
+							<TextBlock Text="Bold text" Grid.Column="0" Grid.Row="2"/>
+							<TextBlock Text="&lt;b&gt;Example&lt;/b&gt;" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center"/>
+							<TextBlock Text="Example" Grid.Column="2" Grid.Row="2" FontWeight="ExtraBold" Margin="0,0,0,10" HorizontalAlignment="Center"/>
 
-					<TextBlock Text="Italic text" Grid.Column="0" Grid.Row="3"/>
-					<TextBlock Text="&lt;i&gt;Example&lt;/i&gt;" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Center"/>
-					<TextBlock Text="Example" Grid.Column="2" Grid.Row="3" FontStyle="Italic" Margin="0,0,0,10"/>
+							<TextBlock Text="Italic text" Grid.Column="0" Grid.Row="3"/>
+							<TextBlock Text="&lt;i&gt;Example&lt;/i&gt;" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Center"/>
+							<TextBlock Text="Example" Grid.Column="2" Grid.Row="3" FontStyle="Italic" Margin="0,0,0,10" HorizontalAlignment="Center"/>
 
-					<TextBlock Text="Colored text" Grid.Column="0" Grid.Row="4"/>
-					<TextBlock Text="&lt;color=&quot;red&quot;&gt;Example&lt;/color&gt;" Grid.Column="1" Grid.Row="4" HorizontalAlignment="Center"/>
-					<TextBlock Text="Example" Foreground="Red" Grid.Column="2" Grid.Row="4" Margin="0,0,0,10"/>
+							<TextBlock Text="Colored text" Grid.Column="0" Grid.Row="4"/>
+							<TextBlock Text="&lt;color=&quot;red&quot;&gt;Example&lt;/color&gt;" Grid.Column="1" Grid.Row="4" HorizontalAlignment="Center"/>
+							<TextBlock Text="Example" Foreground="Red" Grid.Column="2" Grid.Row="4" Margin="0,0,0,10" HorizontalAlignment="Center"/>
 
-					<TextBlock Text="Indented text with bullet" TextWrapping="Wrap" Grid.Column="0" Grid.Row="5"/>
-					<TextBlock Text="{}{-} Example" Grid.Column="1" Grid.Row="5" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-					<TextBlock Text="■ Example" Grid.Column="2" Grid.Row="5" VerticalAlignment="Center"/>
-				</Grid>
+							<TextBlock Text="Indented text with bullet" TextWrapping="Wrap" Grid.Column="0" Grid.Row="5"/>
+							<TextBlock Text="{}{-} Example" Grid.Column="1" Grid.Row="5" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+							<TextBlock Text="■ Example" Grid.Column="2" Grid.Row="5" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+						</Grid>
+					</materialDesign:Card>
+
+					<materialDesign:Card Background="Purple" Padding="10">
+						<StackPanel>
+							<UniformGrid Columns="3" Margin="0,0,0,10">
+								<TextBlock Text="Print Variable Value"/>
+								<TextBlock Text="Example ^variablename^" HorizontalAlignment="Center"/>
+								<TextBlock Text="Example 2" HorizontalAlignment="Center"/>
+							</UniformGrid>
+							<UniformGrid Columns="3">
+								<TextBlock Text="Print Threat Multiplier"/>
+								<TextBlock Text="Threat(2) X 3 is &amp;3&amp;" HorizontalAlignment="Center"/>
+								<TextBlock Text="Threat(2) X 3 is 6" HorizontalAlignment="Center"/>
+							</UniformGrid>
+						</StackPanel>
+					</materialDesign:Card>
+				</StackPanel>
 
 				<StackPanel Grid.Row="1" Margin="0,10,0,0">
 					<Separator Margin="0,0,0,10"/>

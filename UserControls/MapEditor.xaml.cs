@@ -377,9 +377,15 @@ namespace Imperial_Commander_Editor
 						selectedEntity = shapeDragging;
 						selectedEntity.mapRenderer.Select();
 					}
+
 					if ( shapeDragging.hasProperties )
 					{
 						EditEntityProperties dlg = new( shapeDragging.entityProperties );
+						dlg.ShowDialog();
+					}
+					else if ( shapeDragging is DeploymentPoint )
+					{
+						var dlg = new DeploymentPointPropsDialog( (shapeDragging as DeploymentPoint).deploymentPointProps );
 						dlg.ShowDialog();
 					}
 				}

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -55,6 +56,7 @@ namespace Imperial_Commander_Editor
 			heroCB.ItemsSource = Utils.heroData;
 			var items = from e in Utils.mainWindow.mission.globalEvents where e.isGlobal select e;
 			eventCB.ItemsSource = Utils.mainWindow.localEvents;
+			mTypeCB.ItemsSource = Enum.GetNames<MissionType>();
 
 			ciInfo.Text = string.IsNullOrEmpty( Utils.mainWindow.mission.missionProperties.customInstructionText ) ? "Text Not Set" : "Text Set";
 

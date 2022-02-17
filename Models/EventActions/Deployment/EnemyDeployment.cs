@@ -8,7 +8,7 @@ namespace Imperial_Commander_Editor
 		string _enemyName, _deploymentGroup, _modification;
 		SourceType _sourceType;
 		int _threatCost;
-		bool _canReinforce, _canRedeploy, _useThreat, _showMod, _useCustomInstructions;
+		bool _canReinforce, _canRedeploy, _canBeDefeated, _useThreat, _showMod, _useCustomInstructions;
 		Guid _setTrigger, _specificDeploymentPoint;
 		DeploymentSpot _deploymentPoint;
 
@@ -19,6 +19,7 @@ namespace Imperial_Commander_Editor
 		public SourceType sourceType { get { return _sourceType; } set { _sourceType = value; PC(); } }
 		public bool canReinforce { get { return _canReinforce; } set { _canReinforce = value; PC(); } }
 		public bool canRedeploy { get { return _canRedeploy; } set { _canRedeploy = value; PC(); } }
+		public bool canBeDefeated { get { return _canBeDefeated; } set { _canBeDefeated = value; PC(); } }
 		public bool useThreat { get { return _useThreat; } set { _useThreat = value; PC(); } }
 		public bool useCustomInstructions { get { return _useCustomInstructions; } set { _useCustomInstructions = value; PC(); } }
 		public bool showMod { get { return _showMod; } set { _showMod = value; PC(); } }
@@ -44,6 +45,7 @@ namespace Imperial_Commander_Editor
 			_specificDeploymentPoint = Guid.Empty;
 			_useThreat = _showMod = false;
 			_useCustomInstructions = false;
+			_canBeDefeated = true;
 
 			DeploymentCard card = Utils.enemyData.First( x => x.id == _deploymentGroup );
 			enemyGroupData = new( card, new() { name = "None", GUID = Guid.Empty } );

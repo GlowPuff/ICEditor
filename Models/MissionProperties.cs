@@ -9,7 +9,7 @@ namespace Imperial_Commander_Editor
 	{
 		public event PropertyChangedEventHandler PropertyChanged;
 
-		string _missionName, _missionID, _fixedAlly, _bannedAlly, _customInstructionText, _specificAlly, _specificHero, _priorityOther, _missionDescription;
+		string _missionName, _missionID, _fixedAlly, _bannedAlly, _customInstructionText, _specificAlly, _specificHero, _priorityOther, _missionDescription, _campaignName;
 		bool _optionalDeployment, _factionImperial, _factionMercenary;
 		YesNoAll _useFixedAlly, _useBannedAlly, _banAllAllies;
 		CustomInstructionType _customInstructionType;
@@ -17,11 +17,17 @@ namespace Imperial_Commander_Editor
 		PriorityTargetType _priorityTargetType;
 		Guid _startingEvent;
 		int _fixedValue, _threatLevel;
+		string _missionType;
 
 		public string missionName
 		{
 			get { return _missionName; }
 			set { _missionName = value; PC(); }
+		}
+		public string campaignName
+		{
+			get { return _campaignName; }
+			set { _campaignName = value; PC(); }
 		}
 		public string missionDescription
 		{
@@ -140,6 +146,8 @@ namespace Imperial_Commander_Editor
 			set { _threatLevel = value; PC(); }
 		}
 
+		public string missionType { get { return _missionType; } set { _missionType = value; PC(); } }
+
 		public ObservableCollection<string> bannedGroups { get; set; } = new();
 
 		public void PC( [CallerMemberName] string n = "" )
@@ -150,7 +158,7 @@ namespace Imperial_Commander_Editor
 
 		public MissionProperties()
 		{
-			missionID = "Unique Mission ID";
+			missionID = "Example: CORE01";//"Unique Mission ID";
 			missionName = "Mission Name";
 			missionDescription = "";
 			customInstructionText = "";
@@ -171,6 +179,7 @@ namespace Imperial_Commander_Editor
 			fixedValue = 0;
 			threatLevel = 1;
 			startingEvent = Guid.Empty;
+			missionType = "Story";//			MissionType.Story;
 		}
 	}
 }

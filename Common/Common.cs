@@ -28,6 +28,7 @@ namespace Imperial_Commander_Editor
 	public enum DeploymentSpot { Active, Specific }
 	public enum GroupType { All, Specific }
 	public enum MarkerType { Neutral, Rebel, Imperial }
+	public enum MissionType { Story, Side, Agenda, Threat, Forced, Other }
 
 	public class ProjectItem
 	{

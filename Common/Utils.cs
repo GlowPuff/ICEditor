@@ -12,8 +12,8 @@ namespace Imperial_Commander_Editor
 {
 	public static class Utils
 	{
-		public const string formatVersion = "5";
-		public const string appVersion = ".9";
+		public const string formatVersion = "6";
+		public const string appVersion = ".10";
 
 		public static List<DeploymentCard> allyData;
 		public static List<DeploymentCard> enemyData;

@@ -19,8 +19,6 @@
 				<UniformGrid Columns="2">
 					<TextBox Text="{Binding buttonText}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="0,0,10,0" CaretBrush="White"/>
 					<TextBlock Text="{Binding triggerName}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,10,0"/>
-
-					<!--<ComboBox x:Name="triggersCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" ItemsSource="{Binding mainWindow.localTriggers, RelativeSource={RelativeSource FindAncestor,AncestorType=Window}}" DisplayMemberPath="name" SelectedValue="{Binding triggerGUID}" SelectedValuePath="GUID" GotFocus="triggersCB_GotFocus"/>-->
 				</UniformGrid>
 
 				<Button x:Name="remQuestionButton" Click="remQuestionButton_Click" Grid.Column="1" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35" Margin="10,0,0,0">

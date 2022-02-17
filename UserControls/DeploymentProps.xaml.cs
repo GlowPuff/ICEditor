@@ -56,5 +56,11 @@ namespace Imperial_Commander_Editor
 			ownerName = Utils.mainWindow.activeSection.name;
 			Utils.mainWindow.mapEditor.UpdateUI();
 		}
+
+		private void editPropsBtn_Click( object sender, RoutedEventArgs e )
+		{
+			var dlg = new DeploymentPointPropsDialog( ((sender as FrameworkElement).DataContext as DeploymentPoint).deploymentPointProps );
+			dlg.ShowDialog();
+		}
 	}
 }

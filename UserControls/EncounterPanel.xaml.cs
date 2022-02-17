@@ -174,7 +174,7 @@ namespace Imperial_Commander_Editor
 				Utils.LoseFocus( sender as Control );
 				if ( !string.IsNullOrEmpty( selectedGroup ) )
 				{
-					addInitialGroupButton_Click( null, null );
+					//addInitialGroupButton_Click( null, null );
 					filterBox.Text = "";
 				}
 			}

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
@@ -52,6 +51,7 @@ namespace Imperial_Commander_Editor
 			}
 		}
 		public Guid mapSectionOwner { get { return _mapSectionOwner; } set { _mapSectionOwner = value; PC(); } }
+		public DeploymentPointProps deploymentPointProps { get; set; }
 
 		public event PropertyChangedEventHandler PropertyChanged;
 		public void PC( [CallerMemberName] string n = "" )
@@ -71,6 +71,7 @@ namespace Imperial_Commander_Editor
 			entityType = EntityType.DeploymentPoint;
 			entityProperties = new() { name = name };
 			mapSectionOwner = ownderGUID;
+			deploymentPointProps = new();
 
 			entityProperties.isActive = false;
 
@@ -90,6 +91,9 @@ namespace Imperial_Commander_Editor
 			dupe.entityRotation = entityRotation;
 			dupe.mapSectionOwner = mapSectionOwner;
 			dupe.deploymentColor = deploymentColor;
+			dupe.deploymentPointProps = new();
+			dupe.deploymentPointProps.CopyFrom( this.deploymentPointProps );
+
 			return dupe;
 		}
 

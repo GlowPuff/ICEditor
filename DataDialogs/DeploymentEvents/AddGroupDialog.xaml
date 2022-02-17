@@ -10,80 +10,84 @@
 				mc:Ignorable="d"
         Title="Add Group" Width="400" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown" SizeToContent="Height">
 
-  <Window.Resources>
-    <DataTemplate x:Key="k1">
-      <Grid>
-        <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="*" />
-          <ColumnDefinition Width="auto" />
-        </Grid.ColumnDefinitions>
+	<Window.Resources>
+		<DataTemplate x:Key="k1">
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="auto" />
+				</Grid.ColumnDefinitions>
 
-        <TextBlock VerticalAlignment="Center">
-          <TextBlock.Text>
-            <MultiBinding StringFormat="{}{0}: {1}">
-              <Binding Path="name"/>
-              <Binding Path="id"/>
-            </MultiBinding>
-          </TextBlock.Text>
-        </TextBlock>
+				<TextBlock VerticalAlignment="Center">
+					<TextBlock.Text>
+						<MultiBinding StringFormat="{}{0}: {1}">
+							<Binding Path="name"/>
+							<Binding Path="id"/>
+						</MultiBinding>
+					</TextBlock.Text>
+				</TextBlock>
 
-        <Button Grid.Column="1" x:Name="remGroupButton" Content="{materialDesign:PackIcon Kind=RemoveBold}" Click="remGroupButton_Click" Style="{StaticResource MaterialDesignFloatingActionButton}" Foreground="Red" Width="35" Height="35"/>
-      </Grid>
-    </DataTemplate>
-  </Window.Resources>
+				<Button Grid.Column="1" x:Name="remGroupButton" Content="{materialDesign:PackIcon Kind=RemoveBold}" Click="remGroupButton_Click" Style="{StaticResource MaterialDesignFloatingActionButton}" Foreground="Red" Width="35" Height="35"/>
+			</Grid>
+		</DataTemplate>
+	</Window.Resources>
 
-  <Border BorderBrush="MediumPurple" BorderThickness="2">
-    <GroupBox Header="Add Group Event Action" Style="{DynamicResource MaterialDesignGroupBox}">
-      <Grid>
-        <Grid.RowDefinitions>
-          <RowDefinition Height="*"/>
-          <RowDefinition Height="auto"/>
-        </Grid.RowDefinitions>
+	<Border BorderBrush="MediumPurple" BorderThickness="2">
+		<GroupBox Header="Add Group(s) To Deployment Hand Event Action" Style="{DynamicResource MaterialDesignGroupBox}">
+			<StackPanel>
+				<TextBox x:Name="filterBox" Style="{StaticResource MaterialDesignOutlinedTextBox}" Margin="0,0,0,10" materialDesign:HintAssist.Hint="Filter List" KeyDown="filterBox_KeyDown" TextChanged="TextBox_TextChanged" CaretBrush="White"/>
 
-        <StackPanel>
-          <materialDesign:Card Padding="10" Background="MediumPurple" Margin="0,0,0,10">
-            <Grid>
-              <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="auto" />
-              </Grid.ColumnDefinitions>
+				<Grid>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="*"/>
+						<RowDefinition Height="auto"/>
+					</Grid.RowDefinitions>
 
-              <ComboBox x:Name="dpCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectedValue="{Binding selectedGroup, RelativeSource={RelativeSource AncestorType=Window}}" SelectedValuePath="id">
-                <ComboBox.ItemTemplate>
-                  <DataTemplate>
-                    <TextBlock>
-                      <TextBlock.Text>
-                        <MultiBinding StringFormat="{}{0}: {1}">
-                          <Binding Path="name"/>
-                          <Binding Path="id"/>
-                        </MultiBinding>
-                      </TextBlock.Text>
-                    </TextBlock>
-                  </DataTemplate>
-                </ComboBox.ItemTemplate>
-              </ComboBox>
+					<StackPanel>
+						<materialDesign:Card Padding="10" Background="MediumPurple" Margin="0,0,0,10">
+							<Grid>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="*" />
+									<ColumnDefinition Width="auto" />
+								</Grid.ColumnDefinitions>
 
-              <Button x:Name="addGroupButton" Grid.Column="1" Content="{materialDesign:PackIcon Kind=AddBold}" Margin="10,0,0,0" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35" Click="addGroupButton_Click"/>
-            </Grid>
-          </materialDesign:Card>
+								<ComboBox x:Name="dpCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectedValue="{Binding selectedGroup, RelativeSource={RelativeSource AncestorType=Window}}" SelectedValuePath="id">
+									<ComboBox.ItemTemplate>
+										<DataTemplate>
+											<TextBlock>
+												<TextBlock.Text>
+													<MultiBinding StringFormat="{}{0}: {1}">
+														<Binding Path="name"/>
+														<Binding Path="id"/>
+													</MultiBinding>
+												</TextBlock.Text>
+											</TextBlock>
+										</DataTemplate>
+									</ComboBox.ItemTemplate>
+								</ComboBox>
 
-          <!--LIST BOX-->
-          <materialDesign:Card Background="Purple" Padding="10">
-            <ListBox ItemsSource="{Binding groupsToAdd}" HorizontalContentAlignment="Stretch" ItemTemplate="{StaticResource k1}">
-              <ListBox.ItemContainerStyle>
-                <Style TargetType="ListBoxItem" BasedOn="{StaticResource MaterialDesignListBoxItem}">
-                  <Setter Property="materialDesign:ListBoxItemAssist.ShowSelection" Value="False" />
-                </Style>
-              </ListBox.ItemContainerStyle>
-            </ListBox>
-          </materialDesign:Card>
-        </StackPanel>
+								<Button x:Name="addGroupButton" Grid.Column="1" Content="{materialDesign:PackIcon Kind=AddBold}" Margin="10,0,0,0" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35" Click="addGroupButton_Click"/>
+							</Grid>
+						</materialDesign:Card>
 
-        <StackPanel Grid.Row="1" Margin="0,10,0,0">
-          <Separator Margin="0,0,0,10"/>
-          <Button x:Name="okButton" Content="ACCEPT" Click="okButton_Click" IsDefault="True" HorizontalAlignment="Right"/>
-        </StackPanel>
-      </Grid>
-    </GroupBox>
-  </Border>
+						<!--LIST BOX-->
+						<materialDesign:Card Background="Purple" Padding="10">
+							<ListBox ItemsSource="{Binding groupsToAdd}" HorizontalContentAlignment="Stretch" ItemTemplate="{StaticResource k1}">
+								<ListBox.ItemContainerStyle>
+									<Style TargetType="ListBoxItem" BasedOn="{StaticResource MaterialDesignListBoxItem}">
+										<Setter Property="materialDesign:ListBoxItemAssist.ShowSelection" Value="False" />
+									</Style>
+								</ListBox.ItemContainerStyle>
+							</ListBox>
+						</materialDesign:Card>
+					</StackPanel>
+
+					<StackPanel Grid.Row="1" Margin="0,10,0,0">
+						<Separator Margin="0,0,0,10"/>
+						<Button x:Name="okButton" Content="ACCEPT" Click="okButton_Click" HorizontalAlignment="Right"/>
+					</StackPanel>
+				</Grid>
+			</StackPanel>
+		</GroupBox>
+	</Border>
 </Window>

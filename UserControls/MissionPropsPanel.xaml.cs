@@ -103,5 +103,27 @@ namespace Imperial_Commander_Editor
 			if ( Utils.mainWindow.mission.missionProperties.bannedGroups.Count > 0 )
 				selectedBanGroupRemove = Utils.enemyData.First( x => x.id == Utils.mainWindow.mission.missionProperties.bannedGroups[0] );
 		}
+
+		private void TextBox_TextChanged( object sender, TextChangedEventArgs e )
+		{
+			selectedBanGroupAdd = deploymentGroups.Where( x => x.name.ToLower().Contains( filterBox.Text.ToLower() ) ).FirstOr( null );
+
+			//try id
+			if ( selectedBanGroupAdd == null )
+				selectedBanGroupAdd = deploymentGroups.Where( x => x.id.Contains( filterBox.Text ) ).FirstOr( null );
+		}
+
+		private void filterBox_KeyDown( object sender, KeyEventArgs e )
+		{
+			if ( e.Key == Key.Enter )
+			{
+				Utils.LoseFocus( sender as Control );
+				if ( selectedBanGroupAdd != null )
+				{
+					addmBanBtn_Click( null, null );
+					filterBox.Text = "";
+				}
+			}
+		}
 	}
 }

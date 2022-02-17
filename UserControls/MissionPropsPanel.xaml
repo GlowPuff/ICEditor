@@ -140,6 +140,8 @@
 
 				<GroupBox Header="BANNED ENEMY GROUPS" Margin="0,5,0,0">
 					<StackPanel>
+						<TextBox x:Name="filterBox" Style="{StaticResource MaterialDesignOutlinedTextBox}" Margin="0,0,0,10" materialDesign:HintAssist.Hint="Filter List" KeyDown="filterBox_KeyDown" TextChanged="TextBox_TextChanged" CaretBrush="White"/>
+
 						<Grid>
 							<Grid.ColumnDefinitions>
 								<ColumnDefinition Width="*" />

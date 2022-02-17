@@ -35,6 +35,8 @@
 						</TabItem.Header>
 						<UniformGrid Columns="2" Margin="5,10,5,0">
 							<StackPanel Margin="5,0">
+								<TextBox x:Name="filterBox" Style="{StaticResource MaterialDesignOutlinedTextBox}" Margin="0,0,0,10" materialDesign:HintAssist.Hint="Filter List" KeyDown="filterBox_KeyDown" TextChanged="TextBox_TextChanged" CaretBrush="White"/>
+
 								<ComboBox x:Name="enemyCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectedValue="{Binding deploymentGroup}" SelectedValuePath="id" SelectionChanged="enemyCB_SelectionChanged">
 									<ComboBox.ItemTemplate>
 										<DataTemplate>

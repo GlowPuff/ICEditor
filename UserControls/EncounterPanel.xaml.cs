@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace Imperial_Commander_Editor
 {
@@ -145,6 +146,38 @@ namespace Imperial_Commander_Editor
 			var dlg = new GenericTextDialog( "EDIT CUSTOM INSTRUCTIONS", customInstructions );
 			dlg.ShowDialog();
 			customInstructions = dlg.theText.Trim();
+		}
+
+		private void TextBox_TextChanged( object sender, TextChangedEventArgs e )
+		{
+			var s = Utils.enemyData.Where( x => x.name.ToLower().Contains( filterBox.Text.ToLower() ) ).FirstOr( null );
+			if ( s != null )
+				selectedGroup = s.id;
+			else
+				selectedGroup = null;
+
+			//try id
+			if ( s == null )
+			{
+				var ss = Utils.enemyData.Where( x => x.id.Contains( filterBox.Text ) ).FirstOr( null );
+				if ( ss != null )
+					selectedGroup = ss.id;
+				else
+					selectedGroup = null;
+			}
+		}
+
+		private void filterBox_KeyDown( object sender, System.Windows.Input.KeyEventArgs e )
+		{
+			if ( e.Key == Key.Enter )
+			{
+				Utils.LoseFocus( sender as Control );
+				if ( !string.IsNullOrEmpty( selectedGroup ) )
+				{
+					addInitialGroupButton_Click( null, null );
+					filterBox.Text = "";
+				}
+			}
 		}
 
 		private void editText_Click( object sender, RoutedEventArgs e )

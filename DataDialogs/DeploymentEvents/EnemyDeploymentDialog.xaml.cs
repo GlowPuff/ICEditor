@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace Imperial_Commander_Editor
 {
@@ -76,8 +77,11 @@ namespace Imperial_Commander_Editor
 			//{
 			//	(eventAction as EnemyDeployment).enemyGroupData.SetDP( (eventAction as EnemyDeployment).specificDeploymentPoint );
 			//}
+			if ( string.IsNullOrEmpty( (eventAction as EnemyDeployment).deploymentGroup ) )
+				eventAction.displayName = "Deploy: INVALID SELECTION";
+			else
+				eventAction.displayName = "Deploy: " + (eventAction as EnemyDeployment).deploymentGroup + "/" + (eventAction as EnemyDeployment).enemyGroupData.cardName;
 
-			eventAction.displayName = "Deploy: " + (eventAction as EnemyDeployment).deploymentGroup + "/" + (eventAction as EnemyDeployment).enemyGroupData.cardName;
 			Close();
 		}
 
@@ -126,6 +130,43 @@ namespace Imperial_Commander_Editor
 				(eventAction as EnemyDeployment).enemyGroupData.cardName = card.name;
 				(eventAction as EnemyDeployment).enemyGroupData.cardID = card.id;
 			}
+		}
+
+		private void filterBox_KeyDown( object sender, System.Windows.Input.KeyEventArgs e )
+		{
+			if ( e.Key == Key.Enter )
+			{
+				Utils.LoseFocus( sender as Control );
+			}
+		}
+
+		private void TextBox_TextChanged( object sender, TextChangedEventArgs e )
+		{
+			DeploymentCard dc;
+
+			if ( (eventAction as EnemyDeployment).sourceType == SourceType.InitialReserved )
+			{
+				var items = new List<DeploymentCard>();
+				items = items.Concat( Utils.enemyData.Where( x => Utils.mainWindow.mission.initialDeploymentGroups.Any( y => y.cardID == x.id ) ) ).ToList();
+				items = items.Concat( Utils.enemyData.Where( x => Utils.mainWindow.mission.reservedDeploymentGroups.Any( y => y.cardID == x.id ) ) ).ToList();
+
+				dc = items.Where( x => x.name.ToLower().Contains( filterBox.Text.ToLower() ) ).FirstOr( null );
+			}
+			else
+			{
+				dc = Utils.enemyData.Where( x => x.name.ToLower().Contains( filterBox.Text.ToLower() ) ).FirstOr( null );
+
+				//try id
+				if ( dc == null )
+				{
+					dc = Utils.enemyData.Where( x => x.id.Contains( filterBox.Text ) ).FirstOr( null );
+				}
+			}
+
+			if ( dc != null )
+				(eventAction as EnemyDeployment).deploymentGroup = dc.id;
+			else
+				(eventAction as EnemyDeployment).deploymentGroup = null;
 		}
 
 		private void dpCB_SelectionChanged( object sender, SelectionChangedEventArgs e )

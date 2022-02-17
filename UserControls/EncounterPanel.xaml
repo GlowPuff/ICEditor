@@ -70,6 +70,8 @@
 					<StackPanel>
 						<materialDesign:Card Background="MediumPurple" VerticalAlignment="Top" Padding="10">
 							<StackPanel>
+								<TextBox x:Name="filterBox" Style="{StaticResource MaterialDesignOutlinedTextBox}" Margin="0,0,0,10" materialDesign:HintAssist.Hint="Filter List" KeyDown="filterBox_KeyDown" TextChanged="TextBox_TextChanged" CaretBrush="White"/>
+
 								<ComboBox x:Name="gCB_initial" Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectedValue="{Binding selectedGroup, RelativeSource={RelativeSource AncestorType=local:EncounterPanel}}" SelectedValuePath="id">
 									<ComboBox.ItemTemplate>
 										<DataTemplate>

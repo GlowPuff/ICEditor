@@ -15,9 +15,10 @@ namespace Imperial_Commander_Editor
 	/// </summary>
 	public partial class EncounterPanel : UserControl, INotifyPropertyChanged
 	{
-		bool _buttonEnabled;
+		bool _buttonEnabled, _useDefaultPriority;
 		DeploymentPoint _deploymentPoint;
 		string _selectedGroup, _customName, _customInstructions;
+		GroupPriorityTraits _priorityTraits;
 
 		private DeploymentPoint emptyDP = new() { name = "None", GUID = Guid.Empty };
 
@@ -50,6 +51,7 @@ namespace Imperial_Commander_Editor
 		public CustomInstructionType customInstructionType { get; set; } = CustomInstructionType.Replace;
 		public string customInstructions { get { return _customInstructions; } set { _customInstructions = value; PC(); } }
 		public string customName { get { return _customName; } set { _customName = value; PC(); } }
+		public bool useDefaultPriority { get { return _useDefaultPriority; } set { _useDefaultPriority = value; PC(); } }
 
 		public void PC( [CallerMemberName] string n = "" )
 		{
@@ -67,6 +69,7 @@ namespace Imperial_Commander_Editor
 			customInstructions = customName = "";
 			deploymentPoints.Add( emptyDP );
 			deploymentPoint = emptyDP;
+			useDefaultPriority = true;
 		}
 
 		public void UpdateUI()
@@ -96,6 +99,17 @@ namespace Imperial_Commander_Editor
 		{
 			var ig = new EnemyGroupData( Utils.enemyData.Where( x => x.id == selectedGroup ).First(), new( Guid.Empty ) );
 
+			if ( !useDefaultPriority )
+			{
+				_priorityTraits = _priorityTraits ?? new();
+				ig.groupPriorityTraits = _priorityTraits;
+				_priorityTraits = null;
+			}
+			else
+			{
+				//TODO - get priorityTraits from card data JSON and assign it to "ig"
+			}
+
 			ig.customInstructionType = customInstructionType;
 			if ( !string.IsNullOrEmpty( customName.Trim() ) )
 				ig.cardName = customName.Trim();
@@ -103,11 +117,23 @@ namespace Imperial_Commander_Editor
 
 			Utils.mainWindow.mission.reservedDeploymentGroups.Add( ig );
 			customName = customInstructions = "";
+			useDefaultPriority = true;
 		}
 
 		private void addInitialGroupButton_Click( object sender, RoutedEventArgs e )
 		{
 			var ig = new EnemyGroupData( Utils.enemyData.Where( x => x.id == selectedGroup ).First(), deploymentPoint );
+
+			if ( !useDefaultPriority )
+			{
+				_priorityTraits = _priorityTraits ?? new();
+				ig.groupPriorityTraits = _priorityTraits;
+				_priorityTraits = null;
+			}
+			else
+			{
+				//TODO - get priorityTraits from card data JSON and assign it to "ig"
+			}
 
 			ig.customInstructionType = customInstructionType;
 			if ( !string.IsNullOrEmpty( customName.Trim() ) )
@@ -117,6 +143,7 @@ namespace Imperial_Commander_Editor
 			Utils.mainWindow.mission.initialDeploymentGroups.Add( ig );
 			deploymentPoint = deploymentPoints[0];
 			customName = customInstructions = "";
+			useDefaultPriority = true;
 		}
 
 		private void remInitialGroupButton_Click( object sender, RoutedEventArgs e )
@@ -178,6 +205,26 @@ namespace Imperial_Commander_Editor
 					filterBox.Text = "";
 				}
 			}
+		}
+
+		private void editTraits_Click( object sender, RoutedEventArgs e )
+		{
+			var dlg = new PriorityTraitsDialog( (((Control)sender).DataContext as EnemyGroupData).groupPriorityTraits );
+			dlg.ShowDialog();
+		}
+
+		private void editResTraits_Click( object sender, RoutedEventArgs e )
+		{
+			var dlg = new PriorityTraitsDialog( (((Control)sender).DataContext as EnemyGroupData).groupPriorityTraits );
+			dlg.ShowDialog();
+		}
+
+		private void targetBtn_Click( object sender, RoutedEventArgs e )
+		{
+			_priorityTraits = _priorityTraits ?? new();
+
+			var dlg = new PriorityTraitsDialog( _priorityTraits );
+			dlg.ShowDialog();
 		}
 
 		private void editText_Click( object sender, RoutedEventArgs e )

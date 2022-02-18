@@ -5,10 +5,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media;
-using Newtonsoft.Json;
 
 namespace Imperial_Commander_Editor
 {
@@ -18,7 +15,7 @@ namespace Imperial_Commander_Editor
 	public enum EventActionSubtype { }
 	public enum ThreatModifierType { None, Fixed, Multiple }
 	public enum YesNoAll { Yes, No, All }
-	public enum PriorityTargetType { Rebel, Hero, Ally, Other }
+	public enum PriorityTargetType { Rebel, Hero, Ally, Other, Trait }
 	public enum Expansion { Core }
 	public enum EntityType { Tile, Console, Crate, DeploymentPoint, Token, Highlight, Door }
 	public enum TokenShape { Circle, Square, Rectangle }
@@ -29,6 +26,10 @@ namespace Imperial_Commander_Editor
 	public enum GroupType { All, Specific }
 	public enum MarkerType { Neutral, Rebel, Imperial }
 	public enum MissionType { Story, Side, Agenda, Threat, Forced, Other }
+	public enum DiceColor { White, Black, Yellow, Red, Green, Blue, Grey }
+	public enum AttackType { Ranged, Melee, None }
+	public enum FigureSize { Small1x1, Medium1x2, Large2x2, Huge2x3 }
+	public enum GroupTraits { Trooper, Leader, HeavyWeapon, Guardian, Brawler, Droid, Vehicle, Hunter, Creature, Smuggler, Spy, ForceUser, Wookiee, Hero }
 
 	public class ProjectItem
 	{
@@ -90,6 +91,7 @@ namespace Imperial_Commander_Editor
 		public CustomInstructionType customInstructionType { get { return _customInstructionType; } set { _customInstructionType = value; PC(); } }
 		public string customText { get { return _customText; } set { _customText = value; PC(); } }
 		public ObservableCollection<DPData> pointList { get; set; } = new();
+		public GroupPriorityTraits groupPriorityTraits { get; set; }
 
 		public void PC( [CallerMemberName] string n = "" )
 		{
@@ -110,6 +112,7 @@ namespace Imperial_Commander_Editor
 			cardID = dc.id;
 			customText = "";
 			customInstructionType = CustomInstructionType.Replace;
+			groupPriorityTraits = new();
 			for ( int i = 0; i < dc.size; i++ )
 			{
 				pointList.Add( new() { GUID = dp.GUID } );
@@ -127,36 +130,7 @@ namespace Imperial_Commander_Editor
 		}
 	}
 
-	public interface IPropertyModel { };
-	public interface IMapEntity
-	{
-		Guid GUID { get; set; }
-		string name { get; set; }
-		EntityType entityType { get; set; }
-		Vector entityPosition { get; set; }
-		double entityRotation { get; set; }
-		[JsonIgnore]
-		bool hasProperties { get; }
-		[JsonIgnore]
-		bool hasColor { get; }
-		[JsonIgnore]
-		EntityRenderer mapRenderer { get; set; }
-		EntityProperties entityProperties { get; set; }
-		Guid mapSectionOwner { get; set; }
-		void BuildRenderer( Canvas c, Vector where, double scale );
-		IMapEntity Duplicate();
-		bool Validate();
-	}
-	public interface IEventActionDialog
-	{
-		IEventAction eventAction { get; set; }
-	}
-	public interface IEventAction
-	{
-		Guid GUID { get; set; }
-		EventActionType eventActionType { get; set; }
-		string displayName { get; set; }
-	}
+
 
 	//internal static class WindowExtensions
 	//{

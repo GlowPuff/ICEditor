@@ -57,7 +57,12 @@
 								<ComboBox x:Name="aCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectedValue="{Binding specificAlly}" SelectedValuePath="id" DisplayMemberPath="name"/>
 							</UniformGrid>
 
-							<UniformGrid Columns="2" Margin="0,10,0,0">
+							<UniformGrid Columns="2" Margin="0,10,0,10">
+								<RadioButton x:Name="traitsCheck" Content="Specific Target Traits" GroupName="target" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding targetType, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:PriorityTargetType.Trait}}"/>
+								<Button x:Name="traitsBtn" Content="SELECT TRAITS..." Click="traitsBtn_Click" IsEnabled="{Binding ElementName=traitsCheck, Path=IsChecked}"/>
+							</UniformGrid>
+
+							<UniformGrid Columns="2">
 								<RadioButton Content="Other" GroupName="target" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding targetType, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:PriorityTargetType.Other}}"/>
 								<TextBox Text="{Binding otherTarget}" VerticalAlignment="Center" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
 							</UniformGrid>

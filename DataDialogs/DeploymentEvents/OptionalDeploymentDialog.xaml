@@ -22,6 +22,8 @@
 				</Grid.RowDefinitions>
 
 				<StackPanel>
+					<CheckBox Content="This is an Onslaught" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" Margin="0,0,0,10" IsChecked="{Binding isOnslaught}"/>
+
 					<GroupBox Header="Deployment Point">
 						<StackPanel>
 							<RadioButton GroupName="dpoint" Content="Active Deployment Point" VerticalAlignment="Center" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding Path=deploymentPoint, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:DeploymentSpot.Active}}"/>
@@ -33,7 +35,7 @@
 					</GroupBox>
 
 					<!--MODIFIER-->
-					<materialDesign:Card Background="MediumPurple" Padding="10">
+					<materialDesign:Card Background="MediumPurple" Padding="10" Margin="0,10,0,0">
 						<StackPanel>
 							<CheckBox x:Name="tcostcb" Content="Threat Cost" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding useThreat}"/>
 							<StackPanel Orientation="Horizontal" IsEnabled="{Binding Path=IsChecked, ElementName=tcostcb}">

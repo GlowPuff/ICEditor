@@ -30,7 +30,7 @@
 
 						<TextBox x:Name="mnameTB" Style="{StaticResource MaterialDesignOutlinedTextBox}"  Text="{Binding missionName}" KeyDown="Validate_KeyDown" CaretBrush="White" materialDesign:HintAssist.Hint="Mission Name"/>
 						<Button x:Name="descriptionBtn" Grid.Column="1" Content="EDIT DESCRIPTION" HorizontalAlignment="Center" Click="descriptionBtn_Click"/>
-						
+
 						<StackPanel Grid.Column="0" Grid.Row="1" Margin="0,10,0,0">
 							<TextBlock Text="Mission Type"  VerticalAlignment="Center" HorizontalAlignment="Center"/>
 							<ComboBox x:Name="mTypeCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" Margin="0,5,0,0" SelectedValue="{Binding missionType}"/>

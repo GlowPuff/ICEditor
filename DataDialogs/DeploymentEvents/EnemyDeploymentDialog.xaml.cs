@@ -169,6 +169,12 @@ namespace Imperial_Commander_Editor
 				(eventAction as EnemyDeployment).deploymentGroup = null;
 		}
 
+		private void targetBtn_Click( object sender, RoutedEventArgs e )
+		{
+			var dlg = new PriorityTraitsDialog( (eventAction as EnemyDeployment).enemyGroupData.groupPriorityTraits );
+			dlg.ShowDialog();
+		}
+
 		private void dpCB_SelectionChanged( object sender, SelectionChangedEventArgs e )
 		{
 			selectedDP = (eventAction as EnemyDeployment).specificDeploymentPoint;

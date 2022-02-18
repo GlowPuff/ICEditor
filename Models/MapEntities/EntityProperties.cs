@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
@@ -24,6 +25,23 @@ namespace Imperial_Commander_Editor
 		public EntityProperties()
 		{
 			isActive = true;
+		}
+
+		public void ValidateTriggers()
+		{
+			for ( int i = 0; i < buttonActions.Count; i++ )
+			{
+				var t = Utils.mainWindow.mission.GetTriggerFromGUID( buttonActions[i].triggerGUID );
+				if ( t != null )
+				{
+					buttonActions[i].triggerName = t.name;
+				}
+				else
+				{
+					buttonActions[i].triggerGUID = Guid.Empty;
+					buttonActions[i].triggerName = "None";
+				}
+			}
 		}
 
 		public void CopyFrom( IMapEntity me )

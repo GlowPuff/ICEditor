@@ -44,5 +44,11 @@ namespace Imperial_Commander_Editor
 		{
 			(eventAction as ChangeTarget).groupsToAdd.Remove( (sender as FrameworkElement).DataContext as DeploymentCard );
 		}
+
+		private void traitsBtn_Click( object sender, RoutedEventArgs e )
+		{
+			var dlg = new PriorityTraitsDialog( (eventAction as ChangeTarget).groupPriorityTraits );
+			dlg.ShowDialog();
+		}
 	}
 }

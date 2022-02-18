@@ -18,6 +18,9 @@ namespace Imperial_Commander_Editor
 			DataContext = this;
 
 			entityProperties = ep;
+
+			//verify triggers exist/update names
+			entityProperties.ValidateTriggers();
 		}
 
 		private void okButton_Click( object sender, RoutedEventArgs e )

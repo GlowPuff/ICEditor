@@ -51,6 +51,9 @@ namespace Imperial_Commander_Editor
 				PC();
 			}
 		}
+		/// <summary>
+		/// Returns Events (global and owned)
+		/// </summary>
 		public List<MissionEvent> localEvents
 		{
 			get
@@ -61,6 +64,9 @@ namespace Imperial_Commander_Editor
 				return events;
 			}
 		}
+		/// <summary>
+		/// Returns Triggers (global and owned)
+		/// </summary>
 		public List<Trigger> localTriggers
 		{
 			get

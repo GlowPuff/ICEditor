@@ -73,10 +73,6 @@ namespace Imperial_Commander_Editor
 
 		private void okButton_Click( object sender, RoutedEventArgs e )
 		{
-			//if ( initialDP != selectedDP )
-			//{
-			//	(eventAction as EnemyDeployment).enemyGroupData.SetDP( (eventAction as EnemyDeployment).specificDeploymentPoint );
-			//}
 			if ( (eventAction as EnemyDeployment).sourceType == SourceType.Hand )
 				eventAction.displayName = "Deploy: From Hand";
 			else if ( string.IsNullOrEmpty( (eventAction as EnemyDeployment).deploymentGroup ) )

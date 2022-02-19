@@ -489,11 +489,11 @@ namespace Imperial_Commander_Editor
 			}
 			else if ( (selectedEntity is MapTile || selectedEntity is Door) && e.Key == Key.OemOpenBrackets )
 			{
-				selectedEntity?.mapRenderer.Rotate( 1 );
+				selectedEntity?.mapRenderer.Rotate( -1 );
 			}
 			else if ( (selectedEntity is MapTile || selectedEntity is Door) && e.Key == Key.OemCloseBrackets )
 			{
-				selectedEntity?.mapRenderer.Rotate( -1 );
+				selectedEntity?.mapRenderer.Rotate( 1 );
 			}
 			else if ( e.Key == Key.X )
 			{
@@ -510,6 +510,10 @@ namespace Imperial_Commander_Editor
 			else if ( e.Key == Key.W )
 			{
 				switchSectionBtn_Click( null, null );
+			}
+			else if ( e.Key == Key.T )
+			{
+				OnAddTile();
 			}
 		}
 
@@ -632,8 +636,6 @@ namespace Imperial_Commander_Editor
 					selectedEntity = tile;
 				}
 			}
-			//foreach ( var section in Utils.mainWindow.mission.mapSections )
-			//{
 			foreach ( var item in Utils.mainWindow.mission.mapEntities )
 			{
 				Vector p = item.entityPosition;
@@ -642,7 +644,6 @@ namespace Imperial_Commander_Editor
 				item.mapRenderer.SetRotation( item.entityRotation );
 				selectedEntity = item;
 			}
-			//}
 		}
 
 		public void OnWindowLoaded()

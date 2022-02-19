@@ -130,9 +130,12 @@ namespace Imperial_Commander_Editor
 		{
 			var t = entityShape.RenderTransform as RotateTransform ?? new RotateTransform();
 			t.Angle += 90 * dir;
+			t.Angle = t.Angle % 360;
 			entityShape.RenderTransform = new RotateTransform( t.Angle );
 			if ( entityImage != null )
+			{
 				entityImage.RenderTransform = new RotateTransform( t.Angle );
+			}
 			mapEntity.entityRotation = t.Angle;
 		}
 		public void RoundPosition()
@@ -203,8 +206,13 @@ namespace Imperial_Commander_Editor
 			var t = entityShape.RenderTransform as RotateTransform ?? new RotateTransform();
 			t.Angle = r;
 			entityShape.RenderTransform = new RotateTransform( t.Angle );
+			entityShape.RenderTransformOrigin = new();
+
 			if ( entityImage != null )
+			{
 				entityImage.RenderTransform = new RotateTransform( t.Angle );
+				entityShape.RenderTransformOrigin = new();
+			}
 		}
 		public void Dim( bool dim )
 		{

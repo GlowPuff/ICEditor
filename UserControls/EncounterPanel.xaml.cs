@@ -103,8 +103,7 @@ namespace Imperial_Commander_Editor
 
 			if ( !useDefaultPriority )
 			{
-				_priorityTraits = _priorityTraits ?? new();
-				ig.groupPriorityTraits = _priorityTraits;
+				ig.groupPriorityTraits = _priorityTraits ?? new();
 				ig.groupPriorityTraits.useDefaultPriority = false;
 				_priorityTraits = null;
 			}
@@ -128,8 +127,7 @@ namespace Imperial_Commander_Editor
 
 			if ( !useDefaultPriority )
 			{
-				_priorityTraits = _priorityTraits ?? new();
-				ig.groupPriorityTraits = _priorityTraits;
+				ig.groupPriorityTraits = _priorityTraits ?? new();
 				ig.groupPriorityTraits.useDefaultPriority = false;
 				_priorityTraits = null;
 			}

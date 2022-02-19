@@ -117,6 +117,11 @@
 					</Grid>
 					<Border Padding="10,0">
 						<StackPanel Orientation="Horizontal">
+							<TextBlock Text="Add Tile" VerticalAlignment="Center"/>
+							<materialDesign:Chip Content="T" Style="{StaticResource  MaterialDesignFlatSecondaryButton}"/>
+
+							<materialDesign:PackIcon Kind="Dot" VerticalAlignment="Center" Foreground="MediumOrchid"/>
+
 							<TextBlock Text="Duplicate Entity" VerticalAlignment="Center"/>
 							<materialDesign:Chip Content="D" Style="{StaticResource  MaterialDesignFlatSecondaryButton}"/>
 
@@ -128,7 +133,7 @@
 							<materialDesign:PackIcon Kind="Dot" VerticalAlignment="Center" Foreground="MediumOrchid"/>
 
 							<TextBlock Text="Rotate Tile" VerticalAlignment="Center"/>
-							<materialDesign:Chip Content="[ and ], Right Click Entity" Style="{StaticResource  MaterialDesignFlatSecondaryButton}"/>
+							<materialDesign:Chip Content="[ and ], RClick Entity" Style="{StaticResource  MaterialDesignFlatSecondaryButton}"/>
 
 							<materialDesign:PackIcon Kind="Dot" VerticalAlignment="Center" Foreground="MediumOrchid"/>
 

@@ -1,7 +1,7 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Imperial_Commander_Editor
 {
@@ -28,6 +28,9 @@ namespace Imperial_Commander_Editor
 
 			foreach ( var item in jsonObject )
 			{
+				if ( !item.HasValues )
+					continue;
+
 				switch ( item["eventActionType"].Value<int>() )
 				{
 					case 0:

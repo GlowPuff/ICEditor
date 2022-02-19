@@ -1,12 +1,12 @@
-﻿using MaterialDesignThemes.Wpf;
-using Microsoft.Win32;
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using MaterialDesignThemes.Wpf;
+using Microsoft.Win32;
 //using System.Windows.Media;
 //using MaterialDesignColors;
 //using MaterialDesignThemes.Wpf;
@@ -47,7 +47,7 @@ namespace Imperial_Commander_Editor
 			projectCollection = new ObservableCollection<ProjectItem>();
 			projectLV.ItemsSource = projectCollection;
 
-			//poll Project folder for files and populate Recent list
+			//poll Project folder for files and populate Recent list, sorted by newest first
 			var projects = FileManager.GetProjects();
 			if ( projects != null )
 			{

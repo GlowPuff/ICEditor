@@ -99,15 +99,14 @@ namespace Imperial_Commander_Editor
 		{
 			var ig = new EnemyGroupData( Utils.enemyData.Where( x => x.id == selectedGroup ).First(), new( Guid.Empty ) );
 
+			ig.groupPriorityTraits.useDefaultPriority = useDefaultPriority;
+
 			if ( !useDefaultPriority )
 			{
 				_priorityTraits = _priorityTraits ?? new();
 				ig.groupPriorityTraits = _priorityTraits;
+				ig.groupPriorityTraits.useDefaultPriority = false;
 				_priorityTraits = null;
-			}
-			else
-			{
-				//TODO - get priorityTraits from card data JSON and assign it to "ig"
 			}
 
 			ig.customInstructionType = customInstructionType;
@@ -118,21 +117,21 @@ namespace Imperial_Commander_Editor
 			Utils.mainWindow.mission.reservedDeploymentGroups.Add( ig );
 			customName = customInstructions = "";
 			useDefaultPriority = true;
+			customInstructionType = CustomInstructionType.Replace;
 		}
 
 		private void addInitialGroupButton_Click( object sender, RoutedEventArgs e )
 		{
 			var ig = new EnemyGroupData( Utils.enemyData.Where( x => x.id == selectedGroup ).First(), deploymentPoint );
 
+			ig.groupPriorityTraits.useDefaultPriority = useDefaultPriority;
+
 			if ( !useDefaultPriority )
 			{
 				_priorityTraits = _priorityTraits ?? new();
 				ig.groupPriorityTraits = _priorityTraits;
+				ig.groupPriorityTraits.useDefaultPriority = false;
 				_priorityTraits = null;
-			}
-			else
-			{
-				//TODO - get priorityTraits from card data JSON and assign it to "ig"
 			}
 
 			ig.customInstructionType = customInstructionType;
@@ -144,6 +143,7 @@ namespace Imperial_Commander_Editor
 			deploymentPoint = deploymentPoints[0];
 			customName = customInstructions = "";
 			useDefaultPriority = true;
+			customInstructionType = CustomInstructionType.Replace;
 		}
 
 		private void remInitialGroupButton_Click( object sender, RoutedEventArgs e )
@@ -222,6 +222,7 @@ namespace Imperial_Commander_Editor
 		private void targetBtn_Click( object sender, RoutedEventArgs e )
 		{
 			_priorityTraits = _priorityTraits ?? new();
+			_priorityTraits.useDefaultPriority = useDefaultPriority;
 
 			var dlg = new PriorityTraitsDialog( _priorityTraits );
 			dlg.ShowDialog();

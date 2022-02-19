@@ -31,7 +31,7 @@ namespace Imperial_Commander_Editor
 	public enum FigureSize { Small1x1, Medium1x2, Large2x2, Huge2x3 }
 	public enum GroupTraits { Trooper, Leader, HeavyWeapon, Guardian, Brawler, Droid, Vehicle, Hunter, Creature, Smuggler, Spy, ForceUser, Wookiee, Hero }
 
-	public class ProjectItem
+	public class ProjectItem : IComparable<ProjectItem>//IComparer//
 	{
 		public string Title { get; set; }
 		public string Date { get; set; }
@@ -39,6 +39,10 @@ namespace Imperial_Commander_Editor
 		public string fileName { get; set; }
 		public string relativePath { get; set; }
 		public string fileVersion { get; set; }
+		public long timeTicks { get; set; }
+
+		public int CompareTo( ProjectItem other ) => timeTicks > other.timeTicks ? -1 : timeTicks < other.timeTicks ? 1 : 0;
+		//int IComparer.Compare( object x, object y ) => ((ProjectItem)x).timeTicks < ((ProjectItem)y).timeTicks ? -1 : ((ProjectItem)x).timeTicks > ((ProjectItem)y).timeTicks ? 1 : 0;
 	}
 
 	public class DeploymentColor

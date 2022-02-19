@@ -1,10 +1,10 @@
-﻿using Microsoft.Win32;
-using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows;
+using Microsoft.Win32;
+using Newtonsoft.Json;
 
 namespace Imperial_Commander_Editor
 {
@@ -52,6 +52,7 @@ namespace Imperial_Commander_Editor
 			FileInfo fi = new( filePath );
 			mission.fileName = fi.Name;
 			mission.saveDate = DateTime.Now.ToString( "M/d/yyyy" );
+			mission.timeTicks = DateTime.Now.Ticks;
 			mission.fileVersion = Utils.formatVersion;
 
 			string output = JsonConvert.SerializeObject( mission, Formatting.Indented );
@@ -127,6 +128,8 @@ namespace Imperial_Commander_Editor
 						projectItem.Date = split[1];
 					if ( split[0] == "fileVersion" )
 						projectItem.fileVersion = split[1];
+					if ( split[0] == "timeTicks" )
+						projectItem.timeTicks = long.Parse( split[1] );
 				}
 			}
 			return projectItem;
@@ -163,6 +166,7 @@ namespace Imperial_Commander_Editor
 					var pi = CreateProjectItem( fi.FullName );
 					items.Add( pi );
 				}
+				items.Sort();
 				return items;
 			}
 			catch ( Exception )

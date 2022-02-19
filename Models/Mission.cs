@@ -9,8 +9,6 @@ namespace Imperial_Commander_Editor
 {
 	public class Mission : INotifyPropertyChanged
 	{
-		/// Bindable data
-
 		public event PropertyChangedEventHandler PropertyChanged;
 
 		public MissionProperties missionProperties { get; set; }
@@ -30,6 +28,10 @@ namespace Imperial_Commander_Editor
 		public string fileVersion = "1";
 
 		public string saveDate;
+		/// <summary>
+		/// File save time so recent list can sort by recent first
+		/// </summary>
+		public long timeTicks;
 
 		public ObservableCollection<MapSection> mapSections { get; set; }
 		public ObservableCollection<Trigger> globalTriggers { get; set; }
@@ -55,6 +57,7 @@ namespace Imperial_Commander_Editor
 			fileName = "";
 			relativePath = "";
 			saveDate = DateTime.Now.ToString( "M/d/yyyy" );
+			timeTicks = DateTime.Now.Ticks;
 			missionProperties = new MissionProperties();
 
 			mapSections = new();

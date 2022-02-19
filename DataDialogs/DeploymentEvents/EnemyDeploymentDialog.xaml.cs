@@ -77,7 +77,9 @@ namespace Imperial_Commander_Editor
 			//{
 			//	(eventAction as EnemyDeployment).enemyGroupData.SetDP( (eventAction as EnemyDeployment).specificDeploymentPoint );
 			//}
-			if ( string.IsNullOrEmpty( (eventAction as EnemyDeployment).deploymentGroup ) )
+			if ( (eventAction as EnemyDeployment).sourceType == SourceType.Hand )
+				eventAction.displayName = "Deploy: From Hand";
+			else if ( string.IsNullOrEmpty( (eventAction as EnemyDeployment).deploymentGroup ) )
 				eventAction.displayName = "Deploy: INVALID SELECTION";
 			else
 				eventAction.displayName = "Deploy: " + (eventAction as EnemyDeployment).deploymentGroup + "/" + (eventAction as EnemyDeployment).enemyGroupData.cardName;

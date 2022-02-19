@@ -8,6 +8,7 @@ namespace Imperial_Commander_Editor
 		bool _incBrawler, _incCreature, _incDroid, _incForceUser;
 		bool _incGuardian, _incHeavyWeapon, _incHunter, _incLeader;
 		bool _incSmuggler, _incSpy, _incTrooper, _incWookiee;
+		bool _useDefaultPriority;
 
 		public bool incBrawler { get { return _incBrawler; } set { _incBrawler = value; PC(); } }
 		public bool incCreature { get { return _incCreature; } set { _incCreature = value; PC(); } }
@@ -21,6 +22,7 @@ namespace Imperial_Commander_Editor
 		public bool incSpy { get { return _incSpy; } set { _incSpy = value; PC(); } }
 		public bool incTrooper { get { return _incTrooper; } set { _incTrooper = value; PC(); } }
 		public bool incWookiee { get { return _incWookiee; } set { _incWookiee = value; PC(); } }
+		public bool useDefaultPriority { get { return _useDefaultPriority; } set { _useDefaultPriority = value; PC(); } }
 
 		public event PropertyChangedEventHandler PropertyChanged;
 		public void PC( [CallerMemberName] string n = "" )
@@ -34,6 +36,7 @@ namespace Imperial_Commander_Editor
 			incBrawler = incCreature = incDroid = incForceUser = true;
 			incGuardian = incHeavyWeapon = incHunter = incLeader = true;
 			incSmuggler = incSpy = incTrooper = incWookiee = true;
+			useDefaultPriority = true;
 		}
 
 		public void CheckAll()

@@ -29,6 +29,7 @@ namespace Imperial_Commander_Editor
 			specificAlly = "A001";
 			specificHero = "H1";
 			groupPriorityTraits = new();
+			groupPriorityTraits.useDefaultPriority = false;
 		}
 	}
 }

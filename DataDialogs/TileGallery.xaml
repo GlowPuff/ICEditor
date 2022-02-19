@@ -135,7 +135,7 @@
 							</Grid>
 						</GroupBox>
 
-						<Button x:Name="closeBtn" Grid.Row="2" Content="CANCEL" Click="closeBtn_Click" VerticalAlignment="Bottom" IsCancel="True" Margin="0,10,0,0" IsCancel="True"/>
+						<Button x:Name="closeBtn" Grid.Row="2" Content="CANCEL" Click="closeBtn_Click" VerticalAlignment="Bottom" IsCancel="True" Margin="0,10,0,0"/>
 					</Grid>
 				</materialDesign:Card>
 

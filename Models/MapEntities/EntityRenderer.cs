@@ -129,14 +129,77 @@ namespace Imperial_Commander_Editor
 		public void Rotate( int dir )
 		{
 			var t = entityShape.RenderTransform as RotateTransform ?? new RotateTransform();
-			t.Angle += 90 * dir;
-			t.Angle = t.Angle % 360;
-			entityShape.RenderTransform = new RotateTransform( t.Angle );
+			double angle = t.Angle + 90 * dir;
+			angle %= 360;
+			if ( angle < 0 )
+				angle = 360 + angle;
+
+			Vector curpos = GetPosition();
+			if ( dir == 1 )
+			{
+				if ( angle == 90 )
+				{
+					double cx = curpos.X + dims.X * 10 / 2;
+					double cy = curpos.Y + dims.Y * 10 / 2;
+					SetPosition( new( cx + dims.Y * 10 / 2, cy - dims.X * 10 / 2 ) );
+				}
+				else if ( angle == 180 )
+				{
+					double cx = curpos.X - dims.Y * 10 / 2;
+					double cy = curpos.Y + dims.X * 10 / 2;
+					SetPosition( new( cx + dims.X * 10 / 2, cy + dims.Y * 10 / 2 ) );
+				}
+				else if ( angle == 270 )
+				{
+					double cx = curpos.X - dims.X * 10 / 2;
+					double cy = curpos.Y - dims.Y * 10 / 2;
+					SetPosition( new( cx - dims.Y * 10 / 2, cy + dims.X * 10 / 2 ) );
+				}
+				else if ( angle == 0 )
+				{
+					double cx = curpos.X + dims.Y * 10 / 2;
+					double cy = curpos.Y - dims.X * 10 / 2;
+					SetPosition( new( cx - dims.X * 10 / 2, cy - dims.Y * 10 / 2 ) );
+				}
+			}
+			else
+			{
+				if ( angle == 90 )
+				{
+					double cx = curpos.X - dims.X * 10 / 2;
+					double cy = curpos.Y - dims.Y * 10 / 2;
+					SetPosition( new( cx + dims.Y * 10 / 2, cy - dims.X * 10 / 2 ) );
+				}
+				else if ( angle == 180 )
+				{
+					double cx = curpos.X + dims.Y * 10 / 2;
+					double cy = curpos.Y - dims.X * 10 / 2;
+					SetPosition( new( cx + dims.X * 10 / 2, cy + dims.Y * 10 / 2 ) );
+				}
+				else if ( angle == 270 )
+				{
+					double cx = curpos.X + dims.X * 10 / 2;
+					double cy = curpos.Y + dims.Y * 10 / 2;
+					SetPosition( new( cx - dims.Y * 10 / 2, cy + dims.X * 10 / 2 ) );
+				}
+				else if ( angle == 0 )
+				{
+					double cx = curpos.X - dims.Y * 10 / 2;
+					double cy = curpos.Y + dims.X * 10 / 2;
+					SetPosition( new( cx - dims.X * 10 / 2, cy - dims.Y * 10 / 2 ) );
+				}
+			}
+			RoundPosition();
+
+			//t.Angle += 90 * dir;
+			//t.Angle %= 360;
+
+			entityShape.RenderTransform = new RotateTransform( angle );
 			if ( entityImage != null )
 			{
-				entityImage.RenderTransform = new RotateTransform( t.Angle );
+				entityImage.RenderTransform = new RotateTransform( angle );
 			}
-			mapEntity.entityRotation = t.Angle;
+			mapEntity.entityRotation = angle;
 		}
 		public void RoundPosition()
 		{

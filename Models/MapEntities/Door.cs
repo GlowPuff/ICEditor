@@ -1,11 +1,10 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using Newtonsoft.Json;
 
 namespace Imperial_Commander_Editor
 {
@@ -76,8 +75,10 @@ namespace Imperial_Commander_Editor
 			{
 				unselectedBGColor = new SolidColorBrush( Colors.Transparent ),
 				selectedBGColor = new SolidColorBrush( Colors.Transparent ),
-				unselectedStrokeColor = new SolidColorBrush( Colors.Transparent ),
-				selectedZ = 300
+				unselectedStrokeColor = new SolidColorBrush( Colors.White ),
+				selectedImageZ = 305,
+				selectedZ = 300,
+				unselectedStrokeWidth = .25f
 			};
 			mapRenderer.BuildShape( TokenShape.Square );
 			mapRenderer.BuildImage( "pack://application:,,,/Imperial Commander Editor;component/Assets/Tiles/door.png" );

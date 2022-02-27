@@ -10,6 +10,7 @@
 
 	<UserControl.Resources>
 		<local:RadioBoolToIntConverter x:Key="rbConv" />
+		<local:MissionSubTypeConverter x:Key="mtConv" />
 	</UserControl.Resources>
 
 	<ScrollViewer VerticalScrollBarVisibility="Auto" Margin="10">
@@ -31,11 +32,30 @@
 						<TextBox x:Name="mnameTB" Style="{StaticResource MaterialDesignOutlinedTextBox}"  Text="{Binding missionName}" KeyDown="Validate_KeyDown" CaretBrush="White" materialDesign:HintAssist.Hint="Mission Name"/>
 						<Button x:Name="descriptionBtn" Grid.Column="1" Content="EDIT DESCRIPTION" HorizontalAlignment="Center" Click="descriptionBtn_Click"/>
 
+						<!--MISSION TYPE-->
 						<StackPanel Grid.Column="0" Grid.Row="1" Margin="0,10,0,0">
 							<TextBlock Text="Mission Type"  VerticalAlignment="Center" HorizontalAlignment="Center"/>
-							<ComboBox x:Name="mTypeCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" Margin="0,5,0,0" SelectedValue="{Binding missionType}"/>
+							<ComboBox x:Name="mTypeCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" Margin="0,5,0,0">
+								<ComboBoxItem Content="Story" IsSelected="{Binding missionType, ConverterParameter={x:Static local:MissionType.Story}, Converter={StaticResource rbConv}}"/>
+								<ComboBoxItem Content="Side" IsSelected="{Binding missionType, ConverterParameter={x:Static local:MissionType.Side}, Converter={StaticResource rbConv}}"/>
+								<ComboBoxItem Content="Forced" IsSelected="{Binding missionType, ConverterParameter={x:Static local:MissionType.Forced}, Converter={StaticResource rbConv}}"/>
+								<Separator/>
+								<ComboBoxItem>
+									<StackPanel>
+										<CheckBox Content="General" IsChecked="{Binding missionSubType, ConverterParameter={x:Static local:MissionSubType.General}, Converter={StaticResource mtConv}}"/>
+										<CheckBox Content="Personal" IsChecked="{Binding missionSubType, ConverterParameter={x:Static local:MissionSubType.Personal}, Converter={StaticResource mtConv}}"/>
+										<CheckBox Content="Villain" IsChecked="{Binding missionSubType, ConverterParameter={x:Static local:MissionSubType.Villain}, Converter={StaticResource mtConv}}"/>
+										<CheckBox Content="Ally" IsChecked="{Binding missionSubType, ConverterParameter={x:Static local:MissionSubType.Ally}, Converter={StaticResource mtConv}}"/>
+										<CheckBox Content="Agenda" IsChecked="{Binding missionSubType, ConverterParameter={x:Static local:MissionSubType.Agenda}, Converter={StaticResource mtConv}}"/>
+										<CheckBox Content="Threat" IsChecked="{Binding missionSubType, ConverterParameter={x:Static local:MissionSubType.Threat}, Converter={StaticResource mtConv}}"/>
+										<CheckBox Content="Finale" IsChecked="{Binding missionSubType, ConverterParameter={x:Static local:MissionSubType.Finale}, Converter={StaticResource mtConv}}"/>
+										<CheckBox Content="Other" IsChecked="{Binding missionSubType, ConverterParameter={x:Static local:MissionSubType.Other}, Converter={StaticResource mtConv}}"/>
+									</StackPanel>
+								</ComboBoxItem>
+							</ComboBox>
 						</StackPanel>
 
+						<!--MISSION ID-->
 						<TextBox Grid.Column="1" Grid.Row="1" Style="{StaticResource MaterialDesignOutlinedTextBox}" Text="{Binding missionID}" materialDesign:HintAssist.Hint="Unique Mission ID" CharacterCasing="Upper" KeyDown="Validate_KeyDown" CaretBrush="White" VerticalAlignment="Bottom" Margin="10,0,0,0"/>
 					</Grid>
 				</GroupBox>

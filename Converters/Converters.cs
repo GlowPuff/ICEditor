@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -51,11 +52,29 @@ namespace Imperial_Commander_Editor
 		}
 	}
 
+	public class MissionSubTypeConverter : IValueConverter
+	{
+		public object Convert( object value, Type targetType, object parameter, CultureInfo culture )
+		{
+			return ((ObservableCollection<MissionSubType>)value).Contains( (MissionSubType)parameter );
+		}
+		public object ConvertBack( object value, Type targetType, object parameter, CultureInfo culture )
+		{
+			var st = Utils.mainWindow.mission.missionProperties.missionSubType;
+			if ( !st.Contains( (MissionSubType)parameter ) )
+				st.Add( (MissionSubType)parameter );
+			else
+				st.Remove( (MissionSubType)parameter );
+			return st;
+		}
+	}
+
 	public class TileSideConverter : IValueConverter
 	{
 		public object Convert( object value, Type targetType, object parameter, CultureInfo culture )
 		{
-			return (string)value == "A" ? false : true; ;
+			return (string)value == "A" ? false : true;
+			;
 		}
 
 		public object ConvertBack( object value, Type targetType, object parameter, CultureInfo culture )

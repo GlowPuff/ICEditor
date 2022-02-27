@@ -17,7 +17,8 @@ namespace Imperial_Commander_Editor
 		PriorityTargetType _priorityTargetType;
 		Guid _startingEvent;
 		int _fixedValue, _threatLevel;
-		string _missionType;
+		MissionType _missionType;
+		ObservableCollection<MissionSubType> _missionSubType;
 
 		public string missionName
 		{
@@ -146,7 +147,8 @@ namespace Imperial_Commander_Editor
 			set { _threatLevel = value; PC(); }
 		}
 
-		public string missionType { get { return _missionType; } set { _missionType = value; PC(); } }
+		public MissionType missionType { get { return _missionType; } set { _missionType = value; PC(); } }
+		public ObservableCollection<MissionSubType> missionSubType { get { return _missionSubType; } set { _missionSubType = value; PC(); } }
 
 		public ObservableCollection<string> bannedGroups { get; set; } = new();
 
@@ -179,7 +181,8 @@ namespace Imperial_Commander_Editor
 			fixedValue = 0;
 			threatLevel = 1;
 			startingEvent = Guid.Empty;
-			missionType = "Story";//			MissionType.Story;
+			missionType = MissionType.Story;
+			missionSubType = new();
 		}
 	}
 }

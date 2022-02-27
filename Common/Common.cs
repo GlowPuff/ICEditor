@@ -25,13 +25,14 @@ namespace Imperial_Commander_Editor
 	public enum DeploymentSpot { Active, Specific }
 	public enum GroupType { All, Specific }
 	public enum MarkerType { Neutral, Rebel, Imperial }
-	public enum MissionType { Story, Side, Agenda, Threat, Forced, Other }
+	public enum MissionType { Story, Side, Forced }
+	public enum MissionSubType { Agenda, Threat, Other, Finale, General, Personal, Villain, Ally }
 	public enum DiceColor { White, Black, Yellow, Red, Green, Blue, Grey }
 	public enum AttackType { Ranged, Melee, None }
 	public enum FigureSize { Small1x1, Medium1x2, Large2x2, Huge2x3 }
 	public enum GroupTraits { Trooper, Leader, HeavyWeapon, Guardian, Brawler, Droid, Vehicle, Hunter, Creature, Smuggler, Spy, ForceUser, Wookiee, Hero }
 
-	public class ProjectItem : IComparable<ProjectItem>//IComparer//
+	public class ProjectItem : IComparable<ProjectItem>
 	{
 		public string Title { get; set; }
 		public string Date { get; set; }
@@ -42,7 +43,6 @@ namespace Imperial_Commander_Editor
 		public long timeTicks { get; set; }
 
 		public int CompareTo( ProjectItem other ) => timeTicks > other.timeTicks ? -1 : timeTicks < other.timeTicks ? 1 : 0;
-		//int IComparer.Compare( object x, object y ) => ((ProjectItem)x).timeTicks < ((ProjectItem)y).timeTicks ? -1 : ((ProjectItem)x).timeTicks > ((ProjectItem)y).timeTicks ? 1 : 0;
 	}
 
 	public class DeploymentColor

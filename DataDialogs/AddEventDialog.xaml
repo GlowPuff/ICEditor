@@ -15,9 +15,9 @@
 				<ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.PopupBox.xaml"/>
 			</ResourceDictionary.MergedDictionaries>
 
-			<DataTemplate DataType="{x:Type local:Trigger}" x:Key="k1">
+			<DataTemplate DataType="{x:Type local:TriggeredBy}" x:Key="k1">
 				<UniformGrid Columns="3">
-					<TextBlock Text="{Binding name}" VerticalAlignment="Center"/>
+					<TextBlock Text="{Binding triggerName}" VerticalAlignment="Center"/>
 					<TextBox Text="{Binding triggerValue}" VerticalAlignment="Center" KeyDown="nameTB_KeyDown"/>
 					<Button x:Name="removeAdditionalTriggerButton" HorizontalAlignment="Right" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="25" Height="25" Click="removeAdditionalTriggerButton_Click">
 						<materialDesign:PackIcon Kind="Remove" Width="20" Height="20" Foreground="Red"/>

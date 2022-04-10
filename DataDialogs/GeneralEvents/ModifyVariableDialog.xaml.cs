@@ -13,7 +13,7 @@ namespace Imperial_Commander_Editor
 		public static MainWindow mainWindow { get { return Utils.mainWindow; } }
 		public IEventAction eventAction { get; set; }
 		public Trigger selectedTrigger { get; set; }
-		public ObservableCollection<Trigger> selectedTriggers { get; set; } = new();
+		public ObservableCollection<TriggerModifier> selectedTriggers { get; set; } = new();
 
 		public ModifyVariableDialog( string dname, EventActionType et, IEventAction ea = null )
 		{
@@ -31,7 +31,7 @@ namespace Imperial_Commander_Editor
 
 			foreach ( var item in (eventAction as ModifyVariable).triggerList )
 			{
-				selectedTriggers.Add( Utils.mainWindow.mission.GetTriggerFromGUID( item ) );
+				selectedTriggers.Add( new TriggerModifier( Utils.mainWindow.mission.GetTriggerFromGUID( item ) ) );
 			}
 		}
 
@@ -51,14 +51,14 @@ namespace Imperial_Commander_Editor
 			if ( selectedTrigger != null && !(eventAction as ModifyVariable).triggerList.Contains( selectedTrigger.GUID ) )
 			{
 				(eventAction as ModifyVariable).triggerList.Add( selectedTrigger.GUID );
-				selectedTriggers.Add( selectedTrigger );
+				selectedTriggers.Add( new TriggerModifier( selectedTrigger ) );
 			}
 		}
 
 		private void remTriggerButton_Click( object sender, RoutedEventArgs e )
 		{
 			(eventAction as ModifyVariable).triggerList.Remove( ((sender as FrameworkElement).DataContext as Trigger).GUID );
-			selectedTriggers.Remove( (sender as FrameworkElement).DataContext as Trigger );
+			selectedTriggers.Remove( (sender as FrameworkElement).DataContext as TriggerModifier );
 		}
 
 		private void addNewTriggerButton_Click( object sender, RoutedEventArgs e )
@@ -67,7 +67,7 @@ namespace Imperial_Commander_Editor
 			if ( t != null && !(eventAction as ModifyVariable).triggerList.Contains( t.GUID ) )
 			{
 				(eventAction as ModifyVariable).triggerList.Add( t.GUID );
-				selectedTriggers.Add( t );
+				selectedTriggers.Add( new TriggerModifier( t ) );
 			}
 		}
 

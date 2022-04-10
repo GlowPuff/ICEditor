@@ -117,7 +117,7 @@ namespace Imperial_Commander_Editor
 			set { _useActivation = value; PC(); }
 		}
 		public bool behaviorAll { get { return _behaviorAll; } set { _behaviorAll = value; PC(); } }
-		public ObservableCollection<Trigger> additionalTriggers { get; set; }
+		public ObservableCollection<TriggeredBy> additionalTriggers { get; set; }
 
 		[JsonConverter( typeof( EventActionConverter ) )]
 		public ObservableCollection<IEventAction> eventActions { get; set; }

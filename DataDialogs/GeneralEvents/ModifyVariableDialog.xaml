@@ -10,9 +10,9 @@
         Title="Modify Variables" Width="460" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown" SizeToContent="Height" MaxHeight="500">
 
 	<Window.Resources>
-		<DataTemplate DataType="{x:Type local:Trigger}" x:Key="k1">
+		<DataTemplate DataType="{x:Type local:TriggerModifier}" x:Key="k1">
 			<UniformGrid Columns="2">
-				<TextBlock Text="{Binding name}" VerticalAlignment="Center"/>
+				<TextBlock Text="{Binding triggerName}" VerticalAlignment="Center"/>
 				<UniformGrid Columns="3">
 					<TextBox Text="{Binding setValue}" HorizontalAlignment="Center" Width="50"/>
 					<TextBox Text="{Binding modifyValue}" HorizontalAlignment="Center" Width="50"/>

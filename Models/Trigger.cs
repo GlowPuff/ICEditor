@@ -33,7 +33,7 @@ namespace Imperial_Commander_Editor
 			get { return _useReset; }
 			set { _useReset = value; PC(); }
 		}
-		public int triggerValue
+		public int triggerValue//AddEventDialog, trigger value at which event is fired
 		{
 			get { return _triggerValue; }
 			set { _triggerValue = value; PC(); }
@@ -43,12 +43,12 @@ namespace Imperial_Commander_Editor
 			get { return _initialValue; }
 			set { _initialValue = value; PC(); }
 		}
-		public int setValue
+		public int setValue//ModifyVariable, set to value
 		{
 			get { return _setValue; }
 			set { _setValue = value; PC(); }
 		}
-		public int modifyValue
+		public int modifyValue//ModifyVariable, modify value by
 		{
 			get { return _modifyValue; }
 			set { _modifyValue = value; PC(); }
@@ -102,6 +102,73 @@ namespace Imperial_Commander_Editor
 				return false;
 			}
 			return true;
+		}
+	}
+
+	public class TriggeredBy : INotifyPropertyChanged
+	{
+		string _triggerName;
+		Guid _triggerGUID;
+		int _triggerValue;
+
+		public string triggerName { get { return _triggerName; } set { _triggerName = value; PC(); } }
+		//guid of the trigger to listen to
+		public Guid triggerGUID { get { return _triggerGUID; } set { _triggerGUID = value; PC(); } }
+		//fire the event when trigger is this value
+		public int triggerValue { get { return _triggerValue; } set { _triggerValue = value; PC(); } }
+
+		public event PropertyChangedEventHandler PropertyChanged;
+		public void PC( [CallerMemberName] string n = "" )
+		{
+			if ( !string.IsNullOrEmpty( n ) )
+				PropertyChanged?.Invoke( this, new PropertyChangedEventArgs( n ) );
+		}
+
+		public TriggeredBy()
+		{
+
+		}
+
+		public TriggeredBy( Trigger t )
+		{
+			triggerName = t.name;
+			triggerGUID = t.GUID;
+			triggerValue = 0;
+		}
+	}
+
+	public class TriggerModifier : INotifyPropertyChanged
+	{
+		string _triggerName;
+		Guid _triggerGUID;
+		int _setValue, _modifyValue;
+
+		public string triggerName { get { return _triggerName; } set { _triggerName = value; PC(); } }
+		//guid of the trigger to modify
+		public Guid triggerGUID { get { return _triggerGUID; } set { _triggerGUID = value; PC(); } }
+		//set the trigger to this value, null to disregard
+		public int setValue { get { return _setValue; } set { _setValue = value; PC(); } }
+		//modify the trigger value by this, null to disregard
+		public int modifyValue { get { return _modifyValue; } set { _modifyValue = value; PC(); } }
+
+		public event PropertyChangedEventHandler PropertyChanged;
+		public void PC( [CallerMemberName] string n = "" )
+		{
+			if ( !string.IsNullOrEmpty( n ) )
+				PropertyChanged?.Invoke( this, new PropertyChangedEventArgs( n ) );
+		}
+
+		public TriggerModifier()
+		{
+
+		}
+
+		public TriggerModifier( Trigger t )
+		{
+			triggerName = t.name;
+			triggerGUID = t.GUID;
+			setValue = 0;
+			modifyValue = 0;
 		}
 	}
 }

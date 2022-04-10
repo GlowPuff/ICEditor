@@ -49,10 +49,10 @@ namespace Imperial_Commander_Editor
 			//validate additional triggers (name change, still exists)
 			for ( int i = 0; i < missionEvent.additionalTriggers.Count; i++ )
 			{
-				if ( !Utils.mainWindow.mission.TriggerExists( missionEvent.additionalTriggers[i].GUID ) )
+				if ( !Utils.mainWindow.mission.TriggerExists( missionEvent.additionalTriggers[i].triggerGUID ) )
 				{
-					missionEvent.additionalTriggers[i].GUID = Guid.Empty;
-					missionEvent.additionalTriggers[i].name = "None";
+					missionEvent.additionalTriggers[i].triggerGUID = Guid.Empty;
+					missionEvent.additionalTriggers[i].triggerName = "None";
 				}
 			}
 		}
@@ -80,14 +80,14 @@ namespace Imperial_Commander_Editor
 					Utils.mainWindow.activeSection.triggers.Add( dlg.trigger );
 				Utils.mainWindow.leftPanel.triggersCB.SelectedItem = dlg.trigger;
 				//add to this event's trigger list
-				missionEvent.additionalTriggers.Add( dlg.trigger );
+				missionEvent.additionalTriggers.Add( new TriggeredBy( dlg.trigger ) );
 				RebuildTriggerMenu();
 			}
 		}
 
 		private void removeAdditionalTriggerButton_Click( object sender, RoutedEventArgs e )
 		{
-			var t = (sender as Button).DataContext as Trigger;
+			var t = (sender as Button).DataContext as TriggeredBy;
 			missionEvent.additionalTriggers.Remove( t );
 		}
 
@@ -154,7 +154,7 @@ namespace Imperial_Commander_Editor
 		{
 			if ( e.AddedItems.Count > 0 )
 			{
-				missionEvent.additionalTriggers.Add( e.AddedItems[0] as Trigger );
+				missionEvent.additionalTriggers.Add( new TriggeredBy( e.AddedItems[0] as Trigger ) );// e.AddedItems[0] as Trigger );
 				existingTriggersLB.SelectedIndex = -1;
 			}
 		}

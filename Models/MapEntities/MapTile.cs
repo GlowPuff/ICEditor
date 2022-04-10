@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -7,6 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using Newtonsoft.Json;
 
 namespace Imperial_Commander_Editor
 {
@@ -36,6 +36,7 @@ namespace Imperial_Commander_Editor
 		public bool hasColor { get { return false; } }
 
 		//tile props
+		public string textureName { get; set; }
 		public string tileID { get { return _tileID; } set { _tileID = value; PC(); } }
 		public string tileSide { get { return _tileSide; } set { _tileSide = value.ToUpper(); SetSide(); PC(); } }
 		public Expansion expansion { get { return _expansion; } set { _expansion = value; PC(); } }
@@ -56,6 +57,7 @@ namespace Imperial_Commander_Editor
 		public MapTile( string id, string exp = "Core", string side = "A" )
 		{
 			GUID = Guid.NewGuid();
+			textureName = $"{exp[0].ToString().ToUpper() + exp.Substring( 1 ).ToLower()}_{id}{side}";
 			_tileSide = side;
 			_tileID = id;
 			_expansion = (Expansion)Enum.Parse( typeof( Expansion ), exp, true );

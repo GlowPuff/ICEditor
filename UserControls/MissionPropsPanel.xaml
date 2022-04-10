@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Imperial_Commander_Editor"
 							xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
              xmlns:System="clr-namespace:System;assembly=System.Runtime" x:Class="Imperial_Commander_Editor.MissionPropsPanel" 
-             mc:Ignorable="d" d:DesignWidth="800">
+             mc:Ignorable="d" d:DesignWidth="900">
 
 	<UserControl.Resources>
 		<local:RadioBoolToIntConverter x:Key="rbConv" />
@@ -29,8 +29,12 @@
 							<RowDefinition Height="1*" />
 						</Grid.RowDefinitions>
 
-						<TextBox x:Name="mnameTB" Style="{StaticResource MaterialDesignOutlinedTextBox}"  Text="{Binding missionName}" KeyDown="Validate_KeyDown" CaretBrush="White" materialDesign:HintAssist.Hint="Mission Name"/>
-						<Button x:Name="descriptionBtn" Grid.Column="1" Content="EDIT DESCRIPTION" HorizontalAlignment="Center" Click="descriptionBtn_Click"/>
+						<TextBox x:Name="mnameTB" Style="{StaticResource MaterialDesignOutlinedTextBox}"  Text="{Binding missionName}" KeyDown="Validate_KeyDown" CaretBrush="White" materialDesign:HintAssist.Hint="Mission Name" VerticalAlignment="Center"/>
+						<!--<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="auto" />
+								<ColumnDefinition Width="auto" />
+							</Grid.ColumnDefinitions>-->
+						<Button x:Name="descriptionBtn" Grid.Column="1" Content="DESCRIPTION..." HorizontalAlignment="Center" Click="descriptionBtn_Click" Margin="0,5,0,0"/>
 
 						<!--MISSION TYPE-->
 						<StackPanel Grid.Column="0" Grid.Row="1" Margin="0,10,0,0">
@@ -56,7 +60,11 @@
 						</StackPanel>
 
 						<!--MISSION ID-->
-						<TextBox Grid.Column="1" Grid.Row="1" Style="{StaticResource MaterialDesignOutlinedTextBox}" Text="{Binding missionID}" materialDesign:HintAssist.Hint="Unique Mission ID" CharacterCasing="Upper" KeyDown="Validate_KeyDown" CaretBrush="White" VerticalAlignment="Bottom" Margin="10,0,0,0"/>
+						<!--<TextBox Grid.Column="1" Grid.Row="1" Style="{StaticResource MaterialDesignOutlinedTextBox}" Text="{Binding missionID}" materialDesign:HintAssist.Hint="Unique Mission ID" CharacterCasing="Upper" KeyDown="Validate_KeyDown" CaretBrush="White" VerticalAlignment="Bottom" Margin="10,0,0,0"/>-->
+						<StackPanel  Margin="10,0,0,0" Grid.Column="1" Grid.Row="1" VerticalAlignment="Bottom">
+							<TextBlock Text="Mission ID"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+							<ComboBox Name="missionIDCB" Style="{StaticResource MaterialDesignOutlinedComboBox}"  SelectedValue="{Binding missionID}" Margin="0,5,0,0"/>
+						</StackPanel>
 					</Grid>
 				</GroupBox>
 
@@ -149,26 +157,27 @@
 				</GroupBox>
 
 				<!--custom instructions-->
-				<GroupBox Header="CUSTOM INSTRUCTIONS" Margin="0,5">
-					<StackPanel>
-						<Grid>
-							<Grid.ColumnDefinitions >
+				<GroupBox Header="STARTING MISSION INFO" Margin="0,5">
+					<StackPanel Orientation="Horizontal">
+						<!--<Grid HorizontalAlignment="Left">-->
+						<!--<Grid.ColumnDefinitions >
 								<ColumnDefinition Width="auto"/>
 								<ColumnDefinition Width="*"/>
-							</Grid.ColumnDefinitions>
-							<TextBlock x:Name="ciInfo" Text="Text Not Set" VerticalAlignment="Center" Margin="0,0,10,0"/>
-							<Button Grid.Column="1" x:Name="ciButton" Content="Edit Custom Instructions..." Click="ciButton_Click" MaxWidth="200"/>
-						</Grid>
+							</Grid.ColumnDefinitions>-->
+						<Button Grid.Column="1" x:Name="ciButton" Content="EDIT MISSION INFO..." Click="infoBtn_Click"/>
+						<TextBlock x:Name="ciInfo" Text="Text Not Set" VerticalAlignment="Center" Margin="10,0,10,0"/>
+					</StackPanel>
+					<!--</Grid>-->
 
-						<materialDesign:Card Background="MediumPurple" Padding="10" Margin="0,5,0,0">
+					<!--<materialDesign:Card Background="MediumPurple" Padding="10" Margin="0,5,0,0">
 							<StackPanel Orientation="Horizontal">
 								<TextBlock Text="Placement:" Margin="0,0,10,0" VerticalAlignment="Center"/>
 								<RadioButton Content="Top" GroupName="addto" x:Name="ciTop" IsChecked="{Binding customInstructionType, ConverterParameter={x:Static local:CustomInstructionType.Top}, Converter={StaticResource rbConv}}" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}"/>
 								<RadioButton Content="Bottom" GroupName="addto" x:Name="ciBottom" Margin="10,0" IsChecked="{Binding customInstructionType, ConverterParameter={x:Static local:CustomInstructionType.Bottom}, Converter={StaticResource rbConv}}" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}"/>
 								<RadioButton Content="Replace" GroupName="addto" x:Name="ciReplace" IsChecked="{Binding customInstructionType, ConverterParameter={x:Static local:CustomInstructionType.Replace}, Converter={StaticResource rbConv}}" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}"/>
 							</StackPanel>
-						</materialDesign:Card>
-					</StackPanel>
+						</materialDesign:Card>-->
+					<!--</StackPanel>-->
 				</GroupBox>
 
 				<GroupBox Header="BANNED ENEMY GROUPS" Margin="0,5,0,0">

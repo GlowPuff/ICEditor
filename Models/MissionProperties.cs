@@ -9,7 +9,7 @@ namespace Imperial_Commander_Editor
 	{
 		public event PropertyChangedEventHandler PropertyChanged;
 
-		string _missionName, _missionID, _fixedAlly, _bannedAlly, _customInstructionText, _specificAlly, _specificHero, _priorityOther, _missionDescription, _campaignName;
+		string _missionName, _missionID, _fixedAlly, _bannedAlly, _missionInfo, _specificAlly, _specificHero, _priorityOther, _missionDescription, _campaignName;
 		bool _optionalDeployment, _factionImperial, _factionMercenary;
 		YesNoAll _useFixedAlly, _useBannedAlly, _banAllAllies;
 		CustomInstructionType _customInstructionType;
@@ -52,6 +52,11 @@ namespace Imperial_Commander_Editor
 			get { return _missionID; }
 			set { _missionID = value; PC(); }
 		}
+		public string missionInfo
+		{
+			get { return _missionInfo; }
+			set { _missionInfo = value; PC(); }
+		}
 
 		public bool optionalDeployment
 		{
@@ -91,12 +96,6 @@ namespace Imperial_Commander_Editor
 		{
 			get { return _customInstructionType; }
 			set { _customInstructionType = value; PC(); }
-		}
-
-		public string customInstructionText
-		{
-			get { return _customInstructionText; }
-			set { _customInstructionText = value; PC(); }
 		}
 
 		public ThreatModifierType initialThreatType
@@ -160,10 +159,10 @@ namespace Imperial_Commander_Editor
 
 		public MissionProperties()
 		{
-			missionID = "Example: CORE01";//"Unique Mission ID";
+			missionID = "Custom";//"Example: CORE01";//"Unique Mission ID";
 			missionName = "Mission Name";
 			missionDescription = "";
-			customInstructionText = "";
+			missionInfo = "";
 			fixedAlly = "A001";
 			bannedAlly = "A001";
 			priorityOther = "";

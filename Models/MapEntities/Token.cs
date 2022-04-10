@@ -1,11 +1,10 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using Newtonsoft.Json;
 
 namespace Imperial_Commander_Editor
 {
@@ -70,7 +69,6 @@ namespace Imperial_Commander_Editor
 					mapRenderer.unselectedStrokeColor = new( ol );
 			}
 		}
-
 
 		public event PropertyChangedEventHandler PropertyChanged;
 		public void PC( [CallerMemberName] string n = "" )

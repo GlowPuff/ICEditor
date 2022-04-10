@@ -57,14 +57,18 @@ namespace Imperial_Commander_Editor
 
 		private void addTriggerButton_Click( object sender, RoutedEventArgs e )
 		{
-			if ( (eventAction as QuestionPrompt).buttonList.Count < 4 )
+			if ( (eventAction as QuestionPrompt).buttonList.Count < 5 )
 				(eventAction as QuestionPrompt).buttonList.Add( new() { buttonText = "Button Text", triggerGUID = selectedTrigger.GUID } );
 		}
 
 		private void addNewTriggerButton_Click( object sender, RoutedEventArgs e )
 		{
-			Utils.mainWindow.leftPanel.addTriggerButton_Click( sender, e );
+			Trigger t = Utils.mainWindow.leftPanel.addNewTrigger();
 			dirtyList = dirtyList2 = true;
+			if ( t != null && (eventAction as QuestionPrompt).buttonList.Count < 5 )
+			{
+				(eventAction as QuestionPrompt).buttonList.Add( new() { buttonText = "Button Text", triggerGUID = t.GUID } );
+			}
 		}
 
 		private void tlist_GotFocus( object sender, RoutedEventArgs e )

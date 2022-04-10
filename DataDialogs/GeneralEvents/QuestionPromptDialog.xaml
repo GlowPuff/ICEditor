@@ -87,7 +87,7 @@
 
 				<StackPanel Grid.Row="1">
 					<Separator Margin="0,10,0,10"/>
-					<Button x:Name="okButton" Content="ACCEPT" Click="okButton_Click" IsDefault="True" HorizontalAlignment="Right"/>
+					<Button x:Name="okButton" Content="ACCEPT" Click="okButton_Click" HorizontalAlignment="Right"/>
 				</StackPanel>
 			</Grid>
 		</GroupBox>

@@ -11,8 +11,6 @@ namespace Imperial_Commander_Editor
 {
 	///enums
 	public enum CustomInstructionType { Top, Bottom, Replace }
-	//public enum EventActionType { General, Deployment, GroupManipulation, MapAndTokens }
-	public enum EventActionSubtype { }
 	public enum ThreatModifierType { None, Fixed, Multiple }
 	public enum YesNoAll { Yes, No, All }
 	public enum PriorityTargetType { Rebel, Hero, Ally, Other, Trait }

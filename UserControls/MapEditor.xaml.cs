@@ -24,6 +24,7 @@ namespace Imperial_Commander_Editor
 		private readonly TransformGroup transformGroup;
 		private bool canvasDown = false;
 		private bool shapeDown = false;
+		private bool isDragging = false;
 		private IMapEntity shapeDragging = null;
 
 		private bool _nothingSelected, _entityPropsEnabled, _filterBySection, _filterTilesBySection, _canDuplicate;
@@ -182,6 +183,7 @@ namespace Imperial_Commander_Editor
 
 		private void MoveObject( MouseEventArgs e )
 		{
+			isDragging = true;
 			double txCorrected = 1f / mScale;
 			Point currentPosition = e.GetPosition( this );
 			Point delta = (Point)((currentPosition - lastMTx) * txCorrected);
@@ -200,6 +202,7 @@ namespace Imperial_Commander_Editor
 			//Return if mouse is not captured
 			if ( /*!MainCanvas.IsMouseCaptured ||*/ !canvasDown )
 				return;
+			isDragging = true;
 			//Point on move from Parent
 			Point pointOnMove = e.GetPosition( (FrameworkElement)MainCanvas.Parent );
 			//set TranslateTransform
@@ -367,7 +370,7 @@ namespace Imperial_Commander_Editor
 
 		private void MainCanvas_MouseDown( object sender, MouseButtonEventArgs e )
 		{
-			if ( e.ChangedButton == MouseButton.Left && e.ClickCount == 2 )
+			if ( e.ChangedButton == MouseButton.Left && e.ClickCount == 2 )//double click
 			{
 				if ( e.OriginalSource is Shape shape )
 				{
@@ -390,12 +393,14 @@ namespace Imperial_Commander_Editor
 					}
 				}
 			}
-			else
+			else//single click
 			{
+				//pan canvas
 				if ( e.ChangedButton == MouseButton.Middle || (e.ChangedButton == MouseButton.Left && !(e.OriginalSource is Shape)) )
 				{
 					canvasDown = true;
 				}
+				//drag shape
 				else if ( e.ChangedButton == MouseButton.Left && e.OriginalSource is Shape shape )
 				{
 					shapeDragging = shape.DataContext as IMapEntity;
@@ -423,8 +428,15 @@ namespace Imperial_Commander_Editor
 			}
 			else if ( e.ChangedButton == MouseButton.Left )
 			{
-				if ( shapeDragging != null )
+				if ( shapeDragging == null && !isDragging )
 				{
+					selectedEntity?.mapRenderer.Unselect();
+					selectedEntity = null;
+				}
+				else if ( shapeDragging != null )
+				{
+					if ( Keyboard.Modifiers == ModifierKeys.Control )
+						CenterSelection( selectedEntity );
 					shapeDragging.mapRenderer.RoundPosition();
 					shapeDragging.mapRenderer.Select();
 					shapeDragging = null;
@@ -434,7 +446,7 @@ namespace Imperial_Commander_Editor
 			mcap?.ReleaseMouseCapture();
 			//Set cursor by default
 			Mouse.OverrideCursor = null;
-			canvasDown = shapeDown = false;
+			canvasDown = shapeDown = isDragging = false;
 		}
 
 		private void MainCanvas_MouseMove( object sender, MouseEventArgs e )
@@ -648,7 +660,13 @@ namespace Imperial_Commander_Editor
 
 		public void OnWindowLoaded()
 		{
-			CenterMap( new( 1000, 1000 ) );
+			//move camera to 1st section
+			if ( Utils.mainWindow.mission.mapSections[0].mapTiles.Count > 0 )
+			{
+				CenterSelection( Utils.mainWindow.mission.mapSections[0].mapTiles[0] );
+			}
+			else
+				CenterMap( new( 1000, 1000 ) );
 		}
 	}
 }

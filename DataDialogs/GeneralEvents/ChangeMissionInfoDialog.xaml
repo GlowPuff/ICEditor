@@ -4,9 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Imperial_Commander_Editor"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
 				Style="{StaticResource dws}"
-        Title="Change Mission Info" Width="400" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown" SizeToContent="Height" ContentRendered="Window_ContentRendered">
+        Title="Change Mission Info" Width="500" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown" SizeToContent="Height" ContentRendered="Window_ContentRendered">
 
 	<Border BorderBrush="MediumPurple" BorderThickness="2">
 		<GroupBox Header="Change Mission Info Event Action" Style="{DynamicResource MaterialDesignGroupBox}">
@@ -17,7 +18,7 @@
 				</Grid.RowDefinitions>
 
 				<StackPanel>
-					<TextBox x:Name="textbox" Grid.Row="0" Margin="0,0,0,10" BorderThickness="2" BorderBrush="MediumPurple" AcceptsReturn="True" Foreground="White" CaretBrush="White" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap" VerticalAlignment="Stretch" Text="{Binding theText}" MinHeight="200"/>
+					<TextBox x:Name="textbox" Grid.Row="0" Margin="0,0,0,10" BorderThickness="2" BorderBrush="MediumPurple" AcceptsReturn="True" Foreground="White" CaretBrush="White" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap" VerticalAlignment="Stretch" Text="{Binding theText}" MinHeight="200" materialDesign:HintAssist.Hint="This text will replace the current Mission Info."/>
 				</StackPanel>
 
 				<StackPanel Grid.Row="1">

@@ -75,7 +75,7 @@ namespace Imperial_Commander_Editor
 			{
 				unselectedBGColor = new SolidColorBrush( Colors.Transparent ),
 				selectedBGColor = new SolidColorBrush( Colors.Transparent ),
-				unselectedStrokeColor = new SolidColorBrush( Colors.White ),
+				unselectedStrokeColor = new SolidColorBrush( Colors.Transparent ),
 				selectedImageZ = 305,
 				selectedZ = 300,
 				unselectedStrokeWidth = .25f

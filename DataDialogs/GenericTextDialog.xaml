@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
 				Style="{StaticResource dws}"
-        Height="350" Width="500" ContentRendered="Window_ContentRendered" MouseDown="Window_MouseDown" WindowStartupLocation="CenterScreen">
+        Height="350" Width="600" ContentRendered="Window_ContentRendered" MouseDown="Window_MouseDown" WindowStartupLocation="CenterScreen">
 
 	<Border BorderBrush="MediumPurple" BorderThickness="2">
 		<GroupBox x:Name="gbox" Header="{Binding header}" Style="{DynamicResource MaterialDesignGroupBox}">

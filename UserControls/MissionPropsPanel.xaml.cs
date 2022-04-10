@@ -32,17 +32,35 @@ namespace Imperial_Commander_Editor
 		{
 			InitializeComponent();
 			DataContext = null;
+
+			missionIDCB.Items.Add( "Custom" );
+			for ( int i = 1; i <= 32; i++ )
+				missionIDCB.Items.Add( "Core " + i );
+			for ( int i = 1; i <= 6; i++ )
+				missionIDCB.Items.Add( "Bespin " + i );
+			for ( int i = 1; i <= 16; i++ )
+				missionIDCB.Items.Add( "Empire " + i );
+			for ( int i = 1; i <= 16; i++ )
+				missionIDCB.Items.Add( "Hoth " + i );
+			for ( int i = 1; i <= 16; i++ )
+				missionIDCB.Items.Add( "Jabba " + i );
+			for ( int i = 1; i <= 6; i++ )
+				missionIDCB.Items.Add( "Lothal " + i );
+			for ( int i = 1; i <= 6; i++ )
+				missionIDCB.Items.Add( "Twin " + i );
+			for ( int i = 1; i <= 40; i++ )
+				missionIDCB.Items.Add( "Other " + i );
 		}
 
 		private void ciButton_Click( object sender, System.Windows.RoutedEventArgs e )
 		{
-			GenericTextDialog dlg = new GenericTextDialog( "Custom Instructions", Utils.mainWindow.mission.missionProperties.customInstructionText );
+			GenericTextDialog dlg = new GenericTextDialog( "Custom Instructions", Utils.mainWindow.mission.missionProperties.missionInfo );
 			dlg.textHint = "Leave this completely empty to UNSET Custom Instructions.";
 			dlg.ShowDialog();
 
-			Utils.mainWindow.mission.missionProperties.customInstructionText = dlg.theText;
+			Utils.mainWindow.mission.missionProperties.missionInfo = dlg.theText;
 
-			ciInfo.Text = string.IsNullOrEmpty( Utils.mainWindow.mission.missionProperties.customInstructionText ) ? "Text Not Set" : "Text Set";
+			ciInfo.Text = string.IsNullOrEmpty( Utils.mainWindow.mission.missionProperties.missionInfo ) ? "Text Not Set" : "Text Set";
 		}
 
 		public void Refresh()
@@ -56,7 +74,7 @@ namespace Imperial_Commander_Editor
 			var items = from e in Utils.mainWindow.mission.globalEvents where e.isGlobal select e;
 			eventCB.ItemsSource = Utils.mainWindow.localEvents;
 
-			ciInfo.Text = string.IsNullOrEmpty( Utils.mainWindow.mission.missionProperties.customInstructionText ) ? "Text Not Set" : "Text Set";
+			ciInfo.Text = string.IsNullOrEmpty( Utils.mainWindow.mission.missionProperties.missionInfo ) ? "Text Not Set" : "Text Set";
 
 			selectedBanGroupAdd = Utils.enemyData.First( x => x.id == "DG001" );
 			foreach ( var item in Utils.mainWindow.mission.missionProperties.bannedGroups )
@@ -84,8 +102,20 @@ namespace Imperial_Commander_Editor
 		private void descriptionBtn_Click( object sender, System.Windows.RoutedEventArgs e )
 		{
 			var dlg = new GenericTextDialog( "Mission Description", Utils.mainWindow.mission.missionProperties.missionDescription );
+			dlg.textHint = "This text is shown at the setup screen to describe the Mission.\nWhen left empty, it is automatically filled in when using any Mission ID\nother than 'Custom'.";
 			dlg.ShowDialog();
 			Utils.mainWindow.mission.missionProperties.missionDescription = dlg.theText;
+		}
+
+		private void infoBtn_Click( object sender, System.Windows.RoutedEventArgs e )
+		{
+			var dlg = new GenericTextDialog( "Mission Info", Utils.mainWindow.mission.missionProperties.missionInfo );
+			dlg.textHint = "This text is shown during the mission and can be changed with an Event Action.";
+			dlg.ShowDialog();
+
+			Utils.mainWindow.mission.missionProperties.missionInfo = dlg.theText;
+
+			ciInfo.Text = string.IsNullOrEmpty( Utils.mainWindow.mission.missionProperties.missionInfo ) ? "Text Not Set" : "Text Set";
 		}
 
 		private void addmBanBtn_Click( object sender, System.Windows.RoutedEventArgs e )

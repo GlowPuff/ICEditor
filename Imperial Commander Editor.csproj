@@ -153,8 +153,6 @@
     <Resource Include="Assets\save.png" />
     <Resource Include="Assets\saveas.png" />
     <Resource Include="Assets\settings.png" />
-    <Resource Include="Assets\Tiles\Core\1A.jpg" />
-    <Resource Include="Assets\Tiles\Core\1B.jpg" />
     <Resource Include="Assets\Tiles\Core\Core_10A.jpg" />
     <Resource Include="Assets\Tiles\Core\Core_10B.jpg" />
     <Resource Include="Assets\Tiles\Core\Core_11A.jpg" />

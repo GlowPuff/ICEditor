@@ -46,6 +46,7 @@ namespace Imperial_Commander_Editor
 		{
 			symbolsWindow?.Close();
 			formattingWindow?.Close();
+			theText = theText.Trim();
 			Close();
 		}
 

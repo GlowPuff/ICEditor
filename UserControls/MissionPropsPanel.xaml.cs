@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace Imperial_Commander_Editor
 {
@@ -75,6 +76,8 @@ namespace Imperial_Commander_Editor
 			eventCB.ItemsSource = Utils.mainWindow.localEvents;
 
 			ciInfo.Text = string.IsNullOrEmpty( Utils.mainWindow.mission.missionProperties.missionInfo ) ? "Text Not Set" : "Text Set";
+			SolidColorBrush brush = new( string.IsNullOrEmpty( Utils.mainWindow.mission.missionProperties.missionInfo ) ? Colors.Red : Colors.LawnGreen );
+			ciInfo.Foreground = brush;
 
 			selectedBanGroupAdd = Utils.enemyData.First( x => x.id == "DG001" );
 			foreach ( var item in Utils.mainWindow.mission.missionProperties.bannedGroups )
@@ -116,6 +119,8 @@ namespace Imperial_Commander_Editor
 			Utils.mainWindow.mission.missionProperties.missionInfo = dlg.theText;
 
 			ciInfo.Text = string.IsNullOrEmpty( Utils.mainWindow.mission.missionProperties.missionInfo ) ? "Text Not Set" : "Text Set";
+			SolidColorBrush brush = new( string.IsNullOrEmpty( dlg.theText ) ? Colors.Red : Colors.LawnGreen );
+			ciInfo.Foreground = brush;
 		}
 
 		private void addmBanBtn_Click( object sender, System.Windows.RoutedEventArgs e )

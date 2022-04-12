@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace Imperial_Commander_Editor
 {
@@ -38,6 +39,8 @@ namespace Imperial_Commander_Editor
 			DataContext = missionEvent;
 
 			etInfo.Text = string.IsNullOrEmpty( missionEvent.eventText ) ? "Text Not Set" : "Text Set";
+			SolidColorBrush brush = new( string.IsNullOrEmpty( missionEvent.eventText ) ? Colors.Red : Colors.LawnGreen );
+			etInfo.Foreground = brush;
 
 			alliesCB.ItemsSource = Utils.allyData;
 			activationCB.ItemsSource = Utils.enemyData;
@@ -171,6 +174,8 @@ namespace Imperial_Commander_Editor
 			dlg.ShowDialog();
 			missionEvent.eventText = dlg.theText;
 			etInfo.Text = string.IsNullOrEmpty( missionEvent.eventText ) ? "Text Not Set" : "Text Set";
+			SolidColorBrush brush = new( string.IsNullOrEmpty( dlg.theText ) ? Colors.Red : Colors.LawnGreen );
+			etInfo.Foreground = brush;
 		}
 
 		private void cancelButton_Click( object sender, RoutedEventArgs e )

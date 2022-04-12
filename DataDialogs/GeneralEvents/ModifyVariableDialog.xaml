@@ -61,7 +61,7 @@
 
 								<Separator Margin="0,5,0,5"/>
 
-								<ListBox HorizontalContentAlignment="Stretch" ItemTemplate="{StaticResource k1}" ItemsSource="{Binding selectedTriggers}" d:ItemsSource="{d:SampleData ItemCount=1}"/>
+								<ListBox HorizontalContentAlignment="Stretch" ItemTemplate="{StaticResource k1}" ItemsSource="{Binding eventAction.triggerList}" d:ItemsSource="{d:SampleData ItemCount=1}"/>
 							</StackPanel>
 						</materialDesign:Card>
 					</StackPanel>

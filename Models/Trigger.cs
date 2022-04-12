@@ -10,7 +10,7 @@ namespace Imperial_Commander_Editor
 
 		string _name;
 		Guid _GUID, _eventGUID;
-		int _triggerValue, _initialValue, _setValue, _modifyValue;
+		int _initialValue, _maxValue;
 		bool _isGlobal, _useReset;
 
 		public string name
@@ -33,25 +33,15 @@ namespace Imperial_Commander_Editor
 			get { return _useReset; }
 			set { _useReset = value; PC(); }
 		}
-		public int triggerValue//AddEventDialog, trigger value at which event is fired
+		public int maxValue
 		{
-			get { return _triggerValue; }
-			set { _triggerValue = value; PC(); }
+			get { return _maxValue; }
+			set { _maxValue = value; PC(); }
 		}
 		public int initialValue
 		{
 			get { return _initialValue; }
 			set { _initialValue = value; PC(); }
-		}
-		public int setValue//ModifyVariable, set to value
-		{
-			get { return _setValue; }
-			set { _setValue = value; PC(); }
-		}
-		public int modifyValue//ModifyVariable, modify value by
-		{
-			get { return _modifyValue; }
-			set { _modifyValue = value; PC(); }
 		}
 		public Guid eventGUID
 		{
@@ -73,11 +63,9 @@ namespace Imperial_Commander_Editor
 				GUID = this.GUID,
 				isGlobal = this.isGlobal,
 				useReset = this.useReset,
-				triggerValue = this.triggerValue,
 				initialValue = this.initialValue,
-				setValue = this.setValue,
-				modifyValue = this.modifyValue,
-				eventGUID = this.eventGUID
+				eventGUID = this.eventGUID,
+				maxValue = this.maxValue,
 			};
 		}
 
@@ -87,10 +75,8 @@ namespace Imperial_Commander_Editor
 			eventGUID = Guid.Empty;
 			isGlobal = true;
 			useReset = false;
-			triggerValue = 0;
 			initialValue = 0;
-			setValue = 0;
-			modifyValue = 0;
+			maxValue = -1;
 		}
 
 		public bool Validate()

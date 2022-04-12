@@ -1,20 +1,19 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 
 namespace Imperial_Commander_Editor
 {
-  public class ModifyVariable : EventAction
-  {
-    public ObservableCollection<Guid> triggerList { get; set; } = new();
+	public class ModifyVariable : EventAction
+	{
+		public ObservableCollection<TriggerModifier> triggerList { get; set; } = new();
 
-    public ModifyVariable()
-    {
+		public ModifyVariable()
+		{
 
-    }
+		}
 
-    public ModifyVariable( string dname
-      , EventActionType et ) : base( et, dname )
-    {
-    }
-  }
+		public ModifyVariable( string dname
+			, EventActionType et ) : base( et, dname )
+		{
+		}
+	}
 }

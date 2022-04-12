@@ -266,7 +266,7 @@ namespace Imperial_Commander_Editor
 			var w = Utils.mainWindow.ActualWidth;
 			var h = Utils.mainWindow.ActualHeight;
 			double cx = 0, cy = 0;
-			if ( selectedEntity != null && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control )
+			if ( selectedEntity != null )//(Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control
 			{
 				cx = (-selectedEntity.entityPosition.X * mScale) + (w / 2) - 225;
 				cy = (-selectedEntity.entityPosition.Y * mScale) + (h / 2) - 125;

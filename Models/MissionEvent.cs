@@ -12,8 +12,10 @@ namespace Imperial_Commander_Editor
 
 		string _eventName, _eventText, _allyDefeated, _heroWounded, _heroWithdraws, _activationOf;
 		int _startOfRound, _endOfRound;
-		bool _useStartOfRound, _useEndOfRound, _useStartOfEachRound, _useEndOfEachRound, _useAllGroupsDefeated, _useAllHeroesWounded, _useAllyDefeated, _useHeroWounded, _useHeroWithdraws, _useActivation, _useEndOfCurrentRound, _behaviorAll;
-		bool _isGlobal;
+		bool _isGlobal, _isRepeatable, _isEndOfCurrentRound;
+
+		//triggered by
+		bool _useStartOfRound, _useEndOfRound, _useStartOfEachRound, _useEndOfEachRound, _useAllGroupsDefeated, _useAllHeroesWounded, _useAllyDefeated, _useHeroWounded, _useHeroWithdraws, _useActivation, _behaviorAll;
 
 		public Guid GUID { get; set; }
 		public bool isGlobal
@@ -71,11 +73,6 @@ namespace Imperial_Commander_Editor
 			get { return _useEndOfRound; }
 			set { _useEndOfRound = value; PC(); }
 		}
-		public bool useEndOfCurrentRound
-		{
-			get { return _useEndOfCurrentRound; }
-			set { _useEndOfCurrentRound = value; PC(); }
-		}
 		public bool useStartOfEachRound
 		{
 			get { return _useStartOfEachRound; }
@@ -116,6 +113,16 @@ namespace Imperial_Commander_Editor
 			get { return _useActivation; }
 			set { _useActivation = value; PC(); }
 		}
+		public bool isRepeatable
+		{
+			get { return _isRepeatable; }
+			set { _isRepeatable = value; PC(); }
+		}
+		public bool isEndOfCurrentRound
+		{
+			get { return _isEndOfCurrentRound; }
+			set { _isEndOfCurrentRound = value; PC(); }
+		}
 		public bool behaviorAll { get { return _behaviorAll; } set { _behaviorAll = value; PC(); } }
 		public ObservableCollection<TriggeredBy> additionalTriggers { get; set; }
 
@@ -135,14 +142,16 @@ namespace Imperial_Commander_Editor
 			isGlobal = true;
 			eventText = "";
 			startOfRound = endOfRound = 1;
-			useStartOfRound = useEndOfRound = useStartOfEachRound = useEndOfEachRound = useAllGroupsDefeated = useAllHeroesWounded = useAllyDefeated = useHeroWounded = useHeroWithdraws = useActivation = useEndOfCurrentRound = false;
+			useStartOfRound = useEndOfRound = useStartOfEachRound = useEndOfEachRound = useAllGroupsDefeated = useAllHeroesWounded = useAllyDefeated = useHeroWounded = useHeroWithdraws = useActivation = false;
 			behaviorAll = true;
+			isRepeatable = false;
+			isEndOfCurrentRound = false;
 			additionalTriggers = new();
 			eventActions = new();
 
-			heroWounded = "Diala Passil";
-			heroWithdraws = "Diala Passil";
-			allyDefeated = "Luke Skywalker (Hero)";
+			heroWounded = "H1";
+			heroWithdraws = "H1";
+			allyDefeated = "A001";
 			activationOf = "DG001";
 		}
 

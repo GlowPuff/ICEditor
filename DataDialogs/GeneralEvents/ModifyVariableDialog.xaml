@@ -49,6 +49,8 @@
 							</Grid>
 						</materialDesign:Card>
 
+						<TextBlock Text="To Set a value, enter a number greater than -1, otherwise the Trigger Variable will be Modified by the +/- value." TextWrapping="Wrap" Margin="0,10,0,0"/>
+
 						<materialDesign:Card Background="Purple" Padding="10" Margin="0,10,0,0">
 							<StackPanel>
 								<UniformGrid Columns="2">

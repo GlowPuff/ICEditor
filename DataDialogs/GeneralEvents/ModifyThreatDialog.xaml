@@ -22,23 +22,27 @@
 				</Grid.RowDefinitions>
 
 				<StackPanel>
-					<materialDesign:Card  Background="#FF7952C0" Padding="10">
+					<!--<materialDesign:Card  Background="#FF7952C0" Padding="10">
 						<UniformGrid Columns="2">
 							<RadioButton GroupName="threattype" Content="Add Threat" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" HorizontalAlignment="Center" IsChecked="{Binding Path=eventAction.threatAction, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:ThreatAction.Add}}"/>
 
 							<RadioButton GroupName="threattype" Content="Remove Threat" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" HorizontalAlignment="Center" IsChecked="{Binding Path=eventAction.threatAction, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:ThreatAction.Remove}}"/>
 						</UniformGrid>
-					</materialDesign:Card>
+					</materialDesign:Card>-->
 
-					<materialDesign:Card  Background="#FF7952C0" Margin="0,10,0,0" Padding="10">
+					<materialDesign:Card  Background="#FF7952C0" Margin="0,0,0,0" Padding="10">
 						<StackPanel>
-							<UniformGrid Columns="2">
-								<RadioButton Content="Fixed Value" GroupName="valuetype" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding Path=eventAction.threatModifierType, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:ThreatModifierType.Fixed}}"/>
+							<TextBlock Text="To add a value to the Mission's current Threat, enter a positive number, otherwise use a negative number to subtract from the current Threat in the Mission." TextWrapping="Wrap"/>
+
+							<UniformGrid Columns="2" Margin="0,10,0,0">
+								<RadioButton Content="Modified By" GroupName="valuetype" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding Path=eventAction.threatModifierType, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:ThreatModifierType.Fixed}}"/>
 								<TextBox Text="{Binding eventAction.fixedValue}" VerticalAlignment="Center" MaxWidth="50"/>
 							</UniformGrid>
 
-							<UniformGrid Columns="2" Margin="0,10,0,0">
-								<RadioButton Content="Threat Level x" GroupName="valuetype" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding Path=eventAction.threatModifierType, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:ThreatModifierType.Multiple}}"/>
+							<TextBlock Margin="0,10,0,0" Text="Multiply the provided number by the Mission's Threat Level and add it to the current Threat. Use a negative number to subtract the amount instead." TextWrapping="Wrap"/>
+
+							<UniformGrid Columns="2">
+								<RadioButton Content="Threat Level Multiplier" GroupName="valuetype" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding Path=eventAction.threatModifierType, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:ThreatModifierType.Multiple}}"/>
 								<TextBox Text="{Binding eventAction.threatValue}" VerticalAlignment="Center" MaxWidth="50"/>
 							</UniformGrid>
 						</StackPanel>

@@ -27,13 +27,10 @@
 						<Grid.RowDefinitions>
 							<RowDefinition Height="1*" />
 							<RowDefinition Height="1*" />
+							<RowDefinition Height="1*" />
 						</Grid.RowDefinitions>
 
 						<TextBox x:Name="mnameTB" Style="{StaticResource MaterialDesignOutlinedTextBox}"  Text="{Binding missionName}" KeyDown="Validate_KeyDown" CaretBrush="White" materialDesign:HintAssist.Hint="Mission Name" VerticalAlignment="Center"/>
-						<!--<Grid.ColumnDefinitions>
-								<ColumnDefinition Width="auto" />
-								<ColumnDefinition Width="auto" />
-							</Grid.ColumnDefinitions>-->
 						<Button x:Name="descriptionBtn" Grid.Column="1" Content="DESCRIPTION..." HorizontalAlignment="Center" Click="descriptionBtn_Click" Margin="0,5,0,0"/>
 
 						<!--MISSION TYPE-->
@@ -59,12 +56,12 @@
 							</ComboBox>
 						</StackPanel>
 
-						<!--MISSION ID-->
-						<!--<TextBox Grid.Column="1" Grid.Row="1" Style="{StaticResource MaterialDesignOutlinedTextBox}" Text="{Binding missionID}" materialDesign:HintAssist.Hint="Unique Mission ID" CharacterCasing="Upper" KeyDown="Validate_KeyDown" CaretBrush="White" VerticalAlignment="Bottom" Margin="10,0,0,0"/>-->
 						<StackPanel  Margin="10,0,0,0" Grid.Column="1" Grid.Row="1" VerticalAlignment="Bottom">
 							<TextBlock Text="Mission ID"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
 							<ComboBox Name="missionIDCB" Style="{StaticResource MaterialDesignOutlinedComboBox}"  SelectedValue="{Binding missionID}" Margin="0,5,0,0"/>
 						</StackPanel>
+
+						<TextBlock Grid.Row="2" Grid.ColumnSpan="2" Text="Use a Mission ID other than Custom to have the Description filled in automatically by the Saga app." TextWrapping="Wrap" Margin="0,10,0,0"/>
 					</Grid>
 				</GroupBox>
 
@@ -78,16 +75,20 @@
 				</GroupBox>
 
 				<!--initial threat-->
-				<GroupBox Header="INITIAL THREAT" Margin="0,5">
+				<GroupBox Header="INITIAL THREAT MODIFIER" Margin="0,5">
 					<StackPanel>
 						<RadioButton Content="None" GroupName="ithreat" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding initialThreatType, ConverterParameter={x:Static local:ThreatModifierType.None}, Converter={StaticResource rbConv}}"/>
+
+						<TextBlock Text="To add a value to the Mission's initial Threat, enter a positive number, otherwise use a negative number to subtract from the initial Threat in the Mission." TextWrapping="Wrap"/>
 						<StackPanel Orientation="Horizontal">
-							<RadioButton Content="Fixed Value" GroupName="ithreat" VerticalAlignment="Center" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding initialThreatType, ConverterParameter={x:Static local:ThreatModifierType.Fixed}, Converter={StaticResource rbConv}}"/>
-							<TextBox Margin="10,0" Width="30" Text="{Binding fixedValue}" VerticalAlignment="Center" KeyDown="Validate_KeyDown" CaretBrush="White"/>
+							<RadioButton Content="Modified By" GroupName="ithreat" VerticalAlignment="Center" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding initialThreatType, ConverterParameter={x:Static local:ThreatModifierType.Fixed}, Converter={StaticResource rbConv}}"/>
+							<TextBox Margin="10,0" Width="30" Text="{Binding initialThreatModifier}" VerticalAlignment="Center" KeyDown="Validate_KeyDown" CaretBrush="White"/>
 						</StackPanel>
+
+						<TextBlock Margin="0,10,0,0" Text="Multiply the provided number by the Mission's Threat Level and add it to the initial Threat. Use a negative number to subtract the amount instead." TextWrapping="Wrap"/>
 						<StackPanel Orientation="Horizontal">
-							<RadioButton Content="Threat Level x" GroupName="ithreat" VerticalAlignment="Center" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding initialThreatType, ConverterParameter={x:Static local:ThreatModifierType.Multiple}, Converter={StaticResource rbConv}}"/>
-							<TextBox Margin="10,0" Width="30" Text="{Binding threatLevel}" VerticalAlignment="Center" KeyDown="Validate_KeyDown" CaretBrush="White"/>
+							<RadioButton Content="Threat Level Multiplier" GroupName="ithreat" VerticalAlignment="Center" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding initialThreatType, ConverterParameter={x:Static local:ThreatModifierType.Multiple}, Converter={StaticResource rbConv}}"/>
+							<TextBox Margin="10,0" Width="30" Text="{Binding initialThreatMultiplier}" VerticalAlignment="Center" KeyDown="Validate_KeyDown" CaretBrush="White"/>
 						</StackPanel>
 					</StackPanel>
 				</GroupBox>

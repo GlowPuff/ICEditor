@@ -153,7 +153,7 @@ namespace Imperial_Commander_Editor
 		{
 			triggerName = t.name;
 			triggerGUID = t.GUID;
-			setValue = 0;
+			setValue = -1;
 			modifyValue = 0;
 		}
 	}

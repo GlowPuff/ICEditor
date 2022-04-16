@@ -178,22 +178,33 @@
 								</StackPanel>
 
 								<materialDesign:Card Grid.Row="0" Background="MediumPurple" Padding="10" Margin="0,10,0,0">
-									<Grid>
-										<Grid.ColumnDefinitions>
-											<ColumnDefinition Width="*" />
-											<ColumnDefinition Width="auto" />
-										</Grid.ColumnDefinitions>
-										<StackPanel>
-											<TextBlock Text="Trigger Behavior" Margin="0,0,0,5" Foreground="Purple"/>
-											<TextBlock Text="This includes 'Additional Triggers'" Margin="0,0,0,0"/>
-										</StackPanel>
+									<StackPanel>
+										<Grid>
+											<Grid.ColumnDefinitions>
+												<ColumnDefinition Width="*" />
+												<ColumnDefinition Width="auto" />
+											</Grid.ColumnDefinitions>
+											<StackPanel>
+												<TextBlock Text="Trigger Behavior" Margin="0,0,0,5" Foreground="Purple"/>
+												<TextBlock Text="This includes 'Additional Triggers'" Margin="0,0,0,0"/>
+											</StackPanel>
 
-										<StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
-											<TextBlock Text="Any" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-											<ToggleButton IsChecked="{Binding behaviorAll}" Margin="10,0"/>
-											<TextBlock Text="All" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-										</StackPanel>
-									</Grid>
+											<StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
+												<TextBlock Text="Any" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+												<ToggleButton IsChecked="{Binding behaviorAll}" Margin="10,0"/>
+												<TextBlock Text="All" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+											</StackPanel>
+										</Grid>
+
+										<Grid>
+											<Grid.ColumnDefinitions>
+												<ColumnDefinition Width="*" />
+												<ColumnDefinition Width="auto" />
+											</Grid.ColumnDefinitions>
+											<CheckBox Content="This Event Is Repeatable" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding isRepeatable}" Margin="0,10,4,4"/>
+											<CheckBox Grid.Column="1" Content="Fires At End Of Current Round" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding isEndOfCurrentRound}" Margin="0,5,4,4"/>
+										</Grid>
+									</StackPanel>
 								</materialDesign:Card>
 							</StackPanel>
 						</GroupBox>
@@ -219,13 +230,12 @@
 											<TextBox Margin="10,0" Width="30" Text="{Binding endOfRound}" VerticalAlignment="Center" KeyDown="nameTB_KeyDown"/>
 										</StackPanel>
 										<CheckBox Content="All Enemy Groups Defeated" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding useAllGroupsDefeated}"/>
-										<CheckBox Content="All Heroes Are Wounded" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding useAllHeroesWounded}"/>
 									</StackPanel>
 									<!--right-->
 									<StackPanel Margin="0,0,0,10">
 										<CheckBox Content="Start of Each Round" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding useStartOfEachRound}"/>
 										<CheckBox Content="End of Each Round" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding useEndOfEachRound}"/>
-										<CheckBox Content="End of Current Round" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding useEndOfCurrentRound}"/>
+										<CheckBox Content="All Heroes Are Wounded" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding useAllHeroesWounded}"/>
 									</StackPanel>
 								</UniformGrid>
 
@@ -244,15 +254,15 @@
 										</Grid.RowDefinitions>
 										<!--ally defeated-->
 										<CheckBox Grid.Row="0" Grid.Column="0" Content="Ally Defeated" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding useAllyDefeated}"/>
-										<ComboBox Grid.Row="0" Grid.Column="1" x:Name="alliesCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" DisplayMemberPath="name" SelectedValue="{Binding allyDefeated}" SelectedValuePath="name"/>
+										<ComboBox Grid.Row="0" Grid.Column="1" x:Name="alliesCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" DisplayMemberPath="name" SelectedValue="{Binding allyDefeated}" SelectedValuePath="id"/>
 
 										<!--hero wounded-->
 										<CheckBox Grid.Row="1" Grid.Column="0" Content="Hero Wounded" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding useHeroWounded}"/>
-										<ComboBox Grid.Row="1" Grid.Column="1" x:Name="woundedCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" DisplayMemberPath="name" Margin="0,5" SelectedValue="{Binding heroWounded}" SelectedValuePath="name"/>
+										<ComboBox Grid.Row="1" Grid.Column="1" x:Name="woundedCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" DisplayMemberPath="name" Margin="0,5" SelectedValue="{Binding heroWounded}" SelectedValuePath="id"/>
 
 										<!--hero withdraws-->
 										<CheckBox Grid.Row="2" Grid.Column="0" Content="Hero Withdraws" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding useHeroWithdraws}"/>
-										<ComboBox Grid.Row="2" Grid.Column="1" x:Name="withdrawsCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" DisplayMemberPath="name" SelectedValue="{Binding heroWithdraws}" SelectedValuePath="name"/>
+										<ComboBox Grid.Row="2" Grid.Column="1" x:Name="withdrawsCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" DisplayMemberPath="name" SelectedValue="{Binding heroWithdraws}" SelectedValuePath="id"/>
 
 										<!--activation-->
 										<CheckBox Grid.Row="3" Grid.Column="0" Content="Activation Of" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding useActivation}"/>

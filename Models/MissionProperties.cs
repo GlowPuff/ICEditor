@@ -16,7 +16,7 @@ namespace Imperial_Commander_Editor
 		ThreatModifierType _initialThreatType;
 		PriorityTargetType _priorityTargetType;
 		Guid _startingEvent;
-		int _fixedValue, _threatLevel;
+		int _initialThreatModifier, _initialThreatMultiplier;
 		MissionType _missionType;
 		ObservableCollection<MissionSubType> _missionSubType;
 
@@ -134,16 +134,16 @@ namespace Imperial_Commander_Editor
 			set { _startingEvent = value; PC(); }
 		}
 
-		public int fixedValue
+		public int initialThreatModifier
 		{
-			get { return _fixedValue; }
-			set { _fixedValue = value; PC(); }
+			get { return _initialThreatModifier; }
+			set { _initialThreatModifier = value; PC(); }
 		}
 
-		public int threatLevel
+		public int initialThreatMultiplier
 		{
-			get { return _threatLevel; }
-			set { _threatLevel = value; PC(); }
+			get { return _initialThreatMultiplier; }
+			set { _initialThreatMultiplier = value; PC(); }
 		}
 
 		public MissionType missionType { get { return _missionType; } set { _missionType = value; PC(); } }
@@ -177,8 +177,8 @@ namespace Imperial_Commander_Editor
 			banAllAllies = YesNoAll.No;
 			initialThreatType = ThreatModifierType.None;
 			priorityTargetType = PriorityTargetType.Rebel;
-			fixedValue = 0;
-			threatLevel = 1;
+			initialThreatModifier = 0;
+			initialThreatMultiplier = 0;
 			startingEvent = Guid.Empty;
 			missionType = MissionType.Story;
 			missionSubType = new();

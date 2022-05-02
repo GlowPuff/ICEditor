@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace Imperial_Commander_Editor
 {
@@ -93,6 +94,10 @@ namespace Imperial_Commander_Editor
 						initialGroups[i].pointList[y].GUID = Guid.Empty;
 				}
 			}
+
+			ciInfo.Text = string.IsNullOrEmpty( customInstructions ) ? "Text Not Set" : "Text Set";
+			SolidColorBrush brush = new( string.IsNullOrEmpty( customInstructions ) ? Colors.Red : Colors.LawnGreen );
+			ciInfo.Foreground = brush;
 		}
 
 		private void addReservedGroupButton_Click( object sender, RoutedEventArgs e )
@@ -171,6 +176,7 @@ namespace Imperial_Commander_Editor
 			var dlg = new GenericTextDialog( "EDIT CUSTOM INSTRUCTIONS", customInstructions );
 			dlg.ShowDialog();
 			customInstructions = dlg.theText.Trim();
+			UpdateUI();
 		}
 
 		private void TextBox_TextChanged( object sender, TextChangedEventArgs e )

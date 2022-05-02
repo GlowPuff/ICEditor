@@ -37,22 +37,22 @@ namespace Imperial_Commander_Editor
 
 		private void addExhaustButton_Click( object sender, RoutedEventArgs e )
 		{
-			(eventAction as ChangeGroupStatus).exhaustGroups.Add( Utils.enemyData.Where( x => x.id == selectedExhaustGroup ).First() );
+			(eventAction as ChangeGroupStatus).exhaustGroups.Add( new( Utils.enemyData.Where( x => x.id == selectedExhaustGroup ).First() ) );
 		}
 
 		private void addReadyButton_Click( object sender, RoutedEventArgs e )
 		{
-			(eventAction as ChangeGroupStatus).readyGroups.Add( Utils.enemyData.Where( x => x.id == selectedReadyGroup ).First() );
+			(eventAction as ChangeGroupStatus).readyGroups.Add( new( Utils.enemyData.Where( x => x.id == selectedReadyGroup ).First() ) );
 		}
 
 		private void remReadyButton_Click( object sender, RoutedEventArgs e )
 		{
-			(eventAction as ChangeGroupStatus).readyGroups.Remove( (sender as FrameworkElement).DataContext as DeploymentCard );
+			(eventAction as ChangeGroupStatus).readyGroups.Remove( (sender as FrameworkElement).DataContext as DCPointer );
 		}
 
 		private void remExhaustButton_Click( object sender, RoutedEventArgs e )
 		{
-			(eventAction as ChangeGroupStatus).exhaustGroups.Remove( (sender as FrameworkElement).DataContext as DeploymentCard );
+			(eventAction as ChangeGroupStatus).exhaustGroups.Remove( (sender as FrameworkElement).DataContext as DCPointer );
 		}
 	}
 }

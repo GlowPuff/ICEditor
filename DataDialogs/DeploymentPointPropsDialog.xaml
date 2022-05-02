@@ -18,13 +18,13 @@
 				</Grid.RowDefinitions>
 
 				<StackPanel>
-					<GroupBox Header="INCLUDE FACTIONS" Margin="0,0,0,10">
+					<GroupBox Header="Include Factions" Margin="0,0,0,10" Background="#FF503B7C">
 						<StackPanel Orientation="Horizontal">
 							<CheckBox Content="Imperial" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" Margin="4,4,10,4" IsChecked="{Binding incImperial}"/>
 							<CheckBox Content="Mercenary" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding incMercenary}"/>
 						</StackPanel>
 					</GroupBox>
-					<GroupBox Header="INCLUDE SIZES" Margin="0,0,0,10">
+					<GroupBox Header="Include Sizes" Margin="0,0,0,10" Background="#FF503B7C">
 						<StackPanel Orientation="Horizontal">
 							<CheckBox Content="Small (1x1)" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" Margin="4,4,10,4" IsChecked="{Binding incSmall}"/>
 							<CheckBox Content="Medium (1x2)" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" Margin="4,4,10,4" IsChecked="{Binding incMedium}"/>
@@ -32,7 +32,7 @@
 							<CheckBox Content="Huge (2x3)" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" Margin="4,4,10,4" IsChecked="{Binding incHuge}"/>
 						</StackPanel>
 					</GroupBox>
-					<GroupBox Header="INCLUDE TRAITS">
+					<GroupBox Header="Include Traits" Background="#FF503B7C">
 						<StackPanel>
 							<UniformGrid Columns="4">
 								<CheckBox Content="Brawler" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" Margin="4,4,10,4" IsChecked="{Binding incBrawler}"/>

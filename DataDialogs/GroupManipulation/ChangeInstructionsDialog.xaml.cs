@@ -42,12 +42,12 @@ namespace Imperial_Commander_Editor
 
 		private void addGroupButton_Click( object sender, RoutedEventArgs e )
 		{
-			(eventAction as ChangeInstructions).groupsToAdd.Add( Utils.enemyData.Where( x => x.id == selectedGroup ).First() );
+			(eventAction as ChangeInstructions).groupsToAdd.Add( new( Utils.enemyData.Where( x => x.id == selectedGroup ).First() ) );
 		}
 
 		private void remGroupButton_Click( object sender, RoutedEventArgs e )
 		{
-			(eventAction as ChangeInstructions).groupsToAdd.Remove( (sender as FrameworkElement).DataContext as DeploymentCard );
+			(eventAction as ChangeInstructions).groupsToAdd.Remove( (sender as FrameworkElement).DataContext as DCPointer );
 		}
 	}
 }

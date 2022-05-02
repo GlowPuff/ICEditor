@@ -18,11 +18,11 @@
 				</Grid.RowDefinitions>
 
 				<StackPanel>
-					<materialDesign:Card Background="MediumPurple" Padding="10" Margin="0,0,0,10">
+					<materialDesign:Card Background="{StaticResource CardBG}" Padding="10" Margin="0,0,0,10">
 						<CheckBox x:Name="defCB" Content="Use Group Default" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding useDefaultPriority}"/>
 					</materialDesign:Card>
 
-					<materialDesign:Card Background="MediumPurple" Padding="10" Margin="0,0,0,10" IsEnabled="{Binding ElementName=defCB, Path=IsChecked, Converter={StaticResource InvertBooleanConverter}}">
+					<materialDesign:Card Background="{StaticResource CardBG}" Padding="10" Margin="0,0,0,10" IsEnabled="{Binding ElementName=defCB, Path=IsChecked, Converter={StaticResource InvertBooleanConverter}}">
 						<StackPanel>
 							<UniformGrid Columns="4">
 								<CheckBox Content="Brawler" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" Margin="4,4,10,4" IsChecked="{Binding incBrawler}"/>

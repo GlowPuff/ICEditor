@@ -38,9 +38,6 @@ namespace Imperial_Commander_Editor
 		public ObservableCollection<MissionEvent> missionEvents { get; set; } = new();
 		public ObservableCollection<MapTile> mapTiles { get; set; } = new();
 
-		//[JsonConverter( typeof( MapEntityConverter ) )]
-		//public ObservableCollection<IMapEntity> mapEntities { get; set; } = new();
-
 		public void PC( [CallerMemberName] string n = "" )
 		{
 			if ( !string.IsNullOrEmpty( n ) )

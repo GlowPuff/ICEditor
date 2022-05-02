@@ -24,7 +24,7 @@
 				<StackPanel>
 					<CheckBox Content="This is an Onslaught" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" Margin="0,0,0,10" IsChecked="{Binding isOnslaught}"/>
 
-					<GroupBox Header="Deployment Point">
+					<GroupBox Header="Deployment Point" Background="#FF503B7C">
 						<StackPanel>
 							<RadioButton GroupName="dpoint" Content="Active Deployment Point" VerticalAlignment="Center" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding Path=deploymentPoint, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:DeploymentSpot.Active}}"/>
 
@@ -35,12 +35,13 @@
 					</GroupBox>
 
 					<!--MODIFIER-->
-					<materialDesign:Card Background="MediumPurple" Padding="10" Margin="0,10,0,0">
+					<materialDesign:Card Background="{StaticResource CardBG}" Padding="10" Margin="0,10,0,0">
 						<StackPanel>
-							<CheckBox x:Name="tcostcb" Content="Threat Cost" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding useThreat}"/>
+							<CheckBox x:Name="tcostcb" Content="Deduct This Group's Cost From Threat" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding useThreat}" Margin="0,0,4,4"/>
 							<StackPanel Orientation="Horizontal" IsEnabled="{Binding Path=IsChecked, ElementName=tcostcb}">
-								<TextBlock Text="Modifier:" VerticalAlignment="Center"/>
+								<TextBlock Text="Cost Modifier:" VerticalAlignment="Center"/>
 								<TextBox Text="{Binding threatCost}" Margin="10,0" Width="50"/>
+								<TextBlock Text="+/- Cost" FontStyle="Italic" VerticalAlignment="Center"/>
 							</StackPanel>
 						</StackPanel>
 					</materialDesign:Card>

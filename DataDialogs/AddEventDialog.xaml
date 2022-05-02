@@ -53,26 +53,29 @@
 
 				<UniformGrid Columns="2">
 					<!--column 1-->
-					<Grid Margin="0,0,10,0">
+					<Grid Margin="0,0,5,0">
 						<Grid.RowDefinitions>
 							<RowDefinition Height="auto"/>
 							<RowDefinition Height="auto"/>
 							<RowDefinition Height="*"/>
 						</Grid.RowDefinitions>
 
-						<UniformGrid Columns="2">
-							<!--event name-->
-							<GroupBox Header="Event Name" Margin="0,0,10,0">
-								<TextBox x:Name="nameTB" Style="{StaticResource MaterialDesignOutlinedTextBox}"  Text="{Binding name}" CaretBrush="White" KeyDown="nameTB_KeyDown"/>
-							</GroupBox>
-							<!--event text-->
-							<GroupBox Header="Event Text" Margin="10,0,0,0">
-								<StackPanel Orientation="Horizontal">
-									<TextBlock x:Name="etInfo" Margin="0,0,10,0" Text="Text Not Set" VerticalAlignment="Center"/>
-									<Button x:Name="editTextButton" Content="Edit Text..." Click="editTextButton_Click"/>
-								</StackPanel>
-							</GroupBox>
-						</UniformGrid>
+						<StackPanel>
+							<UniformGrid Columns="2">
+								<!--event name-->
+								<GroupBox Header="Event Name" Margin="0,0,5,0" Background="#FF503B7C">
+									<TextBox x:Name="nameTB" Style="{StaticResource MaterialDesignOutlinedTextBox}"  Text="{Binding name}" CaretBrush="White" KeyDown="nameTB_KeyDown"/>
+								</GroupBox>
+								<!--event text-->
+								<GroupBox Header="Event Text" Margin="5,0,0,0" Background="#FF503B7C">
+									<StackPanel Orientation="Horizontal">
+										<TextBlock x:Name="etInfo" Margin="0,0,10,0" Text="Text Not Set" VerticalAlignment="Center"/>
+										<Button x:Name="editTextButton" Content="Edit Text..." Click="editTextButton_Click"/>
+									</StackPanel>
+								</GroupBox>
+							</UniformGrid>
+							<TextBlock Text="If the Event Text isn't set, this Event will still fire, but no text is shown." TextWrapping="Wrap" HorizontalAlignment="Center" Margin="0,5,0,0" FontStyle="Italic"/>
+						</StackPanel>
 						<!--event actions-->
 						<GroupBox Grid.Row="1" Header="Event Actions" Margin="0,10,0,0" MaxHeight="275">
 							<Grid>
@@ -104,7 +107,7 @@
 														<MenuItem Header="Add Group(s) to Deployment Hand" Click="MenuItem_Click" Tag="D5"/>
 													</MenuItem>
 													<MenuItem Header="Group Manipulation">
-														<MenuItem Header="Change Mission Instructions" Click="MenuItem_Click" Tag="GM1"/>
+														<MenuItem Header="Change Group Instructions" Click="MenuItem_Click" Tag="GM1"/>
 														<MenuItem Header="Change Priority Target" Click="MenuItem_Click" Tag="GM2"/>
 														<MenuItem Header="Ready / Exhaust a Group" Click="MenuItem_Click" Tag="GM3"/>
 													</MenuItem>
@@ -123,7 +126,7 @@
 							</Grid>
 						</GroupBox>
 						<!--additional triggers-->
-						<GroupBox Grid.Row="2" Header="Triggered By Additional Triggers" Margin="0,10,0,0">
+						<GroupBox Grid.Row="2" Header="'Triggered By' Additional Triggers" Margin="0,10,0,0" >
 							<Grid Margin="5">
 								<Grid.RowDefinitions>
 									<RowDefinition Height="auto" />
@@ -132,7 +135,7 @@
 								</Grid.RowDefinitions>
 
 								<UniformGrid Columns="3">
-									<TextBlock Text="Trigger" VerticalAlignment="Center"/>
+									<TextBlock Text="Trigger Name" VerticalAlignment="Center"/>
 									<TextBlock Text="When Value Is..." VerticalAlignment="Center"/>
 									<StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
 										<!--add existing-->
@@ -165,8 +168,8 @@
 					</Grid>
 
 					<!--column 2-->
-					<StackPanel Margin="10,0,0,0">
-						<GroupBox Header="Event Scope and Trigger Behavior" Margin="0,0,0,5">
+					<StackPanel Margin="5,0,0,0">
+						<GroupBox Header="Event Scope and Trigger Activation Behavior" Margin="0,0,0,5">
 							<StackPanel>
 								<StackPanel Orientation="Horizontal">
 									<TextBlock Text="Global Scope:" Margin="0,0,10,0"/>
@@ -177,16 +180,15 @@
 									</UniformGrid>
 								</StackPanel>
 
-								<materialDesign:Card Grid.Row="0" Background="MediumPurple" Padding="10" Margin="0,10,0,0">
+								<GroupBox Header="Trigger Behavior (includes 'Additional Triggers')" Grid.Row="0" Background="{StaticResource GroupBG}" Padding="10" Margin="0,10,0,0">
 									<StackPanel>
 										<Grid>
 											<Grid.ColumnDefinitions>
 												<ColumnDefinition Width="*" />
 												<ColumnDefinition Width="auto" />
 											</Grid.ColumnDefinitions>
-											<StackPanel>
-												<TextBlock Text="Trigger Behavior" Margin="0,0,0,5" Foreground="Purple"/>
-												<TextBlock Text="This includes 'Additional Triggers'" Margin="0,0,0,0"/>
+											<StackPanel Margin="0,5,0,0">
+												<TextBlock Text="Which Triggers fire this Event?" Margin="0,0,0,0"/>
 											</StackPanel>
 
 											<StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
@@ -205,11 +207,11 @@
 											<CheckBox Grid.Column="1" Content="Fires At End Of Current Round" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding isEndOfCurrentRound}" Margin="0,5,4,4"/>
 										</Grid>
 									</StackPanel>
-								</materialDesign:Card>
+								</GroupBox>
 							</StackPanel>
 						</GroupBox>
 
-						<GroupBox Header="Triggered By General Triggers" Margin="0,10,0,5">
+						<GroupBox Header="'Triggered By' General Triggers" Margin="0,10,0,5" Background="#FF503B7C">
 							<Grid>
 								<Grid.RowDefinitions>
 									<RowDefinition Height="auto"/>

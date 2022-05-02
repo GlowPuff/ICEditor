@@ -29,15 +29,13 @@
 						<TabItem.Header>
 							<TextBlock Text="Activate" HorizontalAlignment="Center" />
 						</TabItem.Header>
-						<StackPanel Margin="10">
-							<TextBlock Text="Activate either a Map Section OR an individual Tile, or BOTH." Margin="0,0,10,0"/>
-							<TextBlock Text="Only Map Sections with 'Invisible Until Activated' CHECKED appear in the Sections list." Margin="0,0,10,0" TextWrapping="Wrap"/>
-							<TextBlock Text="Only Tiles with 'Starts Activated' UNCHECKED appear in the Tiles list." Margin="0,0,10,10"/>
+						<StackPanel Margin="10,10,0,10">
+							<TextBlock Text="Activate either a Map Section OR an individual Tile, or BOTH." Margin="0,0,10,10"/>
 							<UniformGrid Columns="2" Margin="0,0,10,0">
-								<GroupBox Header="Map Section" Margin="0,0,5,0">
+								<GroupBox Header="Map Section" Margin="0,0,5,0" Background="#FF503B7C">
 									<ComboBox x:Name="msCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectedValue="{Binding mapSection}" SelectedValuePath="GUID" DisplayMemberPath="name" VerticalAlignment="Top"/>
 								</GroupBox>
-								<GroupBox Header="Individual Tile" Margin="5,0,0,0">
+								<GroupBox Header="Individual Tile" Margin="5,0,0,0" Background="#FF503B7C">
 									<ComboBox x:Name="tileCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectedValue="{Binding mapTile}" SelectedValuePath="GUID" DisplayMemberPath="name" VerticalAlignment="Top"/>
 								</GroupBox>
 							</UniformGrid>
@@ -52,10 +50,10 @@
 							<TextBlock Text="Deactivate either a Map Section OR an individual Tile, or BOTH." Margin="0,0,0,10"/>
 
 							<UniformGrid Columns="2">
-								<GroupBox Header="Map Section" Margin="0,0,5,0">
+								<GroupBox Header="Map Section" Margin="0,0,5,0" Background="#FF503B7C">
 									<ComboBox x:Name="ms2CB" Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectedValue="{Binding mapSectionRemove}" SelectedValuePath="GUID" DisplayMemberPath="name" VerticalAlignment="Top"/>
 								</GroupBox>
-								<GroupBox Header="Individual Tile" Margin="5,0,0,0">
+								<GroupBox Header="Individual Tile" Margin="5,0,0,0" Background="#FF503B7C">
 									<ComboBox x:Name="tile2CB" Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectedValue="{Binding mapTileRemove}" SelectedValuePath="GUID" DisplayMemberPath="name" VerticalAlignment="Top"/>
 								</GroupBox>
 							</UniformGrid>

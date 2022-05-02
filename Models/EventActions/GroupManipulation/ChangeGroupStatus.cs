@@ -4,8 +4,8 @@ namespace Imperial_Commander_Editor
 {
 	public class ChangeGroupStatus : EventAction
 	{
-		public ObservableCollection<DeploymentCard> readyGroups { get; set; } = new();
-		public ObservableCollection<DeploymentCard> exhaustGroups { get; set; } = new();
+		public ObservableCollection<DCPointer> readyGroups { get; set; } = new();
+		public ObservableCollection<DCPointer> exhaustGroups { get; set; } = new();
 
 		public ChangeGroupStatus()
 		{

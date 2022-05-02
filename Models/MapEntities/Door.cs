@@ -50,7 +50,7 @@ namespace Imperial_Commander_Editor
 			GUID = Guid.NewGuid();
 			name = "New Door";
 			entityType = EntityType.Door;
-			entityProperties = new() { name = name };
+			entityProperties = new() { name = name, isActive = false };//default closed (isActive=false)
 			mapSectionOwner = ownderGUID;
 		}
 

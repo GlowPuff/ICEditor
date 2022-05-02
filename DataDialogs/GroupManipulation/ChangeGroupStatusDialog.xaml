@@ -64,7 +64,7 @@
 					<!--LEFT-->
 					<StackPanel Margin="0,0,5,0">
 						<TextBlock Text="Ready These Groups" HorizontalAlignment="Center" Margin="0,0,0,10"/>
-						<materialDesign:Card Padding="10" Background="MediumPurple" Margin="0,0,0,10">
+						<materialDesign:Card Padding="10" Background="{StaticResource CardBG}" Margin="0,0,0,10">
 							<Grid>
 								<Grid.ColumnDefinitions>
 									<ColumnDefinition Width="*" />
@@ -105,7 +105,7 @@
 					<!--RIGHT-->
 					<StackPanel Margin="5,0,0,0">
 						<TextBlock Text="Exhaust These Groups" HorizontalAlignment="Center" Margin="0,0,0,10"/>
-						<materialDesign:Card Padding="10" Background="MediumPurple" Margin="0,0,0,10">
+						<materialDesign:Card Padding="10" Background="{StaticResource CardBG}" Margin="0,0,0,10">
 							<Grid>
 								<Grid.ColumnDefinitions>
 									<ColumnDefinition Width="*" />

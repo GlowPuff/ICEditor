@@ -45,8 +45,8 @@
 			<Grid>
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="1*" />
-					<ColumnDefinition Width="auto" />
-					<ColumnDefinition Width="auto" />
+					<!--<ColumnDefinition Width="auto" />
+					<ColumnDefinition Width="auto" />-->
 					<ColumnDefinition Width="auto" />
 				</Grid.ColumnDefinitions>
 
@@ -59,11 +59,11 @@
 					</TextBlock.Text>
 				</TextBlock>
 
-				<Button Grid.Column="1" x:Name="editResText" Content="{materialDesign:PackIcon Kind=Edit}" Click="editResText_Click" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35" ToolTip="Edit Custom Instructions"/>
+				<!--<Button Grid.Column="1" x:Name="editResText" Content="{materialDesign:PackIcon Kind=Edit}" Click="editResText_Click" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35" ToolTip="Edit Custom Instructions"/>
 
-				<Button Grid.Column="2" x:Name="editResTraits" Content="{materialDesign:PackIcon Kind=Tag}" Click="editResTraits_Click" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35" ToolTip="Edit Priority Target Traits" Margin="10,0"/>
+				<Button Grid.Column="2" x:Name="editResTraits" Content="{materialDesign:PackIcon Kind=Tag}" Click="editResTraits_Click" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35" ToolTip="Edit Priority Target Traits" Margin="10,0"/>-->
 
-				<Button Grid.Column="3" x:Name="remReservedGroupButton" Content="{materialDesign:PackIcon Kind=RemoveBold}" Click="remReservedGroupButton_Click" Style="{StaticResource MaterialDesignFloatingActionButton}" Foreground="Red" Width="35" Height="35"/>
+				<Button Grid.Column="1" x:Name="remReservedGroupButton" Content="{materialDesign:PackIcon Kind=RemoveBold}" Click="remReservedGroupButton_Click" Style="{StaticResource MaterialDesignFloatingActionButton}" Foreground="Red" Width="35" Height="35"/>
 			</Grid>
 		</DataTemplate>
 	</UserControl.Resources>
@@ -72,9 +72,9 @@
 		<StackPanel>
 			<UniformGrid Columns="2">
 				<!--LEFT-->
-				<GroupBox Header="GROUP PROPERTIES" Margin="0,0,5,0">
-					<StackPanel>
-						<materialDesign:Card Background="MediumPurple" VerticalAlignment="Top" Padding="10">
+				<StackPanel Margin="0,0,5,0">
+					<GroupBox Header="Add Initial / Reserved Group" Background="#FF503B7C">
+						<StackPanel>
 							<StackPanel>
 								<TextBox x:Name="filterBox" Style="{StaticResource MaterialDesignOutlinedTextBox}" Margin="0,0,0,10" materialDesign:HintAssist.Hint="Filter List" KeyDown="filterBox_KeyDown" TextChanged="TextBox_TextChanged" CaretBrush="White" IsTabStop="False"/>
 
@@ -93,71 +93,77 @@
 									</ComboBox.ItemTemplate>
 								</ComboBox>
 
-								<TextBox Text="{Binding customName}" Style="{StaticResource MaterialDesignOutlinedTextBox}" Margin="0,10,0,0" materialDesign:HintAssist.Hint="Custom Name - Blank For Default" KeyDown="TextBox_KeyDown"/>
+								<Button x:Name="addReservedGroupButton" Grid.Column="1" Content="ADD RESERVED GROUP" Margin="5,10,0,0" Click="addReservedGroupButton_Click" />
 
-								<!--PRIORITY TARGET-->
-								<GroupBox Header="PRIORITY TARGET TRAITS" Margin="0,10,0,0">
-									<UniformGrid Columns="2">
-										<CheckBox x:Name="defPriorityCheck" Content="Use Group Default" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding useDefaultPriority}" VerticalAlignment="Center"/>
-										<Button x:Name="targetBtn" Content="CHANGE TRAITS..." Click="targetBtn_Click" IsEnabled="{Binding Path=IsChecked, ElementName=defPriorityCheck, Converter={StaticResource InvertBooleanConverter}}"/>
-									</UniformGrid>
-								</GroupBox>
-
-								<!--CUSTOM INSTRUCTIONS-->
-								<GroupBox Header="CUSTOM INSTRUCTIONS" Margin="0,10,0,0">
-									<StackPanel>
-										<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-											<RadioButton GroupName="coptions" Content="Top" VerticalAlignment="Center" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding Path=customInstructionType, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:CustomInstructionType.Top}}"/>
-
-											<RadioButton GroupName="coptions" Content="Bottom" VerticalAlignment="Center" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding Path=customInstructionType, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:CustomInstructionType.Bottom}}" HorizontalAlignment="Center"/>
-
-											<RadioButton GroupName="coptions" Content="Replace" VerticalAlignment="Center" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding Path=customInstructionType, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:CustomInstructionType.Replace}}" HorizontalAlignment="Right"/>
-										</StackPanel>
-										<Button x:Name="editCustomBtn" Content="EDIT CUSTOM INSTRUCTIONS" Click="editCustomBtn_Click" Margin="0,5,0,0"/>
-									</StackPanel>
-								</GroupBox>
-
-								<GroupBox Header="DEPLOYMENT POINT" Margin="0,10,0,0">
-									<ComboBox x:Name="dpCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectedValue="{Binding deploymentPoint}" DisplayMemberPath="name" ItemsSource="{Binding deploymentPoints}"/>
-								</GroupBox>
-
-								<UniformGrid Columns="2">
-									<Button x:Name="addInitialGroupButton" Grid.Column="1" Content="ADD INITIAL GROUP" Margin="0,10,5,0" Click="addInitialGroupButton_Click" IsEnabled="{Binding buttonEnabled}"/>
-									<Button x:Name="addReservedGroupButton" Grid.Column="1" Content="ADD RESERVED GROUP" Margin="5,10,0,0" Click="addReservedGroupButton_Click" />
-								</UniformGrid>
 							</StackPanel>
-						</materialDesign:Card>
-					</StackPanel>
-				</GroupBox>
+						</StackPanel>
+					</GroupBox>
+
+					<GroupBox Header="Initial Group Properties" Margin="0,10,0,0" Background="#FF503B7C">
+						<StackPanel>
+							<TextBox Text="{Binding customName}" Style="{StaticResource MaterialDesignOutlinedTextBox}" materialDesign:HintAssist.Hint="Custom Name - Blank For Default" KeyDown="TextBox_KeyDown"/>
+
+							<!--PRIORITY TARGET-->
+							<GroupBox Header="Priority Target Traits" Margin="0,10,0,0">
+								<UniformGrid Columns="2">
+									<CheckBox x:Name="defPriorityCheck" Content="Use Group Default" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding useDefaultPriority}" VerticalAlignment="Center"/>
+									<Button x:Name="targetBtn" Content="CHANGE TRAITS..." Click="targetBtn_Click" IsEnabled="{Binding Path=IsChecked, ElementName=defPriorityCheck, Converter={StaticResource InvertBooleanConverter}}"/>
+								</UniformGrid>
+							</GroupBox>
+
+							<!--CUSTOM INSTRUCTIONS-->
+							<GroupBox Header="Custom Instructions" Margin="0,10,0,0">
+								<StackPanel>
+									<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+										<RadioButton GroupName="coptions" Content="Top" VerticalAlignment="Center" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding Path=customInstructionType, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:CustomInstructionType.Top}}"/>
+
+										<RadioButton GroupName="coptions" Content="Bottom" VerticalAlignment="Center" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding Path=customInstructionType, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:CustomInstructionType.Bottom}}" HorizontalAlignment="Center"/>
+
+										<RadioButton GroupName="coptions" Content="Replace" VerticalAlignment="Center" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding Path=customInstructionType, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:CustomInstructionType.Replace}}" HorizontalAlignment="Right"/>
+									</StackPanel>
+
+									<StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+										<Button x:Name="editCustomBtn" Content="EDIT CUSTOM INSTRUCTIONS..." Click="editCustomBtn_Click"/>
+										<TextBlock x:Name="ciInfo" Text="Text Not Set" VerticalAlignment="Center" Margin="10,0,10,0"/>
+									</StackPanel>
+								</StackPanel>
+							</GroupBox>
+
+							<GroupBox Header="Deployment Point" Margin="0,10,0,0">
+								<ComboBox x:Name="dpCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectedValue="{Binding deploymentPoint}" DisplayMemberPath="name" ItemsSource="{Binding deploymentPoints}"/>
+							</GroupBox>
+
+							<!--<UniformGrid Columns="2">-->
+							<Button x:Name="addInitialGroupButton" Grid.Column="1" Content="ADD INITIAL GROUP" Margin="0,10,5,0" Click="addInitialGroupButton_Click" IsEnabled="{Binding buttonEnabled}"/>
+							<!--</UniformGrid>-->
+						</StackPanel>
+					</GroupBox>
+				</StackPanel>
 
 				<!--RIGHT-->
 				<StackPanel Margin="5,0,0,0">
-					<GroupBox Header="INITIAL GROUPS">
+					<GroupBox Header="Initial Groups" Background="#FF503B7C">
 						<!--INITIAL LIST BOX-->
-						<materialDesign:Card Background="Purple" Padding="10">
-							<ListBox ItemsSource="{Binding initialGroups}" HorizontalContentAlignment="Stretch" ItemTemplate="{StaticResource k1}" d:ItemsSource="{d:SampleData ItemCount=2}">
+						<ListBox ItemsSource="{Binding initialGroups}" HorizontalContentAlignment="Stretch" ItemTemplate="{StaticResource k1}" d:ItemsSource="{d:SampleData ItemCount=2}">
+							<ListBox.ItemContainerStyle>
+								<Style TargetType="ListBoxItem" BasedOn="{StaticResource MaterialDesignListBoxItem}">
+									<Setter Property="materialDesign:ListBoxItemAssist.ShowSelection" Value="False" />
+								</Style>
+							</ListBox.ItemContainerStyle>
+						</ListBox>
+					</GroupBox>
+
+					<GroupBox Header="Reserved Groups" Margin="0,10,0,0" Background="#FF503B7C">
+						<StackPanel>
+							<!--<materialDesign:Card Background="MediumPurple" VerticalAlignment="Top" Padding="10">-->
+							<!--RESERVED LIST BOX-->
+							<ListBox ItemsSource="{Binding reservedGroups}" HorizontalContentAlignment="Stretch" ItemTemplate="{StaticResource k2}" d:ItemsSource="{d:SampleData ItemCount=2}">
 								<ListBox.ItemContainerStyle>
 									<Style TargetType="ListBoxItem" BasedOn="{StaticResource MaterialDesignListBoxItem}">
 										<Setter Property="materialDesign:ListBoxItemAssist.ShowSelection" Value="False" />
 									</Style>
 								</ListBox.ItemContainerStyle>
 							</ListBox>
-						</materialDesign:Card>
-					</GroupBox>
-
-					<GroupBox Header="RESERVED GROUPS" Margin="0,10,0,0">
-						<StackPanel>
-							<!--<materialDesign:Card Background="MediumPurple" VerticalAlignment="Top" Padding="10">-->
-							<!--RESERVED LIST BOX-->
-							<materialDesign:Card Background="Purple" Padding="10">
-								<ListBox ItemsSource="{Binding reservedGroups}" HorizontalContentAlignment="Stretch" ItemTemplate="{StaticResource k2}" d:ItemsSource="{d:SampleData ItemCount=2}">
-									<ListBox.ItemContainerStyle>
-										<Style TargetType="ListBoxItem" BasedOn="{StaticResource MaterialDesignListBoxItem}">
-											<Setter Property="materialDesign:ListBoxItemAssist.ShowSelection" Value="False" />
-										</Style>
-									</ListBox.ItemContainerStyle>
-								</ListBox>
-							</materialDesign:Card>
 							<!--<Grid>
 								<Grid.ColumnDefinitions>
 									<ColumnDefinition Width="*" />

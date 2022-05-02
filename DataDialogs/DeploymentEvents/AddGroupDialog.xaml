@@ -44,7 +44,7 @@
 					</Grid.RowDefinitions>
 
 					<StackPanel>
-						<materialDesign:Card Padding="10" Background="MediumPurple" Margin="0,0,0,10">
+						<materialDesign:Card Padding="10" Background="{StaticResource CardBG}" Margin="0,0,0,10">
 							<Grid>
 								<Grid.ColumnDefinitions>
 									<ColumnDefinition Width="*" />

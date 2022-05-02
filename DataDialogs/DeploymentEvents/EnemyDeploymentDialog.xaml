@@ -35,9 +35,19 @@
 						</TabItem.Header>
 						<UniformGrid Columns="2" Margin="5,10,5,10">
 							<StackPanel Margin="5,0">
-								<TextBox x:Name="filterBox" Style="{StaticResource MaterialDesignOutlinedTextBox}" Margin="0,0,0,10" materialDesign:HintAssist.Hint="Filter List" KeyDown="filterBox_KeyDown" TextChanged="TextBox_TextChanged" CaretBrush="White"/>
+								<materialDesign:Card Padding="10" Background="{StaticResource CardBG}">
+									<Grid>
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="auto" />
+											<ColumnDefinition Width="1*" />
+										</Grid.ColumnDefinitions>
+										<CheckBox x:Name="initialRB" Content="Filter By Reserved" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" Click="initialRB_Click" Margin="0,5,5,10"/>
 
-								<ComboBox x:Name="enemyCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectedValue="{Binding deploymentGroup}" SelectedValuePath="id" SelectionChanged="enemyCB_SelectionChanged">
+										<TextBox Grid.Column="1" x:Name="filterBox" Style="{StaticResource MaterialDesignOutlinedTextBox}" Margin="0,0,0,5" materialDesign:HintAssist.Hint="Filter List" KeyDown="filterBox_KeyDown" TextChanged="TextBox_TextChanged" CaretBrush="White"/>
+									</Grid>
+								</materialDesign:Card>
+
+								<ComboBox x:Name="enemyCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectedValue="{Binding deploymentGroup}" SelectedValuePath="id" SelectionChanged="enemyCB_SelectionChanged" Margin="0,10,0,10">
 									<ComboBox.ItemTemplate>
 										<DataTemplate>
 											<TextBlock>
@@ -52,19 +62,23 @@
 									</ComboBox.ItemTemplate>
 								</ComboBox>
 
+								<!--event name-->
+								<GroupBox Header="Rename Enemy" Margin="0,0,0,10" Background="#FF503B7C">
+									<TextBox x:Name="nameTB" Style="{StaticResource MaterialDesignOutlinedTextBox}" Text="{Binding enemyName}" materialDesign:HintAssist.Hint="Blank For Default Name" KeyDown="nameTB_KeyDown"/>
+								</GroupBox>
+
 								<!--SOURCE-->
-								<materialDesign:Card Margin="0,10" Padding="10" Background="MediumPurple">
+								<GroupBox Header="DRAW DEPLOYMENT FROM" Margin="0,10" Visibility="Collapsed">
 									<StackPanel>
 										<RadioButton x:Name="handRB" GroupName="source" Content="Hand" VerticalAlignment="Center" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding Path=sourceType, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:SourceType.Hand}}" Click="handRB_Click"/>
 
-										<RadioButton x:Name="initialRB" GroupName="source" Content="Initial / Reserved" VerticalAlignment="Center" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding Path=sourceType, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:SourceType.InitialReserved}}" Click="initialRB_Click"/>
 
 										<RadioButton x:Name="manualRB" GroupName="source" Content="Manual" VerticalAlignment="Center" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding Path=sourceType, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:SourceType.Manual}}" Click="manualRB_Click"/>
 									</StackPanel>
-								</materialDesign:Card>
+								</GroupBox>
 
 								<!--OPTIONS-->
-								<materialDesign:Card Padding="10" Background="MediumPurple">
+								<materialDesign:Card Padding="10" Background="{StaticResource CardBG}">
 									<StackPanel>
 										<CheckBox Content="Can Be Reinforced" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding canReinforce}"/>
 										<CheckBox Content="Can Be Redeployed" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding canRedeploy}"/>
@@ -73,20 +87,15 @@
 								</materialDesign:Card>
 
 								<!--ON DEFEAT-->
-								<GroupBox Header="On Defeated, Set +1:" Margin="0,10,0,0">
+								<GroupBox Header="On Defeated, Fire This Trigger:" Margin="0,10,0,0" Background="#FF503B7C">
 									<ComboBox x:Name="triggersCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" DisplayMemberPath="name" SelectedValue="{Binding setTrigger}" SelectedValuePath="GUID"/>
 								</GroupBox>
 							</StackPanel>
 
 							<!--COLUMN 2-->
 							<StackPanel Margin="5,0">
-								<!--event name-->
-								<GroupBox Header="Rename Enemy">
-									<TextBox x:Name="nameTB" Style="{StaticResource MaterialDesignOutlinedTextBox}" Text="{Binding enemyName}" materialDesign:HintAssist.Hint="Blank For Default Name" KeyDown="nameTB_KeyDown"/>
-								</GroupBox>
-
 								<!--DEPLOYMENT POINT-->
-								<GroupBox Header="Deployment Point" Margin="0,10">
+								<GroupBox Header="Deployment Point" Margin="0,0,0,10" Background="#FF503B7C">
 									<StackPanel>
 										<RadioButton GroupName="dpoint" Content="Active Deployment Point" VerticalAlignment="Center" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding Path=deploymentPoint, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:DeploymentSpot.Active}}"/>
 
@@ -105,25 +114,28 @@
 								</GroupBox>
 
 								<!--OPTIONS-->
-								<materialDesign:Card Padding="10" Background="MediumPurple">
+								<materialDesign:Card Padding="10" Background="{StaticResource CardBG}">
 									<StackPanel>
-										<UniformGrid Columns="2">
-											<CheckBox Content="Threat Cost" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding useThreat}"/>
-											<TextBox Text="{Binding threatCost}" VerticalAlignment="Center" Margin="10,0,0,0" KeyDown="nameTB_KeyDown"/>
-										</UniformGrid>
-										<Grid>
+										<CheckBox Content="Deduct This Group's Cost From Threat" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding useThreat}" Margin="0,4,4,4"/>
+										<StackPanel Orientation="Horizontal">
+											<TextBlock Text="Cost Modifier:" VerticalAlignment="Center"/>
+											<TextBox Text="{Binding threatCost}"  Margin="10,0" Width="50" KeyDown="nameTB_KeyDown"/>
+											<TextBlock Text="+/- Cost" FontStyle="Italic" VerticalAlignment="Center"/>
+										</StackPanel>
+
+										<Grid Margin="0,5,0,0">
 											<Grid.ColumnDefinitions>
 												<ColumnDefinition Width="auto" />
 												<ColumnDefinition Width="*" />
 											</Grid.ColumnDefinitions>
-											<CheckBox Content="Show Modification" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding showMod}"/>
+											<CheckBox Content="Show Modification" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding showMod}" Margin="0,4,4,4"/>
 											<TextBox Text="{Binding modification}" Grid.Column="1" VerticalAlignment="Center" Margin="10,0,0,0" KeyDown="nameTB_KeyDown"/>
 										</Grid>
 									</StackPanel>
 								</materialDesign:Card>
 
 								<!--PRIORITY TARGET-->
-								<GroupBox Header="PRIORITY TARGET TRAITS" Margin="0,10,0,0">
+								<GroupBox Header="PRIORITY TARGET TRAITS" Margin="0,10,0,0" Background="#FF503B7C">
 									<UniformGrid Columns="2">
 										<CheckBox VerticalAlignment="Center" x:Name="defPriorityCheck" Content="Use Group Default" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding enemyGroupData.groupPriorityTraits.useDefaultPriority}"/>
 										<Button x:Name="targetBtn" Content="CHANGE TRAITS..." Click="targetBtn_Click" IsEnabled="{Binding Path=IsChecked, ElementName=defPriorityCheck, Converter={StaticResource InvertBooleanConverter}}"/>
@@ -145,7 +157,7 @@
 								<!--USE CUSTOM-->
 								<CheckBox Content="Use Custom Instructions" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding useCustomInstructions}"/>
 								<!--OPTIONS-->
-								<materialDesign:Card Padding="10" Background="MediumPurple">
+								<materialDesign:Card Padding="10" Background="{StaticResource CardBG}">
 									<StackPanel>
 										<TextBlock Text="Placement" HorizontalAlignment="Center"/>
 										<UniformGrid Columns="3">

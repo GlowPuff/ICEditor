@@ -122,18 +122,18 @@
 
 							<materialDesign:PackIcon Kind="Dot" VerticalAlignment="Center" Foreground="MediumOrchid"/>
 
-							<TextBlock Text="Duplicate Entity" VerticalAlignment="Center"/>
+							<TextBlock Text="Duplicate" VerticalAlignment="Center"/>
 							<materialDesign:Chip Content="D" Style="{StaticResource  MaterialDesignFlatSecondaryButton}"/>
 
 							<materialDesign:PackIcon Kind="Dot" VerticalAlignment="Center" Foreground="MediumOrchid"/>
 
-							<TextBlock Text="Delete Entity" VerticalAlignment="Center"/>
+							<TextBlock Text="Delete" VerticalAlignment="Center"/>
 							<materialDesign:Chip Content="X" Style="{StaticResource  MaterialDesignFlatSecondaryButton}"/>
 
 							<materialDesign:PackIcon Kind="Dot" VerticalAlignment="Center" Foreground="MediumOrchid"/>
 
-							<TextBlock Text="Rotate Tile" VerticalAlignment="Center"/>
-							<materialDesign:Chip Content="[ and ], RClick Entity" Style="{StaticResource  MaterialDesignFlatSecondaryButton}"/>
+							<TextBlock Text="Rotate" VerticalAlignment="Center"/>
+							<materialDesign:Chip Content="[ ], RClick" Style="{StaticResource  MaterialDesignFlatSecondaryButton}"/>
 
 							<materialDesign:PackIcon Kind="Dot" VerticalAlignment="Center" Foreground="MediumOrchid"/>
 

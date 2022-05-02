@@ -30,7 +30,7 @@
 						</UniformGrid>
 					</materialDesign:Card>-->
 
-					<materialDesign:Card  Background="#FF7952C0" Margin="0,0,0,0" Padding="10">
+					<materialDesign:Card Background="{StaticResource CardBG}" Margin="0,0,0,0" Padding="10">
 						<StackPanel>
 							<TextBlock Text="To add a value to the Mission's current Threat, enter a positive number, otherwise use a negative number to subtract from the current Threat in the Mission." TextWrapping="Wrap"/>
 

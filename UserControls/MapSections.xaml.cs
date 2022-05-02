@@ -1,6 +1,6 @@
-﻿using MaterialDesignThemes.Wpf;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
+using MaterialDesignThemes.Wpf;
 
 namespace Imperial_Commander_Editor
 {
@@ -39,12 +39,17 @@ namespace Imperial_Commander_Editor
 
 		private void removeButton_Click( object sender, RoutedEventArgs e )
 		{
-			var res = MessageBox.Show( $"Are you sure you want to remove this Map Section?\r\n\r\n{(((Button)sender).DataContext as MapSection).name}", "Remove Map Section", MessageBoxButton.YesNo, MessageBoxImage.Warning );
-			if ( res == MessageBoxResult.Yes )
+			var dlg = new ConfirmSectionRemoveDialog( (((Button)sender).DataContext as MapSection).name );
+			bool result = dlg.ShowDialog().Value;
+
+			//var res = MessageBox.Show( $"Are you sure you want to remove this Map Section?\r\n\r\n{(((Button)sender).DataContext as MapSection).name}", "Remove Map Section", MessageBoxButton.YesNo, MessageBoxImage.Warning );
+			if ( result )//res == MessageBoxResult.Yes )
 			{
 				var m = ((Button)sender).DataContext as MapSection;
 				if ( m.GUID != System.Guid.Empty )
 				{
+					if ( dlg.removeChildren )
+						Utils.RemoveMapSectionObjects( m );
 					parent.activeSection = parent.mission.mapSections[0];
 					parent.mission.mapSections.Remove( m );
 				}

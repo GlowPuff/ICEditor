@@ -18,7 +18,7 @@
 				</Grid.RowDefinitions>
 
 				<StackPanel>
-					<materialDesign:Card Background="Purple" Padding="10" Margin="0,0,0,10">
+					<materialDesign:Card Background="{StaticResource CardBG}" Padding="10" Margin="0,0,0,10">
 						<Grid>
 							<Grid.ColumnDefinitions>
 								<ColumnDefinition Width="1*" />
@@ -58,16 +58,16 @@
 						</Grid>
 					</materialDesign:Card>
 
-					<materialDesign:Card Background="Purple" Padding="10">
+					<materialDesign:Card Background="{StaticResource CardBG}" Padding="10">
 						<StackPanel>
 							<UniformGrid Columns="3" Margin="0,0,0,10">
-								<TextBlock Text="Print Variable Value"/>
-								<TextBlock Text="Example ^variablename^" HorizontalAlignment="Center"/>
+								<TextBlock Text="Print Trigger's Value"/>
+								<TextBlock Text="Example &amp;trigger name&amp;" HorizontalAlignment="Center"/>
 								<TextBlock Text="Example 2" HorizontalAlignment="Center"/>
 							</UniformGrid>
 							<UniformGrid Columns="3">
 								<TextBlock Text="Print Threat Multiplier"/>
-								<TextBlock Text="Threat(2) X 3 is &amp;3&amp;" HorizontalAlignment="Center"/>
+								<TextBlock Text="Threat(2) X 3 is *3*" HorizontalAlignment="Center"/>
 								<TextBlock Text="Threat(2) X 3 is 6" HorizontalAlignment="Center"/>
 							</UniformGrid>
 						</StackPanel>

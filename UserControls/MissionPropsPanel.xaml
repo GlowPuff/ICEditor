@@ -16,9 +16,9 @@
 	<ScrollViewer VerticalScrollBarVisibility="Auto" Margin="10">
 		<UniformGrid Columns="2">
 			<!--left side-->
-			<StackPanel Margin="0,0,10,0">
+			<StackPanel Margin="0,0,5,0">
 				<!--general properties-->
-				<GroupBox Header="GENERAL PROPERTIES" Margin="0,0,0,5">
+				<GroupBox Header="General Properties" Margin="0,0,0,5" Background="#FF503B7C">
 					<Grid>
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition Width="1*" />
@@ -61,12 +61,12 @@
 							<ComboBox Name="missionIDCB" Style="{StaticResource MaterialDesignOutlinedComboBox}"  SelectedValue="{Binding missionID}" Margin="0,5,0,0"/>
 						</StackPanel>
 
-						<TextBlock Grid.Row="2" Grid.ColumnSpan="2" Text="Use a Mission ID other than Custom to have the Description filled in automatically by the Saga app." TextWrapping="Wrap" Margin="0,10,0,0"/>
+						<TextBlock Grid.Row="2" Grid.ColumnSpan="2" Text="Use a Mission ID other than 'Custom' to have the Description filled in automatically by the Saga app." TextWrapping="Wrap" Margin="0,10,0,0"/>
 					</Grid>
 				</GroupBox>
 
 				<!--optional deployment-->
-				<GroupBox Header="OPTIONAL DEPLOYMENT" Margin="0,5">
+				<GroupBox Header="Optional Deployment" Margin="0,5" Background="#FF503B7C">
 					<StackPanel Orientation="Horizontal">
 						<TextBlock Text="No" VerticalAlignment="Center"/>
 						<ToggleButton Margin="10,0" IsChecked="{Binding optionalDeployment}"/>
@@ -75,26 +75,30 @@
 				</GroupBox>
 
 				<!--initial threat-->
-				<GroupBox Header="INITIAL THREAT MODIFIER" Margin="0,5">
+				<GroupBox Header="Initial Threat Modifier" Margin="0,5" Background="#FF503B7C">
 					<StackPanel>
 						<RadioButton Content="None" GroupName="ithreat" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding initialThreatType, ConverterParameter={x:Static local:ThreatModifierType.None}, Converter={StaticResource rbConv}}"/>
 
-						<TextBlock Text="To add a value to the Mission's initial Threat, enter a positive number, otherwise use a negative number to subtract from the initial Threat in the Mission." TextWrapping="Wrap"/>
-						<StackPanel Orientation="Horizontal">
-							<RadioButton Content="Modified By" GroupName="ithreat" VerticalAlignment="Center" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding initialThreatType, ConverterParameter={x:Static local:ThreatModifierType.Fixed}, Converter={StaticResource rbConv}}"/>
-							<TextBox Margin="10,0" Width="30" Text="{Binding initialThreatModifier}" VerticalAlignment="Center" KeyDown="Validate_KeyDown" CaretBrush="White"/>
-						</StackPanel>
+						<materialDesign:Card Background="{StaticResource CardBG}" Padding="10" Margin="0,5,0,0">
+							<StackPanel>
+								<TextBlock Text="To add a value to the Mission's initial Threat, enter a positive number, otherwise use a negative number to subtract from the initial Threat in the Mission." TextWrapping="Wrap"/>
+								<StackPanel Orientation="Horizontal">
+									<RadioButton Content="Modified By" GroupName="ithreat" VerticalAlignment="Center" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding initialThreatType, ConverterParameter={x:Static local:ThreatModifierType.Fixed}, Converter={StaticResource rbConv}}"/>
+									<TextBox Margin="10,0" Width="30" Text="{Binding initialThreatModifier}" VerticalAlignment="Center" KeyDown="Validate_KeyDown" CaretBrush="White"/>
+								</StackPanel>
 
-						<TextBlock Margin="0,10,0,0" Text="Multiply the provided number by the Mission's Threat Level and add it to the initial Threat. Use a negative number to subtract the amount instead." TextWrapping="Wrap"/>
-						<StackPanel Orientation="Horizontal">
-							<RadioButton Content="Threat Level Multiplier" GroupName="ithreat" VerticalAlignment="Center" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding initialThreatType, ConverterParameter={x:Static local:ThreatModifierType.Multiple}, Converter={StaticResource rbConv}}"/>
-							<TextBox Margin="10,0" Width="30" Text="{Binding initialThreatMultiplier}" VerticalAlignment="Center" KeyDown="Validate_KeyDown" CaretBrush="White"/>
-						</StackPanel>
+								<TextBlock Margin="0,10,0,0" Text="Multiply the number below by the Mission's Threat Level and add it to the initial Threat. Use a negative number to subtract the amount instead." TextWrapping="Wrap"/>
+								<StackPanel Orientation="Horizontal">
+									<RadioButton Content="Threat Level Multiplier" GroupName="ithreat" VerticalAlignment="Center" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding initialThreatType, ConverterParameter={x:Static local:ThreatModifierType.Multiple}, Converter={StaticResource rbConv}}"/>
+									<TextBox Margin="10,0" Width="30" Text="{Binding initialThreatMultiplier}" VerticalAlignment="Center" KeyDown="Validate_KeyDown" CaretBrush="White"/>
+								</StackPanel>
+							</StackPanel>
+						</materialDesign:Card>
 					</StackPanel>
 				</GroupBox>
 
 				<!--factions-->
-				<GroupBox Header="INCLUDE FACTIONS" Margin="0,5">
+				<GroupBox Header="Include Factions" Margin="0,5" Background="#FF503B7C">
 					<StackPanel Orientation="Horizontal">
 						<CheckBox Content="Imperial" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding factionImperial}"/>
 						<CheckBox Content="Mercenary" Margin="10,0" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding factionMercenary}"/>
@@ -102,7 +106,7 @@
 				</GroupBox>
 
 				<!--ally-->
-				<GroupBox Header="FIXED ALLY" Margin="0,5">
+				<GroupBox Header="Fixed Ally" Margin="0,5" Background="#FF503B7C">
 					<StackPanel>
 						<RadioButton Content="No" GroupName="ally" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding useFixedAlly, ConverterParameter={x:Static local:YesNoAll.No}, Converter={StaticResource rbConv}}"/>
 						<StackPanel Orientation="Horizontal">
@@ -113,7 +117,7 @@
 				</GroupBox>
 
 				<!--banned ally-->
-				<GroupBox Header="BANNED ALLY" Margin="0,5,0,0">
+				<GroupBox Header="Banned Ally" Margin="0,5,0,0" Background="#FF503B7C">
 					<StackPanel>
 						<CheckBox x:Name="banCB" Content="Ban All Allies" IsChecked="{Binding useBannedAlly, ConverterParameter={x:Static local:YesNoAll.All}, Converter={StaticResource rbConv}}" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}"/>
 						<RadioButton Content="No" GroupName="bannedally" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding useBannedAlly, ConverterParameter={x:Static local:YesNoAll.No}, Converter={StaticResource rbConv}}"/>
@@ -128,13 +132,13 @@
 
 			<!--right side-->
 			<!--campaign name-->
-			<StackPanel Margin="10,0,0,0">
-				<GroupBox Header="CAMPAIGN NAME" Margin="0,0,0,5">
+			<StackPanel Margin="5,0,0,0">
+				<GroupBox Header="Campaign Name" Margin="0,0,0,5" Background="#FF503B7C">
 					<TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}" Text="{Binding campaignName}" KeyDown="Validate_KeyDown" CaretBrush="White"/>
 				</GroupBox>
 
 				<!--priority target-->
-				<GroupBox Header="PRIORITY TARGET" Margin="0,5">
+				<GroupBox Header="Priority Target Override (Applies To All Deployed Groups)" Margin="0,5" Background="#FF503B7C">
 					<StackPanel>
 						<RadioButton GroupName="priority" Content="Any Rebel Figure" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding priorityTargetType, ConverterParameter={x:Static local:PriorityTargetType.Rebel}, Converter={StaticResource rbConv}}"/>
 						<StackPanel Orientation="Horizontal">
@@ -153,18 +157,13 @@
 				</GroupBox>
 
 				<!--starting event-->
-				<GroupBox Header="STARTING EVENT" Margin="0,5">
+				<GroupBox Header="Starting Event" Margin="0,5" Background="#FF503B7C">
 					<ComboBox x:Name="eventCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" Foreground="White" GotFocus="eventCB_GotFocus" DisplayMemberPath="name" SelectedValuePath="GUID" SelectedValue="{Binding startingEvent}"/>
 				</GroupBox>
 
 				<!--custom instructions-->
-				<GroupBox Header="STARTING MISSION INFO" Margin="0,5">
+				<GroupBox Header="Starting Mission Info" Margin="0,5" Background="#FF503B7C">
 					<StackPanel Orientation="Horizontal">
-						<!--<Grid HorizontalAlignment="Left">-->
-						<!--<Grid.ColumnDefinitions >
-								<ColumnDefinition Width="auto"/>
-								<ColumnDefinition Width="*"/>
-							</Grid.ColumnDefinitions>-->
 						<Button Grid.Column="1" x:Name="ciButton" Content="EDIT MISSION INFO..." Click="infoBtn_Click"/>
 						<TextBlock x:Name="ciInfo" Text="Text Not Set" VerticalAlignment="Center" Margin="10,0,10,0"/>
 					</StackPanel>
@@ -181,7 +180,15 @@
 					<!--</StackPanel>-->
 				</GroupBox>
 
-				<GroupBox Header="BANNED ENEMY GROUPS" Margin="0,5,0,0">
+				<!--starting objective-->
+				<GroupBox Header="Starting Objective" Margin="0,5" Background="#FF503B7C">
+					<StackPanel Orientation="Horizontal">
+						<Button x:Name="objButton" Content="EDIT OBJECTIVE..." Click="objButton_Click"/>
+						<TextBlock x:Name="objInfo" Text="Text Not Set" VerticalAlignment="Center" Margin="10,0,10,0"/>
+					</StackPanel>
+				</GroupBox>
+
+				<GroupBox Header="Banned Enemy Groups" Margin="0,5,0,0" Background="#FF503B7C">
 					<StackPanel>
 						<TextBox x:Name="filterBox" Style="{StaticResource MaterialDesignOutlinedTextBox}" Margin="0,0,0,10" materialDesign:HintAssist.Hint="Filter List" KeyDown="filterBox_KeyDown" TextChanged="TextBox_TextChanged" CaretBrush="White"/>
 

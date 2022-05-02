@@ -11,6 +11,18 @@
 				<ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
 			</ResourceDictionary.MergedDictionaries>
 
+			<SolidColorBrush x:Key="CardBG">
+				<SolidColorBrush.Color>
+					<Color R="121" G="82" B="192" A="255"/>
+				</SolidColorBrush.Color>
+			</SolidColorBrush>
+
+			<SolidColorBrush x:Key="GroupBG">
+				<SolidColorBrush.Color>
+					<Color R="80" G="59" B="124" A="255"/>
+				</SolidColorBrush.Color>
+			</SolidColorBrush>
+
 			<!--default window appearance-->
 			<Style TargetType="Window" x:Key="dws">
 				<Setter Property="TextElement.FontWeight" Value="Medium"/>

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
@@ -21,12 +20,12 @@ namespace Imperial_Commander_Editor
 			DataContext = eventAction;
 
 			//get map sections that start invisible
-			List<MapSection> sections = new();
+			//List<MapSection> sections = new();
 			MapSection section = new() { name = "None", GUID = Guid.Empty };
 			section.Init();
-			sections.Add( section );
-			sections = sections.Concat( Utils.mainWindow.mission.mapSections.Where( x => x.invisibleUntilActivated ) ).ToList();
-			msCB.ItemsSource = sections;
+			//sections.Add( section );
+			//sections = sections.Concat( Utils.mainWindow.mission.mapSections ).ToList(); //sections.Concat( Utils.mainWindow.mission.mapSections.Where( x => x.invisibleUntilActivated ) ).ToList();
+			msCB.ItemsSource = new MapSection[] { section }.Concat( Utils.mainWindow.mission.mapSections ); //sections;
 
 			//for removal, list ALL sections
 			MapSection mapSection = new() { name = "None", GUID = Guid.Empty };
@@ -34,10 +33,10 @@ namespace Imperial_Commander_Editor
 			ms2CB.ItemsSource = new MapSection[] { mapSection }.Concat( Utils.mainWindow.mission.mapSections );
 
 			//get tiles that start NOT active
-			List<MapTile> tiles = new();
-			tiles.Add( new( "None" ) { name = "None", GUID = Guid.Empty } );
-			tiles = tiles.Concat( Utils.mainWindow.activeSection.mapTiles.Where( x => !x.entityProperties.isActive ) ).ToList();
-			tileCB.ItemsSource = tiles;
+			//List<MapTile> tiles = new();
+			//tiles.Add( new( "None" ) { name = "None", GUID = Guid.Empty } );
+			//tiles = tiles.Concat( Utils.mainWindow.activeSection.mapTiles.Where( x => !x.entityProperties.isActive ) ).ToList();
+			tileCB.ItemsSource = new MapTile[] { new( "None" ) { name = "None", GUID = Guid.Empty } }.Concat( Utils.mainWindow.activeSection.mapTiles );//tiles;
 
 			//for removal, list ALL tiles
 			tile2CB.ItemsSource = new MapTile[] { new( "None" ) { name = "None", GUID = Guid.Empty } }.Concat( Utils.mainWindow.activeSection.mapTiles );
@@ -45,7 +44,7 @@ namespace Imperial_Commander_Editor
 
 		private void Window_MouseDown( object sender, MouseButtonEventArgs e )
 		{
-			if ( e.LeftButton == System.Windows.Input.MouseButtonState.Pressed )
+			if ( e.LeftButton == MouseButtonState.Pressed )
 				DragMove();
 		}
 

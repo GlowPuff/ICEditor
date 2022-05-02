@@ -36,16 +36,16 @@ namespace Imperial_Commander_Editor
 
 			initialDP = (eventAction as EnemyDeployment).specificDeploymentPoint;
 
-			if ( (eventAction as EnemyDeployment).sourceType == SourceType.InitialReserved )
-			{
-				var items = new List<DeploymentCard>();
-				items = items.Concat( Utils.enemyData.Where( x => Utils.mainWindow.mission.initialDeploymentGroups.Any( y => y.cardID == x.id ) ) ).ToList();
-				items = items.Concat( Utils.enemyData.Where( x => Utils.mainWindow.mission.reservedDeploymentGroups.Any( y => y.cardID == x.id ) ) ).ToList();
+			//if ( (eventAction as EnemyDeployment).sourceType == SourceType.InitialReserved )
+			//{
+			//	var items = new List<DeploymentCard>();
+			//	items = items.Concat( Utils.enemyData.Where( x => Utils.mainWindow.mission.initialDeploymentGroups.Any( y => y.cardID == x.id ) ) ).ToList();
+			//	items = items.Concat( Utils.enemyData.Where( x => Utils.mainWindow.mission.reservedDeploymentGroups.Any( y => y.cardID == x.id ) ) ).ToList();
 
-				enemyCB.ItemsSource = items;
-			}
-			else
-				enemyCB.ItemsSource = Utils.enemyData;
+			//	enemyCB.ItemsSource = items;
+			//}
+			//else
+			enemyCB.ItemsSource = Utils.enemyData;
 
 			triggersCB.ItemsSource = Utils.mainWindow.localTriggers;
 
@@ -91,11 +91,15 @@ namespace Imperial_Commander_Editor
 
 		private void initialRB_Click( object sender, RoutedEventArgs e )
 		{
-			var items = new List<DeploymentCard>();
-			items = items.Concat( Utils.enemyData.Where( x => Utils.mainWindow.mission.initialDeploymentGroups.Any( y => y.cardID == x.id ) ) ).ToList();
-			items = items.Concat( Utils.enemyData.Where( x => Utils.mainWindow.mission.reservedDeploymentGroups.Any( y => y.cardID == x.id ) ) ).ToList();
+			if ( initialRB.IsChecked == true )
+			{
+				var items = new List<DeploymentCard>();
+				items = items.Concat( Utils.enemyData.Where( x => Utils.mainWindow.mission.reservedDeploymentGroups.Any( y => y.cardID == x.id ) ) ).ToList();
 
-			enemyCB.ItemsSource = items;
+				enemyCB.ItemsSource = items;
+			}
+			else
+				enemyCB.ItemsSource = Utils.enemyData;
 		}
 
 		private void manualRB_Click( object sender, RoutedEventArgs e )
@@ -142,11 +146,10 @@ namespace Imperial_Commander_Editor
 		{
 			DeploymentCard dc;
 
-			if ( (eventAction as EnemyDeployment).sourceType == SourceType.InitialReserved )
+			if ( initialRB.IsChecked == true )
 			{
 				var items = new List<DeploymentCard>();
-				items = items.Concat( Utils.enemyData.Where( x => Utils.mainWindow.mission.initialDeploymentGroups.Any( y => y.cardID == x.id ) ) ).ToList();
-				items = items.Concat( Utils.enemyData.Where( x => Utils.mainWindow.mission.reservedDeploymentGroups.Any( y => y.cardID == x.id ) ) ).ToList();
+				items = Utils.enemyData.Where( x => Utils.mainWindow.mission.reservedDeploymentGroups.Any( y => y.cardID == x.id ) ).ToList();
 
 				dc = items.Where( x => x.name.ToLower().Contains( filterBox.Text.ToLower() ) ).FirstOr( null );
 			}

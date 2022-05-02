@@ -527,6 +527,12 @@ namespace Imperial_Commander_Editor
 			{
 				OnAddTile();
 			}
+			//else if(e.Key== Key.LeftCtrl e.Key == Key.F )
+			//(Keyboard.Modifiers & ModifierKeys.Shift) == ModifierKeys.Shift
+			//else if ( Keyboard.Modifiers == ModifierKeys.Control && e.Key == Key.F )
+			//{
+			//	selectedEntity?.mapRenderer.Select();
+			//}
 		}
 
 		private void UserControl_PreviewKeyDown( object sender, KeyEventArgs e ) { }
@@ -544,6 +550,7 @@ namespace Imperial_Commander_Editor
 					t.BuildRenderer( MainCanvas, new Vector( translateTransform.X, translateTransform.Y ), mScale );
 					parent.activeSection.mapTiles.Add( t );
 					selectedEntity = t;
+					selectedEntity.mapRenderer.Select();
 				}
 				else
 				{
@@ -554,6 +561,7 @@ namespace Imperial_Commander_Editor
 						t.BuildRenderer( MainCanvas, new Vector( translateTransform.X, translateTransform.Y ), mScale );
 						parent.activeSection.mapTiles.Add( t );
 						selectedEntity = t;
+						selectedEntity.mapRenderer.Select();
 					}
 				}
 
@@ -609,6 +617,16 @@ namespace Imperial_Commander_Editor
 				UpdateUI();
 				this.Focus();
 			}
+		}
+
+		/// <summary>
+		/// Just removes the visual from the map
+		/// </summary>
+		public void RemoveEntityFromMap( IMapEntity e )
+		{
+			e.mapRenderer.RemoveVisual();
+			selectedEntity = null;
+			UpdateUI();
 		}
 
 		private void entitiesCB_MouseDoubleClick( object sender, MouseButtonEventArgs e )

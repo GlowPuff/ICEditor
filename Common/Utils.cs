@@ -107,6 +107,32 @@ namespace Imperial_Commander_Editor
 			return mainWindow.mission.EntityExists( guid );
 		}
 
+		/// <summary>
+		/// Remove all tiles/entities/events/triggers associated with this Section
+		/// </summary>
+		public static void RemoveMapSectionObjects( MapSection ms )
+		{
+			ms.triggers.Clear();
+			ms.missionEvents.Clear();
+			//map entities
+			for ( int i = mainWindow.mission.mapEntities.Count - 1; i >= 0; i-- )
+			{
+				if ( mainWindow.mission.mapEntities[i].mapSectionOwner == ms.GUID )
+				{
+					mainWindow.mapEditor.RemoveEntityFromMap( mainWindow.mission.mapEntities[i] );
+					mainWindow.mission.mapEntities.RemoveAt( i );
+				}
+			}
+			//tiles
+			for ( int i = ms.mapTiles.Count - 1; i >= 0; i-- )
+			{
+				mainWindow.mapEditor.RemoveEntityFromMap( ms.mapTiles[i] );
+			}
+			ms.mapTiles.Clear();
+
+			mainWindow.mapEditor.UpdateUI();
+		}
+
 		///EXTENSIONS
 		public static double RoundOff( this double i, double value )
 		{

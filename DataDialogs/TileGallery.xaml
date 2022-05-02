@@ -88,7 +88,7 @@
 							<RowDefinition Height="auto" />
 						</Grid.RowDefinitions>
 						<StackPanel>
-							<GroupBox Header="EXPANSION" Background="#FF503B7C">
+							<GroupBox Header="Expansion" Background="#FF503B7C">
 								<StackPanel>
 									<ComboBox x:Name="expansionCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" ItemsSource="{Binding expansionsList}" SelectedValue="{Binding selectedExpansion}"/>
 									<UniformGrid Columns="3" Margin="0,10,0,0">
@@ -100,7 +100,7 @@
 							</GroupBox>
 
 							<!--FLIP SIDE-->
-							<GroupBox Header="SELECTED TILE" Margin="0,10,0,0" Background="#FF503B7C">
+							<GroupBox Header="Selected Tile" Margin="0,10,0,0" Background="#FF503B7C">
 								<StackPanel>
 									<UniformGrid Columns="2">
 										<TextBlock Text="EXPANSION:"/>
@@ -124,7 +124,7 @@
 							<Button x:Name="addToQueueBtn" Content="ADD SELECTED TILE TO QUEUE" Margin="0,10,0,0" IsEnabled="{Binding tileIsSelected}" IsDefault="True" Click="addToQueueBtn_Click"/>
 						</StackPanel>
 
-						<GroupBox Grid.Row="1" Header="TILE QUEUE" Margin="0,10,0,0" VerticalAlignment="Stretch">
+						<GroupBox Grid.Row="1" Header="Tile Queue" Margin="0,10,0,0" VerticalAlignment="Stretch">
 							<Grid>
 								<Grid.RowDefinitions>
 									<RowDefinition Height="*" />

@@ -9,7 +9,7 @@
              d:DesignWidth="200">
 	<Grid Background="#FF503B7C">
 		<StackPanel>
-			<materialDesign:Card Background="MediumPurple" Padding="10">
+			<materialDesign:Card Background="{StaticResource CardBG}" Padding="10">
 				<StackPanel>
 					<TextBlock Text="HIGHLIGHT" HorizontalAlignment="Center"/>
 					<TextBox Text="{Binding name}" materialDesign:HintAssist.Hint="Entity Name" Style="{StaticResource MaterialDesignOutlinedTextBox}" Margin="0,10,0,0" CaretBrush="White" KeyDown="TextBox_KeyDown"/>
@@ -19,7 +19,7 @@
 			</materialDesign:Card>
 
 			<!--ACTIVE-->
-			<materialDesign:Card Background="MediumPurple" Padding="10" Margin="0,10">
+			<materialDesign:Card Background="{StaticResource CardBG}" Padding="10" Margin="0,10">
 				<StackPanel>
 					<TextBlock Text="Is Active?" HorizontalAlignment="Center" Margin="0,0,0,10"/>
 					<UniformGrid Columns="3">
@@ -31,7 +31,7 @@
 			</materialDesign:Card>
 
 			<!--size-->
-			<materialDesign:Card Background="MediumPurple" Margin="0,0,0,10" Padding="10">
+			<materialDesign:Card Background="{StaticResource CardBG}" Margin="0,0,0,10" Padding="10">
 				<StackPanel>
 					<TextBlock Text="Duration In Rounds" HorizontalAlignment="Center"/>
 					<TextBlock Text="(0 = Infinite)" HorizontalAlignment="Center" Margin="0,0,0,10"/>
@@ -40,7 +40,7 @@
 			</materialDesign:Card>
 
 			<!--size-->
-			<materialDesign:Card Background="MediumPurple" Padding="10" Margin="0,0,0,10">
+			<materialDesign:Card Background="{StaticResource CardBG}" Padding="10" Margin="0,0,0,10">
 				<StackPanel>
 					<TextBlock Text="Size" HorizontalAlignment="Center" Margin="0,0,0,10"/>
 					<UniformGrid Columns="2" Margin="0,0,0,10">
@@ -56,7 +56,7 @@
 			</materialDesign:Card>
 
 			<!--color-->
-			<materialDesign:Card Background="MediumPurple" Padding="10" Margin="0,0,0,10">
+			<materialDesign:Card Background="{StaticResource CardBG}" Padding="10" Margin="0,0,0,10">
 				<StackPanel>
 					<TextBlock Text="Space Color" HorizontalAlignment="Center" Margin="0,0,0,10"/>
 					<ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectedValue="{Binding deploymentColor}" SelectedValuePath="name" ItemsSource="{Binding deploymentColors, RelativeSource={RelativeSource AncestorType=local:HighlightProps}}" DisplayMemberPath="name"/>
@@ -64,7 +64,7 @@
 			</materialDesign:Card>
 
 			<!--ENTITY PROPS-->
-			<materialDesign:Card Background="MediumPurple" Padding="10">
+			<materialDesign:Card Background="{StaticResource CardBG}" Padding="10">
 				<StackPanel>
 					<Button x:Name="editPropsBtn" Click="editPropsBtn_Click" Content="EDIT PROPERTIES"/>
 				</StackPanel>

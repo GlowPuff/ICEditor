@@ -16,7 +16,7 @@
 		<StackPanel Margin="10">
 			<UniformGrid Columns="2">
 				<!--LEFT-->
-				<materialDesign:Card x:Name="leftCard" Background="MediumPurple" Margin="0,0,5,0">
+				<materialDesign:Card x:Name="leftCard" Background="{StaticResource GroupBG}" Margin="0,0,5,0">
 					<StackPanel Margin="10">
 						<UniformGrid Columns="2">
 							<TextBlock Text="Properties for" Style="{StaticResource MaterialDesignHeadline6TextBlock}" VerticalAlignment="Center"/>
@@ -60,14 +60,14 @@
 				</materialDesign:Card>
 
 				<!--RIGHT-->
-				<materialDesign:Card x:Name="rightCard" Background="MediumPurple" Margin="5,0,0,0">
+				<materialDesign:Card x:Name="rightCard" Background="{StaticResource GroupBG}" Margin="5,0,0,0">
 
 					<StackPanel Margin="10">
 						<TextBlock Text="Global Properties" Style="{StaticResource MaterialDesignHeadline6TextBlock}" VerticalAlignment="Center"/>
 
 						<Separator Margin="0,10"/>
 
-						<GroupBox Header="EVENT GROUPS">
+						<GroupBox Header="Event Groups" Background="{StaticResource CardBG}">
 							<Grid>
 								<Grid.ColumnDefinitions>
 									<ColumnDefinition Width="*" />
@@ -82,7 +82,7 @@
 							</Grid>
 						</GroupBox>
 
-						<GroupBox Header="RANDOM MAP ENTITY GROUPS" Margin="0,10,0,0">
+						<GroupBox Header="Random Map Entity Groups" Margin="0,10,0,0" Background="{StaticResource CardBG}">
 							<Grid>
 								<Grid.ColumnDefinitions>
 									<ColumnDefinition Width="*" />

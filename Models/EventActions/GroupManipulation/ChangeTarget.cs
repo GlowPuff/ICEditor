@@ -13,7 +13,7 @@ namespace Imperial_Commander_Editor
 		public string otherTarget { get { return _otherTarget; } set { _otherTarget = value; PC(); } }
 		public string specificAlly { get { return _specificAlly; } set { _specificAlly = value; PC(); } }
 		public string specificHero { get { return _specificHero; } set { _specificHero = value; PC(); } }
-		public ObservableCollection<DeploymentCard> groupsToAdd { get; set; } = new();
+		public ObservableCollection<DCPointer> groupsToAdd { get; set; } = new();
 		public GroupPriorityTraits groupPriorityTraits { get; set; }
 
 		public ChangeTarget()

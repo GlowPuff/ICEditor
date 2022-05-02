@@ -71,4 +71,21 @@ namespace Imperial_Commander_Editor
 		public string name;
 		public string text;
 	}
+
+	public class DCPointer
+	{
+		public string name { get; set; }
+		public string id { get; set; }
+
+		public DCPointer()
+		{
+
+		}
+
+		public DCPointer( DeploymentCard dc )
+		{
+			name = dc.name;
+			id = dc.id;
+		}
+	}
 }

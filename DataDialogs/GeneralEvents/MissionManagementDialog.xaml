@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Imperial_Commander_Editor"
         mc:Ignorable="d"
+				xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
 				Style="{StaticResource dws}"
         Title="Mission Management" Width="500" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown" SizeToContent="Height">
 
@@ -16,19 +17,29 @@
 					<RowDefinition Height="auto"/>
 				</Grid.RowDefinitions>
 
-				<UniformGrid Columns="2">
-					<StackPanel>
-						<CheckBox Content="Increase Round Counter by 1" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding incRoundCounter}"/>
-						<CheckBox Content="Pause Deployment" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding pauseDeployment}"/>
-						<CheckBox Content="Unpause Deployment" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding unpauseDeployment}"/>
-					</StackPanel>
+				<materialDesign:Card Background="{StaticResource CardBG}" Padding="10">
+					<Grid>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="*"/>
+							<RowDefinition Height="auto"/>
+						</Grid.RowDefinitions>
 
-					<StackPanel>
-						<CheckBox Content="Pause Threat Increase" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding pauseThreat}"/>
-						<CheckBox Content="Unpause Threat Increase" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding unpauseThreat}"/>
-						<CheckBox Content="End Mission" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding endMission}"/>
-					</StackPanel>
-				</UniformGrid>
+						<UniformGrid Columns="2">
+							<StackPanel>
+								<CheckBox Content="Increase Round Counter by 1" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding incRoundCounter}"/>
+								<CheckBox Content="Pause Deployment" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding pauseDeployment}"/>
+								<CheckBox Content="Unpause Deployment" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding unpauseDeployment}"/>
+							</StackPanel>
+
+							<StackPanel>
+								<CheckBox Content="Pause Threat Increase" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding pauseThreat}"/>
+								<CheckBox Content="Unpause Threat Increase" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding unpauseThreat}"/>
+								<CheckBox Content="End Mission" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding endMission}"/>
+							</StackPanel>
+						</UniformGrid>
+
+					</Grid>
+				</materialDesign:Card>
 
 				<StackPanel Grid.Row="1">
 					<Separator Margin="0,10,0,10"/>

@@ -34,21 +34,21 @@
 					<!--left-->
 					<!--event name-->
 					<StackPanel Margin="0,0,10,0">
-						<GroupBox Header="Group Name">
+						<GroupBox Header="Group Name" Background="#FF503B7C">
 							<StackPanel>
 								<TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}" Text="{Binding eventGroup.name}" CaretBrush="White" KeyDown="TextBox_KeyDown"/>
 								<CheckBox Content="Repeatable" IsChecked="{Binding eventGroup.repeateable}" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" Margin="0,5,4,4"/>
 							</StackPanel>
 						</GroupBox>
 
-						<GroupBox Header="Global And Active Map Section Events" Margin="0,10,0,0">
+						<GroupBox Header="Global And Active Map Section Events" Margin="0,10,0,0" Background="#FF503B7C">
 							<StackPanel>
 								<ComboBox x:Name="eventsCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectedValue="{Binding selectedEvent}" DisplayMemberPath="name"/>
 								<Button x:Name="addGroupBtn" Content="ADD EVENT TO GROUP" Click="addGroupBtn_Click" Margin="0,10,0,0" IsEnabled="{Binding buttonEnabled}"/>
 							</StackPanel>
 						</GroupBox>
 
-						<GroupBox Grid.Row="1" Header="Triggered By" Margin="0,10,0,0">
+						<GroupBox Grid.Row="1" Header="Triggered By" Margin="0,10,0,0" Background="#FF503B7C">
 							<Grid>
 								<Grid.ColumnDefinitions>
 									<ColumnDefinition Width="*" />

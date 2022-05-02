@@ -79,6 +79,10 @@ namespace Imperial_Commander_Editor
 			SolidColorBrush brush = new( string.IsNullOrEmpty( Utils.mainWindow.mission.missionProperties.missionInfo ) ? Colors.Red : Colors.LawnGreen );
 			ciInfo.Foreground = brush;
 
+			objInfo.Text = string.IsNullOrEmpty( Utils.mainWindow.mission.missionProperties.startingObjective ) ? "Text Not Set" : "Text Set";
+			brush = new( string.IsNullOrEmpty( Utils.mainWindow.mission.missionProperties.startingObjective ) ? Colors.Red : Colors.LawnGreen );
+			objInfo.Foreground = brush;
+
 			selectedBanGroupAdd = Utils.enemyData.First( x => x.id == "DG001" );
 			foreach ( var item in Utils.mainWindow.mission.missionProperties.bannedGroups )
 			{
@@ -159,6 +163,19 @@ namespace Imperial_Commander_Editor
 					filterBox.Text = "";
 				}
 			}
+		}
+
+		private void objButton_Click( object sender, System.Windows.RoutedEventArgs e )
+		{
+			var dlg = new GenericTextDialog( "Starting Objective", Utils.mainWindow.mission.missionProperties.startingObjective );
+			dlg.textHint = "Leave this empty to NOT create a starting Objective.";
+			dlg.ShowDialog();
+
+			Utils.mainWindow.mission.missionProperties.startingObjective = dlg.theText;
+
+			objInfo.Text = string.IsNullOrEmpty( Utils.mainWindow.mission.missionProperties.startingObjective ) ? "Text Not Set" : "Text Set";
+			SolidColorBrush brush = new( string.IsNullOrEmpty( Utils.mainWindow.mission.missionProperties.startingObjective ) ? Colors.Red : Colors.LawnGreen );
+			objInfo.Foreground = brush;
 		}
 	}
 }

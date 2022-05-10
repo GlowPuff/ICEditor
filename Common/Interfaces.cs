@@ -24,6 +24,7 @@ namespace Imperial_Commander_Editor
 		void BuildRenderer( Canvas c, Vector where, double scale );
 		IMapEntity Duplicate();
 		bool Validate();
+		void Dim( Guid guid );
 	}
 	public interface IEventActionDialog
 	{

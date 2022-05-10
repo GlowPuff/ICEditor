@@ -136,13 +136,17 @@ namespace Imperial_Commander_Editor
 				}
 			}
 
-			//dim tiles that are NOT in active map section
+			//dim tiles and entities that are NOT in active map section
 			foreach ( var section in Utils.mainWindow.mission.mapSections )
 			{
 				foreach ( var tile in section.mapTiles )
 				{
 					tile.Dim( Utils.mainWindow.activeSection.GUID );
 				}
+			}
+			foreach ( var en in Utils.mainWindow.mission.mapEntities )
+			{
+				en.Dim( Utils.mainWindow.activeSection.GUID );
 			}
 
 			selectedEntity = prev;

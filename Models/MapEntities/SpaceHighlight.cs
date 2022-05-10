@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text.Json.Serialization;
 using System.Windows;
@@ -152,6 +151,11 @@ namespace Imperial_Commander_Editor
 				return false;
 			}
 			return true;
+		}
+
+		public void Dim( Guid guid )
+		{
+			mapRenderer.Dim( mapSectionOwner != guid );
 		}
 	}
 }

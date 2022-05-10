@@ -135,5 +135,10 @@ namespace Imperial_Commander_Editor
 			}
 			return true;
 		}
+
+		public void Dim( Guid guid )
+		{
+			mapRenderer.Dim( mapSectionOwner != guid );
+		}
 	}
 }

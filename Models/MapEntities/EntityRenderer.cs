@@ -280,9 +280,9 @@ namespace Imperial_Commander_Editor
 		public void Dim( bool dim )
 		{
 			if ( entityImage != null )
-			{
-				entityImage.Opacity = dim ? .5d : 1;
-			}
+				entityImage.Opacity = dim ? .4d : 1;
+			if ( entityShape != null )
+				entityShape.Opacity = dim ? .4d : 1;
 		}
 	}
 }

@@ -26,7 +26,6 @@ namespace Imperial_Commander_Editor
 			set { _GUID = value; PC(); }
 		}
 
-
 		[JsonIgnore]
 		public bool canRemove { get; set; } = true;
 

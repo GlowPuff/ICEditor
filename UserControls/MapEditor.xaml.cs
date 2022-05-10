@@ -391,6 +391,10 @@ namespace Imperial_Commander_Editor
 						var dlg = new DeploymentPointPropsDialog( (shapeDragging as DeploymentPoint).deploymentPointProps );
 						dlg.ShowDialog();
 					}
+					else if ( shapeDragging is MapTile )
+					{
+						Utils.mainWindow.activeSection = Utils.mainWindow.mission.mapSections.First( x => x.GUID == shapeDragging.mapSectionOwner );
+					}
 				}
 			}
 			else//single click

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
@@ -121,6 +120,12 @@ namespace Imperial_Commander_Editor
 			tCB.GotFocus -= tCB_GotFocus;
 			tCB.ItemsSource = Utils.mainWindow.localTriggers;
 			tCB.GotFocus += tCB_GotFocus;
+		}
+
+		private void isrpt_Click( object sender, RoutedEventArgs e )
+		{
+			if ( !eventGroup.repeateable )
+				eventGroup.isUnique = true;
 		}
 	}
 }

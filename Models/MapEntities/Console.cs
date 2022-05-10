@@ -66,7 +66,7 @@ namespace Imperial_Commander_Editor
 		public Console( Guid ownderGUID )
 		{
 			GUID = Guid.NewGuid();
-			name = "New Console";
+			name = "New Terminal";
 			entityType = EntityType.Console;
 			entityProperties = new() { name = name };
 			mapSectionOwner = ownderGUID;

@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 
 namespace Imperial_Commander_Editor
 {
@@ -86,6 +83,22 @@ namespace Imperial_Commander_Editor
 				triggersCB.SelectedItem = dlg.trigger;
 				Utils.mainWindow.SetStatus( "Trigger Added" );
 				return dlg.trigger;
+			}
+			return null;
+		}
+
+		public MissionEvent AddNewEvent()
+		{
+			var dlg = new AddEventDialog();
+			if ( dlg.ShowDialog().Value )
+			{
+				if ( dlg.missionEvent.isGlobal )
+					Utils.mainWindow.mission.globalEvents.Add( dlg.missionEvent );
+				else
+					Utils.mainWindow.activeSection.missionEvents.Add( dlg.missionEvent );
+				eventsCB.SelectedItem = dlg.missionEvent;
+				Utils.mainWindow.SetStatus( "Event Added" );
+				return dlg.missionEvent;
 			}
 			return null;
 		}

@@ -74,7 +74,7 @@
 									<ColumnDefinition Width="1*" />
 								</Grid.ColumnDefinitions>
 								<TextBlock Text="Name"/>
-								<TextBlock Text="Activated?" Grid.Column="1"/>
+								<TextBlock Text="Activated / Open" Grid.Column="1"/>
 								<TextBlock Text="Color" Grid.Column="2"/>
 							</Grid>
 

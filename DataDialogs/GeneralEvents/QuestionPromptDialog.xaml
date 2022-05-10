@@ -7,7 +7,7 @@
         mc:Ignorable="d"
 				xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
 				Style="{StaticResource dws}"
-        Title="Question Prompt" Width="500" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown" SizeToContent="Height" ContentRendered="Window_ContentRendered">
+        Title="Question Prompt" Width="650" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown" SizeToContent="Height" ContentRendered="Window_ContentRendered">
 
 	<Window.Resources>
 		<DataTemplate DataType="{x:Type List}" x:Key="k1">
@@ -16,10 +16,13 @@
 					<ColumnDefinition Width="*"/>
 					<ColumnDefinition Width="auto"/>
 				</Grid.ColumnDefinitions>
-				<UniformGrid Columns="2">
+
+				<UniformGrid Columns="3">
 					<TextBox Text="{Binding buttonText}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
 
-					<ComboBox x:Name="triggersCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" ItemsSource="{Binding mainWindow.localTriggers, RelativeSource={RelativeSource FindAncestor,AncestorType=Window}}" DisplayMemberPath="name" SelectedValue="{Binding triggerGUID}" SelectedValuePath="GUID" GotFocus="triggersCB_GotFocus"/>
+					<ComboBox x:Name="triggersCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" ItemsSource="{Binding mainWindow.localTriggers, RelativeSource={RelativeSource FindAncestor,AncestorType=Window}}" DisplayMemberPath="name" SelectedValue="{Binding triggerGUID}" SelectedValuePath="GUID" Margin="10,0"/>
+
+					<ComboBox x:Name="eventsCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" ItemsSource="{Binding mainWindow.localEvents, RelativeSource={RelativeSource FindAncestor,AncestorType=Window}}" DisplayMemberPath="name" SelectedValue="{Binding eventGUID}" SelectedValuePath="GUID"/>
 				</UniformGrid>
 
 				<Button x:Name="remQuestionButton" Click="remQuestionButton_Click" Grid.Column="1" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35" Margin="10,0,0,0">
@@ -38,39 +41,39 @@
 				</Grid.RowDefinitions>
 
 				<StackPanel>
-					<TextBox x:Name="textbox" Grid.Row="0" Margin="0,0,0,10" BorderThickness="2" BorderBrush="MediumPurple" AcceptsReturn="True" Foreground="White" CaretBrush="White" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap" VerticalAlignment="Stretch" Text="{Binding eventAction.theText}" MinHeight="50" materialDesign:HintAssist.Hint="Description"/>
+					<TextBox x:Name="textbox" Grid.Row="0" Margin="0,0,0,10" BorderThickness="2" BorderBrush="MediumPurple" AcceptsReturn="True" Foreground="White" CaretBrush="White" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap" VerticalAlignment="Stretch" Text="{Binding eventAction.theText}" MinHeight="100" materialDesign:HintAssist.Hint="Description"/>
 
 					<materialDesign:Card Padding="10" Background="#FF7952C0">
 						<Grid>
 							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="auto" />
 								<ColumnDefinition Width="*" />
 								<ColumnDefinition Width="auto" />
 								<ColumnDefinition Width="auto" />
 							</Grid.ColumnDefinitions>
-
-							<ComboBox x:Name="tlist" Style="{StaticResource MaterialDesignOutlinedComboBox}" ItemsSource="{Binding mainWindow.localTriggers}" SelectedValue="{Binding selectedTrigger}" DisplayMemberPath="name" GotFocus="tlist_GotFocus"/>
-
-							<Button x:Name="addTriggerButton" Content="{materialDesign:PackIcon Kind=AddBold}" Grid.Column="1" Margin="10,0,0,0" Click="addTriggerButton_Click" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35"/>
-							<Button x:Name="addNewTriggerButton" Grid.Column="2" Margin="10,0,0,0" Click="addNewTriggerButton_Click" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35">
-								<Image Source="../../Assets/addtrigger.png" Height="20"/>
-							</Button>
+							<Button x:Name="addButtonBtn" Content="ADD NEW BUTTON" Click="addButtonBtn_Click"/>
+							<Separator Grid.Column="1" RenderTransformOrigin="0.5,0.5" Width="32" >
+								<Separator.RenderTransform>
+									<TransformGroup>
+										<ScaleTransform/>
+										<SkewTransform/>
+										<RotateTransform Angle="90"/>
+										<TranslateTransform/>
+									</TransformGroup>
+								</Separator.RenderTransform>
+							</Separator>
+							<Button Grid.Column="2" x:Name="addTriggerBtn" Content="+ CREATE NEW TRIGGER..." Margin="10,0" Click="addNewTriggerButton_Click"/>
+							<Button Grid.Column="3" x:Name="addEventBtn" Content="+ CREATE NEW EVENT..." Click="addEventBtn_Click"/>
 						</Grid>
 					</materialDesign:Card>
 
-
 					<materialDesign:Card Background="Purple" Padding="10" Margin="0,10,0,0">
 						<StackPanel>
-							<Grid>
-								<Grid.ColumnDefinitions>
-									<ColumnDefinition Width="5*" />
-									<ColumnDefinition Width="2" />
-								</Grid.ColumnDefinitions>
-
-								<UniformGrid Columns="2" Grid.Column="0">
-									<TextBlock Text="Button Text" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-									<TextBlock Text="When Clicked, Add +1 To:" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-								</UniformGrid>
-							</Grid>
+							<UniformGrid Columns="3" Margin="0,0,55,0">
+								<TextBlock Text="Button Text" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+								<TextBlock Text="When Clicked, Fire Trigger:" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+								<TextBlock Text="When Clicked, Fire Event:" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+							</UniformGrid>
 
 							<Separator Margin="0,5,0,5"/>
 

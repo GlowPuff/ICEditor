@@ -17,7 +17,7 @@ namespace Imperial_Commander_Editor
 	public enum Expansion { Core }
 	public enum EntityType { Tile, Console, Crate, DeploymentPoint, Token, Highlight, Door }
 	public enum TokenShape { Circle, Square, Rectangle }
-	public enum EventActionType { G1, G2, G3, G4, G5, G6, D1, D2, D3, D4, D5, GM1, GM2, GM3, M1, M2 }
+	public enum EventActionType { G1, G2, G3, G4, G5, G6, D1, D2, D3, D4, D5, GM1, GM2, GM3, M1, M2, G7 }
 	public enum ThreatAction { Add, Remove }
 	public enum SourceType { InitialReserved, Manual, Hand }
 	public enum DeploymentSpot { Active, Specific }
@@ -55,11 +55,12 @@ namespace Imperial_Commander_Editor
 		}
 	}
 
-	public class Question
-	{
-		public string buttonText { get; set; }
-		public Guid triggerGUID { get; set; }
-	}
+	//public class Question
+	//{
+	//	public string buttonText { get; set; }
+	//	public Guid triggerGUID { get; set; }
+	//	public Guid eventGUID { get; set; }
+	//}
 
 	public class EntityModifier
 	{
@@ -74,7 +75,8 @@ namespace Imperial_Commander_Editor
 	{
 		public string buttonText { get; set; }
 		public Guid triggerGUID { get; set; }
-		public string triggerName { get; set; }
+		public Guid eventGUID { get; set; }
+		//public string triggerName { get; set; }
 	}
 
 	public class DPData

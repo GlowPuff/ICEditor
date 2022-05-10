@@ -81,6 +81,9 @@ namespace Imperial_Commander_Editor
 					case 15:
 						eventActionAction = item.ToObject<ModifyMapEntity>();
 						break;
+					case 16:
+						eventActionAction = item.ToObject<ShowTextBox>();
+						break;
 				}
 				eObserver.Add( eventActionAction );
 			}

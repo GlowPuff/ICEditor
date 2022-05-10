@@ -14,7 +14,7 @@
 					<TextBlock Text="CRATE" HorizontalAlignment="Center"/>
 					<TextBox Text="{Binding name}" materialDesign:HintAssist.Hint="Entity Name" Style="{StaticResource MaterialDesignOutlinedTextBox}" Margin="0,10,0,0" CaretBrush="White" KeyDown="TextBox_KeyDown"/>
 					<Button x:Name="ownerChangeBtn" Content="CHANGE OWNER" Margin="0,10,0,0" Click="ownerChangeBtn_Click"/>
-					<TextBlock Text="{Binding ownerName, RelativeSource={RelativeSource AncestorType=local:CrateProps}}" Margin="0,5,0,0" Foreground="Purple" HorizontalAlignment="Center"/>
+					<TextBlock Text="{Binding ownerName, RelativeSource={RelativeSource AncestorType=local:CrateProps}}" Margin="0,5,0,0" Foreground="Pink" HorizontalAlignment="Center"/>
 				</StackPanel>
 			</materialDesign:Card>
 

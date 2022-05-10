@@ -37,7 +37,14 @@
 						<GroupBox Header="Group Name" Background="#FF503B7C">
 							<StackPanel>
 								<TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}" Text="{Binding eventGroup.name}" CaretBrush="White" KeyDown="TextBox_KeyDown"/>
-								<CheckBox Content="Repeatable" IsChecked="{Binding eventGroup.repeateable}" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" Margin="0,5,4,4"/>
+								<Grid>
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="auto" />
+										<ColumnDefinition Width="*" />
+									</Grid.ColumnDefinitions>
+									<CheckBox x:Name="isrpt" Content="Repeatable" IsChecked="{Binding eventGroup.repeateable}" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" Margin="0,5,0,0" Click="isrpt_Click"/>
+									<CheckBox Grid.Column="1" Content="Each Event Is Unique" IsChecked="{Binding eventGroup.isUnique}" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" Margin="0,5,0,0" HorizontalAlignment="Right" IsEnabled="{Binding ElementName=isrpt, Path=IsChecked}"/>
+								</Grid>
 							</StackPanel>
 						</GroupBox>
 

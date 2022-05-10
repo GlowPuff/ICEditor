@@ -6,7 +6,7 @@ namespace Imperial_Commander_Editor
 	{
 		string _theText;
 		public string theText { get { return _theText; } set { _theText = value; PC(); } }
-		public ObservableCollection<Question> buttonList { get; set; } = new();
+		public ObservableCollection<ButtonAction> buttonList { get; set; } = new();
 
 		public QuestionPrompt()
 		{

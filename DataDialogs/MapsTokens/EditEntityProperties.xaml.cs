@@ -1,5 +1,5 @@
-﻿using System.Windows;
-using System.Windows.Controls;
+﻿using System;
+using System.Windows;
 
 namespace Imperial_Commander_Editor
 {
@@ -19,8 +19,9 @@ namespace Imperial_Commander_Editor
 
 			entityProperties = ep;
 
-			//verify triggers exist/update names
+			//verify triggers/events still exist
 			entityProperties.ValidateTriggers();
+			entityProperties.ValidateEvents();
 		}
 
 		private void okButton_Click( object sender, RoutedEventArgs e )
@@ -34,32 +35,35 @@ namespace Imperial_Commander_Editor
 				DragMove();
 		}
 
-		private void triggersCB_GotFocus( object sender, RoutedEventArgs e )
-		{
-			(sender as ComboBox).GotFocus -= triggersCB_GotFocus;
-			(sender as ComboBox).ItemsSource = Utils.mainWindow.localTriggers;
-			(sender as ComboBox).GotFocus += triggersCB_GotFocus;
-		}
-
 		private void remQuestionButton_Click( object sender, RoutedEventArgs e )
 		{
 			entityProperties.buttonActions.Remove( (sender as FrameworkElement).DataContext as ButtonAction );
 		}
 
-		private void addTriggerButton_Click( object sender, RoutedEventArgs e )
+		private void addEventBtn_Click( object sender, RoutedEventArgs e )
 		{
-			if ( selectedTrigger != null /*&& !entityProperties.buttonActions.Any( x => x.triggerGUID == selectedTrigger.GUID ) */)
-				entityProperties.buttonActions.Add( new() { triggerGUID = selectedTrigger.GUID, triggerName = selectedTrigger.name } );
+			MissionEvent me = Utils.mainWindow.leftPanel.AddNewEvent();
+			if ( me != null && entityProperties.buttonActions.Count < 5 )
+			{
+				entityProperties.buttonActions.Add( new() { buttonText = "Button Text", triggerGUID = Guid.Empty, eventGUID = me.GUID } );
+			}
 		}
 
-		private void addNewTriggerButton_Click( object sender, RoutedEventArgs e )
+		private void addTriggerBtn_Click( object sender, RoutedEventArgs e )
 		{
 			Trigger t = Utils.mainWindow.leftPanel.addNewTrigger();
-			if ( t != null )
-				entityProperties.buttonActions.Add( new() { triggerGUID = t.GUID, triggerName = t.name } );
+			if ( t != null && entityProperties.buttonActions.Count < 5 )
+			{
+				entityProperties.buttonActions.Add( new() { buttonText = "Button Text", triggerGUID = t.GUID, eventGUID = Guid.Empty } );
+			}
+		}
 
-			//refresh comboboxes with updated trigger list collection
-			tlist.ItemsSource = Utils.mainWindow.localTriggers;
+		private void addButtonBtn_Click( object sender, RoutedEventArgs e )
+		{
+			if ( entityProperties.buttonActions.Count < 5 )
+			{
+				entityProperties.buttonActions.Add( new() { buttonText = "Button Text", triggerGUID = Guid.Empty, eventGUID = Guid.Empty } );
+			}
 		}
 	}
 }

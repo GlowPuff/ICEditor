@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Linq;
+using System.Windows;
 
 namespace Imperial_Commander_Editor
 {
@@ -7,13 +8,16 @@ namespace Imperial_Commander_Editor
 	/// </summary>
 	public partial class ChangeObjectiveDialog : Window, IEventActionDialog
 	{
+		SymbolsWindow symbolsWindow;
+		FormattingWindow formattingWindow;
+
 		public IEventAction eventAction { get; set; }
 
 		public ChangeObjectiveDialog( string dname, EventActionType et, IEventAction ea = null )
 		{
 			InitializeComponent();
 
-			eventAction = ea ?? new ChangeMissionInfo( dname, et );
+			eventAction = ea ?? new ChangeObjective( dname, et );
 			DataContext = eventAction;
 		}
 
@@ -31,7 +35,39 @@ namespace Imperial_Commander_Editor
 
 		private void okButton_Click( object sender, RoutedEventArgs e )
 		{
+			symbolsWindow?.Close();
+			formattingWindow?.Close();
 			Close();
+		}
+
+		private void clearButton_Click( object sender, RoutedEventArgs e )
+		{
+			(eventAction as ChangeObjective).longText = (eventAction as ChangeObjective).theText = "";
+		}
+
+		private void formatBtn_Click( object sender, RoutedEventArgs e )
+		{
+			if ( !IsWindowOpen<FormattingWindow>() )
+			{
+				formattingWindow = new FormattingWindow();
+				formattingWindow.Show();
+			}
+		}
+
+		private void infoBtn_Click( object sender, RoutedEventArgs e )
+		{
+			if ( !IsWindowOpen<SymbolsWindow>() )
+			{
+				symbolsWindow = new SymbolsWindow();
+				symbolsWindow.Show();
+			}
+		}
+
+		private static bool IsWindowOpen<T>( string name = "" ) where T : Window
+		{
+			return string.IsNullOrEmpty( name )
+				 ? Application.Current.Windows.OfType<T>().Any()
+				 : Application.Current.Windows.OfType<T>().Any( w => w.Name.Equals( name ) );
 		}
 	}
 }

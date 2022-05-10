@@ -86,9 +86,14 @@
 									</StackPanel>
 								</materialDesign:Card>
 
-								<!--ON DEFEAT-->
+								<!--ON DEFEAT (TRIGGER)-->
 								<GroupBox Header="On Defeated, Fire This Trigger:" Margin="0,10,0,0" Background="#FF503B7C">
 									<ComboBox x:Name="triggersCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" DisplayMemberPath="name" SelectedValue="{Binding setTrigger}" SelectedValuePath="GUID"/>
+								</GroupBox>
+
+								<!--ON DEFEAT (EVENT)-->
+								<GroupBox Header="On Defeated, Fire This Event:" Margin="0,10,0,0" Background="#FF503B7C">
+									<ComboBox x:Name="eventsCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" DisplayMemberPath="name" SelectedValue="{Binding setEvent}" SelectedValuePath="GUID"/>
 								</GroupBox>
 							</StackPanel>
 
@@ -172,7 +177,7 @@
 							</UniformGrid>
 
 							<!--TEXT-->
-							<TextBox x:Name="textbox" BorderThickness="2" BorderBrush="MediumPurple" AcceptsReturn="True" Foreground="White" CaretBrush="White" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap" Text="{Binding enemyGroupData.customText}" MinHeight="200" Margin="0,10,0,0"/>
+							<TextBox x:Name="textbox" BorderThickness="2" BorderBrush="MediumPurple" AcceptsReturn="True" Foreground="White" CaretBrush="White" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap" Text="{Binding enemyGroupData.customText}" MinHeight="200" Margin="0,10,0,10"/>
 						</StackPanel>
 					</TabItem>
 				</TabControl>

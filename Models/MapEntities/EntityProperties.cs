@@ -32,14 +32,21 @@ namespace Imperial_Commander_Editor
 			for ( int i = 0; i < buttonActions.Count; i++ )
 			{
 				var t = Utils.mainWindow.mission.GetTriggerFromGUID( buttonActions[i].triggerGUID );
-				if ( t != null )
-				{
-					buttonActions[i].triggerName = t.name;
-				}
-				else
+				if ( t == null )
 				{
 					buttonActions[i].triggerGUID = Guid.Empty;
-					buttonActions[i].triggerName = "None";
+				}
+			}
+		}
+
+		public void ValidateEvents()
+		{
+			for ( int i = 0; i < buttonActions.Count; i++ )
+			{
+				var t = Utils.mainWindow.mission.GetEventFromGUID( buttonActions[i].eventGUID );
+				if ( t == null )
+				{
+					buttonActions[i].eventGUID = Guid.Empty;
 				}
 			}
 		}
@@ -55,7 +62,7 @@ namespace Imperial_Commander_Editor
 				{
 					buttonText = ba.buttonText,
 					triggerGUID = ba.triggerGUID,
-					triggerName = ba.triggerName
+					eventGUID = ba.eventGUID,
 				} );
 		}
 	}

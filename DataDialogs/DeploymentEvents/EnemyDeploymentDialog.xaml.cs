@@ -48,6 +48,7 @@ namespace Imperial_Commander_Editor
 			enemyCB.ItemsSource = Utils.enemyData;
 
 			triggersCB.ItemsSource = Utils.mainWindow.localTriggers;
+			eventsCB.ItemsSource = Utils.mainWindow.localEvents;
 
 			deploymentPoints.Add( new() { GUID = Guid.Empty, name = "None" } );
 			foreach ( var e in Utils.mainWindow.mission.mapEntities.OfType<DeploymentPoint>() )

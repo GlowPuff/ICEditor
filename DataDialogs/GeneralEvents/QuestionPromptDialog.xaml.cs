@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace Imperial_Commander_Editor
@@ -10,11 +9,8 @@ namespace Imperial_Commander_Editor
 	/// </summary>
 	public partial class QuestionPromptDialog : Window, IEventActionDialog
 	{
-		private bool dirtyList, dirtyList2;
-
 		public IEventAction eventAction { get; set; }
 		public static MainWindow mainWindow { get { return Utils.mainWindow; } }
-		public Trigger selectedTrigger { get; set; }
 
 		public QuestionPromptDialog( string dname, EventActionType et, IEventAction ea = null )
 		{
@@ -23,13 +19,13 @@ namespace Imperial_Commander_Editor
 			eventAction = ea ?? new QuestionPrompt( dname, et );
 			DataContext = this;
 
-			selectedTrigger = mainWindow.localTriggers[0];
-
-			//validate eventAction's buttonList.trigger (GUID) exists
+			//validate eventAction's button triggers and events (GUID) exist
 			for ( int i = 0; i < (eventAction as QuestionPrompt).buttonList.Count; i++ )
 			{
 				if ( !Utils.ValidateTrigger( (eventAction as QuestionPrompt).buttonList[i].triggerGUID ) )
 					(eventAction as QuestionPrompt).buttonList[i].triggerGUID = Guid.Empty;
+				if ( !Utils.ValidateEvent( (eventAction as QuestionPrompt).buttonList[i].eventGUID ) )
+					(eventAction as QuestionPrompt).buttonList[i].eventGUID = Guid.Empty;
 			}
 		}
 
@@ -52,39 +48,32 @@ namespace Imperial_Commander_Editor
 
 		private void remQuestionButton_Click( object sender, RoutedEventArgs e )
 		{
-			(eventAction as QuestionPrompt).buttonList.Remove( (sender as FrameworkElement).DataContext as Question );
-		}
-
-		private void addTriggerButton_Click( object sender, RoutedEventArgs e )
-		{
-			if ( (eventAction as QuestionPrompt).buttonList.Count < 5 )
-				(eventAction as QuestionPrompt).buttonList.Add( new() { buttonText = "Button Text", triggerGUID = selectedTrigger.GUID } );
+			(eventAction as QuestionPrompt).buttonList.Remove( (sender as FrameworkElement).DataContext as ButtonAction );
 		}
 
 		private void addNewTriggerButton_Click( object sender, RoutedEventArgs e )
 		{
 			Trigger t = Utils.mainWindow.leftPanel.addNewTrigger();
-			dirtyList = dirtyList2 = true;
 			if ( t != null && (eventAction as QuestionPrompt).buttonList.Count < 5 )
 			{
-				(eventAction as QuestionPrompt).buttonList.Add( new() { buttonText = "Button Text", triggerGUID = t.GUID } );
+				(eventAction as QuestionPrompt).buttonList.Add( new() { buttonText = "Button Text", triggerGUID = t.GUID, eventGUID = Guid.Empty } );
 			}
 		}
 
-		private void tlist_GotFocus( object sender, RoutedEventArgs e )
+		private void addButtonBtn_Click( object sender, RoutedEventArgs e )
 		{
-			if ( dirtyList )
+			if ( (eventAction as QuestionPrompt).buttonList.Count < 5 )
 			{
-				dirtyList = false;
-				tlist.ItemsSource = Utils.mainWindow.localTriggers;
+				(eventAction as QuestionPrompt).buttonList.Add( new() { buttonText = "Button Text", triggerGUID = Guid.Empty, eventGUID = Guid.Empty } );
 			}
 		}
-		private void triggersCB_GotFocus( object sender, RoutedEventArgs e )
+
+		private void addEventBtn_Click( object sender, RoutedEventArgs e )
 		{
-			if ( dirtyList2 )
+			MissionEvent me = Utils.mainWindow.leftPanel.AddNewEvent();
+			if ( me != null && (eventAction as QuestionPrompt).buttonList.Count < 5 )
 			{
-				dirtyList2 = false;
-				(sender as ComboBox).ItemsSource = Utils.mainWindow.localTriggers;
+				(eventAction as QuestionPrompt).buttonList.Add( new() { buttonText = "Button Text", triggerGUID = Guid.Empty, eventGUID = me.GUID } );
 			}
 		}
 	}

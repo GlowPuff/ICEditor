@@ -111,6 +111,8 @@
 														<MenuItem Header="Change Group Instructions" Click="MenuItem_Click" Tag="GM1"/>
 														<MenuItem Header="Change Priority Target" Click="MenuItem_Click" Tag="GM2"/>
 														<MenuItem Header="Ready / Exhaust a Group" Click="MenuItem_Click" Tag="GM3"/>
+														<MenuItem Header="Reposition Group" Click="MenuItem_Click" Tag="GM4"/>
+														<MenuItem Header="Reset Group Defaults" Click="MenuItem_Click" Tag="GM5"/>
 													</MenuItem>
 													<MenuItem Header="Map and Tokens">
 														<MenuItem Header="Map Management" Click="MenuItem_Click" Tag="M1"/>

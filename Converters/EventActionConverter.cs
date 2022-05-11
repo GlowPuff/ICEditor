@@ -84,6 +84,12 @@ namespace Imperial_Commander_Editor
 					case 16:
 						eventActionAction = item.ToObject<ShowTextBox>();
 						break;
+					case 17:
+						eventActionAction = item.ToObject<ChangeReposition>();
+						break;
+					case 18:
+						eventActionAction = item.ToObject<ResetGroup>();
+						break;
 				}
 				eObserver.Add( eventActionAction );
 			}

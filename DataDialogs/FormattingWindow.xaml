@@ -7,7 +7,7 @@
         mc:Ignorable="d"
          xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
 				Style="{StaticResource dws}"
-       Title="FormattingWindow" Width="550" MouseDown="Window_MouseDown" WindowStartupLocation="CenterScreen" SizeToContent="Height">
+       Title="FormattingWindow" Width="575" MouseDown="Window_MouseDown" WindowStartupLocation="CenterScreen" SizeToContent="Height">
 
 	<Border BorderBrush="MediumPurple" BorderThickness="2">
 		<GroupBox x:Name="gbox" Header="TEXT FORMATTING" Style="{DynamicResource MaterialDesignGroupBox}">
@@ -65,10 +65,15 @@
 								<TextBlock Text="Example &amp;trigger name&amp;" HorizontalAlignment="Center"/>
 								<TextBlock Text="Example 2" HorizontalAlignment="Center"/>
 							</UniformGrid>
-							<UniformGrid Columns="3">
+							<UniformGrid Columns="3" Margin="0,0,0,10">
 								<TextBlock Text="Print Threat Multiplier"/>
 								<TextBlock Text="Threat(2) X 3 is *3*" HorizontalAlignment="Center"/>
 								<TextBlock Text="Threat(2) X 3 is 6" HorizontalAlignment="Center"/>
+							</UniformGrid>
+							<UniformGrid Columns="3">
+								<TextBlock Text="Print Random Rebel Name"/>
+								<TextBlock Text="Hello {Rebel}" HorizontalAlignment="Center"/>
+								<TextBlock Text="Hello Diala" HorizontalAlignment="Center"/>
 							</UniformGrid>
 						</StackPanel>
 					</materialDesign:Card>

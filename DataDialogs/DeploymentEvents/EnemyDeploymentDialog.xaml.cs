@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace Imperial_Commander_Editor
 {
@@ -54,6 +55,17 @@ namespace Imperial_Commander_Editor
 			foreach ( var e in Utils.mainWindow.mission.mapEntities.OfType<DeploymentPoint>() )
 			{
 				deploymentPoints.Add( e );
+			}
+
+			if ( string.IsNullOrEmpty( (eventAction as EnemyDeployment).repositionInstructions ) )
+			{
+				repInfo.Foreground = new SolidColorBrush( Colors.Red );
+				repInfo.Text = "Not Set";
+			}
+			else
+			{
+				repInfo.Foreground = new SolidColorBrush( Colors.LawnGreen );
+				repInfo.Text = "Text Set";
 			}
 
 			//verify trigger and dp still exist
@@ -175,6 +187,19 @@ namespace Imperial_Commander_Editor
 		{
 			var dlg = new PriorityTraitsDialog( (eventAction as EnemyDeployment).enemyGroupData.groupPriorityTraits );
 			dlg.ShowDialog();
+		}
+
+		private void repositionBtn_Click( object sender, RoutedEventArgs e )
+		{
+			var dlg = new GenericTextDialog( "EDIT REPOSITION INSTRUCTIONS", (eventAction as EnemyDeployment).repositionInstructions );
+			dlg.ShowDialog();
+			(eventAction as EnemyDeployment).repositionInstructions = dlg.theText.Trim();
+			repInfo.Foreground = string.IsNullOrEmpty( dlg.theText ) ? new SolidColorBrush( Colors.Red ) : new SolidColorBrush( Colors.LawnGreen );
+		}
+
+		private void resetBtn_Click( object sender, RoutedEventArgs e )
+		{
+
 		}
 
 		private void dpCB_SelectionChanged( object sender, SelectionChangedEventArgs e )

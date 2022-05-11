@@ -5,7 +5,7 @@ namespace Imperial_Commander_Editor
 {
 	public class EnemyDeployment : EventAction
 	{
-		string _enemyName, _deploymentGroup, _modification;
+		string _enemyName, _deploymentGroup, _modification, _repositionInstructions;
 		SourceType _sourceType;
 		int _threatCost;
 		bool _canReinforce, _canRedeploy, _canBeDefeated, _useThreat, _showMod, _useCustomInstructions;
@@ -14,6 +14,7 @@ namespace Imperial_Commander_Editor
 
 		public string enemyName { get { return _enemyName; } set { _enemyName = value; PC(); } }
 		public string deploymentGroup { get { return _deploymentGroup; } set { _deploymentGroup = value; PC(); } }
+		public string repositionInstructions { get { return _repositionInstructions; } set { _repositionInstructions = value; PC(); } }
 		public int threatCost { get { return _threatCost; } set { _threatCost = value; PC(); } }
 		public string modification { get { return _modification; } set { _modification = value; PC(); } }
 		public SourceType sourceType { get { return _sourceType; } set { _sourceType = value; PC(); } }
@@ -48,6 +49,7 @@ namespace Imperial_Commander_Editor
 			_useThreat = _showMod = false;
 			_useCustomInstructions = false;
 			_canBeDefeated = true;
+			_repositionInstructions = "";
 
 			DeploymentCard card = Utils.enemyData.First( x => x.id == _deploymentGroup );
 			enemyGroupData = new( card, new() { name = "None", GUID = Guid.Empty } );

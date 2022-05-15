@@ -13,10 +13,10 @@ namespace Imperial_Commander_Editor
 		bool _optionalDeployment, _factionImperial, _factionMercenary;
 		YesNoAll _useFixedAlly, _useBannedAlly, _banAllAllies;
 		CustomInstructionType _customInstructionType;
-		ThreatModifierType _initialThreatType;
+		//ThreatModifierType _initialThreatType;
 		PriorityTargetType _priorityTargetType;
 		Guid _startingEvent;
-		int _initialThreatModifier, _initialThreatMultiplier;
+		//int _initialThreatModifier, _initialThreatMultiplier;
 		MissionType _missionType;
 		ObservableCollection<MissionSubType> _missionSubType;
 
@@ -103,11 +103,11 @@ namespace Imperial_Commander_Editor
 			set { _customInstructionType = value; PC(); }
 		}
 
-		public ThreatModifierType initialThreatType
-		{
-			get { return _initialThreatType; }
-			set { _initialThreatType = value; PC(); }
-		}
+		//public ThreatModifierType initialThreatType
+		//{
+		//	get { return _initialThreatType; }
+		//	set { _initialThreatType = value; PC(); }
+		//}
 
 		public PriorityTargetType priorityTargetType
 		{
@@ -139,17 +139,17 @@ namespace Imperial_Commander_Editor
 			set { _startingEvent = value; PC(); }
 		}
 
-		public int initialThreatModifier
-		{
-			get { return _initialThreatModifier; }
-			set { _initialThreatModifier = value; PC(); }
-		}
+		//public int initialThreatModifier
+		//{
+		//	get { return _initialThreatModifier; }
+		//	set { _initialThreatModifier = value; PC(); }
+		//}
 
-		public int initialThreatMultiplier
-		{
-			get { return _initialThreatMultiplier; }
-			set { _initialThreatMultiplier = value; PC(); }
-		}
+		//public int initialThreatMultiplier
+		//{
+		//	get { return _initialThreatMultiplier; }
+		//	set { _initialThreatMultiplier = value; PC(); }
+		//}
 
 		public MissionType missionType { get { return _missionType; } set { _missionType = value; PC(); } }
 		public ObservableCollection<MissionSubType> missionSubType { get { return _missionSubType; } set { _missionSubType = value; PC(); } }
@@ -181,10 +181,10 @@ namespace Imperial_Commander_Editor
 			useFixedAlly = YesNoAll.No;
 			useBannedAlly = YesNoAll.No;
 			banAllAllies = YesNoAll.No;
-			initialThreatType = ThreatModifierType.None;
+			//initialThreatType = ThreatModifierType.None;
 			priorityTargetType = PriorityTargetType.Rebel;
-			initialThreatModifier = 0;
-			initialThreatMultiplier = 0;
+			//initialThreatModifier = 0;
+			//initialThreatMultiplier = 0;
 			startingEvent = Guid.Empty;
 			missionType = MissionType.Story;
 			missionSubType = new();

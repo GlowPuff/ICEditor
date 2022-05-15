@@ -35,7 +35,7 @@
 	</Window.Resources>
 
 	<Border BorderBrush="MediumPurple" BorderThickness="2">
-		<GroupBox Header="Enemy Deployment Event Action" Style="{DynamicResource MaterialDesignGroupBox}">
+		<GroupBox Header="Reset Group Defaults Event Action" Style="{DynamicResource MaterialDesignGroupBox}">
 			<Grid Margin="-9">
 				<Grid.RowDefinitions>
 					<RowDefinition Height="*"/>
@@ -45,43 +45,47 @@
 				<StackPanel Margin="10">
 					<CheckBox x:Name="resetcb" Content="Reset All Groups" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding resetAll}"/>
 
-					<GroupBox Header="RESET SPECIFIC GROUPS" Margin="0,10,0,0" IsEnabled="{Binding ElementName=resetcb, Path=IsChecked, Converter={StaticResource InvertBooleanConverter}}">
+					<GroupBox Header="Reset Specific Groups" Margin="0,10,0,0" IsEnabled="{Binding ElementName=resetcb, Path=IsChecked, Converter={StaticResource InvertBooleanConverter}}">
 						<StackPanel>
 							<materialDesign:Card Name="glist" Padding="10" Background="{StaticResource CardBG}">
-								<Grid>
-									<Grid.ColumnDefinitions>
-										<ColumnDefinition Width="*" />
-										<ColumnDefinition Width="auto" />
-									</Grid.ColumnDefinitions>
+								<StackPanel>
+									<TextBox Grid.Column="1" x:Name="filterBox" Style="{StaticResource MaterialDesignOutlinedTextBox}" materialDesign:HintAssist.Hint="Filter List" KeyDown="filterBox_KeyDown" TextChanged="TextBox_TextChanged" CaretBrush="White"/>
 
-									<ComboBox x:Name="dpCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectedValue="{Binding selectedGroup, RelativeSource={RelativeSource AncestorType=Window}}" SelectedValuePath="id">
-										<ComboBox.ItemTemplate>
-											<DataTemplate>
-												<TextBlock>
-													<TextBlock.Text>
-														<MultiBinding StringFormat="{}{0}: {1}">
-															<Binding Path="name"/>
-															<Binding Path="id"/>
-														</MultiBinding>
-													</TextBlock.Text>
-												</TextBlock>
-											</DataTemplate>
-										</ComboBox.ItemTemplate>
-									</ComboBox>
+									<Grid Margin="0,10,0,0">
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="*" />
+											<ColumnDefinition Width="auto" />
+										</Grid.ColumnDefinitions>
 
-									<Button x:Name="addGroupButton" Grid.Column="1" Content="{materialDesign:PackIcon Kind=AddBold}" Margin="10,0,0,0" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35" Click="addGroupButton_Click"/>
-								</Grid>
+										<ComboBox x:Name="dpCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectedValue="{Binding selectedGroup, RelativeSource={RelativeSource AncestorType=Window}}">
+											<ComboBox.ItemTemplate>
+												<DataTemplate>
+													<TextBlock>
+														<TextBlock.Text>
+															<MultiBinding StringFormat="{}{0}: {1}">
+																<Binding Path="name"/>
+																<Binding Path="id"/>
+															</MultiBinding>
+														</TextBlock.Text>
+													</TextBlock>
+												</DataTemplate>
+											</ComboBox.ItemTemplate>
+										</ComboBox>
+
+										<Button x:Name="addGroupButton" Grid.Column="1" Content="{materialDesign:PackIcon Kind=AddBold}" Margin="10,0,0,0" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35" Click="addGroupButton_Click"/>
+									</Grid>
+								</StackPanel>
 							</materialDesign:Card>
 
 							<!--LIST BOX-->
 							<materialDesign:Card Background="Purple" Margin="0,10,0,0" Padding="10">
-								<ListBox ItemsSource="{Binding groupsToAdd}" HorizontalContentAlignment="Stretch" ItemTemplate="{StaticResource k1}" d:ItemsSource="{d:SampleData ItemCount=3}">
-									<ListBox.ItemContainerStyle>
+								<ListView ItemsSource="{Binding groupsToAdd}" HorizontalContentAlignment="Stretch" ItemTemplate="{StaticResource k1}" d:ItemsSource="{d:SampleData ItemCount=2}" MaxHeight="200">
+									<ListView.ItemContainerStyle>
 										<Style TargetType="ListBoxItem" BasedOn="{StaticResource MaterialDesignListBoxItem}">
 											<Setter Property="materialDesign:ListBoxItemAssist.ShowSelection" Value="False" />
 										</Style>
-									</ListBox.ItemContainerStyle>
-								</ListBox>
+									</ListView.ItemContainerStyle>
+								</ListView>
 							</materialDesign:Card>
 						</StackPanel>
 					</GroupBox>

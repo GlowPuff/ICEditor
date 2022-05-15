@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace Imperial_Commander_Editor
@@ -32,13 +33,15 @@ namespace Imperial_Commander_Editor
 
 		private void okButton_Click( object sender, RoutedEventArgs e )
 		{
+			symbolsWindow?.Close();
+			formattingWindow?.Close();
 			Close();
 		}
 
 		private void Window_ContentRendered( object sender, System.EventArgs e )
 		{
 			textbox.Focus();
-			textbox.Select( textbox.Text.Length, 0 );
+			textbox.SelectAll();
 		}
 		private void formatBtn_Click( object sender, RoutedEventArgs e )
 		{
@@ -67,6 +70,32 @@ namespace Imperial_Commander_Editor
 		private void clearButton_Click( object sender, RoutedEventArgs e )
 		{
 			(eventAction as ChangeReposition).theText = "";
+		}
+
+		private void TextBox_TextChanged( object sender, System.Windows.Controls.TextChangedEventArgs e )
+		{
+			DeploymentCard dc;
+			dc = Utils.enemyData.Where( x => x.name.ToLower().Contains( filterBox.Text.ToLower() ) ).FirstOr( null );
+
+			//try id
+			if ( dc == null )
+				dc = Utils.enemyData.Where( x => x.id.Contains( filterBox.Text ) ).FirstOr( null );
+
+			if ( dc != null )
+				(eventAction as ChangeReposition).groupID = dc.id;
+			else
+				(eventAction as ChangeReposition).groupID = null;
+		}
+
+		private void filterBox_KeyDown( object sender, KeyEventArgs e )
+		{
+			if ( e.Key == Key.Enter )
+			{
+				filterBox.TextChanged -= TextBox_TextChanged;
+				filterBox.Text = "";
+				filterBox.TextChanged += TextBox_TextChanged;
+				Utils.LoseFocus( sender as Control );
+			}
 		}
 	}
 }

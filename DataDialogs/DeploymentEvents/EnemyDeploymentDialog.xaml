@@ -122,7 +122,7 @@
 								</GroupBox>
 
 								<!--OPTIONS-->
-								<materialDesign:Card Padding="10" Background="{StaticResource CardBG}">
+								<GroupBox Header="Group Cost" Padding="10" Background="{StaticResource GroupBG}">
 									<StackPanel>
 										<CheckBox Content="Deduct This Group's Cost From Threat" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding useThreat}" Margin="0,4,4,4"/>
 										<StackPanel Orientation="Horizontal">
@@ -140,10 +140,10 @@
 											<TextBox Text="{Binding modification}" Grid.Column="1" VerticalAlignment="Center" Margin="10,0,0,0" KeyDown="nameTB_KeyDown"/>
 										</Grid>
 									</StackPanel>
-								</materialDesign:Card>
+								</GroupBox>
 
 								<!--PRIORITY TARGET-->
-								<GroupBox Header="PRIORITY TARGET TRAITS" Margin="0,10,0,0" Background="#FF503B7C">
+								<GroupBox Header="Priority Target Traits" Margin="0,10,0,0" Background="#FF503B7C">
 									<UniformGrid Columns="2">
 										<CheckBox VerticalAlignment="Center" x:Name="defPriorityCheck" Content="Use Group Default" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding enemyGroupData.groupPriorityTraits.useDefaultPriority}"/>
 										<Button x:Name="targetBtn" Content="CHANGE TRAITS..." Click="targetBtn_Click" IsEnabled="{Binding Path=IsChecked, ElementName=defPriorityCheck, Converter={StaticResource InvertBooleanConverter}}"/>
@@ -151,7 +151,7 @@
 								</GroupBox>
 
 								<!--REPOSITION-->
-								<GroupBox Header="REPOSITION GROUP INSTRUCTIONS" Margin="0,10,0,0" Background="#FF503B7C">
+								<GroupBox Header="Reposition Group Instructions" Margin="0,10,0,0" Background="#FF503B7C">
 									<Grid>
 										<Grid.ColumnDefinitions>
 											<ColumnDefinition Width="auto" />

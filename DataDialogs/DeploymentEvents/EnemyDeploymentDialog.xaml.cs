@@ -163,18 +163,15 @@ namespace Imperial_Commander_Editor
 			{
 				var items = new List<DeploymentCard>();
 				items = Utils.enemyData.Where( x => Utils.mainWindow.mission.reservedDeploymentGroups.Any( y => y.cardID == x.id ) ).ToList();
-
+				//try id
 				dc = items.Where( x => x.name.ToLower().Contains( filterBox.Text.ToLower() ) ).FirstOr( null );
 			}
 			else
 			{
 				dc = Utils.enemyData.Where( x => x.name.ToLower().Contains( filterBox.Text.ToLower() ) ).FirstOr( null );
-
 				//try id
 				if ( dc == null )
-				{
 					dc = Utils.enemyData.Where( x => x.id.Contains( filterBox.Text ) ).FirstOr( null );
-				}
 			}
 
 			if ( dc != null )

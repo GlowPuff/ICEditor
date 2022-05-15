@@ -66,16 +66,16 @@
 				</GroupBox>
 
 				<!--optional deployment-->
-				<GroupBox Header="Optional Deployment" Margin="0,5" Background="#FF503B7C">
+				<!--<GroupBox Header="Optional Deployment" Margin="0,5" Background="#FF503B7C">
 					<StackPanel Orientation="Horizontal">
 						<TextBlock Text="No" VerticalAlignment="Center"/>
 						<ToggleButton Margin="10,0" IsChecked="{Binding optionalDeployment}"/>
 						<TextBlock Text="Yes" VerticalAlignment="Center"/>
 					</StackPanel>
-				</GroupBox>
+				</GroupBox>-->
 
 				<!--initial threat-->
-				<GroupBox Header="Initial Threat Modifier" Margin="0,5" Background="#FF503B7C">
+				<!--<GroupBox Header="Initial Threat Modifier" Margin="0,5" Background="#FF503B7C">
 					<StackPanel>
 						<RadioButton Content="None" GroupName="ithreat" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding initialThreatType, ConverterParameter={x:Static local:ThreatModifierType.None}, Converter={StaticResource rbConv}}"/>
 
@@ -95,7 +95,7 @@
 							</StackPanel>
 						</materialDesign:Card>
 					</StackPanel>
-				</GroupBox>
+				</GroupBox>-->
 
 				<!--factions-->
 				<GroupBox Header="Include Factions" Margin="0,5" Background="#FF503B7C">

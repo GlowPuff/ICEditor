@@ -34,7 +34,8 @@ namespace Imperial_Commander_Editor
 
 			PopulateRecents();
 
-			formatVersion.Text = "Format Version: v." + Utils.formatVersion;
+			formatVersion.Text = "Mission Format: " + Utils.formatVersion;
+			appVersion.Text = "Editor Version: " + Utils.appVersion;
 
 			var paletteHelper = new PaletteHelper();
 			var theme = paletteHelper.GetTheme();

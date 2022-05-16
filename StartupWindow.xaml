@@ -10,7 +10,7 @@
         TextElement.FontWeight="Medium"
         TextElement.FontSize="14"
         FontFamily="{materialDesign:MaterialDesignFont}"
-        Title="Project Manager" Height="500" Width="800" WindowStartupLocation="CenterScreen" WindowStyle="None" MouseDown="Window_MouseDown" ResizeMode="NoResize">
+        Title="Project Manager" Height="600" Width="800" WindowStartupLocation="CenterScreen" WindowStyle="None" MouseDown="Window_MouseDown" ResizeMode="NoResize">
 
 	<Window.Resources>
 		<Style TargetType="ScrollBar">

@@ -90,6 +90,9 @@ namespace Imperial_Commander_Editor
 					case 18:
 						eventActionAction = item.ToObject<ResetGroup>();
 						break;
+					case 19:
+						eventActionAction = item.ToObject<ActivateEventGroup>();
+						break;
 				}
 				eObserver.Add( eventActionAction );
 			}

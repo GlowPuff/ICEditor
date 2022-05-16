@@ -97,6 +97,7 @@
 														<MenuItem Header="Change Objective" Click="MenuItem_Click" Tag="G3"/>
 														<MenuItem Header="Modify Variable(s)" Click="MenuItem_Click" Tag="G4"/>
 														<MenuItem Header="Modify Threat" Click="MenuItem_Click" Tag="G5"/>
+														<MenuItem Header="Activate Event Group" Click="MenuItem_Click" Tag="G8"/>
 														<MenuItem Header="Question Prompt" Click="MenuItem_Click" Tag="G6"/>
 														<MenuItem Header="Text Box" Click="MenuItem_Click" Tag="G7"/>
 													</MenuItem>
@@ -110,8 +111,8 @@
 													<MenuItem Header="Group Manipulation">
 														<MenuItem Header="Change Group Instructions" Click="MenuItem_Click" Tag="GM1"/>
 														<MenuItem Header="Change Priority Target" Click="MenuItem_Click" Tag="GM2"/>
+														<MenuItem Header="Change Reposition Instructions" Click="MenuItem_Click" Tag="GM4"/>
 														<MenuItem Header="Ready / Exhaust a Group" Click="MenuItem_Click" Tag="GM3"/>
-														<MenuItem Header="Reposition Group" Click="MenuItem_Click" Tag="GM4"/>
 														<MenuItem Header="Reset Group Defaults" Click="MenuItem_Click" Tag="GM5"/>
 													</MenuItem>
 													<MenuItem Header="Map and Tokens">

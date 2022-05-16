@@ -117,6 +117,7 @@ namespace Imperial_Commander_Editor
 			EventActionType.G5 => new ModifyThreatDialog( dname, et, ea ),
 			EventActionType.G6 => new QuestionPromptDialog( dname, et, ea ),
 			EventActionType.G7 => new TextBoxDialog( dname, et, ea ),
+			EventActionType.G8 => new ActivateEventGroupDialog( dname, et, ea ),
 			EventActionType.D1 => new EnemyDeploymentDialog( dname, et, ea ),
 			EventActionType.D2 => new AllyDeploymentDialog( dname, et, ea ),
 			EventActionType.D3 => new OptionalDeploymentDialog( dname, et, ea ),

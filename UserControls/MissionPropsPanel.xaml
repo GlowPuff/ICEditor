@@ -117,7 +117,7 @@
 				</GroupBox>
 
 				<!--banned ally-->
-				<GroupBox Header="Banned Ally" Margin="0,5,0,0" Background="#FF503B7C">
+				<GroupBox Header="Banned Ally" Margin="0,5,0,5" Background="#FF503B7C">
 					<StackPanel>
 						<CheckBox x:Name="banCB" Content="Ban All Allies" IsChecked="{Binding useBannedAlly, ConverterParameter={x:Static local:YesNoAll.All}, Converter={StaticResource rbConv}}" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}"/>
 						<RadioButton Content="No" GroupName="bannedally" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding useBannedAlly, ConverterParameter={x:Static local:YesNoAll.No}, Converter={StaticResource rbConv}}"/>
@@ -125,66 +125,6 @@
 							<RadioButton Content="Yes" GroupName="bannedally" VerticalAlignment="Center" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding useBannedAlly, ConverterParameter={x:Static local:YesNoAll.Yes}, Converter={StaticResource rbConv}}"/>
 							<ComboBox x:Name="bannedAllyCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" Margin="10,0,0,0" DisplayMemberPath="name" SelectedValue="{Binding bannedAlly}" SelectedValuePath="id"/>
 						</StackPanel>
-					</StackPanel>
-
-				</GroupBox>
-			</StackPanel>
-
-			<!--right side-->
-			<!--campaign name-->
-			<StackPanel Margin="5,0,0,0">
-				<GroupBox Header="Campaign Name" Margin="0,0,0,5" Background="#FF503B7C">
-					<TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}" Text="{Binding campaignName}" KeyDown="Validate_KeyDown" CaretBrush="White"/>
-				</GroupBox>
-
-				<!--priority target-->
-				<GroupBox Header="Priority Target Override (Applies To All Deployed Groups)" Margin="0,5" Background="#FF503B7C">
-					<StackPanel>
-						<RadioButton GroupName="priority" Content="Any Rebel Figure" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding priorityTargetType, ConverterParameter={x:Static local:PriorityTargetType.Rebel}, Converter={StaticResource rbConv}}"/>
-						<StackPanel Orientation="Horizontal">
-							<RadioButton GroupName="priority" Content="Specific Hero" VerticalAlignment="Center" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding priorityTargetType, ConverterParameter={x:Static local:PriorityTargetType.Hero}, Converter={StaticResource rbConv}}"/>
-							<ComboBox x:Name="heroCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" Margin="10,0,0,0" SelectedValue="{Binding specificHero}" SelectedValuePath="id" DisplayMemberPath="name"/>
-						</StackPanel>
-						<StackPanel Orientation="Horizontal" Margin="0,10">
-							<RadioButton GroupName="priority" Content="Specific Ally" VerticalAlignment="Center" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding priorityTargetType, ConverterParameter={x:Static local:PriorityTargetType.Ally}, Converter={StaticResource rbConv}}"/>
-							<ComboBox x:Name="allyCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" Margin="10,0,0,0" SelectedValue="{Binding specificAlly}" SelectedValuePath="id" DisplayMemberPath="name"/>
-						</StackPanel>
-						<StackPanel Orientation="Horizontal">
-							<RadioButton GroupName="priority" Content="Other" VerticalAlignment="Center" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding priorityTargetType, ConverterParameter={x:Static local:PriorityTargetType.Other}, Converter={StaticResource rbConv}}"/>
-							<TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}" Margin="10,0,0,0" Width="241" Text="{Binding priorityOther}" KeyDown="Validate_KeyDown" CaretBrush="White"/>
-						</StackPanel>
-					</StackPanel>
-				</GroupBox>
-
-				<!--starting event-->
-				<GroupBox Header="Starting Event" Margin="0,5" Background="#FF503B7C">
-					<ComboBox x:Name="eventCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" Foreground="White" GotFocus="eventCB_GotFocus" DisplayMemberPath="name" SelectedValuePath="GUID" SelectedValue="{Binding startingEvent}"/>
-				</GroupBox>
-
-				<!--custom instructions-->
-				<GroupBox Header="Starting Mission Info" Margin="0,5" Background="#FF503B7C">
-					<StackPanel Orientation="Horizontal">
-						<Button Grid.Column="1" x:Name="ciButton" Content="EDIT MISSION INFO..." Click="infoBtn_Click"/>
-						<TextBlock x:Name="ciInfo" Text="Text Not Set" VerticalAlignment="Center" Margin="10,0,10,0"/>
-					</StackPanel>
-					<!--</Grid>-->
-
-					<!--<materialDesign:Card Background="MediumPurple" Padding="10" Margin="0,5,0,0">
-							<StackPanel Orientation="Horizontal">
-								<TextBlock Text="Placement:" Margin="0,0,10,0" VerticalAlignment="Center"/>
-								<RadioButton Content="Top" GroupName="addto" x:Name="ciTop" IsChecked="{Binding customInstructionType, ConverterParameter={x:Static local:CustomInstructionType.Top}, Converter={StaticResource rbConv}}" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}"/>
-								<RadioButton Content="Bottom" GroupName="addto" x:Name="ciBottom" Margin="10,0" IsChecked="{Binding customInstructionType, ConverterParameter={x:Static local:CustomInstructionType.Bottom}, Converter={StaticResource rbConv}}" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}"/>
-								<RadioButton Content="Replace" GroupName="addto" x:Name="ciReplace" IsChecked="{Binding customInstructionType, ConverterParameter={x:Static local:CustomInstructionType.Replace}, Converter={StaticResource rbConv}}" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}"/>
-							</StackPanel>
-						</materialDesign:Card>-->
-					<!--</StackPanel>-->
-				</GroupBox>
-
-				<!--starting objective-->
-				<GroupBox Header="Starting Objective" Margin="0,5" Background="#FF503B7C">
-					<StackPanel Orientation="Horizontal">
-						<Button x:Name="objButton" Content="EDIT OBJECTIVE..." Click="objButton_Click"/>
-						<TextBlock x:Name="objInfo" Text="Text Not Set" VerticalAlignment="Center" Margin="10,0,10,0"/>
 					</StackPanel>
 				</GroupBox>
 
@@ -240,6 +180,75 @@
 						</Grid>
 					</StackPanel>
 				</GroupBox>
+
+			</StackPanel>
+
+			<!--right side-->
+			<!--campaign name-->
+			<StackPanel Margin="5,0,0,0">
+				<GroupBox Header="Campaign Name" Margin="0,0,0,5" Background="#FF503B7C">
+					<TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}" Text="{Binding campaignName}" KeyDown="Validate_KeyDown" CaretBrush="White"/>
+				</GroupBox>
+
+				<!--priority target-->
+				<GroupBox Header="Priority Target Override (Applies To All Deployed Groups)" Margin="0,5" Background="#FF503B7C">
+					<StackPanel>
+						<RadioButton GroupName="priority" Content="Any Rebel Figure" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding priorityTargetType, ConverterParameter={x:Static local:PriorityTargetType.Rebel}, Converter={StaticResource rbConv}}"/>
+						<StackPanel Orientation="Horizontal">
+							<RadioButton GroupName="priority" Content="Specific Hero" VerticalAlignment="Center" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding priorityTargetType, ConverterParameter={x:Static local:PriorityTargetType.Hero}, Converter={StaticResource rbConv}}"/>
+							<ComboBox x:Name="heroCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" Margin="10,0,0,0" SelectedValue="{Binding specificHero}" SelectedValuePath="id" DisplayMemberPath="name"/>
+						</StackPanel>
+						<StackPanel Orientation="Horizontal" Margin="0,10">
+							<RadioButton GroupName="priority" Content="Specific Ally" VerticalAlignment="Center" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding priorityTargetType, ConverterParameter={x:Static local:PriorityTargetType.Ally}, Converter={StaticResource rbConv}}"/>
+							<ComboBox x:Name="allyCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" Margin="10,0,0,0" SelectedValue="{Binding specificAlly}" SelectedValuePath="id" DisplayMemberPath="name"/>
+						</StackPanel>
+						<StackPanel Orientation="Horizontal">
+							<RadioButton GroupName="priority" Content="Other" VerticalAlignment="Center" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding priorityTargetType, ConverterParameter={x:Static local:PriorityTargetType.Other}, Converter={StaticResource rbConv}}"/>
+							<TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}" Margin="10,0,0,0" Width="241" Text="{Binding priorityOther}" KeyDown="Validate_KeyDown" CaretBrush="White"/>
+						</StackPanel>
+					</StackPanel>
+				</GroupBox>
+
+				<!--reposition target override-->
+				<GroupBox Header="Reposition Instructions Override" Margin="0,5,0,5" Background="{StaticResource GroupBG}">
+					<UniformGrid Columns="2">
+						<Button Grid.Column="1" x:Name="chTargetBtn" Content="EDIT INSTRUCTIONS..." Click="chTargetBtn_Click" Margin="0,0,5,0"/>
+						<Button x:Name="remRepoBtn" Content="REMOVE OVERRIDE" Margin="5,0,0,0" Background="DarkRed" Click="remRepoBtn_Click"/>
+					</UniformGrid>
+				</GroupBox>
+
+				<!--starting event-->
+				<GroupBox Header="Starting Event" Margin="0,5" Background="#FF503B7C">
+					<ComboBox x:Name="eventCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" Foreground="White" GotFocus="eventCB_GotFocus" DisplayMemberPath="name" SelectedValuePath="GUID" SelectedValue="{Binding startingEvent}"/>
+				</GroupBox>
+
+				<!--custom instructions-->
+				<GroupBox Header="Starting Mission Info" Margin="0,5" Background="#FF503B7C">
+					<StackPanel Orientation="Horizontal">
+						<Button Grid.Column="1" x:Name="ciButton" Content="EDIT MISSION INFO..." Click="infoBtn_Click"/>
+						<TextBlock x:Name="ciInfo" Text="Text Not Set" VerticalAlignment="Center" Margin="10,0,10,0"/>
+					</StackPanel>
+					<!--</Grid>-->
+
+					<!--<materialDesign:Card Background="MediumPurple" Padding="10" Margin="0,5,0,0">
+							<StackPanel Orientation="Horizontal">
+								<TextBlock Text="Placement:" Margin="0,0,10,0" VerticalAlignment="Center"/>
+								<RadioButton Content="Top" GroupName="addto" x:Name="ciTop" IsChecked="{Binding customInstructionType, ConverterParameter={x:Static local:CustomInstructionType.Top}, Converter={StaticResource rbConv}}" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}"/>
+								<RadioButton Content="Bottom" GroupName="addto" x:Name="ciBottom" Margin="10,0" IsChecked="{Binding customInstructionType, ConverterParameter={x:Static local:CustomInstructionType.Bottom}, Converter={StaticResource rbConv}}" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}"/>
+								<RadioButton Content="Replace" GroupName="addto" x:Name="ciReplace" IsChecked="{Binding customInstructionType, ConverterParameter={x:Static local:CustomInstructionType.Replace}, Converter={StaticResource rbConv}}" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}"/>
+							</StackPanel>
+						</materialDesign:Card>-->
+					<!--</StackPanel>-->
+				</GroupBox>
+
+				<!--starting objective-->
+				<GroupBox Header="Starting Objective" Margin="0,5" Background="#FF503B7C">
+					<StackPanel Orientation="Horizontal">
+						<Button x:Name="objButton" Content="EDIT OBJECTIVE..." Click="objButton_Click"/>
+						<TextBlock x:Name="objInfo" Text="Text Not Set" VerticalAlignment="Center" Margin="10,0,10,0"/>
+					</StackPanel>
+				</GroupBox>
+
 			</StackPanel>
 		</UniformGrid>
 	</ScrollViewer>

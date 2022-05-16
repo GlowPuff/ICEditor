@@ -18,6 +18,7 @@ namespace Imperial_Commander_Editor
 		Guid _startingEvent;
 		//int _initialThreatModifier, _initialThreatMultiplier;
 		MissionType _missionType;
+		ChangeReposition _changeRepositionOverride;
 		ObservableCollection<MissionSubType> _missionSubType;
 
 		public string missionName
@@ -152,6 +153,7 @@ namespace Imperial_Commander_Editor
 		//}
 
 		public MissionType missionType { get { return _missionType; } set { _missionType = value; PC(); } }
+		public ChangeReposition changeRepositionOverride { get { return _changeRepositionOverride; } set { _changeRepositionOverride = value; PC(); } }
 		public ObservableCollection<MissionSubType> missionSubType { get { return _missionSubType; } set { _missionSubType = value; PC(); } }
 
 		public ObservableCollection<string> bannedGroups { get; set; } = new();
@@ -181,12 +183,10 @@ namespace Imperial_Commander_Editor
 			useFixedAlly = YesNoAll.No;
 			useBannedAlly = YesNoAll.No;
 			banAllAllies = YesNoAll.No;
-			//initialThreatType = ThreatModifierType.None;
 			priorityTargetType = PriorityTargetType.Rebel;
-			//initialThreatModifier = 0;
-			//initialThreatMultiplier = 0;
 			startingEvent = Guid.Empty;
 			missionType = MissionType.Story;
+			changeRepositionOverride = null;
 			missionSubType = new();
 		}
 	}

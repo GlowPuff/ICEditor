@@ -133,7 +133,7 @@ namespace Imperial_Commander_Editor
 
 		private void editGroup_Click( object sender, RoutedEventArgs e )
 		{
-			EditInitialGroupDialog dialog = new EditInitialGroupDialog( (eventAction as EnemyDeployment).enemyGroupData );
+			EditDPDialog dialog = new EditDPDialog( (eventAction as EnemyDeployment).enemyGroupData );
 			dialog.ShowDialog();
 		}
 

@@ -83,6 +83,8 @@ namespace Imperial_Commander_Editor
 			brush = new( string.IsNullOrEmpty( Utils.mainWindow.mission.missionProperties.startingObjective ) ? Colors.Red : Colors.LawnGreen );
 			objInfo.Foreground = brush;
 
+			remRepoBtn.IsEnabled = Utils.mainWindow.mission.missionProperties.changeRepositionOverride == null ? false : true;
+
 			selectedBanGroupAdd = Utils.enemyData.First( x => x.id == "DG001" );
 			foreach ( var item in Utils.mainWindow.mission.missionProperties.bannedGroups )
 			{
@@ -176,6 +178,20 @@ namespace Imperial_Commander_Editor
 			objInfo.Text = string.IsNullOrEmpty( Utils.mainWindow.mission.missionProperties.startingObjective ) ? "Text Not Set" : "Text Set";
 			SolidColorBrush brush = new( string.IsNullOrEmpty( Utils.mainWindow.mission.missionProperties.startingObjective ) ? Colors.Red : Colors.LawnGreen );
 			objInfo.Foreground = brush;
+		}
+
+		private void chTargetBtn_Click( object sender, System.Windows.RoutedEventArgs e )
+		{
+			var dlg = new ChangeRepositionDialog( "", EventActionType.GM4, Utils.mainWindow.mission.missionProperties.changeRepositionOverride );
+			dlg.ShowDialog();
+			Utils.mainWindow.mission.missionProperties.changeRepositionOverride = dlg.eventAction as ChangeReposition;
+			remRepoBtn.IsEnabled = true;
+		}
+
+		private void remRepoBtn_Click( object sender, System.Windows.RoutedEventArgs e )
+		{
+			Utils.mainWindow.mission.missionProperties.changeRepositionOverride = null;
+			remRepoBtn.IsEnabled = false;
 		}
 	}
 }

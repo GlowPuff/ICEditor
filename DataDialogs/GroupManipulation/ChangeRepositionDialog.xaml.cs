@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System.ComponentModel;
+using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -8,12 +10,24 @@ namespace Imperial_Commander_Editor
 	/// <summary>
 	/// Interaction logic for ChangeRepositionDialog.xaml
 	/// </summary>
-	public partial class ChangeRepositionDialog : Window, IEventActionDialog
+	public partial class ChangeRepositionDialog : Window, IEventActionDialog, INotifyPropertyChanged
 	{
+		//DeploymentCard _selectedGroupAdd;
+
+		//public DeploymentCard selectedGroupAdd { get { return _selectedGroupAdd; } set { _selectedGroupAdd = value; PC(); } }
+		string _selectedGroup;
+		public void PC( [CallerMemberName] string n = "" )
+		{
+			if ( !string.IsNullOrEmpty( n ) )
+				PropertyChanged?.Invoke( this, new PropertyChangedEventArgs( n ) );
+		}
 		public IEventAction eventAction { get; set; }
+		public string selectedGroup { get { return _selectedGroup; } set { _selectedGroup = value; PC(); } }
 
 		SymbolsWindow symbolsWindow;
 		FormattingWindow formattingWindow;
+
+		public event PropertyChangedEventHandler PropertyChanged;
 
 		public ChangeRepositionDialog( string dname, EventActionType et, IEventAction ea = null )
 		{
@@ -23,6 +37,8 @@ namespace Imperial_Commander_Editor
 			DataContext = this;
 
 			dpCB.ItemsSource = Utils.enemyData;
+			selectedGroup = "DG001";
+			//selectedGroupAdd = Utils.enemyData.First( x => x.id == "DG001" );
 		}
 
 		private void Window_MouseDown( object sender, MouseButtonEventArgs e )
@@ -74,28 +90,44 @@ namespace Imperial_Commander_Editor
 
 		private void TextBox_TextChanged( object sender, System.Windows.Controls.TextChangedEventArgs e )
 		{
-			DeploymentCard dc;
-			dc = Utils.enemyData.Where( x => x.name.ToLower().Contains( filterBox.Text.ToLower() ) ).FirstOr( null );
+			DeploymentCard selectedGroupAdd;
+			selectedGroupAdd = Utils.enemyData.Where( x => x.name.ToLower().Contains( filterBox.Text.ToLower() ) ).FirstOr( null );
 
 			//try id
-			if ( dc == null )
-				dc = Utils.enemyData.Where( x => x.id.Contains( filterBox.Text ) ).FirstOr( null );
+			if ( selectedGroupAdd == null )
+				selectedGroupAdd = Utils.enemyData.Where( x => x.id.Contains( filterBox.Text ) ).FirstOr( null );
 
-			if ( dc != null )
-				(eventAction as ChangeReposition).groupID = dc.id;
-			else
-				(eventAction as ChangeReposition).groupID = null;
+			if ( selectedGroupAdd != null )
+				selectedGroup = selectedGroupAdd.id;
+			//	(eventAction as ChangeReposition).groupID = dc.id;
+			//else
+			//	(eventAction as ChangeReposition).groupID = null;
 		}
 
 		private void filterBox_KeyDown( object sender, KeyEventArgs e )
 		{
 			if ( e.Key == Key.Enter )
 			{
+				if ( selectedGroup != null )
+					addGroupBtn_Click( null, null );
+				selectedGroup = "DG001";
 				filterBox.TextChanged -= TextBox_TextChanged;
 				filterBox.Text = "";
 				filterBox.TextChanged += TextBox_TextChanged;
 				Utils.LoseFocus( sender as Control );
 			}
+		}
+
+		private void addGroupBtn_Click( object sender, RoutedEventArgs e )
+		{
+			var dc = Utils.enemyData.Where( x => x.id.Contains( selectedGroup ) ).FirstOr( null );
+			if ( dc != null )
+				(eventAction as ChangeReposition).repoGroups.Add( new() { id = dc.id, name = dc.name } );
+		}
+
+		private void remGroupButton_Click( object sender, RoutedEventArgs e )
+		{
+			(eventAction as ChangeReposition).repoGroups.Remove( (sender as FrameworkElement).DataContext as DCPointer );
 		}
 	}
 }

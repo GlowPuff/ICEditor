@@ -7,7 +7,6 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
 
 namespace Imperial_Commander_Editor
 {
@@ -95,9 +94,9 @@ namespace Imperial_Commander_Editor
 				}
 			}
 
-			ciInfo.Text = string.IsNullOrEmpty( customInstructions ) ? "Text Not Set" : "Text Set";
-			SolidColorBrush brush = new( string.IsNullOrEmpty( customInstructions ) ? Colors.Red : Colors.LawnGreen );
-			ciInfo.Foreground = brush;
+			//ciInfo.Text = string.IsNullOrEmpty( customInstructions ) ? "Text Not Set" : "Text Set";
+			//SolidColorBrush brush = new( string.IsNullOrEmpty( customInstructions ) ? Colors.Red : Colors.LawnGreen );
+			//ciInfo.Foreground = brush;
 		}
 
 		private void addReservedGroupButton_Click( object sender, RoutedEventArgs e )
@@ -126,27 +125,27 @@ namespace Imperial_Commander_Editor
 
 		private void addInitialGroupButton_Click( object sender, RoutedEventArgs e )
 		{
-			var ig = new EnemyGroupData( Utils.enemyData.Where( x => x.id == selectedGroup ).First(), deploymentPoint );
+			var ig = new EnemyGroupData( Utils.enemyData.Where( x => x.id == selectedGroup ).First(), new() { name = "None", GUID = Guid.Empty } );
 
 			ig.groupPriorityTraits.useDefaultPriority = useDefaultPriority;
 
-			if ( !useDefaultPriority )
-			{
-				ig.groupPriorityTraits = _priorityTraits ?? new();
-				ig.groupPriorityTraits.useDefaultPriority = false;
-				_priorityTraits = null;
-			}
+			//if ( !useDefaultPriority )
+			//{
+			//	ig.groupPriorityTraits = _priorityTraits ?? new();
+			//	ig.groupPriorityTraits.useDefaultPriority = false;
+			//	_priorityTraits = null;
+			//}
 
-			ig.customInstructionType = customInstructionType;
-			if ( !string.IsNullOrEmpty( customName.Trim() ) )
-				ig.cardName = customName.Trim();
-			ig.customText = customInstructions;
+			//ig.customInstructionType = customInstructionType;
+			//if ( !string.IsNullOrEmpty( customName.Trim() ) )
+			//	ig.cardName = customName.Trim();
+			//ig.customText = customInstructions;
 
 			Utils.mainWindow.mission.initialDeploymentGroups.Add( ig );
-			deploymentPoint = deploymentPoints[0];
-			customName = customInstructions = "";
-			useDefaultPriority = true;
-			customInstructionType = CustomInstructionType.Replace;
+			//deploymentPoint = deploymentPoints[0];
+			//customName = customInstructions = "";
+			//useDefaultPriority = true;
+			//customInstructionType = CustomInstructionType.Replace;
 		}
 
 		private void remInitialGroupButton_Click( object sender, RoutedEventArgs e )
@@ -161,7 +160,7 @@ namespace Imperial_Commander_Editor
 
 		private void editGroup_Click( object sender, RoutedEventArgs e )
 		{
-			EditInitialGroupDialog dialog = new EditInitialGroupDialog( (sender as FrameworkElement).DataContext as EnemyGroupData );
+			EditDPDialog dialog = new EditDPDialog( (sender as FrameworkElement).DataContext as EnemyGroupData );
 			dialog.ShowDialog();
 		}
 
@@ -220,6 +219,12 @@ namespace Imperial_Commander_Editor
 		private void editResTraits_Click( object sender, RoutedEventArgs e )
 		{
 			var dlg = new PriorityTraitsDialog( (((Control)sender).DataContext as EnemyGroupData).groupPriorityTraits );
+			dlg.ShowDialog();
+		}
+
+		private void editInitialGroup_Click( object sender, RoutedEventArgs e )
+		{
+			var dlg = new EditInitialGroupDialog( (sender as FrameworkElement).DataContext as EnemyGroupData );
 			dlg.ShowDialog();
 		}
 

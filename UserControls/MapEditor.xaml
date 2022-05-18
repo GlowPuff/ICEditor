@@ -94,7 +94,7 @@
 							<!--ADD CRATE-->
 							<Button x:Name="addCrateButton" Content="{materialDesign:PackIcon Kind=ShippingPallet}" Margin="5,0" Click="addCrateButton_Click" ToolTip="Add a Crate"/>
 							<!--ADD CONSOLE-->
-							<Button x:Name="addConsoleButton" Content="{materialDesign:PackIcon Kind=ComputerClassic}" Margin="5,0" Click="addConsoleButton_Click" ToolTip="Add a Computer Console"/>
+							<Button x:Name="addConsoleButton" Content="{materialDesign:PackIcon Kind=ComputerClassic}" Margin="5,0" Click="addConsoleButton_Click" ToolTip="Add a Terminal"/>
 							<!--ADD DOOR-->
 							<Button x:Name="addDoorButton" Content="{materialDesign:PackIcon Kind=Door}" Margin="5,0" Click="addDoorButton_Click" ToolTip="Add a Door"/>
 							<!--ADD DEPLOYMENT POINT-->

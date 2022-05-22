@@ -133,6 +133,27 @@ namespace Imperial_Commander_Editor
 			mainWindow.mapEditor.UpdateUI();
 		}
 
+		/// <summary>
+		/// Given map section "ms", set it's child objects' owner to default section
+		/// </summary>
+		public static void SetOwnerToDefaultSection( MapSection ms )
+		{
+			foreach ( var item in ms.triggers )
+				if ( item.GUID != Guid.Empty )
+					mainWindow.mission.globalTriggers.Add( item );
+			foreach ( var item in ms.missionEvents )
+				if ( item.GUID != Guid.Empty )
+					mainWindow.mission.globalEvents.Add( item );
+			//entities
+			var entities = mainWindow.mission.mapEntities.Where( x => x.mapSectionOwner == ms.GUID ).ToList();
+			foreach ( var entity in entities )
+				entity.mapSectionOwner = Guid.Parse( "11111111-1111-1111-1111-111111111111" );
+			//tiles
+			foreach ( var item in ms.mapTiles )
+				item.mapSectionOwner = Guid.Parse( "11111111-1111-1111-1111-111111111111" );
+			mainWindow.mapEditor.UpdateUI();
+		}
+
 		///EXTENSIONS
 		public static double RoundOff( this double i, double value )
 		{

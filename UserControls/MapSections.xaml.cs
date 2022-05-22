@@ -39,7 +39,11 @@ namespace Imperial_Commander_Editor
 
 		private void removeButton_Click( object sender, RoutedEventArgs e )
 		{
-			var dlg = new ConfirmSectionRemoveDialog( (((Button)sender).DataContext as MapSection).name );
+			var section = ((Button)sender).DataContext as MapSection;
+			//sanity check
+			if ( parent.mission.mapSections.IndexOf( section ) == 0 )
+				return;//can't remove default section
+			var dlg = new ConfirmSectionRemoveDialog( section.name );
 			bool result = dlg.ShowDialog().Value;
 
 			//var res = MessageBox.Show( $"Are you sure you want to remove this Map Section?\r\n\r\n{(((Button)sender).DataContext as MapSection).name}", "Remove Map Section", MessageBoxButton.YesNo, MessageBoxImage.Warning );
@@ -50,6 +54,8 @@ namespace Imperial_Commander_Editor
 				{
 					if ( dlg.removeChildren )
 						Utils.RemoveMapSectionObjects( m );
+					else//otherwise set objects' owner to default map section
+						Utils.SetOwnerToDefaultSection( m );
 					parent.activeSection = parent.mission.mapSections[0];
 					parent.mission.mapSections.Remove( m );
 				}

@@ -119,6 +119,7 @@ namespace Imperial_Commander_Editor
 			else
 			{
 				mapEditor.LoadMap();
+				mission.mapSections[0].canRemove = false;
 				mainTitle = $"Imperial Commander Mission Editor - {mission.fileName}";
 			}
 

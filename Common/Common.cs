@@ -14,7 +14,8 @@ namespace Imperial_Commander_Editor
 	public enum ThreatModifierType { None, Fixed, Multiple }
 	public enum YesNoAll { Yes, No, All }
 	public enum PriorityTargetType { Rebel, Hero, Ally, Other, Trait }
-	public enum Expansion { Core }
+	public enum Expansion { Core, Twin, Hoth, Bespin, Jabba, Empire, Lothal }
+	//public enum Expansion { Core, Bespin, Empire, Hoth, Jabba, Lothal, Twin }
 	public enum EntityType { Tile, Console, Crate, DeploymentPoint, Token, Highlight, Door }
 	public enum TokenShape { Circle, Square, Rectangle }
 	public enum EventActionType { G1, G2, G3, G4, G5, G6, D1, D2, D3, D4, D5, GM1, GM2, GM3, M1, M2, G7, GM4, GM5, G8 }
@@ -88,6 +89,7 @@ namespace Imperial_Commander_Editor
 	{
 		CustomInstructionType _customInstructionType;
 		string _customText, _cardName, _cardID;
+		Guid _defeatedTrigger, _defeatedEvent;
 
 		public Guid GUID { get; set; }
 		public string cardName { get { return _cardName; } set { _cardName = value; PC(); } }
@@ -96,6 +98,8 @@ namespace Imperial_Commander_Editor
 		public string customText { get { return _customText; } set { _customText = value; PC(); } }
 		public ObservableCollection<DPData> pointList { get; set; } = new();
 		public GroupPriorityTraits groupPriorityTraits { get; set; }
+		public Guid defeatedTrigger { get { return _defeatedTrigger; } set { _defeatedTrigger = value; PC(); } }
+		public Guid defeatedEvent { get { return _defeatedEvent; } set { _defeatedEvent = value; PC(); } }
 
 		public void PC( [CallerMemberName] string n = "" )
 		{
@@ -117,6 +121,8 @@ namespace Imperial_Commander_Editor
 			customText = "";
 			customInstructionType = CustomInstructionType.Replace;
 			groupPriorityTraits = new();
+			defeatedTrigger = Guid.Empty;
+			defeatedEvent = Guid.Empty;
 			for ( int i = 0; i < dc.size; i++ )
 			{
 				pointList.Add( new() { GUID = dp.GUID } );

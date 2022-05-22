@@ -15,23 +15,12 @@ namespace Imperial_Commander_Editor
 	/// </summary>
 	public partial class EncounterPanel : UserControl, INotifyPropertyChanged
 	{
-		bool _buttonEnabled, _useDefaultPriority;
+		bool _buttonEnabled;
 		DeploymentPoint _deploymentPoint;
-		string _selectedGroup, _customName, _customInstructions;
-		GroupPriorityTraits _priorityTraits;
+		string _selectedGroup;
 
 		private DeploymentPoint emptyDP = new() { name = "None", GUID = Guid.Empty };
 
-		public DeploymentPoint deploymentPoint
-		{
-			get { return _deploymentPoint; }
-			set
-			{
-				_deploymentPoint = value;
-				PC();
-				buttonEnabled = _deploymentPoint != null;
-			}
-		}
 		public DeploymentPoint modifyDeploymentPoint { get; set; }
 		public string selectedGroup { get { return _selectedGroup; } set { _selectedGroup = value; PC(); } }
 		public string selectedResGroup { get; set; }
@@ -48,10 +37,6 @@ namespace Imperial_Commander_Editor
 		public ObservableCollection<DeploymentPoint> deploymentPoints { get; set; } = new();
 		public List<DeploymentPoint> allPoints { get; set; }
 		public bool buttonEnabled { get { return _buttonEnabled; } set { _buttonEnabled = value; PC(); } }
-		public CustomInstructionType customInstructionType { get; set; } = CustomInstructionType.Replace;
-		public string customInstructions { get { return _customInstructions; } set { _customInstructions = value; PC(); } }
-		public string customName { get { return _customName; } set { _customName = value; PC(); } }
-		public bool useDefaultPriority { get { return _useDefaultPriority; } set { _useDefaultPriority = value; PC(); } }
 
 		public void PC( [CallerMemberName] string n = "" )
 		{
@@ -66,10 +51,7 @@ namespace Imperial_Commander_Editor
 
 			DataContext = this;
 			selectedGroup = "DG001";
-			customInstructions = customName = "";
 			deploymentPoints.Add( emptyDP );
-			deploymentPoint = emptyDP;
-			useDefaultPriority = true;
 		}
 
 		public void UpdateUI()
@@ -101,51 +83,16 @@ namespace Imperial_Commander_Editor
 
 		private void addReservedGroupButton_Click( object sender, RoutedEventArgs e )
 		{
-			var ig = new EnemyGroupData( Utils.enemyData.Where( x => x.id == selectedGroup ).First(), new( Guid.Empty ) );
-
-			ig.groupPriorityTraits.useDefaultPriority = useDefaultPriority;
-
-			if ( !useDefaultPriority )
-			{
-				ig.groupPriorityTraits = _priorityTraits ?? new();
-				ig.groupPriorityTraits.useDefaultPriority = false;
-				_priorityTraits = null;
-			}
-
-			ig.customInstructionType = customInstructionType;
-			if ( !string.IsNullOrEmpty( customName.Trim() ) )
-				ig.cardName = customName.Trim();
-			ig.customText = customInstructions;
+			var ig = new EnemyGroupData( Utils.enemyData.Where( x => x.id == selectedGroup ).First(), new() { name = "None", GUID = Guid.Empty } );
 
 			Utils.mainWindow.mission.reservedDeploymentGroups.Add( ig );
-			customName = customInstructions = "";
-			useDefaultPriority = true;
-			customInstructionType = CustomInstructionType.Replace;
 		}
 
 		private void addInitialGroupButton_Click( object sender, RoutedEventArgs e )
 		{
 			var ig = new EnemyGroupData( Utils.enemyData.Where( x => x.id == selectedGroup ).First(), new() { name = "None", GUID = Guid.Empty } );
 
-			ig.groupPriorityTraits.useDefaultPriority = useDefaultPriority;
-
-			//if ( !useDefaultPriority )
-			//{
-			//	ig.groupPriorityTraits = _priorityTraits ?? new();
-			//	ig.groupPriorityTraits.useDefaultPriority = false;
-			//	_priorityTraits = null;
-			//}
-
-			//ig.customInstructionType = customInstructionType;
-			//if ( !string.IsNullOrEmpty( customName.Trim() ) )
-			//	ig.cardName = customName.Trim();
-			//ig.customText = customInstructions;
-
 			Utils.mainWindow.mission.initialDeploymentGroups.Add( ig );
-			//deploymentPoint = deploymentPoints[0];
-			//customName = customInstructions = "";
-			//useDefaultPriority = true;
-			//customInstructionType = CustomInstructionType.Replace;
 		}
 
 		private void remInitialGroupButton_Click( object sender, RoutedEventArgs e )
@@ -168,14 +115,6 @@ namespace Imperial_Commander_Editor
 		{
 			if ( e.Key == System.Windows.Input.Key.Enter )
 				Utils.LoseFocus( sender as Control );
-		}
-
-		private void editCustomBtn_Click( object sender, RoutedEventArgs e )
-		{
-			var dlg = new GenericTextDialog( "EDIT CUSTOM INSTRUCTIONS", customInstructions );
-			dlg.ShowDialog();
-			customInstructions = dlg.theText.Trim();
-			UpdateUI();
 		}
 
 		private void TextBox_TextChanged( object sender, TextChangedEventArgs e )
@@ -225,15 +164,6 @@ namespace Imperial_Commander_Editor
 		private void editInitialGroup_Click( object sender, RoutedEventArgs e )
 		{
 			var dlg = new EditInitialGroupDialog( (sender as FrameworkElement).DataContext as EnemyGroupData );
-			dlg.ShowDialog();
-		}
-
-		private void targetBtn_Click( object sender, RoutedEventArgs e )
-		{
-			_priorityTraits = _priorityTraits ?? new();
-			_priorityTraits.useDefaultPriority = useDefaultPriority;
-
-			var dlg = new PriorityTraitsDialog( _priorityTraits );
 			dlg.ShowDialog();
 		}
 

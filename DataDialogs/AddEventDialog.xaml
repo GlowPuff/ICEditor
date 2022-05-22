@@ -242,6 +242,7 @@
 										<CheckBox Content="Start of Each Round" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding useStartOfEachRound}"/>
 										<CheckBox Content="End of Each Round" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding useEndOfEachRound}"/>
 										<CheckBox Content="All Heroes Are Wounded" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding useAllHeroesWounded}"/>
+										<CheckBox Content="Any Hero Wounded" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding _useAnyHeroWounded}"/>
 									</StackPanel>
 								</UniformGrid>
 

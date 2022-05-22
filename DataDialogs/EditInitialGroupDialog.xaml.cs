@@ -58,6 +58,9 @@ namespace Imperial_Commander_Editor
 			}
 			deploymentPoint = emptyDP;
 
+			triggersCB.ItemsSource = Utils.mainWindow.localTriggers;
+			eventsCB.ItemsSource = Utils.mainWindow.localEvents;
+
 			string expectedName = Utils.enemyData.Where( x => x.id == enemyGroupData.cardID ).First().name;
 			if ( !string.IsNullOrEmpty( enemyGroupData.cardName ) && enemyGroupData.cardName != expectedName )
 				customName = enemyGroupData.cardName;

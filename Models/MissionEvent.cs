@@ -15,7 +15,7 @@ namespace Imperial_Commander_Editor
 		bool _isGlobal, _isRepeatable, _isEndOfCurrentRound;
 
 		//triggered by
-		bool _useStartOfRound, _useEndOfRound, _useStartOfEachRound, _useEndOfEachRound, _useAllGroupsDefeated, _useAllHeroesWounded, _useAllyDefeated, _useHeroWounded, _useHeroWithdraws, _useActivation, _behaviorAll;
+		bool _useStartOfRound, _useEndOfRound, _useStartOfEachRound, _useEndOfEachRound, _useAllGroupsDefeated, _useAllHeroesWounded, _useAllyDefeated, _useHeroWounded, _useHeroWithdraws, _useActivation, _behaviorAll, _useAnyHeroWounded;
 
 		public Guid GUID { get; set; }
 		public bool isGlobal
@@ -108,6 +108,11 @@ namespace Imperial_Commander_Editor
 			get { return _useHeroWithdraws; }
 			set { _useHeroWithdraws = value; PC(); }
 		}
+		public bool useAnyHeroWounded
+		{
+			get { return _useAnyHeroWounded; }
+			set { _useAnyHeroWounded = value; PC(); }
+		}
 		public bool useActivation
 		{
 			get { return _useActivation; }
@@ -142,7 +147,7 @@ namespace Imperial_Commander_Editor
 			isGlobal = true;
 			eventText = "";
 			startOfRound = endOfRound = 1;
-			useStartOfRound = useEndOfRound = useStartOfEachRound = useEndOfEachRound = useAllGroupsDefeated = useAllHeroesWounded = useAllyDefeated = useHeroWounded = useHeroWithdraws = useActivation = false;
+			useStartOfRound = useEndOfRound = useStartOfEachRound = useEndOfEachRound = useAllGroupsDefeated = useAllHeroesWounded = useAllyDefeated = useHeroWounded = useHeroWithdraws = useActivation = useAnyHeroWounded = false;
 			behaviorAll = true;
 			isRepeatable = false;
 			isEndOfCurrentRound = false;

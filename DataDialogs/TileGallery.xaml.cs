@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Imaging;
@@ -29,6 +28,8 @@ namespace Imperial_Commander_Editor
 			{
 				_selectedExpansion = value;
 				PC();
+				tileObserverA.Clear();
+				tileObserverB.Clear();
 				LoadTiles();
 				selectedTileSideA = true;
 			}
@@ -57,6 +58,12 @@ namespace Imperial_Commander_Editor
 			DataContext = this;
 
 			expansionsList.Add( "CORE" );
+			expansionsList.Add( "BESPIN" );
+			expansionsList.Add( "EMPIRE" );
+			expansionsList.Add( "HOTH" );
+			expansionsList.Add( "JABBA" );
+			expansionsList.Add( "LOTHAL" );
+			expansionsList.Add( "TWIN" );
 
 			_selectedTileSideA = true;
 			selectedExpansion = "CORE";
@@ -64,11 +71,10 @@ namespace Imperial_Commander_Editor
 			tileIsSelected = false;
 		}
 
-		static int tileCount( string expansion ) => expansion.ToUpper() switch
+		static int tileCount( string expansion )
 		{
-			"CORE" => 39,
-			_ => 0,
-		};
+			return Utils.tileData.Where( x => x.expansion.ToLower() == expansion.ToLower() ).Count();
+		}
 
 		async void LoadTiles()
 		{

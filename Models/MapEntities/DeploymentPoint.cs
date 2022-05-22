@@ -64,13 +64,13 @@ namespace Imperial_Commander_Editor
 		{
 		}
 
-		public DeploymentPoint( Guid ownderGUID )
+		public DeploymentPoint( Guid ownerGUID )
 		{
 			GUID = Guid.NewGuid();
 			name = "New Deployment Point";
 			entityType = EntityType.DeploymentPoint;
 			entityProperties = new() { name = name };
-			mapSectionOwner = ownderGUID;
+			mapSectionOwner = ownerGUID;
 			deploymentPointProps = new();
 
 			entityProperties.isActive = false;

@@ -15,7 +15,6 @@ namespace Imperial_Commander_Editor
 	/// </summary>
 	public partial class EncounterPanel : UserControl, INotifyPropertyChanged
 	{
-		bool _buttonEnabled;
 		DeploymentPoint _deploymentPoint;
 		string _selectedGroup;
 
@@ -36,7 +35,6 @@ namespace Imperial_Commander_Editor
 		}
 		public ObservableCollection<DeploymentPoint> deploymentPoints { get; set; } = new();
 		public List<DeploymentPoint> allPoints { get; set; }
-		public bool buttonEnabled { get { return _buttonEnabled; } set { _buttonEnabled = value; PC(); } }
 
 		public void PC( [CallerMemberName] string n = "" )
 		{
@@ -86,6 +84,8 @@ namespace Imperial_Commander_Editor
 			var ig = new EnemyGroupData( Utils.enemyData.Where( x => x.id == selectedGroup ).First(), new() { name = "None", GUID = Guid.Empty } );
 
 			Utils.mainWindow.mission.reservedDeploymentGroups.Add( ig );
+			filterBox.Text = "";
+			selectedGroup = "DG001";
 		}
 
 		private void addInitialGroupButton_Click( object sender, RoutedEventArgs e )
@@ -93,6 +93,8 @@ namespace Imperial_Commander_Editor
 			var ig = new EnemyGroupData( Utils.enemyData.Where( x => x.id == selectedGroup ).First(), new() { name = "None", GUID = Guid.Empty } );
 
 			Utils.mainWindow.mission.initialDeploymentGroups.Add( ig );
+			filterBox.Text = "";
+			selectedGroup = "DG001";
 		}
 
 		private void remInitialGroupButton_Click( object sender, RoutedEventArgs e )
@@ -109,12 +111,6 @@ namespace Imperial_Commander_Editor
 		{
 			EditDPDialog dialog = new EditDPDialog( (sender as FrameworkElement).DataContext as EnemyGroupData );
 			dialog.ShowDialog();
-		}
-
-		private void TextBox_KeyDown( object sender, System.Windows.Input.KeyEventArgs e )
-		{
-			if ( e.Key == System.Windows.Input.Key.Enter )
-				Utils.LoseFocus( sender as Control );
 		}
 
 		private void TextBox_TextChanged( object sender, TextChangedEventArgs e )
@@ -144,7 +140,7 @@ namespace Imperial_Commander_Editor
 				if ( !string.IsNullOrEmpty( selectedGroup ) )
 				{
 					//addInitialGroupButton_Click( null, null );
-					filterBox.Text = "";
+					//filterBox.Text = "";
 				}
 			}
 		}

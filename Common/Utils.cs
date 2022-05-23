@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,7 +13,7 @@ namespace Imperial_Commander_Editor
 	public static class Utils
 	{
 		public const string formatVersion = "10";
-		public const string appVersion = "1.0.1";
+		public const string appVersion = "1.0.2";
 
 		public static List<DeploymentCard> allyData;
 		public static List<DeploymentCard> enemyData;
@@ -76,9 +77,7 @@ namespace Imperial_Commander_Editor
 
 		public static void Log( string s )
 		{
-#if DEBUG
 			Debug.WriteLine( s );
-#endif
 		}
 
 		public static void LoadCardData()

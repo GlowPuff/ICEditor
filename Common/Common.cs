@@ -4,6 +4,7 @@
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Media;
 
@@ -136,6 +137,23 @@ namespace Imperial_Commander_Editor
 			for ( int i = 0; i < c; i++ )
 			{
 				pointList.Add( new() { GUID = guid } );
+			}
+		}
+
+		public void UpdateCard( DeploymentCard newcard )
+		{
+			cardName = newcard.name;
+			cardID = newcard.id;
+
+			var oldPoints = pointList.ToArray();
+			pointList.Clear();
+			int c = Math.Min( oldPoints.Length, newcard.size );
+			for ( int i = 0; i < newcard.size; i++ )
+			{
+				if ( i < oldPoints.Length )
+					pointList.Add( oldPoints[i] );
+				else
+					pointList.Add( new() { GUID = Guid.Empty } );
 			}
 		}
 	}

@@ -15,7 +15,6 @@ namespace Imperial_Commander_Editor
 	/// </summary>
 	public partial class EncounterPanel : UserControl, INotifyPropertyChanged
 	{
-		DeploymentPoint _deploymentPoint;
 		string _selectedGroup;
 
 		private DeploymentPoint emptyDP = new() { name = "None", GUID = Guid.Empty };

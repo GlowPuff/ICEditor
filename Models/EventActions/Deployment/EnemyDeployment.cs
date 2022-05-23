@@ -54,5 +54,10 @@ namespace Imperial_Commander_Editor
 			DeploymentCard card = Utils.enemyData.First( x => x.id == _deploymentGroup );
 			enemyGroupData = new( card, new() { name = "None", GUID = Guid.Empty } );
 		}
+
+		public void UpdateCard( DeploymentCard newcard )
+		{
+			enemyGroupData.UpdateCard( newcard );
+		}
 	}
 }

@@ -158,6 +158,12 @@ namespace Imperial_Commander_Editor
 		}
 	}
 
+	public class GitHubResponse
+	{
+		public string tag_name;
+		public string body;
+	}
+
 
 
 	//internal static class WindowExtensions

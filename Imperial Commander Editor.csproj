@@ -23,6 +23,8 @@
     <None Remove="Assets\Data\villains.json" />
     <None Remove="Assets\edit.png" />
     <None Remove="Assets\enemy.png" />
+    <None Remove="Assets\imperial green.png" />
+    <None Remove="Assets\imperial yellow.png" />
     <None Remove="Assets\imperial.png" />
     <None Remove="Assets\ok.png" />
     <None Remove="Assets\open.png" />
@@ -346,6 +348,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Assets\imperial green.png" />
+    <Resource Include="Assets\imperial yellow.png" />
     <Resource Include="Assets\SymbolTable.jpg" />
     <Resource Include="Assets\Tiles\Bespin\Bespin_1A.jpg" />
     <Resource Include="Assets\Tiles\Bespin\Bespin_1B.jpg" />

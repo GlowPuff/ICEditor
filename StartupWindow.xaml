@@ -17,7 +17,12 @@
 			<Setter Property="Background" Value="#333337"/>
 			<Setter Property="BorderBrush" Value="Transparent"/>
 		</Style>
+
 		<local:BoolToScrollbarVisibilityConverter x:Key="b2sv"/>
+
+		<Storyboard x:Key="Storyboard" BeginTime="00:00:00.000" Duration="00:00:10.000">
+			<DoubleAnimation Storyboard.TargetName="busyIcon" 									 Storyboard.TargetProperty="(UIElement.RenderTransform).(RotateTransform.Angle)"              From="0" To="360" BeginTime="00:00:05.000" Duration="00:00:05.000" />
+		</Storyboard>
 	</Window.Resources>
 
 	<Grid Margin="30">
@@ -163,7 +168,33 @@
 			</ListView.ItemTemplate>
 		</ListView>
 		<!--</ScrollViewer>-->
-		<TextBlock x:Name="appVersion" Grid.Row="3" Text="App Version: " Foreground="White" VerticalAlignment="Center"/>
+		<UniformGrid Columns="2" Grid.Row="3">
+			<TextBlock x:Name="appVersion" Text="App Version: " Foreground="White" VerticalAlignment="Center"/>
+
+			<StackPanel Orientation="Horizontal">
+				<Image x:Name="busyIcon" VerticalAlignment="Center" Width="26" Source="Assets/imperial.png">
+					<Image.RenderTransform>
+						<RotateTransform Angle="0" x:Name="busyrot" CenterX="13" CenterY="13"/>
+					</Image.RenderTransform>
+					<Image.Triggers>
+						<EventTrigger RoutedEvent="Loaded">
+							<BeginStoryboard>
+								<Storyboard>
+									<DoubleAnimation
+            Storyboard.TargetProperty="(Rectangle.RenderTransform).(RotateTransform.Angle)"
+            To="-360" Duration="0:0:1" RepeatBehavior="Forever" />
+								</Storyboard>
+							</BeginStoryboard>
+						</EventTrigger>
+					</Image.Triggers>
+				</Image>
+				<Image x:Name="busyIconRed" VerticalAlignment="Center" Width="26" Source="Assets/imperial.png" Visibility="Collapsed"/>
+				<Image x:Name="busyIconGreen" VerticalAlignment="Center" Width="26" Source="Assets/imperial green.png" Visibility="Collapsed"/>
+				<Image x:Name="busyIconYellow" VerticalAlignment="Center" Width="26" Source="Assets/imperial yellow.png" Visibility="Collapsed"/>
+
+				<TextBlock x:Name="busyStatus" Text="Checking..." VerticalAlignment="Center" Foreground="White" Margin="5,0,0,0"/>
+			</StackPanel>
+		</UniformGrid>
 
 	</Grid>
 </Window>

@@ -140,7 +140,8 @@ namespace Imperial_Commander_Editor
 		private void enemyCB_SelectionChanged( object sender, SelectionChangedEventArgs e )
 		{
 			//DeploymentCard card = Utils.enemyData.First( x => x.id == (eventAction as EnemyDeployment).deploymentGroup );
-			(eventAction as EnemyDeployment).UpdateCard( e.AddedItems[0] as DeploymentCard );
+			if ( e.AddedItems.Count > 0 )
+				(eventAction as EnemyDeployment).UpdateCard( e.AddedItems[0] as DeploymentCard );
 			//(eventAction as EnemyDeployment).enemyGroupData.cardName = card.name;
 			//(eventAction as EnemyDeployment).enemyGroupData.cardID = card.id;
 		}
@@ -149,6 +150,9 @@ namespace Imperial_Commander_Editor
 		{
 			if ( e.Key == Key.Enter )
 			{
+				filterBox.TextChanged -= TextBox_TextChanged;
+				filterBox.Text = "";
+				filterBox.TextChanged += TextBox_TextChanged;
 				Utils.LoseFocus( sender as Control );
 			}
 		}

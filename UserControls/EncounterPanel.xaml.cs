@@ -135,7 +135,12 @@ namespace Imperial_Commander_Editor
 		{
 			if ( e.Key == Key.Enter )
 			{
+				filterBox.TextChanged -= TextBox_TextChanged;
+				filterBox.Text = "";
+				filterBox.TextChanged += TextBox_TextChanged;
+
 				Utils.LoseFocus( sender as Control );
+
 				if ( !string.IsNullOrEmpty( selectedGroup ) )
 				{
 					//addInitialGroupButton_Click( null, null );

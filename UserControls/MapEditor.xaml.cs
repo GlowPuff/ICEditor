@@ -152,6 +152,9 @@ namespace Imperial_Commander_Editor
 			selectedEntity = prev;
 		}
 
+		/// <summary>
+		/// Sets the entity property panel to display the data for the selected entity
+		/// </summary>
 		public void SetSelectedPropertyPanel()
 		{
 			if ( selectedEntity is Crate )

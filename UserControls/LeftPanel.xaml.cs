@@ -249,5 +249,19 @@ namespace Imperial_Commander_Editor
 			scv.ScrollToVerticalOffset( scv.VerticalOffset - e.Delta );
 			e.Handled = true;
 		}
+
+		private void dupeEventBtn_Click( object sender, RoutedEventArgs e )
+		{
+			var t = eventsCB.SelectedItem as MissionEvent;
+			if ( t.GUID != Guid.Empty )
+			{
+				var clone = t.Clone();
+				if ( t.isGlobal )
+					Utils.mainWindow.mission.globalEvents.Add( clone as MissionEvent );
+				else
+					Utils.mainWindow.activeSection.missionEvents.Add( clone as MissionEvent );
+				eventsCB.SelectedItem = clone;
+			}
+		}
 	}
 }

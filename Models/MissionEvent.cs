@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 
 namespace Imperial_Commander_Editor
 {
-	public class MissionEvent : INotifyPropertyChanged
+	public class MissionEvent : INotifyPropertyChanged, ICloneable
 	{
 		public event PropertyChangedEventHandler PropertyChanged;
 
@@ -169,6 +169,52 @@ namespace Imperial_Commander_Editor
 				return false;
 			}
 			return true;
+		}
+
+		public object Clone()
+		{
+			//serialize the object to JSON, the deserialize into a brand new INDEPENDENT object
+			string output = JsonConvert.SerializeObject( this );
+			var clone = JsonConvert.DeserializeObject<MissionEvent>( output );
+			//give it a new, unique GUID and name
+			clone.GUID = Guid.NewGuid();
+			clone.name = name + " (Copy)";
+			//make sure each event action has its own, new GUID
+			foreach ( var item in clone.eventActions )
+				item.GUID = Guid.NewGuid();
+
+
+			//var clone = new MissionEvent();
+			//clone.GUID = GUID;
+			//clone.isGlobal = isGlobal;
+			//clone.name = name + " (Copy)";
+			//clone.eventText = eventText;
+			//clone.allyDefeated = allyDefeated;
+			//clone.heroWounded = heroWounded;
+			//clone.heroWithdraws = heroWithdraws;
+			//clone.activationOf = activationOf;
+			//clone.startOfRound = startOfRound;
+			//clone.endOfRound = endOfRound;
+			//clone.useStartOfRound = useStartOfRound;
+			//clone.useEndOfRound = useEndOfRound;
+			//clone.useStartOfEachRound = useStartOfEachRound;
+			//clone.useEndOfEachRound = useEndOfEachRound;
+			//clone.useAllGroupsDefeated = useAllGroupsDefeated;
+			//clone.useAllHeroesWounded = useAllHeroesWounded;
+			//clone.useAllyDefeated = useAllyDefeated;
+			//clone.useHeroWounded = useHeroWounded;
+			//clone.useHeroWithdraws = useHeroWithdraws;
+			//clone.useAnyHeroWounded = useAnyHeroWounded;
+			//clone.useActivation = useActivation;
+			//clone.isRepeatable = isRepeatable;
+			//clone.isEndOfCurrentRound = isEndOfCurrentRound;
+			//clone.behaviorAll = behaviorAll;
+			//clone.additionalTriggers = new ObservableCollection<TriggeredBy>( additionalTriggers );
+			//clone.eventActions = new ObservableCollection<IEventAction>( eventActions.ToArray() );
+			//foreach ( var item in clone.eventActions )
+			//	item.GUID = Guid.NewGuid();
+
+			return clone;
 		}
 	}
 }

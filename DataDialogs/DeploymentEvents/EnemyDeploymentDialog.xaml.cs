@@ -37,15 +37,6 @@ namespace Imperial_Commander_Editor
 
 			initialDP = (eventAction as EnemyDeployment).specificDeploymentPoint;
 
-			//if ( (eventAction as EnemyDeployment).sourceType == SourceType.InitialReserved )
-			//{
-			//	var items = new List<DeploymentCard>();
-			//	items = items.Concat( Utils.enemyData.Where( x => Utils.mainWindow.mission.initialDeploymentGroups.Any( y => y.cardID == x.id ) ) ).ToList();
-			//	items = items.Concat( Utils.enemyData.Where( x => Utils.mainWindow.mission.reservedDeploymentGroups.Any( y => y.cardID == x.id ) ) ).ToList();
-
-			//	enemyCB.ItemsSource = items;
-			//}
-			//else
 			enemyCB.ItemsSource = Utils.enemyData;
 
 			triggersCB.ItemsSource = Utils.mainWindow.localTriggers;

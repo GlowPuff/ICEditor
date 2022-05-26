@@ -8,7 +8,7 @@ namespace Imperial_Commander_Editor
 		Guid _setTrigger, _specificDeploymentPoint;
 		DeploymentSpot _deploymentPoint;
 		int _threatCost;
-		bool _useThreat;
+		bool _useThreat, _useGenericMugshot;
 
 		public string allyName { get { return _allyName; } set { _allyName = value; PC(); } }
 		public string allyID { get { return _allyID; } set { _allyID = value; PC(); } }
@@ -17,6 +17,7 @@ namespace Imperial_Commander_Editor
 		public Guid specificDeploymentPoint { get { return _specificDeploymentPoint; } set { _specificDeploymentPoint = value; PC(); } }
 		public int threatCost { get { return _threatCost; } set { _threatCost = value; PC(); } }
 		public bool useThreat { get { return _useThreat; } set { _useThreat = value; PC(); } }
+		public bool useGenericMugshot { get { return _useGenericMugshot; } set { _useGenericMugshot = value; PC(); } }
 
 		public AllyDeployment()
 		{
@@ -32,6 +33,7 @@ namespace Imperial_Commander_Editor
 			_deploymentPoint = DeploymentSpot.Active;
 			_threatCost = 0;
 			_useThreat = false;
+			_useGenericMugshot = false;
 		}
 	}
 }

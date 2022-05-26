@@ -25,6 +25,8 @@
 					<StackPanel Margin="0,0,5,0">
 						<ComboBox x:Name="allyCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectedValue="{Binding allyID}" SelectedValuePath="id" DisplayMemberPath="name"/>
 
+						<CheckBox Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" Margin="0,10,0,0" Content="Use Generic Thumbnail" IsChecked="{Binding useGenericMugshot}"/>
+
 						<!--CUSTOM ALLY NAME-->
 						<GroupBox Header="Custom Name" Margin="0,10" Padding="10" Background="#FF503B7C">
 							<TextBox Text="{Binding allyName}" materialDesign:HintAssist.Hint="Blank for Default" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>

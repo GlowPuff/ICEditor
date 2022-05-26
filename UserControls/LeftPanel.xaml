@@ -70,6 +70,7 @@
 							<Grid.RowDefinitions>
 								<RowDefinition Height="*" />
 								<RowDefinition Height="auto" />
+								<RowDefinition Height="auto" />
 							</Grid.RowDefinitions>
 
 							<!--<TextBlock HorizontalAlignment="Center" Text="Events" Foreground="White"/>-->
@@ -89,6 +90,8 @@
 									<materialDesign:PackIcon Kind="Settings" Width="24" Height="24" HorizontalAlignment="Center"/>
 								</Button>
 							</UniformGrid>
+
+							<Button x:Name="dupeEventBtn" Grid.Row="2" Content="DUPLICATE EVENT" Margin="0,5,0,0" Click="dupeEventBtn_Click"/>
 						</Grid>
 					</GroupBox>
 				</Grid>

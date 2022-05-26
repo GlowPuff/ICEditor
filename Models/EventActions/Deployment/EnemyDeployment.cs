@@ -9,7 +9,7 @@ namespace Imperial_Commander_Editor
 		SourceType _sourceType;
 		int _threatCost;
 		bool _canReinforce, _canRedeploy, _canBeDefeated, _useThreat, _showMod, _useCustomInstructions;
-		Guid _setTrigger, _setEvent, _specificDeploymentPoint;
+		Guid _specificDeploymentPoint;
 		DeploymentSpot _deploymentPoint;
 
 		public string enemyName { get { return _enemyName; } set { _enemyName = value; PC(); } }
@@ -24,8 +24,6 @@ namespace Imperial_Commander_Editor
 		public bool useThreat { get { return _useThreat; } set { _useThreat = value; PC(); } }
 		public bool useCustomInstructions { get { return _useCustomInstructions; } set { _useCustomInstructions = value; PC(); } }
 		public bool showMod { get { return _showMod; } set { _showMod = value; PC(); } }
-		public Guid setTrigger { get { return _setTrigger; } set { _setTrigger = value; PC(); } }
-		public Guid setEvent { get { return _setEvent; } set { _setEvent = value; PC(); } }
 		public Guid specificDeploymentPoint { get { return _specificDeploymentPoint; } set { _specificDeploymentPoint = value; PC(); } }
 		public DeploymentSpot deploymentPoint { get { return _deploymentPoint; } set { _deploymentPoint = value; PC(); } }
 		public EnemyGroupData enemyGroupData { get; set; }
@@ -42,8 +40,6 @@ namespace Imperial_Commander_Editor
 			_threatCost = 0;
 			_sourceType = SourceType.Manual;
 			_canRedeploy = _canReinforce = true;
-			_setTrigger = Guid.Empty;
-			_setEvent = Guid.Empty;
 			_deploymentPoint = DeploymentSpot.Active;
 			_specificDeploymentPoint = Guid.Empty;
 			_useThreat = _showMod = false;

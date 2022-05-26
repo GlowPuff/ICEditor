@@ -69,9 +69,9 @@ namespace Imperial_Commander_Editor
 				if ( !Utils.ValidateMapEntity( (eventAction as EnemyDeployment).enemyGroupData.pointList[i].GUID ) )
 					(eventAction as EnemyDeployment).enemyGroupData.pointList[i].GUID = Guid.Empty;
 			}
-			if ( !Utils.ValidateTrigger( (eventAction as EnemyDeployment).setTrigger ) )
+			if ( !Utils.ValidateTrigger( (eventAction as EnemyDeployment).enemyGroupData.defeatedTrigger ) )
 			{
-				(eventAction as EnemyDeployment).setTrigger = Guid.Empty;
+				(eventAction as EnemyDeployment).enemyGroupData.defeatedTrigger = Guid.Empty;
 			}
 		}
 

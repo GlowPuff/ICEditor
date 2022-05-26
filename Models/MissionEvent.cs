@@ -183,37 +183,6 @@ namespace Imperial_Commander_Editor
 			foreach ( var item in clone.eventActions )
 				item.GUID = Guid.NewGuid();
 
-
-			//var clone = new MissionEvent();
-			//clone.GUID = GUID;
-			//clone.isGlobal = isGlobal;
-			//clone.name = name + " (Copy)";
-			//clone.eventText = eventText;
-			//clone.allyDefeated = allyDefeated;
-			//clone.heroWounded = heroWounded;
-			//clone.heroWithdraws = heroWithdraws;
-			//clone.activationOf = activationOf;
-			//clone.startOfRound = startOfRound;
-			//clone.endOfRound = endOfRound;
-			//clone.useStartOfRound = useStartOfRound;
-			//clone.useEndOfRound = useEndOfRound;
-			//clone.useStartOfEachRound = useStartOfEachRound;
-			//clone.useEndOfEachRound = useEndOfEachRound;
-			//clone.useAllGroupsDefeated = useAllGroupsDefeated;
-			//clone.useAllHeroesWounded = useAllHeroesWounded;
-			//clone.useAllyDefeated = useAllyDefeated;
-			//clone.useHeroWounded = useHeroWounded;
-			//clone.useHeroWithdraws = useHeroWithdraws;
-			//clone.useAnyHeroWounded = useAnyHeroWounded;
-			//clone.useActivation = useActivation;
-			//clone.isRepeatable = isRepeatable;
-			//clone.isEndOfCurrentRound = isEndOfCurrentRound;
-			//clone.behaviorAll = behaviorAll;
-			//clone.additionalTriggers = new ObservableCollection<TriggeredBy>( additionalTriggers );
-			//clone.eventActions = new ObservableCollection<IEventAction>( eventActions.ToArray() );
-			//foreach ( var item in clone.eventActions )
-			//	item.GUID = Guid.NewGuid();
-
 			return clone;
 		}
 	}

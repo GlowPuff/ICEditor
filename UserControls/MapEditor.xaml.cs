@@ -266,9 +266,9 @@ namespace Imperial_Commander_Editor
 			//calculate centers
 			//double centerX = (point.X - translateTransform.X) / scaleTransform.ScaleX;
 			//double centerY = (point.Y - translateTransform.Y) / scaleTransform.ScaleY;
-			Utils.Log( "==============" );
+			//Utils.Log( "==============" );
 			//Utils.Log( $"CENTER: {centerX}, {centerY}" );
-			Utils.Log( $"SCALE: {mScale}" );
+			//Utils.Log( $"SCALE: {mScale}" );
 
 			var w = Utils.mainWindow.ActualWidth;
 			var h = Utils.mainWindow.ActualHeight;
@@ -286,7 +286,7 @@ namespace Imperial_Commander_Editor
 				cy = (-1000 * mScale) + (h / 2) - 125;//(-point.Y * mScale) + (h / 2) - 125;
 				CenterMap( new( point.X, point.Y ) );
 			}
-			Utils.Log( $"CX/Y: {cx}, {cy}" );
+			//Utils.Log( $"CX/Y: {cx}, {cy}" );
 
 			scaleTransform.ScaleX = scale;
 			scaleTransform.ScaleY = scale;
@@ -297,8 +297,8 @@ namespace Imperial_Commander_Editor
 			//translateTransform.X = cx;
 			//translateTransform.Y = cy;
 
-			Utils.Log( $"TRANS: {translateTransform.X}, {translateTransform.Y}" );
-			Utils.Log( $"MOUSE: {point.X}, {point.Y}" );
+			//Utils.Log( $"TRANS: {translateTransform.X}, {translateTransform.Y}" );
+			//Utils.Log( $"MOUSE: {point.X}, {point.Y}" );
 		}
 
 		private void panelToggleButton_Click( object sender, RoutedEventArgs e )

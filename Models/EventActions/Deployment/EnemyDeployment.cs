@@ -48,7 +48,7 @@ namespace Imperial_Commander_Editor
 			_repositionInstructions = "";
 
 			DeploymentCard card = Utils.enemyData.First( x => x.id == _deploymentGroup );
-			enemyGroupData = new( card, new() { name = "None", GUID = Guid.Empty } );
+			enemyGroupData = new( card, new() { name = "Active Deployment Point", GUID = Guid.Empty } );
 		}
 
 		public void UpdateCard( DeploymentCard newcard )

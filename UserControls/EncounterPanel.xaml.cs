@@ -17,7 +17,8 @@ namespace Imperial_Commander_Editor
 	{
 		string _selectedGroup;
 
-		private DeploymentPoint emptyDP = new() { name = "None", GUID = Guid.Empty };
+		private DeploymentPoint activeDP = new() { name = "Active Deployment Point", GUID = Guid.Empty };
+		private DeploymentPoint noneDP = new() { name = "None", GUID = Utils.GUIDOne };
 
 		public DeploymentPoint modifyDeploymentPoint { get; set; }
 		public string selectedGroup { get { return _selectedGroup; } set { _selectedGroup = value; PC(); } }
@@ -48,7 +49,8 @@ namespace Imperial_Commander_Editor
 
 			DataContext = this;
 			selectedGroup = "DG001";
-			deploymentPoints.Add( emptyDP );
+			deploymentPoints.Add( activeDP );
+			deploymentPoints.Add( noneDP );
 		}
 
 		public void UpdateUI()
@@ -80,7 +82,7 @@ namespace Imperial_Commander_Editor
 
 		private void addReservedGroupButton_Click( object sender, RoutedEventArgs e )
 		{
-			var ig = new EnemyGroupData( Utils.enemyData.Where( x => x.id == selectedGroup ).First(), new() { name = "None", GUID = Guid.Empty } );
+			var ig = new EnemyGroupData( Utils.enemyData.Where( x => x.id == selectedGroup ).First(), new() { name = "Active Deployment Point", GUID = Guid.Empty } );
 
 			Utils.mainWindow.mission.reservedDeploymentGroups.Add( ig );
 			filterBox.Text = "";
@@ -89,7 +91,7 @@ namespace Imperial_Commander_Editor
 
 		private void addInitialGroupButton_Click( object sender, RoutedEventArgs e )
 		{
-			var ig = new EnemyGroupData( Utils.enemyData.Where( x => x.id == selectedGroup ).First(), new() { name = "None", GUID = Guid.Empty } );
+			var ig = new EnemyGroupData( Utils.enemyData.Where( x => x.id == selectedGroup ).First(), new() { name = "Active Deployment Point", GUID = Guid.Empty } );
 
 			Utils.mainWindow.mission.initialDeploymentGroups.Add( ig );
 			filterBox.Text = "";

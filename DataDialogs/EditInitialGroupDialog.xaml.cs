@@ -20,15 +20,6 @@ namespace Imperial_Commander_Editor
 		public string customName { get { return _customName; } set { _customName = value; PC(); } }
 		public EnemyGroupData enemyGroupData { get; set; }
 		public ObservableCollection<DeploymentPoint> deploymentPoints { get; set; } = new();
-		public DeploymentPoint deploymentPoint
-		{
-			get { return _deploymentPoint; }
-			set
-			{
-				_deploymentPoint = value;
-				PC();
-			}
-		}
 
 		public void PC( [CallerMemberName] string n = "" )
 		{
@@ -37,7 +28,8 @@ namespace Imperial_Commander_Editor
 		}
 		public event PropertyChangedEventHandler PropertyChanged;
 
-		private DeploymentPoint emptyDP = new() { name = "None", GUID = Guid.Empty };
+		private DeploymentPoint activeDP = new() { name = "Active Deployment Point", GUID = Guid.Empty };
+		private DeploymentPoint noneDP = new() { name = "None", GUID = Utils.GUIDOne };
 
 		public EditInitialGroupDialog( EnemyGroupData egd )
 		{
@@ -50,13 +42,14 @@ namespace Imperial_Commander_Editor
 			SolidColorBrush brush = new( string.IsNullOrEmpty( enemyGroupData.customText ) ? Colors.Red : Colors.LawnGreen );
 			ciInfo.Foreground = brush;
 
-			deploymentPoints.Add( emptyDP );
+			deploymentPoints.Add( activeDP );
+			deploymentPoints.Add( noneDP );
+
 			foreach ( var ee in Utils.mainWindow.mission.mapEntities.OfType<DeploymentPoint>() )
 			{
 				if ( !deploymentPoints.Contains( ee ) )
 					deploymentPoints.Add( ee );
 			}
-			deploymentPoint = emptyDP;
 
 			triggersCB.ItemsSource = Utils.mainWindow.localTriggers;
 			eventsCB.ItemsSource = Utils.mainWindow.localEvents;

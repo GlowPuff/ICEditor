@@ -41,7 +41,9 @@
 				</Grid.RowDefinitions>
 
 				<StackPanel>
-					<TextBox x:Name="textbox" Grid.Row="0" Margin="0,0,0,10" BorderThickness="2" BorderBrush="MediumPurple" AcceptsReturn="True" Foreground="White" CaretBrush="White" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap" VerticalAlignment="Stretch" Text="{Binding eventAction.theText}" MinHeight="100" materialDesign:HintAssist.Hint="Description"/>
+					<TextBox x:Name="textbox" Grid.Row="0" BorderThickness="2" BorderBrush="MediumPurple" AcceptsReturn="True" Foreground="White" CaretBrush="White" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap" VerticalAlignment="Stretch" Text="{Binding eventAction.theText}" MinHeight="100" materialDesign:HintAssist.Hint="Description"/>
+
+					<CheckBox Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" Margin="0,10" IsChecked="{Binding eventAction.includeCancel}" Content="Include Cancel Button"/>
 
 					<materialDesign:Card Padding="10" Background="#FF7952C0">
 						<Grid>

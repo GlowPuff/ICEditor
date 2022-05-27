@@ -25,6 +25,8 @@ namespace Imperial_Commander_Editor
 
 		public static MainWindow mainWindow;
 
+		public static Guid GUIDOne { get { return Guid.Parse( "11111111-1111-1111-1111-111111111111" ); } }
+
 		public static void InitColors()
 		{
 			deploymentColors = new ObservableCollection<DeploymentColor>();
@@ -102,7 +104,7 @@ namespace Imperial_Commander_Editor
 
 		public static bool ValidateMapEntity( Guid guid )
 		{
-			return mainWindow.mission.EntityExists( guid );
+			return mainWindow.mission.EntityExists( guid ) || guid == Utils.GUIDOne;
 		}
 
 		/// <summary>

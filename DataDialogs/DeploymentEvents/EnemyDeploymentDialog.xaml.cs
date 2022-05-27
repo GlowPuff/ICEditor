@@ -42,7 +42,9 @@ namespace Imperial_Commander_Editor
 			triggersCB.ItemsSource = Utils.mainWindow.localTriggers;
 			eventsCB.ItemsSource = Utils.mainWindow.localEvents;
 
-			deploymentPoints.Add( new() { GUID = Guid.Empty, name = "None" } );
+			deploymentPoints.Add( new() { GUID = Guid.Empty, name = "Active Deployment Point" } );
+			deploymentPoints.Add( new() { GUID = Utils.GUIDOne, name = "None" } );
+
 			foreach ( var e in Utils.mainWindow.mission.mapEntities.OfType<DeploymentPoint>() )
 			{
 				deploymentPoints.Add( e );

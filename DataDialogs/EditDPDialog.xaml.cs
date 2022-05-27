@@ -12,13 +12,16 @@ namespace Imperial_Commander_Editor
 	{
 		public EnemyGroupData initialGroupData { get; set; }
 		public DeploymentPoint selectedPoint { get; set; }
-		public Guid selectedGUID { get; set; }
 
 		public List<DeploymentPoint> deploymentPoints
 		{
 			get
 			{
-				var deps = new List<DeploymentPoint>( new DeploymentPoint[] { new DeploymentPoint() { name = "None", GUID = Guid.Empty } } );
+				var deps = new List<DeploymentPoint>( new DeploymentPoint[]
+				{
+					new DeploymentPoint() { name = "Active Deployment Point", GUID = Guid.Empty },
+					new DeploymentPoint(){name ="None", GUID = Utils.GUIDOne}
+				} );
 				deps = deps.Concat( Utils.mainWindow.mission.mapEntities.OfType<DeploymentPoint>() ).ToList();
 				return deps;
 			}

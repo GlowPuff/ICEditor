@@ -19,7 +19,7 @@
 				</Grid.RowDefinitions>
 
 				<StackPanel>
-					<TextBox Text="{Binding theText}" Margin="0,0,0,10" Foreground="White" materialDesign:HintAssist.Hint="Short Objective Bar Text - REQUIRED" TextWrapping="Wrap" BorderThickness="2" BorderBrush="MediumPurple"/>
+					<TextBox Text="{Binding theText}" Margin="0,0,0,10" Foreground="White" materialDesign:HintAssist.Hint="Short Objective Bar Text - REQUIRED" TextWrapping="Wrap" BorderThickness="2" BorderBrush="MediumPurple" CaretBrush="White"/>
 
 					<TextBox x:Name="textbox" Grid.Row="0" Margin="0,0,0,10" BorderThickness="2" BorderBrush="MediumPurple" AcceptsReturn="True" Foreground="White" CaretBrush="White" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap" VerticalAlignment="Stretch" Text="{Binding longText}" MinHeight="200" materialDesign:HintAssist.Hint="Long Description Of Objective - OPTIONAL"/>
 				</StackPanel>

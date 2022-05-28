@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace Imperial_Commander_Editor
 {
@@ -63,6 +64,14 @@ namespace Imperial_Commander_Editor
 			if ( entityProperties.buttonActions.Count < 5 )
 			{
 				entityProperties.buttonActions.Add( new() { buttonText = "Button Text", triggerGUID = Guid.Empty, eventGUID = Guid.Empty } );
+			}
+		}
+
+		private void btnText_KeyDown( object sender, System.Windows.Input.KeyEventArgs e )
+		{
+			if ( e.Key == System.Windows.Input.Key.Enter )
+			{
+				Utils.LoseFocus( sender as Control );
 			}
 		}
 	}

@@ -35,7 +35,7 @@
 				<StackPanel>
 					<TextBlock Text="Duration In Rounds" HorizontalAlignment="Center"/>
 					<TextBlock Text="(0 = Infinite)" HorizontalAlignment="Center" Margin="0,0,0,10"/>
-					<TextBox Text="{Binding Duration}" Width="50" CaretBrush="White"/>
+					<TextBox x:Name="durationText" Text="{Binding Duration}" Width="50" CaretBrush="White" KeyDown="durationText_KeyDown"/>
 				</StackPanel>
 			</materialDesign:Card>
 

@@ -18,7 +18,7 @@
 				</Grid.ColumnDefinitions>
 
 				<UniformGrid Columns="3">
-					<TextBox Text="{Binding buttonText}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="0,0,10,0" CaretBrush="White"/>
+					<TextBox x:Name="btnText" Text="{Binding buttonText}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="0,0,10,0" CaretBrush="White" KeyDown="btnText_KeyDown"/>
 					<!--<TextBlock Text="{Binding triggerName}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,10,0"/>-->
 					<ComboBox x:Name="triggersCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" ItemsSource="{Binding mainWindow.localTriggers, RelativeSource={RelativeSource FindAncestor,AncestorType=Window}}" DisplayMemberPath="name" SelectedValue="{Binding triggerGUID}" SelectedValuePath="GUID" Margin="10,0"/>
 

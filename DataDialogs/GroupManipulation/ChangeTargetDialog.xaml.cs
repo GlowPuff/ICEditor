@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace Imperial_Commander_Editor
 {
@@ -49,6 +50,12 @@ namespace Imperial_Commander_Editor
 		{
 			var dlg = new PriorityTraitsDialog( (eventAction as ChangeTarget).groupPriorityTraits );
 			dlg.ShowDialog();
+		}
+
+		private void pcntText_KeyDown( object sender, System.Windows.Input.KeyEventArgs e )
+		{
+			if ( e.Key == System.Windows.Input.Key.Enter )
+				Utils.LoseFocus( sender as Control );
 		}
 	}
 }

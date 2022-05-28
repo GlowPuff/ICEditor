@@ -72,5 +72,13 @@ namespace Imperial_Commander_Editor
 				(DataContext as SpaceHighlight).Rebuild();
 			}
 		}
+
+		private void durationText_KeyDown( object sender, System.Windows.Input.KeyEventArgs e )
+		{
+			if ( e.Key == System.Windows.Input.Key.Enter )
+			{
+				Utils.LoseFocus( sender as Control );
+			}
+		}
 	}
 }

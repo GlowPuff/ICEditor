@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace Imperial_Commander_Editor
 {
@@ -42,6 +43,12 @@ namespace Imperial_Commander_Editor
 		{
 			if ( e.LeftButton == System.Windows.Input.MouseButtonState.Pressed )
 				DragMove();
+		}
+
+		private void TextBox_KeyDown( object sender, System.Windows.Input.KeyEventArgs e )
+		{
+			if ( e.Key == System.Windows.Input.Key.Enter )
+				Utils.LoseFocus( sender as Control );
 		}
 	}
 }

@@ -7,12 +7,14 @@ namespace Imperial_Commander_Editor
 		PriorityTargetType _targetType;
 		GroupType _groupType;
 		string _otherTarget, _specificHero, _specificAlly;
+		int _percentChance;
 
 		public PriorityTargetType targetType { get { return _targetType; } set { _targetType = value; PC(); } }
 		public GroupType groupType { get { return _groupType; } set { _groupType = value; PC(); } }
 		public string otherTarget { get { return _otherTarget; } set { _otherTarget = value; PC(); } }
 		public string specificAlly { get { return _specificAlly; } set { _specificAlly = value; PC(); } }
 		public string specificHero { get { return _specificHero; } set { _specificHero = value; PC(); } }
+		public int percentChance { get { return _percentChance; } set { _percentChance = value; PC(); } }
 		public ObservableCollection<DCPointer> groupsToAdd { get; set; } = new();
 		public GroupPriorityTraits groupPriorityTraits { get; set; }
 
@@ -30,6 +32,7 @@ namespace Imperial_Commander_Editor
 			specificHero = "H1";
 			groupPriorityTraits = new();
 			groupPriorityTraits.useDefaultPriority = false;
+			percentChance = 60;
 		}
 	}
 }

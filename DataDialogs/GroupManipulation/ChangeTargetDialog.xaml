@@ -64,7 +64,12 @@
 
 							<UniformGrid Columns="2">
 								<RadioButton Content="Other" GroupName="target" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding targetType, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:PriorityTargetType.Other}}"/>
-								<TextBox Text="{Binding otherTarget}" VerticalAlignment="Center" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+								<TextBox Text="{Binding otherTarget}" VerticalAlignment="Center" Style="{StaticResource MaterialDesignOutlinedTextBox}" CaretBrush="White"/>
+							</UniformGrid>
+
+							<UniformGrid Columns="2"  Margin="0,10,0,0">
+								<TextBlock Text="Percent Chance Priority Target Is Enforced" TextWrapping="Wrap"/>
+								<TextBox Text="{Binding percentChance}" VerticalAlignment="Center" HorizontalContentAlignment="Center" Width="50" CaretBrush="White"/>
 							</UniformGrid>
 						</StackPanel>
 					</GroupBox>

@@ -12,7 +12,7 @@ namespace Imperial_Commander_Editor
 {
 	public static class Utils
 	{
-		public const string formatVersion = "12";
+		public const string formatVersion = "13";
 		public const string appVersion = "1.0.7";
 
 		public static List<DeploymentCard> allyData;

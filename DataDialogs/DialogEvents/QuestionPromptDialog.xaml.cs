@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 
@@ -9,6 +10,8 @@ namespace Imperial_Commander_Editor
 	/// </summary>
 	public partial class QuestionPromptDialog : Window, IEventActionDialog
 	{
+		SymbolsWindow symbolsWindow;
+		FormattingWindow formattingWindow;
 		public IEventAction eventAction { get; set; }
 		public static MainWindow mainWindow { get { return Utils.mainWindow; } }
 
@@ -43,6 +46,8 @@ namespace Imperial_Commander_Editor
 
 		private void okButton_Click( object sender, RoutedEventArgs e )
 		{
+			symbolsWindow?.Close();
+			formattingWindow?.Close();
 			Close();
 		}
 
@@ -75,6 +80,31 @@ namespace Imperial_Commander_Editor
 			{
 				(eventAction as QuestionPrompt).buttonList.Add( new() { buttonText = "Button Text", triggerGUID = Guid.Empty, eventGUID = me.GUID } );
 			}
+		}
+
+		private void formatBtn_Click( object sender, RoutedEventArgs e )
+		{
+			if ( !IsWindowOpen<FormattingWindow>() )
+			{
+				formattingWindow = new FormattingWindow();
+				formattingWindow.Show();
+			}
+		}
+
+		private void infoBtn_Click( object sender, RoutedEventArgs e )
+		{
+			if ( !IsWindowOpen<SymbolsWindow>() )
+			{
+				symbolsWindow = new SymbolsWindow();
+				symbolsWindow.Show();
+			}
+		}
+
+		private static bool IsWindowOpen<T>( string name = "" ) where T : Window
+		{
+			return string.IsNullOrEmpty( name )
+				 ? Application.Current.Windows.OfType<T>().Any()
+				 : Application.Current.Windows.OfType<T>().Any( w => w.Name.Equals( name ) );
 		}
 	}
 }

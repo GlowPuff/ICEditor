@@ -98,8 +98,11 @@
 														<MenuItem Header="Modify Variable(s)" Click="MenuItem_Click" Tag="G4"/>
 														<MenuItem Header="Modify Threat" Click="MenuItem_Click" Tag="G5"/>
 														<MenuItem Header="Activate Event Group" Click="MenuItem_Click" Tag="G8"/>
-														<MenuItem Header="Question Prompt" Click="MenuItem_Click" Tag="G6"/>
+													</MenuItem>
+													<MenuItem Header="Dialogs">
 														<MenuItem Header="Text Box" Click="MenuItem_Click" Tag="G7"/>
+														<MenuItem Header="Question Prompt" Click="MenuItem_Click" Tag="G6"/>
+														<MenuItem Header="Input Prompt" Click="MenuItem_Click" Tag="G9"/>
 													</MenuItem>
 													<MenuItem Header="Deployment">
 														<MenuItem Header="Enemy Deployment" Click="MenuItem_Click" Tag="D1"/>

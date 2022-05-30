@@ -19,7 +19,7 @@ namespace Imperial_Commander_Editor
 	//public enum Expansion { Core, Bespin, Empire, Hoth, Jabba, Lothal, Twin }
 	public enum EntityType { Tile, Console, Crate, DeploymentPoint, Token, Highlight, Door }
 	public enum TokenShape { Circle, Square, Rectangle }
-	public enum EventActionType { G1, G2, G3, G4, G5, G6, D1, D2, D3, D4, D5, GM1, GM2, GM3, M1, M2, G7, GM4, GM5, G8 }
+	public enum EventActionType { G1, G2, G3, G4, G5, G6, D1, D2, D3, D4, D5, GM1, GM2, GM3, M1, M2, G7, GM4, GM5, G8, G9 }
 	public enum ThreatAction { Add, Remove }
 	public enum SourceType { InitialReserved, Manual, Hand }
 	public enum DeploymentSpot { Active, Specific }
@@ -167,7 +167,30 @@ namespace Imperial_Commander_Editor
 		public string body;
 	}
 
+	public class InputRange : INotifyPropertyChanged
+	{
+		string _theText;
+		int _fromValue, _toValue;
+		Guid _triggerGUID, _eventGUID;
 
+		public void PC( [CallerMemberName] string n = "" )
+		{
+			if ( !string.IsNullOrEmpty( n ) )
+				PropertyChanged?.Invoke( this, new PropertyChangedEventArgs( n ) );
+		}
+		public event PropertyChangedEventHandler PropertyChanged;
+
+		public string theText { get { return _theText; } set { _theText = value; PC(); } }
+		public int fromValue { get { return _fromValue; } set { _fromValue = value; PC(); } }
+		public int toValue { get { return _toValue; } set { _toValue = value; PC(); } }
+		public Guid triggerGUID { get { return _triggerGUID; } set { _triggerGUID = value; PC(); } }
+		public Guid eventGUID { get { return _eventGUID; } set { _eventGUID = value; PC(); } }
+
+		public InputRange()
+		{
+
+		}
+	}
 
 	//internal static class WindowExtensions
 	//{

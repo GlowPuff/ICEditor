@@ -43,7 +43,17 @@
 				<StackPanel>
 					<TextBox x:Name="textbox" Grid.Row="0" BorderThickness="2" BorderBrush="MediumPurple" AcceptsReturn="True" Foreground="White" CaretBrush="White" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap" VerticalAlignment="Stretch" Text="{Binding eventAction.theText}" MinHeight="100" materialDesign:HintAssist.Hint="Description"/>
 
-					<CheckBox Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" Margin="0,10" IsChecked="{Binding eventAction.includeCancel}" Content="Include Cancel Button"/>
+					<Grid>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="auto" />
+							<ColumnDefinition Width="1*" />
+						</Grid.ColumnDefinitions>
+						<CheckBox Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" Margin="0,10" IsChecked="{Binding eventAction.includeCancel}" Content="Include Cancel Button"/>
+						<StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right">
+							<Button x:Name="infoBtn" Content="SYMBOLS..." Click="infoBtn_Click"/>
+							<Button x:Name="formatBtn" Content="FORMATTING..." Click="formatBtn_Click" Margin="10,0,0,0"/>
+						</StackPanel>
+					</Grid>
 
 					<materialDesign:Card Padding="10" Background="#FF7952C0">
 						<Grid>
@@ -72,7 +82,7 @@
 					<materialDesign:Card Background="Purple" Padding="10" Margin="0,10,0,0">
 						<StackPanel>
 							<UniformGrid Columns="3" Margin="0,0,55,0">
-								<TextBlock Text="Button Text" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+								<TextBlock Text="Button Text:" HorizontalAlignment="Left" VerticalAlignment="Center"/>
 								<TextBlock Text="When Clicked, Fire Trigger:" HorizontalAlignment="Left" VerticalAlignment="Center"/>
 								<TextBlock Text="When Clicked, Fire Event:" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 							</UniformGrid>

@@ -1,18 +1,18 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 
 namespace Imperial_Commander_Editor
 {
 	public class InputPrompt : EventAction
 	{
-		string _theText;
-		int _fromValue, _toValue;
-		Guid _triggerGUID, _eventGUID;
+		string _theText, _failText;
+		Guid _failTriggerGUID, _failEventGUID;
 
+		public string failText { get { return _failText; } set { _failText = value; PC(); } }
 		public string theText { get { return _theText; } set { _theText = value; PC(); } }
-		public int fromValue { get { return _fromValue; } set { _fromValue = value; PC(); } }
-		public int toValue { get { return _toValue; } set { _toValue = value; PC(); } }
-		public Guid triggerGUID { get { return _triggerGUID; } set { _triggerGUID = value; PC(); } }
-		public Guid eventGUID { get { return _eventGUID; } set { _eventGUID = value; PC(); } }
+		public Guid failTriggerGUID { get { return _failTriggerGUID; } set { _failTriggerGUID = value; PC(); } }
+		public Guid failEventGUID { get { return _failEventGUID; } set { _failEventGUID = value; PC(); } }
+		public ObservableCollection<InputRange> inputList { get; set; } = new();
 
 		public InputPrompt()
 		{
@@ -22,8 +22,10 @@ namespace Imperial_Commander_Editor
 		public InputPrompt( string dname
 			, EventActionType et ) : base( et, dname )
 		{
-			triggerGUID = Guid.Empty;
-			eventGUID = Guid.Empty;
+			_theText = "";
+			_failText = "";
+			_failTriggerGUID = Guid.Empty;
+			_failEventGUID = Guid.Empty;
 		}
 	}
 }

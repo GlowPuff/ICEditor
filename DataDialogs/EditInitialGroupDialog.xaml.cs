@@ -14,7 +14,6 @@ namespace Imperial_Commander_Editor
 	/// </summary>
 	public partial class EditInitialGroupDialog : Window, INotifyPropertyChanged
 	{
-		DeploymentPoint _deploymentPoint;
 		string _customName;
 
 		public string customName { get { return _customName; } set { _customName = value; PC(); } }

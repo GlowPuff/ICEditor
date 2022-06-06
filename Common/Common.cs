@@ -19,9 +19,8 @@ namespace Imperial_Commander_Editor
 	//public enum Expansion { Core, Bespin, Empire, Hoth, Jabba, Lothal, Twin }
 	public enum EntityType { Tile, Console, Crate, DeploymentPoint, Token, Highlight, Door }
 	public enum TokenShape { Circle, Square, Rectangle }
-	public enum EventActionType { G1, G2, G3, G4, G5, G6, D1, D2, D3, D4, D5, GM1, GM2, GM3, M1, M2, G7, GM4, GM5, G8, G9 }
+	public enum EventActionType { G1, G2, G3, G4, G5, G6, D1, D2, D3, D4, D5, GM1, GM2, GM3, M1, M2, G7, GM4, GM5, G8, G9, D6 }
 	public enum ThreatAction { Add, Remove }
-	public enum SourceType { InitialReserved, Manual, Hand }
 	public enum DeploymentSpot { Active, Specific }
 	public enum GroupType { All, Specific }
 	public enum MarkerType { Neutral, Rebel, Imperial }
@@ -150,7 +149,6 @@ namespace Imperial_Commander_Editor
 
 			var oldPoints = pointList.ToArray();
 			pointList.Clear();
-			int c = Math.Min( oldPoints.Length, newcard.size );
 			for ( int i = 0; i < newcard.size; i++ )
 			{
 				if ( i < oldPoints.Length )

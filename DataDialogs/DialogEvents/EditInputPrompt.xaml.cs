@@ -58,5 +58,11 @@ namespace Imperial_Commander_Editor
 				Utils.LoseFocus( sender as Control );
 			}
 		}
+
+		private void Window_ContentRendered( object sender, System.EventArgs e )
+		{
+			textbox.Focus();
+			textbox.SelectAll();
+		}
 	}
 }

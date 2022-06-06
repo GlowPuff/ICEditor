@@ -96,6 +96,9 @@ namespace Imperial_Commander_Editor
 					case 20:
 						eventActionAction = item.ToObject<InputPrompt>();
 						break;
+					case 21:
+						eventActionAction = item.ToObject<CustomEnemyDeployment>();
+						break;
 				}
 				eObserver.Add( eventActionAction );
 			}

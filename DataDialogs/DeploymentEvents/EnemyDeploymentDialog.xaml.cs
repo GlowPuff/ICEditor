@@ -79,9 +79,9 @@ namespace Imperial_Commander_Editor
 
 		private void okButton_Click( object sender, RoutedEventArgs e )
 		{
-			if ( (eventAction as EnemyDeployment).sourceType == SourceType.Hand )
-				eventAction.displayName = "Deploy: From Hand";
-			else if ( string.IsNullOrEmpty( (eventAction as EnemyDeployment).deploymentGroup ) )
+			//if ( (eventAction as EnemyDeployment).sourceType == SourceType.Hand )
+			//eventAction.displayName = "Deploy: From Hand";
+			if ( string.IsNullOrEmpty( (eventAction as EnemyDeployment).deploymentGroup ) )
 				eventAction.displayName = "Deploy: INVALID SELECTION";
 			else
 				eventAction.displayName = "Deploy: " + (eventAction as EnemyDeployment).deploymentGroup + "/" + (eventAction as EnemyDeployment).enemyGroupData.cardName;
@@ -89,7 +89,7 @@ namespace Imperial_Commander_Editor
 			Close();
 		}
 
-		private void Window_MouseDown( object sender, System.Windows.Input.MouseButtonEventArgs e )
+		private void Window_MouseDown( object sender, MouseButtonEventArgs e )
 		{
 			if ( e.LeftButton == System.Windows.Input.MouseButtonState.Pressed )
 				DragMove();
@@ -118,9 +118,9 @@ namespace Imperial_Commander_Editor
 			enemyCB.ItemsSource = Utils.enemyData;
 		}
 
-		private void nameTB_KeyDown( object sender, System.Windows.Input.KeyEventArgs e )
+		private void nameTB_KeyDown( object sender, KeyEventArgs e )
 		{
-			if ( e.Key == System.Windows.Input.Key.Enter )
+			if ( e.Key == Key.Enter )
 				Utils.LoseFocus( sender as Control );
 		}
 
@@ -139,7 +139,7 @@ namespace Imperial_Commander_Editor
 			//(eventAction as EnemyDeployment).enemyGroupData.cardID = card.id;
 		}
 
-		private void filterBox_KeyDown( object sender, System.Windows.Input.KeyEventArgs e )
+		private void filterBox_KeyDown( object sender, KeyEventArgs e )
 		{
 			if ( e.Key == Key.Enter )
 			{
@@ -185,7 +185,7 @@ namespace Imperial_Commander_Editor
 		{
 			var dlg = new GenericTextDialog( "EDIT REPOSITION INSTRUCTIONS", (eventAction as EnemyDeployment).repositionInstructions );
 			dlg.ShowDialog();
-			(eventAction as EnemyDeployment).repositionInstructions = dlg.theText.Trim();
+			(eventAction as EnemyDeployment).repositionInstructions = dlg.theText;
 			repInfo.Foreground = string.IsNullOrEmpty( dlg.theText ) ? new SolidColorBrush( Colors.Red ) : new SolidColorBrush( Colors.LawnGreen );
 		}
 

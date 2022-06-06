@@ -6,7 +6,6 @@ namespace Imperial_Commander_Editor
 	public class EnemyDeployment : EventAction
 	{
 		string _enemyName, _deploymentGroup, _modification, _repositionInstructions;
-		SourceType _sourceType;
 		int _threatCost;
 		bool _canReinforce, _canRedeploy, _canBeDefeated, _useThreat, _showMod, _useCustomInstructions, _useGenericMugshot;
 		Guid _specificDeploymentPoint;
@@ -17,7 +16,6 @@ namespace Imperial_Commander_Editor
 		public string repositionInstructions { get { return _repositionInstructions; } set { _repositionInstructions = value; PC(); } }
 		public int threatCost { get { return _threatCost; } set { _threatCost = value; PC(); } }
 		public string modification { get { return _modification; } set { _modification = value; PC(); } }
-		public SourceType sourceType { get { return _sourceType; } set { _sourceType = value; PC(); } }
 		public bool canReinforce { get { return _canReinforce; } set { _canReinforce = value; PC(); } }
 		public bool canRedeploy { get { return _canRedeploy; } set { _canRedeploy = value; PC(); } }
 		public bool canBeDefeated { get { return _canBeDefeated; } set { _canBeDefeated = value; PC(); } }
@@ -39,7 +37,6 @@ namespace Imperial_Commander_Editor
 		{
 			_deploymentGroup = "DG001";
 			_threatCost = 0;
-			_sourceType = SourceType.Manual;
 			_canRedeploy = _canReinforce = true;
 			_deploymentPoint = DeploymentSpot.Active;
 			_specificDeploymentPoint = Guid.Empty;

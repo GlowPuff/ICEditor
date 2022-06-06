@@ -73,23 +73,13 @@
 										</StackPanel>
 									</GroupBox>
 
-									<!--SOURCE-->
-									<GroupBox Header="DRAW DEPLOYMENT FROM" Margin="0,10" Visibility="Collapsed">
-										<StackPanel>
-											<RadioButton x:Name="handRB" GroupName="source" Content="Hand" VerticalAlignment="Center" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding Path=sourceType, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:SourceType.Hand}}" Click="handRB_Click"/>
-
-
-											<RadioButton x:Name="manualRB" GroupName="source" Content="Manual" VerticalAlignment="Center" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding Path=sourceType, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:SourceType.Manual}}" Click="manualRB_Click"/>
-										</StackPanel>
-									</GroupBox>
-
 									<!--OPTIONS-->
 									<materialDesign:Card Padding="10" Background="{StaticResource CardBG}">
-										<StackPanel>
+										<WrapPanel>
 											<CheckBox Content="Can Be Reinforced" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding canReinforce}"/>
 											<CheckBox Content="Can Be Redeployed" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding canRedeploy}"/>
 											<CheckBox Content="Can Be Defeated" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding canBeDefeated}"/>
-										</StackPanel>
+										</WrapPanel>
 									</materialDesign:Card>
 
 									<!--ON DEFEAT (TRIGGER)-->
@@ -125,7 +115,7 @@
 									</StackPanel>
 								</GroupBox>
 
-								<!--OPTIONS-->
+								<!--COST-->
 								<GroupBox Header="Group Cost" Padding="10" Background="{StaticResource GroupBG}">
 									<StackPanel>
 										<CheckBox Content="Deduct This Group's Cost From Threat" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding useThreat}" Margin="0,4,4,4"/>

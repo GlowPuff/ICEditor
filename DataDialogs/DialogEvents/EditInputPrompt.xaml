@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
 				Style="{StaticResource dws}"
-        Title="Edit Input Prompt" Width="500" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown" SizeToContent="Height">
+        Title="Edit Input Prompt" Width="500" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown" SizeToContent="Height" ContentRendered="Window_ContentRendered">
 
 	<GroupBox Header="Edit Input Prompt" Style="{DynamicResource MaterialDesignGroupBox}">
 		<Grid>

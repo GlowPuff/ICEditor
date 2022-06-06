@@ -124,6 +124,7 @@ namespace Imperial_Commander_Editor
 			EventActionType.D3 => new OptionalDeploymentDialog( dname, et, ea ),
 			EventActionType.D4 => new RandomDeploymentDialog( dname, et, ea ),
 			EventActionType.D5 => new AddGroupDialog( dname, et, ea ),
+			EventActionType.D6 => new CustomDeploymentDialog( dname, et, ea ),
 			EventActionType.GM1 => new ChangeInstructionsDialog( dname, et, ea ),
 			EventActionType.GM2 => new ChangeTargetDialog( dname, et, ea ),
 			EventActionType.GM3 => new ChangeGroupStatusDialog( dname, et, ea ),

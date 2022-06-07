@@ -75,6 +75,8 @@ namespace Imperial_Commander_Editor
 
 		private void editDP_Click( object sender, RoutedEventArgs e )
 		{
+			(eventAction as CustomEnemyDeployment).UpdateDP();
+
 			EditDPDialog dialog = new EditDPDialog( (eventAction as CustomEnemyDeployment).enemyGroupData );
 			dialog.ShowDialog();
 		}
@@ -155,8 +157,15 @@ namespace Imperial_Commander_Editor
 			(eventAction as CustomEnemyDeployment).UpdateDP();
 		}
 
+		private void sizeText_LostFocus( object sender, RoutedEventArgs e )
+		{
+			(eventAction as CustomEnemyDeployment).UpdateDP();
+		}
+
 		private void okButton_Click( object sender, RoutedEventArgs e )
 		{
+			(eventAction as CustomEnemyDeployment).UpdateDP();
+
 			var ced = eventAction as CustomEnemyDeployment;
 			//if ( !ced.enemyGroupData.useGenericMugshot && ced.customType == MarkerType.Rebel )
 			//	ced.enemyGroupData.cardID = ced.thumbnailGroupRebel;

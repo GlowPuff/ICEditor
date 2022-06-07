@@ -100,7 +100,7 @@
 									<!--size-->
 									<StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
 										<TextBlock Text="Group Size:" VerticalAlignment="Bottom"/>
-										<TextBox x:Name="sizeText" Text="{Binding groupSize}"  Margin="10,0" Width="50" KeyDown="sizeText_KeyDown" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" CaretBrush="White"/>
+										<TextBox x:Name="sizeText" Text="{Binding groupSize}"  Margin="10,0" Width="50" KeyDown="sizeText_KeyDown" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" CaretBrush="White" LostFocus="sizeText_LostFocus"/>
 									</StackPanel>
 
 								</StackPanel>

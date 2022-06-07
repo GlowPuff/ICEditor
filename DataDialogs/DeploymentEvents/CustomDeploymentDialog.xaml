@@ -154,7 +154,7 @@
 									<TextBlock Text="For Attack and Defense, use this format:" FontStyle="Italic" TextWrapping="Wrap" HorizontalAlignment="Center"/>
 									<TextBlock Text="#Color #Color" FontStyle="Italic" TextWrapping="Wrap" HorizontalAlignment="Center"/>
 									<TextBlock Text="Example: 2Red 1Green" FontStyle="Italic" TextWrapping="Wrap" HorizontalAlignment="Center"/>
-									<TextBlock Text=" Interprets as 2 Red dice and 1 Green dice, K=Black" FontStyle="Italic" TextWrapping="Wrap" HorizontalAlignment="Center"/>
+									<TextBlock Text=" Interprets as 2 Red dice and 1 Green dice" FontStyle="Italic" TextWrapping="Wrap" HorizontalAlignment="Center"/>
 
 									<Grid>
 										<Grid.ColumnDefinitions>
@@ -165,22 +165,26 @@
 											<RowDefinition Height="1*" />
 											<RowDefinition Height="1*" />
 											<RowDefinition Height="1*" />
+											<RowDefinition Height="1*" />
 										</Grid.RowDefinitions>
 
 										<StackPanel Orientation="Horizontal">
 											<TextBlock Text="Health" VerticalAlignment="Bottom"/>
 											<TextBox Grid.Row="0" Grid.Column="1" Text="{Binding groupHealth}" Width="50" HorizontalContentAlignment="Center" Margin="10,5,0,0" VerticalAlignment="Bottom" KeyDown="nameTB_KeyDown" CaretBrush="White"/>
 										</StackPanel>
+
+										<CheckBox Grid.Row="1" Content="Multiply Health By Threat Level" IsChecked="{Binding useThreatMultiplier}" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" Margin="0,10" Grid.ColumnSpan="2"/>
+
 										<StackPanel Orientation="Horizontal" Grid.Column="1">
-											<TextBlock Grid.Row="1" Text="Speed" VerticalAlignment="Bottom"/>
-											<TextBox Grid.Row="1" Grid.Column="1" Text="{Binding groupSpeed}" Width="50" HorizontalContentAlignment="Center" Margin="10,15,0,0" KeyDown="nameTB_KeyDown" CaretBrush="White"/>
+											<TextBlock Grid.Row="2" Text="Speed" VerticalAlignment="Bottom"/>
+											<TextBox Grid.Row="2" Grid.Column="1" Text="{Binding groupSpeed}" Width="50" HorizontalContentAlignment="Center" Margin="10,15,0,0" KeyDown="nameTB_KeyDown" CaretBrush="White"/>
 										</StackPanel>
 
-										<TextBlock Grid.Row="1" Text="Attack" VerticalAlignment="Bottom"/>
-										<TextBlock Grid.Row="2" Text="Defense" VerticalAlignment="Bottom"/>
+										<TextBlock Grid.Row="2" Text="Attack" VerticalAlignment="Bottom"/>
+										<TextBlock Grid.Row="3" Text="Defense" VerticalAlignment="Bottom"/>
 
-										<TextBox Grid.Row="1" Grid.Column="1" Text="{Binding groupAttack}" materialDesign:HintAssist.Hint="Example: 1Blue 2Yellow" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" Margin="0,15,0,0" KeyDown="nameTB_KeyDown" CaretBrush="White"/>
-										<TextBox Grid.Row="2" Grid.Column="1" Text="{Binding groupDefense}" materialDesign:HintAssist.Hint="Example: 1White 1Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" Margin="0,15,0,0" KeyDown="nameTB_KeyDown" CaretBrush="White"/>
+										<TextBox Grid.Row="2" Grid.Column="1" Text="{Binding groupAttack}" materialDesign:HintAssist.Hint="Example: 1Blue 2Yellow" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" Margin="0,15,0,0" KeyDown="nameTB_KeyDown" CaretBrush="White"/>
+										<TextBox Grid.Row="3" Grid.Column="1" Text="{Binding groupDefense}" materialDesign:HintAssist.Hint="Example: 1White 1Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" Margin="0,15,0,0" KeyDown="nameTB_KeyDown" CaretBrush="White"/>
 									</Grid>
 								</StackPanel>
 							</GroupBox>

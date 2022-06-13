@@ -7,7 +7,7 @@
         mc:Ignorable="d"
        	xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         Style="{StaticResource dws}"
-        Title="Custom Deployment" Width="850" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown" Height="696" ResizeMode="CanResize" >
+        Title="Custom Deployment" Width="850" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown" Height="700" ResizeMode="CanResize" >
 
 	<Window.Resources>
 		<local:RadioBoolToIntConverter x:Key="rbConv" />
@@ -108,11 +108,17 @@
 
 							<!--OPTIONS-->
 							<materialDesign:Card Padding="10" Background="{StaticResource CardBG}" Margin="0,10,0,0">
-								<WrapPanel>
-									<CheckBox Content="Can Be Reinforced" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding canReinforce}"/>
-									<CheckBox Content="Can Be Redeployed" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding canRedeploy}"/>
-									<CheckBox Content="Can Be Defeated" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding canBeDefeated}"/>
-								</WrapPanel>
+								<StackPanel>
+									<WrapPanel>
+										<CheckBox x:Name="canRD" Content="Can Be Redeployed" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding canRedeploy}"/>
+										<CheckBox Content="Reset on Redeployment" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding useResetOnReployment}" IsEnabled="{Binding ElementName=canRD, Path=IsChecked}"/>
+										<CheckBox Content="Can Be Reinforced" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding canReinforce}" IsEnabled="{Binding ElementName=canRD, Path=IsChecked}"/>
+										<CheckBox Content="Can Be Defeated" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding canBeDefeated}" IsEnabled="{Binding ElementName=canRD, Path=IsChecked}"/>
+									</WrapPanel>
+
+									<TextBlock Text="Groups that can't Redeploy are removed from the mission and do not return to the hand on defeat, but they can be manually deployed again with new options." TextWrapping="Wrap" FontStyle="Italic" Margin="0,5,0,0"/>
+									<TextBlock Text="Groups that Reset on Redeployment are able to redeploy in their original card state, removing any customization on this page. Otherwise, they redeploy with the same customized options." TextWrapping="Wrap" FontStyle="Italic" Margin="0,5,0,0"/>
+								</StackPanel>
 							</materialDesign:Card>
 
 							<!--ON DEFEAT (TRIGGER)-->

@@ -7,7 +7,7 @@ namespace Imperial_Commander_Editor
 	{
 		string _thumbnailGroupImperial, _thumbnailGroupRebel, _modification, _repositionInstructions, _groupAttack, _groupDefense, _surges, _bonuses, _keywords, _abilities;
 		int _groupCost, _groupRedeployCost, _groupSize, _groupHealth, _groupSpeed;
-		bool _canReinforce, _canRedeploy, _canBeDefeated, _useDeductCost, _useCustomInstructions, _useThreatMultiplier, _useResetOnReployment;
+		bool _canReinforce, _canRedeploy, _canBeDefeated, _useDeductCost, _useCustomInstructions, _useThreatMultiplier, _useResetOnRedeployment;
 		Guid _specificDeploymentPoint;
 		DeploymentSpot _deploymentPoint;
 		MarkerType _customType;
@@ -34,7 +34,7 @@ namespace Imperial_Commander_Editor
 		public bool useDeductCost { get { return _useDeductCost; } set { _useDeductCost = value; PC(); } }
 		public bool useCustomInstructions { get { return _useCustomInstructions; } set { _useCustomInstructions = value; PC(); } }
 		public bool useThreatMultiplier { get { return _useThreatMultiplier; } set { _useThreatMultiplier = value; PC(); } }
-		public bool useResetOnReployment { get { return _useResetOnReployment; } set { _useResetOnReployment = value; PC(); } }
+		public bool useResetOnRedeployment { get { return _useResetOnRedeployment; } set { _useResetOnRedeployment = value; PC(); } }
 		public Guid specificDeploymentPoint { get { return _specificDeploymentPoint; } set { _specificDeploymentPoint = value; PC(); } }
 		public DeploymentSpot deploymentPoint { get { return _deploymentPoint; } set { _deploymentPoint = value; PC(); } }
 		public EnemyGroupData enemyGroupData { get; set; }
@@ -63,7 +63,7 @@ namespace Imperial_Commander_Editor
 			_groupHealth = 0;
 			_groupSpeed = 0;
 			_useThreatMultiplier = false;
-			_useResetOnReployment = false;
+			_useResetOnRedeployment = false;
 
 			_surges = "{B}: Bleed\n{B}: Focus\n{B}: Pierce 2";
 			_keywords = "+2 {H}\nHabitat: Snow";

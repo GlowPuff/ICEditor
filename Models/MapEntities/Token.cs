@@ -106,6 +106,7 @@ namespace Imperial_Commander_Editor
 			dupe.entityRotation = entityRotation;
 			dupe.mapSectionOwner = mapSectionOwner;
 			dupe.tokenColor = tokenColor;
+			dupe.markerType = markerType;
 			return dupe;
 		}
 
@@ -120,6 +121,7 @@ namespace Imperial_Commander_Editor
 				unselectedBGColor = new( c ),
 				unselectedStrokeColor = new( Colors.Gray )
 			};
+			markerType = markerType;
 			mapRenderer.BuildShape( TokenShape.Circle );
 			canvas.Children.Add( mapRenderer.entityShape );
 		}

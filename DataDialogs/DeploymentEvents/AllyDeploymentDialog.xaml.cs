@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -10,6 +11,8 @@ namespace Imperial_Commander_Editor
 	/// </summary>
 	public partial class AllyDeploymentDialog : Window, IEventActionDialog
 	{
+		public ObservableCollection<DeploymentPoint> deploymentPoints { get; set; } = new();
+
 		public IEventAction eventAction { get; set; }
 
 		public AllyDeploymentDialog( string dname, EventActionType et, IEventAction ea = null )
@@ -19,9 +22,16 @@ namespace Imperial_Commander_Editor
 			eventAction = ea ?? new AllyDeployment( dname, et );
 			DataContext = eventAction;
 
+			deploymentPoints.Add( new() { GUID = Guid.Empty, name = "Active Deployment Point" } );
+			deploymentPoints.Add( new() { GUID = Utils.GUIDOne, name = "None" } );
+			foreach ( var e in Utils.mainWindow.mission.mapEntities.OfType<DeploymentPoint>() )
+			{
+				deploymentPoints.Add( e );
+			}
+
 			allyCB.ItemsSource = Utils.allyData;
 			triggersCB.ItemsSource = Utils.mainWindow.localTriggers;
-			dpCB.ItemsSource = Utils.mainWindow.mission.mapEntities.Where( x => x.entityType == EntityType.DeploymentPoint );
+			//dpCB.ItemsSource = Utils.mainWindow.mission.mapEntities.Where( x => x.entityType == EntityType.DeploymentPoint );
 
 			//verify trigger and dp still exist
 			if ( !Utils.ValidateMapEntity( (eventAction as AllyDeployment).specificDeploymentPoint ) )

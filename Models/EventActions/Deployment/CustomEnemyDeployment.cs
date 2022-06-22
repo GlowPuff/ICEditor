@@ -10,9 +10,10 @@ namespace Imperial_Commander_Editor
 		bool _canReinforce, _canRedeploy, _canBeDefeated, _useDeductCost, _useCustomInstructions, _useThreatMultiplier, _useResetOnRedeployment;
 		Guid _specificDeploymentPoint;
 		DeploymentSpot _deploymentPoint;
-		MarkerType _customType;
+		MarkerType _customType, _iconType;
 
 		public MarkerType customType { get { return _customType; } set { _customType = value; PC(); } }
+		public MarkerType iconType { get { return _iconType; } set { _iconType = value; PC(); } }
 		public string thumbnailGroupImperial { get { return _thumbnailGroupImperial; } set { _thumbnailGroupImperial = value; PC(); } }
 		public string thumbnailGroupRebel { get { return _thumbnailGroupRebel; } set { _thumbnailGroupRebel = value; PC(); } }
 		public string repositionInstructions { get { return _repositionInstructions; } set { _repositionInstructions = value; PC(); } }
@@ -48,6 +49,7 @@ namespace Imperial_Commander_Editor
 			, EventActionType et ) : base( et, dname )
 		{
 			_customType = MarkerType.Rebel;
+			_iconType = MarkerType.Rebel;
 			_thumbnailGroupImperial = "DG001";
 			_thumbnailGroupRebel = "A001";
 			_groupCost = 0;

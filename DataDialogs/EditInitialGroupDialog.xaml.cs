@@ -73,6 +73,8 @@ namespace Imperial_Commander_Editor
 
 		private void okButton_Click( object sender, RoutedEventArgs e )
 		{
+			enemyGroupData.useInitialGroupCustomName = !string.IsNullOrEmpty( customName?.Trim() );
+
 			if ( !string.IsNullOrEmpty( customName?.Trim() ) )
 				enemyGroupData.cardName = customName.Trim();
 			else

@@ -90,7 +90,7 @@ namespace Imperial_Commander_Editor
 		CustomInstructionType _customInstructionType;
 		string _customText, _cardName, _cardID;
 		Guid _defeatedTrigger, _defeatedEvent;
-		bool _useGenericMugshot;
+		bool _useGenericMugshot, _useInitialGroupCustomName;
 
 		public Guid GUID { get; set; }
 		public string cardName { get { return _cardName; } set { _cardName = value; PC(); } }
@@ -102,6 +102,7 @@ namespace Imperial_Commander_Editor
 		public Guid defeatedTrigger { get { return _defeatedTrigger; } set { _defeatedTrigger = value; PC(); } }
 		public Guid defeatedEvent { get { return _defeatedEvent; } set { _defeatedEvent = value; PC(); } }
 		public bool useGenericMugshot { get { return _useGenericMugshot; } set { _useGenericMugshot = value; PC(); } }
+		public bool useInitialGroupCustomName { get { return _useInitialGroupCustomName; } set { _useInitialGroupCustomName = value; PC(); } }
 
 		public void PC( [CallerMemberName] string n = "" )
 		{
@@ -126,6 +127,7 @@ namespace Imperial_Commander_Editor
 			defeatedTrigger = Guid.Empty;
 			defeatedEvent = Guid.Empty;
 			useGenericMugshot = false;
+			useInitialGroupCustomName = false;
 			for ( int i = 0; i < dc.size; i++ )
 			{
 				pointList.Add( new() { GUID = dp.GUID } );

@@ -105,8 +105,8 @@
 														<MenuItem Header="Input Prompt" Click="MenuItem_Click" Tag="G9"/>
 													</MenuItem>
 													<MenuItem Header="Deployment">
-														<MenuItem Header="Custom Deployment" Click="MenuItem_Click" Tag="D6"/>
 														<MenuItem Header="Enemy Deployment" Click="MenuItem_Click" Tag="D1"/>
+														<MenuItem Header="Custom Deployment" Click="MenuItem_Click" Tag="D6"/>
 														<MenuItem Header="Ally Deployment" Click="MenuItem_Click" Tag="D2"/>
 														<MenuItem Header="Optional Deployment" Click="MenuItem_Click" Tag="D3"/>
 														<MenuItem Header="Random Deployment" Click="MenuItem_Click" Tag="D4"/>

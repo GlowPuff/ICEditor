@@ -29,7 +29,7 @@
 							<TextBlock Text="Invisible Until Activated" VerticalAlignment="Center"/>
 							<StackPanel Orientation="Horizontal">
 								<TextBlock Text="No"/>
-								<ToggleButton IsChecked="{Binding invisibleUntilActivated}" Margin="10,0"/>
+								<ToggleButton x:Name="invisToggle" IsChecked="{Binding invisibleUntilActivated}" Margin="10,0"/>
 								<TextBlock Text="Yes"/>
 							</StackPanel>
 						</UniformGrid>

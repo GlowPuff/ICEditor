@@ -7,7 +7,7 @@
         mc:Ignorable="d"
        	xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         Style="{StaticResource dws}"
-        Title="Custom Deployment" Width="850" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown" Height="700" ResizeMode="CanResize" >
+        Title="Custom Deployment" Width="850" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown" Height="700" ResizeMode="CanResize" d:Height="1000">
 
 	<Window.Resources>
 		<local:RadioBoolToIntConverter x:Key="rbConv" />
@@ -92,7 +92,7 @@
 										<!--cost-->
 										<StackPanel Orientation="Horizontal">
 											<CheckBox x:Name="useDeductCost" Content="Use Cost" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding useDeductCost}" Margin="0,4,4,4"/>
-											<TextBox Text="{Binding groupCost}"  Margin="10,0" Width="50" KeyDown="nameTB_KeyDown" IsEnabled="{Binding ElementName=useDeductCost, Path=IsChecked}" VerticalContentAlignment="Bottom" VerticalAlignment="Center" CaretBrush="White"/>
+											<TextBox Text="{Binding groupCost}"  Margin="10,0" Width="50" KeyDown="nameTB_KeyDown" VerticalContentAlignment="Bottom" VerticalAlignment="Center" CaretBrush="White"/>
 										</StackPanel>
 
 										<StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
@@ -115,7 +115,7 @@
 								<StackPanel>
 									<WrapPanel>
 										<CheckBox x:Name="canRD" Content="Can Be Redeployed" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding canRedeploy}"/>
-										<CheckBox Content="Reset on Redeployment" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding useResetOnRedeployment}" IsEnabled="{Binding ElementName=canRD, Path=IsChecked}"/>
+										<!--<CheckBox Content="Reset on Redeployment" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding useResetOnRedeployment}" IsEnabled="{Binding ElementName=canRD, Path=IsChecked}"/>-->
 										<CheckBox Content="Can Be Reinforced" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding canReinforce}"/>
 										<CheckBox Content="Can Be Defeated" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding canBeDefeated}"/>
 									</WrapPanel>

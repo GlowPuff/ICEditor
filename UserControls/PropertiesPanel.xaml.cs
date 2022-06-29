@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -62,6 +63,12 @@ namespace Imperial_Commander_Editor
 			meTB.DataContext = Utils.mainWindow.mission;
 
 			mapEntityCount = Utils.mainWindow.mission.mapEntities.Where( x => x.mapSectionOwner == Utils.mainWindow.activeSection.GUID ).Count();
+
+			//start section can't be toggled
+			invisToggle.IsEnabled = Utils.mainWindow.activeSection.GUID != Guid.Parse( "11111111-1111-1111-1111-111111111111" );
+			//if it's the start section, make sure this setting is set to NO
+			if ( Utils.mainWindow.activeSection.GUID == Guid.Parse( "11111111-1111-1111-1111-111111111111" ) )
+				Utils.mainWindow.activeSection.invisibleUntilActivated = false;
 		}
 
 		private void TextBox_KeyDown( object sender, KeyEventArgs e )

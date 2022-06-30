@@ -9,7 +9,7 @@ namespace Imperial_Commander_Editor
 		bool _incSmall, _incMedium, _incLarge, _incHuge;
 		bool _incBrawler, _incCreature, _incDroid, _incForceUser;
 		bool _incGuardian, _incHeavyWeapon, _incHunter, _incLeader;
-		bool _incSmuggler, _incSpy, _incTrooper, _incWookiee;
+		bool _incSmuggler, _incSpy, _incTrooper, _incWookiee, _incVehicle;
 
 		public bool incImperial { get { return _incImperial; } set { _incImperial = value; PC(); } }
 		public bool incMercenary { get { return _incMercenary; } set { _incMercenary = value; PC(); } }
@@ -29,6 +29,7 @@ namespace Imperial_Commander_Editor
 		public bool incSpy { get { return _incSpy; } set { _incSpy = value; PC(); } }
 		public bool incTrooper { get { return _incTrooper; } set { _incTrooper = value; PC(); } }
 		public bool incWookiee { get { return _incWookiee; } set { _incWookiee = value; PC(); } }
+		public bool incVehicle { get { return _incVehicle; } set { _incVehicle = value; PC(); } }
 
 		public event PropertyChangedEventHandler PropertyChanged;
 		public void PC( [CallerMemberName] string n = "" )
@@ -43,7 +44,7 @@ namespace Imperial_Commander_Editor
 			incSmall = incMedium = incLarge = incHuge = true;
 			incBrawler = incCreature = incDroid = incForceUser = true;
 			incGuardian = incHeavyWeapon = incHunter = incLeader = true;
-			incSmuggler = incSpy = incTrooper = incWookiee = true;
+			incSmuggler = incSpy = incTrooper = incWookiee = incVehicle = true;
 		}
 
 		public void CopyFrom( DeploymentPointProps dp )
@@ -66,6 +67,7 @@ namespace Imperial_Commander_Editor
 			incSpy = dp.incSpy;
 			incTrooper = dp.incTrooper;
 			incWookiee = dp.incWookiee;
+			incVehicle = dp.incVehicle;
 		}
 	}
 }

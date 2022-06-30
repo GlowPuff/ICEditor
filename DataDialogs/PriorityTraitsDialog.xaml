@@ -41,6 +41,7 @@
 								<CheckBox Content="Spy" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" Margin="4,4,10,4" IsChecked="{Binding incSpy}"/>
 								<CheckBox Content="Trooper" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" Margin="4,4,10,4" IsChecked="{Binding incTrooper}"/>
 								<CheckBox Content="Wookiee" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" Margin="4,4,10,4" IsChecked="{Binding incWookiee}"/>
+								<CheckBox Content="Vehicle" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" Margin="4,4,10,4" IsChecked="{Binding incVehicle}"/>
 							</UniformGrid>
 						</StackPanel>
 					</materialDesign:Card>

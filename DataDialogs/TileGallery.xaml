@@ -124,7 +124,7 @@
 							<Button x:Name="addToQueueBtn" Content="ADD SELECTED TILE TO QUEUE" Margin="0,10,0,0" IsEnabled="{Binding tileIsSelected}" IsDefault="True" Click="addToQueueBtn_Click"/>
 						</StackPanel>
 
-						<GroupBox Grid.Row="1" Header="Tile Queue" Margin="0,10,0,0" VerticalAlignment="Stretch">
+						<GroupBox Grid.Row="1" Header="Tile Queue" Margin="0,10,0,0" VerticalAlignment="Stretch" Background="{StaticResource GroupBG}">
 							<Grid>
 								<Grid.RowDefinitions>
 									<RowDefinition Height="*" />

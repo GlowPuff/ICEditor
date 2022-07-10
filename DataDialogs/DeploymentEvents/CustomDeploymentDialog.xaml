@@ -196,6 +196,15 @@
 										<TextBox Grid.Row="2" Grid.Column="1" Text="{Binding groupAttack}" materialDesign:HintAssist.Hint="Example: 1Blue 2Yellow" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" Margin="0,15,0,0" KeyDown="nameTB_KeyDown" CaretBrush="White"/>
 										<TextBox Grid.Row="3" Grid.Column="1" Text="{Binding groupDefense}" materialDesign:HintAssist.Hint="Example: 1White 1Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" Margin="0,15,0,0" KeyDown="nameTB_KeyDown" CaretBrush="White"/>
 									</Grid>
+
+									<!--ATTACK TYPE-->
+									<UniformGrid Columns="2" Margin="0,10,0,0">
+										<TextBlock Text="Attack Type" VerticalAlignment="Center"/>
+										<UniformGrid Columns="2">
+											<RadioButton Content="Melee" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" HorizontalAlignment="Stretch" IsChecked="{Binding attackType, ConverterParameter={x:Static local:AttackType.Melee}, Converter={StaticResource rbConv}}"/>
+											<RadioButton Content="Ranged" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" HorizontalAlignment="Stretch" IsChecked="{Binding attackType, ConverterParameter={x:Static local:AttackType.Ranged}, Converter={StaticResource rbConv}}"/>
+										</UniformGrid>
+									</UniformGrid>
 								</StackPanel>
 							</GroupBox>
 

@@ -99,6 +99,9 @@ namespace Imperial_Commander_Editor
 					case 21:
 						eventActionAction = item.ToObject<CustomEnemyDeployment>();
 						break;
+					case 22:
+						eventActionAction = item.ToObject<RemoveGroup>();
+						break;
 				}
 				eObserver.Add( eventActionAction );
 			}

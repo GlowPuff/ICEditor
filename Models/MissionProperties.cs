@@ -9,7 +9,7 @@ namespace Imperial_Commander_Editor
 	{
 		public event PropertyChangedEventHandler PropertyChanged;
 
-		string _missionName, _missionID, _fixedAlly, _bannedAlly, _missionInfo, _specificAlly, _specificHero, _priorityOther, _missionDescription, _campaignName, _startingObjective;
+		string _missionName, _missionID, _fixedAlly, _bannedAlly, _missionInfo, _specificAlly, _specificHero, _priorityOther, _missionDescription, _campaignName, _startingObjective, _additionalMissionInfo;
 		bool _optionalDeployment, _factionImperial, _factionMercenary;
 		YesNoAll _useFixedAlly, _useBannedAlly, _banAllAllies;
 		CustomInstructionType _customInstructionType;
@@ -35,6 +35,11 @@ namespace Imperial_Commander_Editor
 		{
 			get { return _missionDescription; }
 			set { _missionDescription = value; PC(); }
+		}
+		public string additionalMissionInfo
+		{
+			get { return _additionalMissionInfo; }
+			set { _additionalMissionInfo = value; PC(); }
 		}
 		public string fixedAlly
 		{
@@ -169,6 +174,7 @@ namespace Imperial_Commander_Editor
 			missionID = "Custom";//"Example: CORE01";//"Unique Mission ID";
 			missionName = "Mission Name";
 			missionDescription = "";
+			additionalMissionInfo = "";
 			missionInfo = "";
 			startingObjective = "";
 			fixedAlly = "A001";

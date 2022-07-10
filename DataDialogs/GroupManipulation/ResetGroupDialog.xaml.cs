@@ -56,7 +56,7 @@ namespace Imperial_Commander_Editor
 			(eventAction as ResetGroup).groupsToAdd.Remove( (sender as FrameworkElement).DataContext as DCPointer );
 		}
 
-		private void TextBox_TextChanged( object sender, System.Windows.Controls.TextChangedEventArgs e )
+		private void TextBox_TextChanged( object sender, TextChangedEventArgs e )
 		{
 			selectedGroup = Utils.enemyData.Where( x => x.name.ToLower().Contains( filterBox.Text.ToLower() ) ).FirstOr( null );
 

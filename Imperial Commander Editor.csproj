@@ -363,6 +363,7 @@
     <None Remove="Assets\Tiles\Twin\Twin_8B.jpg" />
     <None Remove="Assets\Tiles\Twin\Twin_9A.jpg" />
     <None Remove="Assets\Tiles\Twin\Twin_9B.jpg" />
+    <None Remove="icon.ico" />
   </ItemGroup>
 
   <ItemGroup>
@@ -417,6 +418,7 @@
     <EmbeddedResource Include="Assets\Data\enemies.json" />
     <EmbeddedResource Include="Assets\Data\heroes.json" />
     <EmbeddedResource Include="Assets\Data\villains.json" />
+    <EmbeddedResource Include="icon.ico" />
     <Resource Include="Assets\edit.png" />
     <Resource Include="Assets\enemy.png" />
     <Resource Include="Assets\imperial.png" />
@@ -680,6 +682,33 @@
     <Resource Include="Assets\Tiles\Twin\Twin_8B.jpg" />
     <Resource Include="Assets\Tiles\Twin\Twin_9A.jpg" />
     <Resource Include="Assets\Tiles\Twin\Twin_9B.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
 
 </Project>

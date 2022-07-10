@@ -31,7 +31,10 @@
 						</Grid.RowDefinitions>
 
 						<TextBox x:Name="mnameTB" Style="{StaticResource MaterialDesignOutlinedTextBox}"  Text="{Binding missionName}" KeyDown="Validate_KeyDown" CaretBrush="White" materialDesign:HintAssist.Hint="Mission Name" VerticalAlignment="Center"/>
-						<Button x:Name="descriptionBtn" Grid.Column="1" Content="DESCRIPTION..." HorizontalAlignment="Center" Click="descriptionBtn_Click" Margin="0,5,0,0"/>
+						<StackPanel Grid.Column="1">
+							<Button x:Name="descriptionBtn" Content="DESCRIPTION..." HorizontalAlignment="Center" Click="descriptionBtn_Click" Margin="0,0,0,5"/>
+							<Button x:Name="addInfoBtn" Grid.Column="1" Content="ADDITIONAL INFO..." HorizontalAlignment="Center" Click="addInfoBtn_Click"/>
+						</StackPanel>
 
 						<!--MISSION TYPE-->
 						<StackPanel Grid.Column="0" Grid.Row="1" Margin="0,10,0,0">

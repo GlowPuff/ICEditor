@@ -1,5 +1,7 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Linq;
+using Newtonsoft.Json;
 
 namespace Imperial_Commander_Editor
 {
@@ -11,9 +13,13 @@ namespace Imperial_Commander_Editor
 		Guid _specificDeploymentPoint;
 		DeploymentSpot _deploymentPoint;
 		MarkerType _customType, _iconType;
+		AttackType _attackType;
 
 		public MarkerType customType { get { return _customType; } set { _customType = value; PC(); } }
 		public MarkerType iconType { get { return _iconType; } set { _iconType = value; PC(); } }
+		[DefaultValue( AttackType.Ranged )]
+		[JsonProperty( DefaultValueHandling = DefaultValueHandling.Populate )]
+		public AttackType attackType { get { return _attackType; } set { _attackType = value; PC(); } }
 		public string thumbnailGroupImperial { get { return _thumbnailGroupImperial; } set { _thumbnailGroupImperial = value; PC(); } }
 		public string thumbnailGroupRebel { get { return _thumbnailGroupRebel; } set { _thumbnailGroupRebel = value; PC(); } }
 		public string repositionInstructions { get { return _repositionInstructions; } set { _repositionInstructions = value; PC(); } }
@@ -66,6 +72,7 @@ namespace Imperial_Commander_Editor
 			_groupSpeed = 0;
 			_useThreatMultiplier = false;
 			_useResetOnRedeployment = false;
+			_attackType = AttackType.Ranged;
 
 			_surges = "{B}: Bleed\n{B}: Focus\n{B}: Pierce 2";
 			_keywords = "+2 {H}\nHabitat: Snow";

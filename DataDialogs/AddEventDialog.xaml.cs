@@ -130,6 +130,7 @@ namespace Imperial_Commander_Editor
 			EventActionType.GM3 => new ChangeGroupStatusDialog( dname, et, ea ),
 			EventActionType.GM4 => new ChangeRepositionDialog( dname, et, ea ),
 			EventActionType.GM5 => new ResetGroupDialog( dname, et, ea ),
+			EventActionType.GM6 => new RemoveGroupDialog( dname, et, ea ),
 			EventActionType.M1 => new MapManagementDialog( dname, et, ea ),
 			EventActionType.M2 => new ModifyMapEntityDialog( dname, et, ea ),
 			_ => null

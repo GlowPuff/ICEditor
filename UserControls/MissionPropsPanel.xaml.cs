@@ -111,9 +111,17 @@ namespace Imperial_Commander_Editor
 		private void descriptionBtn_Click( object sender, System.Windows.RoutedEventArgs e )
 		{
 			var dlg = new GenericTextDialog( "Mission Description", Utils.mainWindow.mission.missionProperties.missionDescription );
-			dlg.textHint = "This text is shown at the setup screen to describe the Mission.\nWhen left empty, it is automatically filled in when using any Mission ID\nother than 'Custom'.";
+			dlg.textHint = "This text is shown on the setup screen to describe the Mission.\nWhen left empty, it is automatically filled in when using any Mission ID\nother than 'Custom'.";
 			dlg.ShowDialog();
 			Utils.mainWindow.mission.missionProperties.missionDescription = dlg.theText;
+		}
+
+		private void addInfoBtn_Click( object sender, System.Windows.RoutedEventArgs e )
+		{
+			var dlg = new GenericTextDialog( "Additional Information", Utils.mainWindow.mission.missionProperties.additionalMissionInfo );
+			dlg.textHint = "A single line, shown on the setup screen, to provide additional\ninformation for the Mission.";
+			dlg.ShowDialog();
+			Utils.mainWindow.mission.missionProperties.additionalMissionInfo = dlg.theText;
 		}
 
 		private void infoBtn_Click( object sender, System.Windows.RoutedEventArgs e )

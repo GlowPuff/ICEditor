@@ -118,6 +118,7 @@
 														<MenuItem Header="Change Reposition Instructions" Click="MenuItem_Click" Tag="GM4"/>
 														<MenuItem Header="Ready / Exhaust a Group" Click="MenuItem_Click" Tag="GM3"/>
 														<MenuItem Header="Reset Group Defaults" Click="MenuItem_Click" Tag="GM5"/>
+														<MenuItem Header="Remove Group" Click="MenuItem_Click" Tag="GM6"/>
 													</MenuItem>
 													<MenuItem Header="Map and Tokens">
 														<MenuItem Header="Map Management" Click="MenuItem_Click" Tag="M1"/>

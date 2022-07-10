@@ -56,7 +56,7 @@
 		<GroupBox Header="Remove Groups Event Action" Style="{DynamicResource MaterialDesignGroupBox}">
 			<StackPanel>
 				<TextBlock Margin="0,0,0,10" FontStyle="Italic" HorizontalAlignment="Center" TextWrapping="Wrap">
-								Removing a Group makes it available to manually redeploy. It is not considered to be <Run Foreground="Orange">Defeated</Run>.
+								Removing a Group makes it available for manual redeployment. It does not trigger <Run Foreground="Orange">On Defeated</Run> Events.
 				</TextBlock>
 
 				<UniformGrid Columns="2">

@@ -7,7 +7,7 @@
 				xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
 				Style="{StaticResource dws}"
-        Title="Enemy Deployment" Width="850" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown" Height="700">
+        Title="Enemy Deployment" Width="850" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown" Height="700" d:Height="850">
 
 	<Window.Resources>
 		<local:RadioBoolToIntConverter x:Key="rbConv" />

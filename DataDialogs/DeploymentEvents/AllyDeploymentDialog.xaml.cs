@@ -31,7 +31,7 @@ namespace Imperial_Commander_Editor
 
 			allyCB.ItemsSource = Utils.allyData;
 			triggersCB.ItemsSource = Utils.mainWindow.localTriggers;
-			//dpCB.ItemsSource = Utils.mainWindow.mission.mapEntities.Where( x => x.entityType == EntityType.DeploymentPoint );
+			eventsCB.ItemsSource = Utils.mainWindow.localEvents;
 
 			//verify trigger and dp still exist
 			if ( !Utils.ValidateMapEntity( (eventAction as AllyDeployment).specificDeploymentPoint ) )
@@ -41,6 +41,10 @@ namespace Imperial_Commander_Editor
 			if ( !Utils.ValidateTrigger( (eventAction as AllyDeployment).setTrigger ) )
 			{
 				(eventAction as AllyDeployment).setTrigger = Guid.Empty;
+			}
+			if ( !Utils.ValidateEvent( (eventAction as AllyDeployment).setEvent ) )
+			{
+				(eventAction as AllyDeployment).setEvent = Guid.Empty;
 			}
 		}
 

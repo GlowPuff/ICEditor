@@ -131,6 +131,18 @@ namespace Imperial_Commander_Editor
 					if ( split[0] == "timeTicks" )
 						projectItem.timeTicks = long.Parse( split[1] );
 				}
+				else if ( split.Length > 2 )//mission name with a colon
+				{
+					for ( int i = 0; i < split.Length; i++ )
+						split[i] = split[i].Replace( "\"", "" ).Replace( ",", "" ).Trim();
+					if ( split[0] == "missionName" )
+					{
+						int idx = line.IndexOf( ':' );
+						int c = line.LastIndexOf( ',' );
+						string mname = line.Substring( idx + 1, c - idx - 1 ).Replace( "\"", "" ).Trim();
+						projectItem.Title = mname;
+					}
+				}
 			}
 			return projectItem;
 		}

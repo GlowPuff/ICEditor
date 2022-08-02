@@ -9,6 +9,16 @@
 				ResizeMode="CanResize"
 				WindowStyle="SingleBorderWindow"
 				xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" Title="{Binding mainTitle}" Height="800" Width="1100" MinWidth="400" WindowStartupLocation="CenterScreen" d:DesignHeight="600" d:DesignWidth="800" Loaded="Window_Loaded" PreviewKeyDown="Window_PreviewKeyDown">
+	<Window.Resources>
+		<ContextMenu x:Key="langCtxMenu">
+			<MenuItem Header="English" Command="{Binding SetEnglish}"/>
+			<MenuItem Header="German" Command="{Binding SetGerman}"/>
+			<MenuItem Header="Spanish" Command="{Binding SetSpanish}"/>
+			<MenuItem Header="French" Command="{Binding SetFrench}"/>
+			<MenuItem Header="Italian" Command="{Binding SetItalian}"/>
+			<MenuItem Header="Polska" Command="{Binding SetPolska}"/>
+		</ContextMenu>
+	</Window.Resources>
 
 	<Grid>
 		<DockPanel LastChildFill="True">
@@ -69,7 +79,7 @@
 			</ToolBarTray>
 
 			<Border DockPanel.Dock="Bottom" BorderBrush="Black" BorderThickness="0,1,0,0" Height="30" Background="{StaticResource MaterialDesignDarkBackground}">
-				<UniformGrid Columns="3">
+				<UniformGrid Columns="4">
 					<!--format version-->
 					<StackPanel Margin="5" HorizontalAlignment="Center" Orientation="Horizontal">
 						<TextBlock Text="Editor Version:  "/>
@@ -79,6 +89,11 @@
 					<StackPanel Margin="5" HorizontalAlignment="Center" Orientation="Horizontal">
 						<TextBlock Text="Mission Format Version:  "/>
 						<TextBlock x:Name="formatVersion"/>
+					</StackPanel>
+					<!--detected language-->
+					<StackPanel Margin="5" HorizontalAlignment="Center" Orientation="Horizontal">
+						<TextBlock Text="Language:  "/>
+						<TextBlock x:Name="detectedLanguage" MouseLeftButtonDown="detectedLanguage_MouseLeftButtonDown" ContextMenu="{StaticResource langCtxMenu}"/>
 					</StackPanel>
 					<!--info-->
 					<Grid Background="{Binding statusColor}">

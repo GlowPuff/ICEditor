@@ -11,7 +11,6 @@ namespace Imperial_Commander_Editor
 	{
 		public event PropertyChangedEventHandler PropertyChanged;
 
-		public MissionProperties missionProperties { get; set; }
 		public Guid missionGUID;
 		/// <summary>
 		/// JUST the filename+extension
@@ -32,6 +31,11 @@ namespace Imperial_Commander_Editor
 		/// File save time so recent list can sort by recent first
 		/// </summary>
 		public long timeTicks;
+
+		[DefaultValue( "English (EN)" )]
+		[JsonProperty( DefaultValueHandling = DefaultValueHandling.Populate )]
+		public string languageID { get; set; }
+		public MissionProperties missionProperties { get; set; }
 
 		public ObservableCollection<MapSection> mapSections { get; set; }
 		public ObservableCollection<Trigger> globalTriggers { get; set; }
@@ -56,6 +60,7 @@ namespace Imperial_Commander_Editor
 			missionGUID = Guid.NewGuid();
 			fileName = "";
 			relativePath = "";
+			languageID = "English (EN)";
 			saveDate = DateTime.Now.ToString( "M/d/yyyy" );
 			timeTicks = DateTime.Now.Ticks;
 			missionProperties = new MissionProperties();

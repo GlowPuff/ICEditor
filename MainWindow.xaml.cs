@@ -10,6 +10,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using CommunityToolkit.Mvvm.Input;
 using MaterialDesignThemes.Wpf;
 using Microsoft.Win32;
 
@@ -20,6 +21,13 @@ namespace Imperial_Commander_Editor
 	/// </summary>
 	public partial class MainWindow : Window, INotifyPropertyChanged
 	{
+		public ICommand SetEnglish { get; set; }
+		public ICommand SetGerman { get; set; }
+		public ICommand SetSpanish { get; set; }
+		public ICommand SetFrench { get; set; }
+		public ICommand SetItalian { get; set; }
+		public ICommand SetPolska { get; set; }
+
 		MapSection _activeSection;
 		string _mainTitle, _infoText;
 		Timer infoTimer;
@@ -105,6 +113,8 @@ namespace Imperial_Commander_Editor
 			theme.SetBaseTheme( Theme.Dark );
 			paletteHelper.SetTheme( theme );
 
+			SetCommands();
+
 			infoTimer = new Timer( 3000 );
 			infoTimer.AutoReset = false;
 			infoTimer.Elapsed += infoTimerFunc;
@@ -137,8 +147,22 @@ namespace Imperial_Commander_Editor
 
 			appVersion.Text = Utils.appVersion;
 			formatVersion.Text = Utils.formatVersion;
+			if ( s.languageID != "Select Target Language" )
+				detectedLanguage.Text = !string.IsNullOrEmpty( s.languageID ) ? s.languageID : "English (EN)";
+			else
+				detectedLanguage.Text = "Not Specified";
 
 			leftPanel.showGlobal = true;
+		}
+
+		void SetCommands()
+		{
+			SetEnglish = new RelayCommand( () => { mission.languageID = detectedLanguage.Text = "English (EN)"; } );
+			SetGerman = new RelayCommand( () => { mission.languageID = detectedLanguage.Text = "German (DE)"; } );
+			SetSpanish = new RelayCommand( () => { mission.languageID = detectedLanguage.Text = "Spanish (ES)"; } );
+			SetFrench = new RelayCommand( () => { mission.languageID = detectedLanguage.Text = "French (FR)"; } );
+			SetItalian = new RelayCommand( () => { mission.languageID = detectedLanguage.Text = "Italian (IT)"; } );
+			SetPolska = new RelayCommand( () => { mission.languageID = detectedLanguage.Text = "Polska (PL)"; } );
 		}
 
 		public void SetStatus( string s )
@@ -253,6 +277,13 @@ namespace Imperial_Commander_Editor
 		{
 			missionProps.Refresh();
 			mapEditor.OnWindowLoaded();
+		}
+
+		private void detectedLanguage_MouseLeftButtonDown( object sender, MouseButtonEventArgs e )
+		{
+			ContextMenu cm = this.FindResource( "langCtxMenu" ) as ContextMenu;
+			cm.PlacementTarget = sender as TextBlock;
+			cm.IsOpen = true;
 		}
 
 		private void Window_PreviewKeyDown( object sender, KeyEventArgs e )

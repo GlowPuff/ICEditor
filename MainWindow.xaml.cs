@@ -147,8 +147,8 @@ namespace Imperial_Commander_Editor
 
 			appVersion.Text = Utils.appVersion;
 			formatVersion.Text = Utils.formatVersion;
-			if ( s.languageID != "Select Target Language" )
-				detectedLanguage.Text = !string.IsNullOrEmpty( s.languageID ) ? s.languageID : "English (EN)";
+			if ( mission.languageID != "Select Target Language" )
+				detectedLanguage.Text = !string.IsNullOrEmpty( mission.languageID ) ? mission.languageID : "English (EN)";
 			else
 				detectedLanguage.Text = "Not Specified";
 

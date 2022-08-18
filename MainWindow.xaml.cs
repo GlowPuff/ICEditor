@@ -162,7 +162,7 @@ namespace Imperial_Commander_Editor
 			SetSpanish = new RelayCommand( () => { mission.languageID = detectedLanguage.Text = "Spanish (ES)"; } );
 			SetFrench = new RelayCommand( () => { mission.languageID = detectedLanguage.Text = "French (FR)"; } );
 			SetItalian = new RelayCommand( () => { mission.languageID = detectedLanguage.Text = "Italian (IT)"; } );
-			SetPolska = new RelayCommand( () => { mission.languageID = detectedLanguage.Text = "Polska (PL)"; } );
+			SetPolska = new RelayCommand( () => { mission.languageID = detectedLanguage.Text = "Polski (PL)"; } );
 		}
 
 		public void SetStatus( string s )

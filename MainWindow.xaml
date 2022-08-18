@@ -16,7 +16,7 @@
 			<MenuItem Header="Spanish" Command="{Binding SetSpanish}"/>
 			<MenuItem Header="French" Command="{Binding SetFrench}"/>
 			<MenuItem Header="Italian" Command="{Binding SetItalian}"/>
-			<MenuItem Header="Polska" Command="{Binding SetPolska}"/>
+			<MenuItem Header="Polski" Command="{Binding SetPolska}"/>
 		</ContextMenu>
 	</Window.Resources>
 

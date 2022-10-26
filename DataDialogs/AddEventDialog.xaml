@@ -241,6 +241,8 @@
 											<TextBox Margin="10,0" Width="30" Text="{Binding endOfRound}" VerticalAlignment="Center" KeyDown="nameTB_KeyDown"/>
 										</StackPanel>
 										<CheckBox Content="All Enemy Groups Defeated" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding useAllGroupsDefeated}"/>
+										<!--any hero defeated-->
+										<CheckBox Content="Any Hero Defeated" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding useAnyHeroDefeated}"/>
 									</StackPanel>
 									<!--right-->
 									<StackPanel Margin="0,0,0,10">

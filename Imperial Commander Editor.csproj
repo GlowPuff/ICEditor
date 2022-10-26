@@ -32,6 +32,8 @@
     <None Remove="Assets\save.png" />
     <None Remove="Assets\saveas.png" />
     <None Remove="Assets\settings.png" />
+    <None Remove="Assets\Symbols1.png" />
+    <None Remove="Assets\Symbols2.png" />
     <None Remove="Assets\SymbolTable.jpg" />
     <None Remove="Assets\Tiles\Bespin\Bespin_10A.jpg" />
     <None Remove="Assets\Tiles\Bespin\Bespin_10B.jpg" />
@@ -369,7 +371,8 @@
   <ItemGroup>
     <Resource Include="Assets\imperial green.png" />
     <Resource Include="Assets\imperial yellow.png" />
-    <Resource Include="Assets\SymbolTable.jpg" />
+    <Resource Include="Assets\Symbols1.png" />
+    <Resource Include="Assets\Symbols2.png" />
     <Resource Include="Assets\Tiles\Bespin\Bespin_10A.jpg" />
     <Resource Include="Assets\Tiles\Bespin\Bespin_10B.jpg" />
     <Resource Include="Assets\Tiles\Bespin\Bespin_11A.jpg" />

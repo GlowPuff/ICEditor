@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
 				Style="{StaticResource dws}"
-        Title="SymbolsWindow" MouseDown="Window_MouseDown" WindowStartupLocation="CenterScreen" SizeToContent="WidthAndHeight" MaxHeight="800">
+        Title="SymbolsWindow" MouseDown="Window_MouseDown" WindowStartupLocation="CenterScreen" SizeToContent="Height" Width="900">
 
 	<Border BorderBrush="MediumPurple" BorderThickness="2">
 		<GroupBox x:Name="gbox" Header="SPECIAL SYMBOLS" Style="{DynamicResource MaterialDesignGroupBox}">
@@ -16,9 +16,14 @@
 					<RowDefinition Height="*"/>
 					<RowDefinition Height="auto"/>
 				</Grid.RowDefinitions>
-				<Image Source="/Assets/SymbolTable.jpg" />
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="1*" />
+					<ColumnDefinition Width="1*" />
+				</Grid.ColumnDefinitions>
+				<Image Source="/Assets/Symbols1.png"/>
+				<Image Source="/Assets/Symbols2.png" Grid.Column="1"/>
 
-				<StackPanel Grid.Row="1" Margin="0,10,0,0">
+				<StackPanel Grid.Row="1" Margin="0,10,0,0" Grid.ColumnSpan="2">
 					<Separator Margin="0,0,0,10"/>
 					<Button Grid.Column="1" x:Name="okButton" Content="DONE" Click="okButton_Click" IsDefault="True" HorizontalAlignment="Right"/>
 				</StackPanel>

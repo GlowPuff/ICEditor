@@ -144,6 +144,8 @@ namespace Imperial_Commander_Editor
 				eventsCB.SelectedIndex = 0;
 				Utils.mainWindow.mapEditor.SetSelectedPropertyPanel();
 				Utils.mainWindow.SetStatus( "Event Removed" );
+				//check and notify if this will break any references to this Event
+
 			}
 		}
 

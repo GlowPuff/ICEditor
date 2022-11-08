@@ -27,6 +27,7 @@ namespace Imperial_Commander_Editor
 		public ICommand SetFrench { get; set; }
 		public ICommand SetItalian { get; set; }
 		public ICommand SetPolska { get; set; }
+		public ICommand SetNorwegian { get; set; }
 
 		MapSection _activeSection;
 		string _mainTitle, _infoText;
@@ -100,7 +101,7 @@ namespace Imperial_Commander_Editor
 
 		public MainWindow( Mission s = null )
 		{
-			Utils.Init( this );
+			//Utils.Init( this );
 
 			InitializeComponent();
 
@@ -163,6 +164,7 @@ namespace Imperial_Commander_Editor
 			SetFrench = new RelayCommand( () => { mission.languageID = detectedLanguage.Text = "French (FR)"; } );
 			SetItalian = new RelayCommand( () => { mission.languageID = detectedLanguage.Text = "Italian (IT)"; } );
 			SetPolska = new RelayCommand( () => { mission.languageID = detectedLanguage.Text = "Polski (PL)"; } );
+			SetNorwegian = new RelayCommand( () => { mission.languageID = detectedLanguage.Text = "Norwegian (NO)"; } );
 		}
 
 		public void SetStatus( string s )

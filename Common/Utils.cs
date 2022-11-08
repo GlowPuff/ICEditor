@@ -23,7 +23,10 @@ namespace Imperial_Commander_Editor
 
 		public static ObservableCollection<DeploymentColor> deploymentColors;
 
-		public static MainWindow mainWindow;
+		public static MainWindow mainWindow
+		{
+			get { return Application.Current.Windows.OfType<MainWindow>().FirstOrDefault(); }
+		}
 
 		public static Guid GUIDOne { get { return Guid.Parse( "11111111-1111-1111-1111-111111111111" ); } }
 
@@ -39,10 +42,10 @@ namespace Imperial_Commander_Editor
 			deploymentColors.Add( new( "Yellow", ColorFromFloats( 1, 202f / 255f, 40f / 255f ) ) );
 		}
 
-		public static void Init( MainWindow mw )
-		{
-			mainWindow = mw;
-		}
+		//public static void Init( MainWindow mw )
+		//{
+		//	mainWindow = mw;
+		//}
 
 		public static void LoadAllCardData()
 		{
@@ -92,16 +95,25 @@ namespace Imperial_Commander_Editor
 			enemyData = enemyData.Concat( villainData ).ToList();
 		}
 
+		/// <summary>
+		/// Check if a Trigger exists in the mission
+		/// </summary>
 		public static bool ValidateTrigger( Guid guid )
 		{
 			return mainWindow.mission.TriggerExists( guid );
 		}
 
+		/// <summary>
+		/// Check if an Event exists in the mission
+		/// </summary>
 		public static bool ValidateEvent( Guid guid )
 		{
 			return mainWindow.mission.EventExists( guid );
 		}
 
+		/// <summary>
+		/// Check if a map entity exists in the mission
+		/// </summary>
 		public static bool ValidateMapEntity( Guid guid )
 		{
 			return mainWindow.mission.EntityExists( guid ) || guid == Utils.GUIDOne;

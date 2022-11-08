@@ -178,7 +178,7 @@ namespace Imperial_Commander_Editor
 
 		public object Clone()
 		{
-			//serialize the object to JSON, the deserialize into a brand new INDEPENDENT object
+			//serialize the object to JSON, then deserialize into a brand new INDEPENDENT object
 			string output = JsonConvert.SerializeObject( this );
 			var clone = JsonConvert.DeserializeObject<MissionEvent>( output );
 			//give it a new, unique GUID and name

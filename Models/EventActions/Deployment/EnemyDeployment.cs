@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Imperial_Commander_Editor
 {
-	public class EnemyDeployment : EventAction
+	public class EnemyDeployment : EventAction, IHasEventReference, IHasTriggerReference
 	{
 		string _enemyName, _deploymentGroup, _modification, _repositionInstructions;
 		int _threatCost;
@@ -55,6 +55,42 @@ namespace Imperial_Commander_Editor
 		public void UpdateCard( DeploymentCard newcard )
 		{
 			enemyGroupData.UpdateCard( newcard );
+		}
+
+		public BrokenRefInfo NotifyEventRemoved( Guid guid, NotifyMode mode )
+		{
+			if ( enemyGroupData.defeatedEvent == guid )
+			{
+				if ( mode == NotifyMode.Update )
+					enemyGroupData.defeatedEvent = Guid.Empty;
+				return new()
+				{
+					itemName = displayName,
+					isBroken = true,
+					ownerGuid = GUID,
+					brokenGuid = guid,
+					details = "Event from [On Defeated]"
+				};
+			}
+			return new() { isBroken = false };
+		}
+
+		public BrokenRefInfo NotifyTriggerRemoved( Guid guid, NotifyMode mode )
+		{
+			if ( enemyGroupData.defeatedTrigger == guid )
+			{
+				if ( mode == NotifyMode.Update )
+					enemyGroupData.defeatedTrigger = Guid.Empty;
+				return new()
+				{
+					itemName = displayName,
+					isBroken = true,
+					ownerGuid = GUID,
+					brokenGuid = guid,
+					details = "Trigger from [On Defeated]"
+				};
+			}
+			return new() { isBroken = false };
 		}
 	}
 }

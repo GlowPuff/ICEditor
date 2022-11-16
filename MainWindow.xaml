@@ -8,7 +8,7 @@
 				Style="{StaticResource dws}"
 				ResizeMode="CanResize"
 				WindowStyle="SingleBorderWindow"
-				xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" Title="{Binding mainTitle}" Height="800" Width="1100" MinWidth="400" WindowStartupLocation="CenterScreen" d:DesignHeight="600" d:DesignWidth="800" Loaded="Window_Loaded" PreviewKeyDown="Window_PreviewKeyDown">
+				xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" Title="{Binding mainTitle}" Height="800" Width="1100" MinWidth="400" WindowStartupLocation="CenterScreen" d:DesignHeight="600" d:DesignWidth="950" Loaded="Window_Loaded" PreviewKeyDown="Window_PreviewKeyDown">
 	<Window.Resources>
 		<ContextMenu x:Key="langCtxMenu">
 			<MenuItem Header="English" Command="{Binding SetEnglish}"/>
@@ -63,6 +63,13 @@
 					</Button>
 
 					<Separator/>
+
+					<!--broken references-->
+					<!--<Button x:Name="openBrokenRefsWindow" ToolTip="Show Broken References" Click="openBrokenRefsWindow_Click">
+						<Image Source="Assets/broken.png" Height="35"/>
+					</Button>
+
+					<Separator/>-->
 
 					<!--mission settings-->
 					<!--<Button x:Name="missionSettingsButton" ToolTip="Mission Settings" Click="missionSettingsButton_Click">

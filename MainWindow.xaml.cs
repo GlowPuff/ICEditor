@@ -288,6 +288,11 @@ namespace Imperial_Commander_Editor
 			cm.IsOpen = true;
 		}
 
+		private void openBrokenRefsWindow_Click( object sender, RoutedEventArgs e )
+		{
+
+		}
+
 		private void Window_PreviewKeyDown( object sender, KeyEventArgs e )
 		{
 			if ( e.Key == Key.F5 || (e.Key == Key.S && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control) )

@@ -1,0 +1,50 @@
+﻿<Window x:Class="Imperial_Commander_Editor.BrokenRefWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Imperial_Commander_Editor"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+				Style="{StaticResource dws}"
+				Title="Broken References Report" Width="600" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown" SizeToContent="Height">
+
+	<Border BorderBrush="MediumPurple" BorderThickness="2">
+		<GroupBox x:Name="gbox" Header="Broken References Report" Style="{DynamicResource MaterialDesignGroupBox}">
+			<Grid>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="*"/>
+					<RowDefinition Height="auto"/>
+					<RowDefinition Height="auto"/>
+				</Grid.RowDefinitions>
+
+				<StackPanel Grid.Row="0">
+					<Grid>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="auto" />
+							<ColumnDefinition Width="*" />
+						</Grid.ColumnDefinitions>
+
+						<Image Source="../Assets/broken.png" Height="48" VerticalAlignment="Top"/>
+						<materialDesign:Card Grid.Column="1" Background="{StaticResource CardBG}" Padding="10" Margin="10,0,0,0">
+							<TextBlock Grid.Column="1" Text="{Binding infoText}" VerticalAlignment="Center" TextWrapping="Wrap"/>
+						</materialDesign:Card>
+					</Grid>
+
+					<!--<materialDesign:Card Background="{StaticResource CardBG}" Margin="0,10" Padding="10">
+					</materialDesign:Card>-->
+
+					<GroupBox Grid.Row="2" Header="Affected Items And Details" Margin="0,10,0,0" Padding="10">
+						<TextBlock Text="{Binding detailsText}" TextWrapping="Wrap"/>
+					</GroupBox>
+
+				</StackPanel>
+
+				<Separator Grid.Row="1" Margin="0,10,0,10"/>
+				<StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" >
+					<Button x:Name="okButton" Content="CONTINUE" Click="okButton_Click" IsDefault="True"/>
+				</StackPanel>
+			</Grid>
+		</GroupBox>
+	</Border>
+</Window>

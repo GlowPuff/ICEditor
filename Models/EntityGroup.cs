@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 
 namespace Imperial_Commander_Editor
@@ -31,6 +32,33 @@ namespace Imperial_Commander_Editor
 			triggerGUID = Guid.Empty;
 			missionEntities = new();
 			repeateable = false;
+		}
+
+		public BrokenRefInfo NotifyEntityRemoved( Guid guid, NotifyMode mode )
+		{
+			var e = missionEntities.Where( x => x == guid ).ToList();
+
+			if ( e.Count() > 0 )
+			{
+				if ( mode == NotifyMode.Update )
+				{
+					for ( int i = missionEntities.Count - 1; i >= 0; i-- )
+					{
+						if ( missionEntities[i] == guid )
+							missionEntities.RemoveAt( i );
+					}
+				}
+
+				return new()
+				{
+					itemName = $"Entity Group [{name}]",
+					isBroken = true,
+					ownerGuid = GUID,
+					brokenGuid = guid,
+					details = $"Entity REMOVED from [Entity Group List]"
+				};
+			}
+			return new() { isBroken = false };
 		}
 	}
 }

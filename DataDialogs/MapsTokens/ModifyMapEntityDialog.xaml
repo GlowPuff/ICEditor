@@ -64,6 +64,11 @@
 						</Grid>
 					</materialDesign:Card>
 
+					<!--NOTE-->
+					<materialDesign:Card Margin="0,10,0,0" Background="DarkOrange" Padding="10">
+						<TextBlock Text="This Event Action creates a SNAPSHOT COPY of an Entity at the moment you add it here. The Snapshot is a special editable copy and is not visible on the Map. Be aware that changing the ORIGINAL Entity's properties AFTER adding it here will NOT UPDATE this snapshot copy." Foreground="Black" TextWrapping="Wrap"/>
+					</materialDesign:Card>
+
 					<!--LIST BOX-->
 					<materialDesign:Card Background="Purple" Padding="10" Margin="0,10,0,0">
 						<StackPanel>

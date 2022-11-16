@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace Imperial_Commander_Editor
 {
-	public class CustomEnemyDeployment : EventAction
+	public class CustomEnemyDeployment : EventAction, IHasEventReference, IHasTriggerReference
 	{
 		string _thumbnailGroupImperial, _thumbnailGroupRebel, _modification, _repositionInstructions, _groupAttack, _groupDefense, _surges, _bonuses, _keywords, _abilities;
 		int _groupCost, _groupRedeployCost, _groupSize, _groupHealth, _groupSpeed;
@@ -110,6 +110,42 @@ namespace Imperial_Commander_Editor
 					enemyGroupData.pointList.Add( new() { GUID = Guid.Empty } );
 			}
 
+		}
+
+		public BrokenRefInfo NotifyEventRemoved( Guid guid, NotifyMode mode )
+		{
+			if ( enemyGroupData.defeatedEvent == guid )
+			{
+				if ( mode == NotifyMode.Update )
+					enemyGroupData.defeatedEvent = Guid.Empty;
+				return new()
+				{
+					itemName = displayName,
+					isBroken = true,
+					ownerGuid = GUID,
+					brokenGuid = guid,
+					details = "Event from [On Defeated]"
+				};
+			}
+			return new() { isBroken = false };
+		}
+
+		public BrokenRefInfo NotifyTriggerRemoved( Guid guid, NotifyMode mode )
+		{
+			if ( enemyGroupData.defeatedTrigger == guid )
+			{
+				if ( mode == NotifyMode.Update )
+					enemyGroupData.defeatedTrigger = Guid.Empty;
+				return new()
+				{
+					itemName = displayName,
+					isBroken = true,
+					ownerGuid = GUID,
+					brokenGuid = guid,
+					details = "Trigger from [On Defeated]"
+				};
+			}
+			return new() { isBroken = false };
 		}
 	}
 }

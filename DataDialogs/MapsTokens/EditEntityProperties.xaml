@@ -67,6 +67,11 @@
 						</Grid>
 					</materialDesign:Card>
 
+					<!--NOTE-->
+					<materialDesign:Card Margin="0,10,0,0" Background="DarkOrange" Padding="10">
+						<TextBlock Text="If you are MODIFYING this Entity after already adding it to a 'Modify Map Entity' Event Action, keep in mind that Event Action will NOT have it's copy of this Entity updated with the changes." Foreground="Black" TextWrapping="Wrap"/>
+					</materialDesign:Card>
+
 					<materialDesign:Card Background="Purple" Padding="10" Margin="0,10,0,0">
 						<StackPanel>
 							<UniformGrid Columns="3" Margin="0,0,55,0">

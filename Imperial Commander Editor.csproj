@@ -15,6 +15,7 @@
     <None Remove="Assets\addevent.png" />
     <None Remove="Assets\addtrigger.png" />
     <None Remove="Assets\bg.png" />
+    <None Remove="Assets\broken.png" />
     <None Remove="Assets\cancel.png" />
     <None Remove="Assets\Data\allies.json" />
     <None Remove="Assets\Data\dimensions.json" />
@@ -369,6 +370,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Assets\broken.png" />
     <Resource Include="Assets\imperial green.png" />
     <Resource Include="Assets\imperial yellow.png" />
     <Resource Include="Assets\Symbols1.png" />

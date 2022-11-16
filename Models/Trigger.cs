@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 
 namespace Imperial_Commander_Editor
 {
-	public class Trigger : INotifyPropertyChanged, ICloneable
+	public class Trigger : INotifyPropertyChanged, ICloneable, IHasEventReference
 	{
 		public event PropertyChangedEventHandler PropertyChanged;
 
@@ -89,9 +89,26 @@ namespace Imperial_Commander_Editor
 			}
 			return true;
 		}
+
+		public BrokenRefInfo NotifyEventRemoved( Guid guid, NotifyMode mode )
+		{
+			if ( eventGUID == guid )
+			{
+				if ( mode == NotifyMode.Update )
+					eventGUID = Guid.Empty;
+				return new()
+				{
+					isBroken = true,
+					ownerGuid = GUID,
+					brokenGuid = guid,
+					details = "Fire Event Upon Triggering"
+				};
+			}
+			return new() { isBroken = false };
+		}
 	}
 
-	public class TriggeredBy : INotifyPropertyChanged
+	public class TriggeredBy : INotifyPropertyChanged, IHasTriggerReference
 	{
 		string _triggerName;
 		Guid _triggerGUID;
@@ -108,6 +125,23 @@ namespace Imperial_Commander_Editor
 		{
 			if ( !string.IsNullOrEmpty( n ) )
 				PropertyChanged?.Invoke( this, new PropertyChangedEventArgs( n ) );
+		}
+
+		public BrokenRefInfo NotifyTriggerRemoved( Guid guid, NotifyMode mode )
+		{
+			if ( triggerGUID == guid )
+			{
+				if ( mode == NotifyMode.Update )
+					triggerGUID = Guid.Empty;
+				return new()
+				{
+					isBroken = true,
+					ownerGuid = Guid.Empty,
+					brokenGuid = guid,
+					details = $"Additional Trigger [{triggerName}]"
+				};
+			}
+			return new() { isBroken = false };
 		}
 
 		public TriggeredBy()

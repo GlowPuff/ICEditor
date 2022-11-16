@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 
 namespace Imperial_Commander_Editor
 {
-	public class Crate : INotifyPropertyChanged, IMapEntity
+	public class Crate : INotifyPropertyChanged, IMapEntity, IHasEventReference
 	{
 		string _name;
 		Guid _mapSectionOwner;
@@ -122,6 +122,11 @@ namespace Imperial_Commander_Editor
 		public void Dim( Guid guid )
 		{
 			mapRenderer.Dim( mapSectionOwner != guid );
+		}
+
+		public BrokenRefInfo NotifyEventRemoved( Guid guid, NotifyMode mode )
+		{
+			return entityProperties.NotifyEventRemoved( name, guid, GUID, mode );
 		}
 	}
 }

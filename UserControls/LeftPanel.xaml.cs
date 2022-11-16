@@ -106,7 +106,14 @@ namespace Imperial_Commander_Editor
 		private void remTriggerButton_Click( object sender, RoutedEventArgs e )
 		{
 			var t = triggersCB.SelectedItem as Trigger;
-			if ( t.GUID != Guid.Empty )
+			MessageBoxResult res = MessageBoxResult.Yes;
+
+			if ( Utils.CheckAndNotifyTriggerRemoved( t.GUID, NotifyMode.Report, t.name ) )
+			{
+				res = MessageBox.Show( "Deleting this Trigger will break references to it made from other Events, Triggers, or Map Entities.\n\nAre you sure you want to delete it?\n\nChoosing YES will automatically fix the broken references, along with displaying a report showing you where all the fixes were made.\n\nNOTE: Fixing this broken reference will update all affected Buttons, Input Ranges, and any other items within the data.", "Warning - Deleting Will Create A Broken Reference", MessageBoxButton.YesNo, MessageBoxImage.Question );
+			}
+
+			if ( res == MessageBoxResult.Yes && t.GUID != Guid.Empty )
 			{
 				if ( showGlobal )
 					Utils.mainWindow.mission.globalTriggers.Remove( t );
@@ -114,6 +121,8 @@ namespace Imperial_Commander_Editor
 					Utils.mainWindow.activeSection.triggers.Remove( t );
 				triggersCB.SelectedIndex = 0;
 				Utils.mainWindow.SetStatus( "Trigger Removed" );
+				//fix the broken references
+				Utils.CheckAndNotifyTriggerRemoved( t.GUID, NotifyMode.Update, t.name );
 			}
 		}
 
@@ -135,7 +144,14 @@ namespace Imperial_Commander_Editor
 		private void remEventButton_Click( object sender, RoutedEventArgs e )
 		{
 			var t = eventsCB.SelectedItem as MissionEvent;
-			if ( t.GUID != Guid.Empty )
+			MessageBoxResult res = MessageBoxResult.Yes;
+
+			if ( Utils.CheckAndNotifyEventRemoved( t.GUID, NotifyMode.Report, t.name ) )
+			{
+				res = MessageBox.Show( "Deleting this Event will break references to it made from other Events, Triggers, or Map Entities.\n\nAre you sure you want to delete it?\n\nChoosing YES will automatically fix the broken references, along with displaying a report showing you where all the fixes were made.\n\nNOTE: Fixing this broken reference will update all affected Buttons, Input Ranges, and any other items within the data.", "Warning - Deleting Will Create A Broken Reference", MessageBoxButton.YesNo, MessageBoxImage.Question );
+			}
+
+			if ( res == MessageBoxResult.Yes && t.GUID != Guid.Empty )
 			{
 				if ( showGlobal )
 					Utils.mainWindow.mission.globalEvents.Remove( t );
@@ -144,8 +160,8 @@ namespace Imperial_Commander_Editor
 				eventsCB.SelectedIndex = 0;
 				Utils.mainWindow.mapEditor.SetSelectedPropertyPanel();
 				Utils.mainWindow.SetStatus( "Event Removed" );
-				//check and notify if this will break any references to this Event
-
+				//fix the broken references
+				Utils.CheckAndNotifyEventRemoved( t.GUID, NotifyMode.Update, t.name );
 			}
 		}
 

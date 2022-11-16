@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace Imperial_Commander_Editor
 {
-	public class InputPrompt : EventAction
+	public class InputPrompt : EventAction, IHasEventReference, IHasTriggerReference
 	{
 		string _theText, _failText;
 		Guid _failTriggerGUID, _failEventGUID;
@@ -26,6 +28,87 @@ namespace Imperial_Commander_Editor
 			_failText = "";
 			_failTriggerGUID = Guid.Empty;
 			_failEventGUID = Guid.Empty;
+		}
+
+		public BrokenRefInfo NotifyEventRemoved( Guid guid, NotifyMode mode )
+		{
+			if ( failEventGUID == guid || inputList.Any( x => x.eventGUID == guid ) )
+			{
+				var msg = "";
+				var msg2 = "";
+				var ranges = new List<string>();
+
+				if ( mode == NotifyMode.Update )
+				{
+					if ( failEventGUID == guid )
+						failEventGUID = Guid.Empty;
+					//check input ranges
+					foreach ( var item in inputList )
+					{
+						if ( item.eventGUID == guid )
+							item.eventGUID = Guid.Empty;
+					}
+				}
+
+				ranges = inputList.Where( x => x.eventGUID == guid ).Select( x => $"[{x.fromValue}-{x.toValue}]" ).ToList();
+
+				if ( failEventGUID == guid )
+					msg = "Event from [Default Handler]";
+				if ( ranges.Count > 0 )
+					msg2 = "Event from [Input Range(s)]: " + string.Join( ", ", ranges );
+
+				return new()
+				{
+					itemName = displayName,
+					isBroken = true,
+					ownerGuid = GUID,
+					brokenGuid = guid,
+					details = msg + (!string.IsNullOrEmpty( msg ) ? "\n" + msg2 : msg2)
+				};
+			}
+			return new() { isBroken = false };
+		}
+
+		public BrokenRefInfo NotifyTriggerRemoved( Guid guid, NotifyMode mode )
+		{
+			if ( failTriggerGUID == guid || inputList.Any( x => x.triggerGUID == guid ) )
+			{
+				var msg = "";
+				var msg2 = "";
+				var ranges = new List<string>();
+
+				if ( mode == NotifyMode.Update )
+				{
+					if ( failTriggerGUID == guid )
+						failTriggerGUID = Guid.Empty;
+					//check input ranges
+					foreach ( var item in inputList )
+					{
+						if ( item.triggerGUID == guid )
+							item.triggerGUID = Guid.Empty;
+					}
+				}
+
+				ranges = inputList.Where( x => x.triggerGUID == guid ).Select( x =>
+				{
+					return $"[{x.fromValue}-{x.toValue}]";
+				} ).ToList();
+
+				if ( failTriggerGUID == guid )
+					msg = "Trigger from [Default Handler]";
+				if ( ranges.Count > 0 )
+					msg2 = "Trigger from [Input Range(s)]: " + string.Join( ", ", ranges );
+
+				return new()
+				{
+					itemName = displayName,
+					isBroken = true,
+					ownerGuid = GUID,
+					brokenGuid = guid,
+					details = $"{msg + (!string.IsNullOrEmpty( msg ) ? '\n' + msg2 : msg2)}"
+				};
+			}
+			return new() { isBroken = false };
 		}
 	}
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -153,6 +154,19 @@ namespace Imperial_Commander_Editor
 		public IMapEntity GetEntityFromGUID( Guid guid )
 		{
 			return mapEntities.Where( x => x.GUID == guid ).FirstOr( null );
+		}
+
+		/// <summary>
+		/// returns concatenation of global events + all map section events
+		/// </summary>
+		public List<MissionEvent> GetAllEvents()
+		{
+			return globalEvents.Concat( mapSections.SelectMany( x => x.missionEvents ) ).ToList();
+		}
+
+		public List<Trigger> GetAllTriggers()
+		{
+			return globalTriggers.Concat( mapSections.SelectMany( x => x.triggers ) ).ToList();
 		}
 	}
 }

@@ -5,6 +5,19 @@ using Newtonsoft.Json;
 
 namespace Imperial_Commander_Editor
 {
+	//when notifying objects, they can either update their broken reference to Guid.None or just report they have a broken reference (NotifyMode.Report)
+	public interface IHasEventReference
+	{
+		BrokenRefInfo NotifyEventRemoved( Guid guid, NotifyMode mode );
+	}
+	public interface IHasTriggerReference
+	{
+		BrokenRefInfo NotifyTriggerRemoved( Guid guid, NotifyMode mode );
+	}
+	public interface IHasEntityReference
+	{
+		BrokenRefInfo NotifyEntityRemoved( Guid guid, NotifyMode mode );
+	}
 	public interface IPropertyModel { };
 	public interface IMapEntity
 	{

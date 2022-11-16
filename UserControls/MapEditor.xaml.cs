@@ -603,6 +603,15 @@ namespace Imperial_Commander_Editor
 		{
 			if ( selectedEntity != null )
 			{
+				MessageBoxResult res = MessageBoxResult.Yes;
+				if ( Utils.CheckAndNotifyEntityRemoved( selectedEntity.GUID, NotifyMode.Report, selectedEntity.name ) )
+				{
+					res = MessageBox.Show( "Deleting this Map Entity will break references to it made from other Events, Triggers, or Map Entities.\n\nAre you sure you want to delete it?\n\nChoosing YES will automatically fix the broken references, along with displaying a report showing you where all the fixes were made.\n\nNOTE: Fixing this broken reference will update all affected Buttons, Input Ranges, and any other items within the data.", "Warning - Deleting Will Create A Broken Reference", MessageBoxButton.YesNo, MessageBoxImage.Question );
+				}
+
+				if ( res == MessageBoxResult.No )
+					return;
+
 				selectedEntity.mapRenderer.RemoveVisual();
 
 				if ( !(selectedEntity is MapTile) )
@@ -624,6 +633,10 @@ namespace Imperial_Commander_Editor
 					}
 				}
 				Utils.mainWindow.SetStatus( $"'{selectedEntity.name}' Removed" );
+
+				//notify and check for broken refernces to this entity
+				Utils.CheckAndNotifyEntityRemoved( selectedEntity.GUID, NotifyMode.Update, selectedEntity.name );
+
 				selectedEntity = null;
 				UpdateUI();
 				this.Focus();

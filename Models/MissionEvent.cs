@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using Newtonsoft.Json;
 
 namespace Imperial_Commander_Editor
 {
-	public class MissionEvent : INotifyPropertyChanged, ICloneable
+	public class MissionEvent : INotifyPropertyChanged, ICloneable, IHasTriggerReference
 	{
 		public event PropertyChangedEventHandler PropertyChanged;
 
@@ -189,6 +190,35 @@ namespace Imperial_Commander_Editor
 				item.GUID = Guid.NewGuid();
 
 			return clone;
+		}
+
+		public BrokenRefInfo NotifyTriggerRemoved( Guid guid, NotifyMode mode )
+		{
+			var e = additionalTriggers.Where( x => x.triggerGUID == guid ).ToList();
+
+			if ( additionalTriggers.Any( x => x.triggerGUID == guid ) )
+			{
+				if ( mode == NotifyMode.Update )
+				{
+					for ( int i = additionalTriggers.Count - 1; i >= 0; i-- )
+					{
+						if ( additionalTriggers[i].triggerGUID == guid )
+							additionalTriggers.RemoveAt( i );
+					}
+				}
+
+				var ranges = e.Select( x => $"['{x.triggerName}'::{x.triggerValue}]" ).ToList();
+
+				return new()
+				{
+					itemName = "Additional Trigger",
+					isBroken = true,
+					ownerGuid = GUID,
+					brokenGuid = guid,
+					details = $"Trigger(s) REMOVED from [Additional Triggers]: {string.Join( ", ", ranges )}"
+				};
+			}
+			return new() { isBroken = false };
 		}
 	}
 }

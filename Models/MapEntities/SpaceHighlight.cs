@@ -8,7 +8,7 @@ using System.Windows.Media;
 
 namespace Imperial_Commander_Editor
 {
-	public class SpaceHighlight : INotifyPropertyChanged, IMapEntity
+	public class SpaceHighlight : INotifyPropertyChanged, IMapEntity, IHasEventReference
 	{
 		string _name;
 		int _width, _height, _duration;
@@ -156,6 +156,11 @@ namespace Imperial_Commander_Editor
 		public void Dim( Guid guid )
 		{
 			mapRenderer.Dim( mapSectionOwner != guid );
+		}
+
+		public BrokenRefInfo NotifyEventRemoved( Guid guid, NotifyMode mode )
+		{
+			return entityProperties.NotifyEventRemoved( name, guid, GUID, mode );
 		}
 	}
 }

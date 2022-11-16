@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 
 namespace Imperial_Commander_Editor
@@ -32,6 +33,33 @@ namespace Imperial_Commander_Editor
 			missionEvents = new();
 			repeateable = false;
 			isUnique = true;
+		}
+
+		public BrokenRefInfo NotifyEventRemoved( Guid guid, NotifyMode mode )
+		{
+			var e = missionEvents.Where( x => x == guid ).ToList();
+
+			if ( e.Count() > 0 )
+			{
+				if ( mode == NotifyMode.Update )
+				{
+					for ( int i = missionEvents.Count - 1; i >= 0; i-- )
+					{
+						if ( missionEvents[i] == guid )
+							missionEvents.RemoveAt( i );
+					}
+				}
+
+				return new()
+				{
+					itemName = $"Event Group [{name}]",
+					isBroken = true,
+					ownerGuid = GUID,
+					brokenGuid = guid,
+					details = $"Event REMOVED from [Event Group List]"
+				};
+			}
+			return new() { isBroken = false };
 		}
 	}
 }

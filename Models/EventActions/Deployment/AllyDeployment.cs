@@ -2,7 +2,7 @@
 
 namespace Imperial_Commander_Editor
 {
-	public class AllyDeployment : EventAction, IHasEventReference, IHasTriggerReference
+	public class AllyDeployment : EventAction, IHasEventReference, IHasTriggerReference, IHasEntityReference
 	{
 		string _allyName, _allyID;
 		Guid _setTrigger, _specificDeploymentPoint, _setEvent;
@@ -69,6 +69,28 @@ namespace Imperial_Commander_Editor
 					ownerGuid = GUID,
 					brokenGuid = guid,
 					details = "Trigger from [On Defeated]"
+				};
+			}
+			return new() { isBroken = false };
+		}
+
+		public BrokenRefInfo NotifyEntityRemoved( Guid guid, NotifyMode mode )
+		{
+			if ( specificDeploymentPoint == guid )
+			{
+				if ( mode == NotifyMode.Update )
+				{
+					specificDeploymentPoint = Guid.Empty;
+					if ( deploymentPoint == DeploymentSpot.Specific )
+						deploymentPoint = DeploymentSpot.Active;
+				}
+				return new()
+				{
+					itemName = displayName,
+					isBroken = deploymentPoint == DeploymentSpot.Specific,
+					ownerGuid = GUID,
+					brokenGuid = guid,
+					details = "Specific Deployment Point reset to Active Deployment Point"
 				};
 			}
 			return new() { isBroken = false };

@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace Imperial_Commander_Editor
 {
-	public class CustomEnemyDeployment : EventAction, IHasEventReference, IHasTriggerReference
+	public class CustomEnemyDeployment : EventAction, IHasEventReference, IHasTriggerReference, IHasEntityReference
 	{
 		string _thumbnailGroupImperial, _thumbnailGroupRebel, _modification, _repositionInstructions, _groupAttack, _groupDefense, _surges, _bonuses, _keywords, _abilities;
 		int _groupCost, _groupRedeployCost, _groupSize, _groupHealth, _groupSpeed;
@@ -143,6 +143,28 @@ namespace Imperial_Commander_Editor
 					ownerGuid = GUID,
 					brokenGuid = guid,
 					details = "Trigger from [On Defeated]"
+				};
+			}
+			return new() { isBroken = false };
+		}
+
+		public BrokenRefInfo NotifyEntityRemoved( Guid guid, NotifyMode mode )
+		{
+			if ( specificDeploymentPoint == guid )
+			{
+				if ( mode == NotifyMode.Update )
+				{
+					specificDeploymentPoint = Guid.Empty;
+					if ( deploymentPoint == DeploymentSpot.Specific )
+						deploymentPoint = DeploymentSpot.Active;
+				}
+				return new()
+				{
+					itemName = displayName,
+					isBroken = deploymentPoint == DeploymentSpot.Specific,
+					ownerGuid = GUID,
+					brokenGuid = guid,
+					details = "Specific Deployment Point reset to Active Deployment Point"
 				};
 			}
 			return new() { isBroken = false };

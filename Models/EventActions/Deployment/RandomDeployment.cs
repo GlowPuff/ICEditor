@@ -2,7 +2,7 @@
 
 namespace Imperial_Commander_Editor
 {
-	public class RandomDeployment : EventAction
+	public class RandomDeployment : EventAction, IHasEntityReference
 	{
 		ThreatModifierType _threatType;
 		int _fixedValue, _threatLevel;
@@ -29,6 +29,28 @@ namespace Imperial_Commander_Editor
 			_threatLevel = 1;
 			_deploymentPoint = DeploymentSpot.Active;
 			_specificDeploymentPoint = Guid.Empty;
+		}
+
+		public BrokenRefInfo NotifyEntityRemoved( Guid guid, NotifyMode mode )
+		{
+			if ( specificDeploymentPoint == guid )
+			{
+				if ( mode == NotifyMode.Update )
+				{
+					specificDeploymentPoint = Guid.Empty;
+					if ( deploymentPoint == DeploymentSpot.Specific )
+						deploymentPoint = DeploymentSpot.Active;
+				}
+				return new()
+				{
+					itemName = displayName,
+					isBroken = deploymentPoint == DeploymentSpot.Specific,
+					ownerGuid = GUID,
+					brokenGuid = guid,
+					details = "Specific Deployment Point reset to Active Deployment Point"
+				};
+			}
+			return new() { isBroken = false };
 		}
 	}
 }

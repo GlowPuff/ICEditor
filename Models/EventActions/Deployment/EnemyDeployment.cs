@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Imperial_Commander_Editor
 {
-	public class EnemyDeployment : EventAction, IHasEventReference, IHasTriggerReference
+	public class EnemyDeployment : EventAction, IHasEventReference, IHasTriggerReference, IHasEntityReference
 	{
 		string _enemyName, _deploymentGroup, _modification, _repositionInstructions;
 		int _threatCost;
@@ -88,6 +88,28 @@ namespace Imperial_Commander_Editor
 					ownerGuid = GUID,
 					brokenGuid = guid,
 					details = "Trigger from [On Defeated]"
+				};
+			}
+			return new() { isBroken = false };
+		}
+
+		public BrokenRefInfo NotifyEntityRemoved( Guid guid, NotifyMode mode )
+		{
+			if ( specificDeploymentPoint == guid )
+			{
+				if ( mode == NotifyMode.Update )
+				{
+					specificDeploymentPoint = Guid.Empty;
+					if ( deploymentPoint == DeploymentSpot.Specific )
+						deploymentPoint = DeploymentSpot.Active;
+				}
+				return new()
+				{
+					itemName = displayName,
+					isBroken = deploymentPoint == DeploymentSpot.Specific,
+					ownerGuid = GUID,
+					brokenGuid = guid,
+					details = "Specific Deployment Point reset to Active Deployment Point"
 				};
 			}
 			return new() { isBroken = false };

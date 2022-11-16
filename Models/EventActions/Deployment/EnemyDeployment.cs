@@ -95,18 +95,23 @@ namespace Imperial_Commander_Editor
 
 		public BrokenRefInfo NotifyEntityRemoved( Guid guid, NotifyMode mode )
 		{
-			if ( specificDeploymentPoint == guid )
+			if ( specificDeploymentPoint == guid || enemyGroupData.pointList.Any( x => x.GUID == guid ) )
 			{
 				if ( mode == NotifyMode.Update )
 				{
 					specificDeploymentPoint = Guid.Empty;
 					if ( deploymentPoint == DeploymentSpot.Specific )
 						deploymentPoint = DeploymentSpot.Active;
+					foreach ( var dp in enemyGroupData.pointList )
+					{
+						if ( dp.GUID == guid )
+							dp.GUID = Guid.Empty;
+					}
 				}
 				return new()
 				{
 					itemName = displayName,
-					isBroken = deploymentPoint == DeploymentSpot.Specific,
+					isBroken = deploymentPoint == DeploymentSpot.Specific || enemyGroupData.pointList.Any( x => x.GUID == guid ),
 					ownerGuid = GUID,
 					brokenGuid = guid,
 					details = "Specific Deployment Point reset to Active Deployment Point"

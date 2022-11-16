@@ -378,7 +378,21 @@ namespace Imperial_Commander_Editor
 			//notify all Event Actions that are IHasEntityReference
 			var brokenEAList = new List<Guid>();
 			var brokenEntityGroupList = new List<Guid>();
+			var brokenInitialGroupList = new List<Guid>();
 			var allBrokenList = new List<BrokenRefInfo>();
+
+			//initial deployment groups (DPs)
+			foreach ( var group in mainWindow.mission.initialDeploymentGroups )
+			{
+				var info = group.NotifyEntityRemoved( guid, NotifyMode.Report );
+				if ( info.isBroken )
+				{
+					info.topOwnerName = group.cardName;
+					info.notifyType = NotifyType.InitialGroup;
+					allBrokenList.Add( info );
+					brokenInitialGroupList.Add( ((EnemyGroupData)group).GUID );
+				}
+			}
 
 			//entity groups
 			foreach ( var group in mainWindow.mission.entityGroups )
@@ -413,6 +427,8 @@ namespace Imperial_Commander_Editor
 				return true;
 
 			List<string> infoMsg = new();
+			if ( brokenInitialGroupList.Count > 0 )
+				infoMsg.Add( $"Found {brokenInitialGroupList.Count} broken Entity reference(s) in all of this Mission's Initial Groups." );
 			if ( brokenEntityGroupList.Count > 0 )
 				infoMsg.Add( $"Found {brokenEntityGroupList.Count} broken Entity reference(s) in all of this Mission's Entity Groups." );
 			if ( brokenEAList.Count > 0 )

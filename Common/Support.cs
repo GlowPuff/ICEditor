@@ -60,7 +60,7 @@ namespace Imperial_Commander_Editor
 		public Guid GUID { get; set; }
 	}
 
-	public class EnemyGroupData : INotifyPropertyChanged, IHasEventReference, IHasTriggerReference
+	public class EnemyGroupData : INotifyPropertyChanged, IHasEventReference, IHasTriggerReference, IHasEntityReference
 	{
 		CustomInstructionType _customInstructionType;
 		string _customText, _cardName, _cardID;
@@ -166,6 +166,30 @@ namespace Imperial_Commander_Editor
 					ownerGuid = GUID,
 					brokenGuid = guid,
 					details = "Trigger from [On Defeated]"
+				};
+			}
+			return new() { isBroken = false };
+		}
+
+		public BrokenRefInfo NotifyEntityRemoved( Guid guid, NotifyMode mode )
+		{
+			if ( pointList.Any( x => x.GUID == guid ) )
+			{
+				if ( mode == NotifyMode.Update )
+				{
+					foreach ( var dp in pointList )
+					{
+						if ( dp.GUID == guid )
+							dp.GUID = Guid.Empty;
+					}
+				}
+				return new()
+				{
+					itemName = cardName,
+					isBroken = true,
+					ownerGuid = GUID,
+					brokenGuid = guid,
+					details = "Broken Deployment Point(s) reset to Active Deployment Point"
 				};
 			}
 			return new() { isBroken = false };

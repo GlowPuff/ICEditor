@@ -174,6 +174,7 @@ namespace Imperial_Commander_Editor
 			var brokenTriggerList = new List<Guid>();
 			var brokenEntityList = new List<Guid>();
 			var brokenEventGroupList = new List<Guid>();
+			var brokenInitialGroupList = new List<Guid>();
 			var allBrokenList = new List<BrokenRefInfo>();
 
 			//mission starting event
@@ -191,6 +192,19 @@ namespace Imperial_Commander_Editor
 					details = "Event from [Starting Event]"
 				};
 				allBrokenList.Add( info );
+			}
+
+			//initial groups (defeated Event)
+			foreach ( var group in mainWindow.mission.initialDeploymentGroups )
+			{
+				var info = group.NotifyEventRemoved( guid, NotifyMode.Report );
+				if ( info.isBroken )
+				{
+					info.topOwnerName = group.cardName;
+					info.notifyType = NotifyType.InitialGroup;
+					allBrokenList.Add( info );
+					brokenInitialGroupList.Add( ((EnemyGroupData)group).GUID );
+				}
 			}
 
 			//event groups
@@ -252,6 +266,8 @@ namespace Imperial_Commander_Editor
 			List<string> infoMsg = new();
 			if ( brokenStartEvent != Guid.Empty )
 				infoMsg.Add( "Found a broken Event reference to the Mission Starting Event." );
+			if ( brokenInitialGroupList.Count > 0 )
+				infoMsg.Add( $"Found {brokenInitialGroupList.Count} broken Event reference(s) in all of this Mission's Initial Enemy Groups." );
 			if ( brokenEventGroupList.Count > 0 )
 				infoMsg.Add( $"Found {brokenEventGroupList.Count} broken Event reference(s) in all of this Mission's Event Groups." );
 			if ( brokenEAList.Count > 0 )
@@ -277,7 +293,21 @@ namespace Imperial_Commander_Editor
 			var brokenEAList = new List<Guid>();
 			var brokenEntityList = new List<Guid>();
 			var brokenEventList = new List<Guid>();
+			var brokenInitialGroupList = new List<Guid>();
 			var allBrokenList = new List<BrokenRefInfo>();
+
+			//initial groups (defeated Trigger)
+			foreach ( var group in mainWindow.mission.initialDeploymentGroups )
+			{
+				var info = group.NotifyTriggerRemoved( guid, NotifyMode.Report );
+				if ( info.isBroken )
+				{
+					info.topOwnerName = group.cardName;
+					info.notifyType = NotifyType.InitialGroup;
+					allBrokenList.Add( info );
+					brokenInitialGroupList.Add( ((EnemyGroupData)group).GUID );
+				}
+			}
 
 			//events - additional triggers
 			foreach ( var ev in mainWindow.mission.GetAllEvents() )
@@ -324,6 +354,8 @@ namespace Imperial_Commander_Editor
 				return true;
 
 			List<string> infoMsg = new();
+			if ( brokenInitialGroupList.Count > 0 )
+				infoMsg.Add( $"Found {brokenInitialGroupList.Count} broken Trigger reference(s) in all of this Mission's Initial Enemy Groups." );
 			if ( brokenEventList.Count > 0 )
 				infoMsg.Add( $"Found {brokenEventList.Count} broken Additional Trigger reference(s) in all of this Mission's Events." );
 			if ( brokenEAList.Count > 0 )

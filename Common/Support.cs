@@ -60,7 +60,7 @@ namespace Imperial_Commander_Editor
 		public Guid GUID { get; set; }
 	}
 
-	public class EnemyGroupData : INotifyPropertyChanged
+	public class EnemyGroupData : INotifyPropertyChanged, IHasEventReference, IHasTriggerReference
 	{
 		CustomInstructionType _customInstructionType;
 		string _customText, _cardName, _cardID;
@@ -133,6 +133,42 @@ namespace Imperial_Commander_Editor
 				else
 					pointList.Add( new() { GUID = Guid.Empty } );
 			}
+		}
+
+		public BrokenRefInfo NotifyEventRemoved( Guid guid, NotifyMode mode )
+		{
+			if ( defeatedEvent == guid )
+			{
+				if ( mode == NotifyMode.Update )
+					defeatedEvent = Guid.Empty;
+				return new()
+				{
+					itemName = cardName,
+					isBroken = true,
+					ownerGuid = GUID,
+					brokenGuid = guid,
+					details = "Event from [On Defeated]"
+				};
+			}
+			return new() { isBroken = false };
+		}
+
+		public BrokenRefInfo NotifyTriggerRemoved( Guid guid, NotifyMode mode )
+		{
+			if ( defeatedTrigger == guid )
+			{
+				if ( mode == NotifyMode.Update )
+					defeatedTrigger = Guid.Empty;
+				return new()
+				{
+					itemName = cardName,
+					isBroken = true,
+					ownerGuid = GUID,
+					brokenGuid = guid,
+					details = "Trigger from [On Defeated]"
+				};
+			}
+			return new() { isBroken = false };
 		}
 	}
 

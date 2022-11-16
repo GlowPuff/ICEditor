@@ -45,6 +45,10 @@ namespace Imperial_Commander_Editor
 		{
 			if ( notifyType == NotifyType.Event )
 			{
+				foreach ( var group in mainWindow.mission.initialDeploymentGroups )
+				{
+					group.NotifyEventRemoved( brokenGUID, NotifyMode.Update );
+				}
 				if ( mainWindow.mission.missionProperties.startingEvent == brokenGUID )
 				{
 					mainWindow.mission.missionProperties.startingEvent = Guid.Empty;
@@ -68,6 +72,10 @@ namespace Imperial_Commander_Editor
 			}
 			else if ( notifyType == NotifyType.Trigger )
 			{
+				foreach ( var group in mainWindow.mission.initialDeploymentGroups )
+				{
+					group.NotifyTriggerRemoved( brokenGUID, NotifyMode.Update );
+				}
 				foreach ( var item in mainWindow.mission.GetAllEvents() )
 				{
 					item.NotifyTriggerRemoved( brokenGUID, NotifyMode.Update );

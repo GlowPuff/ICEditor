@@ -53,9 +53,9 @@ namespace Imperial_Commander_Editor
 				ranges = inputList.Where( x => x.eventGUID == guid ).Select( x => $"[{x.fromValue}-{x.toValue}]" ).ToList();
 
 				if ( failEventGUID == guid )
-					msg = "Event from [Default Handler]";
+					msg = "Fixed 'Default Handler' Event";
 				if ( ranges.Count > 0 )
-					msg2 = "Event from [Input Range(s)]: " + string.Join( ", ", ranges );
+					msg2 = "Fixed The Event For The Following Input Range(s): " + string.Join( ", ", ranges );
 
 				return new()
 				{
@@ -95,9 +95,9 @@ namespace Imperial_Commander_Editor
 				} ).ToList();
 
 				if ( failTriggerGUID == guid )
-					msg = "Trigger from [Default Handler]";
+					msg = "Fixed 'Default Handler' Trigger";
 				if ( ranges.Count > 0 )
-					msg2 = "Trigger from [Input Range(s)]: " + string.Join( ", ", ranges );
+					msg2 = "Fixed The Trigger For The Following Input Range(s): " + string.Join( ", ", ranges );
 
 				return new()
 				{

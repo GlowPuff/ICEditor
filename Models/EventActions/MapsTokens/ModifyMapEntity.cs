@@ -42,7 +42,7 @@ namespace Imperial_Commander_Editor
 					isBroken = true,
 					ownerGuid = GUID,
 					brokenGuid = guid,
-					details = $"Entities REMOVED: {string.Join( ", ", ranges )}"
+					details = "REMOVED The Entity From This Event Action"
 				};
 			}
 			return new() { isBroken = false };
@@ -75,7 +75,7 @@ namespace Imperial_Commander_Editor
 					isBroken = true,
 					ownerGuid = GUID,
 					brokenGuid = guid,
-					details = $"Event from [Entity Button(s)]: {string.Join( ", ", ranges )}"
+					details = $"Fixed The Event For The Following Entity Button(s): {string.Join( ", ", ranges )}"
 				};
 			}
 			return new() { isBroken = false };
@@ -108,7 +108,7 @@ namespace Imperial_Commander_Editor
 					isBroken = true,
 					ownerGuid = GUID,
 					brokenGuid = guid,
-					details = $"Trigger from [Entity Button(s)]: {string.Join( ", ", ranges )}"
+					details = $"Fixed The Trigger For The Following Entity Button(s): {string.Join( ", ", ranges )}"
 				};
 			}
 			return new() { isBroken = false };

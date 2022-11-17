@@ -52,7 +52,7 @@ namespace Imperial_Commander_Editor
 					isBroken = true,
 					ownerGuid = GUID,
 					brokenGuid = guid,
-					details = $"Event from [Button(s)]: {string.Join( ", ", ranges )}"
+					details = $"Fixed The Event For The Following Button(s): {string.Join( ", ", ranges )}"
 				};
 			}
 			return new() { isBroken = false };
@@ -84,7 +84,7 @@ namespace Imperial_Commander_Editor
 					isBroken = true,
 					ownerGuid = GUID,
 					brokenGuid = guid,
-					details = $"Trigger from [Button(s)]: {string.Join( ", ", ranges )}"
+					details = $"Fixed The Trigger For The Following Button(s): {string.Join( ", ", ranges )}"
 				};
 			}
 			return new() { isBroken = false };

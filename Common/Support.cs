@@ -147,7 +147,7 @@ namespace Imperial_Commander_Editor
 					isBroken = true,
 					ownerGuid = GUID,
 					brokenGuid = guid,
-					details = "Event from [On Defeated]"
+					details = "Fixed 'On Defeated' Event"
 				};
 			}
 			return new() { isBroken = false };
@@ -165,7 +165,7 @@ namespace Imperial_Commander_Editor
 					isBroken = true,
 					ownerGuid = GUID,
 					brokenGuid = guid,
-					details = "Trigger from [On Defeated]"
+					details = "Fixed 'On Defeated' Trigger"
 				};
 			}
 			return new() { isBroken = false };

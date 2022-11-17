@@ -41,7 +41,7 @@ namespace Imperial_Commander_Editor
 					isBroken = true,
 					ownerGuid = GUID,
 					brokenGuid = guid,
-					details = $"Trigger REMOVED from [Trigger Modifiers]: {string.Join( ", ", ranges )}"
+					details = $"Trigger REMOVED from 'Trigger Modifiers': {string.Join( ", ", ranges )}"
 				};
 			}
 			return new() { isBroken = false };

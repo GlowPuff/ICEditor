@@ -31,7 +31,7 @@ namespace Imperial_Commander_Editor
 			infoText = message;
 			detailsText = string.Join( "\n", info.Select( x => $"{x.notifyType} Name: {x.topOwnerName}\n\x2192 {x.itemName}: {x.details}\n" ) );
 
-			gbox.Header = Title = $"Broken References Report For {ntype} [{sourceName}]";
+			gbox.Header = Title = $"Broken References Report For {ntype} '{sourceName}'";
 		}
 
 		public event PropertyChangedEventHandler PropertyChanged;

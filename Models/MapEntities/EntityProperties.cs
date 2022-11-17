@@ -99,7 +99,7 @@ namespace Imperial_Commander_Editor
 					isBroken = true,
 					ownerGuid = owner,
 					brokenGuid = eventGuid,
-					details = $"Button(s) affected: '{string.Join( ", ", ranges )}'"
+					details = $"Fixed The Event For The Following Button(s): '{string.Join( ", ", ranges )}'"
 				};
 			}
 			return new() { isBroken = false };
@@ -132,7 +132,7 @@ namespace Imperial_Commander_Editor
 					isBroken = true,
 					ownerGuid = owner,
 					brokenGuid = triggerGuid,
-					details = $"Button(s) affected: '{string.Join( ", ", ranges )}'"
+					details = $"Fixed The Trigger For The Following Button(s): '{string.Join( ", ", ranges )}'"
 				};
 			}
 			return new() { isBroken = false };

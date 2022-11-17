@@ -110,7 +110,7 @@ namespace Imperial_Commander_Editor
 
 			if ( Utils.CheckAndNotifyTriggerRemoved( t.GUID, NotifyMode.Report, t.name ) )
 			{
-				res = MessageBox.Show( "Deleting this Trigger will break references to it made from other Events, Triggers, or Map Entities.\n\nAre you sure you want to delete it?\n\nChoosing YES will automatically fix the broken references, along with displaying a report showing you where all the fixes were made.\n\nNOTE: Fixing this broken reference will update all affected Buttons, Input Ranges, and any other items within the data.", "Warning - Deleting Will Create A Broken Reference", MessageBoxButton.YesNo, MessageBoxImage.Question );
+				res = MessageBox.Show( "Deleting this Trigger will break references to it made from other Events, Triggers, or Map Entities.\n\nAre you sure you want to delete it?\n\nChoosing YES will automatically fix the broken references, along with displaying a report showing you where all the fixes were made.\n\nNOTE: Fixing this broken reference will update all affected Buttons, Input Ranges, and any other items within the data.", "Warning - Deleting Will Create One Or More Broken References", MessageBoxButton.YesNo, MessageBoxImage.Question );
 			}
 
 			if ( res == MessageBoxResult.Yes && t.GUID != Guid.Empty )
@@ -148,7 +148,7 @@ namespace Imperial_Commander_Editor
 
 			if ( Utils.CheckAndNotifyEventRemoved( t.GUID, NotifyMode.Report, t.name ) )
 			{
-				res = MessageBox.Show( "Deleting this Event will break references to it made from other Events, Triggers, or Map Entities.\n\nAre you sure you want to delete it?\n\nChoosing YES will automatically fix the broken references, along with displaying a report showing you where all the fixes were made.\n\nNOTE: Fixing this broken reference will update all affected Buttons, Input Ranges, and any other items within the data.", "Warning - Deleting Will Create A Broken Reference", MessageBoxButton.YesNo, MessageBoxImage.Question );
+				res = MessageBox.Show( "Deleting this Event will break references to it made from other Events, Triggers, or Map Entities.\n\nAre you sure you want to delete it?\n\nChoosing YES will automatically fix the broken references, along with displaying a report showing you where all the fixes were made.\n\nNOTE: Fixing this broken reference will update all affected Buttons, Input Ranges, and any other items within the data.", "Warning - Deleting Will Create One Or More Broken References", MessageBoxButton.YesNo, MessageBoxImage.Question );
 			}
 
 			if ( res == MessageBoxResult.Yes && t.GUID != Guid.Empty )

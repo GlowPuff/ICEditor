@@ -207,7 +207,7 @@ namespace Imperial_Commander_Editor
 					}
 				}
 
-				var ranges = e.Select( x => $"['{x.triggerName}'::{x.triggerValue}]" ).ToList();
+				var ranges = e.Select( x => $"[{x.triggerName} :: {x.triggerValue}]" ).ToList();
 
 				return new()
 				{
@@ -215,7 +215,7 @@ namespace Imperial_Commander_Editor
 					isBroken = true,
 					ownerGuid = GUID,
 					brokenGuid = guid,
-					details = $"Trigger(s) REMOVED from [Additional Triggers]: {string.Join( ", ", ranges )}"
+					details = $"Trigger(s) REMOVED from 'Additional Triggers': {string.Join( ", ", ranges )}"
 				};
 			}
 			return new() { isBroken = false };

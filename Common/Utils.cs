@@ -13,7 +13,7 @@ namespace Imperial_Commander_Editor
 	public static class Utils
 	{
 		public const string formatVersion = "19";
-		public const string appVersion = "1.0.26";
+		public const string appVersion = "1.0.27";
 
 		public static List<DeploymentCard> allyData;
 		public static List<DeploymentCard> enemyData;
@@ -279,8 +279,6 @@ namespace Imperial_Commander_Editor
 
 			if ( infoMsg.Count > 0 )
 			{
-				//string generalMsg = "Deleting this Event has created broken references to it elsewhere in the Mission.";
-
 				BrokenRefWindow broken = new BrokenRefWindow( NotifyType.Event, $"{string.Join( "\n", infoMsg )}\n\nThese broken Event references will be changed to 'None (Global)'.  However, for some affected items, these broken Events will be REMOVED from them entirely.\n\nNOTE: This will affect Buttons, Input Ranges, and any other items within affected data.", allBrokenList, guid, sourceName );
 				broken.ShowDialog();
 			}
@@ -365,8 +363,6 @@ namespace Imperial_Commander_Editor
 
 			if ( infoMsg.Count > 0 )
 			{
-				//string generalMsg = "Deleting this Trigger will create broken references to it elsewhere in the Mission.";
-
 				BrokenRefWindow broken = new BrokenRefWindow( NotifyType.Trigger, $"{string.Join( "\n", infoMsg )}\n\nThese broken Trigger references will be updated to 'None (Global)'.  However, for some affected items, these broken Triggers will be REMOVED from them entirely.\n\nNOTE: This will affect Buttons, Input Ranges, and any other items within affected data.", allBrokenList, guid, sourceName );
 				broken.ShowDialog();
 			}
@@ -436,8 +432,6 @@ namespace Imperial_Commander_Editor
 
 			if ( infoMsg.Count > 0 )
 			{
-				//string generalMsg = "Deleting this Entity will create broken references to it elsewhere in the Mission.";
-
 				BrokenRefWindow broken = new BrokenRefWindow( NotifyType.Entity, $"{string.Join( "\n", infoMsg )}\n\nThese broken Entity references will be updated to 'None (Global)'.  However, for some affected items, these broken Entities will be REMOVED from them entirely.", allBrokenList, guid, sourceName );
 				broken.ShowDialog();
 			}

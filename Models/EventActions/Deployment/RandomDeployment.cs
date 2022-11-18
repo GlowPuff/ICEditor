@@ -35,7 +35,7 @@ namespace Imperial_Commander_Editor
 		{
 			if ( specificDeploymentPoint == guid )
 			{
-				if ( mode == NotifyMode.Update )
+				if ( mode == NotifyMode.Fix )
 				{
 					specificDeploymentPoint = Guid.Empty;
 					if ( deploymentPoint == DeploymentSpot.Specific )

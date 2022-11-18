@@ -36,7 +36,7 @@ namespace Imperial_Commander_Editor
 				{
 					if ( item.eventGUID == guid )
 					{
-						if ( mode == NotifyMode.Update )
+						if ( mode == NotifyMode.Fix )
 							item.eventGUID = Guid.Empty;
 					}
 				}
@@ -68,7 +68,7 @@ namespace Imperial_Commander_Editor
 				{
 					if ( item.triggerGUID == guid )
 					{
-						if ( mode == NotifyMode.Update )
+						if ( mode == NotifyMode.Fix )
 							item.triggerGUID = Guid.Empty;
 					}
 				}
@@ -87,6 +87,32 @@ namespace Imperial_Commander_Editor
 					details = $"Fixed The Trigger For The Following Button(s): {string.Join( ", ", ranges )}"
 				};
 			}
+			return new() { isBroken = false };
+		}
+
+		public BrokenRefInfo SelfCheckEvents()
+		{
+			List<string> list = new();
+
+			foreach ( var item in buttonList )
+			{
+				if ( !Utils.ValidateEvent( item.eventGUID ) )
+					list.Add( $"Missing Event from Button '{item.buttonText}'" );
+			}
+
+			if ( list.Count > 0 )
+			{
+				return new BrokenRefInfo()
+				{
+					isBroken = true,
+					notifyType = NotifyType.Event,
+					itemName = displayName,
+					brokenGuid = Guid.Empty,
+					ownerGuid = GUID,
+					details = string.Join( "\n", list )
+				};
+			}
+
 			return new() { isBroken = false };
 		}
 	}

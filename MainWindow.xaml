@@ -65,11 +65,11 @@
 					<Separator/>
 
 					<!--broken references-->
-					<!--<Button x:Name="openBrokenRefsWindow" ToolTip="Show Broken References" Click="openBrokenRefsWindow_Click">
+					<Button x:Name="openBrokenRefsWindow" ToolTip="Mission Health Check" Click="openBrokenRefsWindow_Click">
 						<Image Source="Assets/broken.png" Height="35"/>
 					</Button>
 
-					<Separator/>-->
+					<Separator/>
 
 					<!--mission settings-->
 					<!--<Button x:Name="missionSettingsButton" ToolTip="Mission Settings" Click="missionSettingsButton_Click">

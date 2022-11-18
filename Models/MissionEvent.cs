@@ -198,7 +198,7 @@ namespace Imperial_Commander_Editor
 
 			if ( additionalTriggers.Any( x => x.triggerGUID == guid ) )
 			{
-				if ( mode == NotifyMode.Update )
+				if ( mode == NotifyMode.Fix )
 				{
 					for ( int i = additionalTriggers.Count - 1; i >= 0; i-- )
 					{

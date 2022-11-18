@@ -166,7 +166,7 @@ namespace Imperial_Commander_Editor
 			mainWindow.mapEditor.UpdateUI();
 		}
 
-		public static bool CheckAndNotifyEventRemoved( Guid guid, NotifyMode notifyMode, string sourceName )
+		public static HealthReport CheckAndNotifyEventRemoved( Guid guid, NotifyMode notifyMode, string sourceName )
 		{
 			//notify all Triggers, Entities, and Event Actions that are IHasEventReference
 			var brokenStartEvent = Guid.Empty;
@@ -197,7 +197,7 @@ namespace Imperial_Commander_Editor
 			//initial groups (defeated Event)
 			foreach ( var group in mainWindow.mission.initialDeploymentGroups )
 			{
-				var info = group.NotifyEventRemoved( guid, NotifyMode.Report );
+				var info = group.NotifyEventRemoved( guid, notifyMode );
 				if ( info.isBroken )
 				{
 					info.topOwnerName = group.cardName;
@@ -210,7 +210,7 @@ namespace Imperial_Commander_Editor
 			//event groups
 			foreach ( var group in mainWindow.mission.eventGroups )
 			{
-				var info = group.NotifyEventRemoved( guid, NotifyMode.Report );
+				var info = group.NotifyEventRemoved( guid, notifyMode );
 				if ( info.isBroken )
 				{
 					info.topOwnerName = group.name;
@@ -225,7 +225,7 @@ namespace Imperial_Commander_Editor
 			{
 				foreach ( var ea in ev.eventActions.OfType<IHasEventReference>() )
 				{
-					var info = ea.NotifyEventRemoved( guid, NotifyMode.Report );
+					var info = ea.NotifyEventRemoved( guid, notifyMode );
 					if ( info.isBroken )
 					{
 						info.topOwnerName = ev.name;
@@ -238,7 +238,7 @@ namespace Imperial_Commander_Editor
 			//triggers
 			foreach ( var trigger in mainWindow.mission.GetAllTriggers().OfType<IHasEventReference>() )
 			{
-				var info = trigger.NotifyEventRemoved( guid, NotifyMode.Report );
+				var info = trigger.NotifyEventRemoved( guid, notifyMode );
 				if ( info.isBroken )
 				{
 					info.topOwnerName = ((Trigger)trigger).name;
@@ -250,7 +250,7 @@ namespace Imperial_Commander_Editor
 			//entities
 			foreach ( var entity in mainWindow.mission.mapEntities.OfType<IHasEventReference>() )
 			{
-				var info = entity.NotifyEventRemoved( guid, NotifyMode.Report );
+				var info = entity.NotifyEventRemoved( guid, notifyMode );
 				if ( info.isBroken )
 				{
 					info.topOwnerName = ((IMapEntity)entity).name;
@@ -259,9 +259,6 @@ namespace Imperial_Commander_Editor
 					brokenEntityList.Add( ((IMapEntity)entity).GUID );
 				}
 			}
-
-			if ( notifyMode == NotifyMode.Report && allBrokenList.Count > 0 )
-				return true;
 
 			List<string> infoMsg = new();
 			if ( brokenStartEvent != Guid.Empty )
@@ -277,15 +274,27 @@ namespace Imperial_Commander_Editor
 			if ( brokenEntityList.Count > 0 )
 				infoMsg.Add( $"Found {brokenEntityList.Count} broken Event reference(s) in all of this Mission's Map Entities." );
 
-			if ( infoMsg.Count > 0 )
+			if ( notifyMode == NotifyMode.Report )
 			{
-				BrokenRefWindow broken = new BrokenRefWindow( NotifyType.Event, $"{string.Join( "\n", infoMsg )}\n\nThese broken Event references will be changed to 'None (Global)'.  However, for some affected items, these broken Events will be REMOVED from them entirely.\n\nNOTE: This will affect Buttons, Input Ranges, and any other items within affected data.", allBrokenList, guid, sourceName );
-				broken.ShowDialog();
+				if ( allBrokenList.Count > 0 )
+					return new()
+					{
+						isBroken = true,
+						detailsMessage = string.Join( "\n", infoMsg ),
+						brokenList = allBrokenList,
+						startEvent = brokenStartEvent != Guid.Empty ? 0 : 1,
+						initialGroups = brokenInitialGroupList.Count,
+						eventGroups = brokenEventGroupList.Count,
+						eventActions = brokenEAList.Count,
+						triggers = brokenTriggerList.Count,
+						entities = brokenEntityList.Count
+					};
 			}
-			return false;
+
+			return new() { isBroken = false };
 		}
 
-		public static bool CheckAndNotifyTriggerRemoved( Guid guid, NotifyMode notifyMode, string sourceName )
+		public static HealthReport CheckAndNotifyTriggerRemoved( Guid guid, NotifyMode notifyMode, string sourceName )
 		{
 			//notify all Entities, and Event Actions that are IHasTriggerReference
 			var brokenEAList = new List<Guid>();
@@ -348,9 +357,6 @@ namespace Imperial_Commander_Editor
 				}
 			}
 
-			if ( notifyMode == NotifyMode.Report && allBrokenList.Count > 0 )
-				return true;
-
 			List<string> infoMsg = new();
 			if ( brokenInitialGroupList.Count > 0 )
 				infoMsg.Add( $"Found {brokenInitialGroupList.Count} broken Trigger reference(s) in all of this Mission's Initial Enemy Groups." );
@@ -361,15 +367,25 @@ namespace Imperial_Commander_Editor
 			if ( brokenEntityList.Count > 0 )
 				infoMsg.Add( $"\nFound {brokenEntityList.Count} broken Trigger reference(s) in all of this Mission's Map Entities." );
 
-			if ( infoMsg.Count > 0 )
+			if ( notifyMode == NotifyMode.Report )
 			{
-				BrokenRefWindow broken = new BrokenRefWindow( NotifyType.Trigger, $"{string.Join( "\n", infoMsg )}\n\nThese broken Trigger references will be updated to 'None (Global)'.  However, for some affected items, these broken Triggers will be REMOVED from them entirely.\n\nNOTE: This will affect Buttons, Input Ranges, and any other items within affected data.", allBrokenList, guid, sourceName );
-				broken.ShowDialog();
+				if ( allBrokenList.Count > 0 )
+					return new()
+					{
+						isBroken = true,
+						detailsMessage = string.Join( "\n", infoMsg ),
+						brokenList = allBrokenList,
+						events = brokenEventList.Count,
+						initialGroups = brokenInitialGroupList.Count,
+						eventActions = brokenEAList.Count,
+						entities = brokenEntityList.Count
+					};
 			}
-			return false;
+
+			return new() { isBroken = false };
 		}
 
-		public static bool CheckAndNotifyEntityRemoved( Guid guid, NotifyMode notifyMode, string sourceName )
+		public static HealthReport CheckAndNotifyEntityRemoved( Guid guid, NotifyMode notifyMode, string sourceName )
 		{
 			//notify all Event Actions that are IHasEntityReference
 			var brokenEAList = new List<Guid>();
@@ -419,9 +435,6 @@ namespace Imperial_Commander_Editor
 				}
 			}
 
-			if ( notifyMode == NotifyMode.Report && allBrokenList.Count > 0 )
-				return true;
-
 			List<string> infoMsg = new();
 			if ( brokenInitialGroupList.Count > 0 )
 				infoMsg.Add( $"Found {brokenInitialGroupList.Count} broken Entity reference(s) in all of this Mission's Initial Groups." );
@@ -430,12 +443,21 @@ namespace Imperial_Commander_Editor
 			if ( brokenEAList.Count > 0 )
 				infoMsg.Add( $"Found {brokenEAList.Count} broken Entity reference(s) in all of this Mission's Event Actions." );
 
-			if ( infoMsg.Count > 0 )
+			if ( notifyMode == NotifyMode.Report )
 			{
-				BrokenRefWindow broken = new BrokenRefWindow( NotifyType.Entity, $"{string.Join( "\n", infoMsg )}\n\nThese broken Entity references will be updated to 'None (Global)'.  However, for some affected items, these broken Entities will be REMOVED from them entirely.", allBrokenList, guid, sourceName );
-				broken.ShowDialog();
+				if ( allBrokenList.Count > 0 )
+					return new()
+					{
+						isBroken = true,
+						detailsMessage = string.Join( "\n", infoMsg ),
+						brokenList = allBrokenList,
+						initialGroups = brokenInitialGroupList.Count,
+						eventActions = brokenEAList.Count,
+						entities = brokenEntityGroupList.Count,
+					};
 			}
-			return false;
+
+			return new() { isBroken = false };
 		}
 
 		///EXTENSIONS

@@ -136,5 +136,10 @@ namespace Imperial_Commander_Editor
 		{
 			return entityProperties.NotifyEventRemoved( name, guid, GUID, mode );
 		}
+
+		public BrokenRefInfo SelfCheckEvents()
+		{
+			return entityProperties.SelfCheckEvents();
+		}
 	}
 }

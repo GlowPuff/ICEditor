@@ -38,7 +38,7 @@ namespace Imperial_Commander_Editor
 				var msg2 = "";
 				var ranges = new List<string>();
 
-				if ( mode == NotifyMode.Update )
+				if ( mode == NotifyMode.Fix )
 				{
 					if ( failEventGUID == guid )
 						failEventGUID = Guid.Empty;
@@ -77,7 +77,7 @@ namespace Imperial_Commander_Editor
 				var msg2 = "";
 				var ranges = new List<string>();
 
-				if ( mode == NotifyMode.Update )
+				if ( mode == NotifyMode.Fix )
 				{
 					if ( failTriggerGUID == guid )
 						failTriggerGUID = Guid.Empty;
@@ -106,6 +106,34 @@ namespace Imperial_Commander_Editor
 					ownerGuid = GUID,
 					brokenGuid = guid,
 					details = $"{msg + (!string.IsNullOrEmpty( msg ) ? '\n' + msg2 : msg2)}"
+				};
+			}
+			return new() { isBroken = false };
+		}
+
+		public BrokenRefInfo SelfCheckEvents()
+		{
+			List<string> strings = new();
+
+			if ( !Utils.ValidateEvent( failEventGUID ) )
+				strings.Add( "Missing 'Default Handler' Event" );
+
+			foreach ( var item in inputList )
+			{
+				if ( !Utils.ValidateEvent( item.eventGUID ) )
+					strings.Add( $"Missing Event from Input Range: From {item.fromValue} to {item.toValue}" );
+			}
+
+			if ( strings.Count > 0 )
+			{
+				return new()
+				{
+					isBroken = true,
+					notifyType = NotifyType.Event,
+					itemName = displayName,
+					ownerGuid = GUID,
+					brokenGuid = Guid.Empty,
+					details = string.Join( "\n", strings )
 				};
 			}
 			return new() { isBroken = false };

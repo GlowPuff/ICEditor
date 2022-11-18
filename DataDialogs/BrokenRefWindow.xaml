@@ -19,7 +19,7 @@
 				</Grid.RowDefinitions>
 
 				<StackPanel Grid.Row="0">
-					<materialDesign:Card Grid.Column="1" Background="{StaticResource CardBG}" Padding="10">
+					<materialDesign:Card Background="{StaticResource CardBG}" Padding="10">
 						<Grid>
 							<Grid.ColumnDefinitions>
 								<ColumnDefinition Width="auto" />
@@ -34,7 +34,7 @@
 					<!--<materialDesign:Card Background="{StaticResource CardBG}" Margin="0,10" Padding="10">
 					</materialDesign:Card>-->
 
-					<GroupBox Grid.Row="2" Header="Affected Items And Details" Margin="0,10,0,0" Padding="10">
+					<GroupBox Header="Affected Items And Details" Margin="0,10,0,0" Padding="10">
 						<TextBlock Text="{Binding detailsText}" TextWrapping="Wrap"/>
 					</GroupBox>
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -139,7 +140,7 @@ namespace Imperial_Commander_Editor
 		{
 			if ( defeatedEvent == guid )
 			{
-				if ( mode == NotifyMode.Update )
+				if ( mode == NotifyMode.Fix )
 					defeatedEvent = Guid.Empty;
 				return new()
 				{
@@ -157,7 +158,7 @@ namespace Imperial_Commander_Editor
 		{
 			if ( defeatedTrigger == guid )
 			{
-				if ( mode == NotifyMode.Update )
+				if ( mode == NotifyMode.Fix )
 					defeatedTrigger = Guid.Empty;
 				return new()
 				{
@@ -175,7 +176,7 @@ namespace Imperial_Commander_Editor
 		{
 			if ( pointList.Any( x => x.GUID == guid ) )
 			{
-				if ( mode == NotifyMode.Update )
+				if ( mode == NotifyMode.Fix )
 				{
 					foreach ( var dp in pointList )
 					{
@@ -190,6 +191,23 @@ namespace Imperial_Commander_Editor
 					ownerGuid = GUID,
 					brokenGuid = guid,
 					details = "Broken Deployment Point(s) reset to Active Deployment Point"
+				};
+			}
+			return new() { isBroken = false };
+		}
+
+		public BrokenRefInfo SelfCheckEvents()
+		{
+			if ( !Utils.ValidateEvent( defeatedEvent ) )
+			{
+				return new()
+				{
+					isBroken = true,
+					notifyType = NotifyType.Event,
+					itemName = cardName,
+					ownerGuid = GUID,
+					brokenGuid = defeatedEvent,
+					details = "Missing 'On Defeated' Event"
 				};
 			}
 			return new() { isBroken = false };
@@ -230,13 +248,13 @@ namespace Imperial_Commander_Editor
 	public class BrokenRefInfo
 	{
 		/// <summary>
-		/// name of the top-most Event/Trigger,Entity that contains this item
+		/// name of the top-most Event/Trigger/Entity that contains this item
 		/// </summary>
 		public string topOwnerName;
 		public NotifyType notifyType;
 		public string itemName;
 		public bool isBroken;
-		public string details;
+		public string details { get; set; }
 		/// <summary>
 		/// Guid of the object that contains the broken reference
 		/// </summary>
@@ -245,5 +263,13 @@ namespace Imperial_Commander_Editor
 		/// Guid of the broken reference
 		/// </summary>
 		public Guid brokenGuid;
+	}
+
+	public class HealthReport
+	{
+		public bool isBroken;
+		public int startEvent, initialGroups, eventGroups, eventActions, triggers, entities, events;
+		public string detailsMessage;
+		public List<BrokenRefInfo> brokenList;
 	}
 }

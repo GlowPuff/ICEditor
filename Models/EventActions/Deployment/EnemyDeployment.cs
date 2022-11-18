@@ -61,7 +61,7 @@ namespace Imperial_Commander_Editor
 		{
 			if ( enemyGroupData.defeatedEvent == guid )
 			{
-				if ( mode == NotifyMode.Update )
+				if ( mode == NotifyMode.Fix )
 					enemyGroupData.defeatedEvent = Guid.Empty;
 				return new()
 				{
@@ -79,7 +79,7 @@ namespace Imperial_Commander_Editor
 		{
 			if ( enemyGroupData.defeatedTrigger == guid )
 			{
-				if ( mode == NotifyMode.Update )
+				if ( mode == NotifyMode.Fix )
 					enemyGroupData.defeatedTrigger = Guid.Empty;
 				return new()
 				{
@@ -97,7 +97,7 @@ namespace Imperial_Commander_Editor
 		{
 			if ( specificDeploymentPoint == guid || enemyGroupData.pointList.Any( x => x.GUID == guid ) )
 			{
-				if ( mode == NotifyMode.Update )
+				if ( mode == NotifyMode.Fix )
 				{
 					specificDeploymentPoint = Guid.Empty;
 					if ( deploymentPoint == DeploymentSpot.Specific )
@@ -115,6 +115,23 @@ namespace Imperial_Commander_Editor
 					ownerGuid = GUID,
 					brokenGuid = guid,
 					details = "Specific Deployment Point reset to Active Deployment Point"
+				};
+			}
+			return new() { isBroken = false };
+		}
+
+		public BrokenRefInfo SelfCheckEvents()
+		{
+			if ( !Utils.ValidateEvent( enemyGroupData.defeatedTrigger ) )
+			{
+				return new()
+				{
+					isBroken = true,
+					notifyType = NotifyType.Event,
+					itemName = displayName,
+					ownerGuid = GUID,
+					brokenGuid = enemyGroupData.defeatedTrigger,
+					details = "Missing 'On Defeated' Event"
 				};
 			}
 			return new() { isBroken = false };

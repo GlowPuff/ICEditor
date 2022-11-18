@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 
 namespace Imperial_Commander_Editor
 {
-	public class Console : INotifyPropertyChanged, IMapEntity, IHasEventReference
+	public class Console : INotifyPropertyChanged, IMapEntity, IHasEventReference, IHasTriggerReference
 	{
 		string _name;
 		Guid _mapSectionOwner;//, _GUID;
@@ -128,6 +128,16 @@ namespace Imperial_Commander_Editor
 		public BrokenRefInfo NotifyEventRemoved( Guid guid, NotifyMode mode )
 		{
 			return entityProperties.NotifyEventRemoved( name, guid, GUID, mode );
+		}
+
+		public BrokenRefInfo NotifyTriggerRemoved( Guid guid, NotifyMode mode )
+		{
+			return entityProperties.NotifyTriggerRemoved( name, guid, GUID, mode );
+		}
+
+		public BrokenRefInfo SelfCheckEvents()
+		{
+			return entityProperties.SelfCheckEvents();
 		}
 	}
 }

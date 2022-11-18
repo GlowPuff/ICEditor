@@ -94,7 +94,7 @@ namespace Imperial_Commander_Editor
 		{
 			if ( eventGUID == guid )
 			{
-				if ( mode == NotifyMode.Update )
+				if ( mode == NotifyMode.Fix )
 					eventGUID = Guid.Empty;
 				return new()
 				{
@@ -102,6 +102,23 @@ namespace Imperial_Commander_Editor
 					ownerGuid = GUID,
 					brokenGuid = guid,
 					details = "Fire Event Upon Triggering"
+				};
+			}
+			return new() { isBroken = false };
+		}
+
+		public BrokenRefInfo SelfCheckEvents()
+		{
+			if ( !Utils.ValidateEvent( eventGUID ) )
+			{
+				return new()
+				{
+					isBroken = true,
+					notifyType = NotifyType.Event,
+					itemName = name,
+					ownerGuid = GUID,
+					brokenGuid = eventGUID,
+					details = "Missing 'On Trigger' Event"
 				};
 			}
 			return new() { isBroken = false };
@@ -131,7 +148,7 @@ namespace Imperial_Commander_Editor
 		{
 			if ( triggerGUID == guid )
 			{
-				if ( mode == NotifyMode.Update )
+				if ( mode == NotifyMode.Fix )
 					triggerGUID = Guid.Empty;
 				return new()
 				{

@@ -604,12 +604,13 @@ namespace Imperial_Commander_Editor
 			if ( selectedEntity != null )
 			{
 				MessageBoxResult res = MessageBoxResult.Yes;
-				if ( Utils.CheckAndNotifyEntityRemoved( selectedEntity.GUID, NotifyMode.Report, selectedEntity.name ) )
+				var report = Utils.CheckAndNotifyEntityRemoved( selectedEntity.GUID, NotifyMode.Report, selectedEntity.name );
+				if ( report.isBroken )
 				{
-					res = MessageBox.Show( "Deleting this Map Entity will break references to it made from other Events, Triggers, or Map Entities.\n\nAre you sure you want to delete it?\n\nChoosing YES will automatically fix the broken references, along with displaying a report showing you where all the fixes were made.\n\nNOTE: Fixing this broken reference will update all affected Buttons, Input Ranges, and any other items within the data.", "Warning - Deleting Will Create One Or More Broken References", MessageBoxButton.YesNo, MessageBoxImage.Question );
+					res = MessageBox.Show( "Deleting this Map Entity will break references to it made from other Events, Triggers, or Map Entities.\n\nAre you sure you want to delete it?\n\nChoosing YES will delete the Entity and fix any broken references, along with displaying a report showing you where all the fixes were made.\n\nChoosing NO will delete the Entity but will NOT fix the broken references left behind.\n\nChoosing CANCEL will cancel this whole operation.\n\nNOTE: Fixing this broken reference will update all affected Buttons, Input Ranges, and any other items within the data.", "Warning - Deleting Will Create One Or More Broken References", MessageBoxButton.YesNo, MessageBoxImage.Question );
 				}
 
-				if ( res == MessageBoxResult.No )
+				if ( res == MessageBoxResult.Cancel )
 					return;
 
 				selectedEntity.mapRenderer.RemoveVisual();
@@ -635,7 +636,11 @@ namespace Imperial_Commander_Editor
 				Utils.mainWindow.SetStatus( $"'{selectedEntity.name}' Removed" );
 
 				//notify and check for broken refernces to this entity
-				Utils.CheckAndNotifyEntityRemoved( selectedEntity.GUID, NotifyMode.Update, selectedEntity.name );
+				if ( res == MessageBoxResult.Yes )
+				{
+					var dlg = new BrokenRefWindow( NotifyType.Entity, $"{report.detailsMessage}\n\nThese broken Entity references will be changed to 'None (Global)'.  However, for some affected items, these broken Events will be REMOVED from them entirely.\n\nNOTE: This will affect Buttons, Input Ranges, and any other items within affected data.", report.brokenList, selectedEntity.GUID, selectedEntity.name );
+					dlg.ShowDialog();
+				}
 
 				selectedEntity = null;
 				UpdateUI();

@@ -47,7 +47,7 @@ namespace Imperial_Commander_Editor
 			{
 				foreach ( var group in mainWindow.mission.initialDeploymentGroups )
 				{
-					group.NotifyEventRemoved( brokenGUID, NotifyMode.Update );
+					group.NotifyEventRemoved( brokenGUID, NotifyMode.Fix );
 				}
 				if ( mainWindow.mission.missionProperties.startingEvent == brokenGUID )
 				{
@@ -55,53 +55,53 @@ namespace Imperial_Commander_Editor
 				}
 				foreach ( var item in mainWindow.mission.eventGroups )
 				{
-					item.NotifyEventRemoved( brokenGUID, NotifyMode.Update );
+					item.NotifyEventRemoved( brokenGUID, NotifyMode.Fix );
 				}
 				foreach ( var item in mainWindow.mission.GetAllEvents().SelectMany( x => x.eventActions ).OfType<IHasEventReference>() )
 				{
-					item.NotifyEventRemoved( brokenGUID, NotifyMode.Update );
+					item.NotifyEventRemoved( brokenGUID, NotifyMode.Fix );
 				}
 				foreach ( var item in mainWindow.mission.GetAllTriggers().OfType<IHasEventReference>() )
 				{
-					item.NotifyEventRemoved( brokenGUID, NotifyMode.Update );
+					item.NotifyEventRemoved( brokenGUID, NotifyMode.Fix );
 				}
 				foreach ( var item in mainWindow.mission.mapEntities.OfType<IHasEventReference>() )
 				{
-					item.NotifyEventRemoved( brokenGUID, NotifyMode.Update );
+					item.NotifyEventRemoved( brokenGUID, NotifyMode.Fix );
 				}
 			}
 			else if ( notifyType == NotifyType.Trigger )
 			{
 				foreach ( var group in mainWindow.mission.initialDeploymentGroups )
 				{
-					group.NotifyTriggerRemoved( brokenGUID, NotifyMode.Update );
+					group.NotifyTriggerRemoved( brokenGUID, NotifyMode.Fix );
 				}
 				foreach ( var item in mainWindow.mission.GetAllEvents() )
 				{
-					item.NotifyTriggerRemoved( brokenGUID, NotifyMode.Update );
+					item.NotifyTriggerRemoved( brokenGUID, NotifyMode.Fix );
 				}
 				foreach ( var item in mainWindow.mission.GetAllEvents().SelectMany( x => x.eventActions ).OfType<IHasTriggerReference>() )
 				{
-					item.NotifyTriggerRemoved( brokenGUID, NotifyMode.Update );
+					item.NotifyTriggerRemoved( brokenGUID, NotifyMode.Fix );
 				}
 				foreach ( var item in mainWindow.mission.mapEntities.OfType<IHasTriggerReference>() )
 				{
-					item.NotifyTriggerRemoved( brokenGUID, NotifyMode.Update );
+					item.NotifyTriggerRemoved( brokenGUID, NotifyMode.Fix );
 				}
 			}
 			else if ( notifyType == NotifyType.Entity )
 			{
 				foreach ( var item in mainWindow.mission.entityGroups )
 				{
-					item.NotifyEntityRemoved( brokenGUID, NotifyMode.Update );
+					item.NotifyEntityRemoved( brokenGUID, NotifyMode.Fix );
 				}
 				foreach ( var item in mainWindow.mission.GetAllEvents().SelectMany( x => x.eventActions ).OfType<IHasEntityReference>() )
 				{
-					item.NotifyEntityRemoved( brokenGUID, NotifyMode.Update );
+					item.NotifyEntityRemoved( brokenGUID, NotifyMode.Fix );
 				}
 				foreach ( var item in mainWindow.mission.mapEntities.OfType<IHasEntityReference>() )
 				{
-					item.NotifyEntityRemoved( brokenGUID, NotifyMode.Update );
+					item.NotifyEntityRemoved( brokenGUID, NotifyMode.Fix );
 				}
 			}
 

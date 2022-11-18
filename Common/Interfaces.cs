@@ -9,6 +9,7 @@ namespace Imperial_Commander_Editor
 	public interface IHasEventReference
 	{
 		BrokenRefInfo NotifyEventRemoved( Guid guid, NotifyMode mode );
+		BrokenRefInfo SelfCheckEvents();
 	}
 	public interface IHasTriggerReference
 	{

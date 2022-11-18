@@ -290,7 +290,8 @@ namespace Imperial_Commander_Editor
 
 		private void openBrokenRefsWindow_Click( object sender, RoutedEventArgs e )
 		{
-
+			var dlg = new HealthCheckWindow();
+			dlg.ShowDialog();
 		}
 
 		private void Window_PreviewKeyDown( object sender, KeyEventArgs e )

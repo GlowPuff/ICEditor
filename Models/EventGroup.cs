@@ -41,7 +41,7 @@ namespace Imperial_Commander_Editor
 
 			if ( e.Count() > 0 )
 			{
-				if ( mode == NotifyMode.Update )
+				if ( mode == NotifyMode.Fix )
 				{
 					for ( int i = missionEvents.Count - 1; i >= 0; i-- )
 					{

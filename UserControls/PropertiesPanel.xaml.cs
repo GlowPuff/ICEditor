@@ -16,7 +16,10 @@ namespace Imperial_Commander_Editor
 		EventGroup _selectedEventGroup;
 		EntityGroup _selectedEntityGroup;
 		int _mapEntityCount;
+		string _eventGroupCount, _entityGroupCount;
 
+		public string eventGroupCount { get => _eventGroupCount; set { _eventGroupCount = value; PC(); } }
+		public string entityGroupCount { get => _entityGroupCount; set { _entityGroupCount = value; PC(); } }
 		public bool editEnabled { get { return _editEnabled; } set { _editEnabled = value; PC(); } }
 		public bool editEGEnabled { get { return _editEGEnabled; } set { _editEGEnabled = value; PC(); } }
 		public ObservableCollection<EventGroup> eventGroups { get { return Utils.mainWindow.mission.eventGroups; } }
@@ -62,6 +65,9 @@ namespace Imperial_Commander_Editor
 			meTB.DataContext = Utils.mainWindow.mission;
 
 			mapEntityCount = Utils.mainWindow.mission.mapEntities.Where( x => x.mapSectionOwner == Utils.mainWindow.activeSection.GUID ).Count();
+
+			eventGroupCount = $"Event Groups, {Utils.mainWindow.mission.eventGroups.Count()} in Mission";
+			entityGroupCount = $"Random Map Entity Groups, {Utils.mainWindow.mission.entityGroups.Count()} in Mission";
 
 			//start section can't be toggled
 			//invisToggle.IsEnabled = Utils.mainWindow.activeSection.GUID != Guid.Parse( "11111111-1111-1111-1111-111111111111" );

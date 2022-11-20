@@ -67,7 +67,7 @@
 
 						<Separator Margin="0,10"/>
 
-						<GroupBox Header="Event Groups" Background="{StaticResource CardBG}">
+						<GroupBox x:Name="eventGroupBox" Header="{Binding eventGroupCount}" Background="{StaticResource CardBG}">
 							<Grid>
 								<Grid.ColumnDefinitions>
 									<ColumnDefinition Width="*" />
@@ -82,7 +82,7 @@
 							</Grid>
 						</GroupBox>
 
-						<GroupBox Header="Random Map Entity Groups" Margin="0,10,0,0" Background="{StaticResource CardBG}">
+						<GroupBox x:Name="entityGroupBox" Header="{Binding entityGroupCount}" Margin="0,10,0,0" Background="{StaticResource CardBG}">
 							<Grid>
 								<Grid.ColumnDefinitions>
 									<ColumnDefinition Width="*" />

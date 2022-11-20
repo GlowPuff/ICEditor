@@ -118,10 +118,13 @@ namespace Imperial_Commander_Editor
 		{
 			List<string> list = new();
 
-			foreach ( var item in entitiesToModify.SelectMany( x => x.entityProperties.buttonActions ) )
+			foreach ( var en in entitiesToModify )
 			{
-				if ( !Utils.ValidateEvent( item.eventGUID ) )
-					list.Add( $"Missing Event from Button: '{item.buttonText}'" );
+				foreach ( var item in en.entityProperties.buttonActions )//.SelectMany( x => x.entityProperties.buttonActions ) )
+				{
+					if ( !Utils.ValidateEvent( item.eventGUID ) )
+						list.Add( $"Entity '{en.entityProperties.name}' has a missing Event from Button: '{item.buttonText}'" );
+				}
 			}
 
 			if ( list.Count > 0 )
@@ -144,10 +147,13 @@ namespace Imperial_Commander_Editor
 		{
 			List<string> strings = new();
 
-			foreach ( var item in entitiesToModify.SelectMany( x => x.entityProperties.buttonActions ) )
+			foreach ( var en in entitiesToModify )
 			{
-				if ( !Utils.ValidateTrigger( item.triggerGUID ) )
-					strings.Add( $"Missing Trigger from Button: '{item.buttonText}'" );
+				foreach ( var item in en.entityProperties.buttonActions )//entitiesToModify.SelectMany( x => x.entityProperties.buttonActions ) )
+				{
+					if ( !Utils.ValidateTrigger( item.triggerGUID ) )
+						strings.Add( $"Entity '{en.entityProperties.name}' has a missing Trigger from Button: '{item.buttonText}'" );
+				}
 			}
 
 			if ( strings.Count > 0 )

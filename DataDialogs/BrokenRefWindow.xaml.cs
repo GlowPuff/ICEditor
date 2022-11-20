@@ -29,7 +29,7 @@ namespace Imperial_Commander_Editor
 			notifyType = ntype;
 			brokenGUID = guid;
 			infoText = message;
-			detailsText = string.Join( "\n", info.Select( x => $"{x.notifyType} Name: {x.topOwnerName}\n\x2192 {x.itemName}: {x.details}\n" ) );
+			detailsText = string.Join( "\n", info.Select( x => $"{x.topLevelNotifyType} Name: {x.topOwnerName}\n\x2192 {x.itemName}: {x.details}\n" ) );
 
 			gbox.Header = Title = $"Broken References Report For {ntype} '{sourceName}'";
 		}

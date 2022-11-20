@@ -61,20 +61,32 @@ namespace Imperial_Commander_Editor
 				repInfo.Text = "Text Set";
 			}
 
-			//verify trigger and dp still exist
+			//verify trigger/event and dp still exist
+			List<string> strings = new();
 			if ( !Utils.ValidateMapEntity( (eventAction as EnemyDeployment).specificDeploymentPoint ) )
 			{
-				(eventAction as EnemyDeployment).specificDeploymentPoint = Guid.Empty;
+				strings.Add( "Missing Specific Deployment Point" );
+				//(eventAction as EnemyDeployment).specificDeploymentPoint = Guid.Empty;
 			}
 			for ( int i = 0; i < (eventAction as EnemyDeployment).enemyGroupData.pointList.Count; i++ )
 			{
 				if ( !Utils.ValidateMapEntity( (eventAction as EnemyDeployment).enemyGroupData.pointList[i].GUID ) )
-					(eventAction as EnemyDeployment).enemyGroupData.pointList[i].GUID = Guid.Empty;
+				{
+					strings.Add( "Missing Deployment Point" );
+					//(eventAction as EnemyDeployment).enemyGroupData.pointList[i].GUID = Guid.Empty;
+				}
 			}
 			if ( !Utils.ValidateTrigger( (eventAction as EnemyDeployment).enemyGroupData.defeatedTrigger ) )
 			{
-				(eventAction as EnemyDeployment).enemyGroupData.defeatedTrigger = Guid.Empty;
+				strings.Add( "Missing 'On Defeated' Trigger" );
+				//(eventAction as EnemyDeployment).enemyGroupData.defeatedTrigger = Guid.Empty;
 			}
+			if ( !Utils.ValidateEvent( (eventAction as EnemyDeployment).enemyGroupData.defeatedEvent ) )
+			{
+				strings.Add( "Missing 'On Defeated' Event" );
+			}
+			if ( strings.Count > 0 )
+				MessageBox.Show( $"This Event Action is referencing an Event, Trigger, or Deployment Point that no longer exist in the Mission.\n\n{string.Join( "\n", strings )}", "Missing Reference(s) Found" );
 		}
 
 		private void okButton_Click( object sender, RoutedEventArgs e )

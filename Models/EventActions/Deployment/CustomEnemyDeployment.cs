@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using Newtonsoft.Json;
@@ -155,8 +156,7 @@ namespace Imperial_Commander_Editor
 				if ( mode == NotifyMode.Fix )
 				{
 					specificDeploymentPoint = Guid.Empty;
-					if ( deploymentPoint == DeploymentSpot.Specific )
-						deploymentPoint = DeploymentSpot.Active;
+					deploymentPoint = DeploymentSpot.Active;
 					foreach ( var dp in enemyGroupData.pointList )
 					{
 						if ( dp.GUID == guid )
@@ -177,16 +177,61 @@ namespace Imperial_Commander_Editor
 
 		public BrokenRefInfo SelfCheckEvents()
 		{
-			if ( !Utils.ValidateEvent( enemyGroupData.defeatedTrigger ) )
+			if ( !Utils.ValidateEvent( enemyGroupData.defeatedEvent ) )
 			{
 				return new()
 				{
 					isBroken = true,
-					notifyType = NotifyType.Event,
+					topLevelNotifyType = NotifyType.Event,
+					itemName = displayName,
+					ownerGuid = GUID,
+					brokenGuid = enemyGroupData.defeatedEvent,
+					details = "Missing 'On Defeated' Event"
+				};
+			}
+			return new() { isBroken = false };
+		}
+
+		public BrokenRefInfo SelfCheckTriggers()
+		{
+			if ( !Utils.ValidateTrigger( enemyGroupData.defeatedTrigger ) )
+			{
+				return new()
+				{
+					isBroken = true,
+					topLevelNotifyType = NotifyType.Trigger,
 					itemName = displayName,
 					ownerGuid = GUID,
 					brokenGuid = enemyGroupData.defeatedTrigger,
-					details = "Missing 'On Defeated' Event"
+					details = "Missing 'On Defeated' Trigger"
+				};
+			}
+			return new() { isBroken = false };
+		}
+
+		public BrokenRefInfo SelfCheckEntities()
+		{
+			List<string> strings = new();
+
+			if ( !Utils.ValidateMapEntity( specificDeploymentPoint ) )
+				strings.Add( "Missing Specific Deployment Point" );
+
+			foreach ( var dp in enemyGroupData.pointList )
+			{
+				if ( !Utils.ValidateMapEntity( dp.GUID ) )
+					strings.Add( "Missing Deployment Point" );
+			}
+
+			if ( strings.Count > 0 )
+			{
+				return new()
+				{
+					isBroken = true,
+					topLevelNotifyType = NotifyType.Entity,
+					itemName = displayName,
+					ownerGuid = GUID,
+					brokenGuid = Guid.Empty,
+					details = string.Join( "\n", strings )
 				};
 			}
 			return new() { isBroken = false };

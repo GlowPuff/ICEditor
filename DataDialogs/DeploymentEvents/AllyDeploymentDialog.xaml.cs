@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
@@ -34,18 +35,28 @@ namespace Imperial_Commander_Editor
 			eventsCB.ItemsSource = Utils.mainWindow.localEvents;
 
 			//verify trigger and dp still exist
+			bool found = false;
+			List<string> strings = new();
 			if ( !Utils.ValidateMapEntity( (eventAction as AllyDeployment).specificDeploymentPoint ) )
 			{
-				(eventAction as AllyDeployment).specificDeploymentPoint = Guid.Empty;
+				found = true;
+				strings.Add( "Missing Deployment Point" );
+				//(eventAction as AllyDeployment).specificDeploymentPoint = Guid.Empty;
 			}
 			if ( !Utils.ValidateTrigger( (eventAction as AllyDeployment).setTrigger ) )
 			{
-				(eventAction as AllyDeployment).setTrigger = Guid.Empty;
+				found = true;
+				strings.Add( "Missing 'On Defeated' Trigger" );
+				//(eventAction as AllyDeployment).setTrigger = Guid.Empty;
 			}
 			if ( !Utils.ValidateEvent( (eventAction as AllyDeployment).setEvent ) )
 			{
-				(eventAction as AllyDeployment).setEvent = Guid.Empty;
+				found = true;
+				strings.Add( "Missing 'On Defeated' Event" );
+				//(eventAction as AllyDeployment).setEvent = Guid.Empty;
 			}
+			if ( found )
+				MessageBox.Show( $"This Event Action is referencing an Event, Trigger, or Deployment Point that no longer exist in the Mission.\n\n{string.Join( "\n", strings )}", "Missing Reference(s) Found" );
 		}
 
 		private void okButton_Click( object sender, RoutedEventArgs e )

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
@@ -45,17 +44,24 @@ namespace Imperial_Commander_Editor
 			buttonEnabled = false;
 
 			//make sure entity still exists
+			int count = 0;
 			for ( int i = entityGroup.missionEntities.Count - 1; i >= 0; i-- )
 			{
 				var e = Utils.mainWindow.mission.GetEntityFromGUID( entityGroup.missionEntities[i] );
 				if ( e != null )
 					addedEntities.Add( e );
 				else
+				{
+					count++;
 					entityGroup.missionEntities.RemoveAt( i );
+				}
 			}
+			if ( count > 0 )
+				MessageBox.Show( $"This Entity Group is referencing one or more Entities that no longer exist in the Mission.\n\nFound and removed {count} missing Entities.", "Missing Reference(s) Found" );
+
 			//make sure trigger still exists
-			if ( Utils.mainWindow.mission.GetTriggerFromGUID( entityGroup.triggerGUID ) == null )
-				entityGroup.triggerGUID = Guid.Empty;
+			//if ( Utils.mainWindow.mission.GetTriggerFromGUID( entityGroup.triggerGUID ) == null )
+			//	entityGroup.triggerGUID = Guid.Empty;
 		}
 
 		private void Window_MouseDown( object sender, System.Windows.Input.MouseButtonEventArgs e )

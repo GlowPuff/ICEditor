@@ -53,7 +53,6 @@ namespace Imperial_Commander_Editor
 		public string buttonText { get; set; }
 		public Guid triggerGUID { get; set; }
 		public Guid eventGUID { get; set; }
-		//public string triggerName { get; set; }
 	}
 
 	public class DPData
@@ -203,11 +202,53 @@ namespace Imperial_Commander_Editor
 				return new()
 				{
 					isBroken = true,
-					notifyType = NotifyType.Event,
+					topLevelNotifyType = NotifyType.Event,
 					itemName = cardName,
 					ownerGuid = GUID,
 					brokenGuid = defeatedEvent,
 					details = "Missing 'On Defeated' Event"
+				};
+			}
+			return new() { isBroken = false };
+		}
+
+		public BrokenRefInfo SelfCheckTriggers()
+		{
+			if ( !Utils.ValidateEvent( defeatedTrigger ) )
+			{
+				return new()
+				{
+					isBroken = true,
+					topLevelNotifyType = NotifyType.Trigger,
+					itemName = cardName,
+					ownerGuid = GUID,
+					brokenGuid = defeatedTrigger,
+					details = "Missing 'On Defeated' Event"
+				};
+			}
+			return new() { isBroken = false };
+		}
+
+		public BrokenRefInfo SelfCheckEntities()
+		{
+			List<string> strings = new();
+
+			foreach ( var item in pointList )
+			{
+				if ( !Utils.ValidateMapEntity( item.GUID ) )
+					strings.Add( $"Missing Deployment Point" );
+			}
+
+			if ( strings.Count > 0 )
+			{
+				return new()
+				{
+					isBroken = true,
+					topLevelNotifyType = NotifyType.Entity,
+					itemName = cardName,
+					ownerGuid = GUID,
+					brokenGuid = Guid.Empty,
+					details = string.Join( "\n", strings )
 				};
 			}
 			return new() { isBroken = false };
@@ -250,9 +291,9 @@ namespace Imperial_Commander_Editor
 		/// <summary>
 		/// name of the top-most Event/Trigger/Entity that contains this item
 		/// </summary>
-		public string topOwnerName;
-		public NotifyType notifyType;
-		public string itemName;
+		public string topOwnerName { get; set; }
+		public NotifyType topLevelNotifyType { get; set; }
+		public string itemName { get; set; }
 		public bool isBroken;
 		public string details { get; set; }
 		/// <summary>

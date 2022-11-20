@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -57,20 +58,33 @@ namespace Imperial_Commander_Editor
 			surgeBtn.Foreground = string.IsNullOrEmpty( ced.surges ) ? new SolidColorBrush( Colors.Red ) : new SolidColorBrush( Colors.LawnGreen );
 			keywordsBtn.Foreground = string.IsNullOrEmpty( ced.keywords ) ? new SolidColorBrush( Colors.Red ) : new SolidColorBrush( Colors.LawnGreen );
 
-			//verify trigger and dp still exist
+			//verify trigger/event and dp still exist
+			List<string> strings = new();
 			if ( !Utils.ValidateMapEntity( ced.specificDeploymentPoint ) )
 			{
-				ced.specificDeploymentPoint = Guid.Empty;
+				strings.Add( "Missing Specific Deployment Point" );
+				//ced.specificDeploymentPoint = Guid.Empty;
 			}
 			for ( int i = 0; i < ced.enemyGroupData.pointList.Count; i++ )
 			{
 				if ( !Utils.ValidateMapEntity( ced.enemyGroupData.pointList[i].GUID ) )
-					ced.enemyGroupData.pointList[i].GUID = Guid.Empty;
+				{
+					strings.Add( "Missing Deployment Point" );
+					//ced.enemyGroupData.pointList[i].GUID = Guid.Empty;
+				}
 			}
 			if ( !Utils.ValidateTrigger( ced.enemyGroupData.defeatedTrigger ) )
 			{
-				ced.enemyGroupData.defeatedTrigger = Guid.Empty;
+				strings.Add( "Missing 'On Defeated' Trigger" );
+				//ced.enemyGroupData.defeatedTrigger = Guid.Empty;
 			}
+			if ( !Utils.ValidateEvent( ced.enemyGroupData.defeatedEvent ) )
+			{
+				strings.Add( "Missing 'On Defeated' Event" );
+				//ced.enemyGroupData.defeatedTrigger = Guid.Empty;
+			}
+			if ( strings.Count > 0 )
+				MessageBox.Show( $"This Event Action is referencing an Event, Trigger, or Deployment Point that no longer exist in the Mission.\n\n{string.Join( "\n", strings )}", "Missing Reference(s) Found" );
 		}
 
 		private void editDP_Click( object sender, RoutedEventArgs e )

@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 
 namespace Imperial_Commander_Editor
 {
-	public class DeploymentPoint : INotifyPropertyChanged, IMapEntity, IHasEventReference
+	public class DeploymentPoint : INotifyPropertyChanged, IMapEntity, IHasEventReference, IHasTriggerReference
 	{
 		string _name;
 		Guid _mapSectionOwner;
@@ -137,9 +137,19 @@ namespace Imperial_Commander_Editor
 			return entityProperties.NotifyEventRemoved( name, guid, GUID, mode );
 		}
 
+		public BrokenRefInfo NotifyTriggerRemoved( Guid guid, NotifyMode mode )
+		{
+			return entityProperties.NotifyTriggerRemoved( name, guid, GUID, mode );
+		}
+
 		public BrokenRefInfo SelfCheckEvents()
 		{
 			return entityProperties.SelfCheckEvents();
+		}
+
+		public BrokenRefInfo SelfCheckTriggers()
+		{
+			return entityProperties.SelfCheckTriggers();
 		}
 	}
 }

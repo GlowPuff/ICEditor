@@ -139,5 +139,10 @@ namespace Imperial_Commander_Editor
 		{
 			return entityProperties.SelfCheckEvents();
 		}
+
+		public BrokenRefInfo SelfCheckTriggers()
+		{
+			return entityProperties.SelfCheckTriggers();
+		}
 	}
 }

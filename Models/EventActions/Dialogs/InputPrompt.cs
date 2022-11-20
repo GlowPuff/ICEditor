@@ -129,7 +129,35 @@ namespace Imperial_Commander_Editor
 				return new()
 				{
 					isBroken = true,
-					notifyType = NotifyType.Event,
+					topLevelNotifyType = NotifyType.Event,
+					itemName = displayName,
+					ownerGuid = GUID,
+					brokenGuid = Guid.Empty,
+					details = string.Join( "\n", strings )
+				};
+			}
+			return new() { isBroken = false };
+		}
+
+		public BrokenRefInfo SelfCheckTriggers()
+		{
+			List<string> strings = new();
+
+			if ( !Utils.ValidateTrigger( failTriggerGUID ) )
+				strings.Add( "Missing 'Default Handler' Trigger" );
+
+			foreach ( var item in inputList )
+			{
+				if ( !Utils.ValidateTrigger( item.triggerGUID ) )
+					strings.Add( $"Missing Trigger from Input Range: From {item.fromValue} to {item.toValue}" );
+			}
+
+			if ( strings.Count > 0 )
+			{
+				return new()
+				{
+					isBroken = true,
+					topLevelNotifyType = NotifyType.Trigger,
 					itemName = displayName,
 					ownerGuid = GUID,
 					brokenGuid = Guid.Empty,

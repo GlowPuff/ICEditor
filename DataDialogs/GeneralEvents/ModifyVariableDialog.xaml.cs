@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
@@ -24,19 +24,22 @@ namespace Imperial_Commander_Editor
 			DataContext = this;
 
 			//validate triggers
+			bool found = false;
+			List<string> strings = new();
 			for ( int i = (eventAction as ModifyVariable).triggerList.Count - 1; i >= 0; i-- )
 			{
 				if ( !Utils.ValidateTrigger( (eventAction as ModifyVariable).triggerList[i].triggerGUID ) )
 				{
-					(eventAction as ModifyVariable).triggerList[i].triggerGUID = Guid.Empty;
-					(eventAction as ModifyVariable).triggerList[i].triggerName = "None";
+					found = true;
+					strings.Add( $"{(eventAction as ModifyVariable).triggerList[i].triggerName}" );
+					//(eventAction as ModifyVariable).triggerList[i].triggerGUID = Guid.Empty;
+					//(eventAction as ModifyVariable).triggerList[i].triggerName = "None";
 				}
 			}
-
-			//foreach ( var item in (eventAction as ModifyVariable).triggerList )
-			//{
-			//	selectedTriggers.Add( new TriggerModifier( Utils.mainWindow.mission.GetTriggerFromGUID( item.triggerGUID ) ) );
-			//}
+			if ( found )
+			{
+				MessageBox.Show( $"This Event Action is referencing one or more Triggers that no longer exist in the Mission.\n\n{string.Join( "\n", strings )}", "Missing Reference(s) Found" );
+			}
 		}
 
 		private void Window_MouseDown( object sender, MouseButtonEventArgs e )

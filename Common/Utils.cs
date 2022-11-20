@@ -13,7 +13,7 @@ namespace Imperial_Commander_Editor
 	public static class Utils
 	{
 		public const string formatVersion = "19";
-		public const string appVersion = "1.0.27";
+		public const string appVersion = "1.0.28";
 
 		public static List<DeploymentCard> allyData;
 		public static List<DeploymentCard> enemyData;
@@ -186,7 +186,7 @@ namespace Imperial_Commander_Editor
 					isBroken = true,
 					topOwnerName = "Mission Properties Tab",
 					itemName = "Mission Properties",
-					notifyType = NotifyType.StartingEvent,
+					topLevelNotifyType = NotifyType.StartingEvent,
 					brokenGuid = guid,
 					ownerGuid = Guid.Empty,
 					details = "Event from [Starting Event]"
@@ -201,7 +201,7 @@ namespace Imperial_Commander_Editor
 				if ( info.isBroken )
 				{
 					info.topOwnerName = group.cardName;
-					info.notifyType = NotifyType.InitialGroup;
+					info.topLevelNotifyType = NotifyType.InitialGroup;
 					allBrokenList.Add( info );
 					brokenInitialGroupList.Add( ((EnemyGroupData)group).GUID );
 				}
@@ -214,7 +214,7 @@ namespace Imperial_Commander_Editor
 				if ( info.isBroken )
 				{
 					info.topOwnerName = group.name;
-					info.notifyType = NotifyType.EventGroup;
+					info.topLevelNotifyType = NotifyType.EventGroup;
 					allBrokenList.Add( info );
 					brokenEventGroupList.Add( ((EventGroup)group).GUID );
 				}
@@ -229,7 +229,7 @@ namespace Imperial_Commander_Editor
 					if ( info.isBroken )
 					{
 						info.topOwnerName = ev.name;
-						info.notifyType = NotifyType.Event;
+						info.topLevelNotifyType = NotifyType.Event;
 						allBrokenList.Add( info );
 						brokenEAList.Add( ((EventAction)ea).GUID );
 					}
@@ -242,7 +242,7 @@ namespace Imperial_Commander_Editor
 				if ( info.isBroken )
 				{
 					info.topOwnerName = ((Trigger)trigger).name;
-					info.notifyType = NotifyType.Trigger;
+					info.topLevelNotifyType = NotifyType.Trigger;
 					allBrokenList.Add( info );
 					brokenTriggerList.Add( ((Trigger)trigger).GUID );
 				}
@@ -254,7 +254,7 @@ namespace Imperial_Commander_Editor
 				if ( info.isBroken )
 				{
 					info.topOwnerName = ((IMapEntity)entity).name;
-					info.notifyType = NotifyType.Entity;
+					info.topLevelNotifyType = NotifyType.Entity;
 					allBrokenList.Add( info );
 					brokenEntityList.Add( ((IMapEntity)entity).GUID );
 				}
@@ -310,7 +310,7 @@ namespace Imperial_Commander_Editor
 				if ( info.isBroken )
 				{
 					info.topOwnerName = group.cardName;
-					info.notifyType = NotifyType.InitialGroup;
+					info.topLevelNotifyType = NotifyType.InitialGroup;
 					allBrokenList.Add( info );
 					brokenInitialGroupList.Add( ((EnemyGroupData)group).GUID );
 				}
@@ -323,7 +323,7 @@ namespace Imperial_Commander_Editor
 				if ( info.isBroken )
 				{
 					info.topOwnerName = ev.name;
-					info.notifyType = NotifyType.Event;
+					info.topLevelNotifyType = NotifyType.Event;
 					allBrokenList.Add( info );
 					brokenEventList.Add( ev.GUID );
 				}
@@ -338,7 +338,7 @@ namespace Imperial_Commander_Editor
 					if ( info.isBroken )
 					{
 						info.topOwnerName = ev.name;
-						info.notifyType = NotifyType.Event;
+						info.topLevelNotifyType = NotifyType.Event;
 						allBrokenList.Add( info );
 						brokenEAList.Add( ((EventAction)ea).GUID );
 					}
@@ -351,7 +351,7 @@ namespace Imperial_Commander_Editor
 				if ( info.isBroken )
 				{
 					info.topOwnerName = ((IMapEntity)entity).name;
-					info.notifyType = NotifyType.Entity;
+					info.topLevelNotifyType = NotifyType.Entity;
 					allBrokenList.Add( info );
 					brokenEntityList.Add( ((IMapEntity)entity).GUID );
 				}
@@ -400,7 +400,7 @@ namespace Imperial_Commander_Editor
 				if ( info.isBroken )
 				{
 					info.topOwnerName = group.cardName;
-					info.notifyType = NotifyType.InitialGroup;
+					info.topLevelNotifyType = NotifyType.InitialGroup;
 					allBrokenList.Add( info );
 					brokenInitialGroupList.Add( ((EnemyGroupData)group).GUID );
 				}
@@ -413,7 +413,7 @@ namespace Imperial_Commander_Editor
 				if ( info.isBroken )
 				{
 					info.topOwnerName = group.name;
-					info.notifyType = NotifyType.EntityGroup;
+					info.topLevelNotifyType = NotifyType.EntityGroup;
 					allBrokenList.Add( info );
 					brokenEntityGroupList.Add( ((EntityGroup)group).GUID );
 				}
@@ -428,7 +428,7 @@ namespace Imperial_Commander_Editor
 					if ( info.isBroken )
 					{
 						info.topOwnerName = ev.name;
-						info.notifyType = NotifyType.Event;
+						info.topLevelNotifyType = NotifyType.Event;
 						allBrokenList.Add( info );
 						brokenEAList.Add( ((EventAction)ea).GUID );
 					}

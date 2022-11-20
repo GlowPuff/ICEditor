@@ -81,8 +81,7 @@ namespace Imperial_Commander_Editor
 				if ( mode == NotifyMode.Fix )
 				{
 					specificDeploymentPoint = Guid.Empty;
-					if ( deploymentPoint == DeploymentSpot.Specific )
-						deploymentPoint = DeploymentSpot.Active;
+					deploymentPoint = DeploymentSpot.Active;
 				}
 				return new()
 				{
@@ -103,11 +102,45 @@ namespace Imperial_Commander_Editor
 				return new()
 				{
 					isBroken = true,
-					notifyType = NotifyType.Event,
+					topLevelNotifyType = NotifyType.Event,
 					itemName = displayName,
 					ownerGuid = GUID,
 					brokenGuid = setEvent,
 					details = "Missing 'On Defeated' Event"
+				};
+			}
+			return new() { isBroken = false };
+		}
+
+		public BrokenRefInfo SelfCheckTriggers()
+		{
+			if ( !Utils.ValidateTrigger( setTrigger ) )
+			{
+				return new()
+				{
+					isBroken = true,
+					topLevelNotifyType = NotifyType.Trigger,
+					itemName = displayName,
+					ownerGuid = GUID,
+					brokenGuid = setTrigger,
+					details = "Missing 'On Defeated' Trigger"
+				};
+			}
+			return new() { isBroken = false };
+		}
+
+		public BrokenRefInfo SelfCheckEntities()
+		{
+			if ( !Utils.ValidateMapEntity( specificDeploymentPoint ) )
+			{
+				return new()
+				{
+					isBroken = true,
+					topLevelNotifyType = NotifyType.Entity,
+					itemName = displayName,
+					ownerGuid = GUID,
+					brokenGuid = Guid.Empty,
+					details = "Missing Specific Deployment Point"
 				};
 			}
 			return new() { isBroken = false };

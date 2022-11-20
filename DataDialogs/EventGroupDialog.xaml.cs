@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -50,17 +51,27 @@ namespace Imperial_Commander_Editor
 			buttonEnabled = false;
 
 			//make sure events still exist
+			List<string> strings = new();
 			for ( int i = eventGroup.missionEvents.Count - 1; i >= 0; i-- )
 			{
 				var e = Utils.mainWindow.mission.GetEventFromGUID( eventGroup.missionEvents[i] );
 				if ( e != null )
 					addedEvents.Add( e );
 				else
+				{
+					strings.Add( "Missing Event" );
 					eventGroup.missionEvents.RemoveAt( i );
+				}
 			}
 			//make sure trigger still exists
 			if ( Utils.mainWindow.mission.GetTriggerFromGUID( eventGroup.triggerGUID ) == null )
+			{
 				eventGroup.triggerGUID = Guid.Empty;
+				strings.Add( "Reset missing 'Triggered By' Trigger to 'None (Global)'" );
+			}
+
+			if ( strings.Count > 0 )
+				MessageBox.Show( $"This Event Group is referencing one or more items that no longer exist in the Mission.\n\n{string.Join( "\n", strings )}", "Missing Reference(s) Found" );
 		}
 
 		private void Window_MouseDown( object sender, System.Windows.Input.MouseButtonEventArgs e )

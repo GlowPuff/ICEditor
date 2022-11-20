@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Windows;
 
 namespace Imperial_Commander_Editor
@@ -23,7 +22,8 @@ namespace Imperial_Commander_Editor
 			//verify dp still exists
 			if ( !Utils.ValidateMapEntity( (eventAction as RandomDeployment).specificDeploymentPoint ) )
 			{
-				(eventAction as RandomDeployment).specificDeploymentPoint = Guid.Empty;
+				MessageBox.Show( "This Event Action is referencing a Deployment Point that no longer exists in the Mission.", "Missing Reference(s) Found" );
+				//(eventAction as RandomDeployment).specificDeploymentPoint = Guid.Empty;
 			}
 		}
 

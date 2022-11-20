@@ -50,14 +50,18 @@ namespace Imperial_Commander_Editor
 				selectedEventAction = missionEvent.eventActions[0];
 
 			//validate additional triggers (name change, still exists)
+			List<string> strings = new();
 			for ( int i = 0; i < missionEvent.additionalTriggers.Count; i++ )
 			{
 				if ( !Utils.mainWindow.mission.TriggerExists( missionEvent.additionalTriggers[i].triggerGUID ) )
 				{
-					missionEvent.additionalTriggers[i].triggerGUID = Guid.Empty;
-					missionEvent.additionalTriggers[i].triggerName = "None";
+					strings.Add( $"Missing 'Additional Trigger': {missionEvent.additionalTriggers[i].triggerName}" );
+					//missionEvent.additionalTriggers[i].triggerGUID = Guid.Empty;
+					//missionEvent.additionalTriggers[i].triggerName = "None";
 				}
 			}
+			if ( strings.Count > 0 )
+				MessageBox.Show( $"This Event Action is referencing one or more Triggers that no longer exist in the Mission.\n\n{string.Join( "\n", strings )}", "Missing Reference(s) Found" );
 		}
 
 		private void Window_MouseDown( object sender, System.Windows.Input.MouseButtonEventArgs e )

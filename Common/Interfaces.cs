@@ -14,10 +14,12 @@ namespace Imperial_Commander_Editor
 	public interface IHasTriggerReference
 	{
 		BrokenRefInfo NotifyTriggerRemoved( Guid guid, NotifyMode mode );
+		BrokenRefInfo SelfCheckTriggers();
 	}
 	public interface IHasEntityReference
 	{
 		BrokenRefInfo NotifyEntityRemoved( Guid guid, NotifyMode mode );
+		BrokenRefInfo SelfCheckEntities();
 	}
 	public interface IPropertyModel { };
 	public interface IMapEntity

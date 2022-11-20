@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
@@ -24,13 +25,24 @@ namespace Imperial_Commander_Editor
 			DataContext = eventAction;
 
 			//validate eventAction's button triggers and events (GUID) exist
+			List<string> strings = new();
 			for ( int i = 0; i < (eventAction as InputPrompt).inputList.Count; i++ )
 			{
-				if ( !Utils.ValidateTrigger( (eventAction as InputPrompt).inputList[i].triggerGUID ) )
-					(eventAction as InputPrompt).inputList[i].triggerGUID = Guid.Empty;
 				if ( !Utils.ValidateEvent( (eventAction as InputPrompt).inputList[i].eventGUID ) )
-					(eventAction as InputPrompt).inputList[i].eventGUID = Guid.Empty;
+				{
+					strings.Add( $"Missing Input Range Event, From {(eventAction as InputPrompt).inputList[i].fromValue} to {(eventAction as InputPrompt).inputList[i].toValue}" );
+				}
+				if ( !Utils.ValidateTrigger( (eventAction as InputPrompt).inputList[i].triggerGUID ) )
+				{
+					strings.Add( $"Missing Input Range Trigger, From {(eventAction as InputPrompt).inputList[i].fromValue} to {(eventAction as InputPrompt).inputList[i].toValue}" );
+				}
+				//if ( !Utils.ValidateTrigger( (eventAction as InputPrompt).inputList[i].triggerGUID ) )
+				//	(eventAction as InputPrompt).inputList[i].triggerGUID = Guid.Empty;
+				//if ( !Utils.ValidateEvent( (eventAction as InputPrompt).inputList[i].eventGUID ) )
+				//	(eventAction as InputPrompt).inputList[i].eventGUID = Guid.Empty;
 			}
+			if ( strings.Count > 0 )
+				MessageBox.Show( $"This Event Action is referencing Events and/or Triggers that no longer exist in the Mission.\n\n{string.Join( "\n", strings )}", "Missing Reference(s) Found" );
 		}
 
 		private void Window_MouseDown( object sender, MouseButtonEventArgs e )

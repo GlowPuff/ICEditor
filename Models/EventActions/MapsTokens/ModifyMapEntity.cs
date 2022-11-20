@@ -121,7 +121,7 @@ namespace Imperial_Commander_Editor
 			foreach ( var item in entitiesToModify.SelectMany( x => x.entityProperties.buttonActions ) )
 			{
 				if ( !Utils.ValidateEvent( item.eventGUID ) )
-					list.Add( $"Missing Event from Button '{item.buttonText}'" );
+					list.Add( $"Missing Event from Button: '{item.buttonText}'" );
 			}
 
 			if ( list.Count > 0 )
@@ -129,7 +129,7 @@ namespace Imperial_Commander_Editor
 				return new BrokenRefInfo()
 				{
 					isBroken = true,
-					notifyType = NotifyType.Event,
+					topLevelNotifyType = NotifyType.Event,
 					itemName = displayName,
 					brokenGuid = Guid.Empty,
 					ownerGuid = GUID,
@@ -137,6 +137,57 @@ namespace Imperial_Commander_Editor
 				};
 			}
 
+			return new() { isBroken = false };
+		}
+
+		public BrokenRefInfo SelfCheckTriggers()
+		{
+			List<string> strings = new();
+
+			foreach ( var item in entitiesToModify.SelectMany( x => x.entityProperties.buttonActions ) )
+			{
+				if ( !Utils.ValidateTrigger( item.triggerGUID ) )
+					strings.Add( $"Missing Trigger from Button: '{item.buttonText}'" );
+			}
+
+			if ( strings.Count > 0 )
+			{
+				return new BrokenRefInfo()
+				{
+					isBroken = true,
+					topLevelNotifyType = NotifyType.Trigger,
+					itemName = displayName,
+					brokenGuid = Guid.Empty,
+					ownerGuid = GUID,
+					details = string.Join( "\n", strings )
+				};
+			}
+
+			return new() { isBroken = false };
+		}
+
+		public BrokenRefInfo SelfCheckEntities()
+		{
+			List<string> strings = new();
+
+			foreach ( var item in entitiesToModify )
+			{
+				if ( !Utils.ValidateMapEntity( item.sourceGUID ) )
+					strings.Add( $"Missing Entity: {item.entityProperties.name}" );
+			}
+
+			if ( strings.Count > 0 )
+			{
+				return new()
+				{
+					isBroken = true,
+					topLevelNotifyType = NotifyType.Entity,
+					itemName = displayName,
+					ownerGuid = GUID,
+					brokenGuid = Guid.Empty,
+					details = string.Join( "\n", strings )
+				};
+			}
 			return new() { isBroken = false };
 		}
 	}

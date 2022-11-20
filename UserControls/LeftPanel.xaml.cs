@@ -297,5 +297,19 @@ namespace Imperial_Commander_Editor
 				eventsCB.SelectedItem = clone;
 			}
 		}
+
+		public void SelectTrigger( Trigger t )
+		{
+			showGlobal = t.isGlobal;
+			triggersCB.SelectedItem = t;
+			EditTrigger();
+		}
+
+		public void SelectEvent( MissionEvent ev )
+		{
+			showGlobal = ev.isGlobal;
+			eventsCB.SelectedItem = ev;
+			EditEvent();
+		}
 	}
 }

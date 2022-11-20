@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -57,6 +58,29 @@ namespace Imperial_Commander_Editor
 					ownerGuid = GUID,
 					brokenGuid = guid,
 					details = $"Event REMOVED from [Event Group List]"
+				};
+			}
+			return new() { isBroken = false };
+		}
+
+		public BrokenRefInfo SelfCheckEvents()
+		{
+			List<string> strings = new();
+			foreach ( var item in missionEvents )
+			{
+				if ( !Utils.ValidateEvent( item ) )
+					strings.Add( "Missing Event" );
+			}
+			if ( strings.Count > 0 )
+			{
+				return new()
+				{
+					isBroken = true,
+					topLevelNotifyType = NotifyType.Event,
+					itemName = $"Event Group [{name}]",
+					ownerGuid = GUID,
+					brokenGuid = Guid.Empty,
+					details = string.Join( "\n", strings )
 				};
 			}
 			return new() { isBroken = false };

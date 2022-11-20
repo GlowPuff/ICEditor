@@ -114,7 +114,7 @@ namespace Imperial_Commander_Editor
 				return new()
 				{
 					isBroken = true,
-					notifyType = NotifyType.Event,
+					topLevelNotifyType = NotifyType.Event,
 					itemName = name,
 					ownerGuid = GUID,
 					brokenGuid = eventGUID,
@@ -125,7 +125,7 @@ namespace Imperial_Commander_Editor
 		}
 	}
 
-	public class TriggeredBy : INotifyPropertyChanged, IHasTriggerReference
+	public class TriggeredBy : INotifyPropertyChanged//, IHasTriggerReference
 	{
 		string _triggerName;
 		Guid _triggerGUID;
@@ -144,22 +144,27 @@ namespace Imperial_Commander_Editor
 				PropertyChanged?.Invoke( this, new PropertyChangedEventArgs( n ) );
 		}
 
-		public BrokenRefInfo NotifyTriggerRemoved( Guid guid, NotifyMode mode )
-		{
-			if ( triggerGUID == guid )
-			{
-				if ( mode == NotifyMode.Fix )
-					triggerGUID = Guid.Empty;
-				return new()
-				{
-					isBroken = true,
-					ownerGuid = Guid.Empty,
-					brokenGuid = guid,
-					details = $"Additional Trigger [{triggerName}]"
-				};
-			}
-			return new() { isBroken = false };
-		}
+		//public BrokenRefInfo NotifyTriggerRemoved( Guid guid, NotifyMode mode )
+		//{
+		//	if ( triggerGUID == guid )
+		//	{
+		//		if ( mode == NotifyMode.Fix )
+		//			triggerGUID = Guid.Empty;
+		//		return new()
+		//		{
+		//			isBroken = true,
+		//			ownerGuid = Guid.Empty,
+		//			brokenGuid = guid,
+		//			details = $"Additional Trigger [{triggerName}]"
+		//		};
+		//	}
+		//	return new() { isBroken = false };
+		//}
+
+		//public BrokenRefInfo SelfCheckTriggers()
+		//{
+
+		//}
 
 		public TriggeredBy()
 		{

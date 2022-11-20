@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -56,6 +57,29 @@ namespace Imperial_Commander_Editor
 					ownerGuid = GUID,
 					brokenGuid = guid,
 					details = $"Entity REMOVED from [Entity Group List]"
+				};
+			}
+			return new() { isBroken = false };
+		}
+
+		public BrokenRefInfo SelfCheckEntities()
+		{
+			List<string> strings = new();
+			foreach ( var item in missionEntities )
+			{
+				if ( !Utils.ValidateMapEntity( item ) )
+					strings.Add( "Missing Entity" );
+			}
+			if ( strings.Count > 0 )
+			{
+				return new()
+				{
+					isBroken = true,
+					topLevelNotifyType = NotifyType.Entity,
+					itemName = $"Entity List, {strings.Count} Missing Entities",
+					ownerGuid = GUID,
+					brokenGuid = Guid.Empty,
+					details = string.Join( "\n", strings )
 				};
 			}
 			return new() { isBroken = false };

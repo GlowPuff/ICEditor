@@ -82,4 +82,37 @@ namespace Imperial_Commander_Editor
 			return (bool)value == true ? "B" : "A";
 		}
 	}
+
+	public class BrokenRefColorConverter : IValueConverter
+	{
+		public object Convert( object value, Type targetType, object parameter, CultureInfo culture )
+		{
+			switch ( (NotifyType)value )
+			{
+				case NotifyType.Entity:
+					return new SolidColorBrush( Colors.DodgerBlue );
+				case NotifyType.Event:
+					return new SolidColorBrush( (Color)ColorConverter.ConvertFromString( "#FF7952C0" ) );
+				case NotifyType.Trigger:
+					return new SolidColorBrush( Colors.Purple );
+				case NotifyType.StartingEvent:
+					return new SolidColorBrush( Colors.DarkSlateBlue );
+				case NotifyType.EventGroup:
+					return new SolidColorBrush( Colors.Purple );
+				case NotifyType.EntityGroup:
+					return new SolidColorBrush( Colors.BlueViolet );
+				case NotifyType.InitialGroup:
+					return new SolidColorBrush( Colors.CornflowerBlue );
+				default:
+					return new SolidColorBrush( (Color)ColorConverter.ConvertFromString( "#FF7952C0" ) );
+			}
+		}
+
+		public object ConvertBack( object value, Type targetType, object parameter, CultureInfo culture )
+		{
+			// don't need this, this is used to convert the other way around
+			// from color to .....
+			throw new NotImplementedException();
+		}
+	}
 }

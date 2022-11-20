@@ -153,7 +153,33 @@ namespace Imperial_Commander_Editor
 				return new BrokenRefInfo()
 				{
 					isBroken = true,
-					notifyType = NotifyType.Event,
+					topLevelNotifyType = NotifyType.Event,
+					itemName = name,
+					brokenGuid = Guid.Empty,
+					ownerGuid = Guid.Empty,
+					details = string.Join( "\n", list )
+				};
+			}
+
+			return new() { isBroken = false };
+		}
+
+		public BrokenRefInfo SelfCheckTriggers()
+		{
+			List<string> list = new();
+
+			foreach ( var item in buttonActions )
+			{
+				if ( !Utils.ValidateEvent( item.triggerGUID ) )
+					list.Add( $"Missing Trigger from Button '{item.buttonText}'" );
+			}
+
+			if ( list.Count > 0 )
+			{
+				return new BrokenRefInfo()
+				{
+					isBroken = true,
+					topLevelNotifyType = NotifyType.Trigger,
 					itemName = name,
 					brokenGuid = Guid.Empty,
 					ownerGuid = Guid.Empty,

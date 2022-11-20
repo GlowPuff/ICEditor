@@ -38,8 +38,7 @@ namespace Imperial_Commander_Editor
 				if ( mode == NotifyMode.Fix )
 				{
 					specificDeploymentPoint = Guid.Empty;
-					if ( deploymentPoint == DeploymentSpot.Specific )
-						deploymentPoint = DeploymentSpot.Active;
+					deploymentPoint = DeploymentSpot.Active;
 				}
 				return new()
 				{
@@ -48,6 +47,23 @@ namespace Imperial_Commander_Editor
 					ownerGuid = GUID,
 					brokenGuid = guid,
 					details = "Specific Deployment Point reset to Active Deployment Point"
+				};
+			}
+			return new() { isBroken = false };
+		}
+
+		public BrokenRefInfo SelfCheckEntities()
+		{
+			if ( !Utils.ValidateMapEntity( specificDeploymentPoint ) )
+			{
+				return new()
+				{
+					isBroken = true,
+					topLevelNotifyType = NotifyType.Entity,
+					itemName = displayName,
+					ownerGuid = GUID,
+					brokenGuid = Guid.Empty,
+					details = "Missing Specific Deployment Point"
 				};
 			}
 			return new() { isBroken = false };

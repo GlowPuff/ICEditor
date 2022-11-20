@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
@@ -23,13 +24,25 @@ namespace Imperial_Commander_Editor
 			DataContext = this;
 
 			//validate eventAction's button triggers and events (GUID) exist
+			bool found = false;
+			List<string> strings = new();
 			for ( int i = 0; i < (eventAction as QuestionPrompt).buttonList.Count; i++ )
 			{
 				if ( !Utils.ValidateTrigger( (eventAction as QuestionPrompt).buttonList[i].triggerGUID ) )
-					(eventAction as QuestionPrompt).buttonList[i].triggerGUID = Guid.Empty;
+				{
+					found = true;
+					strings.Add( $"Missing Button Trigger On '{(eventAction as QuestionPrompt).buttonList[i].buttonText}'" );
+					//(eventAction as QuestionPrompt).buttonList[i].triggerGUID = Guid.Empty;
+				}
 				if ( !Utils.ValidateEvent( (eventAction as QuestionPrompt).buttonList[i].eventGUID ) )
-					(eventAction as QuestionPrompt).buttonList[i].eventGUID = Guid.Empty;
+				{
+					found = true;
+					strings.Add( $"Missing Button Event On '{(eventAction as QuestionPrompt).buttonList[i].buttonText}'" );
+					//(eventAction as QuestionPrompt).buttonList[i].eventGUID = Guid.Empty;
+				}
 			}
+			if ( found )
+				MessageBox.Show( $"This Event Action is referencing Events and/or Triggers that no longer exist in the Mission.\n\n{string.Join( "\n", strings )}", "Missing Reference(s) Found" );
 		}
 
 		private void Window_MouseDown( object sender, MouseButtonEventArgs e )

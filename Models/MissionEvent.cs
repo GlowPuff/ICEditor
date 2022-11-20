@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -216,6 +217,31 @@ namespace Imperial_Commander_Editor
 					ownerGuid = GUID,
 					brokenGuid = guid,
 					details = $"Trigger(s) REMOVED from 'Additional Triggers': {string.Join( ", ", ranges )}"
+				};
+			}
+			return new() { isBroken = false };
+		}
+
+		public BrokenRefInfo SelfCheckTriggers()
+		{
+			List<string> strings = new();
+			foreach ( var t in additionalTriggers )
+			{
+				if ( !Utils.ValidateTrigger( t.triggerGUID ) )
+				{
+					strings.Add( $"Missing 'Additional Trigger': {t.triggerName} [{t.triggerValue}]" );
+				}
+			}
+			if ( strings.Count > 0 )
+			{
+				return new()
+				{
+					isBroken = true,
+					topLevelNotifyType = NotifyType.Trigger,
+					itemName = "Additional Trigger",
+					ownerGuid = GUID,
+					brokenGuid = Guid.Empty,
+					details = string.Join( "\n", strings )
 				};
 			}
 			return new() { isBroken = false };

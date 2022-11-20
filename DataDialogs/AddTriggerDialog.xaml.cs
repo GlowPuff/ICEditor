@@ -43,6 +43,10 @@ namespace Imperial_Commander_Editor
 				gbox.Header = $"Edit Trigger '{trigger.name}'";
 			}
 
+			//verify triggered event exists
+			if ( !Utils.ValidateEvent( trigger.eventGUID ) )
+				MessageBox.Show( "This Event Action is referencing an Event that no longer exists in the Mission.", "Missing Reference(s) Found" );
+
 			////nameTB.Focus();
 			//nameTB.Select( 0, nameTB.Text.Length );
 		}

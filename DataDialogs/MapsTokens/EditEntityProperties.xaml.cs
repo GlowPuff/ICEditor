@@ -21,8 +21,8 @@ namespace Imperial_Commander_Editor
 			entityProperties = ep;
 
 			//verify triggers/events still exist
-			entityProperties.ValidateTriggers();
-			entityProperties.ValidateEvents();
+			//entityProperties.ValidateTriggers();
+			//entityProperties.ValidateEvents();
 		}
 
 		private void okButton_Click( object sender, RoutedEventArgs e )

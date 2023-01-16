@@ -126,7 +126,7 @@ namespace Imperial_Commander_Editor
 				triggersCB.SelectedIndex = 0;
 				Utils.mainWindow.SetStatus( "Trigger Removed" );
 				//fix the broken references
-				if ( res == MessageBoxResult.Yes )
+				if ( report.isBroken && res == MessageBoxResult.Yes )
 				{
 					var dlg = new BrokenRefWindow( NotifyType.Trigger, $"{report.detailsMessage}\n\nThese broken Trigger references will be changed to 'None (Global)'.  However, for some affected items, these broken Events will be REMOVED from them entirely.\n\nNOTE: This will affect Buttons, Input Ranges, and any other items within affected data.", report.brokenList, t.GUID, t.name );
 					dlg.ShowDialog();
@@ -173,7 +173,7 @@ namespace Imperial_Commander_Editor
 				Utils.mainWindow.mapEditor.SetSelectedPropertyPanel();
 				Utils.mainWindow.SetStatus( "Event Removed" );
 				//fix the broken references
-				if ( res == MessageBoxResult.Yes )
+				if ( report.isBroken && res == MessageBoxResult.Yes )
 				{
 					var dlg = new BrokenRefWindow( NotifyType.Event, $"{report.detailsMessage}\n\nThese broken Event references will be changed to 'None (Global)'.  However, for some affected items, these broken Events will be REMOVED from them entirely.\n\nNOTE: This will affect Buttons, Input Ranges, and any other items within affected data.", report.brokenList, t.GUID, t.name );
 					dlg.ShowDialog();

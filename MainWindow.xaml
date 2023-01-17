@@ -18,6 +18,8 @@
 			<MenuItem Header="Italian" Command="{Binding SetItalian}"/>
 			<MenuItem Header="Polski" Command="{Binding SetPolska}"/>
 			<MenuItem Header="Norwegian" Command="{Binding SetNorwegian}"/>
+			<MenuItem Header="Magyar" Command="{Binding SetHungarian}"/>
+			<MenuItem Header="Russian" Command="{Binding SetRussian}"/>
 		</ContextMenu>
 	</Window.Resources>
 

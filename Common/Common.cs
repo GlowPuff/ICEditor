@@ -6,7 +6,7 @@ namespace Imperial_Commander_Editor
 	///enums
 	public enum CustomInstructionType { Top, Bottom, Replace }
 	public enum ThreatModifierType { None, Fixed, Multiple }
-	public enum YesNoAll { Yes, No, All }
+	public enum YesNoAll { Yes, No, All, Multi }
 	public enum PriorityTargetType { Rebel, Hero, Ally, Other, Trait }
 	public enum Expansion { Core, Twin, Hoth, Bespin, Jabba, Empire, Lothal }
 	//public enum Expansion { Core, Bespin, Empire, Hoth, Jabba, Lothal, Twin }

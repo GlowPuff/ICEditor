@@ -201,5 +201,11 @@ namespace Imperial_Commander_Editor
 			Utils.mainWindow.mission.missionProperties.changeRepositionOverride = null;
 			remRepoBtn.IsEnabled = false;
 		}
+
+		private void editMultiBanAllyBtn_Click( object sender, System.Windows.RoutedEventArgs e )
+		{
+			var dlg = new MultipleBannedAlliesDialog();
+			dlg.ShowDialog();
+		}
 	}
 }

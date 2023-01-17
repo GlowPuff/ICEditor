@@ -28,6 +28,8 @@ namespace Imperial_Commander_Editor
 		public ICommand SetItalian { get; set; }
 		public ICommand SetPolska { get; set; }
 		public ICommand SetNorwegian { get; set; }
+		public ICommand SetHungarian { get; set; }
+		public ICommand SetRussian { get; set; }
 
 		MapSection _activeSection;
 		string _mainTitle, _infoText;
@@ -165,6 +167,8 @@ namespace Imperial_Commander_Editor
 			SetItalian = new RelayCommand( () => { mission.languageID = detectedLanguage.Text = "Italian (IT)"; } );
 			SetPolska = new RelayCommand( () => { mission.languageID = detectedLanguage.Text = "Polski (PL)"; } );
 			SetNorwegian = new RelayCommand( () => { mission.languageID = detectedLanguage.Text = "Norwegian (NO)"; } );
+			SetHungarian = new RelayCommand( () => { mission.languageID = detectedLanguage.Text = "Magyar (HU)"; } );
+			SetRussian = new RelayCommand( () => { mission.languageID = detectedLanguage.Text = "Russian (RU)"; } );
 		}
 
 		public void SetStatus( string s )

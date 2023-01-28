@@ -179,7 +179,6 @@ namespace Imperial_Commander_Editor
 			}
 		}
 
-
 		public void PC( [CallerMemberName] string n = "" )
 		{
 			if ( !string.IsNullOrEmpty( n ) )

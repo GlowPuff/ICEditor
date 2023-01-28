@@ -16,12 +16,6 @@ namespace Imperial_Commander_Editor
 
 			DataContext = this;
 
-			//List<DeploymentCard> alist = new();
-			//foreach ( var item in Utils.allyData )
-			//{
-			//	alist.Add( $"{item.name} [{item.id}]" );
-			//}
-
 			allyItems.ItemsSource = Utils.allyData.Select( x => new { name = $"{x.name} ({x.id})", id = x.id } );
 		}
 
@@ -39,8 +33,6 @@ namespace Imperial_Commander_Editor
 			{
 				var pres = (ContentPresenter)allyItems.ItemContainerGenerator.ContainerFromIndex( i );
 				CheckBox cb = (CheckBox)VisualTreeHelper.GetChild( pres, 0 );
-				//var grid = (Grid)VisualTreeHelper.GetChild( pres, 0 );
-				//CheckBox cb = grid.Children[0] as CheckBox;
 				if ( cb.IsChecked == true )
 					Utils.mainWindow.mission.missionProperties.multipleBannedAllies.Add( Utils.allyData[i].id );
 			}
@@ -55,8 +47,6 @@ namespace Imperial_Commander_Editor
 			{
 				var pres = (ContentPresenter)allyItems.ItemContainerGenerator.ContainerFromIndex( i );
 				CheckBox cb = (CheckBox)VisualTreeHelper.GetChild( pres, 0 );
-				//var grid = (Grid)VisualTreeHelper.GetChild( pres, 0 );
-				//CheckBox cb = grid.Children[0] as CheckBox;
 				cb.IsChecked = Utils.mainWindow.mission.missionProperties.multipleBannedAllies.Contains( Utils.allyData[i].id );
 			}
 		}

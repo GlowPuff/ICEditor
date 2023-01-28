@@ -129,7 +129,7 @@
 							<ComboBox x:Name="bannedAllyCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" Margin="10,0,0,0" DisplayMemberPath="name" SelectedValue="{Binding bannedAlly}" SelectedValuePath="id" IsEnabled="{Binding IsChecked, ElementName=banSingleRB }"/>
 						</StackPanel>
 						<StackPanel Orientation="Horizontal" Margin="0,5,0,0">
-							<RadioButton x:Name="banMultipleRB" GroupName="bannedally" Content="Multiple" IsChecked="{Binding useBannedAlly, ConverterParameter={x:Static local:YesNoAll.All}, Converter={StaticResource rbConv}}" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}"/>
+							<RadioButton x:Name="banMultipleRB" GroupName="bannedally" Content="Multiple" IsChecked="{Binding useBannedAlly, ConverterParameter={x:Static local:YesNoAll.Multi}, Converter={StaticResource rbConv}}" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}"/>
 							<Button x:Name="editMultiBanAllyBtn" Content="SELECT..." Margin="10,0" Click="editMultiBanAllyBtn_Click" IsEnabled="{Binding IsChecked, ElementName=banMultipleRB }"/>
 						</StackPanel>
 					</StackPanel>

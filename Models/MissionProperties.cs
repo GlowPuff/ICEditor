@@ -11,7 +11,7 @@ namespace Imperial_Commander_Editor
 
 		string _missionName, _missionID, _fixedAlly, _bannedAlly, _missionInfo, _specificAlly, _specificHero, _priorityOther, _missionDescription, _campaignName, _startingObjective, _additionalMissionInfo;
 		bool _optionalDeployment, _factionImperial, _factionMercenary;
-		YesNoAll _useFixedAlly, _useBannedAlly, _banAllAllies;
+		YesNoAll _useFixedAlly, _useBannedAlly;//, _banAllAllies;
 		CustomInstructionType _customInstructionType;
 		//ThreatModifierType _initialThreatType;
 		PriorityTargetType _priorityTargetType;
@@ -87,11 +87,11 @@ namespace Imperial_Commander_Editor
 			get { return _factionMercenary; }
 			set { _factionMercenary = value; PC(); }
 		}
-		public YesNoAll banAllAllies
-		{
-			get { return _banAllAllies; }
-			set { _banAllAllies = value; PC(); }
-		}
+		//public YesNoAll banAllAllies
+		//{
+		//	get { return _banAllAllies; }
+		//	set { _banAllAllies = value; PC(); }
+		//}
 
 		public YesNoAll useFixedAlly
 		{
@@ -204,7 +204,7 @@ namespace Imperial_Commander_Editor
 			customInstructionType = CustomInstructionType.Replace;
 			useFixedAlly = YesNoAll.No;
 			useBannedAlly = YesNoAll.No;
-			banAllAllies = YesNoAll.No;
+			//banAllAllies = YesNoAll.No;
 			priorityTargetType = PriorityTargetType.Rebel;
 			startingEvent = Guid.Empty;
 			missionType = MissionType.Story;

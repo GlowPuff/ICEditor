@@ -129,7 +129,7 @@ namespace Imperial_Commander_Editor
 		private void projectLV_SelectionChanged( object sender, SelectionChangedEventArgs e )
 		{
 			ProjectItem item = ((ListView)e.Source).SelectedItem as ProjectItem;
-			var project = FileManager.LoadMissionRelativePath( item.relativePath );
+			var project = FileManager.LoadMission( item.fullPathWithFilename );
 			if ( project != null )
 			{
 				MainWindow mainWindow = new( project );
@@ -160,7 +160,8 @@ namespace Imperial_Commander_Editor
 		private void removeButton_Click( object sender, RoutedEventArgs e )
 		{
 			ProjectItem pitem = (sender as Button).DataContext as ProjectItem;
-			string basePath = Path.Combine( Environment.GetFolderPath( Environment.SpecialFolder.MyDocuments ), "ImperialCommander", pitem.relativePath );
+			//string basePath = Path.Combine( Environment.GetFolderPath( Environment.SpecialFolder.MyDocuments ), "ImperialCommander", pitem.relativePath );
+			string basePath = pitem.fullPathWithFilename;
 
 			var r = MessageBox.Show( $"Are you sure you want to PERMANENTLY DELETE this mission?\r\rPath: {basePath}", "Permanently Delete This Mission?", MessageBoxButton.YesNo );
 			if ( r == MessageBoxResult.Yes )

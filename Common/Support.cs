@@ -14,9 +14,10 @@ namespace Imperial_Commander_Editor
 		public string Date { get; set; }
 		public string Description { get; set; }
 		public string fileName { get; set; }
-		public string relativePath { get; set; }
+		//public string relativePath { get; set; }
 		public string fileVersion { get; set; }
 		public long timeTicks { get; set; }
+		public string fullPathWithFilename { get; set; }
 
 		public int CompareTo( ProjectItem other ) => timeTicks > other.timeTicks ? -1 : timeTicks < other.timeTicks ? 1 : 0;
 	}

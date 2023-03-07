@@ -109,8 +109,10 @@
 									</ComboBox.ItemTemplate>
 								</ComboBox>
 
-								<Button x:Name="addInitialGroupButton" Grid.Column="1" Content="ADD INITIAL GROUP" Margin="0,10,0,0" Click="addInitialGroupButton_Click"/>
-								<Button x:Name="addReservedGroupButton" Grid.Column="1" Content="ADD RESERVED GROUP" Margin="0,10,0,0" Click="addReservedGroupButton_Click" />
+								<UniformGrid Columns="2">
+									<Button x:Name="addInitialGroupButton" Grid.Column="1" Content="ADD INITIAL GROUP" Margin="0,10,10,0" Click="addInitialGroupButton_Click"/>
+									<Button x:Name="addReservedGroupButton" Grid.Column="1" Content="ADD RESERVED GROUP" Margin="10,10,0,0" Click="addReservedGroupButton_Click" />
+								</UniformGrid>
 
 							</StackPanel>
 						</StackPanel>

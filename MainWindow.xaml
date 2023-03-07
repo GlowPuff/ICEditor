@@ -179,6 +179,16 @@
 							</TabItem.Header>
 							<local:PropertiesPanel x:Name="properties"/>
 						</TabItem>
+
+						<TabItem Width="100">
+							<TabItem.Header>
+								<StackPanel>
+									<materialDesign:PackIcon Kind="User" Width="24" Height="24" HorizontalAlignment="Center" />
+									<TextBlock Style="{StaticResource MaterialDesignTextBlock}" Text="Character Editor" HorizontalAlignment="Center" TextWrapping="Wrap"/>
+								</StackPanel>
+							</TabItem.Header>
+							<local:ToonEditor x:Name="toonEditor"/>
+						</TabItem>
 					</TabControl>
 				</Grid>
 			</Grid>

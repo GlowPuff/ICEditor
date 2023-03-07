@@ -20,7 +20,12 @@ namespace Imperial_Commander_Editor
 		/// <summary>
 		/// folder path+filename RELATIVE to SpecialFolder.MyDocuments
 		/// </summary>
-		public string relativePath;
+		//[JsonIgnore]
+		//public string relativePath;
+
+		//only used internally to track the filename when saving
+		[JsonIgnore]
+		public string fullPathToFile;
 
 		/// <summary>
 		///	increment this each time file format gets updated
@@ -60,7 +65,8 @@ namespace Imperial_Commander_Editor
 			//defaults
 			missionGUID = Guid.NewGuid();
 			fileName = "";
-			relativePath = "";
+			//relativePath = "";
+			fullPathToFile = "";
 			languageID = "English (EN)";
 			saveDate = DateTime.Now.ToString( "M/d/yyyy" );
 			timeTicks = DateTime.Now.Ticks;

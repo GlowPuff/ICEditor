@@ -29,7 +29,7 @@ namespace Imperial_Commander_Editor
 				}
 			}
 
-			string filePath;
+			string filePath;//full path to the file, including filename
 			if ( saveAs || string.IsNullOrEmpty( mission.fileName ) )
 			{
 				SaveFileDialog saveFileDialog = new();
@@ -40,27 +40,28 @@ namespace Imperial_Commander_Editor
 				if ( saveFileDialog.ShowDialog() == true )
 				{
 					filePath = saveFileDialog.FileName;
-					mission.relativePath = Path.GetRelativePath( basePath, new DirectoryInfo( filePath ).FullName );
+					mission.fullPathToFile = filePath;
+					//mission.relativePath = Path.GetRelativePath( basePath, new DirectoryInfo( filePath ).FullName );
 				}
 				else
 					return false;
 			}
 			else
-				filePath = Path.Combine( basePath, mission.relativePath, mission.fileName );
+				filePath = mission.fullPathToFile; //Path.Combine( basePath, mission.relativePath, mission.fileName );
 
-			//just use the filename, not the whole path
 			FileInfo fi = new( filePath );
 			mission.fileName = fi.Name;
+			mission.fullPathToFile = filePath;
 			mission.saveDate = DateTime.Now.ToString( "M/d/yyyy" );
 			mission.timeTicks = DateTime.Now.Ticks;
 			mission.fileVersion = Utils.formatVersion;
 
 			string output = JsonConvert.SerializeObject( mission, Formatting.Indented );
-			string outpath = Path.Combine( basePath, mission.relativePath );
-			Utils.Log( outpath );
+			//string outpath = Path.Combine( basePath, mission.relativePath );
+			Utils.Log( mission.fullPathToFile );
 			try
 			{
-				using ( var stream = File.CreateText( outpath ) )
+				using ( var stream = File.CreateText( mission.fullPathToFile ) )
 				{
 					stream.Write( output );
 				}
@@ -93,7 +94,8 @@ namespace Imperial_Commander_Editor
 				//overwrite fileName, relativePath and fileVersion properties so they are up-to-date
 				FileInfo fi = new FileInfo( filename );
 				m.fileName = fi.Name;
-				m.relativePath = Path.GetRelativePath( basePath, new DirectoryInfo( filename ).FullName );
+				m.fullPathToFile = fi.FullName;
+				//m.relativePath = Path.GetRelativePath( basePath, new DirectoryInfo( filename ).FullName );
 				m.fileVersion = Utils.formatVersion;
 				return m;
 			}
@@ -104,47 +106,87 @@ namespace Imperial_Commander_Editor
 			}
 		}
 
+		public static Mission LoadMissionFromString( string json )
+		{
+			//make sure it's a mission, simple check for a property in the text
+			if ( !json.Contains( "missionGUID" ) )
+				return null;
+
+			try
+			{
+				var m = JsonConvert.DeserializeObject<Mission>( json );
+				Utils.Log( "LoadMissionFromString: " + m.missionProperties.missionID );
+				return m;
+			}
+			catch ( Exception e )
+			{
+				MessageBox.Show( "LoadMissionFromString()::Could not load the Mission.\n\nException:\n" + e.Message, "App Exception", MessageBoxButton.OK, MessageBoxImage.Error );
+				return null;
+			}
+		}
+
+		/// <summary>
+		/// "filename" is a full path, returns null on failure
+		/// </summary>
 		public static ProjectItem CreateProjectItem( string filename )
 		{
-			ProjectItem projectItem = new();
-			FileInfo fi = new FileInfo( filename );
-			string basePath = Path.Combine( Environment.GetFolderPath( Environment.SpecialFolder.MyDocuments ), "ImperialCommander" );
+			ProjectItem projectItem = new ProjectItem();
 
-			string[] text = File.ReadAllLines( filename );
-			foreach ( var line in text )
+			var mission = LoadMissionFromString( File.ReadAllText( filename ) );
+			if ( mission != null )
 			{
-				//manually parse each line
-				string[] split = line.Split( ':' );
-				if ( split.Length == 2 )
-				{
-					projectItem.fileName = fi.Name;
-					projectItem.relativePath = Path.GetRelativePath( basePath, new DirectoryInfo( filename ).FullName );
-
-					split[0] = split[0].Replace( "\"", "" ).Replace( ",", "" ).Trim();
-					split[1] = split[1].Replace( "\"", "" ).Replace( ",", "" ).Trim();
-					if ( split[0] == "missionName" )
-						projectItem.Title = split[1];
-					if ( split[0] == "saveDate" )
-						projectItem.Date = split[1];
-					if ( split[0] == "fileVersion" )
-						projectItem.fileVersion = split[1];
-					if ( split[0] == "timeTicks" )
-						projectItem.timeTicks = long.Parse( split[1] );
-				}
-				else if ( split.Length > 2 )//mission name with a colon
-				{
-					for ( int i = 0; i < split.Length; i++ )
-						split[i] = split[i].Replace( "\"", "" ).Replace( ",", "" ).Trim();
-					if ( split[0] == "missionName" )
-					{
-						int idx = line.IndexOf( ':' );
-						int c = line.LastIndexOf( ',' );
-						string mname = line.Substring( idx + 1, c - idx - 1 ).Replace( "\"", "" ).Trim();
-						projectItem.Title = mname;
-					}
-				}
+				projectItem.fullPathWithFilename = filename;
+				projectItem.fileName = new FileInfo( filename ).Name;
+				projectItem.Title = mission.missionProperties.missionName;
+				projectItem.Date = mission.saveDate;
+				projectItem.fileVersion = mission.fileVersion;
+				projectItem.timeTicks = mission.timeTicks;
+				projectItem.Description = mission.missionProperties.missionDescription;
 			}
+			else
+				return null;
+
 			return projectItem;
+
+			//ProjectItem projectItem = new();
+			//FileInfo fi = new FileInfo( filename );
+			//string basePath = Path.Combine( Environment.GetFolderPath( Environment.SpecialFolder.MyDocuments ), "ImperialCommander" );
+
+			//string[] text = File.ReadAllLines( filename );
+			//foreach ( var line in text )
+			//{
+			//	//manually parse each line
+			//	string[] split = line.Split( ':' );
+			//	if ( split.Length == 2 )
+			//	{
+			//		projectItem.fileName = fi.Name;
+			//		projectItem.relativePath = Path.GetRelativePath( basePath, new DirectoryInfo( filename ).FullName );
+
+			//		split[0] = split[0].Replace( "\"", "" ).Replace( ",", "" ).Trim();
+			//		split[1] = split[1].Replace( "\"", "" ).Replace( ",", "" ).Trim();
+			//		if ( split[0] == "missionName" )
+			//			projectItem.Title = split[1];
+			//		if ( split[0] == "saveDate" )
+			//			projectItem.Date = split[1];
+			//		if ( split[0] == "fileVersion" )
+			//			projectItem.fileVersion = split[1];
+			//		if ( split[0] == "timeTicks" )
+			//			projectItem.timeTicks = long.Parse( split[1] );
+			//	}
+			//	else if ( split.Length > 2 )//mission name with a colon
+			//	{
+			//		for ( int i = 0; i < split.Length; i++ )
+			//			split[i] = split[i].Replace( "\"", "" ).Replace( ",", "" ).Trim();
+			//		if ( split[0] == "missionName" )
+			//		{
+			//			int idx = line.IndexOf( ':' );
+			//			int c = line.LastIndexOf( ',' );
+			//			string mname = line.Substring( idx + 1, c - idx - 1 ).Replace( "\"", "" ).Trim();
+			//			projectItem.Title = mname;
+			//		}
+			//	}
+			//}
+			//return projectItem;
 		}
 
 
@@ -176,7 +218,8 @@ namespace Imperial_Commander_Editor
 				foreach ( FileInfo fi in files )
 				{
 					var pi = CreateProjectItem( fi.FullName );
-					items.Add( pi );
+					if ( pi != null )
+						items.Add( pi );
 				}
 				items.Sort();
 				return items;
@@ -192,37 +235,34 @@ namespace Imperial_Commander_Editor
 		/// </summary>
 		/// <param name="relativePath">The RELATIVE PATH within basePath</param>
 		/// <returns></returns>
-		public static Mission LoadMissionRelativePath( string relativePath )
-		{
-			//missionID is the folder name containing the mission
-			//if ( missionID == "Saves" )
-			//	return null;
+		//public static Mission LoadMissionRelativePath( string relativePath )
+		//{
+		//	try
+		//	{
+		//		//combines into (XX is the mission number):
+		//		//../Documents/ImperialCommander/MISSIONXX.json
+		//		string basePath = Path.Combine( Environment.GetFolderPath( Environment.SpecialFolder.MyDocuments ), "ImperialCommander" );
+		//		string json = "";
+		//		using ( StreamReader sr = new( Path.Combine( basePath, relativePath ) ) )
+		//		{
+		//			json = sr.ReadToEnd();
+		//		}
 
-			try
-			{
-				//combines into (XX is the mission number):
-				//../MyDocs/ImperialCommander/MISSIONXX.json
-				string basePath = Path.Combine( Environment.GetFolderPath( Environment.SpecialFolder.MyDocuments ), "ImperialCommander" );
-				string json = "";
-				using ( StreamReader sr = new( Path.Combine( basePath, relativePath ) ) )
-				{
-					json = sr.ReadToEnd();
-				}
+		//		var m = JsonConvert.DeserializeObject<Mission>( json, new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Populate } );
+		//		//overwrite fileName, relativePath and fileVersion properties so they are up-to-date
+		//		FileInfo fi = new FileInfo( Path.Combine( basePath, relativePath ) );
+		//		m.fileName = fi.Name;
+		//		m.fullPathToFile = fi.FullName;
+		//		//m.relativePath = Path.GetRelativePath( basePath, new DirectoryInfo( Path.Combine( basePath, relativePath ) ).FullName );
+		//		m.fileVersion = Utils.formatVersion;
 
-				var m = JsonConvert.DeserializeObject<Mission>( json, new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Populate } );
-				//overwrite fileName, relativePath and fileVersion properties so they are up-to-date
-				FileInfo fi = new FileInfo( Path.Combine( basePath, relativePath ) );
-				m.fileName = fi.Name;
-				m.relativePath = Path.GetRelativePath( basePath, new DirectoryInfo( Path.Combine( basePath, relativePath ) ).FullName );
-				m.fileVersion = Utils.formatVersion;
-
-				return m;
-			}
-			catch ( Exception e )
-			{
-				MessageBox.Show( "Could not load the Mission.\r\n\r\nException:\r\n" + e.Message, "App Exception", MessageBoxButton.OK, MessageBoxImage.Error );
-				return null;
-			}
-		}
+		//		return m;
+		//	}
+		//	catch ( Exception e )
+		//	{
+		//		MessageBox.Show( "Could not load the Mission.\n\nException:\n" + e.Message, "App Exception", MessageBoxButton.OK, MessageBoxImage.Error );
+		//		return null;
+		//	}
+		//}
 	}
 }

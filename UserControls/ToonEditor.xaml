@@ -1,0 +1,61 @@
+﻿<UserControl x:Class="Imperial_Commander_Editor.ToonEditor"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Imperial_Commander_Editor"
+             mc:Ignorable="d" 
+						 xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             d:DesignHeight="450" d:DesignWidth="850">
+
+	<ScrollViewer VerticalScrollBarVisibility="Auto" Margin="10">
+		<StackPanel>
+			<GroupBox Header="Custom Character Actions" Background="#FF503B7C" Margin="0,0,0,10">
+				<UniformGrid Columns="3">
+					<Button x:Name="newToon" Content="NEW CHARACTER"/>
+
+					<!--SPACER-->
+					<TextBlock/>
+
+					<StackPanel Orientation="Horizontal">
+						<ComboBox x:Name="toonListCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectedValue="{Binding selectedGroup, RelativeSource={RelativeSource AncestorType=local:EncounterPanel}}" SelectedValuePath="id" Margin="10,0,0,0" MinWidth="200">
+							<ComboBox.ItemTemplate>
+								<DataTemplate>
+									<TextBlock>
+										<TextBlock.Text>
+											<MultiBinding StringFormat="{}{0}: {1}">
+												<Binding Path="name"/>
+												<Binding Path="id"/>
+											</MultiBinding>
+										</TextBlock.Text>
+									</TextBlock>
+								</DataTemplate>
+							</ComboBox.ItemTemplate>
+						</ComboBox>
+						<Button x:Name="editToon" Content="{materialDesign:PackIcon Kind=Edit}" Style="{StaticResource MaterialDesignFloatingActionButton}" Margin="10,0,0,0" Width="35" Height="35"/>
+					</StackPanel>
+				</UniformGrid>
+			</GroupBox>
+
+			<UniformGrid Columns="2">
+				<!--LEFT-->
+				<StackPanel Margin="0,0,5,0">
+					<GroupBox Header="Title" Background="#FF503B7C">
+						<StackPanel>
+
+						</StackPanel>
+					</GroupBox>
+
+				</StackPanel>
+				<!--RIGHT-->
+				<StackPanel Margin="5,0,0,0">
+					<GroupBox Header="Title" Background="#FF503B7C">
+						<StackPanel>
+
+						</StackPanel>
+					</GroupBox>
+				</StackPanel>
+			</UniformGrid>
+		</StackPanel>
+	</ScrollViewer>
+</UserControl>

@@ -75,7 +75,7 @@
 					</GroupBox>
 
 					<!--RIGHT-->
-					<GroupBox Header="Who Targets This New Priority?" Margin="5,0,0,0" Padding="10" Background="#FF503B7C">
+					<GroupBox Header="Which Groups Are Affected By This Override?" Margin="5,0,0,0" Padding="10" Background="#FF503B7C">
 						<StackPanel>
 							<RadioButton Content="All Groups" GroupName="gg" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding groupType, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:GroupType.All}}"/>
 

@@ -4,7 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Imperial_Commander_Editor"
-        mc:Ignorable="d" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d" 
+				xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         Background="{DynamicResource MaterialDesignDarkBackground}"
         TextElement.FontWeight="Medium"
@@ -39,7 +40,7 @@
 
 		<!--title-->
 		<TextBlock Style="{StaticResource MaterialDesignHeadline4TextBlock}" Text="Imperial Commander Mission Editor" Foreground="White" Grid.ColumnSpan="2"/>
-		<TextBlock Grid.Column="1" HorizontalAlignment="Right" FontSize="14" VerticalAlignment="Center" Foreground="White" TextWrapping="Wrap" Width="160">
+		<TextBlock Grid.Column="1" HorizontalAlignment="Right" FontSize="14" VerticalAlignment="Center" Foreground="White" TextWrapping="Wrap" >
 			For The <Italic>Imperial Assault</Italic> Board Game
 		</TextBlock>
 
@@ -50,11 +51,16 @@
 
 		<StackPanel Grid.Row="2" Grid.Column="1">
 			<!--missions-->
-			<Button x:Name="newMissionButton" Click="newMissionButton_Click" Height="70">
-				<StackPanel Orientation="Horizontal" Width="230">
+			<Button x:Name="newMissionButton" Click="newMissionButton_Click" Height="80" HorizontalContentAlignment="Left">
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="auto" />
+						<ColumnDefinition Width="*" />
+					</Grid.ColumnDefinitions>
+
 					<Image Grid.RowSpan="2" Source="Assets/new mission.png" Width="50" Margin="0,0,10,0"/>
 
-					<Grid Margin="0,10">
+					<Grid Grid.Column="1" Margin="0,10">
 						<Grid.RowDefinitions>
 							<RowDefinition Height="auto"/>
 							<RowDefinition Height="auto"/>
@@ -64,14 +70,19 @@
 
 						<TextBlock Grid.Column="1" Grid.Row="1" Text="Create a new Mission." TextWrapping="Wrap"/>
 					</Grid>
-				</StackPanel>
+				</Grid>
 			</Button>
 
-			<Button x:Name="loadMissionButton" Click="loadMissionButton_Click" Height="70" Margin="0,10,0,0">
-				<StackPanel Orientation="Horizontal" Width="230">
+			<Button x:Name="loadMissionButton" Click="loadMissionButton_Click" Height="80" Margin="0,10,0,0" HorizontalContentAlignment="Left">
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="auto" />
+						<ColumnDefinition Width="*" />
+					</Grid.ColumnDefinitions>
+
 					<Image Grid.RowSpan="2" Source="Assets/open.png" Width="50" Margin="0,0,10,0"/>
 
-					<Grid Margin="0,10">
+					<Grid Grid.Column="1" Margin="0,10">
 						<Grid.RowDefinitions>
 							<RowDefinition Height="auto"/>
 							<RowDefinition Height="auto"/>
@@ -81,7 +92,28 @@
 
 						<TextBlock Grid.Column="1" Grid.Row="1" Text="Load a Mission from a file." TextWrapping="Wrap"/>
 					</Grid>
-				</StackPanel>
+				</Grid>
+			</Button>
+
+			<Button x:Name="toonEditorButton" Click="toonEditorButton_Click" Height="80" Margin="0,10,0,0" HorizontalContentAlignment="Left">
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="auto" />
+						<ColumnDefinition Width="*" />
+					</Grid.ColumnDefinitions>
+					<Image Grid.RowSpan="2" Source="Assets/faction rebel.png" Width="50" Margin="0,0,10,0"/>
+
+					<Grid Grid.Column="1" Margin="0,10">
+						<Grid.RowDefinitions>
+							<RowDefinition Height="auto"/>
+							<RowDefinition Height="auto"/>
+						</Grid.RowDefinitions>
+
+						<TextBlock Grid.Column="1" Text="CHARACTER EDITOR" />
+
+						<TextBlock Grid.Column="1" Grid.Row="1" Text="Create custom Heroes, Allies, Enemies, and Villains." TextWrapping="Wrap"/>
+					</Grid>
+				</Grid>
 			</Button>
 
 			<!--campaigns-->

@@ -53,6 +53,7 @@ namespace Imperial_Commander_Editor
 		public ObservableCollection<EnemyGroupData> reservedDeploymentGroups { get; set; }
 		public ObservableCollection<EventGroup> eventGroups { get; set; }
 		public ObservableCollection<EntityGroup> entityGroups { get; set; }
+		public ObservableCollection<CustomToon> customCharacters { get; set; }
 
 		public void PC( [CallerMemberName] string n = "" )
 		{
@@ -80,6 +81,7 @@ namespace Imperial_Commander_Editor
 			reservedDeploymentGroups = new();
 			eventGroups = new();
 			entityGroups = new();
+			customCharacters = new();
 		}
 
 		public void InitDefaultData()

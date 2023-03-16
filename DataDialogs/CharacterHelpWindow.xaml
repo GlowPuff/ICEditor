@@ -1,0 +1,41 @@
+﻿<Window x:Class="Imperial_Commander_Editor.CharacterHelpWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Imperial_Commander_Editor"
+        mc:Ignorable="d"
+ 				xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+				Style="{StaticResource dws}"
+       Title="Character Help" Width="700" SizeToContent="Height" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown">
+
+	<Border BorderBrush="MediumPurple" BorderThickness="2">
+		<GroupBox x:Name="gbox" Header="Character Help" Style="{DynamicResource MaterialDesignGroupBox}">
+			<Grid>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="*"/>
+					<RowDefinition Height="auto"/>
+					<RowDefinition Height="auto"/>
+				</Grid.RowDefinitions>
+
+				<StackPanel>
+					<TextBlock x:Name="standaloneMessage" Text="" FontWeight="Bold" Margin="0,0,0,10" FontSize="16" TextWrapping="Wrap" Foreground="Violet" HorizontalAlignment="Center"/>
+
+					<TextBlock Text="Hero: These Characters will be available in the Imperial Commander setup screen for players to choose from." TextWrapping="Wrap" Margin="0,0,0,10"/>
+					<TextBlock Text="Ally: These Characters will be available in the Imperial Commander setup screen for players to choose from." Margin="0,10" TextWrapping="Wrap"/>
+					<TextBlock Text="Rebel / Neutral: These Groups will deploy on the Rebel side (left) of the screen in the Imperial Commander app." Margin="0,10" TextWrapping="Wrap"/>
+					<TextBlock Text="Enemy Group: These Groups will deploy on the Imperial side (right) of the screen in the Imperial Commander app." Margin="0,10" TextWrapping="Wrap"/>
+					<TextBlock Text="Villain: These Groups will deploy on the Imperial side (right) of the screen in the Imperial Commander app." Margin="0,10" TextWrapping="Wrap"/>
+
+					<TextBlock Text="NOTE: Characters created and saved WITHIN a Mission will ONLY be available when players select the Mission in the Imperial Commander setup screen." FontStyle="Italic" Margin="0,5" TextWrapping="Wrap" Foreground="Violet"/>
+
+					<TextBlock Text="NOTE: If you want this Character available from an Imperial Commander Campaign or on-demand from within ANY standalone Mission, you must EXPORT the Character so players can IMPORT it for use in their app at any time." FontStyle="Italic" Margin="0,5" TextWrapping="Wrap" Foreground="Violet"/>
+				</StackPanel>
+				<Separator Grid.Row="1" Margin="0,10,0,10"/>
+				<StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" >
+					<Button x:Name="cancelButton" Content="OK" MinWidth="100" Margin="10,0,0,0" Click="cancelButton_Click" IsCancel="True"/>
+				</StackPanel>
+			</Grid>
+		</GroupBox>
+	</Border>
+</Window>

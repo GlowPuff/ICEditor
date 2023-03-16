@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Windows;
 using Microsoft.Win32;
 using Newtonsoft.Json;
@@ -13,9 +14,9 @@ namespace Imperial_Commander_Editor
 		public FileManager() { }
 
 		/// <summary>
-		/// saves a mission to base project folder
+		/// Checks if the base save folder exists (Documents/ImperialCommander) and creates it if not
 		/// </summary>
-		public static bool Save( Mission mission, bool saveAs )
+		private static bool CreateBaseDirectory()
 		{
 			string basePath = Path.Combine( Environment.GetFolderPath( Environment.SpecialFolder.MyDocuments ), "ImperialCommander" );
 
@@ -24,10 +25,23 @@ namespace Imperial_Commander_Editor
 				var di = Directory.CreateDirectory( basePath );
 				if ( di == null )
 				{
-					MessageBox.Show( "Could not create the Mission project folder.\r\nTried to create: " + basePath, "App Exception", MessageBoxButton.OK, MessageBoxImage.Error );
+					MessageBox.Show( "Could not create the base project folder.\r\nTried to create: " + basePath, "App Exception", MessageBoxButton.OK, MessageBoxImage.Error );
 					return false;
 				}
 			}
+
+			return true;
+		}
+
+		/// <summary>
+		/// saves a mission to base project folder
+		/// </summary>
+		public static bool Save( Mission mission, bool saveAs )
+		{
+			string basePath = Path.Combine( Environment.GetFolderPath( Environment.SpecialFolder.MyDocuments ), "ImperialCommander" );
+
+			if ( !CreateBaseDirectory() )
+				return false;
 
 			string filePath;//full path to the file, including filename
 			if ( saveAs || string.IsNullOrEmpty( mission.fileName ) )
@@ -47,7 +61,7 @@ namespace Imperial_Commander_Editor
 					return false;
 			}
 			else
-				filePath = mission.fullPathToFile; //Path.Combine( basePath, mission.relativePath, mission.fileName );
+				filePath = mission.fullPathToFile;
 
 			FileInfo fi = new( filePath );
 			mission.fileName = fi.Name;
@@ -57,7 +71,6 @@ namespace Imperial_Commander_Editor
 			mission.fileVersion = Utils.formatVersion;
 
 			string output = JsonConvert.SerializeObject( mission, Formatting.Indented );
-			//string outpath = Path.Combine( basePath, mission.relativePath );
 			Utils.Log( mission.fullPathToFile );
 			try
 			{
@@ -115,7 +128,7 @@ namespace Imperial_Commander_Editor
 			try
 			{
 				var m = JsonConvert.DeserializeObject<Mission>( json );
-				Utils.Log( "LoadMissionFromString: " + m.missionProperties.missionID );
+				//Utils.Log( "LoadMissionFromString: " + m.missionProperties.missionID );
 				return m;
 			}
 			catch ( Exception e )
@@ -231,38 +244,105 @@ namespace Imperial_Commander_Editor
 		}
 
 		/// <summary>
-		/// Load a mission from its .json file
+		/// Load a Resource asset embedded in the app
 		/// </summary>
-		/// <param name="relativePath">The RELATIVE PATH within basePath</param>
-		/// <returns></returns>
-		//public static Mission LoadMissionRelativePath( string relativePath )
-		//{
-		//	try
-		//	{
-		//		//combines into (XX is the mission number):
-		//		//../Documents/ImperialCommander/MISSIONXX.json
-		//		string basePath = Path.Combine( Environment.GetFolderPath( Environment.SpecialFolder.MyDocuments ), "ImperialCommander" );
-		//		string json = "";
-		//		using ( StreamReader sr = new( Path.Combine( basePath, relativePath ) ) )
-		//		{
-		//			json = sr.ReadToEnd();
-		//		}
+		public static T LoadAsset<T>( string assetName )
+		{
+			try
+			{
+				string json = "";
+				var assembly = Assembly.GetExecutingAssembly();
+				var resourceName = assembly.GetManifestResourceNames().Single( str => str.EndsWith( assetName ) );
+				using ( Stream stream = assembly.GetManifestResourceStream( resourceName ) )
+				using ( StreamReader reader = new StreamReader( stream ) )
+				{
+					json = reader.ReadToEnd();
+				}
 
-		//		var m = JsonConvert.DeserializeObject<Mission>( json, new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Populate } );
-		//		//overwrite fileName, relativePath and fileVersion properties so they are up-to-date
-		//		FileInfo fi = new FileInfo( Path.Combine( basePath, relativePath ) );
-		//		m.fileName = fi.Name;
-		//		m.fullPathToFile = fi.FullName;
-		//		//m.relativePath = Path.GetRelativePath( basePath, new DirectoryInfo( Path.Combine( basePath, relativePath ) ).FullName );
-		//		m.fileVersion = Utils.formatVersion;
+				return JsonConvert.DeserializeObject<T>( json );
+			}
+			catch ( JsonReaderException e )
+			{
+				Utils.Log( $"FileManager::LoadData() ERROR:\r\nError parsing {assetName}" );
+				Utils.Log( e.Message );
+				throw new Exception( $"FileManager::LoadData() ERROR:\r\nError parsing {assetName}" );
+			}
+		}
 
-		//		return m;
-		//	}
-		//	catch ( Exception e )
-		//	{
-		//		MessageBox.Show( "Could not load the Mission.\n\nException:\n" + e.Message, "App Exception", MessageBoxButton.OK, MessageBoxImage.Error );
-		//		return null;
-		//	}
-		//}
+		/// <summary>
+		/// Handles full Toon export experience, returns bool for success
+		/// </summary>
+		public static bool ExportCharacter( CustomToon toon )
+		{
+			string basePath = Path.Combine( Environment.GetFolderPath( Environment.SpecialFolder.MyDocuments ), "ImperialCommander" );
+
+			if ( !CreateBaseDirectory() )
+				return false;
+
+			string filePath;//full path to the file, including filename
+			SaveFileDialog saveFileDialog = new();
+			saveFileDialog.DefaultExt = ".json";
+			saveFileDialog.Title = "Export Custom Character";
+			saveFileDialog.Filter = "Character File (*.json)|*.json";
+			saveFileDialog.InitialDirectory = basePath;
+			if ( saveFileDialog.ShowDialog() == true )
+			{
+				filePath = saveFileDialog.FileName;
+			}
+			else
+				return false;
+
+			string output = JsonConvert.SerializeObject( toon, Formatting.Indented );
+			try
+			{
+				using ( var stream = File.CreateText( filePath ) )
+				{
+					stream.Write( output );
+				}
+			}
+			catch ( Exception e )
+			{
+				MessageBox.Show( "Could not Export the Character.\r\n\r\nException:\r\n" + e.Message, "App Exception", MessageBoxButton.OK, MessageBoxImage.Error );
+				return false;
+			}
+
+			return true;
+		}
+
+		public static CustomToon ImportCharacter()
+		{
+			string basePath = Path.Combine( Environment.GetFolderPath( Environment.SpecialFolder.MyDocuments ), "ImperialCommander" );
+
+			CreateBaseDirectory();
+
+			OpenFileDialog openFileDialog = new();
+			openFileDialog.DefaultExt = ".json";
+			openFileDialog.Title = "Import Custom Character";
+			openFileDialog.Filter = "Character File (*.json)|*.json";
+			openFileDialog.InitialDirectory = basePath;
+			if ( openFileDialog.ShowDialog() == true )
+			{
+				try
+				{
+					string json = "";
+					using ( StreamReader sr = new( openFileDialog.FileName ) )
+					{
+						json = sr.ReadToEnd();
+					}
+					var m = JsonConvert.DeserializeObject<CustomToon>( json );
+					if ( m != null )
+						return m;
+					else
+						return null;
+				}
+				catch ( Exception e )
+				{
+					MessageBox.Show( "Could not Import the Character.\r\n\r\nException:\r\n" + e.Message, "App Exception", MessageBoxButton.OK, MessageBoxImage.Error );
+					return null;
+				}
+			}
+			else
+				return null;
+		}
 	}
 }

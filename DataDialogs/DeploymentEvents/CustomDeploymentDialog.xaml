@@ -14,7 +14,7 @@
 	</Window.Resources>
 
 	<Border BorderBrush="MediumPurple" BorderThickness="2">
-		<GroupBox Header="Custom Deployment Event Action" Style="{DynamicResource MaterialDesignGroupBox}">
+		<GroupBox Header="Custom Deployment Event Action (Legacy Feature For Compatibility - Use The Character Editor For Custom Groups)" Style="{DynamicResource MaterialDesignGroupBox}">
 			<Grid>
 				<Grid.RowDefinitions>
 					<RowDefinition Height="auto"/>
@@ -120,8 +120,7 @@
 										<CheckBox Content="Can Be Defeated" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding canBeDefeated}"/>
 									</WrapPanel>
 
-									<TextBlock Text="Groups that can't Redeploy are removed from the mission and do not return to the hand on defeat, but they can be manually deployed again with new options." TextWrapping="Wrap" FontStyle="Italic" Margin="0,5,0,0"/>
-									<TextBlock Text="Groups that Reset on Redeployment are able to redeploy in their original card state, removing any customization on this page. Otherwise, they redeploy with the same customized options." TextWrapping="Wrap" FontStyle="Italic" Margin="0,5,0,0"/>
+									<TextBlock Text="Groups that can't Redeploy are removed from the mission and do not return to the Imperial Hand on defeat, but they can be manually deployed again with new options." TextWrapping="Wrap" FontStyle="Italic" Margin="0,5,0,0"/>
 								</StackPanel>
 							</materialDesign:Card>
 

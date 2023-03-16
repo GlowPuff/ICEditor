@@ -8,54 +8,50 @@
 						 xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              d:DesignHeight="450" d:DesignWidth="850">
 
-	<ScrollViewer VerticalScrollBarVisibility="Auto" Margin="10">
-		<StackPanel>
+	<UserControl.Resources>
+		<local:IsNotNullConverter x:Key="notNull"/>
+	</UserControl.Resources>
+
+	<ScrollViewer VerticalScrollBarVisibility="Auto">
+		<StackPanel x:Name="stackPanel">
 			<GroupBox Header="Custom Character Actions" Background="#FF503B7C" Margin="0,0,0,10">
-				<UniformGrid Columns="3">
-					<Button x:Name="newToon" Content="NEW CHARACTER"/>
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="auto" />
+						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="auto" />
+					</Grid.ColumnDefinitions>
+					<Button x:Name="newToonButton" Content="CREATE NEW CHARACTER" HorizontalAlignment="Left" Click="newToonButton_Click"/>
 
-					<!--SPACER-->
-					<TextBlock/>
-
-					<StackPanel Orientation="Horizontal">
-						<ComboBox x:Name="toonListCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectedValue="{Binding selectedGroup, RelativeSource={RelativeSource AncestorType=local:EncounterPanel}}" SelectedValuePath="id" Margin="10,0,0,0" MinWidth="200">
+					<StackPanel Orientation="Horizontal" Grid.Column="2">
+						<ComboBox x:Name="toonListCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectedValuePath="deploymentCard" MinWidth="200" SelectedItem="{Binding selectedToon}" ItemsSource="{Binding toonList}">
 							<ComboBox.ItemTemplate>
 								<DataTemplate>
 									<TextBlock>
 										<TextBlock.Text>
 											<MultiBinding StringFormat="{}{0}: {1}">
-												<Binding Path="name"/>
-												<Binding Path="id"/>
+												<Binding Path="deploymentCard.name"/>
+												<Binding Path="deploymentCard.id"/>
 											</MultiBinding>
 										</TextBlock.Text>
 									</TextBlock>
 								</DataTemplate>
 							</ComboBox.ItemTemplate>
 						</ComboBox>
-						<Button x:Name="editToon" Content="{materialDesign:PackIcon Kind=Edit}" Style="{StaticResource MaterialDesignFloatingActionButton}" Margin="10,0,0,0" Width="35" Height="35"/>
+
+						<Button x:Name="editToonButton" Content="{materialDesign:PackIcon Kind=Edit}" Click="editToonButton_Click" Style="{StaticResource MaterialDesignFloatingActionButton}" Margin="10,0,0,0" Width="35" Height="35" ToolTip="Edit Character" IsEnabled="{Binding Path=selectedToon, Converter={StaticResource notNull}}"/>
+
+						<Button x:Name="importToonButton" Content="{materialDesign:PackIcon Kind=Import}" Click="importToonButton_Click" Style="{StaticResource MaterialDesignFloatingActionButton}" Margin="10,0,0,0" Width="35" Height="35" ToolTip="Import Character From JSON"/>
+
+						<Button x:Name="exportToonButton" Content="{materialDesign:PackIcon Kind=Export}" Click="exportToonButton_Click" Style="{StaticResource MaterialDesignFloatingActionButton}" Margin="10,0,0,0" Width="35" Height="35" ToolTip="Export Character To JSON" IsEnabled="{Binding Path=selectedToon, Converter={StaticResource notNull}}"/>
+
+						<Button Grid.Column="4" x:Name="remToonButton" Content="{materialDesign:PackIcon Kind=RemoveBold}" Click="remToonButton_Click" Style="{StaticResource MaterialDesignFloatingActionButton}" Foreground="Red" Width="35" Height="35" Margin="10,0,0,0" ToolTip="Remove Character" IsEnabled="{Binding Path=selectedToon, Converter={StaticResource notNull}}"/>
 					</StackPanel>
-				</UniformGrid>
+				</Grid>
 			</GroupBox>
 
-			<UniformGrid Columns="2">
-				<!--LEFT-->
-				<StackPanel Margin="0,0,5,0">
-					<GroupBox Header="Title" Background="#FF503B7C">
-						<StackPanel>
+			<!--TOON EDITOR PANEL ADDED HERE IN CODE-BEHIND-->
 
-						</StackPanel>
-					</GroupBox>
-
-				</StackPanel>
-				<!--RIGHT-->
-				<StackPanel Margin="5,0,0,0">
-					<GroupBox Header="Title" Background="#FF503B7C">
-						<StackPanel>
-
-						</StackPanel>
-					</GroupBox>
-				</StackPanel>
-			</UniformGrid>
 		</StackPanel>
 	</ScrollViewer>
 </UserControl>

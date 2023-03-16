@@ -314,4 +314,36 @@ namespace Imperial_Commander_Editor
 		public string detailsMessage;
 		public List<BrokenRefInfo> brokenList;
 	}
+
+	public class ThumbnailData
+	{
+		public List<Thumbnail> Other, Rebel, Imperial, Mercenary;
+		List<Thumbnail> None = new( new Thumbnail[] { new() { Name = "Select a Thumbnail", ID = "None" } } );
+		public Thumbnail NoneThumb => None[0];
+
+		public List<Thumbnail> Filter( ThumbType ttype )
+		{
+			switch ( ttype )
+			{
+				case ThumbType.All:
+					return None.Concat( Other ).Concat( Rebel ).Concat( Imperial ).Concat( Mercenary ).ToList();
+				case ThumbType.Other:
+					return None.Concat( Other ).ToList();
+				case ThumbType.Rebel:
+					return None.Concat( Rebel ).ToList();
+				case ThumbType.Imperial:
+					return None.Concat( Imperial ).ToList();
+				case ThumbType.Mercenary:
+					return None.Concat( Mercenary ).ToList();
+				default:
+					return Other;
+			}
+		}
+	}
+
+	public class Thumbnail
+	{
+		public string Name { get; set; }
+		public string ID { get; set; }
+	}
 }

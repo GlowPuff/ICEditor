@@ -264,5 +264,12 @@ namespace Imperial_Commander_Editor
 				}
 			} );
 		}
+
+		private void toonEditorButton_Click( object sender, RoutedEventArgs e )
+		{
+			CharacterEditorWindow ced = new();
+			ced.Show();
+			Close();
+		}
 	}
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -12,7 +13,7 @@ namespace Imperial_Commander_Editor
 {
 	public static class Utils
 	{
-		public const string formatVersion = "20";
+		public const string formatVersion = "21";
 		public const string appVersion = "1.0.30";
 
 		public static List<DeploymentCard> allyData;
@@ -20,6 +21,7 @@ namespace Imperial_Commander_Editor
 		public static List<DeploymentCard> villainData;
 		public static List<DeploymentCard> heroData;
 		public static List<TileDescriptor> tileData;
+		public static ThumbnailData thumbnailData;
 
 		public static ObservableCollection<DeploymentColor> deploymentColors;
 
@@ -51,6 +53,8 @@ namespace Imperial_Commander_Editor
 		{
 			LoadCardData();
 			tileData = TileDescriptor.LoadData();
+
+			thumbnailData = FileManager.LoadAsset<ThumbnailData>( "thumbnails.json" );
 		}
 
 		public static DeploymentColor ColorFromName( string n )
@@ -87,12 +91,40 @@ namespace Imperial_Commander_Editor
 
 		public static void LoadCardData()
 		{
-			allyData = DeploymentCard.LoadData( "allies.json" );
-			enemyData = DeploymentCard.LoadData( "enemies.json" );
-			villainData = DeploymentCard.LoadData( "villains.json" );
-			heroData = DeploymentCard.LoadData( "heroes.json" );
+			allyData = FileManager.LoadAsset<List<DeploymentCard>>( "allies.json" );
+			enemyData = FileManager.LoadAsset<List<DeploymentCard>>( "enemies.json" );
+			villainData = FileManager.LoadAsset<List<DeploymentCard>>( "villains.json" );
+			heroData = FileManager.LoadAsset<List<DeploymentCard>>( "heroes.json" );
 
 			enemyData = enemyData.Concat( villainData ).ToList();
+		}
+
+		public static void AddCustomToon( DeploymentCard card )
+		{
+			enemyData.Add( card );
+		}
+
+		public static void RemoveCustomToon( DeploymentCard card )
+		{
+			enemyData.Remove( card );
+		}
+
+		public static string GetAvailableCustomToonID()
+		{
+			var usedIDs = enemyData.Where( x => x.id.Contains( "TC" ) ).Select( x => int.Parse( x.id.Substring( 2 ) ) ).ToList();
+			int highest = 1;
+			if ( usedIDs.Count() >= 1 )
+			{
+				for ( int i = 0; i < usedIDs.Count(); i++ )
+				{
+					if ( !usedIDs.Contains( highest + i + 1 ) )//start at 1
+					{
+						highest += i + 1;
+						break;
+					}
+				}
+			}
+			return $"TC{highest}";
 		}
 
 		/// <summary>
@@ -264,15 +296,15 @@ namespace Imperial_Commander_Editor
 			if ( brokenStartEvent != Guid.Empty )
 				infoMsg.Add( "Found a broken Event reference to the Mission Starting Event." );
 			if ( brokenInitialGroupList.Count > 0 )
-				infoMsg.Add( $"Found {brokenInitialGroupList.Count} broken Event reference(s) in all of this Mission's Initial Enemy Groups." );
+				infoMsg.Add( $"Found {brokenInitialGroupList.Count} broken Event reference(s) in this Mission's Initial Enemy Groups." );
 			if ( brokenEventGroupList.Count > 0 )
-				infoMsg.Add( $"Found {brokenEventGroupList.Count} broken Event reference(s) in all of this Mission's Event Groups." );
+				infoMsg.Add( $"Found {brokenEventGroupList.Count} broken Event reference(s) in this Mission's Event Groups." );
 			if ( brokenEAList.Count > 0 )
-				infoMsg.Add( $"Found {brokenEAList.Count} broken Event reference(s) in all of this Mission's Event Actions." );
+				infoMsg.Add( $"Found {brokenEAList.Count} broken Event reference(s) in this Mission's Event Actions." );
 			if ( brokenTriggerList.Count > 0 )
-				infoMsg.Add( $"Found {brokenTriggerList.Count} broken Event reference(s) in all of this Mission's Triggers." );
+				infoMsg.Add( $"Found {brokenTriggerList.Count} broken Event reference(s) in this Mission's Triggers." );
 			if ( brokenEntityList.Count > 0 )
-				infoMsg.Add( $"Found {brokenEntityList.Count} broken Event reference(s) in all of this Mission's Map Entities." );
+				infoMsg.Add( $"Found {brokenEntityList.Count} broken Event reference(s) in this Mission's Map Entities." );
 
 			if ( notifyMode == NotifyMode.Report )
 			{
@@ -474,6 +506,33 @@ namespace Imperial_Commander_Editor
 			foreach ( IMapEntity j in temp )
 				collection.Add( j );
 			return collection;
+		}
+
+		public static DiceColor[] ParseCustomDice( string[] dice )
+		{
+			List<DiceColor> diceColors = new List<DiceColor>();
+			var regex = new Regex( @"\d\w+", RegexOptions.IgnoreCase );
+
+			try
+			{
+				foreach ( var diceItem in dice )
+				{
+					var m = regex.Matches( diceItem );
+					foreach ( var match in regex.Matches( diceItem ) )
+					{
+						int count = int.Parse( match.ToString()[0].ToString() );
+
+						for ( int i = 0; i < count; i++ )
+							diceColors.Add( (DiceColor)Enum.Parse( typeof( DiceColor ), match.ToString().Substring( 1 ) ) );
+					}
+				}
+				return diceColors.ToArray();
+			}
+			catch ( Exception e )
+			{
+				MessageBox.Show( $"Check your formatting.\n\nException:\n{e.Message}", "Error Parsing Dice Values" );
+				return new DiceColor[0];
+			}
 		}
 	}
 }

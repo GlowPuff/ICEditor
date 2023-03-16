@@ -35,6 +35,14 @@
 				<Setter Property="ResizeMode" Value="NoResize"/>
 			</Style>
 
+			<!--default user control appearance-->
+			<Style TargetType="UserControl" x:Key="dus">
+				<Setter Property="TextElement.FontWeight" Value="Medium"/>
+				<Setter Property="TextElement.FontSize" Value="14"/>
+				<Setter Property="TextElement.Foreground" Value="{DynamicResource MaterialDesignBody}"/>
+				<Setter Property="FontFamily" Value="{materialDesign:MaterialDesignFont}"/>
+			</Style>
+
 			<!--group box colors-->
 			<Style TargetType="GroupBox" BasedOn="{StaticResource MaterialDesignGroupBox}">
 				<Setter Property="materialDesign:ColorZoneAssist.Mode" Value="Custom"/>

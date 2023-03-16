@@ -1,4 +1,6 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 
 namespace Imperial_Commander_Editor
@@ -52,6 +54,83 @@ namespace Imperial_Commander_Editor
 			incBrawler = incCreature = incDroid = incForceUser = false;
 			incGuardian = incHeavyWeapon = incHunter = incLeader = false;
 			incSmuggler = incSpy = incTrooper = incWookiee = incVehicle = false;
+		}
+
+		/// <summary>
+		/// Changes the traits based on given string[] of traits
+		/// </summary>
+		public void FromArray( GroupTraits[] traits )
+		{
+			//GroupPriorityTraits result = new GroupPriorityTraits()
+			//{
+			incBrawler = incCreature = incDroid = incForceUser =
+			incGuardian = incHeavyWeapon = incHunter = incLeader =
+			incSmuggler = incSpy = incTrooper = incWookiee = incVehicle = false;
+			//};
+
+			foreach ( GroupTraits t in traits )
+			{
+				if ( t == GroupTraits.Brawler )
+					incBrawler = true;
+				if ( t == GroupTraits.Creature )
+					incCreature = true;
+				if ( t == GroupTraits.Droid )
+					incDroid = true;
+				if ( t == GroupTraits.ForceUser )
+					incForceUser = true;
+				if ( t == GroupTraits.Guardian )
+					incGuardian = true;
+				if ( t == GroupTraits.HeavyWeapon )
+					incHeavyWeapon = true;
+				if ( t == GroupTraits.Hunter )
+					incHunter = true;
+				if ( t == GroupTraits.Leader )
+					incLeader = true;
+				if ( t == GroupTraits.Smuggler )
+					incSmuggler = true;
+				if ( t == GroupTraits.Spy )
+					incSpy = true;
+				if ( t == GroupTraits.Trooper )
+					incTrooper = true;
+				if ( t == GroupTraits.Wookiee )
+					incWookiee = true;
+				if ( t == GroupTraits.Vehicle )
+					incVehicle = true;
+			}
+			//return result;
+		}
+
+		public string[] GetTraitArray()
+		{
+			List<GroupTraits> list = new List<GroupTraits>();
+			if ( incBrawler )
+				list.Add( GroupTraits.Brawler );
+			if ( incCreature )
+				list.Add( GroupTraits.Creature );
+			if ( incDroid )
+				list.Add( GroupTraits.Droid );
+			if ( incForceUser )
+				list.Add( GroupTraits.ForceUser );
+			if ( incGuardian )
+				list.Add( GroupTraits.Guardian );
+			if ( incHeavyWeapon )
+				list.Add( GroupTraits.HeavyWeapon );
+			if ( incHunter )
+				list.Add( GroupTraits.Hunter );
+			if ( incLeader )
+				list.Add( GroupTraits.Leader );
+			if ( incSmuggler )
+				list.Add( GroupTraits.Smuggler );
+			if ( incSpy )
+				list.Add( GroupTraits.Spy );
+			if ( incTrooper )
+				list.Add( GroupTraits.Trooper );
+			if ( incWookiee )
+				list.Add( GroupTraits.Wookiee );
+			if ( incVehicle )
+				list.Add( GroupTraits.Vehicle );
+
+			return list.Select( x => x.ToString() ).ToArray();
 		}
 	}
 }

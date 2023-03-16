@@ -1,0 +1,406 @@
+{
+	"Other":
+	[
+		{
+			"Name": "Generic Ally",
+			"ID": "genericAlly"
+		},
+		{
+			"Name": "Generic Enemy",
+			"ID": "genericEnemy"
+		},
+	],
+	"Rebel":
+	[
+		{
+			"Name": "Atris",
+			"ID": "Rebel1"
+		},
+		{
+			"Name": "Bao Dur",
+			"ID": "Rebel2"
+		},
+		{
+			"Name": "Bastila Shan",
+			"ID": "Rebel3"
+		},
+		{
+			"Name": "Canderous Ordo",
+			"ID": "Rebel4"
+		},
+		{
+			"Name": "Carth Onasi",
+			"ID": "Rebel5"
+		},
+		{
+			"Name": "Custom Jedi 1",
+			"ID": "Rebel6"
+		},
+		{
+			"Name": "Custom Jedi 2",
+			"ID": "Rebel7"
+		},
+		{
+			"Name": "Dash Rendar",
+			"ID": "Rebel8"
+		},
+		{
+			"Name": "Ewok Archer",
+			"ID": "Rebel9"
+		},
+		{
+			"Name": "Ewok Leader",
+			"ID": "Rebel10"
+		},
+		{
+			"Name": "Ewok Warrior",
+			"ID": "Rebel11"
+		},
+		{
+			"Name": "Galen Marek",
+			"ID": "Rebel12"
+		},
+		{
+			"Name": "HK-47",
+			"ID": "Rebel13"
+		},
+		{
+			"Name": "Jan Ors",
+			"ID": "Rebel14"
+		},
+		{
+			"Name": "Jolee Bindo",
+			"ID": "Rebel15"
+		},
+		{
+			"Name": "Juhani",
+			"ID": "Rebel16"
+		},
+		{
+			"Name": "Kreya",
+			"ID": "Rebel17"
+		},
+		{
+			"Name": "Kyle Katarn",
+			"ID": "Rebel18"
+		},
+		{
+			"Name": "Mandalore the Preserver",
+			"ID": "Rebel19"
+		},
+		{
+			"Name": "Mara Jade",
+			"ID": "Rebel20"
+		},
+		{
+			"Name": "Meetra Surik",
+			"ID": "Rebel21"
+		},
+		{
+			"Name": "Mira",
+			"ID": "Rebel22"
+		},
+		{
+			"Name": "Mission Vao",
+			"ID": "Rebel23"
+		},
+		{
+			"Name": "Mon Mothma",
+			"ID": "Rebel24"
+		},
+		{
+			"Name": "Mr. Bones",
+			"ID": "Rebel25"
+		},
+		{
+			"Name": "Old Republic Soldier",
+			"ID": "Rebel26"
+		},
+		{
+			"Name": "Revan",
+			"ID": "Rebel27"
+		},
+		{
+			"Name": "Rey",
+			"ID": "Rebel28"
+		},
+		{
+			"Name": "T3-M3",
+			"ID": "Rebel29"
+		},
+		{
+			"Name": "Visas Marr",
+			"ID": "Rebel30"
+		},
+		{
+			"Name": "Wookiee 1",
+			"ID": "Rebel31"
+		},
+		{
+			"Name": "Wookiee 2",
+			"ID": "Rebel32"
+		},
+		{
+			"Name": "Yoda (Grand Master)",
+			"ID": "Rebel33"
+		},
+		{
+			"Name": "Yoda",
+			"ID": "Rebel34"
+		},
+		{
+			"Name": "Zaalbar",
+			"ID": "Rebel35"
+		},
+	],
+	"Imperial":
+	[
+		{
+			"Name": "Admiral",
+			"ID": "Imperial1"
+		},
+		{
+			"Name": "Arcann",
+			"ID": "Imperial2"
+		},
+		{
+			"Name": "Baton Trooper",
+			"ID": "Imperial3"
+		},
+		{
+			"Name": "BX Commando Droid Captain",
+			"ID": "Imperial4"
+		},
+		{
+			"Name": "BX Commando Droid",
+			"ID": "Imperial5"
+		},
+		{
+			"Name": "Dark Trooper MK1",
+			"ID": "Imperial6"
+		},
+		{
+			"Name": "Dart Traya",
+			"ID": "Imperial7"
+		},
+		{
+			"Name": "Darth Bane",
+			"ID": "Imperial8"
+		},
+		{
+			"Name": "Darth Malak",
+			"ID": "Imperial9"
+		},
+		{
+			"Name": "Darth Malgus",
+			"ID": "Imperial10"
+		},
+		{
+			"Name": "Darth Nihilus",
+			"ID": "Imperial11"
+		},
+		{
+			"Name": "Darth Revan",
+			"ID": "Imperial12"
+		},
+		{
+			"Name": "Darth Sion",
+			"ID": "Imperial13"
+		},
+		{
+			"Name": "Darth Zannah",
+			"ID": "Imperial14"
+		},
+		{
+			"Name": "Del Meeko",
+			"ID": "Imperial15"
+		},
+		{
+			"Name": "Empire Trooper",
+			"ID": "Imperial16"
+		},
+		{
+			"Name": "First Order Trooper",
+			"ID": "Imperial17"
+		},
+		{
+			"Name": "Galen Marek (Sith Stalker)",
+			"ID": "Imperial18"
+		},
+		{
+			"Name": "Gideon Hask",
+			"ID": "Imperial19"
+		},
+		{
+			"Name": "Heavy Sith Imperial Trooper",
+			"ID": "Imperial20"
+		},
+		{
+			"Name": "Iden Versio",
+			"ID": "Imperial21"
+		},
+		{
+			"Name": "Knights of Zakuul Captain",
+			"ID": "Imperial22"
+		},
+		{
+			"Name": "Knights of Zakuul",
+			"ID": "Imperial23"
+		},
+		{
+			"Name": "Kylo Ren",
+			"ID": "Imperial24"
+		},
+		{
+			"Name": "Mara Jade",
+			"ID": "Imperial25"
+		},
+		{
+			"Name": "Scout Trooper 1",
+			"ID": "Imperial26"
+		},
+		{
+			"Name": "Scout Trooper 2",
+			"ID": "Imperial27"
+		},
+		{
+			"Name": "Scout Trooper 3",
+			"ID": "Imperial28"
+		},
+		{
+			"Name": "Scout Trooper 4",
+			"ID": "Imperial29"
+		},
+		{
+			"Name": "Scout Trooper 5",
+			"ID": "Imperial30"
+		},
+		{
+			"Name": "Scout Trooper 6",
+			"ID": "Imperial31"
+		},
+		{
+			"Name": "Scout Trooper 7",
+			"ID": "Imperial32"
+		},
+		{
+			"Name": "Sentitel Droids",
+			"ID": "Imperial33"
+		},
+		{
+			"Name": "Shae Vizla",
+			"ID": "Imperial34"
+		},
+		{
+			"Name": "Sith Acolyte",
+			"ID": "Imperial35"
+		},
+		{
+			"Name": "Sith Assassin",
+			"ID": "Imperial36"
+		},
+		{
+			"Name": "Sith Imperial Officer",
+			"ID": "Imperial37"
+		},
+		{
+			"Name": "Sith Imperial Trooper",
+			"ID": "Imperial38"
+		},
+		{
+			"Name": "Sith Lord",
+			"ID": "Imperial39"
+		},
+		{
+			"Name": "Sith Trooper",
+			"ID": "Imperial40"
+		},
+		{
+			"Name": "Sith Warrior",
+			"ID": "Imperial41"
+		},
+		{
+			"Name": "Skytrooper",
+			"ID": "Imperial42"
+		},
+		{
+			"Name": "Thexan",
+			"ID": "Imperial43"
+		},
+	],
+	"Mercenary":
+	[
+		{
+			"Name": "Cara Dune",
+			"ID": "Mercenary1"
+		},
+		{
+			"Name": "Cloudriders",
+			"ID": "Mercenary2"
+		},
+		{
+			"Name": "Dr.Aphra",
+			"ID": "Mercenary3"
+		},
+		{
+			"Name": "Heavy Mandalorian",
+			"ID": "Mercenary4"
+		},
+		{
+			"Name": "HK-50",
+			"ID": "Mercenary5"
+		},
+		{
+			"Name": "Krayt Dragon",
+			"ID": "Mercenary6"
+		},
+		{
+			"Name": "Kryze",
+			"ID": "Mercenary7"
+		},
+		{
+			"Name": "Lobot",
+			"ID": "Mercenary8"
+		},
+		{
+			"Name": "Lomrokk",
+			"ID": "Mercenary9"
+		},
+		{
+			"Name": "Mandalorians",
+			"ID": "Mercenary10"
+		},
+		{
+			"Name": "Mara Jade",
+			"ID": "Mercenary11"
+		},
+		{
+			"Name": "Neo-Crusader",
+			"ID": "Mercenary12"
+		},
+		{
+			"Name": "The Mandolorian",
+			"ID": "Mercenary13"
+		},
+		{
+			"Name": "4-Lom",
+			"ID": "Mercenary14"
+		},
+		{
+			"Name": "Enfys Nest",
+			"ID": "Mercenary15"
+		},
+		{
+			"Name": "Flesh Raiders",
+			"ID": "Mercenary16"
+		},
+		{
+			"Name": "RahkGhoul",
+			"ID": "Mercenary17"
+		},
+		{
+			"Name": "Zuckuss",
+			"ID": "Mercenary18"
+		},
+	]
+}

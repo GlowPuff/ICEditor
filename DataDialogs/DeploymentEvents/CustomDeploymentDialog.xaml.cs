@@ -21,6 +21,11 @@ namespace Imperial_Commander_Editor
 		public IEventAction eventAction { get; set; }
 		public ObservableCollection<DeploymentPoint> deploymentPoints { get; set; } = new();
 
+		public ObservableCollection<DeploymentColor> deploymentColors
+		{
+			get { return Utils.deploymentColors; }
+		}
+
 		public void PC( [CallerMemberName] string n = "" )
 		{
 			if ( !string.IsNullOrEmpty( n ) )

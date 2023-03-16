@@ -34,14 +34,16 @@ namespace Imperial_Commander_Editor
 
 		public static void InitColors()
 		{
-			deploymentColors = new ObservableCollection<DeploymentColor>();
-			deploymentColors.Add( new( "Gray", ColorFromFloats( .3301887f, .3301887f, .3301887f ) ) );
-			deploymentColors.Add( new( "Purple", ColorFromFloats( .6784314f, 0f, 1f ) ) );
-			deploymentColors.Add( new( "Black", ColorFromFloats( 0, 0, 0 ) ) );
-			deploymentColors.Add( new( "Blue", ColorFromFloats( 0, 0.3294118f, 1 ) ) );
-			deploymentColors.Add( new( "Green", ColorFromFloats( 0, 0.735849f, 0.1056484f ) ) );
-			deploymentColors.Add( new( "Red", ColorFromFloats( 1, 0, 0 ) ) );
-			deploymentColors.Add( new( "Yellow", ColorFromFloats( 1, 202f / 255f, 40f / 255f ) ) );
+			deploymentColors = new ObservableCollection<DeploymentColor>
+			{
+				new( "Gray", ColorFromFloats( .3301887f, .3301887f, .3301887f ) ),
+				new( "Purple", ColorFromFloats( .6784314f, 0f, 1f ) ),
+				new( "Black", ColorFromFloats( 0, 0, 0 ) ),
+				new( "Blue", ColorFromFloats( 0, 0.3294118f, 1 ) ),
+				new( "Green", ColorFromFloats( 0, 0.735849f, 0.1056484f ) ),
+				new( "Red", ColorFromFloats( 1, 0, 0 ) ),
+				new( "Yellow", ColorFromFloats( 1, 202f / 255f, 40f / 255f ) )
+			};
 		}
 
 		//public static void Init( MainWindow mw )

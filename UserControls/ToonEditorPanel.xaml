@@ -18,7 +18,7 @@
 		<UniformGrid Columns="2">
 			<!--LEFT-->
 			<StackPanel Margin="0,0,5,0">
-				<GroupBox x:Name="propBox" Header="General Properties" Background="{StaticResource GroupBG}">
+				<GroupBox x:Name="propBox" Header="Character Information" Background="{StaticResource GroupBG}">
 					<!--GENERAL PROPERTIES-->
 					<StackPanel>
 						<TextBox x:Name="nameTB" Style="{StaticResource MaterialDesignOutlinedTextBox}" Text="{Binding cardName}" materialDesign:HintAssist.Hint="Character Name" KeyDown="textbox_KeyDown" TextChanged="nameTB_TextChanged" />
@@ -42,6 +42,18 @@
 
 								<Button x:Name="charHelpButton" Content="HELP ME CHOOSE..." Click="charHelpButton_Click"/>
 							</StackPanel>
+						</materialDesign:Card>
+
+						<!--CUSTOM COLOR-->
+						<materialDesign:Card Padding="10" Background="{StaticResource CardBG}" Margin="0,10,0,0" >
+							<Grid>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="auto" />
+									<ColumnDefinition Width="*" />
+								</Grid.ColumnDefinitions>
+								<TextBlock Text="Icon Outline Color:" VerticalAlignment="Center"/>
+								<ComboBox Grid.Column="1" Margin="10,0,0,0" Style="{StaticResource MaterialDesignOutlinedComboBox}" ItemsSource="{Binding deploymentColors, RelativeSource={RelativeSource AncestorType=UserControl}}" SelectedValue="{Binding outlineColor}" DisplayMemberPath="name" SelectedValuePath="name"/>
+							</Grid>
 						</materialDesign:Card>
 
 						<materialDesign:Card Padding="10" Background="{StaticResource CardBG}" Margin="0,10,0,0" >
@@ -81,18 +93,22 @@
 				<GroupBox Header="Appearance" Background="{StaticResource GroupBG}" Margin="0,10,0,0">
 					<StackPanel>
 						<!--FACTION FILTER-->
-						<StackPanel Orientation="Horizontal">
-							<TextBlock Text="Filter Icons By:" VerticalAlignment="Center" Margin="0,0,10,0"/>
-							<Button x:Name="filterAllButton" Style="{StaticResource MaterialDesignFloatingActionButton}" Content="{materialDesign:PackIcon Kind=AllInclusive}" ToolTip="Show All Thumbnails" Click="filterAllButton_Click"/>
-							<Button x:Name="filterRebelButton" Style="{StaticResource MaterialDesignFloatingActionButton}"  Margin="10,0" ToolTip="Show Only Rebel Thumbnails" Click="filterRebelButton_Click">
-								<Image Source="/Assets/faction rebel.png" Width="40" Height="40"/>
-							</Button>
-							<Button x:Name="filterImperialButton" Style="{StaticResource MaterialDesignFloatingActionButton}" ToolTip="Show Only Imperial Thumbnails" Click="filterImperialButton_Click">
-								<Image Source="/Assets/faction imperial.png" Width="40" Height="40"/>
-							</Button>
-							<Button x:Name="filterMercButton" Style="{StaticResource MaterialDesignFloatingActionButton}" ToolTip="Show Only Mercenary Thumbnails" Click="filterMercButton_Click"  Margin="10,0">
-								<Image Source="/Assets/faction mercenary.png" Width="40" Height="40"/>
-							</Button>
+						<StackPanel>
+							<TextBlock Text="Filter By Custom Icons:" VerticalAlignment="Center" Margin="0,0,10,5"/>
+							<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+								<Button x:Name="filterAllButton" Content="All" ToolTip="Show All Icons" Click="filterAllButton_Click"/>
+								<Button x:Name="filterRebelButton" Content="Rebel" Margin="10,0" ToolTip="Show Only Rebel Icons" Click="filterRebelButton_Click"/>
+								<Button x:Name="filterImperialButton" Content="Imperial" ToolTip="Show Only Imperial Icons" Click="filterImperialButton_Click"/>
+								<Button x:Name="filterMercButton" Content="Mercenary" ToolTip="Show Only Mercenary Icons" Click="filterMercButton_Click"  Margin="10,0"/>
+							</StackPanel>
+
+							<TextBlock Text="Filter By Stock Icons:" VerticalAlignment="Center" Margin="0,10,10,5"/>
+							<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5,0,0">
+								<Button x:Name="filterHeroButton" Content="Heroes" ToolTip="Show Only Hero Icons" Click="filterHeroButton_Click"/>
+								<Button x:Name="filterVillainButton" Content="Villains" ToolTip="Show Only Stock Villain Icons" Click="filterVillainButton_Click"  Margin="10,0,0,0"/>
+								<Button x:Name="filterAllyButton" Content="Allies" Margin="10,0,0,0" ToolTip="Show Only Ally Icons" Click="filterAllyButton_Click"/>
+								<Button x:Name="filterStockImperialButton" Content="Imperials" ToolTip="Show Only Stock Imperial Icons" Click="filterStockImperialButton_Click"  Margin="10,0,0,0"/>
+							</StackPanel>
 						</StackPanel>
 
 						<!--FACTION TEXT FILTER-->
@@ -154,7 +170,7 @@
 				</GroupBox>-->
 			</StackPanel>
 
-			<!--RIGHT (SPECIFIC TYPE PROPERTIES)-->
+			<!--RIGHT PANEL-->
 			<StackPanel Margin="5,0,0,0">
 				<TabControl x:Name="tabControl"
   Style="{StaticResource MaterialDesignNavigatilRailTabControl}"
@@ -200,15 +216,19 @@
 
 										<Button x:Name="confirmCopyFromButton" Click="confirmCopyFromButton_Click" Grid.Column="1" Content="{materialDesign:PackIcon Kind=CheckBold}" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35" Margin="10,0,0,0"/>
 									</Grid>
-									<TextBlock Text="Warning: This will overwrite all current properties except the Name and ID." TextWrapping="Wrap" FontStyle="Italic" Margin="0,10,0,0"/>
+									<TextBlock Text="Warning: This will overwrite all current General Properties. Name, ID, Type, Deployment, and Appearance are not affected." TextWrapping="Wrap" FontStyle="Italic" Margin="0,10,0,0"/>
 								</StackPanel>
 							</materialDesign:Card>
 
 							<materialDesign:Card Padding="10" Background="{StaticResource CardBG}" Margin="0,10,0,0">
-								<StackPanel Orientation="Horizontal">
-									<CheckBox Content="This Group is Elite" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding deploymentCard.isElite}" Margin="0,4,4,4"/>
-									<TextBlock Text="Elite Groups are outlined in red" FontStyle="Italic" VerticalAlignment="Center" Margin="10,0,0,0"/>
-								</StackPanel>
+								<Grid>
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="auto" />
+										<ColumnDefinition Width="*" />
+									</Grid.ColumnDefinitions>
+									<CheckBox x:Name="eliteCheckbox" Click="eliteCheckbox_Click" Content="This Group is Elite" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding deploymentCard.isElite}" Margin="0,4,4,4"/>
+									<TextBlock Grid.Column="1" Text="Elite Groups are outlined in red unless a different icon outline color is set." TextWrapping="Wrap" FontStyle="Italic" VerticalAlignment="Center" Margin="10,0,0,0"/>
+								</Grid>
 							</materialDesign:Card>
 
 							<!--FAME and REIMBURSEMENT-->
@@ -233,17 +253,21 @@
 							</GroupBox>
 
 							<GroupBox Header="Health and Speed" Background="#FF503B7C" Margin="0,10,0,0">
-								<UniformGrid Columns="2">
-									<StackPanel Orientation="Horizontal">
-										<TextBlock Text="Health" VerticalAlignment="Bottom"/>
-										<TextBox Grid.Row="0" Text="{Binding deploymentCard.health}" Width="50" HorizontalContentAlignment="Center" Margin="10,0,0,0" VerticalAlignment="Bottom" KeyDown="textbox_KeyDown" CaretBrush="White"/>
-									</StackPanel>
+								<StackPanel>
+									<UniformGrid Columns="2">
+										<StackPanel Orientation="Horizontal">
+											<TextBlock Text="Health" VerticalAlignment="Bottom"/>
+											<TextBox Grid.Row="0" Text="{Binding deploymentCard.health}" Width="50" HorizontalContentAlignment="Center" Margin="10,0,0,0" VerticalAlignment="Bottom" KeyDown="textbox_KeyDown" CaretBrush="White"/>
+										</StackPanel>
 
-									<StackPanel Orientation="Horizontal">
-										<TextBlock Grid.Row="2" Text="Speed" VerticalAlignment="Bottom"/>
-										<TextBox Grid.Row="2" Text="{Binding deploymentCard.speed}" Width="50" HorizontalContentAlignment="Center" Margin="10,0,0,0" KeyDown="textbox_KeyDown" CaretBrush="White"/>
-									</StackPanel>
-								</UniformGrid>
+										<StackPanel Orientation="Horizontal">
+											<TextBlock Grid.Row="2" Text="Speed" VerticalAlignment="Bottom"/>
+											<TextBox Grid.Row="2" Text="{Binding deploymentCard.speed}" Width="50" HorizontalContentAlignment="Center" Margin="10,0,0,0" KeyDown="textbox_KeyDown" CaretBrush="White"/>
+										</StackPanel>
+									</UniformGrid>
+
+									<CheckBox Content="Multiply Health By Threat Level" IsChecked="{Binding useThreatMultiplier}" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" Grid.ColumnSpan="2" Margin="0,10,4,0"/>
+								</StackPanel>
 							</GroupBox>
 
 							<GroupBox Header="Costs and Group Size" Background="#FF503B7C" Margin="0,10,0,0">
@@ -263,7 +287,7 @@
 									<!--size-->
 									<StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,10,0,0">
 										<TextBlock Text="Group Size:" VerticalAlignment="Bottom"/>
-										<TextBox x:Name="sizeText" Text="{Binding deploymentCard.size}"  Margin="10,0" Width="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" CaretBrush="White"/>
+										<TextBox x:Name="sizeText" Text="{Binding deploymentCard.size}" Margin="10,0" Width="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" CaretBrush="White" KeyDown="textbox_KeyDown"/>
 									</StackPanel>
 									<TextBlock x:Name="sizeWarningText" Text="Warning: Changing the Group Size may require updating the Deployment Point properties of any Event Action that deploys this Group." VerticalAlignment="Center" FontStyle="Italic" TextWrapping="Wrap" Margin="0,10,0,0"/>
 								</StackPanel>
@@ -295,9 +319,9 @@
 
 						<materialDesign:Card Padding="10" Background="{StaticResource CardBG}" Margin="0,10,0,0">
 							<StackPanel>
-								<TextBlock Text="Deployment properties are only relevant for Enemy Groups and Villains." FontStyle="Italic" FontWeight="Bold" TextWrapping="Wrap" Margin="0,0,0,10"/>
-								<TextBlock Text="Further, these properties are only used by Imperial Commander when the Character is Exported as a standalone Character and Imported by a player into their game." FontStyle="Italic" FontWeight="Bold" TextWrapping="Wrap" Margin="0,0,0,10"/>
-								<TextBlock Text="To control how this Character deploys within a Mission, instead use the Deployment options found in the Enemy Group Deployment Event Action, and not the Deployment options below." FontStyle="Italic" FontWeight="Bold" TextWrapping="Wrap" Margin="0,0,0,10"/>
+								<TextBlock Text="Deployment properties are only relevant for Enemy Groups and Villains." FontStyle="Italic" TextWrapping="Wrap" Margin="0,0,0,10"/>
+								<TextBlock Text="Further, these properties are only used by Imperial Commander when the Character is Exported as a standalone Character and Imported by a player into their game." FontStyle="Italic" TextWrapping="Wrap" Margin="0,0,0,10"/>
+								<TextBlock Text="To control how this Character deploys within a Mission, instead use the Deployment options found in the Enemy Group Deployment Event Action, and not the Deployment options below." FontStyle="Italic" TextWrapping="Wrap" Margin="0,0,0,10"/>
 
 								<WrapPanel x:Name="deploymentOptions">
 									<CheckBox x:Name="canRD" Content="Can Be Redeployed" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding canRedeploy}"/>
@@ -373,7 +397,7 @@
 						</StackPanel>
 					</TabItem>
 
-					<!--PROPERTIES-->
+					<!--CARD TEXT-->
 					<TabItem Width="95">
 						<TabItem.Header>
 							<StackPanel>

@@ -57,6 +57,18 @@ namespace Imperial_Commander_Editor
 			tileData = TileDescriptor.LoadData();
 
 			thumbnailData = FileManager.LoadAsset<ThumbnailData>( "thumbnails.json" );
+			//append stock icon data
+			//remove duplicate names and elite version, only need 1 thumb for each ID
+			//caution - enemyData contains enemies AND villains, remove villain data
+			var edata = enemyData.Where( x => villainData.All( v => v.id != x.id && !x.name.Contains( "Elite" ) ) ).Select( x => new Thumbnail() { ID = $"StockImperial{x.id.GetDigits()}", Name = x.name } ).ToList();
+			for ( int i = 0; i < edata.Count; i++ )
+			{
+				if ( thumbnailData.StockImperial.All( x => x.Name != edata[i].Name ) )
+					thumbnailData.StockImperial.Add( edata[i] );
+			}
+			thumbnailData.StockAlly = allyData.Select( x => new Thumbnail() { ID = $"StockAlly{x.id.GetDigits()}", Name = x.name } ).ToList();
+			thumbnailData.StockHero = heroData.Select( x => new Thumbnail() { ID = $"StockHero{x.id.GetDigits()}", Name = x.name } ).ToList();
+			thumbnailData.StockVillain = villainData.Select( x => new Thumbnail() { ID = $"StockVillain{x.id.GetDigits()}", Name = x.name } ).ToList();
 		}
 
 		public static DeploymentColor ColorFromName( string n )

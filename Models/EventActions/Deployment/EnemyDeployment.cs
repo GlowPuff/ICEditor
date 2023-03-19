@@ -11,6 +11,7 @@ namespace Imperial_Commander_Editor
 		bool _canReinforce, _canRedeploy, _canBeDefeated, _useThreat, _showMod, _useCustomInstructions, _useGenericMugshot, _useResetOnRedeployment;
 		Guid _specificDeploymentPoint;
 		DeploymentSpot _deploymentPoint;
+		Thumbnail _thumbnail;
 
 		public string enemyName { get { return _enemyName; } set { _enemyName = value; PC(); } }
 		public string deploymentGroup { get { return _deploymentGroup; } set { _deploymentGroup = value; PC(); } }
@@ -28,6 +29,7 @@ namespace Imperial_Commander_Editor
 		public Guid specificDeploymentPoint { get { return _specificDeploymentPoint; } set { _specificDeploymentPoint = value; PC(); } }
 		public DeploymentSpot deploymentPoint { get { return _deploymentPoint; } set { _deploymentPoint = value; PC(); } }
 		public EnemyGroupData enemyGroupData { get; set; }
+		public Thumbnail thumbnail { get => _thumbnail; set { _thumbnail = value; PC(); } }
 
 		public EnemyDeployment()
 		{
@@ -48,6 +50,7 @@ namespace Imperial_Commander_Editor
 			_repositionInstructions = "";
 			_useGenericMugshot = false;
 			_useResetOnRedeployment = false;
+			_thumbnail = Utils.thumbnailData.NoneThumb;
 
 			DeploymentCard card = Utils.enemyData.First( x => x.id == _deploymentGroup );
 			enemyGroupData = new( card, new() { name = "Active Deployment Point", GUID = Guid.Empty } );

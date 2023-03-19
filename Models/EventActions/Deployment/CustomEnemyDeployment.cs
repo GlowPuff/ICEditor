@@ -8,7 +8,7 @@ namespace Imperial_Commander_Editor
 {
 	public class CustomEnemyDeployment : EventAction, IHasEventReference, IHasTriggerReference, IHasEntityReference
 	{
-		string _thumbnailGroupImperial, _thumbnailGroupRebel, _modification, _repositionInstructions, _groupAttack, _groupDefense, _surges, _bonuses, _keywords, _abilities, _customColor;
+		string _thumbnailGroupImperial, _thumbnailGroupRebel, _modification, _repositionInstructions, _groupAttack, _groupDefense, _surges, _bonuses, _keywords, _abilities, _customOutlineColor;
 		int _groupCost, _groupRedeployCost, _groupSize, _groupHealth, _groupSpeed;
 		bool _canReinforce, _canRedeploy, _canBeDefeated, _useDeductCost, _useCustomInstructions, _useThreatMultiplier, _useResetOnRedeployment;
 		Guid _specificDeploymentPoint;
@@ -21,7 +21,7 @@ namespace Imperial_Commander_Editor
 		[DefaultValue( AttackType.Ranged )]
 		[JsonProperty( DefaultValueHandling = DefaultValueHandling.Populate )]
 		public AttackType attackType { get { return _attackType; } set { _attackType = value; PC(); } }
-		public string customColor { get { return _customColor; } set { _customColor = value; PC(); } }
+		public string customOutlineColor { get { return _customOutlineColor; } set { _customOutlineColor = value; PC(); } }
 		public string thumbnailGroupImperial { get { return _thumbnailGroupImperial; } set { _thumbnailGroupImperial = value; PC(); } }
 		public string thumbnailGroupRebel { get { return _thumbnailGroupRebel; } set { _thumbnailGroupRebel = value; PC(); } }
 		public string repositionInstructions { get { return _repositionInstructions; } set { _repositionInstructions = value; PC(); } }
@@ -75,7 +75,7 @@ namespace Imperial_Commander_Editor
 			_useThreatMultiplier = false;
 			_useResetOnRedeployment = false;
 			_attackType = AttackType.Ranged;
-			_customColor = "Gray";
+			_customOutlineColor = "Gray";
 
 			_surges = "{B}: Bleed\n{B}: Focus\n{B}: Pierce 2";
 			_keywords = "+2 {H}\nHabitat: Snow";

@@ -14,393 +14,393 @@
 	[
 		{
 			"Name": "Atris",
-			"ID": "Rebel1"
+			"ID": "CustomRebel1"
 		},
 		{
 			"Name": "Bao Dur",
-			"ID": "Rebel2"
+			"ID": "CustomRebel2"
 		},
 		{
 			"Name": "Bastila Shan",
-			"ID": "Rebel3"
+			"ID": "CustomRebel3"
 		},
 		{
 			"Name": "Canderous Ordo",
-			"ID": "Rebel4"
+			"ID": "CustomRebel4"
 		},
 		{
 			"Name": "Carth Onasi",
-			"ID": "Rebel5"
+			"ID": "CustomRebel5"
 		},
 		{
 			"Name": "Custom Jedi 1",
-			"ID": "Rebel6"
+			"ID": "CustomRebel6"
 		},
 		{
 			"Name": "Custom Jedi 2",
-			"ID": "Rebel7"
+			"ID": "CustomRebel7"
 		},
 		{
 			"Name": "Dash Rendar",
-			"ID": "Rebel8"
+			"ID": "CustomRebel8"
 		},
 		{
 			"Name": "Ewok Archer",
-			"ID": "Rebel9"
+			"ID": "CustomRebel9"
 		},
 		{
 			"Name": "Ewok Leader",
-			"ID": "Rebel10"
+			"ID": "CustomRebel10"
 		},
 		{
 			"Name": "Ewok Warrior",
-			"ID": "Rebel11"
+			"ID": "CustomRebel11"
 		},
 		{
 			"Name": "Galen Marek",
-			"ID": "Rebel12"
+			"ID": "CustomRebel12"
 		},
 		{
 			"Name": "HK-47",
-			"ID": "Rebel13"
+			"ID": "CustomRebel13"
 		},
 		{
 			"Name": "Jan Ors",
-			"ID": "Rebel14"
+			"ID": "CustomRebel14"
 		},
 		{
 			"Name": "Jolee Bindo",
-			"ID": "Rebel15"
+			"ID": "CustomRebel15"
 		},
 		{
 			"Name": "Juhani",
-			"ID": "Rebel16"
+			"ID": "CustomRebel16"
 		},
 		{
 			"Name": "Kreya",
-			"ID": "Rebel17"
+			"ID": "CustomRebel17"
 		},
 		{
 			"Name": "Kyle Katarn",
-			"ID": "Rebel18"
+			"ID": "CustomRebel18"
 		},
 		{
 			"Name": "Mandalore the Preserver",
-			"ID": "Rebel19"
+			"ID": "CustomRebel19"
 		},
 		{
 			"Name": "Mara Jade",
-			"ID": "Rebel20"
+			"ID": "CustomRebel20"
 		},
 		{
 			"Name": "Meetra Surik",
-			"ID": "Rebel21"
+			"ID": "CustomRebel21"
 		},
 		{
 			"Name": "Mira",
-			"ID": "Rebel22"
+			"ID": "CustomRebel22"
 		},
 		{
 			"Name": "Mission Vao",
-			"ID": "Rebel23"
+			"ID": "CustomRebel23"
 		},
 		{
 			"Name": "Mon Mothma",
-			"ID": "Rebel24"
+			"ID": "CustomRebel24"
 		},
 		{
 			"Name": "Mr. Bones",
-			"ID": "Rebel25"
+			"ID": "CustomRebel25"
 		},
 		{
 			"Name": "Old Republic Soldier",
-			"ID": "Rebel26"
+			"ID": "CustomRebel26"
 		},
 		{
 			"Name": "Revan",
-			"ID": "Rebel27"
+			"ID": "CustomRebel27"
 		},
 		{
 			"Name": "Rey",
-			"ID": "Rebel28"
+			"ID": "CustomRebel28"
 		},
 		{
 			"Name": "T3-M3",
-			"ID": "Rebel29"
+			"ID": "CustomRebel29"
 		},
 		{
 			"Name": "Visas Marr",
-			"ID": "Rebel30"
+			"ID": "CustomRebel30"
 		},
 		{
 			"Name": "Wookiee 1",
-			"ID": "Rebel31"
+			"ID": "CustomRebel31"
 		},
 		{
 			"Name": "Wookiee 2",
-			"ID": "Rebel32"
+			"ID": "CustomRebel32"
 		},
 		{
 			"Name": "Yoda (Grand Master)",
-			"ID": "Rebel33"
+			"ID": "CustomRebel33"
 		},
 		{
 			"Name": "Yoda",
-			"ID": "Rebel34"
+			"ID": "CustomRebel34"
 		},
 		{
 			"Name": "Zaalbar",
-			"ID": "Rebel35"
+			"ID": "CustomRebel35"
 		},
 	],
 	"Imperial":
 	[
 		{
 			"Name": "Admiral",
-			"ID": "Imperial1"
+			"ID": "CustomImperial1"
 		},
 		{
 			"Name": "Arcann",
-			"ID": "Imperial2"
+			"ID": "CustomImperial2"
 		},
 		{
 			"Name": "Baton Trooper",
-			"ID": "Imperial3"
+			"ID": "CustomImperial3"
 		},
 		{
 			"Name": "BX Commando Droid Captain",
-			"ID": "Imperial4"
+			"ID": "CustomImperial4"
 		},
 		{
 			"Name": "BX Commando Droid",
-			"ID": "Imperial5"
+			"ID": "CustomImperial5"
 		},
 		{
 			"Name": "Dark Trooper MK1",
-			"ID": "Imperial6"
+			"ID": "CustomImperial6"
 		},
 		{
 			"Name": "Dart Traya",
-			"ID": "Imperial7"
+			"ID": "CustomImperial7"
 		},
 		{
 			"Name": "Darth Bane",
-			"ID": "Imperial8"
+			"ID": "CustomImperial8"
 		},
 		{
 			"Name": "Darth Malak",
-			"ID": "Imperial9"
+			"ID": "CustomImperial9"
 		},
 		{
 			"Name": "Darth Malgus",
-			"ID": "Imperial10"
+			"ID": "CustomImperial10"
 		},
 		{
 			"Name": "Darth Nihilus",
-			"ID": "Imperial11"
+			"ID": "CustomImperial11"
 		},
 		{
 			"Name": "Darth Revan",
-			"ID": "Imperial12"
+			"ID": "CustomImperial12"
 		},
 		{
 			"Name": "Darth Sion",
-			"ID": "Imperial13"
+			"ID": "CustomImperial13"
 		},
 		{
 			"Name": "Darth Zannah",
-			"ID": "Imperial14"
+			"ID": "CustomImperial14"
 		},
 		{
 			"Name": "Del Meeko",
-			"ID": "Imperial15"
+			"ID": "CustomImperial15"
 		},
 		{
 			"Name": "Empire Trooper",
-			"ID": "Imperial16"
+			"ID": "CustomImperial16"
 		},
 		{
 			"Name": "First Order Trooper",
-			"ID": "Imperial17"
+			"ID": "CustomImperial17"
 		},
 		{
 			"Name": "Galen Marek (Sith Stalker)",
-			"ID": "Imperial18"
+			"ID": "CustomImperial18"
 		},
 		{
 			"Name": "Gideon Hask",
-			"ID": "Imperial19"
+			"ID": "CustomImperial19"
 		},
 		{
 			"Name": "Heavy Sith Imperial Trooper",
-			"ID": "Imperial20"
+			"ID": "CustomImperial20"
 		},
 		{
 			"Name": "Iden Versio",
-			"ID": "Imperial21"
+			"ID": "CustomImperial21"
 		},
 		{
 			"Name": "Knights of Zakuul Captain",
-			"ID": "Imperial22"
+			"ID": "CustomImperial22"
 		},
 		{
 			"Name": "Knights of Zakuul",
-			"ID": "Imperial23"
+			"ID": "CustomImperial23"
 		},
 		{
 			"Name": "Kylo Ren",
-			"ID": "Imperial24"
+			"ID": "CustomImperial24"
 		},
 		{
 			"Name": "Mara Jade",
-			"ID": "Imperial25"
+			"ID": "CustomImperial25"
 		},
 		{
 			"Name": "Scout Trooper 1",
-			"ID": "Imperial26"
+			"ID": "CustomImperial26"
 		},
 		{
 			"Name": "Scout Trooper 2",
-			"ID": "Imperial27"
+			"ID": "CustomImperial27"
 		},
 		{
 			"Name": "Scout Trooper 3",
-			"ID": "Imperial28"
+			"ID": "CustomImperial28"
 		},
 		{
 			"Name": "Scout Trooper 4",
-			"ID": "Imperial29"
+			"ID": "CustomImperial29"
 		},
 		{
 			"Name": "Scout Trooper 5",
-			"ID": "Imperial30"
+			"ID": "CustomImperial30"
 		},
 		{
 			"Name": "Scout Trooper 6",
-			"ID": "Imperial31"
+			"ID": "CustomImperial31"
 		},
 		{
 			"Name": "Scout Trooper 7",
-			"ID": "Imperial32"
+			"ID": "CustomImperial32"
 		},
 		{
 			"Name": "Sentitel Droids",
-			"ID": "Imperial33"
+			"ID": "CustomImperial33"
 		},
 		{
 			"Name": "Shae Vizla",
-			"ID": "Imperial34"
+			"ID": "CustomImperial34"
 		},
 		{
 			"Name": "Sith Acolyte",
-			"ID": "Imperial35"
+			"ID": "CustomImperial35"
 		},
 		{
 			"Name": "Sith Assassin",
-			"ID": "Imperial36"
+			"ID": "CustomImperial36"
 		},
 		{
 			"Name": "Sith Imperial Officer",
-			"ID": "Imperial37"
+			"ID": "CustomImperial37"
 		},
 		{
 			"Name": "Sith Imperial Trooper",
-			"ID": "Imperial38"
+			"ID": "CustomImperial38"
 		},
 		{
 			"Name": "Sith Lord",
-			"ID": "Imperial39"
+			"ID": "CustomImperial39"
 		},
 		{
 			"Name": "Sith Trooper",
-			"ID": "Imperial40"
+			"ID": "CustomImperial40"
 		},
 		{
 			"Name": "Sith Warrior",
-			"ID": "Imperial41"
+			"ID": "CustomImperial41"
 		},
 		{
 			"Name": "Skytrooper",
-			"ID": "Imperial42"
+			"ID": "CustomImperial42"
 		},
 		{
 			"Name": "Thexan",
-			"ID": "Imperial43"
+			"ID": "CustomImperial43"
 		},
 	],
 	"Mercenary":
 	[
 		{
 			"Name": "Cara Dune",
-			"ID": "Mercenary1"
+			"ID": "CustomMercenary1"
 		},
 		{
 			"Name": "Cloudriders",
-			"ID": "Mercenary2"
+			"ID": "CustomMercenary2"
 		},
 		{
 			"Name": "Dr.Aphra",
-			"ID": "Mercenary3"
+			"ID": "CustomMercenary3"
 		},
 		{
 			"Name": "Heavy Mandalorian",
-			"ID": "Mercenary4"
+			"ID": "CustomMercenary4"
 		},
 		{
 			"Name": "HK-50",
-			"ID": "Mercenary5"
+			"ID": "CustomMercenary5"
 		},
 		{
 			"Name": "Krayt Dragon",
-			"ID": "Mercenary6"
+			"ID": "CustomMercenary6"
 		},
 		{
 			"Name": "Kryze",
-			"ID": "Mercenary7"
+			"ID": "CustomMercenary7"
 		},
 		{
 			"Name": "Lobot",
-			"ID": "Mercenary8"
+			"ID": "CustomMercenary8"
 		},
 		{
 			"Name": "Lomrokk",
-			"ID": "Mercenary9"
+			"ID": "CustomMercenary9"
 		},
 		{
 			"Name": "Mandalorians",
-			"ID": "Mercenary10"
+			"ID": "CustomMercenary10"
 		},
 		{
 			"Name": "Mara Jade",
-			"ID": "Mercenary11"
+			"ID": "CustomMercenary11"
 		},
 		{
 			"Name": "Neo-Crusader",
-			"ID": "Mercenary12"
+			"ID": "CustomMercenary12"
 		},
 		{
 			"Name": "The Mandolorian",
-			"ID": "Mercenary13"
+			"ID": "CustomMercenary13"
 		},
 		{
 			"Name": "4-Lom",
-			"ID": "Mercenary14"
+			"ID": "CustomMercenary14"
 		},
 		{
 			"Name": "Enfys Nest",
-			"ID": "Mercenary15"
+			"ID": "CustomMercenary15"
 		},
 		{
 			"Name": "Flesh Raiders",
-			"ID": "Mercenary16"
+			"ID": "CustomMercenary16"
 		},
 		{
 			"Name": "RahkGhoul",
-			"ID": "Mercenary17"
+			"ID": "CustomMercenary17"
 		},
 		{
 			"Name": "Zuckuss",
-			"ID": "Mercenary18"
+			"ID": "CustomMercenary18"
 		},
 	]
 }

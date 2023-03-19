@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -28,6 +29,10 @@ namespace Imperial_Commander_Editor
 		public CustomToon customToon { get; set; }
 		public DeploymentCard selectedCopyFrom { get => _selectedCopyFrom; set { _selectedCopyFrom = value; PC(); } }
 		public bool isStandalone = false;
+		public ObservableCollection<DeploymentColor> deploymentColors
+		{
+			get { return Utils.deploymentColors; }
+		}
 
 		public ToonEditorPanel() => InitializeComponent();
 
@@ -191,6 +196,26 @@ namespace Imperial_Commander_Editor
 			SetThumbSource( ThumbType.Mercenary );
 		}
 
+		private void filterStockImperialButton_Click( object sender, RoutedEventArgs e )
+		{
+			SetThumbSource( ThumbType.StockImperial );
+		}
+
+		private void filterHeroButton_Click( object sender, RoutedEventArgs e )
+		{
+			SetThumbSource( ThumbType.StockHero );
+		}
+
+		private void filterVillainButton_Click( object sender, RoutedEventArgs e )
+		{
+			SetThumbSource( ThumbType.StockVillain );
+		}
+
+		private void filterAllyButton_Click( object sender, RoutedEventArgs e )
+		{
+			SetThumbSource( ThumbType.StockAlly );
+		}
+
 		private void SetThumbSource( ThumbType ttype )
 		{
 			iconFilterBox.Text = "";
@@ -211,7 +236,7 @@ namespace Imperial_Commander_Editor
 		{
 			var item = Utils.thumbnailData.Filter( ThumbType.All ).Where( x => x.ID == customToon.thumbnail.ID ).FirstOrDefault();
 			thumbListCB.SelectedItem = item;
-			thumbPreview.Source = new BitmapImage( new Uri( $"pack://application:,,,/Imperial Commander Editor;component/Assets/Thumbnails/{customToon.thumbType}/{customToon.thumbnail.ID}.png" ) );
+			thumbPreview.Source = new BitmapImage( new Uri( $"pack://application:,,,/Imperial Commander Editor;component/Assets/Thumbnails/{customToon.thumbnail.ID.ThumbFolder()}/{customToon.thumbnail.ID}.png" ) );
 		}
 
 		private void confirmCopyFromButton_Click( object sender, RoutedEventArgs e )
@@ -285,6 +310,12 @@ namespace Imperial_Commander_Editor
 					SetThumbSource( ThumbType.All );
 				}
 			}
+		}
+
+		private void eliteCheckbox_Click( object sender, RoutedEventArgs e )
+		{
+			if ( eliteCheckbox.IsChecked == true && customToon.deploymentCard.isElite )
+				customToon.outlineColor = "Red";
 		}
 	}
 }

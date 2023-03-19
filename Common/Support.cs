@@ -317,16 +317,28 @@ namespace Imperial_Commander_Editor
 
 	public class ThumbnailData
 	{
-		public List<Thumbnail> Other, Rebel, Imperial, Mercenary;
+		public List<Thumbnail> Other, Rebel, Imperial, Mercenary, StockImperial, StockAlly, StockHero, StockVillain;
 		List<Thumbnail> None = new( new Thumbnail[] { new() { Name = "Select a Thumbnail", ID = "None" } } );
 		public Thumbnail NoneThumb => None[0];
+
+		public ThumbnailData()
+		{
+			Other = new List<Thumbnail>();
+			Rebel = new List<Thumbnail>();
+			Imperial = new List<Thumbnail>();
+			Mercenary = new List<Thumbnail>();
+			StockImperial = new List<Thumbnail>();
+			StockAlly = new List<Thumbnail>();
+			StockHero = new List<Thumbnail>();
+			StockVillain = new List<Thumbnail>();
+		}
 
 		public List<Thumbnail> Filter( ThumbType ttype )
 		{
 			switch ( ttype )
 			{
 				case ThumbType.All:
-					return None.Concat( Other ).Concat( Rebel ).Concat( Imperial ).Concat( Mercenary ).ToList();
+					return None.Concat( Other ).Concat( Rebel ).Concat( Imperial ).Concat( Mercenary ).Concat( StockImperial ).Concat( StockAlly ).Concat( StockHero ).Concat( StockVillain ).ToList();
 				case ThumbType.Other:
 					return None.Concat( Other ).ToList();
 				case ThumbType.Rebel:
@@ -335,6 +347,14 @@ namespace Imperial_Commander_Editor
 					return None.Concat( Imperial ).ToList();
 				case ThumbType.Mercenary:
 					return None.Concat( Mercenary ).ToList();
+				case ThumbType.StockImperial:
+					return None.Concat( StockImperial ).ToList();
+				case ThumbType.StockAlly:
+					return None.Concat( StockAlly ).ToList();
+				case ThumbType.StockHero:
+					return None.Concat( StockHero ).ToList();
+				case ThumbType.StockVillain:
+					return None.Concat( StockVillain ).ToList();
 				default:
 					return Other;
 			}
@@ -343,7 +363,7 @@ namespace Imperial_Commander_Editor
 
 	public class Thumbnail
 	{
-		public string Name { get; set; }
-		public string ID { get; set; }
+		public string Name { get; set; }//full name of icon's character
+		public string ID { get; set; }//basically the filename
 	}
 }

@@ -9,7 +9,7 @@ namespace Imperial_Commander_Editor
 	{
 		//these properties don't change, even when copying from another Deployment Group
 		public Guid customCharacterGUID { get; set; }
-		string _cardName, _cardID;
+		string _cardName, _cardID, _outlineColor;
 
 		CharacterType _characterType; //deploy as
 		Thumbnail _thumbnail;
@@ -18,7 +18,7 @@ namespace Imperial_Commander_Editor
 		string _groupAttack, _groupDefense, _bonuses;
 		string[] _instructions;
 		Factions _faction;
-		bool _canRedeploy, _canReinforce, _canBeDefeated;
+		bool _canRedeploy, _canReinforce, _canBeDefeated, _useThreatMultiplier;
 
 		//update the embedded DG's name and id when it changes
 		public string cardName { get => _cardName; set { SetProperty( ref _cardName, value ); deploymentCard.name = value; } }
@@ -42,6 +42,7 @@ namespace Imperial_Commander_Editor
 				deploymentCard.defense = Utils.ParseCustomDice( value.Split( ' ' ) );
 			}
 		}
+		public string outlineColor { get => _outlineColor; set { SetProperty( ref _outlineColor, value ); } }
 		public GroupPriorityTraits groupPriorityTraits { get => _groupPriorityTraits; set => SetProperty( ref _groupPriorityTraits, value ); }
 
 		public DeploymentCard deploymentCard { get => _deploymentCard; set => SetProperty( ref _deploymentCard, value ); }
@@ -81,6 +82,11 @@ namespace Imperial_Commander_Editor
 			get => _canBeDefeated;
 			set => SetProperty( ref _canBeDefeated, value );
 		}
+		public bool useThreatMultiplier
+		{
+			get => _useThreatMultiplier;
+			set => SetProperty( ref _useThreatMultiplier, value );
+		}
 		public Factions faction
 		{
 			get => _faction;
@@ -88,21 +94,6 @@ namespace Imperial_Commander_Editor
 			{
 				SetProperty( ref _faction, value );
 				deploymentCard.faction = value.ToString();
-			}
-		}
-
-		public string thumbType
-		{
-			get
-			{
-				if ( thumbnail.ID.ToLower().Contains( "imperial" ) )
-					return "Imperial";
-				else if ( thumbnail.ID.ToLower().Contains( "rebel" ) )
-					return "Rebel";
-				else if ( thumbnail.ID.ToLower().Contains( "mercenary" ) )
-					return "Mercenary";
-				else
-					return "Other";
 			}
 		}
 
@@ -120,30 +111,6 @@ namespace Imperial_Commander_Editor
 			newToon.deploymentCard.id = newID;
 			newToon.cardID = newID;
 			return newToon;
-
-			//var copy = JsonConvert.SerializeObject( toon );
-			//CustomToon t = JsonConvert.DeserializeObject<CustomToon>( copy );
-			//string newID = Utils.GetAvailableCustomToonID();
-			//t.deploymentCard.id = newID;
-			//t.cardID = newID;
-			//return t;
-
-			//deploymentCard = toon.deploymentCard;
-			//cardName = deploymentCard.name;
-			////find a new, free ID when importing
-			//cardID = Utils.GetAvailableCustomToonID();
-			//deploymentCard.id = cardID;
-			//groupPriorityTraits = toon.groupPriorityTraits;
-			//characterType = toon.characterType;
-			//faction = toon.faction;
-			//canRedeploy = toon.canRedeploy;
-			//canReinforce = toon.canReinforce;
-			//canBeDefeated = toon.canBeDefeated;
-			//groupAttack = toon.groupAttack;
-			//groupDefense = toon.groupDefense;
-			//bonuses = toon.bonuses;
-			//instructions = toon.instructions;
-			//thumbnail = toon.thumbnail;
 		}
 
 		public void Create()
@@ -178,9 +145,11 @@ namespace Imperial_Commander_Editor
 			//default properties
 			cardName = deploymentCard.name;
 			cardID = deploymentCard.id;
+			outlineColor = "Gray";
 			groupPriorityTraits = new();
 			characterType = CharacterType.Enemy;
 			faction = Factions.Imperial;
+			useThreatMultiplier = false;
 			canRedeploy = canReinforce = canBeDefeated = true;
 			groupAttack = "1Blue 2Yellow";
 			groupDefense = "1White 1Black";
@@ -189,15 +158,6 @@ namespace Imperial_Commander_Editor
 			//default thumbnail
 			thumbnail = Utils.thumbnailData.NoneThumb;
 		}
-
-		///// <summary>
-		///// Find a new, free TCXX ID when IMPORTING characters
-		///// </summary>
-		//private void SetNewID()
-		//{
-		//	cardID = Utils.GetAvailableCustomToonID();
-		//	deploymentCard.id = cardID;
-		//}
 
 		/// <summary>
 		/// Copies embedded DeploymnentCard data to this objects properties (cost, size, etc)

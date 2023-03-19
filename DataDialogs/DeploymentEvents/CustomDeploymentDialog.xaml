@@ -7,7 +7,7 @@
         mc:Ignorable="d"
        	xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         Style="{StaticResource dws}"
-        Title="Custom Deployment" Width="850" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown" Height="700" ResizeMode="CanResize" d:Height="1000">
+        Title="Custom Deployment" Width="850" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown" Height="700" ResizeMode="CanResize">
 
 	<Window.Resources>
 		<local:RadioBoolToIntConverter x:Key="rbConv" />
@@ -23,7 +23,10 @@
 				</Grid.RowDefinitions>
 
 				<materialDesign:Card Background="{StaticResource CardBG}" Padding="10">
-					<TextBlock Text="Custom Groups are given a unique ID and are not associated with any real, existing card in the game." TextWrapping="Wrap" HorizontalAlignment="Center"/>
+					<StackPanel>
+						<TextBlock Text="Custom Groups are given a unique ID and are not associated with any real, existing card in the game." TextWrapping="Wrap" HorizontalAlignment="Center"/>
+						<TextBlock Text="They cannot be referenced by Event Actions or used anywhere else in the Mission Editor aside from being Deployed by this Event." TextWrapping="Wrap" HorizontalAlignment="Center" Margin="0,5,0,0"/>
+					</StackPanel>
 				</materialDesign:Card>
 
 				<ScrollViewer Grid.Row="1">
@@ -41,7 +44,7 @@
 											<ColumnDefinition Width="*" />
 										</Grid.ColumnDefinitions>
 										<TextBlock Text="Icon Outline Color:" VerticalAlignment="Center"/>
-										<ComboBox Grid.Column="1" Margin="10,0,0,0" Style="{StaticResource MaterialDesignOutlinedComboBox}" ItemsSource="{Binding deploymentColors, RelativeSource={RelativeSource AncestorType=Window}}" SelectedValue="{Binding customColor}" DisplayMemberPath="name" SelectedValuePath="name"/>
+										<ComboBox Grid.Column="1" Margin="10,0,0,0" Style="{StaticResource MaterialDesignOutlinedComboBox}" ItemsSource="{Binding deploymentColors, RelativeSource={RelativeSource AncestorType=Window}}" SelectedValue="{Binding customOutlineColor}" DisplayMemberPath="name" SelectedValuePath="name"/>
 									</Grid>
 
 									<TextBlock Text="Deployment Type" HorizontalAlignment="Center" Margin="0,10,0,0"/>
@@ -119,128 +122,178 @@
 
 								</StackPanel>
 							</GroupBox>
-
-							<!--OPTIONS-->
-							<materialDesign:Card Padding="10" Background="{StaticResource CardBG}" Margin="0,10,0,0">
-								<StackPanel>
-									<WrapPanel>
-										<CheckBox x:Name="canRD" Content="Can Be Redeployed" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding canRedeploy}"/>
-										<!--<CheckBox Content="Reset on Redeployment" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding useResetOnRedeployment}" IsEnabled="{Binding ElementName=canRD, Path=IsChecked}"/>-->
-										<CheckBox Content="Can Be Reinforced" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding canReinforce}"/>
-										<CheckBox Content="Can Be Defeated" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding canBeDefeated}"/>
-									</WrapPanel>
-
-									<TextBlock Text="Groups that can't Redeploy are removed from the mission and do not return to the Imperial Hand on defeat, but they can be manually deployed again with new options." TextWrapping="Wrap" FontStyle="Italic" Margin="0,5,0,0"/>
-								</StackPanel>
-							</materialDesign:Card>
-
-							<!--ON DEFEAT (TRIGGER)-->
-							<GroupBox Header="On Defeated, Fire This Trigger:" Margin="0,10,0,0" Background="#FF503B7C">
-								<ComboBox x:Name="triggersCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" DisplayMemberPath="name" SelectedValue="{Binding enemyGroupData.defeatedTrigger}" SelectedValuePath="GUID"/>
-							</GroupBox>
-
-							<!--ON DEFEAT (EVENT)-->
-							<GroupBox Header="On Defeated, Fire This Event:" Margin="0,10,0,0" Background="#FF503B7C">
-								<ComboBox x:Name="eventsCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" DisplayMemberPath="name" SelectedValue="{Binding enemyGroupData.defeatedEvent}" SelectedValuePath="GUID"/>
-							</GroupBox>
-
 						</StackPanel>
 
 						<!--RIGHT PANEL-->
 						<StackPanel Margin="5,0,0,0">
-							<!--DEPLOYMENT-->
-							<GroupBox Header="Deployment Point" Margin="0,0,0,10" Background="#FF503B7C">
-								<StackPanel>
-									<RadioButton GroupName="dpoint" Content="Active Deployment Point" VerticalAlignment="Center" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding Path=deploymentPoint, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:DeploymentSpot.Active}}"/>
+							<TabControl x:Name="tabControl"
+  Style="{StaticResource MaterialDesignNavigatilRailTabControl}"
+  materialDesign:ColorZoneAssist.Mode="PrimaryMid"
+  TabStripPlacement="Top" materialDesign:NavigationRailAssist.ShowSelectionBackground="True">
+								<TabControl.Background>
+									<SolidColorBrush Color="#FF3A3349"/>
+								</TabControl.Background>
 
-									<RadioButton x:Name="sdp" GroupName="dpoint" Content="Specific Deployment Point:" VerticalAlignment="Center" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding Path=deploymentPoint, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:DeploymentSpot.Specific}}"/>
-
-									<Grid>
-										<Grid.ColumnDefinitions>
-											<ColumnDefinition Width="1*" />
-											<ColumnDefinition Width="auto" />
-											<ColumnDefinition Width="auto" />
-										</Grid.ColumnDefinitions>
-										<ComboBox x:Name="dpCB" ItemsSource="{Binding deploymentPoints, RelativeSource={RelativeSource AncestorType=Window}}" Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectedValue="{Binding specificDeploymentPoint}" SelectedValuePath="GUID" IsEnabled="{Binding Path=IsChecked, ElementName=sdp}" DisplayMemberPath="name" SelectionChanged="dpCB_SelectionChanged"/>
-										<Button Grid.Column="1" x:Name="editGroup" Content="{materialDesign:PackIcon Kind=Edit}" Click="editDP_Click" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35" Margin="10,0,0,0" IsEnabled="{Binding Path=IsChecked, ElementName=sdp}"/>
-									</Grid>
-								</StackPanel>
-							</GroupBox>
-
-							<!--COMBAT-->
-							<GroupBox Header="Combat Properties" Padding="10" Background="{StaticResource GroupBG}">
-								<StackPanel>
-									<TextBlock Text="For Attack and Defense, use this format:" FontStyle="Italic" TextWrapping="Wrap" HorizontalAlignment="Center"/>
-									<TextBlock Text="#Color #Color" FontStyle="Italic" TextWrapping="Wrap" HorizontalAlignment="Center"/>
-									<TextBlock Text="Example: 2Red 1Green" FontStyle="Italic" TextWrapping="Wrap" HorizontalAlignment="Center"/>
-									<TextBlock Text=" Interprets as 2 Red dice and 1 Green dice" FontStyle="Italic" TextWrapping="Wrap" HorizontalAlignment="Center"/>
-
-									<Grid>
-										<Grid.ColumnDefinitions>
-											<ColumnDefinition Width="1*" />
-											<ColumnDefinition Width="1*" />
-										</Grid.ColumnDefinitions>
-										<Grid.RowDefinitions>
-											<RowDefinition Height="1*" />
-											<RowDefinition Height="1*" />
-											<RowDefinition Height="1*" />
-											<RowDefinition Height="1*" />
-										</Grid.RowDefinitions>
-
-										<StackPanel Orientation="Horizontal">
-											<TextBlock Text="Health" VerticalAlignment="Bottom"/>
-											<TextBox Grid.Row="0" Grid.Column="1" Text="{Binding groupHealth}" Width="50" HorizontalContentAlignment="Center" Margin="10,5,0,0" VerticalAlignment="Bottom" KeyDown="nameTB_KeyDown" CaretBrush="White"/>
+								<!--DEPLOYMENT-->
+								<TabItem Width="95" x:Name="deploymentTab">
+									<TabItem.Header>
+										<StackPanel>
+											<materialDesign:PackIcon Kind="Run" Width="24" Height="24" HorizontalAlignment="Center" />
+											<TextBlock Style="{StaticResource MaterialDesignTextBlock}" Text="Deployment" HorizontalAlignment="Center"/>
 										</StackPanel>
+									</TabItem.Header>
 
-										<CheckBox Grid.Row="1" Content="Multiply Health By Threat Level" IsChecked="{Binding useThreatMultiplier}" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" Margin="0,10" Grid.ColumnSpan="2"/>
+									<StackPanel>
+										<!--DEPLOYMENT POINT-->
+										<GroupBox Header="Deployment Point" Margin="0,10,0,10" Background="#FF503B7C">
+											<StackPanel>
+												<RadioButton GroupName="dpoint" Content="Active Deployment Point" VerticalAlignment="Center" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding Path=deploymentPoint, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:DeploymentSpot.Active}}"/>
 
-										<StackPanel Orientation="Horizontal" Grid.Column="1">
-											<TextBlock Grid.Row="2" Text="Speed" VerticalAlignment="Bottom"/>
-											<TextBox Grid.Row="2" Grid.Column="1" Text="{Binding groupSpeed}" Width="50" HorizontalContentAlignment="Center" Margin="10,15,0,0" KeyDown="nameTB_KeyDown" CaretBrush="White"/>
+												<RadioButton x:Name="sdp" GroupName="dpoint" Content="Specific Deployment Point:" VerticalAlignment="Center" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding Path=deploymentPoint, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:DeploymentSpot.Specific}}"/>
+
+												<Grid>
+													<Grid.ColumnDefinitions>
+														<ColumnDefinition Width="1*" />
+														<ColumnDefinition Width="auto" />
+														<ColumnDefinition Width="auto" />
+													</Grid.ColumnDefinitions>
+													<ComboBox x:Name="dpCB" ItemsSource="{Binding deploymentPoints, RelativeSource={RelativeSource AncestorType=Window}}" Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectedValue="{Binding specificDeploymentPoint}" SelectedValuePath="GUID" IsEnabled="{Binding Path=IsChecked, ElementName=sdp}" DisplayMemberPath="name" SelectionChanged="dpCB_SelectionChanged"/>
+													<Button Grid.Column="1" x:Name="editGroup" Content="{materialDesign:PackIcon Kind=Edit}" Click="editDP_Click" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35" Margin="10,0,0,0" IsEnabled="{Binding Path=IsChecked, ElementName=sdp}"/>
+												</Grid>
+											</StackPanel>
+										</GroupBox>
+
+										<!-- DEPLOYMENT OPTIONS-->
+										<materialDesign:Card Padding="10" Background="{StaticResource CardBG}">
+											<StackPanel>
+												<WrapPanel>
+													<CheckBox x:Name="canRD" Content="Can Be Redeployed" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding canRedeploy}"/>
+													<!--<CheckBox Content="Reset on Redeployment" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding useResetOnRedeployment}" IsEnabled="{Binding ElementName=canRD, Path=IsChecked}"/>-->
+													<CheckBox Content="Can Be Reinforced" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding canReinforce}"/>
+													<CheckBox Content="Can Be Defeated" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding canBeDefeated}"/>
+												</WrapPanel>
+
+												<TextBlock Text="Groups that can't Redeploy are removed from the mission and do not return to the Imperial Hand on defeat, but they can be manually deployed again with new options." TextWrapping="Wrap" FontStyle="Italic" Margin="0,5,0,0"/>
+											</StackPanel>
+										</materialDesign:Card>
+									</StackPanel>
+								</TabItem>
+
+								<!--COMBAT-->
+								<TabItem Width="95">
+									<TabItem.Header>
+										<StackPanel>
+											<materialDesign:PackIcon Kind="SwordFight" Width="24" Height="24" HorizontalAlignment="Center" />
+											<TextBlock Style="{StaticResource MaterialDesignTextBlock}" Text="Combat" HorizontalAlignment="Center"/>
 										</StackPanel>
+									</TabItem.Header>
 
-										<TextBlock Grid.Row="2" Text="Attack" VerticalAlignment="Bottom"/>
-										<TextBlock Grid.Row="3" Text="Defense" VerticalAlignment="Bottom"/>
+									<GroupBox Header="Combat Properties" Padding="10" Background="{StaticResource GroupBG}" Margin="0,10,0,0">
+										<StackPanel>
+											<TextBlock Text="For Attack and Defense, use this format:" FontStyle="Italic" TextWrapping="Wrap" HorizontalAlignment="Center"/>
+											<TextBlock Text="#Color #Color" FontStyle="Italic" TextWrapping="Wrap" HorizontalAlignment="Center"/>
+											<TextBlock Text="Example: 2Red 1Green" FontStyle="Italic" TextWrapping="Wrap" HorizontalAlignment="Center"/>
+											<TextBlock Text=" Interprets as 2 Red dice and 1 Green dice" FontStyle="Italic" TextWrapping="Wrap" HorizontalAlignment="Center"/>
 
-										<TextBox Grid.Row="2" Grid.Column="1" Text="{Binding groupAttack}" materialDesign:HintAssist.Hint="Example: 1Blue 2Yellow" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" Margin="0,15,0,0" KeyDown="nameTB_KeyDown" CaretBrush="White"/>
-										<TextBox Grid.Row="3" Grid.Column="1" Text="{Binding groupDefense}" materialDesign:HintAssist.Hint="Example: 1White 1Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" Margin="0,15,0,0" KeyDown="nameTB_KeyDown" CaretBrush="White"/>
-									</Grid>
+											<Grid>
+												<Grid.ColumnDefinitions>
+													<ColumnDefinition Width="1*" />
+													<ColumnDefinition Width="1*" />
+												</Grid.ColumnDefinitions>
+												<Grid.RowDefinitions>
+													<RowDefinition Height="1*" />
+													<RowDefinition Height="1*" />
+													<RowDefinition Height="1*" />
+													<RowDefinition Height="1*" />
+												</Grid.RowDefinitions>
 
-									<!--ATTACK TYPE-->
-									<UniformGrid Columns="2" Margin="0,10,0,0">
-										<TextBlock Text="Attack Type" VerticalAlignment="Center"/>
-										<UniformGrid Columns="2">
-											<RadioButton Content="Melee" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" HorizontalAlignment="Stretch" IsChecked="{Binding attackType, ConverterParameter={x:Static local:AttackType.Melee}, Converter={StaticResource rbConv}}"/>
-											<RadioButton Content="Ranged" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" HorizontalAlignment="Stretch" IsChecked="{Binding attackType, ConverterParameter={x:Static local:AttackType.Ranged}, Converter={StaticResource rbConv}}"/>
-										</UniformGrid>
-									</UniformGrid>
-								</StackPanel>
-							</GroupBox>
+												<StackPanel Orientation="Horizontal">
+													<TextBlock Text="Health" VerticalAlignment="Bottom"/>
+													<TextBox Grid.Row="0" Grid.Column="1" Text="{Binding groupHealth}" Width="50" HorizontalContentAlignment="Center" Margin="10,5,0,0" VerticalAlignment="Bottom" KeyDown="nameTB_KeyDown" CaretBrush="White"/>
+												</StackPanel>
 
-							<!--PRIORITY TARGET-->
-							<GroupBox Header="Priority Target Traits" Margin="0,10,0,0" Background="#FF503B7C">
-								<UniformGrid Columns="2">
-									<CheckBox VerticalAlignment="Center" x:Name="defPriorityCheck" Content="Target All Traits" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding enemyGroupData.groupPriorityTraits.useDefaultPriority}"/>
-									<Button x:Name="targetBtn" Content="CHANGE TRAITS..." Click="targetBtn_Click" IsEnabled="{Binding Path=IsChecked, ElementName=defPriorityCheck, Converter={StaticResource InvertBooleanConverter}}"/>
-								</UniformGrid>
-							</GroupBox>
+												<CheckBox Grid.Row="1" Content="Multiply Health By Threat Level" IsChecked="{Binding useThreatMultiplier}" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" Margin="0,10" Grid.ColumnSpan="2"/>
 
-							<!--REPOSITION-->
-							<GroupBox Header="Instructions, Bonuses, Abilities, Surges and Keywords" Margin="0,10,0,0" Background="#FF503B7C">
-								<StackPanel>
-									<TextBlock Text="Custom Groups are pre-filled with EXAMPLE data by Default." FontStyle="Italic" HorizontalAlignment="Center" Margin="0,0,0,10" TextWrapping="Wrap"/>
+												<StackPanel Orientation="Horizontal" Grid.Column="1">
+													<TextBlock Grid.Row="2" Text="Speed" VerticalAlignment="Bottom"/>
+													<TextBox Grid.Row="2" Grid.Column="1" Text="{Binding groupSpeed}" Width="50" HorizontalContentAlignment="Center" Margin="10,15,0,0" KeyDown="nameTB_KeyDown" CaretBrush="White"/>
+												</StackPanel>
 
-									<WrapPanel>
-										<Button x:Name="instructionsBtn" Content="INSTRUCTIONS..." Click="instructionsBtn_Click" Margin="5" Foreground="Red">
-										</Button>
-										<Button x:Name="bonusBtn" Content="BONUSES..." Click="bonusBtn_Click" Margin="5" Foreground="Red"/>
-										<Button x:Name="abilityBtn" Content="ABILITIES..." Click="abilityBtn_Click" Margin="5" Foreground="Red"/>
-										<Button x:Name="surgeBtn" Content="SURGES..." Click="surgeBtn_Click" Margin="5" Foreground="Red"/>
-										<Button x:Name="keywordsBtn" Content="KEYWORDS..." Click="keywordsBtn_Click" Margin="5" Foreground="Red"/>
-									</WrapPanel>
-								</StackPanel>
-							</GroupBox>
+												<TextBlock Grid.Row="2" Text="Attack" VerticalAlignment="Bottom"/>
+												<TextBlock Grid.Row="3" Text="Defense" VerticalAlignment="Bottom"/>
 
+												<TextBox Grid.Row="2" Grid.Column="1" Text="{Binding groupAttack}" materialDesign:HintAssist.Hint="Example: 1Blue 2Yellow" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" Margin="0,15,0,0" KeyDown="nameTB_KeyDown" CaretBrush="White"/>
+												<TextBox Grid.Row="3" Grid.Column="1" Text="{Binding groupDefense}" materialDesign:HintAssist.Hint="Example: 1White 1Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" Margin="0,15,0,0" KeyDown="nameTB_KeyDown" CaretBrush="White"/>
+											</Grid>
+
+											<!--ATTACK TYPE-->
+											<UniformGrid Columns="2" Margin="0,10,0,0">
+												<TextBlock Text="Attack Type" VerticalAlignment="Center"/>
+												<UniformGrid Columns="2">
+													<RadioButton Content="Melee" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" HorizontalAlignment="Stretch" IsChecked="{Binding attackType, ConverterParameter={x:Static local:AttackType.Melee}, Converter={StaticResource rbConv}}"/>
+													<RadioButton Content="Ranged" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" HorizontalAlignment="Stretch" IsChecked="{Binding attackType, ConverterParameter={x:Static local:AttackType.Ranged}, Converter={StaticResource rbConv}}"/>
+												</UniformGrid>
+											</UniformGrid>
+										</StackPanel>
+									</GroupBox>
+								</TabItem>
+
+								<!--CARD TEXT-->
+								<TabItem Width="95">
+									<TabItem.Header>
+										<StackPanel>
+											<materialDesign:PackIcon Kind="Book" Width="24" Height="24" HorizontalAlignment="Center" />
+											<TextBlock Style="{StaticResource MaterialDesignTextBlock}" Text="Card Text" HorizontalAlignment="Center"/>
+										</StackPanel>
+									</TabItem.Header>
+
+									<StackPanel>
+										<GroupBox Header="Instructions, Bonuses, Abilities, Surges and Keywords" Margin="0,10,0,0" Background="#FF503B7C">
+											<StackPanel>
+												<TextBlock Text="Custom Groups are pre-filled with EXAMPLE data by Default." FontStyle="Italic" HorizontalAlignment="Center" Margin="0,0,0,10" TextWrapping="Wrap"/>
+
+												<WrapPanel>
+													<Button x:Name="instructionsBtn" Content="INSTRUCTIONS..." Click="instructionsBtn_Click" Margin="5" Foreground="Red">
+													</Button>
+													<Button x:Name="bonusBtn" Content="BONUSES..." Click="bonusBtn_Click" Margin="5" Foreground="Red"/>
+													<Button x:Name="abilityBtn" Content="ABILITIES..." Click="abilityBtn_Click" Margin="5" Foreground="Red"/>
+													<Button x:Name="surgeBtn" Content="SURGES..." Click="surgeBtn_Click" Margin="5" Foreground="Red"/>
+													<Button x:Name="keywordsBtn" Content="KEYWORDS..." Click="keywordsBtn_Click" Margin="5" Foreground="Red"/>
+												</WrapPanel>
+											</StackPanel>
+										</GroupBox>
+
+										<GroupBox Header="Priority Target Traits" Margin="0,10,0,0" Background="#FF503B7C">
+											<UniformGrid Columns="2">
+												<CheckBox VerticalAlignment="Center" x:Name="defPriorityCheck" Content="Target All Traits" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding enemyGroupData.groupPriorityTraits.useDefaultPriority}"/>
+												<Button x:Name="targetBtn" Content="CHANGE TRAITS..." Click="targetBtn_Click" IsEnabled="{Binding Path=IsChecked, ElementName=defPriorityCheck, Converter={StaticResource InvertBooleanConverter}}"/>
+											</UniformGrid>
+										</GroupBox>
+									</StackPanel>
+								</TabItem>
+
+								<!--ON DETEATED-->
+								<TabItem Width="95">
+									<TabItem.Header>
+										<StackPanel>
+											<materialDesign:PackIcon Kind="CancelBold" Width="24" Height="24" HorizontalAlignment="Center" />
+											<TextBlock Style="{StaticResource MaterialDesignTextBlock}" Text="On Defeated" HorizontalAlignment="Center"/>
+										</StackPanel>
+									</TabItem.Header>
+
+									<StackPanel>
+										<!--ON DEFEAT (TRIGGER)-->
+										<GroupBox Header="On Defeated, Fire This Trigger:" Margin="0,10,0,0" Background="#FF503B7C">
+											<ComboBox x:Name="triggersCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" DisplayMemberPath="name" SelectedValue="{Binding enemyGroupData.defeatedTrigger}" SelectedValuePath="GUID"/>
+										</GroupBox>
+
+										<!--ON DEFEAT (EVENT)-->
+										<GroupBox Header="On Defeated, Fire This Event:" Margin="0,10,0,0" Background="#FF503B7C">
+											<ComboBox x:Name="eventsCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" DisplayMemberPath="name" SelectedValue="{Binding enemyGroupData.defeatedEvent}" SelectedValuePath="GUID"/>
+										</GroupBox>
+									</StackPanel>
+								</TabItem>
+							</TabControl>
 						</StackPanel>
 					</UniformGrid>
 				</ScrollViewer>

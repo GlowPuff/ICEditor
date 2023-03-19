@@ -47,7 +47,7 @@
 		<!--recents title-->
 		<TextBlock Grid.Row="1" Text="Open Recent Mission"  Margin="0,20,0,10" FontSize="16" Foreground="White"/>
 		<!--new project-->
-		<TextBlock Grid.Row="1" Grid.Column="1" Text="Missions"  Margin="0,20,0,10" FontSize="16"  Foreground="White" HorizontalAlignment="Center"/>
+		<TextBlock Grid.Row="1" Grid.Column="1" Text="Actions"  Margin="0,20,0,10" FontSize="16"  Foreground="White" HorizontalAlignment="Center"/>
 
 		<StackPanel Grid.Row="2" Grid.Column="1">
 			<!--missions-->

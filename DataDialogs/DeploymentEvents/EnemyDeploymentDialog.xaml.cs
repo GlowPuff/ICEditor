@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace Imperial_Commander_Editor
 {
@@ -38,9 +39,10 @@ namespace Imperial_Commander_Editor
 			initialDP = (eventAction as EnemyDeployment).specificDeploymentPoint;
 
 			enemyCB.ItemsSource = Utils.enemyData;
-
 			triggersCB.ItemsSource = Utils.mainWindow.localTriggers;
 			eventsCB.ItemsSource = Utils.mainWindow.localEvents;
+			thumbListCB.ItemsSource = Utils.thumbnailData.Filter( ThumbType.All );
+			thumbListCB.SelectedItem = (eventAction as EnemyDeployment).thumbnail;
 
 			deploymentPoints.Add( new() { GUID = Guid.Empty, name = "Active Deployment Point" } );
 			deploymentPoints.Add( new() { GUID = Utils.GUIDOne, name = "None" } );
@@ -203,7 +205,128 @@ namespace Imperial_Commander_Editor
 
 		private void resetBtn_Click( object sender, RoutedEventArgs e )
 		{
+			//   WHAT IS THIS FOR
+		}
 
+		private void filterAllButton_Click( object sender, RoutedEventArgs e )
+		{
+			SetThumbSource( ThumbType.All );
+		}
+
+		private void filterRebelButton_Click( object sender, RoutedEventArgs e )
+		{
+			SetThumbSource( ThumbType.Rebel );
+		}
+
+		private void filterImperialButton_Click( object sender, RoutedEventArgs e )
+		{
+			SetThumbSource( ThumbType.Imperial );
+		}
+
+		private void filterMercButton_Click( object sender, RoutedEventArgs e )
+		{
+			SetThumbSource( ThumbType.Mercenary );
+		}
+
+		private void filterStockImperialButton_Click( object sender, RoutedEventArgs e )
+		{
+			SetThumbSource( ThumbType.StockImperial );
+		}
+
+		private void filterHeroButton_Click( object sender, RoutedEventArgs e )
+		{
+			SetThumbSource( ThumbType.StockHero );
+		}
+
+		private void filterVillainButton_Click( object sender, RoutedEventArgs e )
+		{
+			SetThumbSource( ThumbType.StockVillain );
+		}
+
+		private void filterAllyButton_Click( object sender, RoutedEventArgs e )
+		{
+			SetThumbSource( ThumbType.StockAlly );
+		}
+
+		private void iconFilterBox_TextChanged( object sender, TextChangedEventArgs e )
+		{
+			if ( string.IsNullOrEmpty( iconFilterBox.Text ) )
+				return;
+
+			var fthumbs = Utils.thumbnailData.Filter( ThumbType.All ).Where( x => x.Name.ToLower().Contains( iconFilterBox.Text.ToLower() ) );
+			if ( fthumbs == null )
+				return;
+
+			//set custom filtered CB source
+			thumbListCB.SelectionChanged -= thumbListCB_SelectionChanged;
+			thumbListCB.ItemsSource = fthumbs;
+			thumbListCB.SelectionChanged += thumbListCB_SelectionChanged;
+
+			//select first one found
+			if ( fthumbs.FirstOr( null ) != null )
+			{
+				thumbListCB.SelectionChanged -= thumbListCB_SelectionChanged;
+				thumbListCB.SelectedItem = fthumbs.First();
+				thumbListCB.SelectionChanged += thumbListCB_SelectionChanged;
+
+				(eventAction as EnemyDeployment).thumbnail = fthumbs.First();
+				SetThumbnailImage();
+			}
+		}
+
+		private void thumbListCB_SelectionChanged( object sender, SelectionChangedEventArgs e )
+		{
+			(eventAction as EnemyDeployment).thumbnail = thumbListCB.SelectedItem as Thumbnail;
+			SetThumbnailImage();
+			iconFilterBox.Text = "";
+			SetThumbSource( ThumbType.All );
+		}
+
+		private void iconFilterBox_KeyDown( object sender, KeyEventArgs e )
+		{
+			if ( string.IsNullOrEmpty( iconFilterBox.Text ) )
+				return;
+
+			var fthumbs = Utils.thumbnailData.Filter( ThumbType.All ).Where( x => x.Name.ToLower().Contains( iconFilterBox.Text.ToLower() ) );
+			if ( fthumbs == null )
+				return;
+
+			//set custom filtered CB source
+			thumbListCB.SelectionChanged -= thumbListCB_SelectionChanged;
+			thumbListCB.ItemsSource = fthumbs;
+			thumbListCB.SelectionChanged += thumbListCB_SelectionChanged;
+
+			//select first one found
+			if ( fthumbs.FirstOr( null ) != null )
+			{
+				thumbListCB.SelectionChanged -= thumbListCB_SelectionChanged;
+				thumbListCB.SelectedItem = fthumbs.First();
+				thumbListCB.SelectionChanged += thumbListCB_SelectionChanged;
+				(eventAction as EnemyDeployment).thumbnail = fthumbs.First();
+				SetThumbnailImage();
+			}
+		}
+
+		private void SetThumbSource( ThumbType ttype )
+		{
+			iconFilterBox.Text = "";
+			thumbListCB.SelectionChanged -= thumbListCB_SelectionChanged;
+			thumbListCB.ItemsSource = Utils.thumbnailData.Filter( ttype );
+			thumbListCB.SelectionChanged += thumbListCB_SelectionChanged;
+		}
+
+		public void SetThumbnailImage()
+		{
+			var item = Utils.thumbnailData.Filter( ThumbType.All ).Where( x => x.ID == (eventAction as EnemyDeployment).thumbnail.ID ).FirstOrDefault();
+			thumbListCB.SelectedItem = item;
+			thumbPreview.Source = new BitmapImage( new Uri( $"pack://application:,,,/Imperial Commander Editor;component/Assets/Thumbnails/{(eventAction as EnemyDeployment).thumbnail.ID.ThumbFolder()}/{(eventAction as EnemyDeployment).thumbnail.ID}.png" ) );
+		}
+
+		private void useDefaultIconButton_Click( object sender, RoutedEventArgs e )
+		{
+			thumbListCB.ItemsSource = Utils.thumbnailData.Filter( ThumbType.All );
+			(eventAction as EnemyDeployment).thumbnail = Utils.thumbnailData.NoneThumb;
+			thumbListCB.SelectedItem = (eventAction as EnemyDeployment).thumbnail;
 		}
 
 		private void dpCB_SelectionChanged( object sender, SelectionChangedEventArgs e )

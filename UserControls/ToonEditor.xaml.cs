@@ -37,6 +37,15 @@ namespace Imperial_Commander_Editor
 			selectedToon = null;
 		}
 
+		public void SetToonList( ObservableCollection<CustomToon> toons )
+		{
+			foreach ( var item in toons )
+			{
+				toonList.Add( item );
+				Utils.AddCustomToon( item.deploymentCard );
+			}
+		}
+
 		public void SetStandalone()
 		{
 			isStandalone = true;
@@ -129,6 +138,8 @@ namespace Imperial_Commander_Editor
 			{
 				if ( !isStandalone )
 					Utils.mainWindow.SetStatus( "Character Not Imported" );
+				else
+					MessageBox.Show( "Could not import the character. Did you choose the correct file?", "Error Importing Character", MessageBoxButton.OK, MessageBoxImage.Warning );
 			}
 		}
 	}

@@ -324,6 +324,11 @@ namespace Imperial_Commander_Editor
 			{
 				try
 				{
+					//make sure it's a character and not a mission
+					var file = File.ReadAllText( openFileDialog.FileName );
+					if ( !file.Contains( "customCharacterGUID" ) || file.Contains( "missionGUID" ) )
+						return null;
+
 					string json = "";
 					using ( StreamReader sr = new( openFileDialog.FileName ) )
 					{

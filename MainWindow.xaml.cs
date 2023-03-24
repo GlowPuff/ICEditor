@@ -298,6 +298,11 @@ namespace Imperial_Commander_Editor
 			dlg.ShowDialog();
 		}
 
+		private void charTab_Loaded( object sender, RoutedEventArgs e )
+		{
+			toonEditor.SetToonList( mission.customCharacters );
+		}
+
 		private void Window_PreviewKeyDown( object sender, KeyEventArgs e )
 		{
 			if ( e.Key == Key.F5 || (e.Key == Key.S && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control) )

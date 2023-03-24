@@ -25,7 +25,7 @@ namespace Imperial_Commander_Editor
 	public enum GroupTraits { Trooper, Leader, HeavyWeapon, Guardian, Brawler, Droid, Vehicle, Hunter, Creature, Smuggler, Spy, ForceUser, Wookiee, Hero }
 	public enum NotifyMode { Report, Fix }
 	public enum NotifyType { Event, Trigger, Entity, StartingEvent, EventGroup, EntityGroup, InitialGroup }
-	public enum CharacterType { Hero, Ally, Enemy, Villain, Rebel }
+	public enum CharacterType { Hero, Ally, Imperial, Villain, Rebel }
 	public enum ThumbType { All, Other, Rebel, Imperial, Mercenary, StockImperial, StockAlly, StockHero, StockVillain }
 	public enum Factions { Imperial, Mercenary }
 

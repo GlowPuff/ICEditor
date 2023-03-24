@@ -86,7 +86,10 @@ namespace Imperial_Commander_Editor
 
 			var dlg = new GenericTextDialog( "EDIT INSTRUCTIONS", s );
 			dlg.ShowDialog();
-			customToon.instructions = dlg.theText.Split( "\r\n" ).Select( x => x.Trim() ).ToArray();
+			if ( string.IsNullOrEmpty( dlg.theText.Trim() ) )
+				customToon.instructions = new string[0];
+			else
+				customToon.instructions = dlg.theText.Split( "\r\n" ).Select( x => x.Trim() ).ToArray();
 
 			instructionsBtn.Foreground = customToon.instructions.Length == 0 ? new SolidColorBrush( Colors.Red ) : new SolidColorBrush( Colors.LawnGreen );
 		}
@@ -95,7 +98,7 @@ namespace Imperial_Commander_Editor
 		{
 			var dlg = new GenericTextDialog( "EDIT BONUSES", customToon.bonuses );
 			dlg.ShowDialog();
-			customToon.bonuses = dlg.theText;
+			customToon.bonuses = dlg.theText.Trim();
 
 			bonusBtn.Foreground = string.IsNullOrEmpty( customToon.bonuses ) ? new SolidColorBrush( Colors.Red ) : new SolidColorBrush( Colors.LawnGreen );
 		}
@@ -107,20 +110,24 @@ namespace Imperial_Commander_Editor
 				string s = "";
 				if ( customToon.deploymentCard.abilities.Length > 0 )
 				{
-					s = customToon.deploymentCard.abilities.Select( x => $"{x.name}:{x.text}" ).Aggregate( ( acc, cur ) => acc + "\r\n" + cur );
+					s = customToon.deploymentCard.abilities.Select( x => $"{x.name}:{x.text}" ).Aggregate( ( acc, cur ) => acc + "\n" + cur );
 				}
 
 				var dlg = new GenericTextDialog( "EDIT ABILITIES", s );
 				dlg.ShowDialog();
-				//(eventAction as CustomEnemyDeployment).abilities = dlg.theText;
-				var array = dlg.theText.Split( "\r\n" );//get each line of text
-				var list = new List<GroupAbility>();
-				foreach ( var item in array )
+				if ( string.IsNullOrEmpty( dlg.theText.Trim() ) )
+					customToon.deploymentCard.abilities = new GroupAbility[0];
+				else
 				{
-					var a = item.Trim().Split( ":" );//split into name and text
-					list.Add( new() { name = a[0].Trim(), text = a[1].Trim() } );
+					var array = dlg.theText.Trim().Split( "\n" );//get each line of text
+					var list = new List<GroupAbility>();
+					foreach ( var item in array )
+					{
+						var a = item.Trim().Split( ":" );//split into name and text
+						list.Add( new() { name = a[0].Trim(), text = a[1].Trim() } );
+					}
+					customToon.deploymentCard.abilities = list.ToArray();
 				}
-				customToon.deploymentCard.abilities = list.ToArray();
 			}
 			catch ( Exception ex )
 			{
@@ -140,7 +147,10 @@ namespace Imperial_Commander_Editor
 
 				var dlg = new GenericTextDialog( "EDIT SURGES", s );
 				dlg.ShowDialog();
-				customToon.deploymentCard.surges = dlg.theText.Split( "\r\n" ).Select( x => x.Trim() ).ToArray();
+				if ( string.IsNullOrEmpty( dlg.theText.Trim() ) )
+					customToon.deploymentCard.surges = new string[0];
+				else
+					customToon.deploymentCard.surges = dlg.theText.Split( "\n" ).Select( x => x.Trim() ).ToArray();
 			}
 			catch ( Exception ex )
 			{
@@ -160,7 +170,10 @@ namespace Imperial_Commander_Editor
 
 				var dlg = new GenericTextDialog( "EDIT KEYWORDS", s );
 				dlg.ShowDialog();
-				customToon.deploymentCard.keywords = dlg.theText.Split( "\r\n" ).Select( x => x.Trim() ).ToArray();
+				if ( string.IsNullOrEmpty( dlg.theText.Trim() ) )
+					customToon.deploymentCard.keywords = new string[0];
+				else
+					customToon.deploymentCard.keywords = dlg.theText.Split( "\n" ).Select( x => x.Trim() ).ToArray();
 			}
 			catch ( Exception ex )
 			{
@@ -245,6 +258,12 @@ namespace Imperial_Commander_Editor
 			{
 				var dg = Utils.enemyData.Where( x => x.id == selectedCopyFrom.id ).FirstOr( null );
 				customToon.CopyFrom( dg );
+				//check if card text is empty now
+				instructionsBtn.Foreground = customToon.instructions.Length == 0 ? new SolidColorBrush( Colors.Red ) : new SolidColorBrush( Colors.LawnGreen );
+				bonusBtn.Foreground = string.IsNullOrEmpty( customToon.bonuses ) ? new SolidColorBrush( Colors.Red ) : new SolidColorBrush( Colors.LawnGreen );
+				abilityBtn.Foreground = customToon.deploymentCard.abilities.Length == 0 ? new SolidColorBrush( Colors.Red ) : new SolidColorBrush( Colors.LawnGreen );
+				surgeBtn.Foreground = customToon.deploymentCard.surges.Length == 0 ? new SolidColorBrush( Colors.Red ) : new SolidColorBrush( Colors.LawnGreen );
+				keywordsBtn.Foreground = customToon.deploymentCard.keywords.Length == 0 ? new SolidColorBrush( Colors.Red ) : new SolidColorBrush( Colors.LawnGreen );
 			}
 		}
 

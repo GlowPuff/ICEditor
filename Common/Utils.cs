@@ -22,6 +22,8 @@ namespace Imperial_Commander_Editor
 		public static List<DeploymentCard> heroData;
 		public static List<TileDescriptor> tileData;
 		public static ThumbnailData thumbnailData;
+		public static List<EnemyInstructionData> enemyInstructions;
+		public static List<EnemyBonusEffect> enemyBonusEffects;
 
 		public static ObservableCollection<DeploymentColor> deploymentColors;
 
@@ -55,7 +57,8 @@ namespace Imperial_Commander_Editor
 		{
 			LoadCardData();
 			tileData = TileDescriptor.LoadData();
-
+			enemyInstructions = FileManager.LoadAsset<List<EnemyInstructionData>>( "instructions.json" );
+			enemyBonusEffects = FileManager.LoadAsset<List<EnemyBonusEffect>>( "bonuseffects.json" );
 			thumbnailData = FileManager.LoadAsset<ThumbnailData>( "thumbnails.json" );
 			//append stock icon data
 			//remove duplicate names and elite version, only need 1 thumb for each ID

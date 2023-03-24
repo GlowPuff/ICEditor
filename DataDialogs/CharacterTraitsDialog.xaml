@@ -18,7 +18,7 @@
 				</Grid.RowDefinitions>
 
 				<StackPanel>
-					<materialDesign:Card Background="{StaticResource CardBG}" Padding="10" Margin="0,0,0,10" IsEnabled="{Binding ElementName=defCB, Path=IsChecked, Converter={StaticResource InvertBooleanConverter}}">
+					<materialDesign:Card Background="{StaticResource CardBG}" Padding="10" Margin="0,0,0,10">
 						<StackPanel>
 							<UniformGrid Columns="4">
 								<CheckBox Content="Brawler" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" Margin="4,4,10,4" IsChecked="{Binding incBrawler}"/>

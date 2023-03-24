@@ -366,4 +366,21 @@ namespace Imperial_Commander_Editor
 		public string Name { get; set; }//full name of icon's character
 		public string ID { get; set; }//basically the filename
 	}
+
+	public class EnemyInstructionData
+	{
+		public string instName, instID;
+		public List<EnemyInstruction> content;
+	}
+
+	public class EnemyInstruction
+	{
+		public List<string> instruction;//line by line instructions
+	}
+
+	public class EnemyBonusEffect
+	{
+		public string bonusID;
+		public List<string> effects;
+	}
 }

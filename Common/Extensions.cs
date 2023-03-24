@@ -67,8 +67,7 @@ namespace Imperial_Commander_Editor
 		/// </summary>
 		public static string StripDigits( this string s )
 		{
-			return new String( s.Where( Char.IsLetter ).ToArray() );
+			return new string( s.Where( Char.IsLetter ).ToArray() );
 		}
-
 	}
 }

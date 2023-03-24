@@ -25,9 +25,11 @@
     <None Remove="Assets\broken.png" />
     <None Remove="Assets\cancel.png" />
     <None Remove="Assets\Data\allies.json" />
+    <None Remove="Assets\Data\bonuseffects.json" />
     <None Remove="Assets\Data\dimensions.json" />
     <None Remove="Assets\Data\enemies.json" />
     <None Remove="Assets\Data\heroes.json" />
+    <None Remove="Assets\Data\instructions.json" />
     <None Remove="Assets\Data\thumbnails.json" />
     <None Remove="Assets\Data\villains.json" />
     <None Remove="Assets\edit.png" />
@@ -1100,9 +1102,11 @@
     <Resource Include="Assets\bg.png" />
     <Resource Include="Assets\cancel.png" />
     <EmbeddedResource Include="Assets\Data\allies.json" />
+    <EmbeddedResource Include="Assets\Data\bonuseffects.json" />
     <EmbeddedResource Include="Assets\Data\dimensions.json" />
     <EmbeddedResource Include="Assets\Data\enemies.json" />
     <EmbeddedResource Include="Assets\Data\heroes.json" />
+    <EmbeddedResource Include="Assets\Data\instructions.json" />
     <EmbeddedResource Include="Assets\Data\thumbnails.json" />
     <EmbeddedResource Include="Assets\Data\villains.json" />
     <EmbeddedResource Include="icon.ico" />

@@ -147,14 +147,14 @@ namespace Imperial_Commander_Editor
 			cardID = deploymentCard.id;
 			outlineColor = "Gray";
 			groupPriorityTraits = new();
-			characterType = CharacterType.Enemy;
+			characterType = CharacterType.Imperial;
 			faction = Factions.Imperial;
 			useThreatMultiplier = false;
 			canRedeploy = canReinforce = canBeDefeated = true;
 			groupAttack = "1Blue 2Yellow";
 			groupDefense = "1White 1Black";
 			bonuses = "CHARGE: The first time this figure attacks or uses Trample, add 1 blue die to its dice pool.\nCRUSH: Each Rebel that suffers {H} during this activation also becomes Weakened.";
-			instructions = new string[] { "{-} MISSILE SALVO: This figure’s attacks do not require line of sight or Accuracy.", "{A} Move 2 to reposition 4." };
+			instructions = new string[] { "{-} MISSILE SALVO: This figure’s attacks do not require line of sight or Accuracy.", "{A} Move 2 to reposition 4.", "***", "This is a second randomized Instruction Group", "Separate randomized Instruction Groups with ***", "***", "This is a third randomized Instruction Group", "When this character Activates, one of these 3 Instruction Groups will be randomly chosen to Activate with" };
 			//default thumbnail
 			thumbnail = Utils.thumbnailData.NoneThumb;
 		}
@@ -164,9 +164,9 @@ namespace Imperial_Commander_Editor
 		/// </summary>
 		public void CopyFrom( DeploymentCard card )
 		{
-			//set this first, because their properties also force set the deploymentCard values
+			//set these first, because these 2 properties also force set the deploymentCard values
 			groupAttack = groupDefense = "";
-			//make the card copy
+			//now make the card copy
 			deploymentCard = card.Copy();
 			//keep the original ID and name of this toon, do NOT use the copied card's ID and name
 			deploymentCard.id = cardID;
@@ -175,6 +175,12 @@ namespace Imperial_Commander_Editor
 			HashSet<DiceColor> colors = new();
 			for ( int i = 0; i < card.attacks.Length; i++ )
 				colors.Add( card.attacks[i] );
+			//set instructions from the copied card
+			var data = Utils.enemyInstructions.Where( x => x.instID == card.id ).First();
+			//extract and convert all the the List<string> to a single string[], separating the instruction groups with ***
+			instructions = data.content.Select( x => x.instruction.ToArray() ).Aggregate( ( acc, cur ) => acc.Concat( new string[] { "***" } ).Concat( cur ).ToArray() );
+			//set bonuses from the copied card
+			bonuses = String.Join( "\n", Utils.enemyBonusEffects.First( x => x.bonusID == card.id ).effects );
 			//get number of each dice color
 			foreach ( var c in colors )
 			{

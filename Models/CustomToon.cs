@@ -9,7 +9,7 @@ namespace Imperial_Commander_Editor
 	{
 		//these properties don't change, even when copying from another Deployment Group
 		public Guid customCharacterGUID { get; set; }
-		string _cardName, _cardID, _outlineColor;
+		string _cardName, _cardSubName, _cardID, _outlineColor;
 
 		CharacterType _characterType; //deploy as
 		Thumbnail _thumbnail;
@@ -20,8 +20,9 @@ namespace Imperial_Commander_Editor
 		Factions _faction;
 		bool _canRedeploy, _canReinforce, _canBeDefeated, _useThreatMultiplier;
 
-		//update the embedded DG's name and id when it changes
+		//update the embedded DG's name/subname and id when it changes
 		public string cardName { get => _cardName; set { SetProperty( ref _cardName, value ); deploymentCard.name = value; } }
+		public string cardSubName { get => _cardSubName; set { SetProperty( ref _cardSubName, value ); deploymentCard.subname = value; } }
 		public string cardID { get => _cardID; set { SetProperty( ref _cardID, value ); deploymentCard.id = value; } }
 
 		public string groupAttack
@@ -120,6 +121,7 @@ namespace Imperial_Commander_Editor
 			deploymentCard = new()
 			{
 				name = "New Character",
+				subname = "",
 				//assign a free custom ID
 				id = Utils.GetAvailableCustomToonID(),
 				expansion = "Core",
@@ -144,6 +146,7 @@ namespace Imperial_Commander_Editor
 
 			//default properties
 			cardName = deploymentCard.name;
+			cardSubName = deploymentCard.subname;
 			cardID = deploymentCard.id;
 			outlineColor = "Gray";
 			groupPriorityTraits = new();
@@ -168,9 +171,10 @@ namespace Imperial_Commander_Editor
 			groupAttack = groupDefense = "";
 			//now make the card copy
 			deploymentCard = card.Copy();
-			//keep the original ID and name of this toon, do NOT use the copied card's ID and name
+			//keep the original ID, name and subname of this toon, do NOT use the copied card's data
 			deploymentCard.id = cardID;
 			deploymentCard.name = cardName;
+			deploymentCard.subname = cardSubName;
 			//set groupAttack from the copied card
 			HashSet<DiceColor> colors = new();
 			for ( int i = 0; i < card.attacks.Length; i++ )

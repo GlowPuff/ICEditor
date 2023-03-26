@@ -21,7 +21,8 @@
 				<GroupBox x:Name="propBox" Header="Character Information" Background="{StaticResource GroupBG}">
 					<!--GENERAL PROPERTIES-->
 					<StackPanel>
-						<TextBox x:Name="nameTB" Style="{StaticResource MaterialDesignOutlinedTextBox}" Text="{Binding cardName}" materialDesign:HintAssist.Hint="Character Name" KeyDown="textbox_KeyDown" TextChanged="nameTB_TextChanged" />
+						<TextBox x:Name="nameTB" Style="{StaticResource MaterialDesignOutlinedTextBox}" Text="{Binding cardName}" materialDesign:HintAssist.Hint="Character Name (Required)" KeyDown="textbox_KeyDown" TextChanged="nameTB_TextChanged" />
+						<TextBox x:Name="subnameTB" Style="{StaticResource MaterialDesignOutlinedTextBox}" Text="{Binding cardSubName}" materialDesign:HintAssist.Hint="Character SubName (Optional)" KeyDown="textbox_KeyDown" Margin="0,10,0,0" />
 
 						<!--ID-->
 						<TextBlock Text="Character ID:" HorizontalAlignment="Center" Margin="0,10,0,0"/>
@@ -216,7 +217,7 @@
 
 										<Button x:Name="confirmCopyFromButton" Click="confirmCopyFromButton_Click" Grid.Column="1" Content="{materialDesign:PackIcon Kind=CheckBold}" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35" Margin="10,0,0,0"/>
 									</Grid>
-									<TextBlock Text="Warning: This will overwrite all current General Properties. Name, ID, Type, Deployment, and Appearance are not affected." TextWrapping="Wrap" FontStyle="Italic" Margin="0,10,0,0"/>
+									<TextBlock Text="Warning: This will overwrite all current General Properties. Name, Subname, ID, Type, Deployment, and Appearance are not affected." TextWrapping="Wrap" FontStyle="Italic" Margin="0,10,0,0"/>
 								</StackPanel>
 							</materialDesign:Card>
 

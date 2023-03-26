@@ -52,7 +52,7 @@ namespace Imperial_Commander_Editor
 			tierCB.ItemsSource = new int[] { 1, 2, 3 };
 			priorityCB.ItemsSource = new int[] { 1, 2 };
 
-			instructionsBtn.Foreground = customToon.instructions.Length == 0 ? new SolidColorBrush( Colors.Red ) : new SolidColorBrush( Colors.LawnGreen );
+			instructionsBtn.Foreground = customToon.cardInstruction.content.Count == 0 ? new SolidColorBrush( Colors.Red ) : new SolidColorBrush( Colors.LawnGreen );
 			bonusBtn.Foreground = string.IsNullOrEmpty( customToon.bonuses ) ? new SolidColorBrush( Colors.Red ) : new SolidColorBrush( Colors.LawnGreen );
 			abilityBtn.Foreground = customToon.deploymentCard.abilities.Length == 0 ? new SolidColorBrush( Colors.Red ) : new SolidColorBrush( Colors.LawnGreen );
 			surgeBtn.Foreground = customToon.deploymentCard.surges.Length == 0 ? new SolidColorBrush( Colors.Red ) : new SolidColorBrush( Colors.LawnGreen );
@@ -79,19 +79,32 @@ namespace Imperial_Commander_Editor
 		private void instructionsBtn_Click( object sender, RoutedEventArgs e )
 		{
 			string s = "";
-			if ( customToon.instructions.Length > 0 )
+			List<string> ilist = new();
+			if ( customToon.cardInstruction.content.Count > 0 )
 			{
-				s = customToon.instructions.Aggregate( ( acc, cur ) => acc + "\r\n" + cur );
+				foreach ( var item in customToon.cardInstruction.content )
+				{
+					s += item.instruction.Aggregate( ( acc, cur ) => acc + "\n" + cur );
+					s += "\n***\n";
+				}
+				s = s.Substring( 0, s.LastIndexOf( "***" ) ).Trim();
 			}
 
 			var dlg = new GenericTextDialog( "EDIT INSTRUCTIONS", s );
 			dlg.ShowDialog();
 			if ( string.IsNullOrEmpty( dlg.theText.Trim() ) )
-				customToon.instructions = new string[0];
+				customToon.cardInstruction.content = new();
 			else
-				customToon.instructions = dlg.theText.Split( "\r\n" ).Select( x => x.Trim() ).ToArray();
+			{
+				customToon.cardInstruction.content = new();
+				var groups = dlg.theText.Trim().Split( "\n***\n" );
+				foreach ( var item in groups )
+				{
+					customToon.cardInstruction.content.Add( new() { instruction = item.Trim().Split( "\n" ).ToList() } );
+				}
+			}
 
-			instructionsBtn.Foreground = customToon.instructions.Length == 0 ? new SolidColorBrush( Colors.Red ) : new SolidColorBrush( Colors.LawnGreen );
+			instructionsBtn.Foreground = customToon.cardInstruction.content.Count == 0 ? new SolidColorBrush( Colors.Red ) : new SolidColorBrush( Colors.LawnGreen );
 		}
 
 		private void bonusBtn_Click( object sender, RoutedEventArgs e )
@@ -259,7 +272,7 @@ namespace Imperial_Commander_Editor
 				var dg = Utils.enemyData.Where( x => x.id == selectedCopyFrom.id ).FirstOr( null );
 				customToon.CopyFrom( dg );
 				//check if card text is empty now
-				instructionsBtn.Foreground = customToon.instructions.Length == 0 ? new SolidColorBrush( Colors.Red ) : new SolidColorBrush( Colors.LawnGreen );
+				instructionsBtn.Foreground = customToon.cardInstruction.content.Count == 0 ? new SolidColorBrush( Colors.Red ) : new SolidColorBrush( Colors.LawnGreen );
 				bonusBtn.Foreground = string.IsNullOrEmpty( customToon.bonuses ) ? new SolidColorBrush( Colors.Red ) : new SolidColorBrush( Colors.LawnGreen );
 				abilityBtn.Foreground = customToon.deploymentCard.abilities.Length == 0 ? new SolidColorBrush( Colors.Red ) : new SolidColorBrush( Colors.LawnGreen );
 				surgeBtn.Foreground = customToon.deploymentCard.surges.Length == 0 ? new SolidColorBrush( Colors.Red ) : new SolidColorBrush( Colors.LawnGreen );

@@ -16,7 +16,8 @@ namespace Imperial_Commander_Editor
 		DeploymentCard _deploymentCard;
 		GroupPriorityTraits _groupPriorityTraits;
 		string _groupAttack, _groupDefense, _bonuses;
-		string[] _instructions;
+		//string[] _instructions;
+		CardInstruction _cardInstruction;
 		Factions _faction;
 		bool _canRedeploy, _canReinforce, _canBeDefeated, _useThreatMultiplier;
 
@@ -63,10 +64,15 @@ namespace Imperial_Commander_Editor
 			get => _bonuses;
 			set => SetProperty( ref _bonuses, value );
 		}
-		public string[] instructions
+		//public string[] instructions
+		//{
+		//	get => _instructions;
+		//	set => SetProperty( ref _instructions, value );
+		//}
+		public CardInstruction cardInstruction
 		{
-			get => _instructions;
-			set => SetProperty( ref _instructions, value );
+			get => _cardInstruction;
+			set => SetProperty( ref _cardInstruction, value );
 		}
 		public bool canRedeploy
 		{
@@ -157,7 +163,18 @@ namespace Imperial_Commander_Editor
 			groupAttack = "1Blue 2Yellow";
 			groupDefense = "1White 1Black";
 			bonuses = "CHARGE: The first time this figure attacks or uses Trample, add 1 blue die to its dice pool.\nCRUSH: Each Rebel that suffers {H} during this activation also becomes Weakened.";
-			instructions = new string[] { "{-} MISSILE SALVO: This figure’s attacks do not require line of sight or Accuracy.", "{A} Move 2 to reposition 4.", "***", "This is a second randomized Instruction Group", "Separate randomized Instruction Groups with ***", "***", "This is a third randomized Instruction Group", "When this character Activates, one of these 3 Instruction Groups will be randomly chosen to Activate with" };
+			cardInstruction = new()
+			{
+				instID = cardID,
+				instName = cardName,
+				content = new()
+				{
+					new(){instruction= new(){"{-} MISSILE SALVO: This figure’s attacks do not require line of sight or Accuracy.", "{A} Move 2 to reposition 4."}},
+					new(){instruction= new(){"This is a second randomized Instruction Group", "Separate randomized Instruction Groups with ***"}},
+					new(){instruction= new(){"This is a third randomized Instruction Group", "When this character Activates, one of these 3 Instruction Groups will be randomly chosen to Activate with"}}
+				}
+			};
+			//instructions = new string[] { "{-} MISSILE SALVO: This figure’s attacks do not require line of sight or Accuracy.", "{A} Move 2 to reposition 4.", "***", "This is a second randomized Instruction Group", "Separate randomized Instruction Groups with ***", "***", "This is a third randomized Instruction Group", "When this character Activates, one of these 3 Instruction Groups will be randomly chosen to Activate with" };
 			//default thumbnail
 			thumbnail = Utils.thumbnailData.NoneThumb;
 		}
@@ -180,9 +197,7 @@ namespace Imperial_Commander_Editor
 			for ( int i = 0; i < card.attacks.Length; i++ )
 				colors.Add( card.attacks[i] );
 			//set instructions from the copied card
-			var data = Utils.enemyInstructions.Where( x => x.instID == card.id ).First();
-			//extract and convert all the the List<string> to a single string[], separating the instruction groups with ***
-			instructions = data.content.Select( x => x.instruction.ToArray() ).Aggregate( ( acc, cur ) => acc.Concat( new string[] { "***" } ).Concat( cur ).ToArray() );
+			cardInstruction = Utils.enemyInstructions.Where( x => x.instID == card.id ).First();
 			//set bonuses from the copied card
 			bonuses = String.Join( "\n", Utils.enemyBonusEffects.First( x => x.bonusID == card.id ).effects );
 			//get number of each dice color

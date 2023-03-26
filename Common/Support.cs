@@ -367,13 +367,13 @@ namespace Imperial_Commander_Editor
 		public string ID { get; set; }//basically the filename
 	}
 
-	public class EnemyInstructionData
+	public class CardInstruction
 	{
 		public string instName, instID;
-		public List<EnemyInstruction> content;
+		public List<InstructionOption> content;
 	}
 
-	public class EnemyInstruction
+	public class InstructionOption
 	{
 		public List<string> instruction;//line by line instructions
 	}

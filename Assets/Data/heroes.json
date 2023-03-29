@@ -2,6 +2,7 @@
 	{
 		"name": "Diala Passil",
 		"id": "H1",
+		"characterType": "Hero",
 		"tier": 0,
 		"faction": "Hero",
 		"priority": 0,
@@ -15,11 +16,13 @@
 			"Force User",
 			"Brawler"
 		],
-		"ignored": ""			
+		"ignored": "",
+		"isHero": true
 	},
 	{
 		"name": "Fenn Signis",
 		"id": "H2",
+		"characterType": "Hero",
 		"tier": 0,
 		"faction": "Hero",
 		"priority": 0,
@@ -33,11 +36,13 @@
 			"Trooper",
 			"Leader"
 		],
-		"ignored": ""			
+		"ignored": "",
+		"isHero": true			
 	},
 	{
 		"name": "Gaarkhan",
 		"id": "H3",
+		"characterType": "Hero",
 		"tier": 0,
 		"faction": "Hero",
 		"priority": 0,
@@ -52,11 +57,13 @@
 			"Guardian",
 			"Brawler"
 		],
-		"ignored": ""			
+		"ignored": "",
+		"isHero": true			
 	},
 	{
 		"name": "Gideon Argus",
 		"id": "H4",
+		"characterType": "Hero",
 		"tier": 0,
 		"faction": "Hero",
 		"priority": 0,
@@ -69,11 +76,13 @@
 			"Hero",
 			"Leader"
 		],
-		"ignored": ""			
+		"ignored": "",
+		"isHero": true			
 	},
 	{
 		"name": "Jyn Odan",
 		"id": "H5",
+		"characterType": "Hero",
 		"tier": 0,
 		"faction": "Hero",
 		"priority": 0,
@@ -86,11 +95,13 @@
 			"Hero",
 			"Smuggler"
 		],
-		"ignored": ""			
+		"ignored": "",
+		"isHero": true			
 	},
 	{
 		"name": "Mak Eshka'rey",
 		"id": "H6",
+		"characterType": "Hero",
 		"tier": 0,
 		"faction": "Hero",
 		"priority": 0,
@@ -103,11 +114,13 @@
 			"Hero",
 			"Spy"
 		],
-		"ignored": ""			
+		"ignored": "",
+		"isHero": true			
 	},
 	{
 		"name": "Biv Bodhrik",
 		"id": "H7",
+		"characterType": "Hero",
 		"tier": 0,
 		"faction": "Hero",
 		"priority": 0,
@@ -121,11 +134,13 @@
 			"Hunter",
 			"Brawler"
 		],
-		"ignored": ""			
+		"ignored": "",
+		"isHero": true			
 	},
 	{
 		"name": "Saska Teft",
 		"id": "H8",
+		"characterType": "Hero",
 		"tier": 0,
 		"faction": "Hero",
 		"priority": 0,
@@ -139,11 +154,13 @@
 			"Smuggler",
 			"Spy"
 		],
-		"ignored": ""			
+		"ignored": "",
+		"isHero": true			
 	},
 	{
 		"name": "Loku Kanoloa",
 		"id": "H9",
+		"characterType": "Hero",
 		"tier": 0,
 		"faction": "Hero",
 		"priority": 0,
@@ -156,11 +173,13 @@
 			"Hero",
 			"Spy"
 		],
-		"ignored": ""			
+		"ignored": "",
+		"isHero": true			
 	},
 	{
 		"name": "MHD-19",
 		"id": "H10",
+		"characterType": "Hero",
 		"tier": 0,
 		"faction": "Hero",
 		"priority": 0,
@@ -173,11 +192,13 @@
 			"Hero",
 			"Droid"
 		],
-		"ignored": ""			
+		"ignored": "",
+		"isHero": true			
 	},
 	{
 		"name": "Verena Talos",
 		"id": "H11",
+		"characterType": "Hero",
 		"tier": 0,
 		"faction": "Hero",
 		"priority": 0,
@@ -191,11 +212,13 @@
 			"Spy",
 			"Brawler"
 		],
-		"ignored": ""			
+		"ignored": "",
+		"isHero": true			
 	},
 	{
 		"name": "Davith Elso",
 		"id": "H12",
+		"characterType": "Hero",
 		"tier": 0,
 		"faction": "Hero",
 		"priority": 0,
@@ -209,11 +232,13 @@
 			"Spy",
 			"Force User"
 		],
-		"ignored": ""			
+		"ignored": "",
+		"isHero": true			
 	},
 	{
 		"name": "Murne Rin",
 		"id": "H13",
+		"characterType": "Hero",
 		"tier": 0,
 		"faction": "Hero",
 		"priority": 0,
@@ -227,11 +252,13 @@
 			"Leader",
 			"Spy"
 		],
-		"ignored": ""			
+		"ignored": "",
+		"isHero": true			
 	},
 	{
 		"name": "Onar Koma",
 		"id": "H14",
+		"characterType": "Hero",
 		"tier": 0,
 		"faction": "Hero",
 		"priority": 0,
@@ -245,11 +272,13 @@
 			"Guardian",
 			"Hunter"
 		],
-		"ignored": ""			
+		"ignored": "",
+		"isHero": true			
 	},
 	{
 		"name": "Shyla Varad",
 		"id": "H15",
+		"characterType": "Hero",
 		"tier": 0,
 		"faction": "Hero",
 		"priority": 0,
@@ -263,11 +292,13 @@
 			"Brawler",
 			"Hunter"
 		],
-		"ignored": ""			
+		"ignored": "",
+		"isHero": true			
 	},
 	{
 		"name": "Vinto Hreeda",
 		"id": "H16",
+		"characterType": "Hero",
 		"tier": 0,
 		"faction": "Hero",
 		"priority": 0,
@@ -281,11 +312,13 @@
 			"Hunter",
 			"Smuggler"
 		],
-		"ignored": ""			
+		"ignored": "",
+		"isHero": true			
 	},
 	{
 		"name": "Drokkatta",
 		"id": "H17",
+		"characterType": "Hero",
 		"tier": 0,
 		"faction": "Hero",
 		"priority": 0,
@@ -299,11 +332,13 @@
 			"Wookiee",
 			"Heavy Weapon"
 		],
-		"ignored": ""			
+		"ignored": "",
+		"isHero": true			
 	},
 	{
 		"name": "Jarrod Kelvin",
 		"id": "H18",
+		"characterType": "Hero",
 		"tier": 0,
 		"faction": "Hero",
 		"priority": 0,
@@ -318,11 +353,13 @@
 			"Leader",
 			"Spy"
 		],
-		"ignored": ""			
+		"ignored": "",
+		"isHero": true			
 	},
 	{
 		"name": "Ko-Tun Feralo",
 		"id": "H19",
+		"characterType": "Hero",
 		"tier": 0,
 		"faction": "Hero",
 		"priority": 0,
@@ -336,11 +373,13 @@
 			"Leader",
 			"Trooper"
 		],
-		"ignored": ""			
+		"ignored": "",
+		"isHero": true			
 	},
 	{
 		"name": "CT-1701",
 		"id": "H20",
+		"characterType": "Hero",
 		"tier": 0,
 		"faction": "Hero",
 		"priority": 0,
@@ -354,11 +393,13 @@
 			"Trooper",
 			"Guardian"
 		],
-		"ignored": ""			
+		"ignored": "",
+		"isHero": true			
 	},
 	{
 		"name": "Tress Hacnua",
 		"id": "H21",
+		"characterType": "Hero",
 		"tier": 0,
 		"faction": "Hero",
 		"priority": 0,
@@ -371,6 +412,7 @@
 			"Hero",
 			"Brawler"
 		],
-		"ignored": ""			
+		"ignored": "",
+		"isHero": true			
 	}
 ]

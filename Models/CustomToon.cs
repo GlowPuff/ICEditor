@@ -174,7 +174,6 @@ namespace Imperial_Commander_Editor
 					new(){instruction= new(){"This is a third randomized Instruction Group", "When this character Activates, one of these 3 Instruction Groups will be randomly chosen to Activate with"}}
 				}
 			};
-			//instructions = new string[] { "{-} MISSILE SALVO: This figure’s attacks do not require line of sight or Accuracy.", "{A} Move 2 to reposition 4.", "***", "This is a second randomized Instruction Group", "Separate randomized Instruction Groups with ***", "***", "This is a third randomized Instruction Group", "When this character Activates, one of these 3 Instruction Groups will be randomly chosen to Activate with" };
 			//default thumbnail
 			thumbnail = Utils.thumbnailData.NoneThumb;
 		}

@@ -44,7 +44,7 @@
 											<ColumnDefinition Width="*" />
 										</Grid.ColumnDefinitions>
 										<TextBlock Text="Icon Outline Color:" VerticalAlignment="Center"/>
-										<ComboBox Grid.Column="1" Margin="10,0,0,0" Style="{StaticResource MaterialDesignOutlinedComboBox}" ItemsSource="{Binding deploymentColors, RelativeSource={RelativeSource AncestorType=Window}}" SelectedValue="{Binding customOutlineColor}" DisplayMemberPath="name" SelectedValuePath="name"/>
+										<ComboBox Grid.Column="1" Margin="10,0,0,0" Style="{StaticResource MaterialDesignOutlinedComboBox}" ItemsSource="{Binding deploymentColors, RelativeSource={RelativeSource AncestorType=Window}}" SelectedValue="{Binding deploymentOutlineColor}" DisplayMemberPath="name" SelectedValuePath="name"/>
 									</Grid>
 
 									<TextBlock Text="Deployment Type" HorizontalAlignment="Center" Margin="0,10,0,0"/>

@@ -1,6 +1,7 @@
 [
 	{
 		"name": "Luke Skywalker (Hero)",
+		"characterType": "Ally",
 		"subname": "HERO OF THE REBELLION",
 		"id": "A001",
 		"tier": 0,
@@ -13,7 +14,8 @@
 		"ignored": "",
 		"miniSize": "Small1x1",
 		"groupTraits": ["ForceUser"],
-		"isElite": true,
+		"isElite": false,
+		"isHero": false,
 		"health": 10,
 		"speed": 5,
 		"defense": [
@@ -49,6 +51,7 @@
 	},
 	{
 		"name": "Rebel Trooper",
+		"characterType": "Ally",
 		"subname": "",
 		"id": "A002",
 		"tier": 0,
@@ -62,6 +65,7 @@
 		"miniSize": "Small1x1",
 		"groupTraits": ["Trooper"],
 		"isElite": false,
+		"isHero": false,
 		"health": 3,
 		"speed": 4,
 		"defense": [
@@ -89,6 +93,7 @@
 	},
 	{
 		"name": "Rebel Saboteur",
+		"characterType": "Ally",
 		"subname": "",
 		"id": "A003",
 		"tier": 0,
@@ -102,6 +107,7 @@
 		"miniSize": "Small1x1",
 		"groupTraits": ["Spy", "HeavyWeapon"],
 		"isElite": false,
+		"isHero": false,
 		"health": 4,
 		"speed": 4,
 		"defense": [
@@ -133,6 +139,7 @@
 	},
 	{
 		"name": "Chewbacca",
+		"characterType": "Ally",
 		"subname": "LOYAL WOOKIEE",
 		"id": "A004",
 		"tier": 0,
@@ -145,7 +152,8 @@
 		"ignored": "",
 		"miniSize": "Small1x1",
 		"groupTraits": ["Smuggler", "Wookiee", "Guardian"],
-		"isElite": true,
+		"isElite": false,
+		"isHero": false,
 		"health": 14,
 		"speed": 4,
 		"defense": [
@@ -182,6 +190,7 @@
 	},
 	{
 		"name": "Han Solo",
+		"characterType": "Ally",
 		"subname": "SCOUNDREL",
 		"id": "A005",
 		"tier": 0,
@@ -194,7 +203,8 @@
 		"ignored": "",
 		"miniSize": "Small1x1",
 		"groupTraits": ["Smuggler", "Leader"],
-		"isElite": true,
+		"isElite": false,
+		"isHero": false,
 		"health": 12,
 		"speed": 4,
 		"defense": [
@@ -232,6 +242,7 @@
 	},
 	{
 		"name": "C-3PO",
+		"characterType": "Ally",
 		"subname": "HUMAN-CYBORG RELATIONS",
 		"id": "A006",
 		"tier": 0,
@@ -244,7 +255,8 @@
 		"ignored": "",
 		"miniSize": "Small1x1",
 		"groupTraits": ["Droid"],
-		"isElite": true,
+		"isElite": false,
+		"isHero": false,
 		"health": 4,
 		"speed": 3,
 		"defense": [
@@ -278,6 +290,7 @@
 	},
 	{
 		"name": "R2-D2",
+		"characterType": "Ally",
 		"subname": "LOYAL ASTROMECH",
 		"id": "A007",
 		"tier": 0,
@@ -290,7 +303,8 @@
 		"ignored": "",
 		"miniSize": "Small1x1",
 		"groupTraits": ["Droid"],
-		"isElite": true,
+		"isElite": false,
+		"isHero": false,
 		"health": 6,
 		"speed": 3,
 		"defense": [
@@ -329,6 +343,7 @@
 	},
 	{
 		"name": "Leia Organa",
+		"characterType": "Ally",
 		"subname": "REBEL COMMANDER",
 		"id": "A008",
 		"tier": 0,
@@ -341,7 +356,8 @@
 		"ignored": "",
 		"miniSize": "Small1x1",
 		"groupTraits": ["Leader", "Spy"],
-		"isElite": true,
+		"isElite": false,
+		"isHero": false,
 		"health": 8,
 		"speed": 5,
 		"defense": [
@@ -378,6 +394,7 @@
 	},
 	{
 		"name": "Echo Base Trooper",
+		"characterType": "Ally",
 		"subname": "",
 		"id": "A009",
 		"tier": 0,
@@ -391,6 +408,7 @@
 		"miniSize": "Small1x1",
 		"groupTraits": ["Trooper"],
 		"isElite": false,
+		"isHero": false,
 		"health": 5,
 		"speed": 4,
 		"defense": [
@@ -422,6 +440,7 @@
 	},
 	{
 		"name": "Lando Calrissian",
+		"characterType": "Ally",
 		"subname": "CHARMING GAMBLER",
 		"id": "A010",
 		"tier": 0,
@@ -434,7 +453,8 @@
 		"ignored": "",
 		"miniSize": "Small1x1",
 		"groupTraits": ["Leader", "Smuggler"],
-		"isElite": true,
+		"isElite": false,
+		"isHero": false,
 		"health": 8,
 		"speed": 4,
 		"defense": [
@@ -469,6 +489,7 @@
 	},
 	{
 		"name": "Luke Skywalker (Jedi)",
+		"characterType": "Ally",
 		"subname": "JEDI KNIGHT",
 		"id": "A011",
 		"tier": 0,
@@ -481,7 +502,8 @@
 		"ignored": "",
 		"miniSize": "Small1x1",
 		"groupTraits": ["ForceUser", "Leader", "Brawler"],
-		"isElite": true,
+		"isElite": false,
+		"isHero": false,
 		"health": 16,
 		"speed": 4,
 		"defense": [
@@ -519,6 +541,7 @@
 	},
 	{
 		"name": "Alliance Ranger",
+		"characterType": "Ally",
 		"subname": "",
 		"id": "A012",
 		"tier": 0,
@@ -532,6 +555,7 @@
 		"miniSize": "Small1x1",
 		"groupTraits": ["Trooper", "Hunter"],
 		"isElite": false,
+		"isHero": false,
 		"health": 5,
 		"speed": 4,
 		"defense": [
@@ -567,6 +591,7 @@
 	},
 	{
 		"name": "Ahsoka Tano",
+		"characterType": "Ally",
 		"subname": "REBEL INSTIGATOR",
 		"id": "A013",
 		"tier": 0,
@@ -579,7 +604,8 @@
 		"ignored": "",
 		"miniSize": "Small1x1",
 		"groupTraits": ["ForceUser", "Leader", "Spy"],
-		"isElite": true,
+		"isElite": false,
+		"isHero": false,
 		"health": 12,
 		"speed": 4,
 		"defense": [
@@ -619,6 +645,7 @@
 	},
 	{
 		"name": "Ezra Bridger",
+		"characterType": "Ally",
 		"subname": "SPECTRE-6",
 		"id": "A014",
 		"tier": 0,
@@ -631,7 +658,8 @@
 		"ignored": "",
 		"miniSize": "Small1x1",
 		"groupTraits": ["ForceUser", "Smuggler"],
-		"isElite": true,
+		"isElite": false,
+		"isHero": false,
 		"health": 10,
 		"speed": 4,
 		"defense": [
@@ -668,6 +696,7 @@
 	},
 	{
 		"name": "Kanan Jarrus",
+		"characterType": "Ally",
 		"subname": "SPECTRE-1",
 		"id": "A015",
 		"tier": 0,
@@ -680,7 +709,8 @@
 		"ignored": "",
 		"miniSize": "Small1x1",
 		"groupTraits": ["ForceUser", "Leader"],
-		"isElite": true,
+		"isElite": false,
+		"isHero": false,
 		"health": 14,
 		"speed": 4,
 		"defense": [
@@ -714,6 +744,7 @@
 	},
 	{
 		"name": "Sabine Wren",
+		"characterType": "Ally",
 		"subname": "SPECTRE-5",
 		"id": "A016",
 		"tier": 0,
@@ -726,7 +757,8 @@
 		"ignored": "",
 		"miniSize": "Small1x1",
 		"groupTraits": ["Hunter"],
-		"isElite": true,
+		"isElite": false,
+		"isHero": false,
 		"health": 11,
 		"speed": 4,
 		"defense": [
@@ -759,6 +791,7 @@
 	},
 	{
 		"name": "Zeb Orrelios",
+		"characterType": "Ally",
 		"subname": "SPECTRE-4",
 		"id": "A017",
 		"tier": 0,
@@ -771,7 +804,8 @@
 		"ignored": "",
 		"miniSize": "Small1x1",
 		"groupTraits": ["Brawler", "Guardian"],
-		"isElite": true,
+		"isElite": false,
+		"isHero": false,
 		"health": 15,
 		"speed": 4,
 		"defense": [
@@ -802,6 +836,7 @@
 	},
 	{
 		"name": "Obi-Wan Kenobi",
+		"characterType": "Ally",
 		"subname": "JEDI KNIGHT",
 		"id": "A018",
 		"tier": 0,
@@ -814,7 +849,8 @@
 		"ignored": "",
 		"miniSize": "Small1x1",
 		"groupTraits": ["ForceUser"],
-		"isElite": true,
+		"isElite": false,
+		"isHero": false,
 		"health": 12,
 		"speed": 4,
 		"defense": [
@@ -849,6 +885,7 @@
 	},
 	{
 		"name": "Hera Syndulla",
+		"characterType": "Ally",
 		"subname": "SPECTRE-2",
 		"id": "A019",
 		"tier": 0,
@@ -861,7 +898,8 @@
 		"ignored": "",
 		"miniSize": "Small1x1",
 		"groupTraits": ["Leader", "Smuggler"],
-		"isElite": true,
+		"isElite": false,
+		"isHero": false,
 		"health": 7,
 		"speed": 4,
 		"defense": [
@@ -895,6 +933,7 @@
 	},
 	{
 		"name": "C1-10P",
+		"characterType": "Ally",
 		"subname": "\"CHOPPER\"",
 		"id": "A020",
 		"tier": 0,
@@ -907,7 +946,8 @@
 		"ignored": "",
 		"miniSize": "Small1x1",
 		"groupTraits": ["Droid"],
-		"isElite": true,
+		"isElite": false,
+		"isHero": false,
 		"health": 5,
 		"speed": 4,
 		"defense": [
@@ -939,6 +979,7 @@
 	},
 	{
 		"name": "Alliance Smuggler",
+		"characterType": "Ally",
 		"subname": "",
 		"id": "A021",
 		"tier": 0,
@@ -952,6 +993,7 @@
 		"miniSize": "Small1x1",
 		"groupTraits": ["Smuggler"],
 		"isElite": false,
+		"isHero": false,
 		"health": 3,
 		"speed": 4,
 		"defense": [
@@ -984,6 +1026,7 @@
 	},
 	{
 		"name": "Alliance Smuggler (Elite)",
+		"characterType": "Ally",
 		"subname": "",
 		"id": "A022",
 		"tier": 0,
@@ -997,6 +1040,7 @@
 		"miniSize": "Small1x1",
 		"groupTraits": ["Smuggler"],
 		"isElite": true,
+		"isHero": false,
 		"health": 5,
 		"speed": 5,
 		"defense": [
@@ -1030,6 +1074,7 @@
 	},
 	{
 		"name": "Wookiee Warrior",
+		"characterType": "Ally",
 		"subname": "",
 		"id": "A023",
 		"tier": 0,
@@ -1043,6 +1088,7 @@
 		"miniSize": "Small1x1",
 		"groupTraits": ["Brawler", "Wookiee"],
 		"isElite": false,
+		"isHero": false,
 		"health": 11,
 		"speed": 4,
 		"defense": [
@@ -1072,6 +1118,7 @@
 	},
 	{
 		"name": "Wookiee Warrior (Elite)",
+		"characterType": "Ally",
 		"subname": "",
 		"id": "A024",
 		"tier": 0,
@@ -1085,6 +1132,7 @@
 		"miniSize": "Small1x1",
 		"groupTraits": ["Brawler", "Wookiee"],
 		"isElite": true,
+		"isHero": false,
 		"health": 13,
 		"speed": 4,
 		"defense": [
@@ -1114,6 +1162,7 @@
 	},
 	{
 		"name": "Alliance Ranger (Elite)",
+		"characterType": "Ally",
 		"subname": "",
 		"id": "A025",
 		"tier": 0,
@@ -1127,6 +1176,7 @@
 		"miniSize": "Small1x1",
 		"groupTraits": ["Trooper", "Hunter"],
 		"isElite": true,
+		"isHero": false,
 		"health": 7,
 		"speed": 4,
 		"defense": [
@@ -1175,6 +1225,7 @@
 		"miniSize": "Small1x1",
 		"groupTraits": ["Trooper", "Hunter"],
 		"isElite": true,
+		"isHero": false,
 		"health": 7,
 		"speed": 4,
 		"defense": [
@@ -1211,6 +1262,7 @@
 	},
 	{
 		"name": "Rebel Saboteur (Elite)",
+		"characterType": "Ally",
 		"subname": "",
 		"id": "A027",
 		"tier": 0,
@@ -1224,6 +1276,7 @@
 		"miniSize": "Small1x1",
 		"groupTraits": ["Spy", "HeavyWeapon"],
 		"isElite": true,
+		"isHero": false,
 		"health": 6,
 		"speed": 5,
 		"defense": [
@@ -1259,6 +1312,7 @@
 	},
 	{
 		"name": "Rebel Trooper (Elite)",
+		"characterType": "Ally",
 		"subname": "",
 		"id": "A028",
 		"tier": 0,
@@ -1272,6 +1326,7 @@
 		"miniSize": "Small1x1",
 		"groupTraits": ["Trooper"],
 		"isElite": true,
+		"isHero": false,
 		"health": 5,
 		"speed": 4,
 		"defense": [

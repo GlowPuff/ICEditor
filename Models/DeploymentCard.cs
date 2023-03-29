@@ -13,7 +13,7 @@ namespace Imperial_Commander_Editor
 		}
 		public event PropertyChangedEventHandler PropertyChanged;
 
-		string _name, _id, _faction;//, _mugshotID;
+		string _name, _id, _faction, _deploymentOutlineColor, _mugShotPath;
 		int _cost, _rcost, _size, _health, _speed, _priority, _tier, _fame, _reimb;
 		bool _isElite;
 		AttackType _attackType;
@@ -21,6 +21,7 @@ namespace Imperial_Commander_Editor
 		GroupTraits[] _groupTraits;
 		string[] _traits, _surges, _keywords;
 		GroupAbility[] _abilities;
+		CharacterType _characterType;
 
 		//== data from JSON
 		public string name { get => _name; set { _name = value; PC(); } }
@@ -49,7 +50,9 @@ namespace Imperial_Commander_Editor
 		public AttackType attackType { get => _attackType; set { _attackType = value; PC(); } }
 		public FigureSize miniSize { get => _miniSize; set { _miniSize = value; PC(); } }
 		public GroupTraits[] groupTraits { get => _groupTraits; set { _groupTraits = value; PC(); } }
-		//public string mugshotID { get => _mugshotID; set { _mugshotID = value; PC(); } }
+		public string deploymentOutlineColor { get => _deploymentOutlineColor; set { _deploymentOutlineColor = value; PC(); } }
+		public string mugShotPath { get => _mugShotPath; set { _mugShotPath = value; PC(); } }
+		public CharacterType characterType { get => _characterType; set { _characterType = value; PC(); } }
 
 		public DeploymentCard()
 		{

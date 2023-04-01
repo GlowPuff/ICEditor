@@ -196,7 +196,7 @@ namespace Imperial_Commander_Editor
 			for ( int i = 0; i < card.attacks.Length; i++ )
 				colors.Add( card.attacks[i] );
 			//set instructions from the copied card
-			cardInstruction = Utils.enemyInstructions.Where( x => x.instID == card.id ).First();
+			cardInstruction = Utils.enemyInstructions.Where( x => x.instID == card.id ).FirstOr( null );
 			//set bonuses from the copied card
 			bonuses = String.Join( "\n", Utils.enemyBonusEffects.First( x => x.bonusID == card.id ).effects );
 			//get number of each dice color

@@ -47,7 +47,7 @@ namespace Imperial_Commander_Editor
 			thumbListCB.ItemsSource = Utils.thumbnailData.Filter( ThumbType.All );
 			thumbListCB.SelectedItem = customToon.thumbnail;
 
-			copyFromCB.ItemsSource = Utils.enemyData;
+			copyFromCB.ItemsSource = Utils.enemyData.Where( x => !x.id.Contains( "TC" ) );
 
 			tierCB.ItemsSource = new int[] { 1, 2, 3 };
 			priorityCB.ItemsSource = new int[] { 1, 2 };

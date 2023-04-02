@@ -1213,6 +1213,8 @@
 	},
 	{
 		"name": "Echo Base Trooper (Elite)",
+		"characterType": "Ally",
+		"subname": "",
 		"id": "A026",
 		"tier": 0,
 		"faction": "Alliance",

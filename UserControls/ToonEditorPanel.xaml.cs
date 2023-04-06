@@ -53,7 +53,7 @@ namespace Imperial_Commander_Editor
 			priorityCB.ItemsSource = new int[] { 1, 2 };
 
 			instructionsBtn.Foreground = customToon.cardInstruction.content.Count == 0 ? new SolidColorBrush( Colors.Red ) : new SolidColorBrush( Colors.LawnGreen );
-			bonusBtn.Foreground = string.IsNullOrEmpty( customToon.bonuses ) ? new SolidColorBrush( Colors.Red ) : new SolidColorBrush( Colors.LawnGreen );
+			bonusBtn.Foreground = customToon.bonusEffect.effects.Count == 0 ? new SolidColorBrush( Colors.Red ) : new SolidColorBrush( Colors.LawnGreen );
 			abilityBtn.Foreground = customToon.deploymentCard.abilities.Length == 0 ? new SolidColorBrush( Colors.Red ) : new SolidColorBrush( Colors.LawnGreen );
 			surgeBtn.Foreground = customToon.deploymentCard.surges.Length == 0 ? new SolidColorBrush( Colors.Red ) : new SolidColorBrush( Colors.LawnGreen );
 			keywordsBtn.Foreground = customToon.deploymentCard.keywords.Length == 0 ? new SolidColorBrush( Colors.Red ) : new SolidColorBrush( Colors.LawnGreen );
@@ -109,11 +109,16 @@ namespace Imperial_Commander_Editor
 
 		private void bonusBtn_Click( object sender, RoutedEventArgs e )
 		{
-			var dlg = new GenericTextDialog( "EDIT BONUSES", customToon.bonuses );
+			var s = string.Join( "\n", customToon.bonusEffect.effects );
+			var dlg = new GenericTextDialog( "EDIT BONUSES", s );
 			dlg.ShowDialog();
-			customToon.bonuses = dlg.theText.Trim();
+			customToon.bonusEffect = new EnemyBonusEffect()
+			{
+				bonusID = customToon.cardID,
+				effects = dlg.theText.Trim().Split( "\n" ).Select( x => x.Trim() ).ToList()
+			};
 
-			bonusBtn.Foreground = string.IsNullOrEmpty( customToon.bonuses ) ? new SolidColorBrush( Colors.Red ) : new SolidColorBrush( Colors.LawnGreen );
+			bonusBtn.Foreground = customToon.bonusEffect.effects.Count == 0 ? new SolidColorBrush( Colors.Red ) : new SolidColorBrush( Colors.LawnGreen );
 		}
 
 		private void abilityBtn_Click( object sender, RoutedEventArgs e )
@@ -273,7 +278,7 @@ namespace Imperial_Commander_Editor
 				customToon.CopyFrom( dg );
 				//check if card text is empty now
 				instructionsBtn.Foreground = customToon.cardInstruction.content.Count == 0 ? new SolidColorBrush( Colors.Red ) : new SolidColorBrush( Colors.LawnGreen );
-				bonusBtn.Foreground = string.IsNullOrEmpty( customToon.bonuses ) ? new SolidColorBrush( Colors.Red ) : new SolidColorBrush( Colors.LawnGreen );
+				bonusBtn.Foreground = customToon.bonusEffect.effects.Count == 0 ? new SolidColorBrush( Colors.Red ) : new SolidColorBrush( Colors.LawnGreen );
 				abilityBtn.Foreground = customToon.deploymentCard.abilities.Length == 0 ? new SolidColorBrush( Colors.Red ) : new SolidColorBrush( Colors.LawnGreen );
 				surgeBtn.Foreground = customToon.deploymentCard.surges.Length == 0 ? new SolidColorBrush( Colors.Red ) : new SolidColorBrush( Colors.LawnGreen );
 				keywordsBtn.Foreground = customToon.deploymentCard.keywords.Length == 0 ? new SolidColorBrush( Colors.Red ) : new SolidColorBrush( Colors.LawnGreen );

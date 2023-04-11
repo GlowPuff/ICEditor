@@ -75,5 +75,25 @@ namespace Imperial_Commander_Editor
 			if ( e.Key == System.Windows.Input.Key.Enter )
 				Utils.LoseFocus( sender as Control );
 		}
+
+		private void addNewTriggerButton_Click( object sender, RoutedEventArgs e )
+		{
+			Trigger t = Utils.mainWindow.leftPanel.addNewTrigger();
+			if ( t != null )
+			{
+				triggersCB.ItemsSource = Utils.mainWindow.localTriggers;
+				(eventAction as AllyDeployment).setTrigger = t.GUID;
+			}
+		}
+
+		private void addNewEventButton_Click( object sender, RoutedEventArgs e )
+		{
+			MissionEvent me = Utils.mainWindow.leftPanel.AddNewEvent();
+			if ( me != null )
+			{
+				eventsCB.ItemsSource = Utils.mainWindow.localEvents;
+				(eventAction as AllyDeployment).setEvent = me.GUID;
+			}
+		}
 	}
 }

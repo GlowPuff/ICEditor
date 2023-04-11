@@ -207,5 +207,15 @@ namespace Imperial_Commander_Editor
 			var dlg = new MultipleBannedAlliesDialog();
 			dlg.ShowDialog();
 		}
+
+		private void addNewEventButton_Click( object sender, System.Windows.RoutedEventArgs e )
+		{
+			MissionEvent me = Utils.mainWindow.leftPanel.AddNewEvent();
+			if ( me != null )
+			{
+				eventCB.ItemsSource = Utils.mainWindow.localEvents;
+				Utils.mainWindow.mission.missionProperties.startingEvent = me.GUID;
+			}
+		}
 	}
 }

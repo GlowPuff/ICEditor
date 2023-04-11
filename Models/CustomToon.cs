@@ -11,7 +11,6 @@ namespace Imperial_Commander_Editor
 		public Guid customCharacterGUID { get; set; }
 		string _cardName, _cardSubName, _cardID;
 
-		CharacterType _characterType; //deploy as
 		Thumbnail _thumbnail;
 		DeploymentCard _deploymentCard;
 		string _groupAttack, _groupDefense;
@@ -46,11 +45,6 @@ namespace Imperial_Commander_Editor
 
 		public DeploymentCard deploymentCard { get => _deploymentCard; set => SetProperty( ref _deploymentCard, value ); }
 
-		public CharacterType characterType
-		{
-			get => _characterType;
-			set => SetProperty( ref _characterType, value );
-		}
 		public Thumbnail thumbnail
 		{
 			get => _thumbnail;
@@ -145,13 +139,13 @@ namespace Imperial_Commander_Editor
 				mugShotPath = "CardThumbnails/none",
 				groupTraits = new GroupTraits[0],
 				preferredTargets = new GroupTraits[0],
+				characterType = CharacterType.Imperial
 			};
 
 			//default properties
 			cardName = deploymentCard.name;
 			cardSubName = deploymentCard.subname;
 			cardID = deploymentCard.id;
-			characterType = CharacterType.Imperial;
 			faction = Factions.Imperial;
 			useThreatMultiplier = false;
 			canRedeploy = canReinforce = canBeDefeated = true;
@@ -188,7 +182,9 @@ namespace Imperial_Commander_Editor
 		{
 			//set these first, because these 2 properties also force set the deploymentCard values
 			groupAttack = groupDefense = "";
+			//store some properties from the card we want to keep
 			string outline = deploymentCard.deploymentOutlineColor;
+			CharacterType ctype = deploymentCard.characterType;
 			//now make the card copy
 			deploymentCard = card.Copy();
 			//keep some original properties of this toon, do NOT use the copied card's data
@@ -196,6 +192,8 @@ namespace Imperial_Commander_Editor
 			deploymentCard.name = cardName;
 			deploymentCard.subname = cardSubName;
 			deploymentCard.deploymentOutlineColor = outline;
+			deploymentCard.characterType = ctype;
+			deploymentCard.faction = faction.ToString();
 
 			//set groupAttack from the copied card
 			HashSet<DiceColor> colors = new();

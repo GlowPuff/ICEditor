@@ -31,13 +31,13 @@
 						<!--CHARACTER TYPE-->
 						<materialDesign:Card Padding="10" Background="{StaticResource CardBG}" Margin="0,10,0,0" >
 							<StackPanel>
-								<TextBlock Text="This Character is a:" HorizontalAlignment="Center"/>
+								<TextBlock Text="This Character Type is:" HorizontalAlignment="Center"/>
 								<WrapPanel HorizontalAlignment="Center">
-									<RadioButton x:Name="isHeroCheck" Content="Hero" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" HorizontalAlignment="Stretch" IsChecked="{Binding characterType, ConverterParameter={x:Static local:CharacterType.Hero}, Converter={StaticResource rbConv}}" GroupName="ctype" MinWidth="75"/>
-									<RadioButton x:Name="isAllyCheck" Content="Ally" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" HorizontalAlignment="Stretch" IsChecked="{Binding characterType, ConverterParameter={x:Static local:CharacterType.Ally}, Converter={StaticResource rbConv}}" GroupName="ctype" MinWidth="75"/>
-									<RadioButton x:Name="isRebelCheck" Content="Rebel / Neutral" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" HorizontalAlignment="Stretch" IsChecked="{Binding characterType, ConverterParameter={x:Static local:CharacterType.Rebel}, Converter={StaticResource rbConv}}" GroupName="ctype" MinWidth="75"/>
-									<RadioButton x:Name="isEnemyCheck" Content="Enemy Group" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" HorizontalAlignment="Stretch" IsChecked="{Binding characterType, ConverterParameter={x:Static local:CharacterType.Imperial}, Converter={StaticResource rbConv}}" GroupName="ctype" MinWidth="75"/>
-									<RadioButton x:Name="isVillainCheck" Content="Villain" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" HorizontalAlignment="Stretch" IsChecked="{Binding characterType, ConverterParameter={x:Static local:CharacterType.Villain}, Converter={StaticResource rbConv}}" GroupName="ctype" MinWidth="75"/>
+									<RadioButton x:Name="isHeroCheck" Content="Hero" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" HorizontalAlignment="Stretch" IsChecked="{Binding deploymentCard.characterType, ConverterParameter={x:Static local:CharacterType.Hero}, Converter={StaticResource rbConv}}" GroupName="ctype" MinWidth="75"/>
+									<RadioButton x:Name="isAllyCheck" Content="Ally" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" HorizontalAlignment="Stretch" IsChecked="{Binding deploymentCard.characterType, ConverterParameter={x:Static local:CharacterType.Ally}, Converter={StaticResource rbConv}}" GroupName="ctype" MinWidth="75"/>
+									<RadioButton x:Name="isRebelCheck" Content="Rebel / Neutral" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" HorizontalAlignment="Stretch" IsChecked="{Binding deploymentCard.characterType, ConverterParameter={x:Static local:CharacterType.Rebel}, Converter={StaticResource rbConv}}" GroupName="ctype" MinWidth="75"/>
+									<RadioButton x:Name="isEnemyCheck" Content="Enemy Group" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" HorizontalAlignment="Stretch" IsChecked="{Binding deploymentCard.characterType, ConverterParameter={x:Static local:CharacterType.Imperial}, Converter={StaticResource rbConv}}" GroupName="ctype" MinWidth="75"/>
+									<RadioButton x:Name="isVillainCheck" Content="Villain" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" HorizontalAlignment="Stretch" IsChecked="{Binding deploymentCard.characterType, ConverterParameter={x:Static local:CharacterType.Villain}, Converter={StaticResource rbConv}}" GroupName="ctype" MinWidth="75"/>
 								</WrapPanel>
 								<TextBlock x:Name="setupInfo" Padding="5" Text="Character Type affects how this Character can be used." TextWrapping="Wrap" FontStyle="Italic" Margin="0,0,0,10" Visibility="Visible"/>
 
@@ -217,7 +217,7 @@
 
 										<Button x:Name="confirmCopyFromButton" Click="confirmCopyFromButton_Click" Grid.Column="1" Content="{materialDesign:PackIcon Kind=CheckBold}" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35" Margin="10,0,0,0"/>
 									</Grid>
-									<TextBlock Text="Warning: This will overwrite all current General Properties. Name, Subname, ID, Type, Deployment, and Appearance are not affected." TextWrapping="Wrap" FontStyle="Italic" Margin="0,10,0,0"/>
+									<TextBlock Text="Warning: This will overwrite all current General Properties. Name, Subname, ID, Character Type, Deployment, Faction, and Appearance are not affected." TextWrapping="Wrap" FontStyle="Italic" Margin="0,10,0,0"/>
 								</StackPanel>
 							</materialDesign:Card>
 

@@ -14,7 +14,7 @@
 
 	<ScrollViewer VerticalScrollBarVisibility="Auto">
 		<StackPanel x:Name="stackPanel">
-			<GroupBox Header="Custom Character Actions" Background="#FF503B7C" Margin="0,0,0,10">
+			<GroupBox Header="Character Designer Actions" Background="#FF503B7C" Margin="0,0,0,10">
 				<Grid>
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="auto" />

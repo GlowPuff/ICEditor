@@ -7,22 +7,32 @@ namespace Imperial_Commander_Editor
 {
 	public class CustomToon : ObservableObject
 	{
-		//these properties don't change, even when copying from another Deployment Group
+		//these properties don't change when copying from another Deployment Group
 		public Guid customCharacterGUID { get; set; }
 		string _cardName, _cardSubName, _cardID;
+		Factions _faction;
+		//and Deployment Card outline color, character type
 
 		Thumbnail _thumbnail;
 		DeploymentCard _deploymentCard;
 		string _groupAttack, _groupDefense;
 		CardInstruction _cardInstruction;
 		BonusEffect _bonusEffect;
-		Factions _faction;
 		bool _canRedeploy, _canReinforce, _canBeDefeated, _useThreatMultiplier;
 
-		//update the embedded DG's name/subname and id when it changes
+		//update the embedded DG's name/subname, faction and id when it changes
 		public string cardName { get => _cardName; set { SetProperty( ref _cardName, value ); deploymentCard.name = value; } }
 		public string cardSubName { get => _cardSubName; set { SetProperty( ref _cardSubName, value ); deploymentCard.subname = value; } }
 		public string cardID { get => _cardID; set { SetProperty( ref _cardID, value ); deploymentCard.id = value; } }
+		public Factions faction
+		{
+			get => _faction;
+			set
+			{
+				SetProperty( ref _faction, value );
+				deploymentCard.faction = value.ToString();
+			}
+		}
 
 		public string groupAttack
 		{
@@ -79,15 +89,6 @@ namespace Imperial_Commander_Editor
 		{
 			get => _useThreatMultiplier;
 			set => SetProperty( ref _useThreatMultiplier, value );
-		}
-		public Factions faction
-		{
-			get => _faction;
-			set
-			{
-				SetProperty( ref _faction, value );
-				deploymentCard.faction = value.ToString();
-			}
 		}
 
 		public CustomToon()

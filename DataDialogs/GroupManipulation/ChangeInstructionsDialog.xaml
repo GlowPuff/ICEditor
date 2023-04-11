@@ -39,7 +39,7 @@
 			<StackPanel>
 				<materialDesign:Card Background="{StaticResource CardBG}" Padding="10">
 					<StackPanel>
-						<TextBlock Text="Changing Group Instructions will apply to ALL groups by default, unless one or more Specific Groups are added." TextWrapping="Wrap"/>
+						<TextBlock Text="Changing Group Instructions will apply to All Groups by default, unless one or more Specific Groups are added." TextWrapping="Wrap"/>
 					</StackPanel>
 				</materialDesign:Card>
 

@@ -43,14 +43,13 @@
 				</Grid.RowDefinitions>
 
 				<StackPanel Margin="10">
-					<!--<materialDesign:Card Background="{StaticResource CardBG}" Padding="10">
+					<materialDesign:Card Background="{StaticResource CardBG}" Padding="10">
 						<StackPanel>
-							<TextBlock Text="Groups that have been specifically targeted for modification, such as changing the Activation Instructions, have priority over 'Reset All Groups'." TextWrapping="Wrap"/>
-							<TextBlock Text="For example, if you specifically target Stormtroopers DG001 with a 'Change Instructions' modification, that modification will NOT be reset by 'Reset All Groups'.  You would have to Reset that specific group to remove its modification." TextWrapping="Wrap" Margin="0,5,0,0"/>
+							<TextBlock Text="Custom Enemy Deployments are not affected by this Event Action." TextWrapping="Wrap"/>
 						</StackPanel>
-					</materialDesign:Card>-->
+					</materialDesign:Card>
 
-					<CheckBox x:Name="resetcb" Content="Reset All Groups" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding resetAll}" Margin="4,0,4,0"/>
+					<CheckBox x:Name="resetcb" Content="Reset All Groups" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding resetAll}" Margin="4,10,4,0"/>
 
 					<GroupBox Header="Reset Specific Groups" Margin="0,10,0,0" IsEnabled="{Binding ElementName=resetcb, Path=IsChecked, Converter={StaticResource InvertBooleanConverter}}">
 						<StackPanel>

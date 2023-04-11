@@ -19,6 +19,12 @@
 
 				<StackPanel>
 					<materialDesign:Card Background="{StaticResource CardBG}" Padding="10" Margin="0,0,0,10">
+						<StackPanel>
+							<TextBlock Text="Priority Target Traits affect which types of Rebel traits this group will prefer first when attacking." TextWrapping="Wrap"/>
+						</StackPanel>
+					</materialDesign:Card>
+
+					<materialDesign:Card x:Name="useDefaultCard" Background="{StaticResource CardBG}" Padding="10" Margin="0,0,0,10">
 						<CheckBox x:Name="defCB" Content="Use Group Default" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding useDefaultPriority}"/>
 					</materialDesign:Card>
 

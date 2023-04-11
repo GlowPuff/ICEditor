@@ -57,11 +57,15 @@ namespace Imperial_Commander_Editor
 			abilityBtn.Foreground = customToon.deploymentCard.abilities.Length == 0 ? new SolidColorBrush( Colors.Red ) : new SolidColorBrush( Colors.LawnGreen );
 			surgeBtn.Foreground = customToon.deploymentCard.surges.Length == 0 ? new SolidColorBrush( Colors.Red ) : new SolidColorBrush( Colors.LawnGreen );
 			keywordsBtn.Foreground = customToon.deploymentCard.keywords.Length == 0 ? new SolidColorBrush( Colors.Red ) : new SolidColorBrush( Colors.LawnGreen );
+			traitsText.Text = "None";
 			if ( customToon.deploymentCard.traits.Length > 0 )
 			{
 				var t = customToon.deploymentCard.traits.Aggregate( ( acc, cur ) => acc + ", " + cur );
 				traitsText.Text = t;
 			}
+			priorityTargetsText.Text = "No Priorities";
+			if ( customToon.deploymentCard.preferredTargets.Length > 0 )
+				priorityTargetsText.Text = customToon.deploymentCard.preferredTargets.Select( x => x.ToString() ).Aggregate( ( acc, cur ) => acc.ToString() + ", " + cur.ToString() );
 		}
 
 		public void SetStandalone()
@@ -209,10 +213,14 @@ namespace Imperial_Commander_Editor
 		private void targetBtn_Click( object sender, RoutedEventArgs e )
 		{
 			//convert GroupTraits to GroupPriorityTraits from the deployment card
-			GroupPriorityTraits traits = new();
+			GroupPriorityTraits traits = new() { useDefaultPriority = false };
 			traits.FromArray( customToon.deploymentCard.preferredTargets );
-			var dlg = new PriorityTraitsDialog( traits );
+			var dlg = new PriorityTraitsDialog( traits, true );
 			dlg.ShowDialog();
+			customToon.deploymentCard.preferredTargets = dlg.priorityTraits.GetTraitArray().Select( x => (GroupTraits)Enum.Parse( typeof( GroupTraits ), x ) ).ToArray();
+			priorityTargetsText.Text = "No Priorities";
+			if ( customToon.deploymentCard.preferredTargets.Length > 0 )
+				priorityTargetsText.Text = customToon.deploymentCard.preferredTargets.Select( x => x.ToString() ).Aggregate( ( acc, cur ) => acc.ToString() + ", " + cur.ToString() );
 		}
 
 		private void filterAllButton_Click( object sender, RoutedEventArgs e )
@@ -291,11 +299,15 @@ namespace Imperial_Commander_Editor
 				abilityBtn.Foreground = customToon.deploymentCard.abilities.Length == 0 ? new SolidColorBrush( Colors.Red ) : new SolidColorBrush( Colors.LawnGreen );
 				surgeBtn.Foreground = customToon.deploymentCard.surges.Length == 0 ? new SolidColorBrush( Colors.Red ) : new SolidColorBrush( Colors.LawnGreen );
 				keywordsBtn.Foreground = customToon.deploymentCard.keywords.Length == 0 ? new SolidColorBrush( Colors.Red ) : new SolidColorBrush( Colors.LawnGreen );
+				traitsText.Text = "None";
 				if ( customToon.deploymentCard.traits.Length > 0 )
 				{
 					var t = customToon.deploymentCard.traits.Aggregate( ( acc, cur ) => acc + ", " + cur );
 					traitsText.Text = t;
 				}
+				priorityTargetsText.Text = "No Priorities";
+				if ( customToon.deploymentCard.preferredTargets.Length > 0 )
+					priorityTargetsText.Text = customToon.deploymentCard.preferredTargets.Select( x => x.ToString() ).Aggregate( ( acc, cur ) => acc.ToString() + ", " + cur.ToString() );
 			}
 		}
 

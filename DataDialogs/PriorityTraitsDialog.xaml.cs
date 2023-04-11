@@ -7,14 +7,17 @@ namespace Imperial_Commander_Editor
 	/// </summary>
 	public partial class PriorityTraitsDialog : Window
 	{
-		GroupPriorityTraits priorityTraits;
+		public GroupPriorityTraits priorityTraits;
 
-		public PriorityTraitsDialog( GroupPriorityTraits traits )
+		public PriorityTraitsDialog( GroupPriorityTraits traits, bool hideUseDefault = false )
 		{
 			InitializeComponent();
 
 			priorityTraits = traits;
 			DataContext = priorityTraits;
+
+			if ( hideUseDefault )
+				useDefaultCard.Visibility = Visibility.Collapsed;
 		}
 
 		private void okButton_Click( object sender, RoutedEventArgs e )

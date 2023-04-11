@@ -131,7 +131,7 @@
 							<SolidColorBrush Color="#FF3A3349"/>
 						</TabControl.Background>
 
-						<TabItem Width="95">
+						<TabItem Width="115">
 							<TabItem.Header>
 								<StackPanel>
 									<materialDesign:PackIcon Kind="Settings" Width="24" Height="24" HorizontalAlignment="Center" />
@@ -141,7 +141,7 @@
 							<local:MissionPropsPanel x:Name="missionProps"/>
 						</TabItem>
 
-						<TabItem Width="95">
+						<TabItem Width="115">
 							<TabItem.Header>
 								<StackPanel>
 									<materialDesign:PackIcon Kind="ViewGrid" Width="24" Height="24" HorizontalAlignment="Center" />
@@ -151,7 +151,7 @@
 							<local:MapSections x:Name="mapSections"/>
 						</TabItem>
 
-						<TabItem Width="95">
+						<TabItem Width="115">
 							<TabItem.Header>
 								<StackPanel>
 									<materialDesign:PackIcon Kind="Map" Width="24" Height="24" HorizontalAlignment="Center" />
@@ -161,7 +161,7 @@
 							<local:MapEditor x:Name="mapEditor" />
 						</TabItem>
 
-						<TabItem Width="95">
+						<TabItem Width="115">
 							<TabItem.Header>
 								<StackPanel>
 									<Image Width="24" Height="24" HorizontalAlignment="Center" Source="Assets/enemy.png"/>
@@ -171,7 +171,7 @@
 							<local:EncounterPanel x:Name="encounters"/>
 						</TabItem>
 
-						<TabItem Width="95">
+						<TabItem Width="115">
 							<TabItem.Header>
 								<StackPanel>
 									<materialDesign:PackIcon Kind="DeveloperBoard" Width="24" Height="24" HorizontalAlignment="Center" />
@@ -181,11 +181,11 @@
 							<local:PropertiesPanel x:Name="properties"/>
 						</TabItem>
 
-						<TabItem x:Name="charTab" Width="100" Loaded="charTab_Loaded">
+						<TabItem x:Name="charTab" Width="115" Loaded="charTab_Loaded">
 							<TabItem.Header>
 								<StackPanel>
 									<materialDesign:PackIcon Kind="User" Width="24" Height="24" HorizontalAlignment="Center" />
-									<TextBlock Style="{StaticResource MaterialDesignTextBlock}" Text="Character Editor" HorizontalAlignment="Center" TextWrapping="Wrap"/>
+									<TextBlock Style="{StaticResource MaterialDesignTextBlock}" Text="Character Designer" HorizontalAlignment="Center" TextWrapping="Wrap"/>
 								</StackPanel>
 							</TabItem.Header>
 							<local:ToonEditor x:Name="toonEditor"/>

@@ -53,7 +53,7 @@
 									<ColumnDefinition Width="*" />
 								</Grid.ColumnDefinitions>
 								<TextBlock Text="Icon Outline Color:" VerticalAlignment="Center"/>
-								<ComboBox Grid.Column="1" Margin="10,0,0,0" Style="{StaticResource MaterialDesignOutlinedComboBox}" ItemsSource="{Binding deploymentColors, RelativeSource={RelativeSource AncestorType=UserControl}}" SelectedValue="{Binding outlineColor}" DisplayMemberPath="name" SelectedValuePath="name"/>
+								<ComboBox Grid.Column="1" Margin="10,0,0,0" Style="{StaticResource MaterialDesignOutlinedComboBox}" ItemsSource="{Binding deploymentColors, RelativeSource={RelativeSource AncestorType=UserControl}}" SelectedValue="{Binding deploymentCard.deploymentOutlineColor}" DisplayMemberPath="name" SelectedValuePath="name"/>
 							</Grid>
 						</materialDesign:Card>
 

@@ -57,6 +57,11 @@ namespace Imperial_Commander_Editor
 			abilityBtn.Foreground = customToon.deploymentCard.abilities.Length == 0 ? new SolidColorBrush( Colors.Red ) : new SolidColorBrush( Colors.LawnGreen );
 			surgeBtn.Foreground = customToon.deploymentCard.surges.Length == 0 ? new SolidColorBrush( Colors.Red ) : new SolidColorBrush( Colors.LawnGreen );
 			keywordsBtn.Foreground = customToon.deploymentCard.keywords.Length == 0 ? new SolidColorBrush( Colors.Red ) : new SolidColorBrush( Colors.LawnGreen );
+			if ( customToon.deploymentCard.traits.Length > 0 )
+			{
+				var t = customToon.deploymentCard.traits.Aggregate( ( acc, cur ) => acc + ", " + cur );
+				traitsText.Text = t;
+			}
 		}
 
 		public void SetStandalone()
@@ -85,9 +90,9 @@ namespace Imperial_Commander_Editor
 				foreach ( var item in customToon.cardInstruction.content )
 				{
 					s += item.instruction.Aggregate( ( acc, cur ) => acc + "\n" + cur );
-					s += "\n***\n";
+					s += "\n===\n";
 				}
-				s = s.Substring( 0, s.LastIndexOf( "***" ) ).Trim();
+				s = s.Substring( 0, s.LastIndexOf( "===" ) ).Trim();
 			}
 
 			var dlg = new GenericTextDialog( "EDIT INSTRUCTIONS", s );
@@ -97,7 +102,7 @@ namespace Imperial_Commander_Editor
 			else
 			{
 				customToon.cardInstruction.content = new();
-				var groups = dlg.theText.Trim().Split( "\n***\n" );
+				var groups = dlg.theText.Trim().Split( "\n===\n" );
 				foreach ( var item in groups )
 				{
 					customToon.cardInstruction.content.Add( new() { instruction = item.Trim().Split( "\n" ).ToList() } );
@@ -112,7 +117,7 @@ namespace Imperial_Commander_Editor
 			var s = string.Join( "\n", customToon.bonusEffect.effects );
 			var dlg = new GenericTextDialog( "EDIT BONUSES", s );
 			dlg.ShowDialog();
-			customToon.bonusEffect = new EnemyBonusEffect()
+			customToon.bonusEffect = new BonusEffect()
 			{
 				bonusID = customToon.cardID,
 				effects = dlg.theText.Trim().Split( "\n" ).Select( x => x.Trim() ).ToList()
@@ -203,7 +208,10 @@ namespace Imperial_Commander_Editor
 
 		private void targetBtn_Click( object sender, RoutedEventArgs e )
 		{
-			var dlg = new PriorityTraitsDialog( customToon.groupPriorityTraits );
+			//convert GroupTraits to GroupPriorityTraits from the deployment card
+			GroupPriorityTraits traits = new();
+			traits.FromArray( customToon.deploymentCard.preferredTargets );
+			var dlg = new PriorityTraitsDialog( traits );
 			dlg.ShowDialog();
 		}
 
@@ -258,6 +266,7 @@ namespace Imperial_Commander_Editor
 		private void thumbListCB_SelectionChanged( object sender, SelectionChangedEventArgs e )
 		{
 			customToon.thumbnail = thumbListCB.SelectedItem as Thumbnail;
+			customToon.deploymentCard.mugShotPath = $"CardThumbnails/{customToon.thumbnail.ID}";
 			SetThumbnailImage();
 			iconFilterBox.Text = "";
 			SetThumbSource( ThumbType.All );
@@ -282,6 +291,11 @@ namespace Imperial_Commander_Editor
 				abilityBtn.Foreground = customToon.deploymentCard.abilities.Length == 0 ? new SolidColorBrush( Colors.Red ) : new SolidColorBrush( Colors.LawnGreen );
 				surgeBtn.Foreground = customToon.deploymentCard.surges.Length == 0 ? new SolidColorBrush( Colors.Red ) : new SolidColorBrush( Colors.LawnGreen );
 				keywordsBtn.Foreground = customToon.deploymentCard.keywords.Length == 0 ? new SolidColorBrush( Colors.Red ) : new SolidColorBrush( Colors.LawnGreen );
+				if ( customToon.deploymentCard.traits.Length > 0 )
+				{
+					var t = customToon.deploymentCard.traits.Aggregate( ( acc, cur ) => acc + ", " + cur );
+					traitsText.Text = t;
+				}
 			}
 		}
 
@@ -325,6 +339,7 @@ namespace Imperial_Commander_Editor
 				thumbListCB.SelectedItem = fthumbs.First();
 				thumbListCB.SelectionChanged += thumbListCB_SelectionChanged;
 				customToon.thumbnail = fthumbs.First();
+				customToon.deploymentCard.mugShotPath = $"CardThumbnails/{customToon.thumbnail.ID}";
 				SetThumbnailImage();
 			}
 		}
@@ -342,6 +357,7 @@ namespace Imperial_Commander_Editor
 				{
 					thumbListCB.SelectedItem = fthumb;
 					customToon.thumbnail = fthumb;
+					customToon.deploymentCard.mugShotPath = $"CardThumbnails/{customToon.thumbnail.ID}";
 					SetThumbnailImage();
 					iconFilterBox.Text = "";
 					SetThumbSource( ThumbType.All );
@@ -352,7 +368,7 @@ namespace Imperial_Commander_Editor
 		private void eliteCheckbox_Click( object sender, RoutedEventArgs e )
 		{
 			if ( eliteCheckbox.IsChecked == true && customToon.deploymentCard.isElite )
-				customToon.outlineColor = "Red";
+				customToon.deploymentCard.deploymentOutlineColor = "Red";
 		}
 	}
 }

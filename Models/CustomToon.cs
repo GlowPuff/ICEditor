@@ -9,15 +9,14 @@ namespace Imperial_Commander_Editor
 	{
 		//these properties don't change, even when copying from another Deployment Group
 		public Guid customCharacterGUID { get; set; }
-		string _cardName, _cardSubName, _cardID, _outlineColor;
+		string _cardName, _cardSubName, _cardID;
 
 		CharacterType _characterType; //deploy as
 		Thumbnail _thumbnail;
 		DeploymentCard _deploymentCard;
-		GroupPriorityTraits _groupPriorityTraits;
 		string _groupAttack, _groupDefense;
 		CardInstruction _cardInstruction;
-		EnemyBonusEffect _bonusEffect;
+		BonusEffect _bonusEffect;
 		Factions _faction;
 		bool _canRedeploy, _canReinforce, _canBeDefeated, _useThreatMultiplier;
 
@@ -44,8 +43,6 @@ namespace Imperial_Commander_Editor
 				deploymentCard.defense = Utils.ParseCustomDice( value.Split( ' ' ) );
 			}
 		}
-		public string outlineColor { get => _outlineColor; set { SetProperty( ref _outlineColor, value ); } }
-		public GroupPriorityTraits groupPriorityTraits { get => _groupPriorityTraits; set => SetProperty( ref _groupPriorityTraits, value ); }
 
 		public DeploymentCard deploymentCard { get => _deploymentCard; set => SetProperty( ref _deploymentCard, value ); }
 
@@ -59,7 +56,7 @@ namespace Imperial_Commander_Editor
 			get => _thumbnail;
 			set => SetProperty( ref _thumbnail, value );
 		}
-		public EnemyBonusEffect bonusEffect
+		public BonusEffect bonusEffect
 		{
 			get => _bonusEffect;
 			set => SetProperty( ref _bonusEffect, value );
@@ -137,20 +134,23 @@ namespace Imperial_Commander_Editor
 				fame = 6,
 				reimb = 3,
 				faction = "Imperial",
+				ignored = "",
 				attackType = AttackType.Melee,
 				traits = new string[0],
 				surges = new string[] { "{B}: Bleed", "{B}: Focus", "{B}: Pierce 2" },
 				keywords = new string[] { "+2 {H}", "Habitat: Snow" },
 				abilities = new GroupAbility[] { new() { name = "Composite Plating", text = "While defending, if the attacker is 4 or more spaces away, apply +1 {G} to the defense roll.\nEfficient Travel:Snowtroopers (Elite) ignores additional movement point costs for difficult terrain and hostile figures." } },
-				miniSize = FigureSize.Small1x1//Small1x1, Medium1x2, Large2x2, Huge2x3
+				miniSize = FigureSize.Small1x1,//Small1x1, Medium1x2, Large2x2, Huge2x3
+				deploymentOutlineColor = "Gray",
+				mugShotPath = "CardThumbnails/none",
+				groupTraits = new GroupTraits[0],
+				preferredTargets = new GroupTraits[0],
 			};
 
 			//default properties
 			cardName = deploymentCard.name;
 			cardSubName = deploymentCard.subname;
 			cardID = deploymentCard.id;
-			outlineColor = "Gray";
-			groupPriorityTraits = new();
 			characterType = CharacterType.Imperial;
 			faction = Factions.Imperial;
 			useThreatMultiplier = false;
@@ -173,7 +173,7 @@ namespace Imperial_Commander_Editor
 				content = new()
 				{
 					new(){instruction = new(){"{-} MISSILE SALVO: This figure’s attacks do not require line of sight or Accuracy.", "{A} Move 2 to reposition 4."}},
-					new(){instruction = new(){"This is a second randomized Instruction Group", "Separate randomized Instruction Groups with ***"}},
+					new(){instruction = new(){"This is a second randomized Instruction Group", "Separate randomized Instruction Groups with ==="}},
 					new(){instruction = new(){"This is a third randomized Instruction Group", "When this character Activates, one of these 3 Instruction Groups will be randomly chosen to Activate with"}}
 				}
 			};
@@ -188,12 +188,15 @@ namespace Imperial_Commander_Editor
 		{
 			//set these first, because these 2 properties also force set the deploymentCard values
 			groupAttack = groupDefense = "";
+			string outline = deploymentCard.deploymentOutlineColor;
 			//now make the card copy
 			deploymentCard = card.Copy();
-			//keep the original ID, name and subname of this toon, do NOT use the copied card's data
+			//keep some original properties of this toon, do NOT use the copied card's data
 			deploymentCard.id = cardID;
 			deploymentCard.name = cardName;
 			deploymentCard.subname = cardSubName;
+			deploymentCard.deploymentOutlineColor = outline;
+
 			//set groupAttack from the copied card
 			HashSet<DiceColor> colors = new();
 			for ( int i = 0; i < card.attacks.Length; i++ )

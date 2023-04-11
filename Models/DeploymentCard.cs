@@ -18,7 +18,7 @@ namespace Imperial_Commander_Editor
 		bool _isElite;
 		AttackType _attackType;
 		FigureSize _miniSize;
-		GroupTraits[] _groupTraits;
+		GroupTraits[] _groupTraits, _preferredTargets;
 		string[] _traits, _surges, _keywords;
 		GroupAbility[] _abilities;
 		CharacterType _characterType;
@@ -50,6 +50,7 @@ namespace Imperial_Commander_Editor
 		public AttackType attackType { get => _attackType; set { _attackType = value; PC(); } }
 		public FigureSize miniSize { get => _miniSize; set { _miniSize = value; PC(); } }
 		public GroupTraits[] groupTraits { get => _groupTraits; set { _groupTraits = value; PC(); } }
+		public GroupTraits[] preferredTargets { get => _preferredTargets; set { _preferredTargets = value; PC(); } }
 		public string deploymentOutlineColor { get => _deploymentOutlineColor; set { _deploymentOutlineColor = value; PC(); } }
 		public string mugShotPath { get => _mugShotPath; set { _mugShotPath = value; PC(); } }
 		public CharacterType characterType { get => _characterType; set { _characterType = value; PC(); } }

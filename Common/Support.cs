@@ -378,7 +378,7 @@ namespace Imperial_Commander_Editor
 		public List<string> instruction;//line by line instructions
 	}
 
-	public class EnemyBonusEffect
+	public class BonusEffect
 	{
 		public string bonusID;
 		public List<string> effects;

@@ -25,7 +25,12 @@
 					<StackPanel Margin="0,0,5,0">
 						<TextBox x:Name="nameText" Text="{Binding customName, RelativeSource={RelativeSource AncestorType=Window}}" Style="{StaticResource MaterialDesignOutlinedTextBox}" materialDesign:HintAssist.Hint="Custom Name - Blank For Default" KeyDown="TextBox_KeyDown"/>
 
-						<CheckBox Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" Margin="0,10,0,0" Content="Use Generic Thumbnail" IsChecked="{Binding useGenericMugshot}"/>
+						<materialDesign:Card Background="{StaticResource CardBG}" Padding="10" Margin="0,10,0,0">
+							<StackPanel>
+								<CheckBox Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" Margin="0,0,0,10" Content="Use Generic Thumbnail" IsChecked="{Binding useGenericMugshot}"/>
+								<TextBlock Text="Forcing the use of a Generic Thumbnail will essentially make this deployment a 'dummy token' when its card is shown in Imperial Commander. All unique data about this group will be set to 0 or empty values, such as health, cost, abilities, bonus text, traits, keywords, attack, and defense." TextWrapping="Wrap"/>
+							</StackPanel>
+						</materialDesign:Card>
 
 						<!--ON DEFEAT (TRIGGER)-->
 						<GroupBox Header="On Defeated, Fire This Trigger:" Margin="0,10,0,0" Background="#FF503B7C">

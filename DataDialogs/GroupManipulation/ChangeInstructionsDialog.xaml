@@ -37,7 +37,13 @@
 	<Border BorderBrush="MediumPurple" BorderThickness="2">
 		<GroupBox Header="Change Group Instructions Event Action" Style="{DynamicResource MaterialDesignGroupBox}">
 			<StackPanel>
-				<GroupBox Header="Instruction Placement" Background="#FF503B7C">
+				<materialDesign:Card Background="{StaticResource CardBG}" Padding="10">
+					<StackPanel>
+						<TextBlock Text="Changing Group Instructions will apply to ALL groups by default, unless one or more Specific Groups are added." TextWrapping="Wrap"/>
+					</StackPanel>
+				</materialDesign:Card>
+
+				<GroupBox Header="Instruction Placement" Background="#FF503B7C" Margin="0,10,0,0">
 					<StackPanel Orientation="Horizontal">
 						<TextBlock Text="Placement:" Margin="0,0,10,0" VerticalAlignment="Center"/>
 						<RadioButton Content="Top" GroupName="all" IsChecked="{Binding Path=instructionType, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:CustomInstructionType.Top}}" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}"/>

@@ -64,17 +64,21 @@
 					</materialDesign:Card>
 
 					<materialDesign:Card Background="{StaticResource CardBG}" Padding="10">
-						<StackPanel>
-							<Grid>
-								<Grid.ColumnDefinitions>
-									<ColumnDefinition Width="auto" />
-									<ColumnDefinition Width="*" />
-								</Grid.ColumnDefinitions>
-								<TextBlock Text="Fire Event Upon Triggering:" VerticalAlignment="Center" Margin="0,0,10,0"/>
-								<ComboBox Grid.Column="1" x:Name="elist" Style="{StaticResource MaterialDesignOutlinedComboBox}" ItemsSource="{Binding mainWindow.localEvents}" SelectedValue="{Binding trigger.eventGUID}" DisplayMemberPath="name" SelectedValuePath="GUID"/>
-							</Grid>
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="auto" />
+								<ColumnDefinition Width="*" />
+								<ColumnDefinition Width="auto" />
+							</Grid.ColumnDefinitions>
 
-						</StackPanel>
+							<TextBlock Text="Fire Event Upon Triggering:" VerticalAlignment="Center" Margin="0,0,10,0"/>
+
+							<ComboBox Grid.Column="1" x:Name="elist" Style="{StaticResource MaterialDesignOutlinedComboBox}" ItemsSource="{Binding mainWindow.localEvents}" SelectedValue="{Binding trigger.eventGUID}" DisplayMemberPath="name" SelectedValuePath="GUID"/>
+
+							<Button Grid.Row="2" x:Name="addNewEventButton" Grid.Column="2" Margin="10,0,0,0" Click="addNewEventButton_Click" ToolTip="Add New Event" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35">
+								<Image Source="../Assets/addevent.png" Height="20"/>
+							</Button>
+						</Grid>
 					</materialDesign:Card>
 				</StackPanel>
 

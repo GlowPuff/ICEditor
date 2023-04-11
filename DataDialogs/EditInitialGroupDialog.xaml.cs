@@ -117,5 +117,25 @@ namespace Imperial_Commander_Editor
 			nameText.Focus();
 			nameText.SelectAll();
 		}
+
+		private void addNewTriggerButton_Click( object sender, RoutedEventArgs e )
+		{
+			Trigger t = Utils.mainWindow.leftPanel.addNewTrigger();
+			if ( t != null )
+			{
+				triggersCB.ItemsSource = Utils.mainWindow.localTriggers;
+				enemyGroupData.defeatedTrigger = t.GUID;
+			}
+		}
+
+		private void addNewEventButton_Click( object sender, RoutedEventArgs e )
+		{
+			MissionEvent me = Utils.mainWindow.leftPanel.AddNewEvent();
+			if ( me != null )
+			{
+				eventsCB.ItemsSource = Utils.mainWindow.localEvents;
+				enemyGroupData.defeatedEvent = me.GUID;
+			}
+		}
 	}
 }

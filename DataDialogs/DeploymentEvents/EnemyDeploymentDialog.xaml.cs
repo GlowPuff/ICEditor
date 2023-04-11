@@ -329,6 +329,26 @@ namespace Imperial_Commander_Editor
 			thumbListCB.SelectedItem = (eventAction as EnemyDeployment).thumbnail;
 		}
 
+		private void addNewTriggerButton_Click( object sender, RoutedEventArgs e )
+		{
+			Trigger t = Utils.mainWindow.leftPanel.addNewTrigger();
+			if ( t != null )
+			{
+				triggersCB.ItemsSource = Utils.mainWindow.localTriggers;
+				(eventAction as EnemyDeployment).enemyGroupData.defeatedTrigger = t.GUID;
+			}
+		}
+
+		private void addNewEventButton_Click( object sender, RoutedEventArgs e )
+		{
+			MissionEvent me = Utils.mainWindow.leftPanel.AddNewEvent();
+			if ( me != null )
+			{
+				eventsCB.ItemsSource = Utils.mainWindow.localEvents;
+				(eventAction as EnemyDeployment).enemyGroupData.defeatedEvent = me.GUID;
+			}
+		}
+
 		private void dpCB_SelectionChanged( object sender, SelectionChangedEventArgs e )
 		{
 			selectedDP = (eventAction as EnemyDeployment).specificDeploymentPoint;

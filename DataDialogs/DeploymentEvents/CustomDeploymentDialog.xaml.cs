@@ -181,6 +181,26 @@ namespace Imperial_Commander_Editor
 			(eventAction as CustomEnemyDeployment).UpdateDP();
 		}
 
+		private void addNewTriggerButton_Click( object sender, RoutedEventArgs e )
+		{
+			Trigger t = Utils.mainWindow.leftPanel.addNewTrigger();
+			if ( t != null )
+			{
+				triggersCB.ItemsSource = Utils.mainWindow.localTriggers;
+				(eventAction as CustomEnemyDeployment).enemyGroupData.defeatedTrigger = t.GUID;
+			}
+		}
+
+		private void addNewEventButton_Click( object sender, RoutedEventArgs e )
+		{
+			MissionEvent me = Utils.mainWindow.leftPanel.AddNewEvent();
+			if ( me != null )
+			{
+				eventsCB.ItemsSource = Utils.mainWindow.localEvents;
+				(eventAction as CustomEnemyDeployment).enemyGroupData.defeatedEvent = me.GUID;
+			}
+		}
+
 		private void okButton_Click( object sender, RoutedEventArgs e )
 		{
 			(eventAction as CustomEnemyDeployment).UpdateDP();

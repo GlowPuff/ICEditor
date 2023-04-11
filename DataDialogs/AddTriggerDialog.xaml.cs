@@ -89,5 +89,15 @@ namespace Imperial_Commander_Editor
 			if ( e.Key == System.Windows.Input.Key.Enter )
 				Utils.LoseFocus( sender as Control );
 		}
+
+		private void addNewEventButton_Click( object sender, RoutedEventArgs e )
+		{
+			MissionEvent me = Utils.mainWindow.leftPanel.AddNewEvent();
+			if ( me != null )
+			{
+				elist.ItemsSource = Utils.mainWindow.localEvents;
+				trigger.eventGUID = me.GUID;
+			}
+		}
 	}
 }

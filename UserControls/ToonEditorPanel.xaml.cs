@@ -121,11 +121,21 @@ namespace Imperial_Commander_Editor
 			var s = string.Join( "\n", customToon.bonusEffect.effects );
 			var dlg = new GenericTextDialog( "EDIT BONUSES", s );
 			dlg.ShowDialog();
-			customToon.bonusEffect = new BonusEffect()
+
+			if ( string.IsNullOrEmpty( dlg.theText.Trim() ) )
+				customToon.bonusEffect = new BonusEffect()
+				{
+					bonusID = customToon.cardID,
+					effects = new()
+				};
+			else
 			{
-				bonusID = customToon.cardID,
-				effects = dlg.theText.Trim().Split( "\n" ).Select( x => x.Trim() ).ToList()
-			};
+				customToon.bonusEffect = new BonusEffect()
+				{
+					bonusID = customToon.cardID,
+					effects = dlg.theText.Trim().Split( "\n" ).Select( x => x.Trim() ).ToList()
+				};
+			}
 
 			bonusBtn.Foreground = customToon.bonusEffect.effects.Count == 0 ? new SolidColorBrush( Colors.Red ) : new SolidColorBrush( Colors.LawnGreen );
 		}

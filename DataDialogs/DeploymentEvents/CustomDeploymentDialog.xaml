@@ -14,7 +14,7 @@
 	</Window.Resources>
 
 	<Border BorderBrush="MediumPurple" BorderThickness="2">
-		<GroupBox Header="Custom Deployment Event Action (Legacy Feature For Compatibility - Use The Character Editor For Custom Groups)" Style="{DynamicResource MaterialDesignGroupBox}">
+		<GroupBox Header="(DEPRECATED) Custom Deployment Event Action" Style="{DynamicResource MaterialDesignGroupBox}">
 			<Grid>
 				<Grid.RowDefinitions>
 					<RowDefinition Height="auto"/>
@@ -24,6 +24,8 @@
 
 				<materialDesign:Card Background="{StaticResource CardBG}" Padding="10">
 					<StackPanel>
+						<TextBlock Text="Custom Deployments are DEPRECATED" TextWrapping="Wrap" HorizontalAlignment="Center" Foreground="Red"/>
+						<TextBlock Text="This is now a Legacy Feature For Compatibility. It is recommended to use the Character Designer to create customized groups." TextWrapping="Wrap" HorizontalAlignment="Center" Margin="0,0,0,10"/>
 						<TextBlock Text="Custom Groups are given a unique ID and are not associated with any real, existing card in the game." TextWrapping="Wrap" HorizontalAlignment="Center"/>
 						<TextBlock Text="They cannot be referenced by Event Actions or used anywhere else in the Mission Editor aside from being Deployed by this Event." TextWrapping="Wrap" HorizontalAlignment="Center" Margin="0,5,0,0"/>
 					</StackPanel>

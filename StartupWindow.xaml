@@ -159,7 +159,7 @@
 					<Grid Margin="10" HorizontalAlignment="Stretch">
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition Width="auto"/>
-							<ColumnDefinition Width="*"/>
+							<!--<ColumnDefinition Width="*"/>-->
 							<ColumnDefinition Width="*"/>
 							<ColumnDefinition Width="auto"/>
 						</Grid.ColumnDefinitions>
@@ -170,28 +170,29 @@
 
 						<!--mission info text-->
 						<StackPanel Grid.Column="1" Margin="10,0" VerticalAlignment="Center">
-							<TextBlock Text="{Binding Title}" Foreground="White" FontSize="16" Margin="0,0"/>
+							<!--mission title-->
+							<TextBlock Text="{Binding Title}" Foreground="White" FontSize="16"/>
+							<!--filename-->
+							<TextBlock Text="{Binding fileName}" Foreground="White" Margin="0,2,0,0"/>
 							<Grid>
 								<Grid.ColumnDefinitions>
 									<ColumnDefinition Width="auto"/>
 									<ColumnDefinition Width="*"/>
 								</Grid.ColumnDefinitions>
-								<!--<TextBlock Grid.Column="0" Text="{Binding projectType}" Foreground="White" FontSize="12" Margin="0,0"/>-->
+
+								<!--date-->
+								<TextBlock Grid.Column="0" Text="{Binding Date}" Style="{StaticResource MaterialDesignCaptionTextBlock}" HorizontalAlignment="Right" Foreground="White"/>
+
+								<!--version-->
 								<StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10,0,0,0">
 									<TextBlock Text="v." Foreground="White" VerticalAlignment="Center"/>
 									<TextBlock Grid.Column="1" Text="{Binding fileVersion}" Foreground="White" FontSize="12" VerticalAlignment="Center"/>
 								</StackPanel>
-
-								<TextBlock Grid.Column="0" Text="{Binding Date}" Style="{StaticResource MaterialDesignCaptionTextBlock}" HorizontalAlignment="Right" Foreground="White"/>
 							</Grid>
-
-							<!--<TextBlock Text="{Binding Description}" TextTrimming="WordEllipsis" Foreground="White" FontSize="12" Margin="0,5,0,0"/>-->
 						</StackPanel>
 
-						<TextBlock Grid.Column="2" Text="{Binding fileName}" VerticalAlignment="Center" Margin="10,0"/>
-
 						<!--remove button-->
-						<Button x:Name="removeButton" Grid.Column="3" Style="{StaticResource MaterialDesignFlatButton}" Click="removeButton_Click" Width="60" Height="60">
+						<Button x:Name="removeButton" Grid.Column="2" Style="{StaticResource MaterialDesignFlatButton}" Click="removeButton_Click" Width="60" Height="60">
 							<Image Source="Assets/remove2.png" Width="20"/>
 						</Button>
 

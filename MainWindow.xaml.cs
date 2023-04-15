@@ -96,15 +96,8 @@ namespace Imperial_Commander_Editor
 				PropertyChanged?.Invoke( this, new PropertyChangedEventArgs( n ) );
 		}
 
-		//public MainWindow( string missionID ) : this( null )
-		//{
-		//	mission.missionID = missionID;
-		//}
-
 		public MainWindow( Mission s = null )
 		{
-			//Utils.Init( this );
-
 			InitializeComponent();
 
 			System.Threading.Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.InvariantCulture;

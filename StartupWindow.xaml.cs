@@ -203,22 +203,16 @@ namespace Imperial_Commander_Editor
 				//parse JSON response
 				gitHubResponse = JsonConvert.DeserializeObject<GitHubResponse>( response );
 
-				int ghVersion = int.Parse( gitHubResponse.tag_name.Substring( 2 ).Replace( ".", "" ) );
-				int v = int.Parse( Utils.appVersion.Replace( ".", "" ) );
+				//remove beginning "v." and "." from tag_name
+				int ghVersion = int.Parse( gitHubResponse.tag_name.GetDigits() );
+				int v = int.Parse( Utils.appVersion.GetDigits() );
 
-				//if ( gitHubResponse.tag_name.Substring( 2 ) == Utils.appVersion )//remove beginning "v."
-				if ( v > ghVersion )
-				{
-					DoStatus( 3 );
-				}
-				else if ( ghVersion == v )
-				{
+				if ( ghVersion == v )
 					DoStatus( 1 );
-				}
+				//else if ( v > ghVersion )
+				//	DoStatus( 3 );
 				else
-				{
 					DoStatus( 2, gitHubResponse.tag_name );
-				}
 			}
 		}
 
@@ -240,7 +234,7 @@ namespace Imperial_Commander_Editor
 		}
 
 		/// <summary>
-		/// 0=red, 1=green, 2=yellow, 3=green(using a newer beta version)
+		/// 0=red, 1=green, 2=yellow, 3=green(using a beta)
 		/// </summary>
 		private void DoStatus( int s, string version = "" )
 		{
@@ -248,6 +242,10 @@ namespace Imperial_Commander_Editor
 			{
 				//hide animated icon
 				busyIcon.Visibility = Visibility.Collapsed;
+
+#if DEBUG
+				s = 3;
+#endif
 
 				if ( s == 0 )
 				{
@@ -272,7 +270,7 @@ namespace Imperial_Commander_Editor
 				}
 				else if ( s == 3 )
 				{
-					busyStatus.Text = "Using Newer Version";
+					busyStatus.Text = "BETA";
 					busyIconRed.Visibility = Visibility.Collapsed;
 					busyIconGreen.Visibility = Visibility.Visible;
 					busyIconYellow.Visibility = Visibility.Collapsed;

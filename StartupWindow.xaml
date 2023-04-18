@@ -109,7 +109,7 @@
 							<RowDefinition Height="auto"/>
 						</Grid.RowDefinitions>
 
-						<TextBlock Grid.Column="1" Text="CHARACTER EDITOR" />
+						<TextBlock Grid.Column="1" Text="CHARACTER DESIGNER" />
 
 						<TextBlock Grid.Column="1" Grid.Row="1" Text="Create custom Heroes, Allies, Enemies, and Villains." TextWrapping="Wrap"/>
 					</Grid>

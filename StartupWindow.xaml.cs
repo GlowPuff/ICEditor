@@ -209,8 +209,8 @@ namespace Imperial_Commander_Editor
 
 				if ( ghVersion == v )
 					DoStatus( 1 );
-				//else if ( v > ghVersion )
-				//	DoStatus( 3 );
+				else if ( v > ghVersion )
+					DoStatus( 3 );
 				else
 					DoStatus( 2, gitHubResponse.tag_name );
 			}

@@ -23,13 +23,13 @@
 
 					<TextBlock Text="Hero: These Characters will be available in the Imperial Commander setup screen for players to choose from." TextWrapping="Wrap" Margin="0,0,0,10"/>
 					<TextBlock Text="Ally: These Characters will be available in the Imperial Commander setup screen for players to choose from." Margin="0,10" TextWrapping="Wrap"/>
-					<TextBlock Text="Rebel / Neutral: These Groups will deploy on the Rebel side (left) of the screen in the Imperial Commander app." Margin="0,10" TextWrapping="Wrap"/>
-					<TextBlock Text="Enemy Group: These Groups will deploy on the Imperial side (right) of the screen in the Imperial Commander app." Margin="0,10" TextWrapping="Wrap"/>
-					<TextBlock Text="Villain: These Groups will deploy on the Imperial side (right) of the screen in the Imperial Commander app." Margin="0,10" TextWrapping="Wrap"/>
+					<TextBlock Text="Rebel / Neutral: These Groups will appear on the Rebel side (left) of the screen in the Imperial Commander app after they are Deployed." Margin="0,10" TextWrapping="Wrap"/>
+					<TextBlock Text="Enemy Group: These Groups will appear on the Imperial side (right) of the screen in the Imperial Commander app after they are Deployed." Margin="0,10" TextWrapping="Wrap"/>
+					<TextBlock Text="Villain: These Groups will appear on the Imperial side (right) of the screen in the Imperial Commander app after they are Deployed." Margin="0,10" TextWrapping="Wrap"/>
 
 					<TextBlock Text="NOTE: Characters created and saved WITHIN a Mission will ONLY be available when players select the Mission in the Imperial Commander setup screen." FontStyle="Italic" Margin="0,5" TextWrapping="Wrap" Foreground="Violet"/>
 
-					<TextBlock Text="NOTE: If you want this Character available from an Imperial Commander Campaign or on-demand from within ANY standalone Mission, you must EXPORT the Character so players can IMPORT it for use in their app at any time." FontStyle="Italic" Margin="0,5" TextWrapping="Wrap" Foreground="Violet"/>
+					<TextBlock Text="NOTE: If you want a Character available from an Imperial Commander Campaign or on-demand from within ANY standalone Mission, you must EXPORT the Character so players can IMPORT it for use in their app at any time." FontStyle="Italic" Margin="0,5" TextWrapping="Wrap" Foreground="Violet"/>
 				</StackPanel>
 				<Separator Grid.Row="1" Margin="0,10,0,10"/>
 				<StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" >

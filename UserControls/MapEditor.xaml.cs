@@ -604,7 +604,7 @@ namespace Imperial_Commander_Editor
 			if ( selectedEntity != null )
 			{
 				MessageBoxResult res = MessageBoxResult.Yes;
-				var report = Utils.CheckAndNotifyEntityRemoved( selectedEntity.GUID, NotifyMode.Report, selectedEntity.name );
+				var report = HealthReportHelper.CheckAndNotifyEntityRemoved( selectedEntity.GUID, NotifyMode.Report, selectedEntity.name );
 				if ( report.isBroken )
 				{
 					res = MessageBox.Show( "Deleting this Map Entity will break references to it made from other Events, Triggers, or Map Entities.\n\nAre you sure you want to delete it?\n\nChoosing YES will delete the Entity and fix any broken references, along with displaying a report showing you where all the fixes were made.\n\nChoosing NO will delete the Entity but will NOT fix the broken references left behind.\n\nChoosing CANCEL will cancel this whole operation.\n\nNOTE: Fixing this broken reference will update all affected Buttons, Input Ranges, and any other items within the data.", "Warning - Deleting Will Create One Or More Broken References", MessageBoxButton.YesNoCancel, MessageBoxImage.Question );

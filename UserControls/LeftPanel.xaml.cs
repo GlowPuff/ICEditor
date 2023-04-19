@@ -108,7 +108,7 @@ namespace Imperial_Commander_Editor
 			var t = triggersCB.SelectedItem as Trigger;
 			MessageBoxResult res = MessageBoxResult.Yes;
 
-			var report = Utils.CheckAndNotifyTriggerRemoved( t.GUID, NotifyMode.Report, t.name );
+			var report = HealthReportHelper.CheckAndNotifyTriggerRemoved( t.GUID, NotifyMode.Report, t.name );
 			if ( report.isBroken )
 			{
 				res = MessageBox.Show( "Deleting this Trigger will break references to it made from other Events, Triggers, or Map Entities.\n\nAre you sure you want to delete it?\n\nChoosing YES will delete the Trigger and fix any broken references, along with displaying a report showing you where all the fixes were made.\n\nChoosing NO will delete the Trigger but will NOT fix the broken references left behind.\n\nChoosing CANCEL will cancel this whole operation.\n\nNOTE: Fixing this broken reference will update all affected Buttons, Input Ranges, and any other items within the data.", "Warning - Deleting Will Create One Or More Broken References", MessageBoxButton.YesNoCancel, MessageBoxImage.Question );
@@ -154,7 +154,7 @@ namespace Imperial_Commander_Editor
 			var t = eventsCB.SelectedItem as MissionEvent;
 			MessageBoxResult res = MessageBoxResult.Yes;
 
-			var report = Utils.CheckAndNotifyEventRemoved( t.GUID, NotifyMode.Report, t.name );
+			var report = HealthReportHelper.CheckAndNotifyEventRemoved( t.GUID, NotifyMode.Report, t.name );
 			if ( report.isBroken )
 			{
 				res = MessageBox.Show( "Deleting this Event will break references to it made from other Events, Triggers, or Map Entities.\n\nAre you sure you want to delete it?\n\nChoosing YES will delete the Event and fix any broken references, along with displaying a report showing you where all the fixes were made.\n\nChoosing NO will delete the Event but will NOT fix the broken references left behind.\n\nChoosing CANCEL will cancel this whole operation.\n\nNOTE: Fixing this broken reference will update all affected Buttons, Input Ranges, and any other items within the data.", "Warning - Deleting Will Create One Or More Broken References", MessageBoxButton.YesNoCancel, MessageBoxImage.Question );

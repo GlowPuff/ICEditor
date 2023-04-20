@@ -106,7 +106,7 @@
 													</MenuItem>
 													<MenuItem Header="Deployment">
 														<MenuItem Header="Enemy Deployment" Click="MenuItem_Click" Tag="D1"/>
-														<MenuItem Header="Ally Deployment" Click="MenuItem_Click" Tag="D2"/>
+														<MenuItem Header="Ally/Rebel Deployment" Click="MenuItem_Click" Tag="D2"/>
 														<MenuItem Header="Optional Deployment" Click="MenuItem_Click" Tag="D3"/>
 														<MenuItem Header="Random Deployment" Click="MenuItem_Click" Tag="D4"/>
 														<MenuItem Header="Add Group(s) to Deployment Hand" Click="MenuItem_Click" Tag="D5"/>

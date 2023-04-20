@@ -28,7 +28,7 @@ namespace Imperial_Commander_Editor
 			selectedGroup = Utils.enemyData.First( x => x.id == "DG001" );
 
 			dpCBAlly.ItemsSource = Utils.allyRebelData;
-			selectedAllyGroup = Utils.allyData.First( x => x.id == "A001" );
+			selectedAllyGroup = Utils.allyRebelData.First( x => x.id == "A001" );
 		}
 
 		public void PC( [CallerMemberName] string n = "" )
@@ -86,11 +86,11 @@ namespace Imperial_Commander_Editor
 
 		private void filterBoxA_TextChanged( object sender, TextChangedEventArgs e )
 		{
-			selectedAllyGroup = Utils.allyData.Where( x => x.name.ToLower().Contains( filterBoxA.Text.ToLower() ) ).FirstOr( null );
+			selectedAllyGroup = Utils.allyRebelData.Where( x => x.name.ToLower().Contains( filterBoxA.Text.ToLower() ) ).FirstOr( null );
 
 			//try id
 			if ( selectedAllyGroup == null )
-				selectedAllyGroup = Utils.allyData.Where( x => x.id.Contains( filterBoxA.Text ) ).FirstOr( null );
+				selectedAllyGroup = Utils.allyRebelData.Where( x => x.id.Contains( filterBoxA.Text ) ).FirstOr( null );
 		}
 
 		private void remGroupButton_Click( object sender, RoutedEventArgs e )
@@ -100,7 +100,7 @@ namespace Imperial_Commander_Editor
 
 		private void addGroupButtonAlly_Click( object sender, RoutedEventArgs e )
 		{
-			(eventAction as RemoveGroup).allyGroupsToRemove.Add( new( Utils.allyData.Where( x => x.id == selectedAllyGroup.id ).First() ) );
+			(eventAction as RemoveGroup).allyGroupsToRemove.Add( new( Utils.allyRebelData.Where( x => x.id == selectedAllyGroup.id ).First() ) );
 		}
 
 		private void remAllyGroupButton_Click( object sender, RoutedEventArgs e )

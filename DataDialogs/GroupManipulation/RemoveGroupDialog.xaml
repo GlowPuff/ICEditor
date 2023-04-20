@@ -113,11 +113,10 @@
 								</StackPanel>
 							</GroupBox>
 						</StackPanel>
-
 					</Grid>
 
 					<!--RIGHT-->
-					<GroupBox Header="Remove Ally Groups">
+					<GroupBox Header="Remove Ally/Rebel Groups">
 						<StackPanel>
 							<materialDesign:Card Padding="10" Background="{StaticResource CardBG}">
 								<StackPanel>

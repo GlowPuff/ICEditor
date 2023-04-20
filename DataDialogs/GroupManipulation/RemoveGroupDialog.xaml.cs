@@ -27,7 +27,7 @@ namespace Imperial_Commander_Editor
 			dpCB.ItemsSource = Utils.enemyData;
 			selectedGroup = Utils.enemyData.First( x => x.id == "DG001" );
 
-			dpCBAlly.ItemsSource = Utils.allyData;
+			dpCBAlly.ItemsSource = Utils.allyRebelData;
 			selectedAllyGroup = Utils.allyData.First( x => x.id == "A001" );
 		}
 

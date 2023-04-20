@@ -18,6 +18,7 @@ namespace Imperial_Commander_Editor
 
 		private static List<DeploymentCard> _allyData, _enemyData, _villainData, _heroData;
 
+		//all xData card properties include designed characters, unless noted in name
 		public static List<DeploymentCard> allyNoCustomData
 		{
 			get => _allyData;
@@ -61,6 +62,7 @@ namespace Imperial_Commander_Editor
 		{
 			get => allyData.Concat( customData.Where( x => x.characterType == CharacterType.Rebel ) ).ToList();
 		}
+
 		public static List<DeploymentCard> customData = new();
 		public static List<TileDescriptor> tileData;
 		public static ThumbnailData thumbnailData;

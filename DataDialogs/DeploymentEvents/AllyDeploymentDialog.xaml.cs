@@ -30,7 +30,7 @@ namespace Imperial_Commander_Editor
 				deploymentPoints.Add( e );
 			}
 
-			allyCB.ItemsSource = Utils.allyData;
+			allyCB.ItemsSource = Utils.allyRebelData;
 			triggersCB.ItemsSource = Utils.mainWindow.localTriggers;
 			eventsCB.ItemsSource = Utils.mainWindow.localEvents;
 

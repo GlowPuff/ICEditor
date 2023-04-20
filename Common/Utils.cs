@@ -16,10 +16,52 @@ namespace Imperial_Commander_Editor
 		public const string formatVersion = "21";
 		public const string appVersion = "1.0.30";
 
-		public static List<DeploymentCard> allyData;
-		public static List<DeploymentCard> enemyData;
-		public static List<DeploymentCard> villainData;
-		public static List<DeploymentCard> heroData;
+		private static List<DeploymentCard> _allyData, _enemyData, _villainData, _heroData;
+
+		public static List<DeploymentCard> allyNoCustomData
+		{
+			get => _allyData;
+		}
+		public static List<DeploymentCard> allyData
+		{
+			get
+			{
+				return _allyData.Concat( customData.Where( x => x.characterType == CharacterType.Ally ) ).ToList();
+			}
+			set
+			{
+				_allyData = value;
+			}
+		}
+		public static List<DeploymentCard> enemyData
+		{
+			get
+			{
+				return _enemyData.Concat( customData.Where( x => x.characterType == CharacterType.Imperial || x.characterType == CharacterType.Villain ) ).ToList();
+			}
+			set { _enemyData = value; }
+		}
+		public static List<DeploymentCard> villainData
+		{
+			get
+			{
+				return _villainData.Concat( customData.Where( x => x.characterType == CharacterType.Villain ) ).ToList();
+			}
+			set { _villainData = value; }
+		}
+		public static List<DeploymentCard> heroData
+		{
+			get
+			{
+				return _heroData.Concat( customData.Where( x => x.characterType == CharacterType.Hero ) ).ToList();
+			}
+			set { _heroData = value; }
+		}
+		public static List<DeploymentCard> allyRebelData
+		{
+			get => allyData.Concat( customData.Where( x => x.characterType == CharacterType.Rebel ) ).ToList();
+		}
+		public static List<DeploymentCard> customData = new();
 		public static List<TileDescriptor> tileData;
 		public static ThumbnailData thumbnailData;
 		public static List<CardInstruction> enemyInstructions;
@@ -48,13 +90,12 @@ namespace Imperial_Commander_Editor
 			};
 		}
 
-		//public static void Init( MainWindow mw )
-		//{
-		//	mainWindow = mw;
-		//}
-
+		/// <summary>
+		/// called from startup window
+		/// </summary>
 		public static void LoadAllCardData()
 		{
+			customData = new();//clear any custom data set from previous session
 			LoadCardData();
 			tileData = TileDescriptor.LoadData();
 			enemyInstructions = FileManager.LoadAsset<List<CardInstruction>>( "instructions.json" );
@@ -118,17 +159,17 @@ namespace Imperial_Commander_Editor
 
 		public static void AddCustomToon( DeploymentCard card )
 		{
-			enemyData.Add( card );
+			customData.Add( card );
 		}
 
 		public static void RemoveCustomToon( DeploymentCard card )
 		{
-			enemyData.Remove( card );
+			customData.Remove( card );
 		}
 
 		public static string GetAvailableCustomToonID()
 		{
-			var usedIDs = enemyData.Where( x => x.id.Contains( "TC" ) ).Select( x => int.Parse( x.id.Substring( 2 ) ) ).ToList();
+			var usedIDs = customData.Select( x => int.Parse( x.id.GetDigits() ) ).ToList();
 			int highest = 1;
 			if ( usedIDs.Count() >= 1 )
 			{

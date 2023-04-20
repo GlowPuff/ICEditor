@@ -127,6 +127,9 @@ namespace Imperial_Commander_Editor
 				mapEditor.LoadMap();
 				mission.mapSections[0].canRemove = false;
 				mainTitle = $"Imperial Commander Mission Editor - {mission.fileName}";
+				//add any custom characters to the pool
+				foreach ( var item in mission.customCharacters )
+					Utils.AddCustomToon( item.deploymentCard );
 			}
 
 			DataContext = this;
@@ -270,6 +273,8 @@ namespace Imperial_Commander_Editor
 				properties.UpdateUI( activeSection );
 			else if ( (sender as TabControl).SelectedIndex == 3 )
 				encounters.UpdateUI();
+			else if ( (sender as TabControl).SelectedIndex == 5 )
+				toonEditor.UpdateUI();
 		}
 
 		private void Window_Loaded( object sender, RoutedEventArgs e )
@@ -289,11 +294,6 @@ namespace Imperial_Commander_Editor
 		{
 			var dlg = new HealthCheckWindow();
 			dlg.ShowDialog();
-		}
-
-		private void charTab_Loaded( object sender, RoutedEventArgs e )
-		{
-			toonEditor.SetToonList( mission.customCharacters );
 		}
 
 		private void Window_PreviewKeyDown( object sender, KeyEventArgs e )

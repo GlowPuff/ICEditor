@@ -181,7 +181,7 @@
 							<local:PropertiesPanel x:Name="properties"/>
 						</TabItem>
 
-						<TabItem x:Name="charTab" Width="115" Loaded="charTab_Loaded">
+						<TabItem x:Name="charTab" Width="115">
 							<TabItem.Header>
 								<StackPanel>
 									<materialDesign:PackIcon Kind="User" Width="24" Height="24" HorizontalAlignment="Center" />

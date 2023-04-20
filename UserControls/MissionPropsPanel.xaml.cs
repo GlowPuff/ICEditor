@@ -70,7 +70,7 @@ namespace Imperial_Commander_Editor
 
 			allyCB.ItemsSource = Utils.allyData;
 			fixedAllyCB.ItemsSource = Utils.allyData;
-			bannedAllyCB.ItemsSource = Utils.allyData;
+			bannedAllyCB.ItemsSource = Utils.allyNoCustomData;
 			heroCB.ItemsSource = Utils.heroData;
 			var items = from e in Utils.mainWindow.mission.globalEvents where e.isGlobal select e;
 			eventCB.ItemsSource = Utils.mainWindow.localEvents;

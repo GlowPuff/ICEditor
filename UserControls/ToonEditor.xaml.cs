@@ -37,12 +37,12 @@ namespace Imperial_Commander_Editor
 			selectedToon = null;
 		}
 
-		public void SetToonList( ObservableCollection<CustomToon> toons )
+		public void UpdateUI()
 		{
-			foreach ( var item in toons )
+			toonList.Clear();
+			foreach ( var item in Utils.mainWindow.mission.customCharacters )
 			{
 				toonList.Add( item );
-				Utils.AddCustomToon( item.deploymentCard );
 			}
 		}
 

@@ -21,7 +21,7 @@ namespace Imperial_Commander_Editor
 
 			dpCB.ItemsSource = Utils.enemyData;
 			hCB.ItemsSource = Utils.heroData;
-			aCB.ItemsSource = Utils.allyData;
+			aCB.ItemsSource = Utils.allyRebelData;
 			selectedGroup = "DG001";
 		}
 

@@ -269,12 +269,16 @@ namespace Imperial_Commander_Editor
 
 		private void tabControl_SelectionChanged( object sender, SelectionChangedEventArgs e )
 		{
-			if ( (sender as TabControl).SelectedIndex == 4 )
-				properties.UpdateUI( activeSection );
-			else if ( (sender as TabControl).SelectedIndex == 3 )
-				encounters.UpdateUI();
-			else if ( (sender as TabControl).SelectedIndex == 5 )
-				toonEditor.UpdateUI();
+			//check source, otherwise combobox selection changed bubbles up
+			if ( e.OriginalSource is TabControl )
+			{
+				if ( (sender as TabControl).SelectedIndex == 4 )
+					properties.UpdateUI( activeSection );
+				else if ( (sender as TabControl).SelectedIndex == 3 )
+					encounters.UpdateUI();
+				else if ( (sender as TabControl).SelectedIndex == 5 )
+					toonEditor.UpdateUI();
+			}
 		}
 
 		private void Window_Loaded( object sender, RoutedEventArgs e )

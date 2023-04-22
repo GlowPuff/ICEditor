@@ -83,18 +83,19 @@ namespace Imperial_Commander_Editor
 		{
 			stackPanel.Children.Remove( toonEditorPanel );
 
-			selectedToon = new();
-			selectedToon.Create();
+			CustomToon newToon = new();
+			newToon.Create();
 			if ( !isStandalone )
 			{
-				toonList.Add( selectedToon );
-				Utils.mainWindow.mission.customCharacters.Add( selectedToon );
-				Utils.AddCustomToon( selectedToon.deploymentCard );
+				toonList.Add( newToon );
+				Utils.mainWindow.mission.customCharacters.Add( newToon );
+				Utils.AddCustomToon( newToon.deploymentCard );
 			}
-			toonEditorPanel = new ToonEditorPanel( selectedToon );
+			toonEditorPanel = new ToonEditorPanel( newToon );
 			if ( isStandalone )
 				toonEditorPanel.SetStandalone();
 			stackPanel.Children.Add( toonEditorPanel );
+			selectedToon = newToon;
 		}
 
 		private void exportToonButton_Click( object sender, RoutedEventArgs e )
@@ -118,18 +119,19 @@ namespace Imperial_Commander_Editor
 			var toon = FileManager.ImportCharacter();
 			if ( toon != null )
 			{
-				selectedToon = CustomToon.ImportFrom( toon );
+				CustomToon newToon = CustomToon.ImportFrom( toon );
 				if ( !isStandalone )
 				{
-					toonList.Add( selectedToon );
-					Utils.mainWindow.mission.customCharacters.Add( selectedToon );
-					Utils.AddCustomToon( selectedToon.deploymentCard );
+					toonList.Add( newToon );
+					Utils.mainWindow.mission.customCharacters.Add( newToon );
+					Utils.AddCustomToon( newToon.deploymentCard );
 				}
-				toonEditorPanel = new ToonEditorPanel( selectedToon );
+				toonEditorPanel = new ToonEditorPanel( newToon );
 				if ( isStandalone )
 					toonEditorPanel.SetStandalone();
 				toonEditorPanel.SetThumbnailImage();
 				stackPanel.Children.Add( toonEditorPanel );
+				selectedToon = newToon;
 
 				if ( !isStandalone )
 					Utils.mainWindow.SetStatus( "Imported Character" );

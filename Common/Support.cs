@@ -383,4 +383,12 @@ namespace Imperial_Commander_Editor
 		public string bonusID;
 		public List<string> effects;
 	}
+
+	public class CampaignSkill
+	{
+		public string owner;//use custom toon's unique ID
+		public string id;//use custom toon's unique ID
+		public string name { get; set; }
+		public int cost { get; set; }
+	}
 }

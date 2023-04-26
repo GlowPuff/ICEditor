@@ -66,6 +66,7 @@ namespace Imperial_Commander_Editor
 			priorityTargetsText.Text = "No Priorities";
 			if ( customToon.deploymentCard.preferredTargets.Length > 0 )
 				priorityTargetsText.Text = customToon.deploymentCard.preferredTargets.Select( x => x.ToString() ).Aggregate( ( acc, cur ) => acc.ToString() + ", " + cur.ToString() );
+			heroSkillsText.Text = customToon.heroSkills.Count == 0 ? "None" : $"{customToon.heroSkills.Count} Skills";
 		}
 
 		public void SetStandalone()
@@ -391,6 +392,13 @@ namespace Imperial_Commander_Editor
 		{
 			if ( eliteCheckbox.IsChecked == true && customToon.deploymentCard.isElite )
 				customToon.deploymentCard.deploymentOutlineColor = "Red";
+		}
+
+		private void editHeroSkillsButton_Click( object sender, RoutedEventArgs e )
+		{
+			var dlg = new EditCustomHeroSkillsWindow( customToon );
+			dlg.ShowDialog();
+			heroSkillsText.Text = customToon.heroSkills.Count == 0 ? "None" : $"{customToon.heroSkills.Count} Skills";
 		}
 	}
 }

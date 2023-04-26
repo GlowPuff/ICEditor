@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
 
@@ -34,6 +35,7 @@ namespace Imperial_Commander_Editor
 			}
 		}
 
+		public ObservableCollection<CampaignSkill> heroSkills { get; set; }
 		public string groupAttack
 		{
 			get => _groupAttack;
@@ -94,6 +96,7 @@ namespace Imperial_Commander_Editor
 		public CustomToon()
 		{
 			deploymentCard = new();
+			heroSkills = new();
 		}
 
 		public static CustomToon ImportFrom( CustomToon toon )
@@ -223,6 +226,17 @@ namespace Imperial_Commander_Editor
 			//trim values
 			groupAttack = groupAttack.Trim();
 			groupDefense = groupDefense.Trim();
+		}
+
+		public CampaignSkill CreateSkill( string name, int cost )
+		{
+			return new CampaignSkill()
+			{
+				name = name,
+				cost = cost,
+				id = customCharacterGUID.ToString(),
+				owner = customCharacterGUID.ToString()
+			};
 		}
 	}
 }

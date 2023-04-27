@@ -238,5 +238,13 @@ namespace Imperial_Commander_Editor
 				owner = customCharacterGUID.ToString()
 			};
 		}
+
+		public void ReorderSkillIDs()
+		{
+			for ( int i = 0; i < heroSkills.Count; i++ )
+			{
+				heroSkills[i].id = $"{cardName.Replace( " ", "" ).ToLower()}{i + 1}";
+			}
+		}
 	}
 }

@@ -33,6 +33,7 @@ namespace Imperial_Commander_Editor
 
 		private void okButton_Click( object sender, RoutedEventArgs e )
 		{
+			customToon.ReorderSkillIDs();
 			Close();
 		}
 

@@ -300,5 +300,15 @@ namespace Imperial_Commander_Editor
 				return new DiceColor[0];
 			}
 		}
+
+		public static void ThrowErrorDialog( Exception e, string customMessage = null, string customTitle = null )
+		{
+			MessageBox.Show( $"{customMessage ?? "An error has occurred."}\r\n\r\nException:\r\n" + e.Message + "\r\n" + e.StackTrace, $"{customTitle ?? "App Exception"}", MessageBoxButton.OK, MessageBoxImage.Error );
+		}
+
+		public static void ShowError( string customMessage = null, string customTitle = null )
+		{
+			MessageBox.Show( $"{customMessage ?? "An error has occurred."}", $"{customTitle ?? "App Exception"}", MessageBoxButton.OK, MessageBoxImage.Error );
+		}
 	}
 }

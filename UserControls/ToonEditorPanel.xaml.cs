@@ -52,21 +52,28 @@ namespace Imperial_Commander_Editor
 			tierCB.ItemsSource = new int[] { 1, 2, 3 };
 			priorityCB.ItemsSource = new int[] { 1, 2 };
 
-			instructionsBtn.Foreground = customToon.cardInstruction.content.Count == 0 ? new SolidColorBrush( Colors.Red ) : new SolidColorBrush( Colors.LawnGreen );
-			bonusBtn.Foreground = customToon.bonusEffect.effects.Count == 0 ? new SolidColorBrush( Colors.Red ) : new SolidColorBrush( Colors.LawnGreen );
-			abilityBtn.Foreground = customToon.deploymentCard.abilities.Length == 0 ? new SolidColorBrush( Colors.Red ) : new SolidColorBrush( Colors.LawnGreen );
-			surgeBtn.Foreground = customToon.deploymentCard.surges.Length == 0 ? new SolidColorBrush( Colors.Red ) : new SolidColorBrush( Colors.LawnGreen );
-			keywordsBtn.Foreground = customToon.deploymentCard.keywords.Length == 0 ? new SolidColorBrush( Colors.Red ) : new SolidColorBrush( Colors.LawnGreen );
-			traitsText.Text = "None";
-			if ( customToon.deploymentCard.traits.Length > 0 )
+			try
 			{
-				var t = customToon.deploymentCard.traits.Aggregate( ( acc, cur ) => acc + ", " + cur );
-				traitsText.Text = t;
+				instructionsBtn.Foreground = customToon.cardInstruction.content.Count == 0 ? new SolidColorBrush( Colors.Red ) : new SolidColorBrush( Colors.LawnGreen );
+				bonusBtn.Foreground = customToon.bonusEffect.effects.Count == 0 ? new SolidColorBrush( Colors.Red ) : new SolidColorBrush( Colors.LawnGreen );
+				abilityBtn.Foreground = customToon.deploymentCard.abilities.Length == 0 ? new SolidColorBrush( Colors.Red ) : new SolidColorBrush( Colors.LawnGreen );
+				surgeBtn.Foreground = customToon.deploymentCard.surges.Length == 0 ? new SolidColorBrush( Colors.Red ) : new SolidColorBrush( Colors.LawnGreen );
+				keywordsBtn.Foreground = customToon.deploymentCard.keywords.Length == 0 ? new SolidColorBrush( Colors.Red ) : new SolidColorBrush( Colors.LawnGreen );
+				traitsText.Text = "None";
+				if ( customToon.deploymentCard.traits.Length > 0 )
+				{
+					var t = customToon.deploymentCard.traits.Aggregate( ( acc, cur ) => acc + ", " + cur );
+					traitsText.Text = t;
+				}
+				priorityTargetsText.Text = "No Priorities";
+				if ( customToon.deploymentCard.preferredTargets?.Length > 0 )
+					priorityTargetsText.Text = customToon.deploymentCard.preferredTargets.Select( x => x.ToString() ).Aggregate( ( acc, cur ) => acc.ToString() + ", " + cur.ToString() );
+				heroSkillsText.Text = customToon.heroSkills.Count == 0 ? "None" : $"{customToon.heroSkills.Count} Skills";
 			}
-			priorityTargetsText.Text = "No Priorities";
-			if ( customToon.deploymentCard.preferredTargets.Length > 0 )
-				priorityTargetsText.Text = customToon.deploymentCard.preferredTargets.Select( x => x.ToString() ).Aggregate( ( acc, cur ) => acc.ToString() + ", " + cur.ToString() );
-			heroSkillsText.Text = customToon.heroSkills.Count == 0 ? "None" : $"{customToon.heroSkills.Count} Skills";
+			catch ( Exception e )
+			{
+				Utils.ThrowErrorDialog( e, "Error trying to import character." );
+			}
 		}
 
 		public void SetStandalone()
@@ -88,6 +95,13 @@ namespace Imperial_Commander_Editor
 
 		private void instructionsBtn_Click( object sender, RoutedEventArgs e )
 		{
+			if ( customToon.cardInstruction == null )
+			{
+				Utils.ShowError( "Instructions is null, setting a default value.  Try again." );
+				customToon.cardInstruction = new() { instID = customToon.cardID, content = new() };
+				return;
+			}
+
 			string s = "";
 			List<string> ilist = new();
 			if ( customToon.cardInstruction.content.Count > 0 )
@@ -119,6 +133,17 @@ namespace Imperial_Commander_Editor
 
 		private void bonusBtn_Click( object sender, RoutedEventArgs e )
 		{
+			if ( customToon.bonusEffect == null )
+			{
+				Utils.ShowError( "Bonus Effects is null, setting a default value.  Try again." );
+				customToon.bonusEffect = new()
+				{
+					bonusID = customToon.cardID,
+					effects = new()
+				};
+				return;
+			}
+
 			var s = string.Join( "\n", customToon.bonusEffect.effects );
 			var dlg = new GenericTextDialog( "EDIT BONUSES", s );
 			dlg.ShowDialog();
@@ -223,6 +248,13 @@ namespace Imperial_Commander_Editor
 
 		private void targetBtn_Click( object sender, RoutedEventArgs e )
 		{
+			if ( customToon.deploymentCard.preferredTargets == null )
+			{
+				Utils.ShowError( "Bonus Effects is null, setting a default value.  Try again." );
+				customToon.deploymentCard.preferredTargets = new GroupTraits[0];
+				return;
+			}
+
 			//convert GroupTraits to GroupPriorityTraits from the deployment card
 			GroupPriorityTraits traits = new() { useDefaultPriority = false };
 			traits.FromArray( customToon.deploymentCard.preferredTargets );

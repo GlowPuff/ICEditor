@@ -21,10 +21,22 @@ namespace Imperial_Commander_Editor
 		BonusEffect _bonusEffect;
 		bool _canRedeploy, _canReinforce, _canBeDefeated, _useThreatMultiplier;
 
-		//update the embedded DG's name/subname, faction and id when it changes
+		//update the embedded DG's name/subname, faction, instructions ID, bonus effect ID, and id when it changes
 		public string cardName { get => _cardName; set { SetProperty( ref _cardName, value ); deploymentCard.name = value; } }
 		public string cardSubName { get => _cardSubName; set { SetProperty( ref _cardSubName, value ); deploymentCard.subname = value; } }
-		public string cardID { get => _cardID; set { SetProperty( ref _cardID, value ); deploymentCard.id = value; } }
+		public string cardID
+		{
+			get => _cardID;
+			set
+			{
+				SetProperty( ref _cardID, value );
+				deploymentCard.id = value;
+				if ( cardInstruction != null )
+					cardInstruction.instID = value;
+				if ( bonusEffect != null )
+					bonusEffect.bonusID = value;
+			}
+		}
 		public Factions faction
 		{
 			get => _faction;
@@ -205,8 +217,10 @@ namespace Imperial_Commander_Editor
 				colors.Add( card.attacks[i] );
 			//set instructions from the copied card
 			cardInstruction = Utils.enemyInstructions.Where( x => x.instID == card.id ).FirstOr( null );
+			cardInstruction.instID = cardID;
 			//set bonuses from the copied card
 			bonusEffect = Utils.enemyBonusEffects.Where( x => x.bonusID == card.id ).FirstOr( null );
+			bonusEffect.bonusID = cardID;
 			//get number of each dice color
 			foreach ( var c in colors )
 			{

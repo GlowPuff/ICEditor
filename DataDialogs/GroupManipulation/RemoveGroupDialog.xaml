@@ -55,9 +55,20 @@
 	<Border BorderBrush="MediumPurple" BorderThickness="2">
 		<GroupBox Header="Remove Groups Event Action" Style="{DynamicResource MaterialDesignGroupBox}">
 			<StackPanel>
-				<TextBlock Margin="0,0,0,10" FontStyle="Italic" HorizontalAlignment="Center" TextWrapping="Wrap">
-								Removing a Group makes it available for manual redeployment. It does not trigger <Run Foreground="Orange">On Defeated</Run> Events.
-				</TextBlock>
+				<materialDesign:Card Background="{StaticResource CardBG}" Padding="10" Margin="0,0,0,10">
+					<StackPanel>
+						<TextBlock Text="Note the following about Removed Groups:" Margin="0,0,0,5"/>
+						<TextBlock Text="• The Group becomes available for manual deployment unless the group has the Cannot Redeploy flag set"/>
+						<TextBlock Text="• Non-villains are returned to the hand unless the group has the Cannot Redeploy flag set"/>
+						<TextBlock Text="• Earned Villains are added back to the manual deployment list"/>
+						<TextBlock Text="• The Group will Reset if the 'Reset on Redeployment' flag is set"/>
+						<TextBlock Text="• 'On Defeated' Events and Triggers do not fire"/>
+						<TextBlock Text="• Adaptive Difficulty options do not apply (no Fame or Imperial Reimbursement)"/>
+					</StackPanel>
+					<!--<TextBlock FontStyle="Italic" TextWrapping="Wrap">
+								Removing a Group makes it available for manual redeployment, unless the group has the Cannot Redeploy flag set. Removing a Group also does not fire <Run Foreground="Orange">On Defeated</Run> Events and Triggers or award Fame and Imperial Reimbursements.
+					</TextBlock>-->
+				</materialDesign:Card>
 
 				<UniformGrid Columns="2">
 					<!--LEFT-->

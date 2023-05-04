@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
 						 Style="{StaticResource dus}"
 						 xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             d:DesignHeight="950" d:DesignWidth="800">
+             d:DesignHeight="950" d:DesignWidth="900">
 
 	<UserControl.Resources>
 		<local:RadioBoolToIntConverter x:Key="rbConv" />
@@ -87,55 +87,6 @@
 								<ComboBox x:Name="priorityCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectedValue="{Binding deploymentCard.priority}"/>
 							</UniformGrid>
 						</Grid>
-					</StackPanel>
-				</GroupBox>
-
-				<!--APPEARANCE-->
-				<GroupBox Header="Appearance" Background="{StaticResource GroupBG}" Margin="0,10,0,0">
-					<StackPanel>
-						<!--FACTION FILTER-->
-						<StackPanel>
-							<TextBlock Text="Filter By Custom Icons:" VerticalAlignment="Center" Margin="0,0,10,10"/>
-							<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-								<Button x:Name="filterAllButton" Content="All" ToolTip="Show All Icons" Click="filterAllButton_Click"/>
-								<Button x:Name="filterRebelButton" Content="Rebel" Margin="10,0" ToolTip="Show Only Rebel Icons" Click="filterRebelButton_Click"/>
-								<Button x:Name="filterImperialButton" Content="Imperial" ToolTip="Show Only Imperial Icons" Click="filterImperialButton_Click"/>
-								<Button x:Name="filterMercButton" Content="Mercenary" ToolTip="Show Only Mercenary Icons" Click="filterMercButton_Click"  Margin="10,0"/>
-							</StackPanel>
-
-							<TextBlock Text="Filter By Stock Icons:" VerticalAlignment="Center" Margin="0,10,10,5"/>
-							<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5,0,0">
-								<Button x:Name="filterHeroButton" Content="Heroes" ToolTip="Show Only Hero Icons" Click="filterHeroButton_Click"/>
-								<Button x:Name="filterVillainButton" Content="Villains" ToolTip="Show Only Stock Villain Icons" Click="filterVillainButton_Click"  Margin="10,0,0,0"/>
-								<Button x:Name="filterAllyButton" Content="Allies" Margin="10,0,0,0" ToolTip="Show Only Ally Icons" Click="filterAllyButton_Click"/>
-								<Button x:Name="filterStockImperialButton" Content="Imperials" ToolTip="Show Only Stock Imperial Icons" Click="filterStockImperialButton_Click"  Margin="10,0,0,0"/>
-							</StackPanel>
-						</StackPanel>
-
-						<!--FACTION TEXT FILTER-->
-						<TextBox x:Name="iconFilterBox" Style="{StaticResource MaterialDesignOutlinedTextBox}" materialDesign:HintAssist.Hint="Filter Icons By Name" Margin="0,10,0,0" KeyDown="iconFilterBox_KeyDown" TextChanged="iconFilterBox_TextChanged" CaretBrush="White"/>
-
-						<!--ICON CB-->
-						<Grid Margin="0,10,0,0">
-							<Grid.ColumnDefinitions>
-								<ColumnDefinition Width="auto" />
-								<ColumnDefinition Width="*" />
-							</Grid.ColumnDefinitions>
-							<TextBlock Text="Thumbnail Icon:" VerticalAlignment="Center"/>
-							<ComboBox Grid.Column="1" Name="thumbListCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" Margin="10,0,0,0" DisplayMemberPath="Name" SelectionChanged="thumbListCB_SelectionChanged"/>
-						</Grid>
-
-						<StackPanel Orientation="Horizontal">
-							<Border BorderBrush="MediumPurple" BorderThickness="2" HorizontalAlignment="Left" CornerRadius="50">
-								<Image x:Name="thumbPreview" Source="/Assets/Thumbnails/Other/none.png" Width="100" HorizontalAlignment="Left">
-									<Image.Clip>
-										<EllipseGeometry Center="50,50" RadiusX="50" RadiusY="50" />
-									</Image.Clip>
-								</Image>
-							</Border>
-
-							<TextBlock Text="{Binding thumbnail.Name}" VerticalAlignment="Center" Margin="20,0" FontWeight="Bold"/>
-						</StackPanel>
 					</StackPanel>
 				</GroupBox>
 
@@ -307,6 +258,62 @@
 								</WrapPanel>
 							</GroupBox>
 						</StackPanel>
+					</TabItem>
+
+					<!--APPEARANCE-->
+					<TabItem Width="95">
+						<TabItem.Header>
+							<StackPanel>
+								<materialDesign:PackIcon Kind="Person" Width="24" Height="24" HorizontalAlignment="Center" />
+								<TextBlock Style="{StaticResource MaterialDesignTextBlock}" Text="Appearance" HorizontalAlignment="Center"/>
+							</StackPanel>
+						</TabItem.Header>
+
+						<materialDesign:Card Padding="10" Background="{StaticResource CardBG}" Margin="0,10,0,0">
+							<StackPanel>
+								<!--FACTION FILTER-->
+								<StackPanel>
+									<TextBlock Text="Filter By Custom Icons:" VerticalAlignment="Center" Margin="0,0,10,10"/>
+									<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+										<Button x:Name="filterAllButton" Content="All" ToolTip="Show All Icons" Click="filterAllButton_Click"/>
+										<Button x:Name="filterRebelButton" Content="Rebel" Margin="10,0" ToolTip="Show Only Rebel Icons" Click="filterRebelButton_Click"/>
+										<Button x:Name="filterImperialButton" Content="Imperial" ToolTip="Show Only Imperial Icons" Click="filterImperialButton_Click"/>
+										<Button x:Name="filterMercButton" Content="Mercenary" ToolTip="Show Only Mercenary Icons" Click="filterMercButton_Click"  Margin="10,0"/>
+									</StackPanel>
+
+									<TextBlock Text="Filter By Stock Icons:" VerticalAlignment="Center" Margin="0,10,10,5"/>
+									<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5,0,0">
+										<Button x:Name="filterHeroButton" Content="Heroes" ToolTip="Show Only Hero Icons" Click="filterHeroButton_Click"/>
+										<Button x:Name="filterVillainButton" Content="Villains" ToolTip="Show Only Stock Villain Icons" Click="filterVillainButton_Click"  Margin="10,0,0,0"/>
+										<Button x:Name="filterAllyButton" Content="Allies" Margin="10,0,0,0" ToolTip="Show Only Ally Icons" Click="filterAllyButton_Click"/>
+										<Button x:Name="filterStockImperialButton" Content="Imperials" ToolTip="Show Only Stock Imperial Icons" Click="filterStockImperialButton_Click"  Margin="10,0,0,0"/>
+									</StackPanel>
+								</StackPanel>
+
+								<StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+									<Border BorderBrush="MediumPurple" BorderThickness="2" HorizontalAlignment="Left" CornerRadius="50">
+										<Image x:Name="thumbPreview" Source="/Assets/Thumbnails/Other/none.png" Width="100" HorizontalAlignment="Left">
+											<Image.Clip>
+												<EllipseGeometry Center="50,50" RadiusX="50" RadiusY="50" />
+											</Image.Clip>
+										</Image>
+									</Border>
+
+									<TextBlock Text="{Binding thumbnail.Name}" VerticalAlignment="Center" Margin="20,0" FontWeight="Bold"/>
+								</StackPanel>
+
+								<!--FACTION TEXT FILTER-->
+								<TextBox x:Name="iconFilterBox" Style="{StaticResource MaterialDesignOutlinedTextBox}" materialDesign:HintAssist.Hint="Filter Icons By Name" Margin="0,10,0,0" KeyDown="iconFilterBox_KeyDown" TextChanged="iconFilterBox_TextChanged" CaretBrush="White"/>
+
+								<!--ICON CB-->
+								<StackPanel Margin="0,10,0,0">
+									<TextBlock Text="Thumbnail Icon:" VerticalAlignment="Center"/>
+									<Border Background="MediumPurple" Margin="0,5,0,0">
+										<ListView x:Name="thumbListLV" DisplayMemberPath="Name" SelectionChanged="thumbListLV_SelectionChanged" Height="200"/>
+									</Border>
+								</StackPanel>
+							</StackPanel>
+						</materialDesign:Card>
 					</TabItem>
 
 					<!--DEPLOYMENT - only for standalone-->

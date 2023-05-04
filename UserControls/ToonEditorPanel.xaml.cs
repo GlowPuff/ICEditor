@@ -44,8 +44,9 @@ namespace Imperial_Commander_Editor
 			DataContext = customToon;
 
 			propBox.Header = $"General Properties For '{customToon.deploymentCard.name}'";
-			thumbListCB.ItemsSource = Utils.thumbnailData.Filter( ThumbType.All );
-			thumbListCB.SelectedItem = customToon.thumbnail;
+
+			thumbListLV.ItemsSource = Utils.thumbnailData.Filter( ThumbType.All );
+			thumbListLV.SelectedItem = customToon.thumbnail;
 
 			copyFromCB.ItemsSource = Utils.enemyData.Where( x => !x.id.Contains( "TC" ) );
 
@@ -309,24 +310,16 @@ namespace Imperial_Commander_Editor
 		private void SetThumbSource( ThumbType ttype )
 		{
 			iconFilterBox.Text = "";
-			thumbListCB.SelectionChanged -= thumbListCB_SelectionChanged;
-			thumbListCB.ItemsSource = Utils.thumbnailData.Filter( ttype );
-			thumbListCB.SelectionChanged += thumbListCB_SelectionChanged;
-		}
 
-		private void thumbListCB_SelectionChanged( object sender, SelectionChangedEventArgs e )
-		{
-			customToon.thumbnail = thumbListCB.SelectedItem as Thumbnail;
-			customToon.deploymentCard.mugShotPath = $"CardThumbnails/{customToon.thumbnail.ID}";
-			SetThumbnailImage();
-			iconFilterBox.Text = "";
-			SetThumbSource( ThumbType.All );
+			thumbListLV.SelectionChanged -= thumbListLV_SelectionChanged;
+			thumbListLV.ItemsSource = Utils.thumbnailData.Filter( ttype );
+			thumbListLV.SelectionChanged += thumbListLV_SelectionChanged;
 		}
 
 		public void SetThumbnailImage()
 		{
 			var item = Utils.thumbnailData.Filter( ThumbType.All ).Where( x => x.ID == customToon.thumbnail.ID ).FirstOrDefault();
-			thumbListCB.SelectedItem = item;
+			thumbListLV.SelectedItem = item;
 			thumbPreview.Source = new BitmapImage( new Uri( $"pack://application:,,,/Imperial Commander Editor;component/Assets/Thumbnails/{customToon.thumbnail.ID.ThumbFolder()}/{customToon.thumbnail.ID}.png" ) );
 		}
 
@@ -383,16 +376,16 @@ namespace Imperial_Commander_Editor
 				return;
 
 			//set custom filtered CB source
-			thumbListCB.SelectionChanged -= thumbListCB_SelectionChanged;
-			thumbListCB.ItemsSource = fthumbs;
-			thumbListCB.SelectionChanged += thumbListCB_SelectionChanged;
+			thumbListLV.SelectionChanged -= thumbListLV_SelectionChanged;
+			thumbListLV.ItemsSource = fthumbs;
+			thumbListLV.SelectionChanged += thumbListLV_SelectionChanged;
 
 			//select first one found
 			if ( fthumbs.FirstOr( null ) != null )
 			{
-				thumbListCB.SelectionChanged -= thumbListCB_SelectionChanged;
-				thumbListCB.SelectedItem = fthumbs.First();
-				thumbListCB.SelectionChanged += thumbListCB_SelectionChanged;
+				thumbListLV.SelectionChanged -= thumbListLV_SelectionChanged;
+				thumbListLV.SelectedItem = fthumbs.First();
+				thumbListLV.SelectionChanged += thumbListLV_SelectionChanged;
 				customToon.thumbnail = fthumbs.First();
 				customToon.deploymentCard.mugShotPath = $"CardThumbnails/{customToon.thumbnail.ID}";
 				SetThumbnailImage();
@@ -410,7 +403,7 @@ namespace Imperial_Commander_Editor
 				var fthumb = Utils.thumbnailData.Filter( ThumbType.All ).Where( x => x.Name.ToLower().Contains( iconFilterBox.Text.ToLower() ) ).FirstOr( null );
 				if ( fthumb != null )
 				{
-					thumbListCB.SelectedItem = fthumb;
+					thumbListLV.SelectedItem = fthumb;
 					customToon.thumbnail = fthumb;
 					customToon.deploymentCard.mugShotPath = $"CardThumbnails/{customToon.thumbnail.ID}";
 					SetThumbnailImage();
@@ -431,6 +424,14 @@ namespace Imperial_Commander_Editor
 			var dlg = new EditCustomHeroSkillsWindow( customToon );
 			dlg.ShowDialog();
 			heroSkillsText.Text = customToon.heroSkills.Count == 0 ? "None" : $"{customToon.heroSkills.Count} Skills";
+		}
+
+		private void thumbListLV_SelectionChanged( object sender, SelectionChangedEventArgs e )
+		{
+			customToon.thumbnail = thumbListLV.SelectedItem as Thumbnail;
+			customToon.deploymentCard.mugShotPath = $"CardThumbnails/{customToon.thumbnail.ID}";
+			SetThumbnailImage();
+			iconFilterBox.Text = "";
 		}
 	}
 }

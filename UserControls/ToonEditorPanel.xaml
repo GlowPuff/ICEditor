@@ -31,7 +31,7 @@
 						<!--CHARACTER TYPE-->
 						<materialDesign:Card Padding="10" Background="{StaticResource CardBG}" Margin="0,10,0,0" >
 							<StackPanel>
-								<TextBlock Text="This Character Type is:" HorizontalAlignment="Center"/>
+								<TextBlock Text="This Character Type is:" HorizontalAlignment="Center" Margin="0,0,0,10"/>
 								<WrapPanel HorizontalAlignment="Center">
 									<RadioButton x:Name="isHeroCheck" Content="Hero" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" HorizontalAlignment="Stretch" IsChecked="{Binding deploymentCard.characterType, ConverterParameter={x:Static local:CharacterType.Hero}, Converter={StaticResource rbConv}}" GroupName="ctype" MinWidth="75"/>
 									<RadioButton x:Name="isAllyCheck" Content="Ally" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" HorizontalAlignment="Stretch" IsChecked="{Binding deploymentCard.characterType, ConverterParameter={x:Static local:CharacterType.Ally}, Converter={StaticResource rbConv}}" GroupName="ctype" MinWidth="75"/>
@@ -168,7 +168,9 @@
 
 										<Button x:Name="confirmCopyFromButton" Click="confirmCopyFromButton_Click" Grid.Column="1" Content="{materialDesign:PackIcon Kind=CheckBold}" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35" Margin="10,0,0,0"/>
 									</Grid>
-									<TextBlock Text="Warning: This will overwrite the current General Properties. Name, Subname, ID, Character Type, Deployment, Faction, and Appearance are not affected." TextWrapping="Wrap" FontStyle="Italic" Margin="0,10,0,0"/>
+									<CheckBox x:Name="copyCardTextCB" Content="Also Copy Instructions and Bonuses" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" Margin="0,10,4,4" IsChecked="True"/>
+									<TextBlock Text="Warning: This will overwrite the current General Properties, Combat Properties and Card Text Properties." TextWrapping="Wrap" FontStyle="Italic" Margin="0,10,0,0"/>
+									<TextBlock Text="Name, Subname, ID, Character Type, Deployment Properties, Faction, and Appearance are not affected." TextWrapping="Wrap" FontStyle="Italic" Margin="0,10,0,0"/>
 								</StackPanel>
 							</materialDesign:Card>
 

@@ -194,7 +194,7 @@ namespace Imperial_Commander_Editor
 		/// <summary>
 		/// Copies embedded DeploymnentCard data to this objects properties (cost, size, etc)
 		/// </summary>
-		public void CopyFrom( DeploymentCard card )
+		public void CopyFrom( DeploymentCard card, bool copyCardText )
 		{
 			//set these first, because these 2 properties also force set the deploymentCard values
 			groupAttack = groupDefense = "";
@@ -215,12 +215,18 @@ namespace Imperial_Commander_Editor
 			HashSet<DiceColor> colors = new();
 			for ( int i = 0; i < card.attacks.Length; i++ )
 				colors.Add( card.attacks[i] );
-			//set instructions from the copied card
-			cardInstruction = Utils.enemyInstructions.Where( x => x.instID == card.id ).FirstOr( null );
-			cardInstruction.instID = cardID;
-			//set bonuses from the copied card
-			bonusEffect = Utils.enemyBonusEffects.Where( x => x.bonusID == card.id ).FirstOr( null );
-			bonusEffect.bonusID = cardID;
+
+			//card text
+			if ( copyCardText )
+			{
+				//set instructions from the copied card
+				cardInstruction = Utils.enemyInstructions.Where( x => x.instID == card.id ).FirstOr( null );
+				cardInstruction.instID = cardID;
+				//set bonuses from the copied card
+				bonusEffect = Utils.enemyBonusEffects.Where( x => x.bonusID == card.id ).FirstOr( null );
+				bonusEffect.bonusID = cardID;
+			}
+
 			//get number of each dice color
 			foreach ( var c in colors )
 			{

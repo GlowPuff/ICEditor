@@ -328,7 +328,7 @@ namespace Imperial_Commander_Editor
 			if ( selectedCopyFrom != null )
 			{
 				var dg = Utils.enemyData.Where( x => x.id == selectedCopyFrom.id ).FirstOr( null );
-				customToon.CopyFrom( dg );
+				customToon.CopyFrom( dg, copyCardTextCB.IsChecked.Value );
 				//check if card text is empty now
 				instructionsBtn.Foreground = customToon.cardInstruction.content.Count == 0 ? new SolidColorBrush( Colors.Red ) : new SolidColorBrush( Colors.LawnGreen );
 				bonusBtn.Foreground = customToon.bonusEffect.effects.Count == 0 ? new SolidColorBrush( Colors.Red ) : new SolidColorBrush( Colors.LawnGreen );

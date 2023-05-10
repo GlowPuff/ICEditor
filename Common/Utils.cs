@@ -60,7 +60,14 @@ namespace Imperial_Commander_Editor
 		}
 		public static List<DeploymentCard> allyRebelData
 		{
-			get => allyData.Concat( customData.Where( x => x.characterType == CharacterType.Rebel ) ).ToList();
+			get => allyData.Concat( customData.Where( x =>
+			x.characterType == CharacterType.Rebel ) ).ToList();
+		}
+		public static List<DeploymentCard> allyRebelHeroData
+		{
+			get => allyRebelData
+				.Concat( heroData )
+				.Concat( customData.Where( x => x.characterType == CharacterType.Hero ) ).ToList();
 		}
 
 		public static List<DeploymentCard> customData = new();

@@ -78,56 +78,54 @@
 							<RowDefinition Height="auto"/>
 						</Grid.RowDefinitions>
 
-						<StackPanel Margin="0,0,5,0">
-							<GroupBox Header="Remove Enemy Groups">
-								<StackPanel>
-									<materialDesign:Card Padding="10" Background="{StaticResource CardBG}">
-										<StackPanel>
-											<TextBox Grid.Column="1" x:Name="filterBox" Style="{StaticResource MaterialDesignOutlinedTextBox}" materialDesign:HintAssist.Hint="Filter List" KeyDown="filterBox_KeyDown" TextChanged="TextBox_TextChanged" CaretBrush="White"/>
+						<GroupBox Header="Remove Enemy Groups" Margin="0,0,5,0">
+							<StackPanel>
+								<materialDesign:Card Padding="10" Background="{StaticResource CardBG}">
+									<StackPanel>
+										<TextBox Grid.Column="1" x:Name="filterBox" Style="{StaticResource MaterialDesignOutlinedTextBox}" materialDesign:HintAssist.Hint="Filter List" KeyDown="filterBox_KeyDown" TextChanged="TextBox_TextChanged" CaretBrush="White"/>
 
-											<Grid Margin="0,10,0,0">
-												<Grid.ColumnDefinitions>
-													<ColumnDefinition Width="*" />
-													<ColumnDefinition Width="auto" />
-												</Grid.ColumnDefinitions>
+										<Grid Margin="0,10,0,0">
+											<Grid.ColumnDefinitions>
+												<ColumnDefinition Width="*" />
+												<ColumnDefinition Width="auto" />
+											</Grid.ColumnDefinitions>
 
-												<ComboBox x:Name="dpCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectedValue="{Binding selectedGroup, RelativeSource={RelativeSource AncestorType=Window}}">
-													<ComboBox.ItemTemplate>
-														<DataTemplate>
-															<TextBlock>
-																<TextBlock.Text>
-																	<MultiBinding StringFormat="{}{0}: {1}">
-																		<Binding Path="name"/>
-																		<Binding Path="id"/>
-																	</MultiBinding>
-																</TextBlock.Text>
-															</TextBlock>
-														</DataTemplate>
-													</ComboBox.ItemTemplate>
-												</ComboBox>
+											<ComboBox x:Name="dpCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectedValue="{Binding selectedGroup, RelativeSource={RelativeSource AncestorType=Window}}">
+												<ComboBox.ItemTemplate>
+													<DataTemplate>
+														<TextBlock>
+															<TextBlock.Text>
+																<MultiBinding StringFormat="{}{0}: {1}">
+																	<Binding Path="name"/>
+																	<Binding Path="id"/>
+																</MultiBinding>
+															</TextBlock.Text>
+														</TextBlock>
+													</DataTemplate>
+												</ComboBox.ItemTemplate>
+											</ComboBox>
 
-												<Button x:Name="addGroupButton" Grid.Column="1" Content="{materialDesign:PackIcon Kind=AddBold}" Margin="10,0,0,0" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35" Click="addGroupButton_Click"/>
-											</Grid>
-										</StackPanel>
-									</materialDesign:Card>
+											<Button x:Name="addGroupButton" Grid.Column="1" Content="{materialDesign:PackIcon Kind=AddBold}" Margin="10,0,0,0" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35" Click="addGroupButton_Click"/>
+										</Grid>
+									</StackPanel>
+								</materialDesign:Card>
 
-									<!--LIST BOX-->
-									<materialDesign:Card Background="Purple" Margin="0,10,0,0" Padding="10">
-										<ListView ItemsSource="{Binding groupsToRemove}" HorizontalContentAlignment="Stretch" ItemTemplate="{StaticResource k1}" d:ItemsSource="{d:SampleData ItemCount=2}" MaxHeight="200">
-											<ListView.ItemContainerStyle>
-												<Style TargetType="ListBoxItem" BasedOn="{StaticResource MaterialDesignListBoxItem}">
-													<Setter Property="materialDesign:ListBoxItemAssist.ShowSelection" Value="False" />
-												</Style>
-											</ListView.ItemContainerStyle>
-										</ListView>
-									</materialDesign:Card>
-								</StackPanel>
-							</GroupBox>
-						</StackPanel>
+								<!--LIST BOX-->
+								<materialDesign:Card Background="Purple" Margin="0,10,0,0" Padding="10">
+									<ListView ItemsSource="{Binding groupsToRemove}" HorizontalContentAlignment="Stretch" ItemTemplate="{StaticResource k1}" d:ItemsSource="{d:SampleData ItemCount=2}" MaxHeight="200">
+										<ListView.ItemContainerStyle>
+											<Style TargetType="ListBoxItem" BasedOn="{StaticResource MaterialDesignListBoxItem}">
+												<Setter Property="materialDesign:ListBoxItemAssist.ShowSelection" Value="False" />
+											</Style>
+										</ListView.ItemContainerStyle>
+									</ListView>
+								</materialDesign:Card>
+							</StackPanel>
+						</GroupBox>
 					</Grid>
 
 					<!--RIGHT-->
-					<GroupBox Header="Remove Ally/Rebel Groups">
+					<GroupBox Header="Remove Ally/Rebel Groups" Margin="5,0,0,0">
 						<StackPanel>
 							<materialDesign:Card Padding="10" Background="{StaticResource CardBG}">
 								<StackPanel>

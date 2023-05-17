@@ -284,5 +284,12 @@ namespace Imperial_Commander_Editor
 			ced.Show();
 			Close();
 		}
+
+		private void packageButton_Click( object sender, RoutedEventArgs e )
+		{
+			CampaignPackager packager = new();
+			packager.Show();
+			Close();
+		}
 	}
 }

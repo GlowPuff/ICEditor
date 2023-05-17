@@ -42,6 +42,7 @@
     <None Remove="Assets\imperial.png" />
     <None Remove="Assets\ok.png" />
     <None Remove="Assets\open.png" />
+    <None Remove="Assets\package.png" />
     <None Remove="Assets\remove2.png" />
     <None Remove="Assets\save.png" />
     <None Remove="Assets\saveas.png" />
@@ -818,6 +819,7 @@
     <Resource Include="Assets\faction rebel.png" />
     <Resource Include="Assets\imperial green.png" />
     <Resource Include="Assets\imperial yellow.png" />
+    <Resource Include="Assets\package.png" />
     <Resource Include="Assets\Symbols1.png" />
     <Resource Include="Assets\Symbols2.png" />
     <Resource Include="Assets\Thumbnails\Imperial\CustomImperial1.png" />

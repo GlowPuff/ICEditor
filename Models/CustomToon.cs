@@ -132,7 +132,7 @@ namespace Imperial_Commander_Editor
 				subname = "",
 				//assign a free custom ID
 				id = Utils.GetAvailableCustomToonID(),
-				expansion = "Core",
+				expansion = "Other",
 				isElite = false,
 				cost = 3,
 				rcost = 1,
@@ -210,6 +210,7 @@ namespace Imperial_Commander_Editor
 			deploymentCard.deploymentOutlineColor = outline;
 			deploymentCard.characterType = ctype;
 			deploymentCard.faction = faction.ToString();
+			deploymentCard.expansion = "Other";
 
 			//set groupAttack from the copied card
 			HashSet<DiceColor> colors = new();

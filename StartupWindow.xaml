@@ -116,6 +116,27 @@
 				</Grid>
 			</Button>
 
+			<Button x:Name="packageButton" Click="packageButton_Click" Height="80" Margin="0,10,0,0" HorizontalContentAlignment="Left">
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="auto" />
+						<ColumnDefinition Width="*" />
+					</Grid.ColumnDefinitions>
+					<Image Grid.RowSpan="2" Source="Assets/package.png" Width="50" Margin="0,0,10,0"/>
+
+					<Grid Grid.Column="1" Margin="0,10">
+						<Grid.RowDefinitions>
+							<RowDefinition Height="auto"/>
+							<RowDefinition Height="auto"/>
+						</Grid.RowDefinitions>
+
+						<TextBlock Grid.Column="1" Text="CAMPAIGN PACKAGER" />
+
+						<TextBlock Grid.Column="1" Grid.Row="1" Text="Arrange Missions and export custom Campaigns." TextWrapping="Wrap"/>
+					</Grid>
+				</Grid>
+			</Button>
+
 			<!--campaigns-->
 			<!--<TextBlock Text="Campaigns"  Margin="0,25,0,0" FontSize="16"  Foreground="White" HorizontalAlignment="Center"/>
 

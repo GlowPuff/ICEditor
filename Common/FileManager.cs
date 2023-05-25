@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Reflection;
 using System.Windows;
@@ -102,6 +103,10 @@ namespace Imperial_Commander_Editor
 				{
 					json = sr.ReadToEnd();
 				}
+
+				//sanity check
+				if ( !json.Contains( "missionGUID" ) )
+					throw new( "File doesn't appear to be a Mission." );
 
 				var m = JsonConvert.DeserializeObject<Mission>( json );
 				//overwrite fileName, relativePath and fileVersion properties so they are up-to-date
@@ -348,6 +353,124 @@ namespace Imperial_Commander_Editor
 			}
 			else
 				return null;
+		}
+
+		public static CampaignPackage LoadCampaignPackage( string fullFilename )
+		{
+			CampaignPackage package = null;
+
+			try
+			{
+				List<Mission> missionList = new();
+				//create the zip file
+				using ( FileStream zipPath = new FileStream( fullFilename, FileMode.Open ) )
+				{
+					//open the archive
+					using ( ZipArchive archive = new ZipArchive( zipPath, ZipArchiveMode.Read ) )
+					{
+						foreach ( var entry in archive.Entries )
+						{
+							//deserialize the CampaignPackage
+							if ( entry.Name == "campaign_package.json" )
+							{
+								//open the package meta file
+								using ( TextReader tr = new StreamReader( entry.Open() ) )
+								{
+									package = JsonConvert.DeserializeObject<CampaignPackage>( tr.ReadToEnd() );
+								}
+							}
+							else//deserialize the individual missions
+							{
+								using ( TextReader tr = new StreamReader( entry.Open() ) )
+								{
+									missionList.Add( JsonConvert.DeserializeObject<Mission>( tr.ReadToEnd() ) );
+								}
+							}
+						}
+
+						//now add all the missions to the CampaignPackage
+						foreach ( var item in package.campaignMissionItems )
+						{
+							var m = missionList.Where( x => x.missionGUID == item.missionGUID ).FirstOr( null );
+							if ( m != null )
+								item.mission = m;
+							else
+								throw new( $"Missing Mission in the zip archive:\n{item.missionName}\n{item.missionGUID}" );
+						}
+					}
+				}
+
+				return package;
+			}
+			catch ( Exception ee )
+			{
+				MessageBox.Show( $"LoadCampaignPackage()::Error loading the Campaign Package.\n\n{ee.Message}", "App Exception", MessageBoxButton.OK, MessageBoxImage.Error );
+				return null;
+			}
+		}
+
+		public static bool SaveCampaignPackage( string fullPath, CampaignPackage package )
+		{
+			try
+			{
+				FileInfo fileInfo = new FileInfo( fullPath );
+
+				//create the zip file
+				using ( FileStream zipPath = new FileStream( fullPath, FileMode.OpenOrCreate ) )
+				{
+					//create the archive
+					using ( ZipArchive archive = new ZipArchive( zipPath, ZipArchiveMode.Create ) )
+					{
+						//add the CampaignPackage object from memory
+						var entry = archive.CreateEntry( "campaign_package.json" );
+						using ( var packageStream = entry.Open() )
+						{
+							//add the CampaignPackage object from memory instead of from an actual file
+							using ( var ms = new MemoryStream() )
+							{
+								//create campaign_package.json in memory
+								using ( TextWriter tw = new StreamWriter( ms ) )
+								{
+									tw.Write( JsonConvert.SerializeObject( package, Formatting.Indented ) );
+									tw.Flush();
+									ms.Position = 0;
+									//copy the memory stream to the archive
+									ms.CopyTo( packageStream );
+								}
+							}
+						}
+
+						//add each mission
+						foreach ( var item in package.campaignMissionItems )
+						{
+							var missionEntry = archive.CreateEntry( item.missionGUID + ".json" );
+							using ( var missionStream = missionEntry.Open() )
+							{
+								using ( var mmStream = new MemoryStream() )
+								{
+									//create the mission .json in memory
+									using ( TextWriter tw = new StreamWriter( mmStream ) )
+									{
+										tw.Write( JsonConvert.SerializeObject( item.mission, Formatting.Indented ) );
+										tw.Flush();
+										mmStream.Position = 0;
+										//copy the memory stream to the archive
+										mmStream.CopyTo( missionStream );
+									}
+								}
+							}
+						}
+					}
+
+					return true;
+				}
+			}
+			catch ( Exception ee )
+			{
+				MessageBox.Show( $"SaveCustomCampaign()::Could not export the Campaign Package.\n\n{ee.Message}", "App Exception", MessageBoxButton.OK, MessageBoxImage.Error );
+			}
+
+			return false;
 		}
 	}
 }

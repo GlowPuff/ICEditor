@@ -5,12 +5,15 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Media;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace Imperial_Commander_Editor
 {
-	public class ProjectItem : IComparable<ProjectItem>
+	public class ProjectItem : ObservableObject, IComparable<ProjectItem>
 	{
-		public string Title { get; set; }
+		string _title;
+
+		public string Title { get => _title; set { SetProperty( ref _title, value ); } }
 		public string Date { get; set; }
 		public string Description { get; set; }
 		public string fileName { get; set; }

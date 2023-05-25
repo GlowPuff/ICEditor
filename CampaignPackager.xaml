@@ -5,11 +5,31 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Imperial_Commander_Editor"
         mc:Ignorable="d"
+				xmlns:sys="clr-namespace:System;assembly=mscorlib"
 				Style="{StaticResource dws}"
 				ResizeMode="CanResize"
 				WindowStyle="SingleBorderWindow"
 				xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
-        Title="Campaign Packager" Height="600" Width="800" Closing="Window_Closed" WindowStartupLocation="CenterScreen">
+        Title="Campaign Packager" Width="825" Closing="Window_Closed" WindowStartupLocation="CenterScreen" SizeToContent="Height">
+
+	<Window.Resources>
+		<local:IsNotNullConverter x:Key="notNull" />
+		<local:MissionTypeConverter x:Key="missionTypeConv" />
+
+		<DataTemplate x:Key="structure">
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="auto" />
+				</Grid.ColumnDefinitions>
+
+				<StackPanel>
+					<TextBlock Text="{Binding projectItem.Title}" VerticalAlignment="Center"/>
+					<TextBlock Text="{Binding missionType}" VerticalAlignment="Center" Foreground="Violet"/>
+				</StackPanel>
+			</Grid>
+		</DataTemplate>
+	</Window.Resources>
 
 	<Grid>
 		<Grid.RowDefinitions>
@@ -22,7 +42,7 @@
 			<!--NOTICE-->
 			<materialDesign:Card Background="{StaticResource CardBG}" Padding="10">
 				<StackPanel>
-					<TextBlock Text="Drag and drop the custom Missions you want to include in your Campaign below. Use the arrow buttons to re-order them into the sequence they should be played. Package and Export the Campaign when you're finished." TextWrapping="Wrap"/>
+					<TextBlock Text="Drag and drop the custom Missions you want to include in your Campaign into the Mission Pool below. Design the structure of your Campaign in the Campaign Structure panel. Use the arrow buttons to re-order Missions into the sequence they should be played. Package and Export the Campaign when you're finished." TextWrapping="Wrap"/>
 				</StackPanel>
 			</materialDesign:Card>
 
@@ -36,7 +56,7 @@
 					</Grid.ColumnDefinitions>
 
 					<!--LOAD-->
-					<Button x:Name="loadButton" Click="loadButton_Click" HorizontalContentAlignment="Left" Padding="10" Height="60" Margin="0,0,10,0">
+					<Button x:Name="loadButton" Click="loadButton_Click" HorizontalContentAlignment="Left" Padding="10" Height="60" Margin="0,0,10,0" DragEnter="loadButton_DragEnter" Drop="loadButton_Drop" AllowDrop="True">
 						<Grid>
 							<Grid.ColumnDefinitions>
 								<ColumnDefinition Width="auto" />
@@ -44,12 +64,15 @@
 							</Grid.ColumnDefinitions>
 							<Image Grid.RowSpan="2" Source="Assets/open.png" Width="50" Margin="0,0,10,0"/>
 
-							<TextBlock Grid.Column="1" Text="OPEN EXISTING CAMPAIGN..." VerticalAlignment="Center"/>
+							<StackPanel Grid.Column="1" VerticalAlignment="Center">
+								<TextBlock Text="OPEN EXISTING CAMPAIGN..."/>
+								<TextBlock Text="Or drag and drop the .zip here." FontStyle="Italic"/>
+							</StackPanel>
 						</Grid>
 					</Button>
 
 					<!--EXPORT-->
-					<Button Grid.Column="2" x:Name="packageButton" Click="packageButton_Click" HorizontalContentAlignment="Left" Padding="10" Height="60">
+					<Button Grid.Column="2" x:Name="packageButton" Click="packageButton_Click" HorizontalContentAlignment="Left" Padding="10" Height="60" Margin="10,0,0,0">
 						<Grid>
 							<Grid.ColumnDefinitions>
 								<ColumnDefinition Width="auto" />
@@ -65,14 +88,160 @@
 
 			<!--GENERAL PROPS-->
 			<materialDesign:Card Background="{StaticResource CardBG}" Padding="10" Margin="0,10,0,0">
+				<StackPanel Orientation="Horizontal">
+					<TextBox x:Name="campaignNameText" Text="{Binding campaignName}" Style="{StaticResource MaterialDesignOutlinedTextBox}" Width="300" CaretBrush="White" materialDesign:HintAssist.Hint="Campaign Name" KeyDown="TB_KeyDown"/>
 
+					<Button x:Name="instructionBtn" Content="CAMPAIGN INSTRUCTIONS..." Margin="10,0" Click="instructionBtn_Click" Foreground="Red"/>
+				</StackPanel>
 			</materialDesign:Card>
 
 			<!--DROP AND PROPS-->
 			<UniformGrid Columns="2" Margin="0,10,0,0">
 				<!--LEFT-->
+				<TabControl x:Name="tabControl" SelectionChanged="tabControl_SelectionChanged" Style="{StaticResource MaterialDesignNavigatilRailTabControl}" materialDesign:ColorZoneAssist.Mode="PrimaryMid" TabStripPlacement="Top" materialDesign:NavigationRailAssist.ShowSelectionBackground="True">
+					<TabControl.Background>
+						<SolidColorBrush Color="#FF3A3349"/>
+					</TabControl.Background>
+
+					<!--CAMPAIGN STRUCTURE-->
+					<TabItem Width="175">
+						<TabItem.Header>
+							<StackPanel>
+								<materialDesign:PackIcon Kind="Planner" Width="24" Height="24" HorizontalAlignment="Center" />
+								<TextBlock Style="{StaticResource MaterialDesignTextBlock}" Text="Campaign Structure" HorizontalAlignment="Center"/>
+							</StackPanel>
+						</TabItem.Header>
+
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="*" />
+								<ColumnDefinition Width="auto" />
+							</Grid.ColumnDefinitions>
+
+							<materialDesign:Card Padding="5" Margin="0,5,5,0" Background="#FF4C3679">
+								<ListView x:Name="structureLV" HorizontalContentAlignment="Stretch" ItemsSource="{Binding campaignStructure}" MaxHeight="250" SelectedItem="{Binding selectedStructure, RelativeSource={RelativeSource AncestorType=Window}}" ItemTemplate="{StaticResource structure}" d:ItemsSource="{d:SampleData ItemCount=5}"/>
+							</materialDesign:Card>
+
+							<StackPanel Grid.Column="1" Orientation="Vertical">
+								<Button x:Name="addStructureBtn" Content="{materialDesign:PackIcon Kind=AddBold}" Margin="0,5" Click="addStructureBtn_Click" Foreground="Lime" ToolTip="Add Mission Slot"/>
+								<Button x:Name="removeStructureBtn" Content="{materialDesign:PackIcon Kind=RemoveBold}" Foreground="Red" Margin="0,5" Click="removeStructureBtn_Click" IsEnabled="{Binding selectedStructure,RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource notNull}}" ToolTip="Remove Mission Slot"/>
+
+								<Separator/>
+
+								<Button x:Name="upBtn" Content="{materialDesign:PackIcon Kind=ChevronUp}" Margin="0,5" Click="upBtn_Click" IsEnabled="{Binding selectedStructure,RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource notNull}}"/>
+								<Button x:Name="downBtn" Content="{materialDesign:PackIcon Kind=ChevronDown}" Margin="0,5" Click="downBtn_Click" IsEnabled="{Binding selectedStructure,RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource notNull}}"/>
+							</StackPanel>
+						</Grid>
+					</TabItem>
+
+					<!--MISSION POOL-->
+					<TabItem Width="175">
+						<TabItem.Header>
+							<StackPanel>
+								<materialDesign:PackIcon Kind="Group" Width="24" Height="24" HorizontalAlignment="Center" />
+								<TextBlock Style="{StaticResource MaterialDesignTextBlock}" Text="Mission Pool" HorizontalAlignment="Center"/>
+							</StackPanel>
+						</TabItem.Header>
+
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="*" />
+								<ColumnDefinition Width="auto" />
+							</Grid.ColumnDefinitions>
+
+							<materialDesign:Card Padding="5" Margin="0,5,5,0" Background="#FF4C3679">
+								<Grid>
+									<TextBlock x:Name="dropNotice" Text="Drag and drop Missions here." HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+									<ListView x:Name="missionLV" HorizontalContentAlignment="Stretch" ItemsSource="{Binding campaignMissionItems}" DisplayMemberPath="missionName" DragEnter="missionLV_DragEnter" Drop="missionLV_Drop" AllowDrop="True" MaxHeight="250" SelectedItem="{Binding selectedMissionItem, RelativeSource={RelativeSource AncestorType=Window}}"/>
+								</Grid>
+							</materialDesign:Card>
+
+							<StackPanel Grid.Column="1" Orientation="Vertical">
+								<Button x:Name="addMissionBtn" Content="{materialDesign:PackIcon Kind=AddBold}" Margin="0,5" Click="addMissionBtn_Click" Foreground="Lime" ToolTip="Add Mission to Pool"/>
+								<Button x:Name="removeBtn" Content="{materialDesign:PackIcon Kind=RemoveBold}" Foreground="Red" Margin="0,5" Click="removeBtn_Click" IsEnabled="{Binding selectedMissionItem,RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource notNull}}" ToolTip="Remove Mission from Pool"/>
+							</StackPanel>
+						</Grid>
+					</TabItem>
+				</TabControl>
 
 				<!--RIGHT-->
+				<Grid x:Name="rightPanel">
+					<materialDesign:Card Background="{StaticResource CardBG}" Padding="10" Margin="5,0,0,0" IsEnabled="{Binding selectedStructure,RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource notNull}}">
+						<StackPanel>
+							<Grid>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="*" />
+									<ColumnDefinition Width="auto" />
+									<ColumnDefinition Width="auto" />
+								</Grid.ColumnDefinitions>
+
+								<TextBlock Text="{Binding selectedStructure.projectItem.Title, RelativeSource={RelativeSource AncestorType=Window}}" HorizontalAlignment="Center" FontWeight="Bold" FontSize="16" Margin="0,0,10,0" VerticalAlignment="Center"/>
+
+								<materialDesign:PopupBox Grid.Column="1" Width="25" Height="25" Margin="0,0,10,0" StaysOpen="False" ToolTip="Change Mission">
+									<Border Margin="5" MaxHeight="200">
+										<ScrollViewer VerticalScrollBarVisibility="Auto">
+											<ListBox x:Name="missionsPopupLB" DisplayMemberPath="missionName" SelectionChanged="missionsPopupLB_SelectionChanged" MaxHeight="250" ItemsSource="{Binding campaignMissionItems}"/>
+										</ScrollViewer>
+									</Border>
+								</materialDesign:PopupBox>
+
+								<Button x:Name="missionResetBtn" Grid.Column="2" Content="{materialDesign:PackIcon Kind=Refresh}" Click="missionResetBtn_Click" ToolTip="Reset to Player's Choice" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35"/>
+
+							</Grid>
+
+							<!--<Button x:Name="missionResetBtn" Content="RESET TO PLAYER'S CHOICE" Click="missionResetBtn_Click" Margin="0,10,0,0"/>-->
+
+							<Grid Margin="0,10,0,0">
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="auto" />
+									<ColumnDefinition Width="auto" />
+									<ColumnDefinition Width="auto" />
+									<ColumnDefinition Width="auto" />
+								</Grid.ColumnDefinitions>
+
+								<StackPanel  Orientation="Horizontal" Margin="0,0,10,0">
+									<TextBlock Text="Tier:" VerticalAlignment="Center" Margin="0,0,10,0"/>
+									<ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}" Margin="0,10" HorizontalAlignment="Center" SelectedValue="{Binding selectedStructure.tier, RelativeSource={RelativeSource AncestorType=Window}}">
+										<ComboBox.ItemsSource>
+											<x:Array Type="{x:Type sys:String}">
+												<sys:String>1</sys:String>
+												<sys:String>2</sys:String>
+												<sys:String>3</sys:String>
+												<sys:String>1,2</sys:String>
+												<sys:String>1,2,3</sys:String>
+												<sys:String>1,3</sys:String>
+												<sys:String>2,3</sys:String>
+											</x:Array>
+										</ComboBox.ItemsSource>
+									</ComboBox>
+								</StackPanel>
+
+								<TextBox Grid.Column="1" Text="{Binding selectedStructure.threatLevel, RelativeSource={RelativeSource AncestorType=Window}}" VerticalAlignment="Center" Style="{StaticResource MaterialDesignOutlinedTextBox}" CaretBrush="White" materialDesign:HintAssist.Hint="Threat Level" Margin="10,0,10,0" KeyDown="TB_KeyDown"/>
+
+								<CheckBox Content="Agenda Button" Grid.Column="2" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding selectedStructure.isAgendaMission, RelativeSource={RelativeSource AncestorType=Window}}" HorizontalAlignment="Center"/>
+							</Grid>
+
+							<TextBlock Text="Mission Type:" Margin="0,10,0,0"/>
+							<ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}" Margin="0,5,0,0" SelectedItem="{Binding selectedStructure.missionType, RelativeSource={RelativeSource AncestorType=Window},Converter={StaticResource missionTypeConv}}">
+								<ComboBox.ItemsSource>
+									<x:Array Type="{x:Type sys:String}">
+										<sys:String>Introduction</sys:String>
+										<sys:String>Story</sys:String>
+										<sys:String>Side</sys:String>
+										<sys:String>Interlude</sys:String>
+										<sys:String>Finale</sys:String>
+									</x:Array>
+								</ComboBox.ItemsSource>
+							</ComboBox>
+
+							<!--<Separator/>
+							<TextBlock Text="If you received this Package and don't have local copies of the included Missions, you can export a copy of the selected Mission." TextWrapping="Wrap" FontStyle="Italic" Margin="0,10,0,0"/>
+							<Button x:Name="exportButton" Content="EXPORT THIS MISSION..." Margin="0,10,0,0" HorizontalAlignment="Left" Click="exportButton_Click"/>-->
+
+						</StackPanel>
+					</materialDesign:Card>
+				</Grid>
 			</UniformGrid>
 		</StackPanel>
 

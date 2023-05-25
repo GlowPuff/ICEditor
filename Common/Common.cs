@@ -17,7 +17,7 @@ namespace Imperial_Commander_Editor
 	public enum DeploymentSpot { Active, Specific }
 	public enum GroupType { All, Specific }
 	public enum MarkerType { Neutral, Rebel, Imperial }
-	public enum MissionType { Story, Side, Forced }
+	public enum MissionType { Story, Side, Forced, Introduction, Interlude, Finale }
 	public enum MissionSubType { Agenda, Threat, Other, Finale, General, Personal, Villain, Ally }
 	public enum DiceColor { White, Black, Yellow, Red, Green, Blue, Grey }
 	public enum AttackType { Ranged, Melee, None }
@@ -28,6 +28,7 @@ namespace Imperial_Commander_Editor
 	public enum CharacterType { Hero, Ally, Imperial, Villain, Rebel }
 	public enum ThumbType { All, Other, Rebel, Imperial, Mercenary, StockImperial, StockAlly, StockHero, StockVillain }
 	public enum Factions { Imperial, Mercenary }
+	public enum AgendaType { NotSet, Rebel, Imperial }
 
 	//internal static class WindowExtensions
 	//{

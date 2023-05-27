@@ -83,12 +83,15 @@ namespace Imperial_Commander_Editor
 		public MissionType missionType { get => _missionType; set { SetProperty( ref _missionType, value ); } }
 		public int threatLevel { get => _threatLevel; set { SetProperty( ref _threatLevel, value ); } }
 		public bool isAgendaMission { get => _isAgendaMission; set { SetProperty( ref _isAgendaMission, value ); } }
+
+		[JsonIgnore]
 		public string tier
 		{
 			get => itemTier.Aggregate( ( acc, cur ) => $"{acc},{cur}" );
 			set
 			{
-				itemTier = value.Split( (',') );
+				//itemTier = value.Split( (',') );
+				SetProperty( ref itemTier, value.Split( (',') ) );
 			}
 		}
 

@@ -10,22 +10,46 @@
 				ResizeMode="CanResize"
 				WindowStyle="SingleBorderWindow"
 				xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
-        Title="Campaign Packager" Width="825" Closing="Window_Closed" WindowStartupLocation="CenterScreen" SizeToContent="Height">
+        Title="Campaign Packager" Width="825" Closing="Window_Closed" WindowStartupLocation="CenterScreen" Height="700">
 
 	<Window.Resources>
 		<local:IsNotNullConverter x:Key="notNull" />
 		<local:MissionTypeConverter x:Key="missionTypeConv" />
+		<local:Agenda2Color x:Key="agendaColor" />
 
 		<DataTemplate x:Key="structure">
-			<Grid>
+			<Grid Margin="0,5">
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="*" />
 					<ColumnDefinition Width="auto" />
 				</Grid.ColumnDefinitions>
 
 				<StackPanel>
-					<TextBlock Text="{Binding projectItem.Title}" VerticalAlignment="Center"/>
-					<TextBlock Text="{Binding missionType}" VerticalAlignment="Center" Foreground="Violet"/>
+					<StackPanel Grid.Column="0" Orientation="Horizontal" Margin="0,0,0,5">
+						<TextBlock Text="{Binding missionType}" VerticalAlignment="Center" Foreground="Violet"/>
+						<TextBlock Text=" // " VerticalAlignment="Center" Foreground="LightBlue"/>
+						<TextBlock Text="{Binding projectItem.Title}" VerticalAlignment="Center"/>
+					</StackPanel>
+
+					<Grid>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="auto" />
+							<ColumnDefinition Width="auto" />
+							<ColumnDefinition Width="auto" />
+						</Grid.ColumnDefinitions>
+
+						<StackPanel Grid.Column="0" Orientation="Horizontal">
+							<TextBlock Text="Tier:" Margin="0,0,10,0"/>
+							<TextBlock Text="{Binding tier}" VerticalAlignment="Center" Foreground="White"/>
+						</StackPanel>
+
+						<StackPanel Grid.Column="1" Orientation="Horizontal" Margin="20,0">
+							<TextBlock Text="Threat:" Margin="0,0,10,0" Foreground="Red"/>
+							<TextBlock Text="{Binding threatLevel}" VerticalAlignment="Center" Foreground="Red"/>
+						</StackPanel>
+
+						<TextBlock Grid.Column="2" Text="Agenda Mission" VerticalAlignment="Center" Foreground="{Binding isAgendaMission, Converter={StaticResource agendaColor}}"/>
+					</Grid>
 				</StackPanel>
 			</Grid>
 		</DataTemplate>
@@ -106,7 +130,7 @@
 				<!--LEFT-->
 				<TabControl x:Name="tabControl" SelectionChanged="tabControl_SelectionChanged" Style="{StaticResource MaterialDesignNavigatilRailTabControl}" materialDesign:ColorZoneAssist.Mode="PrimaryMid" TabStripPlacement="Top" materialDesign:NavigationRailAssist.ShowSelectionBackground="True">
 					<TabControl.Background>
-						<SolidColorBrush Color="#FF3A3349"/>
+						<SolidColorBrush Color="#FF3D2C61"/>
 					</TabControl.Background>
 
 					<!--CAMPAIGN STRUCTURE-->
@@ -125,10 +149,10 @@
 							</Grid.ColumnDefinitions>
 
 							<materialDesign:Card Padding="5" Margin="0,5,5,0" Background="#FF4C3679">
-								<ListView x:Name="structureLV" HorizontalContentAlignment="Stretch" ItemsSource="{Binding campaignStructure}" MaxHeight="250" SelectedItem="{Binding selectedStructure, RelativeSource={RelativeSource AncestorType=Window}}" ItemTemplate="{StaticResource structure}" d:ItemsSource="{d:SampleData ItemCount=1}"/>
+								<ListView x:Name="structureLV" HorizontalContentAlignment="Stretch" ItemsSource="{Binding campaignStructure}" SelectedItem="{Binding selectedStructure, RelativeSource={RelativeSource AncestorType=Window}}" ItemTemplate="{StaticResource structure}" d:ItemsSource="{d:SampleData ItemCount=1}" VerticalAlignment="Top"/>
 							</materialDesign:Card>
 
-							<StackPanel Grid.Column="1" Orientation="Vertical">
+							<StackPanel Grid.Column="1" Orientation="Vertical" Background="#FF3D2C61">
 								<Button x:Name="addStructureBtn" Content="{materialDesign:PackIcon Kind=AddBold}" Margin="0,5" Click="addStructureBtn_Click" Foreground="Lime" ToolTip="Add Mission Slot"/>
 								<Button x:Name="removeStructureBtn" Content="{materialDesign:PackIcon Kind=RemoveBold}" Foreground="Red" Margin="0,5" Click="removeStructureBtn_Click" IsEnabled="{Binding selectedStructure,RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource notNull}}" ToolTip="Remove Mission Slot"/>
 
@@ -159,7 +183,7 @@
 								<Grid>
 									<TextBlock x:Name="dropNotice" Text="Drag and drop Missions here." HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
-									<ListView x:Name="missionLV" HorizontalContentAlignment="Stretch" ItemsSource="{Binding campaignMissionItems}" DisplayMemberPath="missionName" DragEnter="missionLV_DragEnter" Drop="missionLV_Drop" AllowDrop="True" MaxHeight="250" SelectedItem="{Binding selectedMissionItem, RelativeSource={RelativeSource AncestorType=Window}}"/>
+									<ListView x:Name="missionLV" HorizontalContentAlignment="Stretch" ItemsSource="{Binding campaignMissionItems}" DisplayMemberPath="missionName" DragEnter="missionLV_DragEnter" Drop="missionLV_Drop" AllowDrop="True" SelectedItem="{Binding selectedMissionItem, RelativeSource={RelativeSource AncestorType=Window}}" VerticalAlignment="Top"/>
 								</Grid>
 							</materialDesign:Card>
 

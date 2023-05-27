@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using Microsoft.Win32;
+using Newtonsoft.Json;
 
 namespace Imperial_Commander_Editor
 {
@@ -244,28 +245,6 @@ namespace Imperial_Commander_Editor
 			addMissionBtn_Click( sender, e );
 		}
 
-		//private void exportButton_Click( object sender, RoutedEventArgs e )
-		//{
-		//	if ( selectedMissionItem != null )
-		//	{
-		//		var save = new SaveFileDialog() { Title = "Export the Selected Mission", InitialDirectory = defaultPath, Filter = "Campaign Package (.json)|*.json" };
-		//		var res = save.ShowDialog();
-		//		if ( res.Value == true )
-		//		{
-		//			try
-		//			{
-		//				string json = JsonConvert.SerializeObject( selectedMissionItem.mission, Formatting.Indented );
-		//				File.WriteAllText( save.FileName, json );
-		//				MessageBox.Show( $"Mission successfully exported to\n{save.FileName}.", "Export Successful", MessageBoxButton.OK, MessageBoxImage.Information );
-		//			}
-		//			catch ( Exception ee )
-		//			{
-		//				MessageBox.Show( $"There was an error trying to export the Mission:\n{ee.Message}", "App Exception", MessageBoxButton.OK, MessageBoxImage.Error );
-		//			}
-		//		}
-		//	}
-		//}
-
 		private void TB_KeyDown( object sender, KeyEventArgs e )
 		{
 			if ( e.Key == Key.Enter )
@@ -278,7 +257,16 @@ namespace Imperial_Commander_Editor
 		{
 			if ( e.OriginalSource is TabControl )
 			{
-				rightPanel.Visibility = ((TabControl)sender).SelectedIndex == 0 ? Visibility.Visible : Visibility.Hidden;
+				if ( ((TabControl)sender).SelectedIndex == 0 )
+				{
+					structurePanel.Visibility = Visibility.Visible;
+					poolPanel.Visibility = Visibility.Collapsed;
+				}
+				else
+				{
+					structurePanel.Visibility = Visibility.Collapsed;
+					poolPanel.Visibility = Visibility.Visible;
+				}
 			}
 		}
 
@@ -311,6 +299,28 @@ namespace Imperial_Commander_Editor
 			if ( selectedStructure != null )
 			{
 				selectedStructure.Reset();
+			}
+		}
+
+		private void exportButton_Click( object sender, RoutedEventArgs e )
+		{
+			if ( selectedMissionItem != null )
+			{
+				var save = new SaveFileDialog() { Title = "Export the Selected Mission", InitialDirectory = defaultPath, Filter = "IC2 Missions (.json)|*.json" };
+				var res = save.ShowDialog();
+				if ( res.Value == true )
+				{
+					try
+					{
+						string json = JsonConvert.SerializeObject( selectedMissionItem.mission, Formatting.Indented );
+						File.WriteAllText( save.FileName, json );
+						MessageBox.Show( $"Mission successfully exported:\n{save.FileName}.", "Export Successful", MessageBoxButton.OK, MessageBoxImage.Information );
+					}
+					catch ( Exception ee )
+					{
+						MessageBox.Show( $"There was an error trying to export the Mission:\n{ee.Message}", "App Exception", MessageBoxButton.OK, MessageBoxImage.Error );
+					}
+				}
 			}
 		}
 	}

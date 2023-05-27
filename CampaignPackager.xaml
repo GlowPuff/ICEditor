@@ -179,11 +179,11 @@
 								<ColumnDefinition Width="auto" />
 							</Grid.ColumnDefinitions>
 
-							<materialDesign:Card Padding="5" Margin="0,5,5,0" Background="#FF4C3679">
+							<materialDesign:Card Padding="5" Margin="0,5,5,0" Background="#FF4C3679" DragEnter="missionLV_DragEnter" Drop="missionLV_Drop" AllowDrop="True">
 								<Grid>
-									<TextBlock x:Name="dropNotice" Text="Drag and drop Missions here." HorizontalAlignment="Center" VerticalAlignment="Center"/>
+									<TextBlock x:Name="dropNotice" Text="Drag and drop Missions here." HorizontalAlignment="Center" VerticalAlignment="Center" />
 
-									<ListView x:Name="missionLV" HorizontalContentAlignment="Stretch" ItemsSource="{Binding campaignMissionItems}" DisplayMemberPath="missionName" DragEnter="missionLV_DragEnter" Drop="missionLV_Drop" AllowDrop="True" SelectedItem="{Binding selectedMissionItem, RelativeSource={RelativeSource AncestorType=Window}}" VerticalAlignment="Top"/>
+									<ListView x:Name="missionLV" HorizontalContentAlignment="Stretch" ItemsSource="{Binding campaignMissionItems}" DisplayMemberPath="missionName"  SelectedItem="{Binding selectedMissionItem, RelativeSource={RelativeSource AncestorType=Window}}" VerticalAlignment="Top"/>
 								</Grid>
 							</materialDesign:Card>
 
@@ -197,7 +197,15 @@
 
 				<!--RIGHT-->
 				<Grid x:Name="rightPanel">
-					<materialDesign:Card Background="{StaticResource CardBG}" Padding="10" Margin="5,0,0,0" IsEnabled="{Binding selectedStructure,RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource notNull}}">
+					<!--POOL PANEL-->
+					<materialDesign:Card x:Name="poolPanel" Background="{StaticResource CardBG}" Padding="10" Margin="5,0,0,0" IsEnabled="{Binding selectedMissionItem,RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource notNull}}" Visibility="Collapsed">
+						<StackPanel>
+							<TextBlock Text="If you received this Package and don't have local copies of the included Missions, you can export a copy of the selected Mission." TextWrapping="Wrap" FontStyle="Italic" Margin="0,10,0,0"/>
+							<Button x:Name="exportButton" Content="EXPORT THIS MISSION..." Margin="0,10,0,0" HorizontalAlignment="Left" Click="exportButton_Click"/>
+						</StackPanel>
+					</materialDesign:Card>
+
+					<materialDesign:Card x:Name="structurePanel" Background="{StaticResource CardBG}" Padding="10" Margin="5,0,0,0" IsEnabled="{Binding selectedStructure,RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource notNull}}" Visibility="Visible">
 						<StackPanel>
 							<Grid>
 								<Grid.ColumnDefinitions>
@@ -217,8 +225,6 @@
 								<Button x:Name="missionResetBtn" Grid.Column="2" Content="{materialDesign:PackIcon Kind=Refresh}" Click="missionResetBtn_Click" ToolTip="Reset to Player's Choice" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35"/>
 
 							</Grid>
-
-							<!--<Button x:Name="missionResetBtn" Content="RESET TO PLAYER'S CHOICE" Click="missionResetBtn_Click" Margin="0,10,0,0"/>-->
 
 							<Grid Margin="0,10,0,0">
 								<Grid.ColumnDefinitions>
@@ -262,11 +268,6 @@
 									</x:Array>
 								</ComboBox.ItemsSource>
 							</ComboBox>
-
-							<!--<Separator/>
-							<TextBlock Text="If you received this Package and don't have local copies of the included Missions, you can export a copy of the selected Mission." TextWrapping="Wrap" FontStyle="Italic" Margin="0,10,0,0"/>
-							<Button x:Name="exportButton" Content="EXPORT THIS MISSION..." Margin="0,10,0,0" HorizontalAlignment="Left" Click="exportButton_Click"/>-->
-
 						</StackPanel>
 					</materialDesign:Card>
 				</Grid>

@@ -38,7 +38,13 @@
 			<RowDefinition Height="auto"/>
 		</Grid.RowDefinitions>
 
-		<StackPanel Margin="10">
+		<Grid Margin="10">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="auto" />
+				<RowDefinition Height="auto" />
+				<RowDefinition Height="auto" />
+				<RowDefinition Height="*" />
+			</Grid.RowDefinitions>
 			<!--NOTICE-->
 			<materialDesign:Card Background="{StaticResource CardBG}" Padding="10">
 				<StackPanel>
@@ -47,7 +53,7 @@
 			</materialDesign:Card>
 
 			<!--TOOLBAR-->
-			<materialDesign:Card Background="{StaticResource CardBG}" Padding="10" Margin="0,10,0,0">
+			<materialDesign:Card Grid.Row="1" Background="{StaticResource CardBG}" Padding="10" Margin="0,10,0,0">
 				<Grid>
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="auto" />
@@ -87,7 +93,7 @@
 			</materialDesign:Card>
 
 			<!--GENERAL PROPS-->
-			<materialDesign:Card Background="{StaticResource CardBG}" Padding="10" Margin="0,10,0,0">
+			<materialDesign:Card Grid.Row="2" Background="{StaticResource CardBG}" Padding="10" Margin="0,10,0,0">
 				<StackPanel Orientation="Horizontal">
 					<TextBox x:Name="campaignNameText" Text="{Binding campaignName}" Style="{StaticResource MaterialDesignOutlinedTextBox}" Width="300" CaretBrush="White" materialDesign:HintAssist.Hint="Campaign Name" KeyDown="TB_KeyDown"/>
 
@@ -95,8 +101,8 @@
 				</StackPanel>
 			</materialDesign:Card>
 
-			<!--DROP AND PROPS-->
-			<UniformGrid Columns="2" Margin="0,10,0,0">
+			<!--LEFT/RIGHT PANELS-->
+			<UniformGrid Grid.Row="3" Columns="2" Margin="0,10,0,0">
 				<!--LEFT-->
 				<TabControl x:Name="tabControl" SelectionChanged="tabControl_SelectionChanged" Style="{StaticResource MaterialDesignNavigatilRailTabControl}" materialDesign:ColorZoneAssist.Mode="PrimaryMid" TabStripPlacement="Top" materialDesign:NavigationRailAssist.ShowSelectionBackground="True">
 					<TabControl.Background>
@@ -119,7 +125,7 @@
 							</Grid.ColumnDefinitions>
 
 							<materialDesign:Card Padding="5" Margin="0,5,5,0" Background="#FF4C3679">
-								<ListView x:Name="structureLV" HorizontalContentAlignment="Stretch" ItemsSource="{Binding campaignStructure}" MaxHeight="250" SelectedItem="{Binding selectedStructure, RelativeSource={RelativeSource AncestorType=Window}}" ItemTemplate="{StaticResource structure}" d:ItemsSource="{d:SampleData ItemCount=5}"/>
+								<ListView x:Name="structureLV" HorizontalContentAlignment="Stretch" ItemsSource="{Binding campaignStructure}" MaxHeight="250" SelectedItem="{Binding selectedStructure, RelativeSource={RelativeSource AncestorType=Window}}" ItemTemplate="{StaticResource structure}" d:ItemsSource="{d:SampleData ItemCount=1}"/>
 							</materialDesign:Card>
 
 							<StackPanel Grid.Column="1" Orientation="Vertical">
@@ -178,11 +184,9 @@
 
 								<TextBlock Text="{Binding selectedStructure.projectItem.Title, RelativeSource={RelativeSource AncestorType=Window}}" HorizontalAlignment="Center" FontWeight="Bold" FontSize="16" Margin="0,0,10,0" VerticalAlignment="Center"/>
 
-								<materialDesign:PopupBox Grid.Column="1" Width="25" Height="25" Margin="0,0,10,0" StaysOpen="False" ToolTip="Change Mission">
+								<materialDesign:PopupBox Grid.Column="1" Width="25" Height="25" Margin="0,0,10,0" StaysOpen="True" ToolTip="Change Mission">
 									<Border Margin="5" MaxHeight="200">
-										<ScrollViewer VerticalScrollBarVisibility="Auto">
-											<ListBox x:Name="missionsPopupLB" DisplayMemberPath="missionName" SelectionChanged="missionsPopupLB_SelectionChanged" MaxHeight="250" ItemsSource="{Binding campaignMissionItems}"/>
-										</ScrollViewer>
+										<ListBox x:Name="missionsPopupLB" DisplayMemberPath="missionName" SelectionChanged="missionsPopupLB_SelectionChanged" MaxHeight="250" ItemsSource="{Binding campaignMissionItems}"/>
 									</Border>
 								</materialDesign:PopupBox>
 
@@ -243,12 +247,12 @@
 					</materialDesign:Card>
 				</Grid>
 			</UniformGrid>
-		</StackPanel>
+		</Grid>
 
 		<Separator Grid.Row="1" Margin="0,10,0,10"/>
+
 		<StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Right" >
 			<Button x:Name="cancelButton" Content="CLOSE" Margin="0,0,10,10" Click="cancelButton_Click" HorizontalAlignment="Right"/>
 		</StackPanel>
-
 	</Grid>
 </Window>

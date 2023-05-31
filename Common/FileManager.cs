@@ -416,7 +416,7 @@ namespace Imperial_Commander_Editor
 				FileInfo fileInfo = new FileInfo( fullPath );
 
 				//create the zip file
-				using ( FileStream zipPath = new FileStream( fullPath, FileMode.OpenOrCreate ) )
+				using ( FileStream zipPath = new FileStream( fullPath, FileMode.Create ) )
 				{
 					//create the archive
 					using ( ZipArchive archive = new ZipArchive( zipPath, ZipArchiveMode.Create ) )

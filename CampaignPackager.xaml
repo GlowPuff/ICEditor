@@ -200,7 +200,7 @@
 					<!--POOL PANEL-->
 					<materialDesign:Card x:Name="poolPanel" Background="{StaticResource CardBG}" Padding="10" Margin="5,0,0,0" IsEnabled="{Binding selectedMissionItem,RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource notNull}}" Visibility="Collapsed">
 						<StackPanel>
-							<TextBlock Text="If you received this Package and don't have local copies of the included Missions, you can export a copy of the selected Mission." TextWrapping="Wrap" FontStyle="Italic" Margin="0,10,0,0"/>
+							<TextBlock Text="If you received this Package and don't have local copies of the included Missions, you can export a copy of the selected Mission." TextWrapping="Wrap" FontStyle="Italic"/>
 							<Button x:Name="exportButton" Content="EXPORT THIS MISSION..." Margin="0,10,0,0" HorizontalAlignment="Left" Click="exportButton_Click"/>
 						</StackPanel>
 					</materialDesign:Card>
@@ -274,7 +274,7 @@
 			</UniformGrid>
 		</Grid>
 
-		<Separator Grid.Row="1" Margin="0,10,0,10"/>
+		<Separator Grid.Row="1" Margin="0,0,0,10"/>
 
 		<StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Right" >
 			<Button x:Name="cancelButton" Content="CLOSE" Margin="0,0,10,10" Click="cancelButton_Click" HorizontalAlignment="Right"/>

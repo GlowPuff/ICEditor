@@ -290,6 +290,8 @@ namespace Imperial_Commander_Editor
 			{
 				selectedStructure.projectItem.Title = ((CampaignMissionItem)e.AddedItems[0]).missionName;
 				selectedStructure.missionID = ((CampaignMissionItem)e.AddedItems[0]).missionGUID.ToString();
+				selectedStructure.missionSource = MissionSource.Embedded;
+				selectedStructure.projectItem.missionGUID = ((CampaignMissionItem)e.AddedItems[0]).mission.missionGUID.ToString();
 				missionsPopupLB.SelectedIndex = -1;
 			}
 		}

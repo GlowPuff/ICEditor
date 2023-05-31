@@ -20,6 +20,7 @@ namespace Imperial_Commander_Editor
 		//public string relativePath { get; set; }
 		public string fileVersion { get; set; }
 		public long timeTicks { get; set; }
+		public string missionGUID { get; set; }
 		public string fullPathWithFilename { get; set; }
 
 		public int CompareTo( ProjectItem other ) => timeTicks > other.timeTicks ? -1 : timeTicks < other.timeTicks ? 1 : 0;

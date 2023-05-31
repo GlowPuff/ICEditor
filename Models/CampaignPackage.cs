@@ -10,12 +10,16 @@ namespace Imperial_Commander_Editor
 	{
 		string _campaignName, _campaignInstructions;
 
+		public Guid GUID;
 		public string campaignName { get => _campaignName; set { SetProperty( ref _campaignName, value ); } }
 		public string campaignInstructions { get => _campaignInstructions; set { SetProperty( ref _campaignInstructions, value ); } }
 		public ObservableCollection<CampaignMissionItem> campaignMissionItems { get; set; } = new();
 		public ObservableCollection<CampaignStructure> campaignStructure { get; set; } = new();
 
-		public CampaignPackage() { }
+		public CampaignPackage()
+		{
+			GUID = Guid.NewGuid();
+		}
 
 		public CampaignMissionItem AddMission( Mission mission )
 		{
@@ -32,12 +36,14 @@ namespace Imperial_Commander_Editor
 		public void AddStructure()
 		{
 			var cs = new CampaignStructure();
-			cs.isCustom = true;
+			cs.missionSource = MissionSource.None;
 			cs.itemTier = new string[] { "1" };
 			cs.isAgendaMission = false;
 			cs.missionType = MissionType.Story;
 			cs.missionID = Guid.Empty.ToString();
 			cs.projectItem.Title = "Player's Choice";
+			cs.projectItem.missionGUID = Guid.Empty.ToString();
+			cs.expansionCode = "Imported";
 
 			campaignStructure.Add( cs );
 		}
@@ -75,8 +81,8 @@ namespace Imperial_Commander_Editor
 		public bool isItemChecked = false;
 		public bool isForced = false;
 		public AgendaType agendaType = AgendaType.NotSet;
-		public bool isCustom = false;//is part of a custom campaign
-		public Guid GUID;
+		public MissionSource missionSource = MissionSource.None;
+		public Guid structureGUID;
 		public bool canModify = true;
 		public ProjectItem projectItem { get; set; }
 
@@ -97,7 +103,7 @@ namespace Imperial_Commander_Editor
 
 		public CampaignStructure()
 		{
-			GUID = Guid.NewGuid();
+			structureGUID = Guid.NewGuid();
 			projectItem = new ProjectItem();
 		}
 
@@ -105,6 +111,8 @@ namespace Imperial_Commander_Editor
 		{
 			projectItem.Title = "Player's Choice";
 			missionID = Guid.Empty.ToString();
+			missionSource = MissionSource.None;
+			projectItem.missionGUID = Guid.Empty.ToString();
 		}
 	}
 }

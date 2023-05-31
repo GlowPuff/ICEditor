@@ -29,6 +29,7 @@ namespace Imperial_Commander_Editor
 	public enum ThumbType { All, Other, Rebel, Imperial, Mercenary, StockImperial, StockAlly, StockHero, StockVillain }
 	public enum Factions { Imperial, Mercenary }
 	public enum AgendaType { NotSet, Rebel, Imperial }
+	public enum MissionSource { None, Official, Custom, Embedded }
 
 	//internal static class WindowExtensions
 	//{

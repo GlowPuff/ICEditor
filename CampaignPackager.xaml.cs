@@ -44,7 +44,6 @@ namespace Imperial_Commander_Editor
 			dropNotice.Visibility = Visibility.Visible;
 		}
 
-
 		private void cancelButton_Click( object sender, RoutedEventArgs e )
 		{
 			Close();
@@ -158,7 +157,13 @@ namespace Imperial_Commander_Editor
 			if ( e.Data.GetDataPresent( DataFormats.FileDrop ) )
 			{
 				string[] filename = e.Data.GetData( DataFormats.FileDrop ) as string[];
-				if ( Path.GetExtension( filename[0] ) == ".json" )
+				bool valid = true;
+				foreach ( var item in filename )
+				{
+					if ( Path.GetExtension( item ) != ".json" )
+						valid = false;
+				}
+				if ( valid )
 					e.Effects = DragDropEffects.All;
 			}
 		}
@@ -193,27 +198,27 @@ namespace Imperial_Commander_Editor
 		{
 			if ( e.Data.GetDataPresent( DataFormats.FileDrop ) )
 			{
-				//grab the filename
+				//grab the filenames
 				string[] filename = e.Data.GetData( DataFormats.FileDrop ) as string[];
-				if ( filename.Length == 1 )
+				try
 				{
-					try
+					foreach ( var item in filename )
 					{
-						var mission = FileManager.LoadMission( filename[0] );
+						var mission = FileManager.LoadMission( item );
 						if ( mission != null )
 						{
-							lastMissionPath = new FileInfo( filename[0] ).DirectoryName;
+							lastMissionPath = new FileInfo( item ).DirectoryName;
 							selectedMissionItem = campaignPackage.AddMission( mission );
 							dropNotice.Visibility = campaignPackage.campaignMissionItems.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
 						}
 						else
-							throw new( "Loaded Mission is null." );
+							throw new( $"Loaded Mission is null.\n{item}" );
 					}
-					catch ( Exception ee )
-					{
-						MessageBox.Show( $"Could not load the Mission.\n\n{ee.Message}", "App Exception", MessageBoxButton.OK, MessageBoxImage.Error );
-						selectedMissionItem = null;
-					}
+				}
+				catch ( Exception ee )
+				{
+					MessageBox.Show( $"Could not load the Mission.\n\n{ee.Message}", "App Exception", MessageBoxButton.OK, MessageBoxImage.Error );
+					selectedMissionItem = null;
 				}
 			}
 		}
@@ -222,7 +227,9 @@ namespace Imperial_Commander_Editor
 		{
 			if ( selectedMissionItem != null )
 			{
-				campaignPackage.campaignMissionItems.Remove( selectedMissionItem );
+				campaignPackage.RemoveMission( selectedMissionItem );
+				//if a structure slot is using this removed mission, reset it
+				campaignPackage.ValidateMissions();
 				selectedMissionItem = null;
 			}
 			dropNotice.Visibility = campaignPackage.campaignMissionItems.Count == 0 ? Visibility.Visible : Visibility.Collapsed;

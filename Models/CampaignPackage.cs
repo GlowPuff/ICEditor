@@ -52,6 +52,17 @@ namespace Imperial_Commander_Editor
 		{
 			campaignStructure.Remove( cs );
 		}
+
+		public void ValidateMissions()
+		{
+			if ( campaignMissionItems.Count == 0 )
+				campaignStructure.ToList().ForEach( x => x.Reset() );
+			else
+			{
+				var broken = campaignStructure.Where( x => campaignMissionItems.Any( y => y.missionGUID.ToString() != x.missionID ) ).ToList();
+				broken.ForEach( x => x.Reset() );
+			}
+		}
 	}
 
 	public class CampaignMissionItem : ObservableObject

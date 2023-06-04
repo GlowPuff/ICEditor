@@ -51,7 +51,6 @@ namespace Imperial_Commander_Editor
 			isStandalone = true;
 			toonListCB.Visibility = Visibility.Collapsed;
 			remToonButton.Visibility = Visibility.Collapsed;
-			editToonButton.Visibility = Visibility.Collapsed;
 		}
 
 		private void remToonButton_Click( object sender, RoutedEventArgs e )

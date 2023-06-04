@@ -39,8 +39,6 @@
 							</ComboBox.ItemTemplate>
 						</ComboBox>
 
-						<Button x:Name="editToonButton" Content="{materialDesign:PackIcon Kind=Edit}" Click="editToonButton_Click" Style="{StaticResource MaterialDesignFloatingActionButton}" Margin="10,0,0,0" Width="35" Height="35" ToolTip="Edit Character" IsEnabled="{Binding Path=selectedToon, Converter={StaticResource notNull}}"/>
-
 						<Button x:Name="dupeToonButton" Content="{materialDesign:PackIcon Kind=ContentCopy}" Click="dupeToonButton_Click" Style="{StaticResource MaterialDesignFloatingActionButton}" Margin="10,0,0,0" Width="35" Height="35" ToolTip="Duplicate Character" IsEnabled="{Binding Path=selectedToon, Converter={StaticResource notNull}}"/>
 
 						<Button x:Name="importToonButton" Content="{materialDesign:PackIcon Kind=Import}" Click="importToonButton_Click" Style="{StaticResource MaterialDesignFloatingActionButton}" Margin="10,0,0,0" Width="35" Height="35" ToolTip="Import Character From JSON"/>

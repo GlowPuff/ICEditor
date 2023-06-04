@@ -149,7 +149,6 @@ namespace Imperial_Commander_Editor
 
 		private void toonListCB_SelectionChanged( object sender, SelectionChangedEventArgs e )
 		{
-			//if ( selectedToon != null )
 			toonEditorPanel.RefreshToon( selectedToon ?? new(), isStandalone );
 		}
 	}

@@ -322,8 +322,7 @@ namespace Imperial_Commander_Editor
 	public class ThumbnailData
 	{
 		public List<Thumbnail> Other, Rebel, Imperial, Mercenary, StockImperial, StockAlly, StockHero, StockVillain;
-		List<Thumbnail> None = new( new Thumbnail[] { new() { Name = "Select a Thumbnail", ID = "None" } } );
-		public Thumbnail NoneThumb => None[0];
+		public Thumbnail NoneThumb => new() { Name = "Select a Thumbnail", ID = "None" };//None[0];
 
 		public ThumbnailData()
 		{
@@ -339,6 +338,8 @@ namespace Imperial_Commander_Editor
 
 		public List<Thumbnail> Filter( ThumbType ttype )
 		{
+			List<Thumbnail> None = new( new Thumbnail[] { new() { Name = "Select a Thumbnail", ID = "None" } } );
+
 			switch ( ttype )
 			{
 				case ThumbType.All:

@@ -88,6 +88,8 @@
     <None Remove="Assets\Thumbnails\Imperial\CustomImperial41.png" />
     <None Remove="Assets\Thumbnails\Imperial\CustomImperial42.png" />
     <None Remove="Assets\Thumbnails\Imperial\CustomImperial43.png" />
+    <None Remove="Assets\Thumbnails\Imperial\CustomImperial44.png" />
+    <None Remove="Assets\Thumbnails\Imperial\CustomImperial45.png" />
     <None Remove="Assets\Thumbnails\Imperial\CustomImperial5.png" />
     <None Remove="Assets\Thumbnails\Imperial\CustomImperial6.png" />
     <None Remove="Assets\Thumbnails\Imperial\CustomImperial7.png" />
@@ -860,6 +862,8 @@
     <Resource Include="Assets\Thumbnails\Imperial\CustomImperial41.png" />
     <Resource Include="Assets\Thumbnails\Imperial\CustomImperial42.png" />
     <Resource Include="Assets\Thumbnails\Imperial\CustomImperial43.png" />
+    <Resource Include="Assets\Thumbnails\Imperial\CustomImperial44.png" />
+    <Resource Include="Assets\Thumbnails\Imperial\CustomImperial45.png" />
     <Resource Include="Assets\Thumbnails\Imperial\CustomImperial5.png" />
     <Resource Include="Assets\Thumbnails\Imperial\CustomImperial6.png" />
     <Resource Include="Assets\Thumbnails\Imperial\CustomImperial7.png" />

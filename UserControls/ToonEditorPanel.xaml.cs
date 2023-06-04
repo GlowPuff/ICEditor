@@ -25,8 +25,9 @@ namespace Imperial_Commander_Editor
 		public event PropertyChangedEventHandler PropertyChanged;
 
 		DeploymentCard _selectedCopyFrom;
+		CustomToon _customToon;
 
-		public CustomToon customToon { get; set; }
+		public CustomToon customToon { get => _customToon; set { _customToon = value; PC(); } }
 		public DeploymentCard selectedCopyFrom { get => _selectedCopyFrom; set { _selectedCopyFrom = value; PC(); } }
 		public bool isStandalone = false;
 		public ObservableCollection<DeploymentColor> deploymentColors
@@ -34,16 +35,20 @@ namespace Imperial_Commander_Editor
 			get { return Utils.deploymentColors; }
 		}
 
-		public ToonEditorPanel() => InitializeComponent();
-
-		public ToonEditorPanel( CustomToon ct = null )
+		public ToonEditorPanel()
 		{
 			InitializeComponent();
+		}
 
+		public void RefreshToon( CustomToon ct, bool isStandalone )
+		{
 			customToon = ct;
 			DataContext = customToon;
 
-			propBox.Header = $"General Properties For '{customToon.deploymentCard.name}'";
+			if ( isStandalone )
+				SetStandalone();
+
+			SetThumbnailImage();
 
 			thumbListLV.ItemsSource = Utils.thumbnailData.Filter( ThumbType.All );
 			thumbListLV.SelectedItem = customToon.thumbnail;
@@ -55,13 +60,13 @@ namespace Imperial_Commander_Editor
 
 			try
 			{
-				instructionsBtn.Foreground = customToon.cardInstruction.content.Count == 0 ? new SolidColorBrush( Colors.Red ) : new SolidColorBrush( Colors.LawnGreen );
-				bonusBtn.Foreground = customToon.bonusEffect.effects.Count == 0 ? new SolidColorBrush( Colors.Red ) : new SolidColorBrush( Colors.LawnGreen );
-				abilityBtn.Foreground = customToon.deploymentCard.abilities.Length == 0 ? new SolidColorBrush( Colors.Red ) : new SolidColorBrush( Colors.LawnGreen );
-				surgeBtn.Foreground = customToon.deploymentCard.surges.Length == 0 ? new SolidColorBrush( Colors.Red ) : new SolidColorBrush( Colors.LawnGreen );
-				keywordsBtn.Foreground = customToon.deploymentCard.keywords.Length == 0 ? new SolidColorBrush( Colors.Red ) : new SolidColorBrush( Colors.LawnGreen );
+				instructionsBtn.Foreground = customToon.cardInstruction.content?.Count == 0 ? new SolidColorBrush( Colors.Red ) : new SolidColorBrush( Colors.LawnGreen );
+				bonusBtn.Foreground = customToon.bonusEffect?.effects.Count == 0 ? new SolidColorBrush( Colors.Red ) : new SolidColorBrush( Colors.LawnGreen );
+				abilityBtn.Foreground = customToon.deploymentCard.abilities?.Length == 0 ? new SolidColorBrush( Colors.Red ) : new SolidColorBrush( Colors.LawnGreen );
+				surgeBtn.Foreground = customToon.deploymentCard.surges?.Length == 0 ? new SolidColorBrush( Colors.Red ) : new SolidColorBrush( Colors.LawnGreen );
+				keywordsBtn.Foreground = customToon.deploymentCard.keywords?.Length == 0 ? new SolidColorBrush( Colors.Red ) : new SolidColorBrush( Colors.LawnGreen );
 				traitsText.Text = "None";
-				if ( customToon.deploymentCard.traits.Length > 0 )
+				if ( customToon.deploymentCard.traits?.Length > 0 )
 				{
 					var t = customToon.deploymentCard.traits.Aggregate( ( acc, cur ) => acc + ", " + cur );
 					traitsText.Text = t;
@@ -69,7 +74,7 @@ namespace Imperial_Commander_Editor
 				priorityTargetsText.Text = "No Priorities";
 				if ( customToon.deploymentCard.preferredTargets?.Length > 0 )
 					priorityTargetsText.Text = customToon.deploymentCard.preferredTargets.Select( x => x.ToString() ).Aggregate( ( acc, cur ) => acc.ToString() + ", " + cur.ToString() );
-				heroSkillsText.Text = customToon.heroSkills.Count == 0 ? "None" : $"{customToon.heroSkills.Count} Skills";
+				heroSkillsText.Text = customToon.heroSkills?.Count == 0 ? "None" : $"{customToon.heroSkills.Count} Skills";
 			}
 			catch ( Exception e )
 			{
@@ -87,11 +92,6 @@ namespace Imperial_Commander_Editor
 		{
 			if ( e.Key == Key.Enter )
 				Utils.LoseFocus( sender as Control );
-		}
-
-		private void nameTB_TextChanged( object sender, TextChangedEventArgs e )
-		{
-			propBox.Header = $"General Properties For '{((TextBox)sender).Text}'";
 		}
 
 		private void instructionsBtn_Click( object sender, RoutedEventArgs e )
@@ -432,6 +432,11 @@ namespace Imperial_Commander_Editor
 			customToon.deploymentCard.mugShotPath = $"CardThumbnails/{customToon.thumbnail.ID}";
 			SetThumbnailImage();
 			iconFilterBox.Text = "";
+		}
+
+		private void recycleGUID_Click( object sender, RoutedEventArgs e )
+		{
+			customToon.customCharacterGUID = Guid.NewGuid();
 		}
 	}
 }

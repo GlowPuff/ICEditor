@@ -18,15 +18,28 @@
 		<UniformGrid Columns="2">
 			<!--LEFT-->
 			<StackPanel Margin="0,0,5,0">
-				<GroupBox x:Name="propBox" Header="Character Information" Background="{StaticResource GroupBG}">
+				<GroupBox x:Name="propBox" Background="{StaticResource GroupBG}">
+					<GroupBox.Header>
+						<TextBlock>
+							<Run Text="General Properties For: "/>
+							<Run Text="{Binding cardName}"/>
+						</TextBlock>
+					</GroupBox.Header>
 					<!--GENERAL PROPERTIES-->
 					<StackPanel>
-						<TextBox x:Name="nameTB" Style="{StaticResource MaterialDesignOutlinedTextBox}" Text="{Binding cardName}" materialDesign:HintAssist.Hint="Character Name (Required)" KeyDown="textbox_KeyDown" TextChanged="nameTB_TextChanged" />
+						<TextBox x:Name="nameTB" Style="{StaticResource MaterialDesignOutlinedTextBox}" Text="{Binding cardName}" materialDesign:HintAssist.Hint="Character Name (Required)" KeyDown="textbox_KeyDown"/>
 						<TextBox x:Name="subnameTB" Style="{StaticResource MaterialDesignOutlinedTextBox}" Text="{Binding cardSubName}" materialDesign:HintAssist.Hint="Character SubName (Optional)" KeyDown="textbox_KeyDown" Margin="0,10,0,0" />
 
 						<!--ID-->
 						<TextBlock Text="Character ID:" HorizontalAlignment="Center" Margin="0,10,0,0"/>
 						<TextBlock Text="{Binding cardID}" FontStyle="Italic" FontWeight="Bold"  Foreground="Violet" HorizontalAlignment="Center" Margin="0,5,0,0"/>
+						<!--GUID-->
+						<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+							<TextBlock Text="Character GUID:" HorizontalAlignment="Center" Margin="0,10,0,0"/>
+							<Button x:Name="recycleGUID" Content="{materialDesign:PackIcon Kind=Refresh}" Margin="7,0,0,0" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35" Click="recycleGUID_Click" ToolTip="Refresh GUID"/>
+						</StackPanel>
+						<TextBlock Text="{Binding customCharacterGUID}" FontStyle="Italic" FontWeight="Bold"  Foreground="Violet" HorizontalAlignment="Center" Margin="0,5,0,0"/>
+						<TextBlock Text="Refresh the GUID if this will be a NEW character based on a previously imported character. Custom characters must have a unique GUID. Do not refresh the GUID if you are just editing an existing character." TextWrapping="Wrap" FontStyle="Italic" HorizontalAlignment="Center" Margin="0,10,0,0"/>
 
 						<!--CHARACTER TYPE-->
 						<materialDesign:Card Padding="10" Background="{StaticResource CardBG}" Margin="0,10,0,0" >

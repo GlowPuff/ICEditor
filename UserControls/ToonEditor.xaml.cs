@@ -18,7 +18,6 @@ namespace Imperial_Commander_Editor
 		}
 		public event PropertyChangedEventHandler PropertyChanged;
 
-		ToonEditorPanel toonEditorPanel;
 		CustomToon _selectedToon;
 		//if we're in the standalone character editor and NOT in the mission editor
 		bool isStandalone = false;
@@ -35,6 +34,7 @@ namespace Imperial_Commander_Editor
 			DataContext = this;
 
 			selectedToon = null;
+			toonEditorPanel.DataContext = selectedToon;
 		}
 
 		public void UpdateUI()
@@ -64,25 +64,15 @@ namespace Imperial_Commander_Editor
 			}
 
 			selectedToon = null;
-			stackPanel.Children.Remove( toonEditorPanel );
-			toonEditorPanel = null;
 		}
 
 		private void editToonButton_Click( object sender, RoutedEventArgs e )
 		{
-			stackPanel.Children.Remove( toonEditorPanel );
-
-			toonEditorPanel = new ToonEditorPanel( selectedToon );
-			toonEditorPanel.SetThumbnailImage();
-			if ( isStandalone )
-				toonEditorPanel.SetStandalone();
-			stackPanel.Children.Add( toonEditorPanel );
+			toonEditorPanel.RefreshToon( selectedToon, isStandalone );
 		}
 
 		private void newToonButton_Click( object sender, RoutedEventArgs e )
 		{
-			stackPanel.Children.Remove( toonEditorPanel );
-
 			CustomToon newToon = new();
 			newToon.Create();
 			if ( !isStandalone )
@@ -91,11 +81,9 @@ namespace Imperial_Commander_Editor
 				Utils.mainWindow.mission.customCharacters.Add( newToon );
 				Utils.AddCustomToon( newToon.deploymentCard );
 			}
-			toonEditorPanel = new ToonEditorPanel( newToon );
-			if ( isStandalone )
-				toonEditorPanel.SetStandalone();
-			stackPanel.Children.Add( toonEditorPanel );
 			selectedToon = newToon;
+
+			toonEditorPanel.RefreshToon( selectedToon, isStandalone );
 		}
 
 		private void exportToonButton_Click( object sender, RoutedEventArgs e )
@@ -114,8 +102,6 @@ namespace Imperial_Commander_Editor
 
 		private void importToonButton_Click( object sender, RoutedEventArgs e )
 		{
-			stackPanel.Children.Remove( toonEditorPanel );
-
 			var toon = FileManager.ImportCharacter();
 			if ( toon != null )
 			{
@@ -126,12 +112,9 @@ namespace Imperial_Commander_Editor
 					Utils.mainWindow.mission.customCharacters.Add( newToon );
 					Utils.AddCustomToon( newToon.deploymentCard );
 				}
-				toonEditorPanel = new ToonEditorPanel( newToon );
-				if ( isStandalone )
-					toonEditorPanel.SetStandalone();
-				toonEditorPanel.SetThumbnailImage();
-				stackPanel.Children.Add( toonEditorPanel );
 				selectedToon = newToon;
+
+				toonEditorPanel.RefreshToon( selectedToon, isStandalone );
 
 				if ( !isStandalone )
 					Utils.mainWindow.SetStatus( "Imported Character" );
@@ -143,6 +126,32 @@ namespace Imperial_Commander_Editor
 				else
 					MessageBox.Show( "Could not import the character. Did you choose the correct file?", "Error Importing Character", MessageBoxButton.OK, MessageBoxImage.Warning );
 			}
+		}
+
+		private void dupeToonButton_Click( object sender, RoutedEventArgs e )
+		{
+			var newToon = selectedToon.Duplicate();
+			if ( !isStandalone )
+			{
+				toonList.Add( newToon );
+				Utils.mainWindow.mission.customCharacters.Add( newToon );
+				Utils.AddCustomToon( newToon.deploymentCard );
+			}
+			selectedToon = newToon;
+
+			toonEditorPanel.RefreshToon( selectedToon, isStandalone );
+
+			if ( isStandalone )
+				toonEditorPanel.SetStandalone();
+
+			if ( !isStandalone )
+				Utils.mainWindow.SetStatus( "Duplicated Character" );
+		}
+
+		private void toonListCB_SelectionChanged( object sender, SelectionChangedEventArgs e )
+		{
+			//if ( selectedToon != null )
+			toonEditorPanel.RefreshToon( selectedToon ?? new(), isStandalone );
 		}
 	}
 }

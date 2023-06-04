@@ -24,7 +24,7 @@
 					<Button x:Name="newToonButton" Content="CREATE NEW CHARACTER" HorizontalAlignment="Left" Click="newToonButton_Click"/>
 
 					<StackPanel Orientation="Horizontal" Grid.Column="2">
-						<ComboBox x:Name="toonListCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectedValuePath="deploymentCard" MinWidth="200" SelectedItem="{Binding selectedToon}" ItemsSource="{Binding toonList}">
+						<ComboBox x:Name="toonListCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectedValuePath="deploymentCard" MinWidth="200" ItemsSource="{Binding toonList}" SelectedItem="{Binding selectedToon}" SelectionChanged="toonListCB_SelectionChanged">
 							<ComboBox.ItemTemplate>
 								<DataTemplate>
 									<TextBlock>
@@ -41,6 +41,8 @@
 
 						<Button x:Name="editToonButton" Content="{materialDesign:PackIcon Kind=Edit}" Click="editToonButton_Click" Style="{StaticResource MaterialDesignFloatingActionButton}" Margin="10,0,0,0" Width="35" Height="35" ToolTip="Edit Character" IsEnabled="{Binding Path=selectedToon, Converter={StaticResource notNull}}"/>
 
+						<Button x:Name="dupeToonButton" Content="{materialDesign:PackIcon Kind=ContentCopy}" Click="dupeToonButton_Click" Style="{StaticResource MaterialDesignFloatingActionButton}" Margin="10,0,0,0" Width="35" Height="35" ToolTip="Duplicate Character" IsEnabled="{Binding Path=selectedToon, Converter={StaticResource notNull}}"/>
+
 						<Button x:Name="importToonButton" Content="{materialDesign:PackIcon Kind=Import}" Click="importToonButton_Click" Style="{StaticResource MaterialDesignFloatingActionButton}" Margin="10,0,0,0" Width="35" Height="35" ToolTip="Import Character From JSON"/>
 
 						<Button x:Name="exportToonButton" Content="{materialDesign:PackIcon Kind=Export}" Click="exportToonButton_Click" Style="{StaticResource MaterialDesignFloatingActionButton}" Margin="10,0,0,0" Width="35" Height="35" ToolTip="Export Character To JSON" IsEnabled="{Binding Path=selectedToon, Converter={StaticResource notNull}}"/>
@@ -50,7 +52,8 @@
 				</Grid>
 			</GroupBox>
 
-			<!--TOON EDITOR PANEL ADDED HERE IN CODE-BEHIND-->
+			<!--TOON EDITOR PANEL-->
+			<local:ToonEditorPanel x:Name="toonEditorPanel" IsEnabled="{Binding Path=selectedToon, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource notNull}}"/>
 
 		</StackPanel>
 	</ScrollViewer>

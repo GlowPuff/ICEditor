@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
+using Newtonsoft.Json;
 
 namespace Imperial_Commander_Editor
 {
 	public class CustomToon : ObservableObject
 	{
 		//these properties don't change when copying from another Deployment Group
-		public Guid customCharacterGUID { get; set; }
 		string _cardName, _cardSubName, _cardID;
 		Factions _faction;
 		//and Deployment Card outline color, character type
 
+		Guid _customCharacterGUID;
 		Thumbnail _thumbnail;
 		DeploymentCard _deploymentCard;
 		string _groupAttack, _groupDefense;
@@ -21,8 +22,18 @@ namespace Imperial_Commander_Editor
 		BonusEffect _bonusEffect;
 		bool _canRedeploy, _canReinforce, _canBeDefeated, _useThreatMultiplier;
 
+		public Guid customCharacterGUID { get => _customCharacterGUID; set { SetProperty( ref _customCharacterGUID, value ); } }
 		//update the embedded DG's name/subname, faction, instructions ID, bonus effect ID, and id when it changes
-		public string cardName { get => _cardName; set { SetProperty( ref _cardName, value ); deploymentCard.name = value; } }
+		public string cardName
+		{
+			get => _cardName;
+			set
+			{
+				SetProperty( ref _cardName, value );
+				deploymentCard.name = value;
+				cardInstruction.instName = value;
+			}
+		}
 		public string cardSubName { get => _cardSubName; set { SetProperty( ref _cardSubName, value ); deploymentCard.subname = value; } }
 		public string cardID
 		{
@@ -109,6 +120,8 @@ namespace Imperial_Commander_Editor
 		{
 			deploymentCard = new();
 			heroSkills = new();
+			cardInstruction = new();
+			thumbnail = Utils.thumbnailData.NoneThumb;
 		}
 
 		public static CustomToon ImportFrom( CustomToon toon )
@@ -266,6 +279,25 @@ namespace Imperial_Commander_Editor
 			{
 				heroSkills[i].id = $"{cardName.Replace( " ", "" ).ToLower()}{i + 1}";
 			}
+		}
+
+		/// <summary>
+		/// Creates a unique duplicate with unique GUID
+		/// </summary>
+		public CustomToon Duplicate()
+		{
+			var toon = JsonConvert.SerializeObject( this );
+			var dupe = JsonConvert.DeserializeObject<CustomToon>( toon );
+			dupe.customCharacterGUID = Guid.NewGuid();
+			dupe.deploymentCard.name = dupe.deploymentCard.name + " (Duplicate)";
+			dupe.deploymentCard.id = Utils.GetAvailableCustomToonID();
+			dupe.cardID = dupe.deploymentCard.id;
+			dupe.cardName = dupe.deploymentCard.name;
+			dupe.bonusEffect.bonusID = dupe.cardID;
+			dupe.cardInstruction.instName = dupe.cardName;
+			dupe.cardInstruction.instID = dupe.cardID;
+
+			return dupe;
 		}
 	}
 }

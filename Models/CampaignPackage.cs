@@ -1,6 +1,11 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Windows;
+using System.Windows.Media.Imaging;
+using System.Windows.Resources;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Newtonsoft.Json;
 
@@ -8,17 +13,44 @@ namespace Imperial_Commander_Editor
 {
 	public class CampaignPackage : ObservableObject
 	{
-		string _campaignName, _campaignInstructions;
+		string _campaignName, _campaignInstructions, _campaignIconName;
+		BitmapImage _bmpImage;
 
 		public Guid GUID;
 		public string campaignName { get => _campaignName; set { SetProperty( ref _campaignName, value ); } }
 		public string campaignInstructions { get => _campaignInstructions; set { SetProperty( ref _campaignInstructions, value ); } }
+		public string campaignIconName { get => _campaignIconName; set { SetProperty( ref _campaignIconName, value ); } }
+		[JsonIgnore]
+		public BitmapImage bmpImage { get => _bmpImage; set { SetProperty( ref _bmpImage, value ); } }
 		public ObservableCollection<CampaignMissionItem> campaignMissionItems { get; set; } = new();
 		public ObservableCollection<CampaignStructure> campaignStructure { get; set; } = new();
+		[JsonIgnore]
+
+		public byte[] iconBytesBuffer;
 
 		public CampaignPackage()
 		{
 			GUID = Guid.NewGuid();
+			campaignIconName = "none.png";
+			SetDefaultIcon();
+		}
+
+		public void SetDefaultIcon()
+		{
+			bmpImage = new( new Uri( $"pack://application:,,,/{Assembly.GetEntryAssembly().GetName().Name};component/Assets/Thumbnails/Other/none.png" ) );
+
+			StreamResourceInfo sri = Application.GetResourceStream( new Uri( $"pack://application:,,,/{Assembly.GetEntryAssembly().GetName().Name};component/Assets/Thumbnails/Other/none.png" ) );
+			using ( var s = sri.Stream )
+			{
+				iconBytesBuffer = new byte[s.Length];
+				s.Read( iconBytesBuffer, 0, iconBytesBuffer.Length );
+			}
+		}
+
+		public void SetIcon( string filename )
+		{
+			iconBytesBuffer = File.ReadAllBytes( filename );
+			bmpImage = new( new Uri( filename ) );
 		}
 
 		public CampaignMissionItem AddMission( Mission mission )

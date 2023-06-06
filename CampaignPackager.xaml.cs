@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using Microsoft.Win32;
 using Newtonsoft.Json;
 
@@ -19,7 +20,9 @@ namespace Imperial_Commander_Editor
 		//the previous path to saved missions
 		string lastMissionPath = Path.Combine( Environment.GetFolderPath( Environment.SpecialFolder.MyDocuments ), "ImperialCommander" );
 		string defaultPath = Path.Combine( Environment.GetFolderPath( Environment.SpecialFolder.MyDocuments ), "ImperialCommander" );
+		//string _iconPath;
 
+		//public string iconPath { get => _iconPath; set { _iconPath = value; PC(); } }
 		CampaignPackage _campaignPackage { get; set; } = new();
 		CampaignMissionItem _selectedMissionItem { get; set; } = null;
 		CampaignStructure _selectedStructure { get; set; } = null;
@@ -42,6 +45,7 @@ namespace Imperial_Commander_Editor
 
 			instructionBtn.Foreground = new SolidColorBrush( Colors.Red );
 			dropNotice.Visibility = Visibility.Visible;
+			//iconPath = "Assets/Thumbnails/Other/none.png";
 		}
 
 		private void cancelButton_Click( object sender, RoutedEventArgs e )
@@ -331,6 +335,106 @@ namespace Imperial_Commander_Editor
 					}
 				}
 			}
+		}
+
+		private void iconBtn_Click( object sender, RoutedEventArgs e )
+		{
+			OpenFileDialog ofd = new OpenFileDialog()
+			{
+				Title = "Load Campaign Icon",
+				InitialDirectory = defaultPath,
+				Filter = "PNG Image (.png)|*.png"
+			};
+			var res = ofd.ShowDialog();
+			if ( res.Value == true )
+			{
+				bool goodFile = true;
+				//check the size and format
+				if ( CheckPNGFormat( ofd.FileName ) )
+				{
+					if ( !isCorrectDimensions( ofd.FileName ) )
+					{
+						goodFile = false;
+						Utils.ShowError( "Is the image size 64x64 or 128x128?", "Wrong File Size" );
+					}
+				}
+				else
+				{
+					goodFile = false;
+					Utils.ShowError( "Is the image a PNG?", "Wrong File Type" );
+				}
+
+				if ( goodFile )
+				{
+					campaignPackage.SetIcon( ofd.FileName );
+					campaignPackage.campaignIconName = new FileInfo( ofd.FileName ).Name;
+				}
+			}
+		}
+
+		private bool CheckPNGFormat( string path )
+		{
+			byte[] buffer = new byte[8];
+			byte[] bufferEnd = new byte[2];
+			//PNG "\x89PNG\x0D\0xA\0x1A\0x0A"
+			var png = new byte[] { 0x89, 0x50, 0x4e, 0x47, 0x0D, 0x0A, 0x1A, 0x0A };
+
+			try
+			{
+				using ( FileStream fs = new FileStream( path, FileMode.Open, FileAccess.Read ) )
+				{
+					if ( fs.Length > buffer.Length )
+					{
+						fs.Read( buffer, 0, buffer.Length );
+						fs.Position = (int)fs.Length - bufferEnd.Length;
+						fs.Read( bufferEnd, 0, bufferEnd.Length );
+					}
+					fs.Close();
+				}
+
+				if ( this.ByteArrayStartsWith( buffer, png ) )
+					return true;
+			}
+			catch ( Exception e )
+			{
+				Utils.ShowError( $"CheckPNG()::There was an error checking the image type:\n{e.Message}", "" );
+			}
+
+			return false;
+		}
+
+		private bool ByteArrayStartsWith( byte[] a, byte[] b )
+		{
+			if ( a.Length < b.Length )
+			{
+				return false;
+			}
+
+			for ( int i = 0; i < b.Length; i++ )
+			{
+				if ( a[i] != b[i] )
+				{
+					return false;
+				}
+			}
+
+			return true;
+		}
+
+		private bool isCorrectDimensions( string path )
+		{
+			using ( var imageStream = new FileStream( path, FileMode.Open, FileAccess.Read ) )
+			{
+				var decoder = BitmapDecoder.Create( imageStream, BitmapCreateOptions.IgnoreColorProfile,
+								BitmapCacheOption.Default );
+				var width = decoder.Frames[0].PixelWidth;
+				var height = decoder.Frames[0].PixelHeight;
+				if ( width == 64 && height == 64 )
+					return true;
+				else if ( width == 128 && height == 128 )
+					return true;
+			}
+			return false;
 		}
 	}
 }

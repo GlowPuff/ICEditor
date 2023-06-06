@@ -5,6 +5,7 @@ using System.IO.Compression;
 using System.Linq;
 using System.Reflection;
 using System.Windows;
+using System.Windows.Media.Imaging;
 using Microsoft.Win32;
 using Newtonsoft.Json;
 
@@ -358,6 +359,8 @@ namespace Imperial_Commander_Editor
 		public static CampaignPackage LoadCampaignPackage( string fullFilename )
 		{
 			CampaignPackage package = null;
+			BitmapImage bitmap = null;
+			byte[] iconBytesBuffer = new byte[0];
 
 			try
 			{
@@ -379,13 +382,44 @@ namespace Imperial_Commander_Editor
 									package = JsonConvert.DeserializeObject<CampaignPackage>( tr.ReadToEnd() );
 								}
 							}
-							else//deserialize the individual missions
+							else if ( entry.Name.EndsWith( ".json" ) )//deserialize the individual missions
 							{
 								using ( TextReader tr = new StreamReader( entry.Open() ) )
 								{
 									missionList.Add( JsonConvert.DeserializeObject<Mission>( tr.ReadToEnd() ) );
 								}
 							}
+							else if ( (entry.Name.EndsWith( ".png" )) )//icon image
+							{
+								using ( var stream = new MemoryStream() )
+								{
+									using ( var s = entry.Open() )
+									{
+										s.CopyTo( stream );
+										bitmap = new BitmapImage();
+										bitmap.BeginInit();
+										bitmap.StreamSource = stream;
+										bitmap.CacheOption = BitmapCacheOption.OnLoad;
+										bitmap.EndInit();
+
+										//get bytes
+										stream.Position = 0;
+										iconBytesBuffer = new byte[stream.Length];
+										stream.Read( iconBytesBuffer, 0, iconBytesBuffer.Length );
+									}
+								}
+							}
+						}
+
+						//set the visible icon
+						if ( bitmap != null )
+						{
+							package.bmpImage = bitmap;
+							package.iconBytesBuffer = iconBytesBuffer;
+						}
+						else
+						{
+							package.SetDefaultIcon();
 						}
 
 						//now add all the missions to the CampaignPackage
@@ -460,9 +494,23 @@ namespace Imperial_Commander_Editor
 								}
 							}
 						}
-					}
 
-					return true;
+						//add the icon
+						var iconEntry = archive.CreateEntry( package.campaignIconName );
+						using ( var bmpStream = iconEntry.Open() )
+						{
+							using ( var mmStream = new MemoryStream() )
+							{
+								mmStream.Write( package.iconBytesBuffer );
+								mmStream.Flush();
+								mmStream.Position = 0;
+								//copy the memory stream to the archive
+								mmStream.CopyTo( bmpStream );
+							}
+						}
+
+						return true;
+					}
 				}
 			}
 			catch ( Exception ee )

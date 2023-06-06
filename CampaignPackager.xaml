@@ -119,8 +119,16 @@
 			<!--GENERAL PROPS-->
 			<materialDesign:Card Grid.Row="2" Background="{StaticResource CardBG}" Padding="10" Margin="0,10,0,0">
 				<StackPanel Orientation="Horizontal">
-					<TextBox x:Name="campaignNameText" Text="{Binding campaignName}" Style="{StaticResource MaterialDesignOutlinedTextBox}" Width="300" CaretBrush="White" materialDesign:HintAssist.Hint="Campaign Name" KeyDown="TB_KeyDown"/>
-
+					<!--ICON-->
+					<Button x:Name="iconBtn" Click="iconBtn_Click" Width="50" Height="50" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" Padding="5" Margin="0,0,10,0">
+						<Image Source="{Binding bmpImage}">
+						</Image>
+					</Button>
+					<!--ICON INFO-->
+					<TextBlock Text="Icons must be PNG images with dimensions of 64x64 or 128x128." Width="200" TextWrapping="Wrap" FontStyle="Italic" VerticalAlignment="Center" Margin="0,0,10,0"/>
+					<!--NAME-->
+					<TextBox x:Name="campaignNameText" Text="{Binding campaignName}" Style="{StaticResource MaterialDesignOutlinedTextBox}" MinWidth="250" CaretBrush="White" materialDesign:HintAssist.Hint="Campaign Name" KeyDown="TB_KeyDown"/>
+					<!--INSTRUCTIONS-->
 					<Button x:Name="instructionBtn" Content="CAMPAIGN INSTRUCTIONS..." Margin="10,0" Click="instructionBtn_Click" Foreground="Red"/>
 				</StackPanel>
 			</materialDesign:Card>

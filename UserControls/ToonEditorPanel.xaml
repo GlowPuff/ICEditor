@@ -137,10 +137,10 @@
 
 			<!--RIGHT PANEL-->
 			<StackPanel Margin="5,0,0,0">
-				<TabControl x:Name="tabControl"
+				<TabControl x:Name="toonTabControl"
   Style="{StaticResource MaterialDesignNavigatilRailTabControl}"
   materialDesign:ColorZoneAssist.Mode="PrimaryMid"
-  TabStripPlacement="Top" materialDesign:NavigationRailAssist.ShowSelectionBackground="True">
+  TabStripPlacement="Top" materialDesign:NavigationRailAssist.ShowSelectionBackground="True" SelectionChanged="toonTabControl_SelectionChanged">
 					<TabControl.Background>
 						<SolidColorBrush Color="#FF3A3349"/>
 					</TabControl.Background>

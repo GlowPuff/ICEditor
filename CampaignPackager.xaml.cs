@@ -45,7 +45,6 @@ namespace Imperial_Commander_Editor
 
 			instructionBtn.Foreground = new SolidColorBrush( Colors.Red );
 			dropNotice.Visibility = Visibility.Visible;
-			//iconPath = "Assets/Thumbnails/Other/none.png";
 		}
 
 		private void cancelButton_Click( object sender, RoutedEventArgs e )

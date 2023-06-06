@@ -438,5 +438,10 @@ namespace Imperial_Commander_Editor
 		{
 			customToon.customCharacterGUID = Guid.NewGuid();
 		}
+
+		private void toonTabControl_SelectionChanged( object sender, SelectionChangedEventArgs e )
+		{
+			e.Handled = true;
+		}
 	}
 }

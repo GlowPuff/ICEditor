@@ -126,7 +126,7 @@ namespace Imperial_Commander_Editor
 			{
 				mapEditor.LoadMap();
 				mission.mapSections[0].canRemove = false;
-				mainTitle = $"Imperial Commander Mission Editor - {mission.fileName}";
+				mainTitle = $"Imperial Commander Mission Editor - {mission.fullPathToFile}";
 				//add any custom characters to the pool
 				foreach ( var item in mission.customCharacters )
 					Utils.AddCustomToon( item.deploymentCard );
@@ -209,7 +209,7 @@ namespace Imperial_Commander_Editor
 		{
 			if ( FileManager.Save( mission, false ) )
 			{
-				mainTitle = $"Imperial Commander Mission Editor - {mission.fileName}";
+				mainTitle = $"Imperial Commander Mission Editor - {mission.fullPathToFile}";
 				SetStatus( "Mission Saved" );
 			}
 			else
@@ -219,7 +219,7 @@ namespace Imperial_Commander_Editor
 		private void saveMissionAsButton_Click( object sender, RoutedEventArgs e )
 		{
 			if ( FileManager.Save( mission, true ) )
-				mainTitle = $"Imperial Commander Mission Editor - {mission.fileName}";
+				mainTitle = $"Imperial Commander Mission Editor - {mission.fullPathToFile}";
 		}
 
 		private void addTriggerButton_Click( object sender, RoutedEventArgs e )

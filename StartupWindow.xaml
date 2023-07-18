@@ -11,7 +11,7 @@
         TextElement.FontWeight="Medium"
         TextElement.FontSize="14"
         FontFamily="{materialDesign:MaterialDesignFont}"
-        Title="Project Manager" Height="600" Width="900" WindowStartupLocation="CenterScreen" WindowStyle="None" MouseDown="Window_MouseDown" ResizeMode="NoResize">
+        Title="Project Manager" Height="600" Width="900" WindowStartupLocation="CenterScreen" WindowStyle="None" MouseDown="Window_MouseDown" ResizeMode="NoResize" DragEnter="Window_DragEnter" Drop="Window_Drop" AllowDrop="True" DragLeave="Window_DragLeave" DragOver="Window_DragOver">
 
 	<Window.Resources>
 		<Style TargetType="ScrollBar">
@@ -137,25 +137,7 @@
 				</Grid>
 			</Button>
 
-			<!--campaigns-->
-			<!--<TextBlock Text="Campaigns"  Margin="0,25,0,0" FontSize="16"  Foreground="White" HorizontalAlignment="Center"/>
-
-			<Button x:Name="editorButton" Height="70" Margin="0,10,0,0" Click="editorButton_Click">
-				<StackPanel Orientation="Horizontal" Width="230">
-					<Image Grid.RowSpan="2" Source="Assets/imperial.png" Width="50" Margin="0,0,10,0"/>
-
-					<Grid Margin="0,10">
-						<Grid.RowDefinitions>
-							<RowDefinition Height="auto"/>
-							<RowDefinition Height="auto"/>
-						</Grid.RowDefinitions>
-
-						<TextBlock Grid.Column="1" Text="CAMPAIGN EDITOR" />
-
-						<TextBlock Grid.Column="1" Grid.Row="1" Text="Create or edit a Campaign."/>
-					</Grid>
-				</StackPanel>
-			</Button>-->
+			<TextBlock Text="You may also drag and drop Mission files." Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" TextWrapping="Wrap" FontStyle="Italic" Margin="0,15,0,0"/>
 		</StackPanel>
 
 		<Grid Grid.Column="1" Grid.Row="3">
@@ -173,7 +155,6 @@
 		</Grid>
 
 		<!--recents-->
-		<!--<ScrollViewer Grid.Row="2" Grid.RowSpan="2" PreviewMouseWheel="ScrollViewer_PreviewMouseWheel" Margin="0,0,20,0" MouseEnter="ScrollViewer_MouseEnter" MouseLeave="ScrollViewer_MouseLeave" VerticalScrollBarVisibility="{Binding scrollVisible, Converter={StaticResource b2sv}}">-->
 		<ListView x:Name="projectLV" BorderThickness="0" Margin="0,0,10,0" SelectionChanged="projectLV_SelectionChanged" HorizontalContentAlignment="Stretch" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.Row="2" Grid.RowSpan="1">
 			<ListView.ItemTemplate>
 				<DataTemplate>
@@ -227,7 +208,7 @@
 			</ListView.ItemTemplate>
 		</ListView>
 		<!--</ScrollViewer>-->
-		<UniformGrid Columns="2" Grid.Row="3">
+		<UniformGrid Columns="3" Grid.Row="3" Margin="0,0,20,0">
 			<TextBlock x:Name="appVersion" Text="App Version: " Foreground="White" VerticalAlignment="Center"/>
 
 			<StackPanel Orientation="Horizontal">
@@ -253,7 +234,12 @@
 
 				<TextBlock x:Name="busyStatus" Text="Checking..." VerticalAlignment="Center" Foreground="White" Margin="5,0,0,0"/>
 			</StackPanel>
+
 		</UniformGrid>
 
+		<!--DRAG 'N DROP NOTICE-->
+		<Grid Grid.Row="0" Grid.RowSpan="4" Grid.Column="0" Grid.ColumnSpan="2" Background="#EE303030" x:Name="dropNotice" Visibility="Hidden">
+			<TextBlock x:Name="dropStatusText" Text="DRAG AND DROP MISSION FILE" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" Foreground="White"/>
+		</Grid>
 	</Grid>
 </Window>

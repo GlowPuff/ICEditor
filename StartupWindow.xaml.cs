@@ -291,5 +291,84 @@ namespace Imperial_Commander_Editor
 			packager.Show();
 			Close();
 		}
+
+		private void Window_DragEnter( object sender, DragEventArgs e )
+		{
+			dropStatusText.Text = "DRAG AND DROP MISSION FILE";
+
+			if ( e.Data.GetDataPresent( DataFormats.FileDrop ) )
+			{
+				string[] filename = e.Data.GetData( DataFormats.FileDrop ) as string[];
+				if ( filename.Length == 1 && Path.GetExtension( filename[0] ) == ".json" )
+				{
+					e.Effects = DragDropEffects.Copy;
+					dropNotice.Visibility = Visibility.Visible;
+				}
+			}
+			else
+			{
+				e.Effects = DragDropEffects.None;
+				dropNotice.Visibility = Visibility.Hidden;
+			}
+			e.Handled = true;
+		}
+
+		private void Window_Drop( object sender, DragEventArgs e )
+		{
+			if ( e.Data.GetDataPresent( DataFormats.FileDrop ) )
+			{
+				string[] filename = e.Data.GetData( DataFormats.FileDrop ) as string[];
+				if ( filename.Length == 1 && Path.GetExtension( filename[0] ) == ".json" )
+				{
+					dropStatusText.Text = "OPENING MISSION...";
+
+					var task = new Task( () =>
+					{
+						var filePath = filename[0];
+						var project = FileManager.LoadMission( filePath );
+						if ( project != null )
+						{
+							Dispatcher.Invoke( () =>
+							{
+								MainWindow mainWindow = new( project );
+								mainWindow.Show();
+								Close();
+							} );
+						}
+						else
+						{
+							Dispatcher.Invoke( () =>
+							{
+								dropNotice.Visibility = Visibility.Hidden;
+							} );
+						}
+					} );
+					task.Start();
+				}
+			}
+			e.Handled = true;
+		}
+
+		private void Window_DragLeave( object sender, DragEventArgs e )
+		{
+			dropNotice.Visibility = Visibility.Hidden;
+			e.Handled = true;
+		}
+
+		private void Window_DragOver( object sender, DragEventArgs e )
+		{
+			string[] filename = e.Data.GetData( DataFormats.FileDrop ) as string[];
+			if ( filename.Length == 1 && Path.GetExtension( filename[0] ) == ".json" )
+			{
+				e.Effects = DragDropEffects.Copy;
+				dropNotice.Visibility = Visibility.Visible;
+			}
+			else
+			{
+				e.Effects = DragDropEffects.None;
+				dropNotice.Visibility = Visibility.Hidden;
+			}
+			e.Handled = true;
+		}
 	}
 }

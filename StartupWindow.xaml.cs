@@ -160,10 +160,9 @@ namespace Imperial_Commander_Editor
 		private void removeButton_Click( object sender, RoutedEventArgs e )
 		{
 			ProjectItem pitem = (sender as Button).DataContext as ProjectItem;
-			//string basePath = Path.Combine( Environment.GetFolderPath( Environment.SpecialFolder.MyDocuments ), "ImperialCommander", pitem.relativePath );
 			string basePath = pitem.fullPathWithFilename;
 
-			var r = MessageBox.Show( $"Are you sure you want to PERMANENTLY DELETE this mission?\r\rPath: {basePath}", "Permanently Delete This Mission?", MessageBoxButton.YesNo );
+			var r = MessageBox.Show( $"Are you sure you want to PERMANENTLY DELETE this mission OR remove it from the Recent Mission List?\n\nPath: {basePath}\n\nYES = PERMANENTLY DELETE THE MISSION\nNO = ONLY Remove the Mission from the Recent Mission List\nCANCEL = Don't do ANYTHING, Cancel!", "Permanently Delete Mission OR Remove from Recent Mission List", MessageBoxButton.YesNoCancel );
 			if ( r == MessageBoxResult.Yes )
 			{
 				try
@@ -176,6 +175,11 @@ namespace Imperial_Commander_Editor
 				{
 					MessageBox.Show( $"Could not delete file '{basePath}'.\r\r{ee.InnerException}", "Error Deleting File", MessageBoxButton.OK, MessageBoxImage.Error );
 				}
+			}
+			else if ( r == MessageBoxResult.No )
+			{
+				FileManager.RemoveFromMRU( basePath );
+				PopulateRecents();
 			}
 		}
 

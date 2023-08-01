@@ -157,6 +157,9 @@ namespace Imperial_Commander_Editor
 		{
 			ProjectItem projectItem = new ProjectItem();
 
+			if ( !File.Exists( filename ) )
+				return null;
+
 			var mission = LoadMissionFromString( File.ReadAllText( filename ) );
 			if ( mission != null )
 			{
@@ -266,7 +269,14 @@ namespace Imperial_Commander_Editor
 				if ( File.Exists( basePath ) )
 				{
 					List<ProjectItem> items = new();
-					var mru = File.ReadAllLines( basePath );
+					var mru = File.ReadAllLines( basePath ).ToList();
+					//validate each file exists
+					mru = mru.Where( x => File.Exists( x ) ).ToList();
+					//overwrite the MRU in case it changed
+					using ( TextWriter fs = new StreamWriter( basePath, false ) )
+					{
+						mru.ForEach( x => fs.WriteLine( x ) );
+					}
 
 					foreach ( string line in mru )
 					{
@@ -274,7 +284,6 @@ namespace Imperial_Commander_Editor
 						if ( pi != null )
 							items.Add( pi );
 					}
-					//items.Sort();
 					return items;
 				}
 				else
@@ -287,7 +296,7 @@ namespace Imperial_Commander_Editor
 		}
 
 		/// <summary>
-		/// When saving a Mission, add it to the MRU, then save the MRU list
+		/// When saving or loading a Mission, add it to the MRU, then save the MRU list
 		/// </summary>
 		public static void AddSaveMRU( string fullPath )
 		{
@@ -297,6 +306,8 @@ namespace Imperial_Commander_Editor
 			if ( File.Exists( basePath ) )
 			{
 				mru = File.ReadAllLines( basePath ).ToList();
+				//validate each file exists
+				mru = mru.Where( x => File.Exists( x ) ).ToList();
 			}
 
 			//check if this file path already exists in the current MRU

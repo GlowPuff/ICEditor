@@ -74,7 +74,7 @@ namespace Imperial_Commander_Editor
 			projectLV.ItemsSource = projectCollection;
 
 			//poll Project folder for files and populate Recent list, sorted by newest first
-			var projects = FileManager.GetProjects();
+			var projects = FileManager.GetMRUProjects();
 			if ( projects != null )
 			{
 				foreach ( ProjectItem pi in projects )
@@ -168,6 +168,7 @@ namespace Imperial_Commander_Editor
 			{
 				try
 				{
+					FileManager.RemoveFromMRU( basePath );
 					File.Delete( basePath );
 					PopulateRecents();
 				}

@@ -80,6 +80,8 @@ namespace Imperial_Commander_Editor
 				{
 					stream.Write( output );
 				}
+				//add saved file to MRU list
+				AddSaveMRU( mission.fullPathToFile );
 			}
 			catch ( Exception e )
 			{
@@ -116,6 +118,10 @@ namespace Imperial_Commander_Editor
 				m.fullPathToFile = fi.FullName;
 				//m.relativePath = Path.GetRelativePath( basePath, new DirectoryInfo( filename ).FullName );
 				m.fileVersion = Utils.formatVersion;
+
+				//add loaded file to MRU list
+				AddSaveMRU( m.fullPathToFile );
+
 				return m;
 			}
 			catch ( Exception e )
@@ -208,7 +214,6 @@ namespace Imperial_Commander_Editor
 			//return projectItem;
 		}
 
-
 		/// <summary>
 		/// Return ProjectItem info for missions in Project folder
 		/// </summary>
@@ -246,6 +251,88 @@ namespace Imperial_Commander_Editor
 			catch ( Exception )
 			{
 				return null;
+			}
+		}
+
+		/// <summary>
+		/// Builds and returns ProjectItems from MRU list
+		/// </summary>
+		public static IEnumerable<ProjectItem> GetMRUProjects()
+		{
+			string basePath = Path.Combine( AppDomain.CurrentDomain.BaseDirectory, "ICEditor_MRU.txt" );
+
+			try
+			{
+				if ( File.Exists( basePath ) )
+				{
+					List<ProjectItem> items = new();
+					var mru = File.ReadAllLines( basePath );
+
+					foreach ( string line in mru )
+					{
+						var pi = CreateProjectItem( line );
+						if ( pi != null )
+							items.Add( pi );
+					}
+					//items.Sort();
+					return items;
+				}
+				else
+					return new List<ProjectItem>();
+			}
+			catch ( Exception )
+			{
+				return null;
+			}
+		}
+
+		/// <summary>
+		/// When saving a Mission, add it to the MRU, then save the MRU list
+		/// </summary>
+		public static void AddSaveMRU( string fullPath )
+		{
+			string basePath = Path.Combine( AppDomain.CurrentDomain.BaseDirectory, "ICEditor_MRU.txt" );
+			List<string> mru = new();
+
+			if ( File.Exists( basePath ) )
+			{
+				mru = File.ReadAllLines( basePath ).ToList();
+			}
+
+			//check if this file path already exists in the current MRU
+			//add it to the top if it's not in the list
+			if ( !mru.Any( x => x == fullPath ) )
+				mru.Insert( 0, fullPath );
+			else
+			{
+				int idx = mru.IndexOf( fullPath );
+				mru.RemoveAt( idx );
+				mru.Insert( 0, fullPath );
+			}
+			//overwrite the MRU
+			using ( TextWriter fs = new StreamWriter( basePath, false ) )
+			{
+				mru.ForEach( x => fs.WriteLine( x ) );
+			}
+		}
+
+		public static void RemoveFromMRU( string fullPath )
+		{
+			string basePath = Path.Combine( AppDomain.CurrentDomain.BaseDirectory, "ICEditor_MRU.txt" );
+
+			if ( File.Exists( basePath ) )
+			{
+				List<string> mru = File.ReadAllLines( basePath ).ToList();
+				for ( int i = mru.Count - 1; i >= 0; i-- )
+				{
+					if ( mru[i] == fullPath )
+						mru.RemoveAt( i );
+				}
+				//overwrite the MRU
+				using ( TextWriter fs = new StreamWriter( basePath, false ) )
+				{
+					mru.ForEach( x => fs.WriteLine( x ) );
+				}
 			}
 		}
 

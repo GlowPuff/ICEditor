@@ -95,7 +95,8 @@ namespace Imperial_Commander_Editor
 				new( "Blue", ColorFromFloats( 0, 0.3294118f, 1 ) ),
 				new( "Green", ColorFromFloats( 0, 0.735849f, 0.1056484f ) ),
 				new( "Red", ColorFromFloats( 1, 0, 0 ) ),
-				new( "Yellow", ColorFromFloats( 1, 202f / 255f, 40f / 255f ) )
+				new( "Yellow", ColorFromFloats( 1, 202f / 255f, 40f / 255f ) ),
+				new( "LightBlue", ColorFromFloats( 0, 164f / 255f, 1 ) )
 			};
 		}
 

@@ -90,6 +90,9 @@
     <None Remove="Assets\Thumbnails\Imperial\CustomImperial43.png" />
     <None Remove="Assets\Thumbnails\Imperial\CustomImperial44.png" />
     <None Remove="Assets\Thumbnails\Imperial\CustomImperial45.png" />
+    <None Remove="Assets\Thumbnails\Imperial\CustomImperial46.png" />
+    <None Remove="Assets\Thumbnails\Imperial\CustomImperial47.png" />
+    <None Remove="Assets\Thumbnails\Imperial\CustomImperial48.png" />
     <None Remove="Assets\Thumbnails\Imperial\CustomImperial5.png" />
     <None Remove="Assets\Thumbnails\Imperial\CustomImperial6.png" />
     <None Remove="Assets\Thumbnails\Imperial\CustomImperial7.png" />
@@ -191,6 +194,7 @@
     <None Remove="Assets\Thumbnails\Mercenary\CustomMercenary16.png" />
     <None Remove="Assets\Thumbnails\Mercenary\CustomMercenary17.png" />
     <None Remove="Assets\Thumbnails\Mercenary\CustomMercenary18.png" />
+    <None Remove="Assets\Thumbnails\Mercenary\CustomMercenary19.png" />
     <None Remove="Assets\Thumbnails\Mercenary\CustomMercenary2.png" />
     <None Remove="Assets\Thumbnails\Mercenary\CustomMercenary3.png" />
     <None Remove="Assets\Thumbnails\Mercenary\CustomMercenary4.png" />
@@ -267,6 +271,7 @@
     <None Remove="Assets\Thumbnails\Rebel\CustomRebel33.png" />
     <None Remove="Assets\Thumbnails\Rebel\CustomRebel34.png" />
     <None Remove="Assets\Thumbnails\Rebel\CustomRebel35.png" />
+    <None Remove="Assets\Thumbnails\Rebel\CustomRebel36.png" />
     <None Remove="Assets\Thumbnails\Rebel\CustomRebel4.png" />
     <None Remove="Assets\Thumbnails\Rebel\CustomRebel5.png" />
     <None Remove="Assets\Thumbnails\Rebel\CustomRebel6.png" />
@@ -864,6 +869,9 @@
     <Resource Include="Assets\Thumbnails\Imperial\CustomImperial43.png" />
     <Resource Include="Assets\Thumbnails\Imperial\CustomImperial44.png" />
     <Resource Include="Assets\Thumbnails\Imperial\CustomImperial45.png" />
+    <Resource Include="Assets\Thumbnails\Imperial\CustomImperial46.png" />
+    <Resource Include="Assets\Thumbnails\Imperial\CustomImperial47.png" />
+    <Resource Include="Assets\Thumbnails\Imperial\CustomImperial48.png" />
     <Resource Include="Assets\Thumbnails\Imperial\CustomImperial5.png" />
     <Resource Include="Assets\Thumbnails\Imperial\CustomImperial6.png" />
     <Resource Include="Assets\Thumbnails\Imperial\CustomImperial7.png" />
@@ -879,6 +887,7 @@
     <Resource Include="Assets\Thumbnails\Mercenary\CustomMercenary16.png" />
     <Resource Include="Assets\Thumbnails\Mercenary\CustomMercenary17.png" />
     <Resource Include="Assets\Thumbnails\Mercenary\CustomMercenary18.png" />
+    <Resource Include="Assets\Thumbnails\Mercenary\CustomMercenary19.png" />
     <Resource Include="Assets\Thumbnails\Mercenary\CustomMercenary2.png" />
     <Resource Include="Assets\Thumbnails\Mercenary\CustomMercenary3.png" />
     <Resource Include="Assets\Thumbnails\Mercenary\CustomMercenary4.png" />
@@ -919,6 +928,7 @@
     <Resource Include="Assets\Thumbnails\Rebel\CustomRebel33.png" />
     <Resource Include="Assets\Thumbnails\Rebel\CustomRebel34.png" />
     <Resource Include="Assets\Thumbnails\Rebel\CustomRebel35.png" />
+    <Resource Include="Assets\Thumbnails\Rebel\CustomRebel36.png" />
     <Resource Include="Assets\Thumbnails\Rebel\CustomRebel4.png" />
     <Resource Include="Assets\Thumbnails\Rebel\CustomRebel5.png" />
     <Resource Include="Assets\Thumbnails\Rebel\CustomRebel6.png" />
@@ -1096,9 +1106,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="CommunityToolkit.Mvvm" Version="7.1.2" />
-    <PackageReference Include="MaterialDesignThemes" Version="4.5.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
+    <PackageReference Include="MaterialDesignThemes" Version="4.9.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
   <ItemGroup>

@@ -343,23 +343,23 @@ namespace Imperial_Commander_Editor
 			switch ( ttype )
 			{
 				case ThumbType.All:
-					return None.Concat( Other ).Concat( Rebel ).Concat( Imperial ).Concat( Mercenary ).Concat( StockImperial ).Concat( StockAlly ).Concat( StockHero ).Concat( StockVillain ).ToList();
+					return None.Concat( Other ).Concat( Rebel ).Concat( Imperial ).Concat( Mercenary ).Concat( StockImperial ).Concat( StockAlly ).Concat( StockHero ).Concat( StockVillain ).OrderBy( x => x.Name ).ToList();
 				case ThumbType.Other:
-					return None.Concat( Other ).ToList();
+					return None.Concat( Other ).OrderBy( x => x.Name ).ToList();
 				case ThumbType.Rebel:
-					return None.Concat( Rebel ).ToList();
+					return None.Concat( Rebel ).OrderBy( x => x.Name ).ToList();
 				case ThumbType.Imperial:
-					return None.Concat( Imperial ).ToList();
+					return None.Concat( Imperial ).OrderBy( x => x.Name ).ToList();
 				case ThumbType.Mercenary:
-					return None.Concat( Mercenary ).ToList();
+					return None.Concat( Mercenary ).OrderBy( x => x.Name ).ToList();
 				case ThumbType.StockImperial:
-					return None.Concat( StockImperial ).ToList();
+					return None.Concat( StockImperial ).OrderBy( x => x.Name ).ToList();
 				case ThumbType.StockAlly:
-					return None.Concat( StockAlly ).ToList();
+					return None.Concat( StockAlly ).OrderBy( x => x.Name ).ToList();
 				case ThumbType.StockHero:
-					return None.Concat( StockHero ).ToList();
+					return None.Concat( StockHero ).OrderBy( x => x.Name ).ToList();
 				case ThumbType.StockVillain:
-					return None.Concat( StockVillain ).ToList();
+					return None.Concat( StockVillain ).OrderBy( x => x.Name ).ToList();
 				default:
 					return Other;
 			}

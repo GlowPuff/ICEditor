@@ -1,41 +1,68 @@
-﻿<Window x:Class="Imperial_Commander_Editor.AddTriggerDialog"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Imperial_Commander_Editor"
-        mc:Ignorable="d"
-				xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
-				Style="{StaticResource dws}"
-				Title="Add New Trigger" Width="500" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown" ContentRendered="Window_ContentRendered" SizeToContent="Height">
+﻿<Window
+	x:Class="Imperial_Commander_Editor.AddTriggerDialog"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:local="clr-namespace:Imperial_Commander_Editor"
+	xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	Title="Add New Trigger"
+	Width="500"
+	ContentRendered="Window_ContentRendered"
+	MouseDown="Window_MouseDown"
+	SizeToContent="Height"
+	Style="{StaticResource dws}"
+	WindowStartupLocation="CenterScreen"
+	mc:Ignorable="d">
 
 	<Border BorderBrush="MediumPurple" BorderThickness="2">
-		<GroupBox x:Name="gbox" Header="Add A New Trigger Variable" Style="{DynamicResource MaterialDesignGroupBox}">
+		<GroupBox
+			x:Name="gbox"
+			Header="Add A New Trigger Variable"
+			Style="{DynamicResource MaterialDesignGroupBox}">
 			<Grid>
 				<Grid.RowDefinitions>
-					<RowDefinition Height="*"/>
-					<RowDefinition Height="auto"/>
-					<RowDefinition Height="auto"/>
+					<RowDefinition Height="*" />
+					<RowDefinition Height="auto" />
+					<RowDefinition Height="auto" />
 				</Grid.RowDefinitions>
 
 				<StackPanel Grid.Row="0">
 					<Grid>
 						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="auto"/>
-							<ColumnDefinition Width="auto"/>
-							<ColumnDefinition Width="*"/>
-							<ColumnDefinition Width="auto"/>
-							<ColumnDefinition Width="auto"/>
+							<ColumnDefinition Width="auto" />
+							<ColumnDefinition Width="auto" />
+							<ColumnDefinition Width="*" />
+							<ColumnDefinition Width="auto" />
+							<ColumnDefinition Width="auto" />
 						</Grid.ColumnDefinitions>
 
-						<TextBlock Text="Name:" VerticalAlignment="Center"/>
-						<TextBox Grid.Column="1" x:Name="nameTB" Text="{Binding trigger.name}" Margin="10,0,10,0" Foreground="White" Width="200" Style="{StaticResource MaterialDesignOutlinedTextBox}" KeyDown="nameTB_KeyDown"/>
-						<TextBlock Grid.Column="2"/>
-						<TextBlock Grid.Column="3" Text="Global?" Margin="0,0,10,0" VerticalAlignment="Center"/>
-						<ToggleButton Grid.Column="4" x:Name="globalToggle" IsChecked="{Binding trigger.isGlobal}"/>
+						<TextBlock VerticalAlignment="Center" Text="Name:" />
+						<TextBox
+							x:Name="nameTB"
+							Grid.Column="1"
+							Width="200"
+							Margin="10,0,10,0"
+							Foreground="White"
+							KeyDown="nameTB_KeyDown"
+							Style="{StaticResource MaterialDesignOutlinedTextBox}"
+							Text="{Binding trigger.name}" />
+						<TextBlock Grid.Column="2" />
+						<TextBlock
+							Grid.Column="3"
+							Margin="0,0,10,0"
+							VerticalAlignment="Center"
+							Text="Global?" />
+						<ToggleButton
+							x:Name="globalToggle"
+							Grid.Column="4"
+							IsChecked="{Binding trigger.isGlobal}" />
 					</Grid>
 
-					<materialDesign:Card Background="{StaticResource CardBG}" Margin="0,10" Padding="10">
+					<materialDesign:Card
+						Margin="0,10"
+						Padding="10"
+						Background="{StaticResource CardBG}">
 						<StackPanel>
 							<Grid>
 								<Grid.ColumnDefinitions>
@@ -43,10 +70,22 @@
 									<ColumnDefinition Width="*" />
 								</Grid.ColumnDefinitions>
 								<StackPanel Orientation="Horizontal">
-									<TextBlock Text="Initial Value:" VerticalAlignment="Center" Margin="0,0,10,0"/>
-									<TextBox Text="{Binding trigger.initialValue}" Width="64" KeyDown="nameTB_KeyDown" VerticalAlignment="Center"/>
+									<TextBlock
+										Margin="0,0,10,0"
+										VerticalAlignment="Center"
+										Text="Initial Value:" />
+									<TextBox
+										Width="64"
+										VerticalAlignment="Center"
+										KeyDown="nameTB_KeyDown"
+										Text="{Binding trigger.initialValue}" />
 								</StackPanel>
-								<CheckBox Grid.Column="1" Content="Reset To 0 Upon Triggering" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding trigger.useReset}" Margin="0,0,0,4"/>
+								<CheckBox
+									Grid.Column="1"
+									Margin="0,0,0,4"
+									Content="Reset To 0 Upon Triggering"
+									IsChecked="{Binding trigger.useReset}"
+									Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" />
 							</Grid>
 
 							<Grid Margin="0,10,0,0">
@@ -55,15 +94,27 @@
 									<ColumnDefinition Width="1*" />
 								</Grid.ColumnDefinitions>
 								<StackPanel Orientation="Horizontal">
-									<TextBlock Text="Maximum Value:" VerticalAlignment="Center" Margin="0,0,10,0"/>
-									<TextBox Text="{Binding trigger.maxValue}" Width="64" KeyDown="nameTB_KeyDown" VerticalAlignment="Center"/>
+									<TextBlock
+										Margin="0,0,10,0"
+										VerticalAlignment="Center"
+										Text="Maximum Value:" />
+									<TextBox
+										Width="64"
+										VerticalAlignment="Center"
+										KeyDown="nameTB_KeyDown"
+										Text="{Binding trigger.maxValue}" />
 								</StackPanel>
-								<TextBlock Grid.Column="1" Text="-1 = No Maximum" VerticalAlignment="Center" FontStyle="Italic" Foreground="Purple"/>
+								<TextBlock
+									Grid.Column="1"
+									VerticalAlignment="Center"
+									FontStyle="Italic"
+									Foreground="Violet"
+									Text="-1 = No Maximum" />
 							</Grid>
 						</StackPanel>
 					</materialDesign:Card>
 
-					<materialDesign:Card Background="{StaticResource CardBG}" Padding="10">
+					<materialDesign:Card Padding="10" Background="{StaticResource CardBG}">
 						<Grid>
 							<Grid.ColumnDefinitions>
 								<ColumnDefinition Width="auto" />
@@ -71,21 +122,52 @@
 								<ColumnDefinition Width="auto" />
 							</Grid.ColumnDefinitions>
 
-							<TextBlock Text="Fire Event Upon Triggering:" VerticalAlignment="Center" Margin="0,0,10,0"/>
+							<TextBlock
+								Margin="0,0,10,0"
+								VerticalAlignment="Center"
+								Text="Fire Event Upon Triggering:" />
 
-							<ComboBox Grid.Column="1" x:Name="elist" Style="{StaticResource MaterialDesignOutlinedComboBox}" ItemsSource="{Binding mainWindow.localEvents}" SelectedValue="{Binding trigger.eventGUID}" DisplayMemberPath="name" SelectedValuePath="GUID"/>
+							<ComboBox
+								x:Name="elist"
+								Grid.Column="1"
+								DisplayMemberPath="name"
+								ItemsSource="{Binding mainWindow.localEvents}"
+								SelectedValue="{Binding trigger.eventGUID}"
+								SelectedValuePath="GUID"
+								Style="{StaticResource MaterialDesignOutlinedComboBox}" />
 
-							<Button Grid.Row="2" x:Name="addNewEventButton" Grid.Column="2" Margin="10,0,0,0" Click="addNewEventButton_Click" ToolTip="Add New Event" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35">
-								<Image Source="../Assets/addevent.png" Height="20"/>
+							<Button
+								x:Name="addNewEventButton"
+								Grid.Row="2"
+								Grid.Column="2"
+								Width="35"
+								Height="35"
+								Margin="10,0,0,0"
+								Click="addNewEventButton_Click"
+								Style="{StaticResource MaterialDesignFloatingActionButton}"
+								ToolTip="Add New Event">
+								<Image Height="20" Source="../Assets/addevent.png" />
 							</Button>
 						</Grid>
 					</materialDesign:Card>
 				</StackPanel>
 
-				<Separator Grid.Row="1" Margin="0,10,0,10"/>
-				<StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" >
-					<Button x:Name="okButton" Content="ACCEPT" Click="okButton_Click" IsDefault="True"/>
-					<Button x:Name="cancelButton" Content="CANCEL" Margin="10,0,0,0" Click="cancelButton_Click" IsCancel="True"/>
+				<Separator Grid.Row="1" Margin="0,10,0,10" />
+				<StackPanel
+					Grid.Row="2"
+					HorizontalAlignment="Right"
+					Orientation="Horizontal">
+					<Button
+						x:Name="okButton"
+						Click="okButton_Click"
+						Content="ACCEPT"
+						IsDefault="True" />
+					<Button
+						x:Name="cancelButton"
+						Margin="10,0,0,0"
+						Click="cancelButton_Click"
+						Content="CANCEL"
+						IsCancel="True" />
 				</StackPanel>
 			</Grid>
 		</GroupBox>

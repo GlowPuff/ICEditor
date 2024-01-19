@@ -9,7 +9,7 @@ namespace Imperial_Commander_Editor
 	{
 		public event PropertyChangedEventHandler PropertyChanged;
 
-		string _missionName, _missionID, _fixedAlly, _bannedAlly, _missionInfo, _specificAlly, _specificHero, _priorityOther, _missionDescription, _campaignName, _startingObjective, _additionalMissionInfo;
+		string _missionName, _missionID, _fixedAlly, _bannedAlly, _missionInfo, _specificAlly, _specificHero, _priorityOther, _missionDescription, _campaignName, _startingObjective, _additionalMissionInfo, _customMissionIdentifier;
 		bool _optionalDeployment, _factionImperial, _factionMercenary;
 		YesNoAll _useFixedAlly, _useBannedAlly;//, _banAllAllies;
 		CustomInstructionType _customInstructionType;
@@ -63,6 +63,11 @@ namespace Imperial_Commander_Editor
 		{
 			get { return _missionID; }
 			set { _missionID = value; PC(); }
+		}
+		public string customMissionIdentifier
+		{
+			get { return _customMissionIdentifier; }
+			set { _customMissionIdentifier = value; PC(); }
 		}
 		public string missionInfo
 		{
@@ -189,6 +194,7 @@ namespace Imperial_Commander_Editor
 		{
 			missionID = "Custom";//"Example: CORE01";//"Unique Mission ID";
 			missionName = "Mission Name";
+			customMissionIdentifier = Guid.NewGuid().ToString();
 			missionDescription = "";
 			additionalMissionInfo = "";
 			missionInfo = "";

@@ -13,8 +13,8 @@ namespace Imperial_Commander_Editor
 {
 	public static class Utils
 	{
-		public const string formatVersion = "21";
-		public const string appVersion = "1.0.34";
+		public const string formatVersion = "22";
+		public const string appVersion = "1.1.0";
 
 		private static List<DeploymentCard> _allyData, _enemyData, _villainData, _heroData;
 
@@ -75,6 +75,7 @@ namespace Imperial_Commander_Editor
 		public static ThumbnailData thumbnailData;
 		public static List<CardInstruction> enemyInstructions;
 		public static List<BonusEffect> enemyBonusEffects;
+		public static List<MissionNameData> missionNames;
 
 		public static ObservableCollection<DeploymentColor> deploymentColors;
 
@@ -111,6 +112,17 @@ namespace Imperial_Commander_Editor
 			enemyInstructions = FileManager.LoadAsset<List<CardInstruction>>( "instructions.json" );
 			enemyBonusEffects = FileManager.LoadAsset<List<BonusEffect>>( "bonuseffects.json" );
 			thumbnailData = FileManager.LoadAsset<ThumbnailData>( "thumbnails.json" );
+			//rewrite the mission names with the expansion ID
+			missionNames = LoadMissionNames( "core" )
+				.Concat( LoadMissionNames( "bespin" ) )
+				.Concat( LoadMissionNames( "empire" ) )
+				.Concat( LoadMissionNames( "hoth" ) )
+				.Concat( LoadMissionNames( "jabba" ) )
+				.Concat( LoadMissionNames( "lothal" ) )
+				.Concat( LoadMissionNames( "twin" ) )
+				.Concat( LoadMissionNames( "other" ) ).ToList();
+			//FileManager.LoadAsset<List<MissionNameData>>( "missionnames.json" )
+			//.Select( x => new MissionNameData() { id = x.id, name = $"({x.id}) {x.name}" } ).ToList();
 			//append stock icon data
 			//remove duplicate names and elite version, only need 1 thumb for each ID
 			//caution - enemyData contains enemies AND villains, remove villain data
@@ -123,6 +135,12 @@ namespace Imperial_Commander_Editor
 			thumbnailData.StockAlly = allyData.Select( x => new Thumbnail() { ID = $"StockAlly{x.id.GetDigits()}", Name = x.name } ).ToList();
 			thumbnailData.StockHero = heroData.Select( x => new Thumbnail() { ID = $"StockHero{x.id.GetDigits()}", Name = x.name } ).ToList();
 			thumbnailData.StockVillain = villainData.Select( x => new Thumbnail() { ID = $"StockVillain{x.id.GetDigits()}", Name = x.name } ).ToList();
+		}
+
+		private static List<MissionNameData> LoadMissionNames( string id )
+		{
+			return FileManager.LoadAsset<List<MissionNameData>>( $"{id}.json" )
+				.Select( x => new MissionNameData() { id = x.id, name = $"({x.id.ToUpper()}) {x.name}" } ).ToList();
 		}
 
 		public static DeploymentColor ColorFromName( string n )
@@ -140,6 +158,9 @@ namespace Imperial_Commander_Editor
 				(byte)(b * 255f) );
 		}
 
+		/// <summary>
+		/// Makes the TextBlock lose focus when hitting Enter
+		/// </summary>
 		public static void LoseFocus( Control element )
 		{
 			FrameworkElement parent = (FrameworkElement)element.Parent;
@@ -157,6 +178,9 @@ namespace Imperial_Commander_Editor
 			Debug.WriteLine( s );
 		}
 
+		/// <summary>
+		/// allies, enemies, villains, heroes card data
+		/// </summary>
 		public static void LoadCardData()
 		{
 			allyData = FileManager.LoadAsset<List<DeploymentCard>>( "allies.json" );

@@ -105,6 +105,18 @@ namespace Imperial_Commander_Editor
 					case 23:
 						eventActionAction = item.ToObject<QueryGroup>();
 						break;
+					case 24:
+						eventActionAction = item.ToObject<CampaignModifyXP>();
+						break;
+					case 25:
+						eventActionAction = item.ToObject<CampaignModifyCredits>();
+						break;
+					case 26:
+						eventActionAction = item.ToObject<CampaignAddReward>();
+						break;
+					case 27:
+						eventActionAction = item.ToObject<CampaignSetNextMission>();
+						break;
 				}
 				eObserver.Add( eventActionAction );
 			}

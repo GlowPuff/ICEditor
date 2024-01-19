@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -216,6 +217,11 @@ namespace Imperial_Commander_Editor
 				eventCB.ItemsSource = Utils.mainWindow.localEvents;
 				Utils.mainWindow.mission.missionProperties.startingEvent = me.GUID;
 			}
+		}
+
+		private void refreshIdentifier_Click( object sender, System.Windows.RoutedEventArgs e )
+		{
+			Utils.mainWindow.mission.missionProperties.customMissionIdentifier = Guid.NewGuid().ToString();
 		}
 	}
 }

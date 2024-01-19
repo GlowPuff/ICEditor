@@ -47,6 +47,7 @@ namespace Imperial_Commander_Editor
 
 	public class EntityModifier
 	{
+		public Guid GUID { get; set; } = Guid.NewGuid();
 		public Guid sourceGUID { get; set; }
 		public bool hasColor { get; set; }
 		public bool hasProperties { get; set; }
@@ -55,6 +56,7 @@ namespace Imperial_Commander_Editor
 
 	public class ButtonAction
 	{
+		public Guid GUID { get; set; } = Guid.NewGuid();
 		public string buttonText { get; set; }
 		public Guid triggerGUID { get; set; }
 		public Guid eventGUID { get; set; }
@@ -279,6 +281,7 @@ namespace Imperial_Commander_Editor
 		}
 		public event PropertyChangedEventHandler PropertyChanged;
 
+		public Guid GUID { get; set; } = Guid.NewGuid();
 		public string theText { get { return _theText; } set { _theText = value; PC(); } }
 		public int fromValue { get { return _fromValue; } set { _fromValue = value; PC(); } }
 		public int toValue { get { return _toValue; } set { _toValue = value; PC(); } }
@@ -287,7 +290,6 @@ namespace Imperial_Commander_Editor
 
 		public InputRange()
 		{
-
 		}
 	}
 
@@ -395,5 +397,11 @@ namespace Imperial_Commander_Editor
 		public string id;//use custom toon's unique ID
 		public string name { get; set; }
 		public int cost { get; set; }
+	}
+
+	public class MissionNameData
+	{
+		public string id { get; set; }
+		public string name { get; set; }
 	}
 }

@@ -138,6 +138,10 @@ namespace Imperial_Commander_Editor
 			EventActionType.GM7 => new QueryGroupDialog( dname, et, ea ),
 			EventActionType.M1 => new MapManagementDialog( dname, et, ea ),
 			EventActionType.M2 => new ModifyMapEntityDialog( dname, et, ea ),
+			EventActionType.CM1 => new ModifyXPDialog( dname, et, ea ),
+			EventActionType.CM2 => new ModifyCreditsDialog( dname, et, ea ),
+			EventActionType.CM3 => new ModifyFameAwardsDialog( dname, et, ea ),
+			EventActionType.CM4 => new SetNextMissionDialog( dname, et, ea ),
 			_ => null
 		};
 

@@ -52,6 +52,19 @@ namespace Imperial_Commander_Editor
 		}
 	}
 
+	public class RadioBoolToVisibilityConverter : IValueConverter
+	{
+		public object Convert( object value, Type targetType, object parameter, CultureInfo culture )
+		{
+			return value?.Equals( parameter ) == true ? "Visible" : "Collapsed";
+		}
+
+		public object ConvertBack( object value, Type targetType, object parameter, CultureInfo culture )
+		{
+			throw new NotImplementedException();
+		}
+	}
+
 	public class MissionSubTypeConverter : IValueConverter
 	{
 		public object Convert( object value, Type targetType, object parameter, CultureInfo culture )

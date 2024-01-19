@@ -280,7 +280,7 @@
 													<MenuItem Header="Campaign Management">
 														<MenuItem
 															Click="MenuItem_Click"
-															Header="Add XP"
+															Header="Modify XP"
 															Tag="CM1" />
 														<MenuItem
 															Click="MenuItem_Click"
@@ -288,7 +288,7 @@
 															Tag="CM2" />
 														<MenuItem
 															Click="MenuItem_Click"
-															Header="Add Fame and Awards"
+															Header="Modify Fame and Awards"
 															Tag="CM3" />
 														<MenuItem
 															Click="MenuItem_Click"

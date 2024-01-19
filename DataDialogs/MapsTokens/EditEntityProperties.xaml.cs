@@ -13,12 +13,14 @@ namespace Imperial_Commander_Editor
 		public static MainWindow mainWindow { get { return Utils.mainWindow; } }
 		public Trigger selectedTrigger { get; set; }
 
-		public EditEntityProperties( EntityProperties ep )
+		public EditEntityProperties( EntityProperties ep, bool showWarning = true )
 		{
 			InitializeComponent();
 			DataContext = this;
 
 			entityProperties = ep;
+
+			warning.Visibility = showWarning ? Visibility.Visible : Visibility.Collapsed;
 
 			//verify triggers/events still exist
 			//entityProperties.ValidateTriggers();

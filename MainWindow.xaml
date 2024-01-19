@@ -1,161 +1,247 @@
-﻿<Window x:Class="Imperial_Commander_Editor.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Imperial_Commander_Editor"
-        mc:Ignorable="d"
-				Style="{StaticResource dws}"
-				ResizeMode="CanResize"
-				WindowStyle="SingleBorderWindow"
-				xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
-				Title="{Binding mainTitle}" Height="800" Width="1100" MinWidth="400" WindowStartupLocation="CenterScreen" d:DesignHeight="600" d:DesignWidth="950" Loaded="Window_Loaded" PreviewKeyDown="Window_PreviewKeyDown">
+﻿<Window
+	x:Class="Imperial_Commander_Editor.MainWindow"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:local="clr-namespace:Imperial_Commander_Editor"
+	xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	Title="{Binding mainTitle}"
+	Width="1100"
+	Height="800"
+	MinWidth="400"
+	d:DesignHeight="600"
+	d:DesignWidth="950"
+	Loaded="Window_Loaded"
+	PreviewKeyDown="Window_PreviewKeyDown"
+	ResizeMode="CanResize"
+	Style="{StaticResource dws}"
+	WindowStartupLocation="CenterScreen"
+	WindowStyle="SingleBorderWindow"
+	mc:Ignorable="d">
 	<Window.Resources>
 		<ContextMenu x:Key="langCtxMenu">
-			<MenuItem Header="English" Command="{Binding SetEnglish}"/>
-			<MenuItem Header="German" Command="{Binding SetGerman}"/>
-			<MenuItem Header="Spanish" Command="{Binding SetSpanish}"/>
-			<MenuItem Header="French" Command="{Binding SetFrench}"/>
-			<MenuItem Header="Italian" Command="{Binding SetItalian}"/>
-			<MenuItem Header="Polski" Command="{Binding SetPolska}"/>
-			<MenuItem Header="Norwegian" Command="{Binding SetNorwegian}"/>
-			<MenuItem Header="Magyar" Command="{Binding SetHungarian}"/>
-			<MenuItem Header="Russian" Command="{Binding SetRussian}"/>
+			<MenuItem Command="{Binding SetEnglish}" Header="English" />
+			<MenuItem Command="{Binding SetGerman}" Header="German" />
+			<MenuItem Command="{Binding SetSpanish}" Header="Spanish" />
+			<MenuItem Command="{Binding SetFrench}" Header="French" />
+			<MenuItem Command="{Binding SetItalian}" Header="Italian" />
+			<MenuItem Command="{Binding SetPolska}" Header="Polski" />
+			<MenuItem Command="{Binding SetNorwegian}" Header="Norwegian" />
+			<MenuItem Command="{Binding SetHungarian}" Header="Magyar" />
+			<MenuItem Command="{Binding SetRussian}" Header="Russian" />
 		</ContextMenu>
 	</Window.Resources>
 
 	<Grid>
 		<DockPanel LastChildFill="True">
-			<ToolBarTray DockPanel.Dock="Top" materialDesign:ThemeAssist.Theme="Dark">
-				<ToolBar
-					Style="{DynamicResource MaterialDesignToolBar}" ClipToBounds="False">
-					<!--PROJECT WINDOW-->
-					<Button x:Name="projectManagerButton" ToolTip="Open Project Manager" Click="projectManagerButton_Click">
-						<Image Source="Assets/imperial.png" Height="35"/>
+			<ToolBarTray materialDesign:ThemeAssist.Theme="Dark" DockPanel.Dock="Top">
+				<ToolBar ClipToBounds="False" Style="{DynamicResource MaterialDesignToolBar}">
+					<!--  PROJECT WINDOW  -->
+					<Button
+						x:Name="projectManagerButton"
+						Click="projectManagerButton_Click"
+						ToolTip="Open Project Manager">
+						<Image Height="35" Source="Assets/imperial.png" />
 					</Button>
-					<Separator/>
-					<!--FILE STUFF-->
-					<!--open-->
-					<Button x:Name="openMissionButton" ToolTip="Open a Mission" Click="openMissionButton_Click">
-						<Image Source="Assets/open.png" Height="30"/>
+					<Separator />
+					<!--  FILE STUFF  -->
+					<!--  open  -->
+					<Button
+						x:Name="openMissionButton"
+						Click="openMissionButton_Click"
+						ToolTip="Open a Mission">
+						<Image Height="30" Source="Assets/open.png" />
 					</Button>
-					<!--save-->
-					<Button x:Name="saveMissionButton" ToolTip="Save the Mission" Click="saveMissionButton_Click">
-						<Image Source="Assets/save.png" Height="30"/>
+					<!--  save  -->
+					<Button
+						x:Name="saveMissionButton"
+						Click="saveMissionButton_Click"
+						ToolTip="Save the Mission">
+						<Image Height="30" Source="Assets/save.png" />
 					</Button>
-					<!--save as-->
-					<Button x:Name="saveMissionAsButton" ToolTip="Save the Mission As New Mission" Click="saveMissionAsButton_Click">
-						<Image Source="Assets/saveas.png" Height="30"/>
-					</Button>
-
-					<Separator/>
-
-					<!--CREATING-->
-					<!--trigger-->
-					<Button x:Name="addTriggerButton" ToolTip="Add a Trigger" Click="addTriggerButton_Click">
-						<Image Source="Assets/addtrigger.png" Height="30"/>
-					</Button>
-					<!--event-->
-					<Button x:Name="addEventButton" ToolTip="Add an Event" Click="addEventButton_Click">
-						<Image Source="Assets/addevent.png" Height="30"/>
-					</Button>
-
-					<!--map section-->
-					<Button x:Name="addBlockButton" ToolTip="Add a Map Section" Click="addBlockButton_Click">
-						<Image Source="Assets/addblock.png" Height="30"/>
+					<!--  save as  -->
+					<Button
+						x:Name="saveMissionAsButton"
+						Click="saveMissionAsButton_Click"
+						ToolTip="Save the Mission As New Mission">
+						<Image Height="30" Source="Assets/saveas.png" />
 					</Button>
 
-					<Separator/>
+					<Separator />
 
-					<!--broken references-->
-					<Button x:Name="openBrokenRefsWindow" ToolTip="Mission Health Check" Click="openBrokenRefsWindow_Click">
-						<Image Source="Assets/broken.png" Height="35"/>
+					<!--  CREATING  -->
+					<!--  trigger  -->
+					<Button
+						x:Name="addTriggerButton"
+						Click="addTriggerButton_Click"
+						ToolTip="Add a Trigger">
+						<Image Height="30" Source="Assets/addtrigger.png" />
+					</Button>
+					<!--  event  -->
+					<Button
+						x:Name="addEventButton"
+						Click="addEventButton_Click"
+						ToolTip="Add an Event">
+						<Image Height="30" Source="Assets/addevent.png" />
 					</Button>
 
-					<Separator/>
+					<!--  map section  -->
+					<Button
+						x:Name="addBlockButton"
+						Click="addBlockButton_Click"
+						ToolTip="Add a Map Section">
+						<Image Height="30" Source="Assets/addblock.png" />
+					</Button>
 
-					<!--mission settings-->
+					<Separator />
+
+					<!--  broken references  -->
+					<Button
+						x:Name="openBrokenRefsWindow"
+						Click="openBrokenRefsWindow_Click"
+						ToolTip="Mission Health Check">
+						<Image Height="35" Source="Assets/broken.png" />
+					</Button>
+
+					<Separator />
+
+					<!--  mission settings  -->
 					<!--<Button x:Name="missionSettingsButton" ToolTip="Mission Settings" Click="missionSettingsButton_Click">
 						<Image Source="Assets/settings.png" Height="30"/>
 					</Button>
 
 					<Separator/>-->
 
-					<TextBlock Text="Active Section" VerticalAlignment="Center" Margin="10,0,0,0"/>
-					<ComboBox Margin="10"
-    x:Name="activeSectionCB"
-    Style="{StaticResource MaterialDesignOutlinedComboBox}" Width="256" ItemsSource="{Binding mission.mapSections}" SelectedItem="{Binding activeSection}" DisplayMemberPath="name">
-					</ComboBox>
+					<TextBlock
+						Margin="10,0,0,0"
+						VerticalAlignment="Center"
+						Text="Active Section" />
+					<ComboBox
+						x:Name="activeSectionCB"
+						Width="256"
+						Margin="10"
+						DisplayMemberPath="name"
+						ItemsSource="{Binding mission.mapSections}"
+						SelectedItem="{Binding activeSection}"
+						Style="{StaticResource MaterialDesignOutlinedComboBox}" />
 				</ToolBar>
 			</ToolBarTray>
 
-			<Border DockPanel.Dock="Bottom" BorderBrush="Black" BorderThickness="0,1,0,0" Height="30" Background="{StaticResource MaterialDesignDarkBackground}">
+			<Border
+				Height="30"
+				Background="{StaticResource MaterialDesignDarkBackground}"
+				BorderBrush="Black"
+				BorderThickness="0,1,0,0"
+				DockPanel.Dock="Bottom">
 				<UniformGrid Columns="4">
-					<!--format version-->
-					<StackPanel Margin="5" HorizontalAlignment="Center" Orientation="Horizontal">
-						<TextBlock Text="Editor Version:  "/>
-						<TextBlock x:Name="appVersion"/>
+					<!--  format version  -->
+					<StackPanel
+						Margin="5"
+						HorizontalAlignment="Center"
+						Orientation="Horizontal">
+						<TextBlock Text="Editor Version:  " />
+						<TextBlock x:Name="appVersion" />
 					</StackPanel>
-					<!--app version-->
-					<StackPanel Margin="5" HorizontalAlignment="Center" Orientation="Horizontal">
-						<TextBlock Text="Mission Format Version:  "/>
-						<TextBlock x:Name="formatVersion"/>
+					<!--  app version  -->
+					<StackPanel
+						Margin="5"
+						HorizontalAlignment="Center"
+						Orientation="Horizontal">
+						<TextBlock Text="Mission Format Version:  " />
+						<TextBlock x:Name="formatVersion" />
 					</StackPanel>
-					<!--detected language-->
-					<StackPanel Margin="5" HorizontalAlignment="Center" Orientation="Horizontal">
-						<TextBlock Text="Language:  "/>
-						<TextBlock x:Name="detectedLanguage" MouseLeftButtonDown="detectedLanguage_MouseLeftButtonDown" ContextMenu="{StaticResource langCtxMenu}"/>
+					<!--  detected language  -->
+					<StackPanel
+						Margin="5"
+						HorizontalAlignment="Center"
+						Orientation="Horizontal">
+						<TextBlock Text="Default Language:  " />
+						<TextBlock
+							x:Name="detectedLanguage"
+							ContextMenu="{StaticResource langCtxMenu}"
+							MouseLeftButtonDown="detectedLanguage_MouseLeftButtonDown" />
 					</StackPanel>
-					<!--info-->
+					<!--  info  -->
 					<Grid Background="{Binding statusColor}">
-						<TextBlock Text="{Binding infoText}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+						<TextBlock
+							HorizontalAlignment="Center"
+							VerticalAlignment="Center"
+							Text="{Binding infoText}" />
 					</Grid>
 				</UniformGrid>
 			</Border>
 
 			<Grid>
 				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="235"/>
+					<ColumnDefinition Width="235" />
 					<!--<ColumnDefinition Width="3"/>-->
-					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="*" />
 				</Grid.ColumnDefinitions>
-				<!--left panel-->
-				<local:LeftPanel x:Name="leftPanel" DockPanel.Dock="Left" DataContext="{Binding}"/>
-				<!--main area-->
+				<!--  left panel  -->
+				<local:LeftPanel
+					x:Name="leftPanel"
+					DataContext="{Binding}"
+					DockPanel.Dock="Left" />
+				<!--  main area  -->
 				<Grid Grid.Column="2">
-					<TabControl x:Name="tabControl"
-  Style="{StaticResource MaterialDesignNavigatilRailTabControl}"
-  materialDesign:ColorZoneAssist.Mode="PrimaryMid"
-  TabStripPlacement="Top" materialDesign:NavigationRailAssist.ShowSelectionBackground="True" SelectionChanged="tabControl_SelectionChanged">
+					<TabControl
+						x:Name="tabControl"
+						materialDesign:ColorZoneAssist.Mode="PrimaryMid"
+						materialDesign:NavigationRailAssist.ShowSelectionBackground="True"
+						SelectionChanged="tabControl_SelectionChanged"
+						Style="{StaticResource MaterialDesignNavigatilRailTabControl}"
+						TabStripPlacement="Top">
 						<TabControl.Background>
-							<SolidColorBrush Color="#FF3A3349"/>
+							<SolidColorBrush Color="#FF3A3349" />
 						</TabControl.Background>
 
 						<TabItem Width="115">
 							<TabItem.Header>
 								<StackPanel>
-									<materialDesign:PackIcon Kind="Settings" Width="24" Height="24" HorizontalAlignment="Center" />
-									<TextBlock Style="{StaticResource MaterialDesignTextBlock}" Text="Mission" HorizontalAlignment="Center"/>
+									<materialDesign:PackIcon
+										Width="24"
+										Height="24"
+										HorizontalAlignment="Center"
+										Kind="Settings" />
+									<TextBlock
+										HorizontalAlignment="Center"
+										Style="{StaticResource MaterialDesignTextBlock}"
+										Text="Mission" />
 								</StackPanel>
 							</TabItem.Header>
-							<local:MissionPropsPanel x:Name="missionProps"/>
+							<local:MissionPropsPanel x:Name="missionProps" />
 						</TabItem>
 
 						<TabItem Width="115">
 							<TabItem.Header>
 								<StackPanel>
-									<materialDesign:PackIcon Kind="ViewGrid" Width="24" Height="24" HorizontalAlignment="Center" />
-									<TextBlock Style="{StaticResource MaterialDesignTextBlock}" Text="Sections" HorizontalAlignment="Center" />
+									<materialDesign:PackIcon
+										Width="24"
+										Height="24"
+										HorizontalAlignment="Center"
+										Kind="ViewGrid" />
+									<TextBlock
+										HorizontalAlignment="Center"
+										Style="{StaticResource MaterialDesignTextBlock}"
+										Text="Sections" />
 								</StackPanel>
 							</TabItem.Header>
-							<local:MapSections x:Name="mapSections"/>
+							<local:MapSections x:Name="mapSections" />
 						</TabItem>
 
 						<TabItem Width="115">
 							<TabItem.Header>
 								<StackPanel>
-									<materialDesign:PackIcon Kind="Map" Width="24" Height="24" HorizontalAlignment="Center" />
-									<TextBlock Style="{StaticResource MaterialDesignTextBlock}" Text="Map Editor" HorizontalAlignment="Center" />
+									<materialDesign:PackIcon
+										Width="24"
+										Height="24"
+										HorizontalAlignment="Center"
+										Kind="Map" />
+									<TextBlock
+										HorizontalAlignment="Center"
+										Style="{StaticResource MaterialDesignTextBlock}"
+										Text="Map Editor" />
 								</StackPanel>
 							</TabItem.Header>
 							<local:MapEditor x:Name="mapEditor" />
@@ -164,31 +250,53 @@
 						<TabItem Width="115">
 							<TabItem.Header>
 								<StackPanel>
-									<Image Width="24" Height="24" HorizontalAlignment="Center" Source="Assets/enemy.png"/>
-									<TextBlock Style="{StaticResource MaterialDesignTextBlock}" Text="Enemy Groups" HorizontalAlignment="Center"/>
+									<Image
+										Width="24"
+										Height="24"
+										HorizontalAlignment="Center"
+										Source="Assets/enemy.png" />
+									<TextBlock
+										HorizontalAlignment="Center"
+										Style="{StaticResource MaterialDesignTextBlock}"
+										Text="Enemy Groups" />
 								</StackPanel>
 							</TabItem.Header>
-							<local:EncounterPanel x:Name="encounters"/>
+							<local:EncounterPanel x:Name="encounters" />
 						</TabItem>
 
 						<TabItem Width="115">
 							<TabItem.Header>
 								<StackPanel>
-									<materialDesign:PackIcon Kind="DeveloperBoard" Width="24" Height="24" HorizontalAlignment="Center" />
-									<TextBlock Style="{StaticResource MaterialDesignTextBlock}" Text="Properties" HorizontalAlignment="Center"/>
+									<materialDesign:PackIcon
+										Width="24"
+										Height="24"
+										HorizontalAlignment="Center"
+										Kind="DeveloperBoard" />
+									<TextBlock
+										HorizontalAlignment="Center"
+										Style="{StaticResource MaterialDesignTextBlock}"
+										Text="Properties" />
 								</StackPanel>
 							</TabItem.Header>
-							<local:PropertiesPanel x:Name="properties"/>
+							<local:PropertiesPanel x:Name="properties" />
 						</TabItem>
 
 						<TabItem x:Name="charTab" Width="115">
 							<TabItem.Header>
 								<StackPanel>
-									<materialDesign:PackIcon Kind="User" Width="24" Height="24" HorizontalAlignment="Center" />
-									<TextBlock Style="{StaticResource MaterialDesignTextBlock}" Text="Character Designer" HorizontalAlignment="Center" TextWrapping="Wrap"/>
+									<materialDesign:PackIcon
+										Width="24"
+										Height="24"
+										HorizontalAlignment="Center"
+										Kind="User" />
+									<TextBlock
+										HorizontalAlignment="Center"
+										Style="{StaticResource MaterialDesignTextBlock}"
+										Text="Character Designer"
+										TextWrapping="Wrap" />
 								</StackPanel>
 							</TabItem.Header>
-							<local:ToonEditor x:Name="toonEditor"/>
+							<local:ToonEditor x:Name="toonEditor" />
 						</TabItem>
 					</TabControl>
 				</Grid>

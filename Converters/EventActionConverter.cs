@@ -112,7 +112,7 @@ namespace Imperial_Commander_Editor
 						eventActionAction = item.ToObject<CampaignModifyCredits>();
 						break;
 					case 26:
-						eventActionAction = item.ToObject<CampaignAddReward>();
+						eventActionAction = item.ToObject<CampaignModifyFameAwards>();
 						break;
 					case 27:
 						eventActionAction = item.ToObject<CampaignSetNextMission>();

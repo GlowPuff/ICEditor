@@ -36,7 +36,7 @@ namespace Imperial_Commander_Editor
 		}
 
 		/// <summary>
-		/// saves a mission to base project folder
+		/// saves a mission and its default translation to base project folder
 		/// </summary>
 		public static bool Save( Mission mission, bool saveAs )
 		{
@@ -73,7 +73,6 @@ namespace Imperial_Commander_Editor
 			mission.fileVersion = Utils.formatVersion;
 
 			string output = JsonConvert.SerializeObject( mission, Formatting.Indented );
-			Utils.Log( mission.fullPathToFile );
 			try
 			{
 				using ( var stream = File.CreateText( mission.fullPathToFile ) )
@@ -86,6 +85,27 @@ namespace Imperial_Commander_Editor
 			catch ( Exception e )
 			{
 				MessageBox.Show( "Could not save the Mission.\r\n\r\nException:\r\n" + e.Message, "App Exception", MessageBoxButton.OK, MessageBoxImage.Error );
+				return false;
+			}
+
+			//now save the default translation for the Mission
+			try
+			{
+				//strip default language out of the Mission and save it
+				TranslatedMission translation = TranslatedMission.CreateTranslation( mission );
+				var lang = mission.languageID.Split( '(', ')' )[1];
+				string tfname = $"{mission.fullPathToFile.Substring( 0, mission.fullPathToFile.Length - 5 )}_{lang}.json";
+				//serialize to json
+				output = JsonConvert.SerializeObject( translation, Formatting.Indented );
+				//save it
+				using ( var stream = File.CreateText( tfname ) )
+				{
+					stream.Write( output );
+				}
+			}
+			catch ( Exception e )
+			{
+				MessageBox.Show( "Could not save the Mission's translation.\r\n\r\nException:\r\n" + e.Message, "App Exception", MessageBoxButton.OK, MessageBoxImage.Error );
 				return false;
 			}
 			return true;

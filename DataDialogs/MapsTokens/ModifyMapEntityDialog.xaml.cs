@@ -68,7 +68,7 @@ namespace Imperial_Commander_Editor
 
 		private void editPropsBtn_Click( object sender, RoutedEventArgs e )
 		{
-			EditEntityProperties dlg = new( (((FrameworkElement)sender).DataContext as EntityModifier).entityProperties );
+			EditEntityProperties dlg = new( (((FrameworkElement)sender).DataContext as EntityModifier).entityProperties, false );
 			dlg.ShowDialog();
 		}
 

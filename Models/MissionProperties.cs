@@ -11,11 +11,12 @@ namespace Imperial_Commander_Editor
 
 		string _missionName, _missionID, _fixedAlly, _bannedAlly, _missionInfo, _specificAlly, _specificHero, _priorityOther, _missionDescription, _campaignName, _startingObjective, _additionalMissionInfo, _customMissionIdentifier;
 		bool _optionalDeployment, _factionImperial, _factionMercenary;
+		int _roundLimit;
 		YesNoAll _useFixedAlly, _useBannedAlly;//, _banAllAllies;
 		CustomInstructionType _customInstructionType;
 		//ThreatModifierType _initialThreatType;
 		PriorityTargetType _priorityTargetType;
-		Guid _startingEvent;
+		Guid _startingEvent, _roundLimitEvent;
 		//int _initialThreatModifier, _initialThreatMultiplier;
 		MissionType _missionType;
 		ChangeReposition _changeRepositionOverride;
@@ -92,6 +93,11 @@ namespace Imperial_Commander_Editor
 			get { return _factionMercenary; }
 			set { _factionMercenary = value; PC(); }
 		}
+		public int roundLimit
+		{
+			get { return _roundLimit; }
+			set { _roundLimit = value; PC(); }
+		}
 		//public YesNoAll banAllAllies
 		//{
 		//	get { return _banAllAllies; }
@@ -149,6 +155,11 @@ namespace Imperial_Commander_Editor
 		{
 			get { return _startingEvent; }
 			set { _startingEvent = value; PC(); }
+		}
+		public Guid roundLimitEvent
+		{
+			get { return _roundLimitEvent; }
+			set { _roundLimitEvent = value; PC(); }
 		}
 
 		//public int initialThreatModifier
@@ -213,6 +224,8 @@ namespace Imperial_Commander_Editor
 			//banAllAllies = YesNoAll.No;
 			priorityTargetType = PriorityTargetType.Rebel;
 			startingEvent = Guid.Empty;
+			roundLimitEvent = Guid.Empty;
+			roundLimit = -1;
 			missionType = MissionType.Story;
 			changeRepositionOverride = null;
 			missionSubType = new();

@@ -84,6 +84,11 @@ namespace Imperial_Commander_Editor
 			brush = new( string.IsNullOrEmpty( Utils.mainWindow.mission.missionProperties.startingObjective ) ? Colors.Red : Colors.LawnGreen );
 			objInfo.Foreground = brush;
 
+			brush = new( string.IsNullOrEmpty( Utils.mainWindow.mission.missionProperties.missionDescription ) ? Colors.Red : Colors.LawnGreen );
+			descriptionBtn.Foreground = brush;
+			brush = new( string.IsNullOrEmpty( Utils.mainWindow.mission.missionProperties.additionalMissionInfo ) ? Colors.Red : Colors.LawnGreen );
+			addInfoBtn.Foreground = brush;
+
 			remRepoBtn.IsEnabled = Utils.mainWindow.mission.missionProperties.changeRepositionOverride == null ? false : true;
 
 			selectedBanGroupAdd = Utils.enemyData.First( x => x.id == "DG001" );
@@ -115,6 +120,8 @@ namespace Imperial_Commander_Editor
 			dlg.textHint = "This text is shown on the setup screen to describe the Mission.\nWhen left empty, it is automatically filled in when using any Mission ID\nother than 'Custom'.";
 			dlg.ShowDialog();
 			Utils.mainWindow.mission.missionProperties.missionDescription = dlg.theText;
+			SolidColorBrush brush = new( string.IsNullOrEmpty( dlg.theText ) ? Colors.Red : Colors.LawnGreen );
+			descriptionBtn.Foreground = brush;
 		}
 
 		private void addInfoBtn_Click( object sender, System.Windows.RoutedEventArgs e )
@@ -123,6 +130,8 @@ namespace Imperial_Commander_Editor
 			dlg.textHint = "A single line, shown on the setup screen, to provide additional\ninformation for the Mission.";
 			dlg.ShowDialog();
 			Utils.mainWindow.mission.missionProperties.additionalMissionInfo = dlg.theText;
+			SolidColorBrush brush = new( string.IsNullOrEmpty( dlg.theText ) ? Colors.Red : Colors.LawnGreen );
+			addInfoBtn.Foreground = brush;
 		}
 
 		private void infoBtn_Click( object sender, System.Windows.RoutedEventArgs e )
@@ -222,6 +231,28 @@ namespace Imperial_Commander_Editor
 		private void refreshIdentifier_Click( object sender, System.Windows.RoutedEventArgs e )
 		{
 			Utils.mainWindow.mission.missionProperties.customMissionIdentifier = Guid.NewGuid().ToString();
+		}
+
+		private void propsTabControl_SelectionChanged( object sender, SelectionChangedEventArgs e )
+		{
+			e.Handled = true;
+		}
+
+		private void eventCBRoundLimit_GotFocus( object sender, System.Windows.RoutedEventArgs e )
+		{
+			eventCBRoundLimit.GotFocus -= eventCBRoundLimit_GotFocus;
+			eventCBRoundLimit.ItemsSource = Utils.mainWindow.localEvents;
+			eventCBRoundLimit.GotFocus += eventCBRoundLimit_GotFocus;
+		}
+
+		private void addNewEventButtonRoundLimit_Click( object sender, System.Windows.RoutedEventArgs e )
+		{
+			MissionEvent me = Utils.mainWindow.leftPanel.AddNewEvent();
+			if ( me != null )
+			{
+				eventCBRoundLimit.ItemsSource = Utils.mainWindow.localEvents;
+				Utils.mainWindow.mission.missionProperties.roundLimitEvent = me.GUID;
+			}
 		}
 	}
 }

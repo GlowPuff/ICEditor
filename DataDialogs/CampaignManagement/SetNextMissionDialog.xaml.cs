@@ -9,10 +9,11 @@ namespace Imperial_Commander_Editor
 	public partial class SetNextMissionDialog : Window, IEventActionDialog
 	{
 		//sets the next STORY Mission
+		public bool enabledStatus { get; set; }
 
 		public IEventAction eventAction { get; set; }
 
-		public SetNextMissionDialog( string dname, EventActionType et, IEventAction ea = null )
+		public SetNextMissionDialog( string dname, EventActionType et, IEventAction ea = null, bool fromPackageManager = false )
 		{
 			InitializeComponent();
 
@@ -23,6 +24,14 @@ namespace Imperial_Commander_Editor
 			var names = Utils.missionNames;
 			names.Insert( 0, custom );
 			missionIDCB.ItemsSource = names;
+			enabledStatus = !fromPackageManager;
+
+			if ( fromPackageManager )
+			{
+				instructions.Text = "Copy/Paste the Custom Mission Identifier of the Mission you want to set as the next Story Mission.";
+				customIDTB.Focus();
+				customIDTB.SelectAll();
+			}
 		}
 
 		private void Window_MouseDown( object sender, System.Windows.Input.MouseButtonEventArgs e )

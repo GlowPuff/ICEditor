@@ -1,113 +1,249 @@
-﻿<UserControl x:Class="Imperial_Commander_Editor.ToonEditorPanel"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Imperial_Commander_Editor"
-             mc:Ignorable="d" 
-						 Style="{StaticResource dus}"
-						 xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             d:DesignHeight="950" d:DesignWidth="900">
+﻿<UserControl
+	x:Class="Imperial_Commander_Editor.ToonEditorPanel"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:local="clr-namespace:Imperial_Commander_Editor"
+	xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	d:DesignHeight="950"
+	d:DesignWidth="900"
+	Style="{StaticResource dus}"
+	mc:Ignorable="d">
 
 	<UserControl.Resources>
 		<local:RadioBoolToIntConverter x:Key="rbConv" />
-		<BooleanToVisibilityConverter x:Key="b2vis"/>
+		<BooleanToVisibilityConverter x:Key="b2vis" />
 	</UserControl.Resources>
 
 	<StackPanel>
 		<UniformGrid Columns="2">
-			<!--LEFT-->
+			<!--  LEFT  -->
 			<StackPanel Margin="0,0,5,0">
 				<GroupBox x:Name="propBox" Background="{StaticResource GroupBG}">
 					<GroupBox.Header>
 						<TextBlock>
-							<Run Text="General Properties For: "/>
-							<Run Text="{Binding cardName}"/>
+							<Run Text="General Properties For: " />
+							<Run Text="{Binding cardName}" />
 						</TextBlock>
 					</GroupBox.Header>
-					<!--GENERAL PROPERTIES-->
+					<!--  GENERAL PROPERTIES  -->
 					<StackPanel>
-						<TextBox x:Name="nameTB" Style="{StaticResource MaterialDesignOutlinedTextBox}" Text="{Binding cardName}" materialDesign:HintAssist.Hint="Character Name (Required)" KeyDown="textbox_KeyDown"/>
-						<TextBox x:Name="subnameTB" Style="{StaticResource MaterialDesignOutlinedTextBox}" Text="{Binding cardSubName}" materialDesign:HintAssist.Hint="Character SubName (Optional)" KeyDown="textbox_KeyDown" Margin="0,10,0,0" />
+						<TextBox
+							x:Name="nameTB"
+							materialDesign:HintAssist.Hint="Character Name (Required)"
+							KeyDown="textbox_KeyDown"
+							Style="{StaticResource MaterialDesignOutlinedTextBox}"
+							Text="{Binding cardName}" />
+						<TextBox
+							x:Name="subnameTB"
+							Margin="0,10,0,0"
+							materialDesign:HintAssist.Hint="Character SubName (Optional)"
+							KeyDown="textbox_KeyDown"
+							Style="{StaticResource MaterialDesignOutlinedTextBox}"
+							Text="{Binding cardSubName}" />
 
-						<!--ID-->
-						<TextBlock Text="Character ID:" HorizontalAlignment="Center" Margin="0,10,0,0"/>
-						<TextBlock Text="{Binding cardID}" FontStyle="Italic" FontWeight="Bold"  Foreground="Violet" HorizontalAlignment="Center" Margin="0,5,0,0"/>
-						<!--GUID-->
-						<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-							<TextBlock Text="Character GUID:" HorizontalAlignment="Center" Margin="0,10,0,0"/>
-							<Button x:Name="recycleGUID" Content="{materialDesign:PackIcon Kind=Refresh}" Margin="7,0,0,0" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35" Click="recycleGUID_Click" ToolTip="Refresh GUID"/>
+						<!--  ID  -->
+						<TextBlock
+							Margin="0,10,0,0"
+							HorizontalAlignment="Center"
+							Text="Character ID:" />
+						<TextBlock
+							Margin="0,5,0,0"
+							HorizontalAlignment="Center"
+							FontStyle="Italic"
+							FontWeight="Bold"
+							Foreground="Violet"
+							Text="{Binding cardID}" />
+						<!--  GUID  -->
+						<StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+							<TextBlock
+								Margin="0,10,0,0"
+								HorizontalAlignment="Center"
+								Text="Character GUID:" />
+							<Button
+								x:Name="recycleGUID"
+								Width="35"
+								Height="35"
+								Margin="7,0,0,0"
+								Click="recycleGUID_Click"
+								Content="{materialDesign:PackIcon Kind=Refresh}"
+								Style="{StaticResource MaterialDesignFloatingActionButton}"
+								ToolTip="Refresh GUID" />
 						</StackPanel>
-						<TextBlock Text="{Binding customCharacterGUID}" FontStyle="Italic" FontWeight="Bold"  Foreground="Violet" HorizontalAlignment="Center" Margin="0,5,0,0"/>
-						<TextBlock Text="Refresh the GUID if this will be a NEW character based on a previously imported character. Custom characters must have a unique GUID. Do not refresh the GUID if you are just editing an existing character." TextWrapping="Wrap" FontStyle="Italic" HorizontalAlignment="Center" Margin="0,10,0,0"/>
+						<TextBlock
+							Margin="0,5,0,0"
+							HorizontalAlignment="Center"
+							FontStyle="Italic"
+							FontWeight="Bold"
+							Foreground="Violet"
+							Text="{Binding customCharacterGUID}" />
+						<TextBlock
+							Margin="0,10,0,0"
+							HorizontalAlignment="Center"
+							FontStyle="Italic"
+							Text="Refresh the GUID if this will be a NEW character based on a previously imported character. Custom characters must have a unique GUID. Do not refresh the GUID if you are just editing an existing character."
+							TextWrapping="Wrap" />
 
-						<!--CHARACTER TYPE-->
-						<materialDesign:Card Padding="10" Background="{StaticResource CardBG}" Margin="0,10,0,0" >
+						<!--  CHARACTER TYPE  -->
+						<materialDesign:Card
+							Margin="0,10,0,0"
+							Padding="10"
+							Background="{StaticResource CardBG}">
 							<StackPanel>
-								<TextBlock Text="This Character Type is:" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+								<TextBlock
+									Margin="0,0,0,10"
+									HorizontalAlignment="Center"
+									Text="This Character Type is:" />
 								<WrapPanel HorizontalAlignment="Center">
-									<RadioButton x:Name="isHeroCheck" Content="Hero" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" HorizontalAlignment="Stretch" IsChecked="{Binding deploymentCard.characterType, ConverterParameter={x:Static local:CharacterType.Hero}, Converter={StaticResource rbConv}}" GroupName="ctype" MinWidth="75"/>
-									<RadioButton x:Name="isAllyCheck" Content="Ally" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" HorizontalAlignment="Stretch" IsChecked="{Binding deploymentCard.characterType, ConverterParameter={x:Static local:CharacterType.Ally}, Converter={StaticResource rbConv}}" GroupName="ctype" MinWidth="75"/>
-									<RadioButton x:Name="isRebelCheck" Content="Rebel / Neutral" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" HorizontalAlignment="Stretch" IsChecked="{Binding deploymentCard.characterType, ConverterParameter={x:Static local:CharacterType.Rebel}, Converter={StaticResource rbConv}}" GroupName="ctype" MinWidth="75"/>
-									<RadioButton x:Name="isEnemyCheck" Content="Enemy Group" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" HorizontalAlignment="Stretch" IsChecked="{Binding deploymentCard.characterType, ConverterParameter={x:Static local:CharacterType.Imperial}, Converter={StaticResource rbConv}}" GroupName="ctype" MinWidth="75"/>
-									<RadioButton x:Name="isVillainCheck" Content="Villain" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" HorizontalAlignment="Stretch" IsChecked="{Binding deploymentCard.characterType, ConverterParameter={x:Static local:CharacterType.Villain}, Converter={StaticResource rbConv}}" GroupName="ctype" MinWidth="75"/>
+									<RadioButton
+										x:Name="isHeroCheck"
+										MinWidth="75"
+										HorizontalAlignment="Stretch"
+										Content="Hero"
+										GroupName="ctype"
+										IsChecked="{Binding deploymentCard.characterType, ConverterParameter={x:Static local:CharacterType.Hero}, Converter={StaticResource rbConv}}"
+										Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" />
+									<RadioButton
+										x:Name="isAllyCheck"
+										MinWidth="75"
+										HorizontalAlignment="Stretch"
+										Content="Ally"
+										GroupName="ctype"
+										IsChecked="{Binding deploymentCard.characterType, ConverterParameter={x:Static local:CharacterType.Ally}, Converter={StaticResource rbConv}}"
+										Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" />
+									<RadioButton
+										x:Name="isRebelCheck"
+										MinWidth="75"
+										HorizontalAlignment="Stretch"
+										Content="Rebel / Neutral"
+										GroupName="ctype"
+										IsChecked="{Binding deploymentCard.characterType, ConverterParameter={x:Static local:CharacterType.Rebel}, Converter={StaticResource rbConv}}"
+										Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" />
+									<RadioButton
+										x:Name="isEnemyCheck"
+										MinWidth="75"
+										HorizontalAlignment="Stretch"
+										Content="Enemy Group"
+										GroupName="ctype"
+										IsChecked="{Binding deploymentCard.characterType, ConverterParameter={x:Static local:CharacterType.Imperial}, Converter={StaticResource rbConv}}"
+										Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" />
+									<RadioButton
+										x:Name="isVillainCheck"
+										MinWidth="75"
+										HorizontalAlignment="Stretch"
+										Content="Villain"
+										GroupName="ctype"
+										IsChecked="{Binding deploymentCard.characterType, ConverterParameter={x:Static local:CharacterType.Villain}, Converter={StaticResource rbConv}}"
+										Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" />
 								</WrapPanel>
-								<TextBlock x:Name="setupInfo" Padding="5" Text="Character Type affects how this Character can be used." TextWrapping="Wrap" FontStyle="Italic" Margin="0,0,0,10" Visibility="Visible"/>
+								<TextBlock
+									x:Name="setupInfo"
+									Margin="0,0,0,10"
+									Padding="5"
+									FontStyle="Italic"
+									Text="Character Type affects how this Character can be used."
+									TextWrapping="Wrap"
+									Visibility="Visible" />
 
-								<Button x:Name="charHelpButton" Content="HELP ME CHOOSE..." Click="charHelpButton_Click"/>
+								<Button
+									x:Name="charHelpButton"
+									Click="charHelpButton_Click"
+									Content="HELP ME CHOOSE..." />
 							</StackPanel>
 						</materialDesign:Card>
 
-						<!--CUSTOM COLOR-->
-						<materialDesign:Card Padding="10" Background="{StaticResource CardBG}" Margin="0,10,0,0" >
+						<!--  CUSTOM COLOR  -->
+						<materialDesign:Card
+							Margin="0,10,0,0"
+							Padding="10"
+							Background="{StaticResource CardBG}">
 							<Grid>
 								<Grid.ColumnDefinitions>
 									<ColumnDefinition Width="auto" />
 									<ColumnDefinition Width="*" />
 								</Grid.ColumnDefinitions>
-								<TextBlock Text="Icon Outline Color:" VerticalAlignment="Center"/>
-								<ComboBox Grid.Column="1" Margin="10,0,0,0" Style="{StaticResource MaterialDesignOutlinedComboBox}" ItemsSource="{Binding deploymentColors, RelativeSource={RelativeSource AncestorType=UserControl}}" SelectedValue="{Binding deploymentCard.deploymentOutlineColor}" DisplayMemberPath="name" SelectedValuePath="name"/>
+								<TextBlock VerticalAlignment="Center" Text="Icon Outline Color:" />
+								<ComboBox
+									Grid.Column="1"
+									Margin="10,0,0,0"
+									DisplayMemberPath="name"
+									ItemsSource="{Binding deploymentColors, RelativeSource={RelativeSource AncestorType=UserControl}}"
+									SelectedValue="{Binding deploymentCard.deploymentOutlineColor}"
+									SelectedValuePath="name"
+									Style="{StaticResource MaterialDesignOutlinedComboBox}" />
 							</Grid>
 						</materialDesign:Card>
 
-						<materialDesign:Card Padding="10" Background="{StaticResource CardBG}" Margin="0,10,0,0" >
+						<materialDesign:Card
+							Margin="0,10,0,0"
+							Padding="10"
+							Background="{StaticResource CardBG}">
 							<StackPanel>
-								<UniformGrid Columns="4" HorizontalAlignment="Left">
-									<TextBlock Text="Faction:" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-									<RadioButton Content="Imperial" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" HorizontalAlignment="Stretch" IsChecked="{Binding faction, ConverterParameter={x:Static local:Factions.Imperial}, Converter={StaticResource rbConv}}"/>
+								<UniformGrid HorizontalAlignment="Left" Columns="4">
+									<TextBlock
+										HorizontalAlignment="Center"
+										VerticalAlignment="Center"
+										Text="Faction:" />
+									<RadioButton
+										HorizontalAlignment="Stretch"
+										Content="Imperial"
+										IsChecked="{Binding faction, ConverterParameter={x:Static local:Factions.Imperial}, Converter={StaticResource rbConv}}"
+										Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" />
 
-									<RadioButton Content="Mercenary" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" HorizontalAlignment="Stretch" IsChecked="{Binding faction, ConverterParameter={x:Static local:Factions.Mercenary}, Converter={StaticResource rbConv}}"/>
+									<RadioButton
+										HorizontalAlignment="Stretch"
+										Content="Mercenary"
+										IsChecked="{Binding faction, ConverterParameter={x:Static local:Factions.Mercenary}, Converter={StaticResource rbConv}}"
+										Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" />
 								</UniformGrid>
 
-								<TextBlock Text="Faction is only relevant for Enemies and Villains." FontStyle="Italic" HorizontalAlignment="Center"/>
+								<TextBlock
+									HorizontalAlignment="Center"
+									FontStyle="Italic"
+									Text="Faction is only relevant for Enemies and Villains." />
 							</StackPanel>
 						</materialDesign:Card>
 
 						<Grid Margin="10,15,10,0">
 							<Grid.ColumnDefinitions>
-								<ColumnDefinition Width="1*"/>
-								<ColumnDefinition Width="*"/>
-								<ColumnDefinition Width="1*"/>
+								<ColumnDefinition Width="1*" />
+								<ColumnDefinition Width="*" />
+								<ColumnDefinition Width="1*" />
 							</Grid.ColumnDefinitions>
 
 							<UniformGrid Columns="2">
-								<TextBlock Text="Tier:" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,10,0"/>
-								<ComboBox x:Name="tierCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectedValue="{Binding deploymentCard.tier}"/>
+								<TextBlock
+									Margin="0,0,10,0"
+									HorizontalAlignment="Left"
+									VerticalAlignment="Center"
+									Text="Tier:" />
+								<ComboBox
+									x:Name="tierCB"
+									SelectedValue="{Binding deploymentCard.tier}"
+									Style="{StaticResource MaterialDesignOutlinedComboBox}" />
 							</UniformGrid>
 
-							<UniformGrid Columns="2" Grid.Column="2">
-								<TextBlock Text="Priority:" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,10,0"/>
-								<ComboBox x:Name="priorityCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectedValue="{Binding deploymentCard.priority}"/>
+							<UniformGrid Grid.Column="2" Columns="2">
+								<TextBlock
+									Margin="0,0,10,0"
+									HorizontalAlignment="Left"
+									VerticalAlignment="Center"
+									Text="Priority:" />
+								<ComboBox
+									x:Name="priorityCB"
+									SelectedValue="{Binding deploymentCard.priority}"
+									Style="{StaticResource MaterialDesignOutlinedComboBox}" />
 							</UniformGrid>
 						</Grid>
 					</StackPanel>
 				</GroupBox>
 
-				<!--ON DEFEATED-->
+				<!--  ON DEFEATED  -->
 				<!--<GroupBox x:Name="defeatedSection" Header="On Defeated..." Visibility="Visible" Background="#FF503B7C" Margin="0,10,0,0">
 					<StackPanel>
 						-->
-				<!--ON DEFEAT (TRIGGER)-->
+				<!--  ON DEFEAT (TRIGGER)  -->
 				<!--
 						<TextBlock Text="Fire This Trigger:"/>
 						<Grid Margin="0,5,0,10">
@@ -120,7 +256,7 @@
 						</Grid>
 
 						-->
-				<!--ON DEFEAT (EVENT)-->
+				<!--  ON DEFEAT (EVENT)  -->
 				<!--
 						<TextBlock Text="Fire This Event:"/>
 						<Grid Margin="0,5,0,0">
@@ -135,43 +271,59 @@
 				</GroupBox>-->
 			</StackPanel>
 
-			<!--RIGHT PANEL-->
+			<!--  RIGHT PANEL  -->
 			<StackPanel Margin="5,0,0,0">
-				<TabControl x:Name="toonTabControl"
-  Style="{StaticResource MaterialDesignNavigatilRailTabControl}"
-  materialDesign:ColorZoneAssist.Mode="PrimaryMid"
-  TabStripPlacement="Top" materialDesign:NavigationRailAssist.ShowSelectionBackground="True" SelectionChanged="toonTabControl_SelectionChanged">
+				<TabControl
+					x:Name="toonTabControl"
+					materialDesign:ColorZoneAssist.Mode="PrimaryMid"
+					materialDesign:NavigationRailAssist.ShowSelectionBackground="True"
+					SelectionChanged="toonTabControl_SelectionChanged"
+					Style="{StaticResource MaterialDesignNavigatilRailTabControl}"
+					TabStripPlacement="Top">
 					<TabControl.Background>
-						<SolidColorBrush Color="#FF3A3349"/>
+						<SolidColorBrush Color="#FF3A3349" />
 					</TabControl.Background>
 
-					<!--PROPERTIES-->
+					<!--  PROPERTIES  -->
 					<TabItem Width="95">
 						<TabItem.Header>
 							<StackPanel>
-								<materialDesign:PackIcon Kind="DeveloperBoard" Width="24" Height="24" HorizontalAlignment="Center" />
-								<TextBlock Style="{StaticResource MaterialDesignTextBlock}" Text="Properties" HorizontalAlignment="Center"/>
+								<materialDesign:PackIcon
+									Width="24"
+									Height="24"
+									HorizontalAlignment="Center"
+									Kind="DeveloperBoard" />
+								<TextBlock
+									HorizontalAlignment="Center"
+									Style="{StaticResource MaterialDesignTextBlock}"
+									Text="Properties" />
 							</StackPanel>
 						</TabItem.Header>
 
 						<StackPanel>
-							<materialDesign:Card Padding="10" Background="{StaticResource CardBG}" Margin="0,10,0,0">
+							<materialDesign:Card
+								Margin="0,10,0,0"
+								Padding="10"
+								Background="{StaticResource CardBG}">
 								<StackPanel>
-									<TextBlock Text="Copy Group Properties From:" Margin="0,0,0,5"/>
+									<TextBlock Margin="0,0,0,5" Text="Copy Group Properties From:" />
 									<Grid>
 										<Grid.ColumnDefinitions>
 											<ColumnDefinition Width="*" />
 											<ColumnDefinition Width="auto" />
 										</Grid.ColumnDefinitions>
 
-										<ComboBox x:Name="copyFromCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectedValue="{Binding selectedCopyFrom, RelativeSource={RelativeSource AncestorType=UserControl}}">
+										<ComboBox
+											x:Name="copyFromCB"
+											SelectedValue="{Binding selectedCopyFrom, RelativeSource={RelativeSource AncestorType=UserControl}}"
+											Style="{StaticResource MaterialDesignOutlinedComboBox}">
 											<ComboBox.ItemTemplate>
 												<DataTemplate>
 													<TextBlock>
 														<TextBlock.Text>
 															<MultiBinding StringFormat="{}{0}: {1}">
-																<Binding Path="name"/>
-																<Binding Path="id"/>
+																<Binding Path="name" />
+																<Binding Path="id" />
 															</MultiBinding>
 														</TextBlock.Text>
 													</TextBlock>
@@ -179,200 +331,496 @@
 											</ComboBox.ItemTemplate>
 										</ComboBox>
 
-										<Button x:Name="confirmCopyFromButton" Click="confirmCopyFromButton_Click" Grid.Column="1" Content="{materialDesign:PackIcon Kind=CheckBold}" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35" Margin="10,0,0,0"/>
+										<Button
+											x:Name="confirmCopyFromButton"
+											Grid.Column="1"
+											Width="35"
+											Height="35"
+											Margin="10,0,0,0"
+											Click="confirmCopyFromButton_Click"
+											Content="{materialDesign:PackIcon Kind=CheckBold}"
+											Style="{StaticResource MaterialDesignFloatingActionButton}" />
 									</Grid>
-									<CheckBox x:Name="copyCardTextCB" Content="Also Copy Instructions and Bonuses" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" Margin="0,10,4,4" IsChecked="True"/>
-									<TextBlock Text="Warning: This will overwrite the current General Properties, Combat Properties and Card Text Properties." TextWrapping="Wrap" FontStyle="Italic" Margin="0,10,0,0"/>
-									<TextBlock Text="Name, Subname, ID, Character Type, Deployment Properties, Faction, and Appearance are not affected." TextWrapping="Wrap" FontStyle="Italic" Margin="0,10,0,0"/>
+									<CheckBox
+										x:Name="copyCardTextCB"
+										Margin="0,10,4,4"
+										Content="Also Copy Instructions and Bonuses"
+										IsChecked="True"
+										Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" />
+									<TextBlock
+										Margin="0,10,0,0"
+										FontStyle="Italic"
+										Text="Warning: This will overwrite the current General Properties, Combat Properties and Card Text Properties."
+										TextWrapping="Wrap" />
+									<TextBlock
+										Margin="0,10,0,0"
+										FontStyle="Italic"
+										Text="Name, Subname, ID, Character Type, Deployment Properties, Faction, and Appearance are not affected."
+										TextWrapping="Wrap" />
 								</StackPanel>
 							</materialDesign:Card>
 
-							<materialDesign:Card Padding="10" Background="{StaticResource CardBG}" Margin="0,10,0,0">
+							<materialDesign:Card
+								Margin="0,10,0,0"
+								Padding="10"
+								Background="{StaticResource CardBG}">
 								<Grid>
 									<Grid.ColumnDefinitions>
 										<ColumnDefinition Width="auto" />
 										<ColumnDefinition Width="*" />
 									</Grid.ColumnDefinitions>
-									<CheckBox x:Name="eliteCheckbox" Click="eliteCheckbox_Click" Content="This Group is Elite" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding deploymentCard.isElite}" Margin="0,4,4,4"/>
-									<TextBlock Grid.Column="1" Text="Elite Groups are outlined in red unless a different icon outline color is set." TextWrapping="Wrap" FontStyle="Italic" VerticalAlignment="Center" Margin="10,0,0,0"/>
+									<CheckBox
+										x:Name="eliteCheckbox"
+										Margin="0,4,4,4"
+										Click="eliteCheckbox_Click"
+										Content="This Group is Elite"
+										IsChecked="{Binding deploymentCard.isElite}"
+										Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" />
+									<TextBlock
+										Grid.Column="1"
+										Margin="10,0,0,0"
+										VerticalAlignment="Center"
+										FontStyle="Italic"
+										Text="Elite Groups are outlined in red unless a different icon outline color is set."
+										TextWrapping="Wrap" />
 								</Grid>
 							</materialDesign:Card>
 
-							<!--FAME and REIMBURSEMENT-->
-							<GroupBox Header="Fame and Reimbursement" Background="#FF503B7C" Margin="0,10,0,0">
+							<!--  FAME and REIMBURSEMENT  -->
+							<GroupBox
+								Margin="0,10,0,0"
+								Background="#FF503B7C"
+								Header="Fame and Reimbursement">
 								<Grid Margin="0,15,0,0">
 									<Grid.ColumnDefinitions>
-										<ColumnDefinition Width="auto"/>
-										<ColumnDefinition Width="*"/>
-										<ColumnDefinition Width="auto"/>
+										<ColumnDefinition Width="auto" />
+										<ColumnDefinition Width="*" />
+										<ColumnDefinition Width="auto" />
 									</Grid.ColumnDefinitions>
 
 									<StackPanel Orientation="Horizontal">
-										<TextBlock Text="Fame:" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,10,0"/>
-										<TextBox Text="{Binding deploymentCard.fame}"  Margin="10,0" Width="50" KeyDown="textbox_KeyDown" VerticalContentAlignment="Bottom" VerticalAlignment="Center" CaretBrush="White"/>
+										<TextBlock
+											Margin="0,0,10,0"
+											HorizontalAlignment="Left"
+											VerticalAlignment="Center"
+											Text="Fame:" />
+										<TextBox
+											Width="50"
+											Margin="10,0"
+											VerticalAlignment="Center"
+											VerticalContentAlignment="Bottom"
+											CaretBrush="White"
+											KeyDown="textbox_KeyDown"
+											Text="{Binding deploymentCard.fame}" />
 									</StackPanel>
-									<StackPanel Orientation="Horizontal" Grid.Column="2">
-										<TextBlock Text="Reimbursement:" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,10,0"/>
-										<TextBox Text="{Binding deploymentCard.reimb}"  Margin="10,0" Width="50" KeyDown="textbox_KeyDown" VerticalContentAlignment="Bottom" VerticalAlignment="Center" CaretBrush="White"/>
+									<StackPanel Grid.Column="2" Orientation="Horizontal">
+										<TextBlock
+											Margin="0,0,10,0"
+											HorizontalAlignment="Left"
+											VerticalAlignment="Center"
+											Text="Reimbursement:" />
+										<TextBox
+											Width="50"
+											Margin="10,0"
+											VerticalAlignment="Center"
+											VerticalContentAlignment="Bottom"
+											CaretBrush="White"
+											KeyDown="textbox_KeyDown"
+											Text="{Binding deploymentCard.reimb}" />
 									</StackPanel>
 
 								</Grid>
 							</GroupBox>
 
-							<GroupBox Header="Health and Speed" Background="#FF503B7C" Margin="0,10,0,0">
+							<GroupBox
+								Margin="0,10,0,0"
+								Background="#FF503B7C"
+								Header="Health and Speed">
 								<StackPanel>
 									<UniformGrid Columns="2">
 										<StackPanel Orientation="Horizontal">
-											<TextBlock Text="Health" VerticalAlignment="Bottom"/>
-											<TextBox Grid.Row="0" Text="{Binding deploymentCard.health}" Width="50" HorizontalContentAlignment="Center" Margin="10,0,0,0" VerticalAlignment="Bottom" KeyDown="textbox_KeyDown" CaretBrush="White"/>
+											<TextBlock VerticalAlignment="Bottom" Text="Health" />
+											<TextBox
+												Grid.Row="0"
+												Width="50"
+												Margin="10,0,0,0"
+												VerticalAlignment="Bottom"
+												HorizontalContentAlignment="Center"
+												CaretBrush="White"
+												KeyDown="textbox_KeyDown"
+												Text="{Binding deploymentCard.health}" />
 										</StackPanel>
 
 										<StackPanel Orientation="Horizontal">
-											<TextBlock Grid.Row="2" Text="Speed" VerticalAlignment="Bottom"/>
-											<TextBox Grid.Row="2" Text="{Binding deploymentCard.speed}" Width="50" HorizontalContentAlignment="Center" Margin="10,0,0,0" KeyDown="textbox_KeyDown" CaretBrush="White"/>
+											<TextBlock
+												Grid.Row="2"
+												VerticalAlignment="Bottom"
+												Text="Speed" />
+											<TextBox
+												Grid.Row="2"
+												Width="50"
+												Margin="10,0,0,0"
+												HorizontalContentAlignment="Center"
+												CaretBrush="White"
+												KeyDown="textbox_KeyDown"
+												Text="{Binding deploymentCard.speed}" />
 										</StackPanel>
 									</UniformGrid>
 
-									<CheckBox Content="Multiply Health By Threat Level" IsChecked="{Binding useThreatMultiplier}" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" Grid.ColumnSpan="2" Margin="0,10,4,0"/>
+									<CheckBox
+										Grid.ColumnSpan="2"
+										Margin="0,10,4,0"
+										Content="Multiply Health By Threat Level"
+										IsChecked="{Binding useThreatMultiplier}"
+										Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" />
 								</StackPanel>
 							</GroupBox>
 
-							<GroupBox Header="Costs and Group Size" Background="#FF503B7C" Margin="0,10,0,0">
+							<GroupBox
+								Margin="0,10,0,0"
+								Background="#FF503B7C"
+								Header="Costs and Group Size">
 								<StackPanel>
-									<UniformGrid Columns="2" Margin="0,10,0,0">
-										<!--cost-->
+									<UniformGrid Margin="0,10,0,0" Columns="2">
+										<!--  cost  -->
 										<StackPanel Orientation="Horizontal">
-											<TextBlock x:Name="useDeductCost" Text="Group Cost" Margin="0,4,4,4"/>
-											<TextBox Text="{Binding deploymentCard.cost}"  Margin="10,0" Width="50" KeyDown="textbox_KeyDown" VerticalContentAlignment="Bottom" VerticalAlignment="Center" CaretBrush="White"/>
+											<TextBlock
+												x:Name="useDeductCost"
+												Margin="0,4,4,4"
+												Text="Group Cost" />
+											<TextBox
+												Width="50"
+												Margin="10,0"
+												VerticalAlignment="Center"
+												VerticalContentAlignment="Bottom"
+												CaretBrush="White"
+												KeyDown="textbox_KeyDown"
+												Text="{Binding deploymentCard.cost}" />
 										</StackPanel>
 
-										<StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
-											<TextBlock Text="Redeploy Cost:" VerticalAlignment="Bottom"/>
-											<TextBox Text="{Binding deploymentCard.rcost}" Margin="10,0" Width="50" KeyDown="textbox_KeyDown" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" CaretBrush="White"/>
+										<StackPanel
+											HorizontalAlignment="Left"
+											VerticalAlignment="Center"
+											Orientation="Horizontal">
+											<TextBlock VerticalAlignment="Bottom" Text="Redeploy Cost:" />
+											<TextBox
+												Width="50"
+												Margin="10,0"
+												HorizontalContentAlignment="Center"
+												VerticalContentAlignment="Bottom"
+												CaretBrush="White"
+												KeyDown="textbox_KeyDown"
+												Text="{Binding deploymentCard.rcost}" />
 										</StackPanel>
 									</UniformGrid>
-									<!--size-->
-									<StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,10,0,0">
-										<TextBlock Text="Group Size:" VerticalAlignment="Bottom"/>
-										<TextBox x:Name="sizeText" Text="{Binding deploymentCard.size}" Margin="10,0" Width="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" CaretBrush="White" KeyDown="textbox_KeyDown"/>
+									<!--  size  -->
+									<StackPanel
+										Margin="0,10,0,0"
+										HorizontalAlignment="Left"
+										VerticalAlignment="Center"
+										Orientation="Horizontal">
+										<TextBlock VerticalAlignment="Bottom" Text="Group Size:" />
+										<TextBox
+											x:Name="sizeText"
+											Width="50"
+											Margin="10,0"
+											HorizontalContentAlignment="Center"
+											VerticalContentAlignment="Bottom"
+											CaretBrush="White"
+											KeyDown="textbox_KeyDown"
+											Text="{Binding deploymentCard.size}" />
 									</StackPanel>
-									<TextBlock x:Name="sizeWarningText" Text="Warning: Changing the Group Size may require updating the Deployment Point properties of any Event Action that deploys this Group." VerticalAlignment="Center" FontStyle="Italic" TextWrapping="Wrap" Margin="0,10,0,0"/>
+									<TextBlock
+										x:Name="sizeWarningText"
+										Margin="0,10,0,0"
+										VerticalAlignment="Center"
+										FontStyle="Italic"
+										Text="Warning: Changing the Group Size may require updating the Deployment Point properties of any Event Action that deploys this Group."
+										TextWrapping="Wrap" />
 								</StackPanel>
 							</GroupBox>
 
-							<!--FIGURE SIZE-->
-							<GroupBox Header="Figure Size" Background="#FF503B7C" Margin="0,10,0,0">
+							<!--  FIGURE SIZE  -->
+							<GroupBox
+								Margin="0,10,0,0"
+								Background="#FF503B7C"
+								Header="Figure Size">
 								<WrapPanel>
-									<RadioButton Content="Small 1x1" Margin="5" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" GroupName="figSizeGrp" IsChecked="{Binding deploymentCard.miniSize, ConverterParameter={x:Static local:FigureSize.Small1x1}, Converter={StaticResource rbConv}}"/>
+									<RadioButton
+										Margin="5"
+										Content="Small 1x1"
+										GroupName="figSizeGrp"
+										IsChecked="{Binding deploymentCard.miniSize, ConverterParameter={x:Static local:FigureSize.Small1x1}, Converter={StaticResource rbConv}}"
+										Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" />
 
-									<RadioButton Content="Medium 1x2" Margin="5" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" GroupName="figSizeGrp" IsChecked="{Binding deploymentCard.miniSize, ConverterParameter={x:Static local:FigureSize.Medium1x2}, Converter={StaticResource rbConv}}"/>
+									<RadioButton
+										Margin="5"
+										Content="Medium 1x2"
+										GroupName="figSizeGrp"
+										IsChecked="{Binding deploymentCard.miniSize, ConverterParameter={x:Static local:FigureSize.Medium1x2}, Converter={StaticResource rbConv}}"
+										Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" />
 
-									<RadioButton Content="Large 2x2" Margin="5" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" GroupName="figSizeGrp" IsChecked="{Binding deploymentCard.miniSize, ConverterParameter={x:Static local:FigureSize.Large2x2}, Converter={StaticResource rbConv}}"/>
+									<RadioButton
+										Margin="5"
+										Content="Large 2x2"
+										GroupName="figSizeGrp"
+										IsChecked="{Binding deploymentCard.miniSize, ConverterParameter={x:Static local:FigureSize.Large2x2}, Converter={StaticResource rbConv}}"
+										Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" />
 
-									<RadioButton Content="Huge 2x3" Margin="5" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" GroupName="figSizeGrp" IsChecked="{Binding deploymentCard.miniSize, ConverterParameter={x:Static local:FigureSize.Huge2x3}, Converter={StaticResource rbConv}}"/>
+									<RadioButton
+										Margin="5"
+										Content="Huge 2x3"
+										GroupName="figSizeGrp"
+										IsChecked="{Binding deploymentCard.miniSize, ConverterParameter={x:Static local:FigureSize.Huge2x3}, Converter={StaticResource rbConv}}"
+										Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" />
 								</WrapPanel>
 							</GroupBox>
 						</StackPanel>
 					</TabItem>
 
-					<!--APPEARANCE-->
+					<!--  APPEARANCE  -->
 					<TabItem Width="95">
 						<TabItem.Header>
 							<StackPanel>
-								<materialDesign:PackIcon Kind="Person" Width="24" Height="24" HorizontalAlignment="Center" />
-								<TextBlock Style="{StaticResource MaterialDesignTextBlock}" Text="Appearance" HorizontalAlignment="Center"/>
+								<materialDesign:PackIcon
+									Width="24"
+									Height="24"
+									HorizontalAlignment="Center"
+									Kind="Person" />
+								<TextBlock
+									HorizontalAlignment="Center"
+									Style="{StaticResource MaterialDesignTextBlock}"
+									Text="Appearance" />
 							</StackPanel>
 						</TabItem.Header>
 
-						<materialDesign:Card Padding="10" Background="{StaticResource CardBG}" Margin="0,10,0,0">
+						<materialDesign:Card
+							Margin="0,10,0,0"
+							Padding="10"
+							Background="{StaticResource CardBG}">
 							<StackPanel>
-								<!--FACTION FILTER-->
+								<!--  FACTION FILTER  -->
 								<StackPanel>
-									<TextBlock Text="Filter By Custom Icons:" VerticalAlignment="Center" Margin="0,0,10,10"/>
-									<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-										<Button x:Name="filterAllButton" Content="All" ToolTip="Show All Icons" Click="filterAllButton_Click"/>
-										<Button x:Name="filterRebelButton" Content="Rebel" Margin="10,0" ToolTip="Show Only Rebel Icons" Click="filterRebelButton_Click"/>
-										<Button x:Name="filterImperialButton" Content="Imperial" ToolTip="Show Only Imperial Icons" Click="filterImperialButton_Click"/>
-										<Button x:Name="filterMercButton" Content="Mercenary" ToolTip="Show Only Mercenary Icons" Click="filterMercButton_Click"  Margin="10,0"/>
+									<TextBlock
+										Margin="0,0,10,10"
+										VerticalAlignment="Center"
+										Text="Filter By Custom Icons:" />
+									<StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+										<Button
+											x:Name="filterAllButton"
+											Click="filterAllButton_Click"
+											Content="All"
+											ToolTip="Show All Icons" />
+										<Button
+											x:Name="filterRebelButton"
+											Margin="10,0"
+											Click="filterRebelButton_Click"
+											Content="Rebel"
+											ToolTip="Show Only Rebel Icons" />
+										<Button
+											x:Name="filterImperialButton"
+											Click="filterImperialButton_Click"
+											Content="Imperial"
+											ToolTip="Show Only Imperial Icons" />
+										<Button
+											x:Name="filterMercButton"
+											Margin="10,0"
+											Click="filterMercButton_Click"
+											Content="Mercenary"
+											ToolTip="Show Only Mercenary Icons" />
 									</StackPanel>
 
-									<TextBlock Text="Filter By Stock Icons:" VerticalAlignment="Center" Margin="0,10,10,5"/>
-									<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5,0,0">
-										<Button x:Name="filterHeroButton" Content="Heroes" ToolTip="Show Only Hero Icons" Click="filterHeroButton_Click"/>
-										<Button x:Name="filterVillainButton" Content="Villains" ToolTip="Show Only Stock Villain Icons" Click="filterVillainButton_Click"  Margin="10,0,0,0"/>
-										<Button x:Name="filterAllyButton" Content="Allies" Margin="10,0,0,0" ToolTip="Show Only Ally Icons" Click="filterAllyButton_Click"/>
-										<Button x:Name="filterStockImperialButton" Content="Imperials" ToolTip="Show Only Stock Imperial Icons" Click="filterStockImperialButton_Click"  Margin="10,0,0,0"/>
+									<TextBlock
+										Margin="0,10,10,5"
+										VerticalAlignment="Center"
+										Text="Filter By Stock Icons:" />
+									<StackPanel
+										Margin="0,5,0,0"
+										HorizontalAlignment="Center"
+										Orientation="Horizontal">
+										<Button
+											x:Name="filterHeroButton"
+											Click="filterHeroButton_Click"
+											Content="Heroes"
+											ToolTip="Show Only Hero Icons" />
+										<Button
+											x:Name="filterVillainButton"
+											Margin="10,0,0,0"
+											Click="filterVillainButton_Click"
+											Content="Villains"
+											ToolTip="Show Only Stock Villain Icons" />
+										<Button
+											x:Name="filterAllyButton"
+											Margin="10,0,0,0"
+											Click="filterAllyButton_Click"
+											Content="Allies"
+											ToolTip="Show Only Ally Icons" />
+										<Button
+											x:Name="filterStockImperialButton"
+											Margin="10,0,0,0"
+											Click="filterStockImperialButton_Click"
+											Content="Imperials"
+											ToolTip="Show Only Stock Imperial Icons" />
 									</StackPanel>
 								</StackPanel>
 
-								<StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-									<Border BorderBrush="MediumPurple" BorderThickness="2" HorizontalAlignment="Left" CornerRadius="50">
-										<Image x:Name="thumbPreview" Source="/Assets/Thumbnails/Other/none.png" Width="100" HorizontalAlignment="Left">
+								<StackPanel Margin="0,10,0,0" Orientation="Horizontal">
+									<Border
+										HorizontalAlignment="Left"
+										BorderBrush="MediumPurple"
+										BorderThickness="2"
+										CornerRadius="50">
+										<Image
+											x:Name="thumbPreview"
+											Width="100"
+											HorizontalAlignment="Left"
+											Source="/Assets/Thumbnails/Other/none.png">
 											<Image.Clip>
-												<EllipseGeometry Center="50,50" RadiusX="50" RadiusY="50" />
+												<EllipseGeometry
+													Center="50,50"
+													RadiusX="50"
+													RadiusY="50" />
 											</Image.Clip>
 										</Image>
 									</Border>
 
-									<TextBlock Text="{Binding thumbnail.Name}" VerticalAlignment="Center" Margin="20,0" FontWeight="Bold"/>
+									<TextBlock
+										Margin="20,0"
+										VerticalAlignment="Center"
+										FontWeight="Bold"
+										Text="{Binding thumbnail.Name}" />
 								</StackPanel>
 
-								<!--FACTION TEXT FILTER-->
-								<TextBox x:Name="iconFilterBox" Style="{StaticResource MaterialDesignOutlinedTextBox}" materialDesign:HintAssist.Hint="Filter Icons By Name" Margin="0,10,0,0" KeyDown="iconFilterBox_KeyDown" TextChanged="iconFilterBox_TextChanged" CaretBrush="White"/>
+								<!--  FACTION TEXT FILTER  -->
+								<TextBox
+									x:Name="iconFilterBox"
+									Margin="0,10,0,0"
+									materialDesign:HintAssist.Hint="Filter Icons By Name"
+									CaretBrush="White"
+									KeyDown="iconFilterBox_KeyDown"
+									Style="{StaticResource MaterialDesignOutlinedTextBox}"
+									TextChanged="iconFilterBox_TextChanged" />
 
-								<!--ICON CB-->
+								<!--  ICON CB  -->
 								<StackPanel Margin="0,10,0,0">
-									<TextBlock Text="Thumbnail Icon:" VerticalAlignment="Center"/>
-									<Border Background="MediumPurple" Margin="0,5,0,0">
-										<ListView x:Name="thumbListLV" DisplayMemberPath="Name" SelectionChanged="thumbListLV_SelectionChanged" Height="200"/>
+									<TextBlock VerticalAlignment="Center" Text="Thumbnail Icon:" />
+									<Border Margin="0,5,0,0" Background="MediumPurple">
+										<ListView
+											x:Name="thumbListLV"
+											Height="200"
+											DisplayMemberPath="Name"
+											SelectionChanged="thumbListLV_SelectionChanged" />
 									</Border>
 								</StackPanel>
 							</StackPanel>
 						</materialDesign:Card>
 					</TabItem>
 
-					<!--DEPLOYMENT - only for standalone-->
-					<TabItem Width="95" x:Name="deploymentTab">
+					<!--  DEPLOYMENT - only for standalone  -->
+					<TabItem x:Name="deploymentTab" Width="95">
 						<TabItem.Header>
 							<StackPanel>
-								<materialDesign:PackIcon Kind="Run" Width="24" Height="24" HorizontalAlignment="Center" />
-								<TextBlock Style="{StaticResource MaterialDesignTextBlock}" Text="Deployment" HorizontalAlignment="Center"/>
+								<materialDesign:PackIcon
+									Width="24"
+									Height="24"
+									HorizontalAlignment="Center"
+									Kind="Run" />
+								<TextBlock
+									HorizontalAlignment="Center"
+									Style="{StaticResource MaterialDesignTextBlock}"
+									Text="Deployment" />
 							</StackPanel>
 						</TabItem.Header>
 
-						<materialDesign:Card Padding="10" Background="{StaticResource CardBG}" Margin="0,10,0,0">
+						<materialDesign:Card
+							Margin="0,10,0,0"
+							Padding="10"
+							Background="{StaticResource CardBG}">
 							<StackPanel>
-								<TextBlock Text="Deployment properties are only relevant for Enemy Groups and Villains." FontStyle="Italic" TextWrapping="Wrap" Margin="0,0,0,10"/>
-								<TextBlock Text="Further, these properties are only used by Imperial Commander when this Character is Exported as a standalone Character and Imported by a player into their game." FontStyle="Italic" TextWrapping="Wrap" Margin="0,0,0,10"/>
-								<TextBlock Text="To control how this Character deploys within a Mission, use the Deployment options found in the Enemy Group Deployment Event Action, and not the Deployment options below." FontStyle="Italic" TextWrapping="Wrap" Margin="0,0,0,10"/>
+								<TextBlock
+									Margin="0,0,0,10"
+									FontStyle="Italic"
+									Text="Deployment properties are only relevant for Enemy Groups and Villains."
+									TextWrapping="Wrap" />
+								<TextBlock
+									Margin="0,0,0,10"
+									FontStyle="Italic"
+									Text="Further, these properties are only used by Imperial Commander when this Character is Exported as a standalone Character and Imported by a player into their game."
+									TextWrapping="Wrap" />
+								<TextBlock
+									Margin="0,0,0,10"
+									FontStyle="Italic"
+									Text="However, if this Character is deployed by an Event in the Mission, control the deployment using the Deployment options found in the Enemy Group Deployment Event Action, and not the Deployment options below."
+									TextWrapping="Wrap" />
 
 								<WrapPanel x:Name="deploymentOptions">
-									<CheckBox x:Name="canRD" Content="Can Be Redeployed" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding canRedeploy}"/>
-									<CheckBox Content="Can Be Reinforced" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding canReinforce}"/>
-									<CheckBox Content="Can Be Defeated" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding canBeDefeated}"/>
+									<CheckBox
+										x:Name="canRD"
+										Content="Can Be Redeployed"
+										IsChecked="{Binding canRedeploy}"
+										Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" />
+									<CheckBox
+										Content="Can Be Reinforced"
+										IsChecked="{Binding canReinforce}"
+										Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" />
+									<CheckBox
+										Content="Can Be Defeated"
+										IsChecked="{Binding canBeDefeated}"
+										Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" />
 								</WrapPanel>
 
-								<TextBlock Text="Groups that cannot Redeploy are removed from the mission and do not return to the Imperial Hand on defeat, but they can be manually deployed again with new options." TextWrapping="Wrap" FontStyle="Italic" Margin="0,5,0,0"/>
+								<TextBlock
+									Margin="0,5,0,0"
+									FontStyle="Italic"
+									Text="Groups that cannot Redeploy are removed from the Mission and do not return to the Imperial Hand upon defeat, but they can be manually deployed again with new options."
+									TextWrapping="Wrap" />
 							</StackPanel>
 						</materialDesign:Card>
 					</TabItem>
 
-					<!--COMBAT-->
+					<!--  COMBAT  -->
 					<TabItem Width="95">
 						<TabItem.Header>
 							<StackPanel>
-								<materialDesign:PackIcon Kind="SwordFight" Width="24" Height="24" HorizontalAlignment="Center" />
-								<TextBlock Style="{StaticResource MaterialDesignTextBlock}" Text="Combat" HorizontalAlignment="Center"/>
+								<materialDesign:PackIcon
+									Width="24"
+									Height="24"
+									HorizontalAlignment="Center"
+									Kind="SwordFight" />
+								<TextBlock
+									HorizontalAlignment="Center"
+									Style="{StaticResource MaterialDesignTextBlock}"
+									Text="Combat" />
 							</StackPanel>
 						</TabItem.Header>
 
 						<StackPanel>
-							<GroupBox Header="Combat Properties" Padding="10" Background="{StaticResource GroupBG}" Margin="0,10,0,0">
+							<GroupBox
+								Margin="0,10,0,0"
+								Padding="10"
+								Background="{StaticResource GroupBG}"
+								Header="Combat Properties">
 								<StackPanel>
-									<TextBlock Text="For Attack and Defense, use this format:" FontStyle="Italic" TextWrapping="Wrap" HorizontalAlignment="Center"/>
-									<TextBlock Text="#Color #Color" FontStyle="Italic" TextWrapping="Wrap" HorizontalAlignment="Center"/>
-									<TextBlock Text="Example: 2Red 1Green" FontStyle="Italic" TextWrapping="Wrap" HorizontalAlignment="Center"/>
-									<TextBlock Text=" Interprets as 2 Red dice and 1 Green dice" FontStyle="Italic" TextWrapping="Wrap" HorizontalAlignment="Center"/>
+									<TextBlock
+										HorizontalAlignment="Center"
+										FontStyle="Italic"
+										Text="For Attack and Defense, use this format:"
+										TextWrapping="Wrap" />
+									<TextBlock
+										HorizontalAlignment="Center"
+										FontStyle="Italic"
+										Text="#Color #Color"
+										TextWrapping="Wrap" />
+									<TextBlock
+										HorizontalAlignment="Center"
+										FontStyle="Italic"
+										Text="Example: 2Red 1Green"
+										TextWrapping="Wrap" />
+									<TextBlock
+										HorizontalAlignment="Center"
+										FontStyle="Italic"
+										Text=" Interprets as 2 Red dice and 1 Green dice"
+										TextWrapping="Wrap" />
 
 									<Grid>
 										<Grid.ColumnDefinitions>
@@ -388,83 +836,194 @@
 
 										<!--<CheckBox Grid.Row="1" Content="Multiply Health By Threat Level" IsChecked="{Binding useThreatMultiplier}" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" Margin="0,10" Grid.ColumnSpan="2"/>-->
 
-										<TextBlock Grid.Row="2" Text="Attack" VerticalAlignment="Bottom"/>
-										<TextBlock Grid.Row="3" Text="Defense" VerticalAlignment="Bottom"/>
+										<TextBlock
+											Grid.Row="2"
+											VerticalAlignment="Bottom"
+											Text="Attack" />
+										<TextBlock
+											Grid.Row="3"
+											VerticalAlignment="Bottom"
+											Text="Defense" />
 
-										<TextBox Grid.Row="2" Grid.Column="1" Text="{Binding groupAttack}" materialDesign:HintAssist.Hint="Example: 1Blue 2Yellow" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" Margin="0,15,0,0" KeyDown="textbox_KeyDown" CaretBrush="White"/>
-										<TextBox Grid.Row="3" Grid.Column="1" Text="{Binding groupDefense}" materialDesign:HintAssist.Hint="Example: 1White 1Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" Margin="0,15,0,0" KeyDown="textbox_KeyDown" CaretBrush="White"/>
+										<TextBox
+											Grid.Row="2"
+											Grid.Column="1"
+											Margin="0,15,0,0"
+											HorizontalContentAlignment="Center"
+											VerticalContentAlignment="Bottom"
+											materialDesign:HintAssist.Hint="Example: 1Blue 2Yellow"
+											CaretBrush="White"
+											KeyDown="textbox_KeyDown"
+											Style="{StaticResource MaterialDesignOutlinedTextBox}"
+											Text="{Binding groupAttack}" />
+										<TextBox
+											Grid.Row="3"
+											Grid.Column="1"
+											Margin="0,15,0,0"
+											HorizontalContentAlignment="Center"
+											VerticalContentAlignment="Bottom"
+											materialDesign:HintAssist.Hint="Example: 1White 1Black"
+											CaretBrush="White"
+											KeyDown="textbox_KeyDown"
+											Style="{StaticResource MaterialDesignOutlinedTextBox}"
+											Text="{Binding groupDefense}" />
 									</Grid>
 
-									<!--ATTACK TYPE-->
-									<UniformGrid Columns="2" Margin="0,10,0,0">
-										<TextBlock Text="Attack Type" VerticalAlignment="Center"/>
+									<!--  ATTACK TYPE  -->
+									<UniformGrid Margin="0,10,0,0" Columns="2">
+										<TextBlock VerticalAlignment="Center" Text="Attack Type" />
 										<UniformGrid Columns="2">
-											<RadioButton Content="Melee" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" HorizontalAlignment="Stretch" IsChecked="{Binding deploymentCard.attackType, ConverterParameter={x:Static local:AttackType.Melee}, Converter={StaticResource rbConv}}"/>
-											<RadioButton Content="Ranged" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" HorizontalAlignment="Stretch" IsChecked="{Binding deploymentCard.attackType, ConverterParameter={x:Static local:AttackType.Ranged}, Converter={StaticResource rbConv}}"/>
+											<RadioButton
+												HorizontalAlignment="Stretch"
+												Content="Melee"
+												IsChecked="{Binding deploymentCard.attackType, ConverterParameter={x:Static local:AttackType.Melee}, Converter={StaticResource rbConv}}"
+												Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" />
+											<RadioButton
+												HorizontalAlignment="Stretch"
+												Content="Ranged"
+												IsChecked="{Binding deploymentCard.attackType, ConverterParameter={x:Static local:AttackType.Ranged}, Converter={StaticResource rbConv}}"
+												Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" />
 										</UniformGrid>
 									</UniformGrid>
 								</StackPanel>
 							</GroupBox>
 
-							<!--PRIORITY TARGET-->
-							<GroupBox Header="Default Priority Target Traits" Margin="0,10,0,0" Background="#FF503B7C">
+							<!--  PRIORITY TARGET  -->
+							<GroupBox
+								Margin="0,10,0,0"
+								Background="#FF503B7C"
+								Header="Default Priority Target Traits">
 								<StackPanel>
-									<Button x:Name="targetBtn" Grid.Column="1" Content="CHANGE PRIORITY TRAITS..." Click="targetBtn_Click"/>
-									<TextBlock x:Name="priorityTargetsText" Text="" Margin="0,10,0,0" TextWrapping="Wrap"/>
+									<Button
+										x:Name="targetBtn"
+										Grid.Column="1"
+										Click="targetBtn_Click"
+										Content="CHANGE PRIORITY TRAITS..." />
+									<TextBlock
+										x:Name="priorityTargetsText"
+										Margin="0,10,0,0"
+										Text=""
+										TextWrapping="Wrap" />
 								</StackPanel>
 							</GroupBox>
 						</StackPanel>
 					</TabItem>
 
-					<!--CARD TEXT-->
+					<!--  CARD TEXT  -->
 					<TabItem Width="95">
 						<TabItem.Header>
 							<StackPanel>
-								<materialDesign:PackIcon Kind="Book" Width="24" Height="24" HorizontalAlignment="Center" />
-								<TextBlock Style="{StaticResource MaterialDesignTextBlock}" Text="Card Text" HorizontalAlignment="Center"/>
+								<materialDesign:PackIcon
+									Width="24"
+									Height="24"
+									HorizontalAlignment="Center"
+									Kind="Book" />
+								<TextBlock
+									HorizontalAlignment="Center"
+									Style="{StaticResource MaterialDesignTextBlock}"
+									Text="Card Text" />
 							</StackPanel>
 						</TabItem.Header>
 
 						<StackPanel>
-							<GroupBox Header="Instructions, Bonuses, Abilities, Surges and Keywords" Margin="0,10,0,0" Background="#FF503B7C">
+							<GroupBox
+								Margin="0,10,0,0"
+								Background="#FF503B7C"
+								Header="Instructions, Bonuses, Abilities, Surges and Keywords">
 								<StackPanel>
-									<TextBlock Text="Card Text data is pre-filled with EXAMPLE data by Default." FontStyle="Italic" HorizontalAlignment="Center" Margin="0,0,0,10" TextWrapping="Wrap"/>
+									<TextBlock
+										Margin="0,0,0,10"
+										HorizontalAlignment="Center"
+										FontStyle="Italic"
+										Text="Card Text data is pre-filled with EXAMPLE data by Default."
+										TextWrapping="Wrap" />
 									<WrapPanel>
-										<Button x:Name="instructionsBtn" Content="INSTRUCTIONS..." Click="instructionsBtn_Click" Margin="5" Foreground="Red">
-										</Button>
-										<Button x:Name="bonusBtn" Content="BONUSES..." Click="bonusBtn_Click" Margin="5" Foreground="Red"/>
-										<Button x:Name="abilityBtn" Content="ABILITIES..." Click="abilityBtn_Click" Margin="5" Foreground="Red"/>
-										<Button x:Name="surgeBtn" Content="SURGES..." Click="surgeBtn_Click" Margin="5" Foreground="Red"/>
-										<Button x:Name="keywordsBtn" Content="KEYWORDS..." Click="keywordsBtn_Click" Margin="5" Foreground="Red"/>
+										<Button
+											x:Name="instructionsBtn"
+											Margin="5"
+											Click="instructionsBtn_Click"
+											Content="INSTRUCTIONS..."
+											Foreground="Red" />
+										<Button
+											x:Name="bonusBtn"
+											Margin="5"
+											Click="bonusBtn_Click"
+											Content="BONUSES..."
+											Foreground="Red" />
+										<Button
+											x:Name="abilityBtn"
+											Margin="5"
+											Click="abilityBtn_Click"
+											Content="ABILITIES..."
+											Foreground="Red" />
+										<Button
+											x:Name="surgeBtn"
+											Margin="5"
+											Click="surgeBtn_Click"
+											Content="SURGES..."
+											Foreground="Red" />
+										<Button
+											x:Name="keywordsBtn"
+											Margin="5"
+											Click="keywordsBtn_Click"
+											Content="KEYWORDS..."
+											Foreground="Red" />
 									</WrapPanel>
 								</StackPanel>
 							</GroupBox>
 
-							<!--GROUP TRAITS-->
-							<GroupBox Header="Character Traits" Margin="0,10,0,0" Background="#FF503B7C">
+							<!--  GROUP TRAITS  -->
+							<GroupBox
+								Margin="0,10,0,0"
+								Background="#FF503B7C"
+								Header="Character Traits">
 								<Grid>
 									<Grid.ColumnDefinitions>
 										<ColumnDefinition Width="*" />
 										<ColumnDefinition Width="auto" />
 									</Grid.ColumnDefinitions>
 
-									<TextBlock x:Name="traitsText" Text="None" FontWeight="Bold" TextWrapping="Wrap" VerticalAlignment="Center"/>
+									<TextBlock
+										x:Name="traitsText"
+										VerticalAlignment="Center"
+										FontWeight="Bold"
+										Text="None"
+										TextWrapping="Wrap" />
 
-									<Button x:Name="editTraitsButton" Grid.Column="1" Content="EDIT TRAITS..." Click="editTraitsButton_Click" Margin="10,0,0,0"/>
+									<Button
+										x:Name="editTraitsButton"
+										Grid.Column="1"
+										Margin="10,0,0,0"
+										Click="editTraitsButton_Click"
+										Content="EDIT TRAITS..." />
 								</Grid>
 							</GroupBox>
 
-							<!--HERO SKILLS-->
-							<GroupBox Header="Hero Skills" Margin="0,10,0,0" Background="#FF503B7C">
+							<!--  HERO SKILLS  -->
+							<GroupBox
+								Margin="0,10,0,0"
+								Background="#FF503B7C"
+								Header="Hero Skills">
 								<Grid>
 									<Grid.ColumnDefinitions>
 										<ColumnDefinition Width="*" />
 										<ColumnDefinition Width="auto" />
 									</Grid.ColumnDefinitions>
 
-									<TextBlock x:Name="heroSkillsText" Text="None" FontWeight="Bold" TextWrapping="Wrap" VerticalAlignment="Center"/>
+									<TextBlock
+										x:Name="heroSkillsText"
+										VerticalAlignment="Center"
+										FontWeight="Bold"
+										Text="None"
+										TextWrapping="Wrap" />
 
-									<Button x:Name="editHeroSkillsButton" Grid.Column="1" Content="EDIT HERO SKILLS..." Click="editHeroSkillsButton_Click" Margin="10,0,0,0" IsEnabled="{Binding ElementName=isHeroCheck, Path=IsChecked}"/>
+									<Button
+										x:Name="editHeroSkillsButton"
+										Grid.Column="1"
+										Margin="10,0,0,0"
+										Click="editHeroSkillsButton_Click"
+										Content="EDIT HERO SKILLS..."
+										IsEnabled="{Binding ElementName=isHeroCheck, Path=IsChecked}" />
 								</Grid>
 							</GroupBox>
 						</StackPanel>

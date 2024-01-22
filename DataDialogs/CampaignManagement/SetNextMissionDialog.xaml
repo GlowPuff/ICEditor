@@ -7,7 +7,7 @@
 	xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	Title="Set Next Mission"
-	Width="525"
+	Width="600"
 	MouseDown="Window_MouseDown"
 	SizeToContent="Height"
 	Style="{StaticResource dws}"
@@ -30,6 +30,7 @@
 							Name="missionIDCB"
 							Margin="0,5,0,0"
 							DisplayMemberPath="name"
+							IsEnabled="{Binding enabledStatus, RelativeSource={RelativeSource AncestorType=Window}}"
 							SelectedValue="{Binding missionID}"
 							SelectedValuePath="id"
 							Style="{StaticResource MaterialDesignOutlinedComboBox}" />
@@ -68,6 +69,7 @@
 									VerticalAlignment="Center"
 									Text="Custom Mission Identifier:" />
 								<TextBox
+									x:Name="customIDTB"
 									Grid.Row="0"
 									Grid.Column="1"
 									Margin="10,0,0,0"
@@ -83,10 +85,11 @@
 									Margin="0,5,0,0"
 									VerticalAlignment="Center">
 									<TextBlock
+										x:Name="instructions"
 										VerticalAlignment="Center"
 										FontStyle="Italic"
 										Foreground="Violet"
-										Text="Copy the Custom Mission Identifier from the Mission Properties panel of the Custom Mission you want to set as the next Mission (not this Mission)."
+										Text="Copy the Custom Mission Identifier from the Mission Properties panel of the Custom Mission you want to set as the next Mission (not this Mission), and paste it here. The Custom Mission Identifier for this Event Action can also be set later from within the Custom Campaign Packager."
 										TextWrapping="Wrap" />
 									<TextBlock
 										Margin="0,10,0,0"

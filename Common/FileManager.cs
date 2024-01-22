@@ -544,8 +544,14 @@ namespace Imperial_Commander_Editor
 						foreach ( var item in package.campaignMissionItems )
 						{
 							var m = missionList.Where( x => x.missionGUID == item.missionGUID ).FirstOr( null );
+							//find the structure object that uses this Mission, if any
+							var structure = package.campaignStructure.Where( x => x.missionID == m.missionGUID.ToString() ).FirstOr( null );
 							if ( m != null )
+							{
 								item.mission = m;
+								if ( structure != null )
+									structure.mission = m;
+							}
 							else
 								throw new( $"Missing Mission in the zip archive:\n{item.missionName}\n{item.missionGUID}" );
 						}
@@ -627,9 +633,11 @@ namespace Imperial_Commander_Editor
 							}
 						}
 
-						return true;
+						//return true;
 					}
 				}
+
+				return true;
 			}
 			catch ( Exception ee )
 			{

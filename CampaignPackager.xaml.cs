@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.IO;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
@@ -45,6 +46,7 @@ namespace Imperial_Commander_Editor
 
 			instructionBtn.Foreground = new SolidColorBrush( Colors.Red );
 			dropNotice.Visibility = Visibility.Visible;
+			tabControl.SelectedIndex = 1;
 		}
 
 		private void cancelButton_Click( object sender, RoutedEventArgs e )
@@ -302,6 +304,13 @@ namespace Imperial_Commander_Editor
 				selectedStructure.missionID = ((CampaignMissionItem)e.AddedItems[0]).missionGUID.ToString();
 				selectedStructure.missionSource = MissionSource.Embedded;
 				selectedStructure.projectItem.missionGUID = ((CampaignMissionItem)e.AddedItems[0]).mission.missionGUID.ToString();
+				selectedStructure.customMissionIdentifier = ((CampaignMissionItem)e.AddedItems[0]).customMissionIdentifier;
+
+				var eventActions = ((CampaignMissionItem)e.AddedItems[0]).mission.GetAllEvents().SelectMany( x => x.eventActions );
+
+				selectedStructure.mission = ((CampaignMissionItem)e.AddedItems[0]).mission;
+				selectedStructure.hasCustomSetNextEventActions = eventActions.Any( x => x.eventActionType == EventActionType.CM4 && ((CampaignSetNextMission)x).missionID == "Custom" );
+
 				missionsPopupLB.SelectedIndex = -1;
 			}
 		}
@@ -434,6 +443,35 @@ namespace Imperial_Commander_Editor
 					return true;
 			}
 			return false;
+		}
+
+		private void copyCustomID_Click( object sender, RoutedEventArgs e )
+		{
+			Clipboard.SetText( customMissionIDText.Text, TextDataFormat.Text );
+		}
+
+		private void copyPoolCustomID_Click( object sender, RoutedEventArgs e )
+		{
+			Clipboard.SetText( customMissionPoolIDText.Text, TextDataFormat.Text );
+		}
+
+		private void editSetNextBtn_Click( object sender, RoutedEventArgs e )
+		{
+			var validActions = selectedStructure.mission.GetAllEvents().SelectMany( x => x.eventActions ).Where( x => x.eventActionType == EventActionType.CM4 ).ToList();
+
+			//if there is only one 'set next mission' event action, show the edit window directly
+			if ( validActions.Count() == 1 )
+			{
+				var ea = new CampaignSetNextMission() { missionID = "Custom", customMissionID = ((CampaignSetNextMission)validActions[0]).customMissionID };
+				var dlg = new SetNextMissionDialog( "Set Next Mission", EventActionType.CM4, ea, true );
+				dlg.ShowDialog();
+			}
+			else if ( validActions.Count() > 1 )
+			{
+				//otherwise show the selector window so each one can be edited independently
+				var chooser = new ChooseSetNextMissionWindow( selectedStructure.mission.GetAllEvents() );
+				chooser.ShowDialog();
+			}
 		}
 	}
 }

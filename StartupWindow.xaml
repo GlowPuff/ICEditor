@@ -1,206 +1,378 @@
-﻿<Window x:Class="Imperial_Commander_Editor.StartupWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Imperial_Commander_Editor"
-        mc:Ignorable="d" 
-				xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-        Background="{DynamicResource MaterialDesignDarkBackground}"
-        TextElement.FontWeight="Medium"
-        TextElement.FontSize="14"
-        FontFamily="{materialDesign:MaterialDesignFont}"
-        Title="Project Manager" Height="600" Width="900" WindowStartupLocation="CenterScreen" WindowStyle="None" MouseDown="Window_MouseDown" ResizeMode="NoResize" DragEnter="Window_DragEnter" Drop="Window_Drop" AllowDrop="True" DragLeave="Window_DragLeave" DragOver="Window_DragOver">
+﻿<Window
+	x:Class="Imperial_Commander_Editor.StartupWindow"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:local="clr-namespace:Imperial_Commander_Editor"
+	xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	Title="Project Manager"
+	Width="900"
+	Height="600"
+	AllowDrop="True"
+	Background="{DynamicResource MaterialDesignDarkBackground}"
+	DragEnter="Window_DragEnter"
+	DragLeave="Window_DragLeave"
+	DragOver="Window_DragOver"
+	Drop="Window_Drop"
+	FontFamily="{materialDesign:MaterialDesignFont}"
+	MouseDown="Window_MouseDown"
+	ResizeMode="NoResize"
+	TextElement.FontSize="14"
+	TextElement.FontWeight="Medium"
+	TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+	WindowStartupLocation="CenterScreen"
+	WindowStyle="None"
+	mc:Ignorable="d">
 
 	<Window.Resources>
 		<Style TargetType="ScrollBar">
-			<Setter Property="Background" Value="#333337"/>
-			<Setter Property="BorderBrush" Value="Transparent"/>
+			<Setter Property="Background" Value="#333337" />
+			<Setter Property="BorderBrush" Value="Transparent" />
 		</Style>
 
-		<local:BoolToScrollbarVisibilityConverter x:Key="b2sv"/>
+		<local:BoolToScrollbarVisibilityConverter x:Key="b2sv" />
 
-		<Storyboard x:Key="Storyboard" BeginTime="00:00:00.000" Duration="00:00:10.000">
-			<DoubleAnimation Storyboard.TargetName="busyIcon" 									 Storyboard.TargetProperty="(UIElement.RenderTransform).(RotateTransform.Angle)"              From="0" To="360" BeginTime="00:00:05.000" Duration="00:00:05.000" />
+		<Storyboard
+			x:Key="Storyboard"
+			BeginTime="00:00:00.000"
+			Duration="00:00:10.000">
+			<DoubleAnimation
+				BeginTime="00:00:05.000"
+				Storyboard.TargetName="busyIcon"
+				Storyboard.TargetProperty="(UIElement.RenderTransform).(RotateTransform.Angle)"
+				From="0"
+				To="360"
+				Duration="00:00:05.000" />
 		</Storyboard>
 	</Window.Resources>
 
 	<Grid Margin="30">
 		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="2*"/>
-			<ColumnDefinition Width="*"/>
+			<ColumnDefinition Width="2*" />
+			<ColumnDefinition Width="*" />
 		</Grid.ColumnDefinitions>
 		<Grid.RowDefinitions>
-			<RowDefinition Height="auto"/>
-			<RowDefinition Height="auto"/>
-			<RowDefinition Height="*"/>
-			<RowDefinition Height="auto"/>
+			<RowDefinition Height="auto" />
+			<RowDefinition Height="auto" />
+			<RowDefinition Height="*" />
+			<RowDefinition Height="auto" />
 		</Grid.RowDefinitions>
 
-		<!--title-->
-		<TextBlock Style="{StaticResource MaterialDesignHeadline4TextBlock}" Text="Imperial Commander Mission Editor" Foreground="White" Grid.ColumnSpan="2"/>
-		<TextBlock Grid.Column="1" HorizontalAlignment="Right" FontSize="14" VerticalAlignment="Center" Foreground="White" TextWrapping="Wrap" >
-			For The <Italic>Imperial Assault</Italic> Board Game
-		</TextBlock>
+		<!--  title  -->
+		<TextBlock
+			Grid.ColumnSpan="2"
+			Foreground="White"
+			Style="{StaticResource MaterialDesignHeadline4TextBlock}"
+			Text="Imperial Commander Mission Editor" />
+		<StackPanel
+			Grid.Column="1"
+			HorizontalAlignment="Right"
+			VerticalAlignment="Center"
+			Orientation="Horizontal">
+			<TextBlock
+				FontSize="14"
+				Foreground="White"
+				Text="For The"
+				TextWrapping="Wrap" />
+			<TextBlock
+				FontSize="14"
+				FontStyle="Italic"
+				Foreground="White"
+				Text=" Imperial Assault "
+				TextWrapping="Wrap" />
+			<TextBlock
+				FontSize="14"
+				Foreground="White"
+				Text="Board Game"
+				TextWrapping="Wrap" />
+		</StackPanel>
 
-		<!--recents title-->
-		<TextBlock Grid.Row="1" Text="Open Recent Mission"  Margin="0,20,0,10" FontSize="16" Foreground="White"/>
-		<!--new project-->
-		<TextBlock Grid.Row="1" Grid.Column="1" Text="Actions"  Margin="0,20,0,10" FontSize="16"  Foreground="White" HorizontalAlignment="Center"/>
+		<!--  recents title  -->
+		<TextBlock
+			Grid.Row="1"
+			Margin="0,20,0,10"
+			FontSize="16"
+			Foreground="White"
+			Text="Open Recent Mission" />
+		<!--  new project  -->
+		<TextBlock
+			Grid.Row="1"
+			Grid.Column="1"
+			Margin="0,20,0,10"
+			HorizontalAlignment="Center"
+			FontSize="16"
+			Foreground="White"
+			Text="Actions" />
 
 		<StackPanel Grid.Row="2" Grid.Column="1">
-			<!--missions-->
-			<Button x:Name="newMissionButton" Click="newMissionButton_Click" Height="80" HorizontalContentAlignment="Left">
+			<!--  missions  -->
+			<Button
+				x:Name="newMissionButton"
+				Height="80"
+				HorizontalContentAlignment="Left"
+				Click="newMissionButton_Click">
 				<Grid>
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="auto" />
 						<ColumnDefinition Width="*" />
 					</Grid.ColumnDefinitions>
 
-					<Image Grid.RowSpan="2" Source="Assets/new mission.png" Width="50" Margin="0,0,10,0"/>
+					<Image
+						Grid.RowSpan="2"
+						Width="50"
+						Margin="0,0,10,0"
+						Source="Assets/new mission.png" />
 
 					<Grid Grid.Column="1" Margin="0,10">
 						<Grid.RowDefinitions>
-							<RowDefinition Height="auto"/>
-							<RowDefinition Height="auto"/>
+							<RowDefinition Height="auto" />
+							<RowDefinition Height="auto" />
 						</Grid.RowDefinitions>
 
 						<TextBlock Grid.Column="1" Text="NEW MISSION" />
 
-						<TextBlock Grid.Column="1" Grid.Row="1" Text="Create a new Mission." TextWrapping="Wrap"/>
+						<TextBlock
+							Grid.Row="1"
+							Grid.Column="1"
+							Text="Create a new Mission."
+							TextWrapping="Wrap" />
 					</Grid>
 				</Grid>
 			</Button>
 
-			<Button x:Name="loadMissionButton" Click="loadMissionButton_Click" Height="80" Margin="0,10,0,0" HorizontalContentAlignment="Left">
+			<Button
+				x:Name="loadMissionButton"
+				Height="80"
+				Margin="0,10,0,0"
+				HorizontalContentAlignment="Left"
+				Click="loadMissionButton_Click">
 				<Grid>
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="auto" />
 						<ColumnDefinition Width="*" />
 					</Grid.ColumnDefinitions>
 
-					<Image Grid.RowSpan="2" Source="Assets/open.png" Width="50" Margin="0,0,10,0"/>
+					<Image
+						Grid.RowSpan="2"
+						Width="50"
+						Margin="0,0,10,0"
+						Source="Assets/open.png" />
 
 					<Grid Grid.Column="1" Margin="0,10">
 						<Grid.RowDefinitions>
-							<RowDefinition Height="auto"/>
-							<RowDefinition Height="auto"/>
+							<RowDefinition Height="auto" />
+							<RowDefinition Height="auto" />
 						</Grid.RowDefinitions>
 
 						<TextBlock Grid.Column="1" Text="OPEN MISSION" />
 
-						<TextBlock Grid.Column="1" Grid.Row="1" Text="Load a Mission from a file." TextWrapping="Wrap"/>
+						<TextBlock
+							Grid.Row="1"
+							Grid.Column="1"
+							Text="Load a Mission from a file."
+							TextWrapping="Wrap" />
 					</Grid>
 				</Grid>
 			</Button>
 
-			<Button x:Name="toonEditorButton" Click="toonEditorButton_Click" Height="80" Margin="0,10,0,0" HorizontalContentAlignment="Left">
+			<Button
+				x:Name="toonEditorButton"
+				Height="80"
+				Margin="0,10,0,0"
+				HorizontalContentAlignment="Left"
+				Click="toonEditorButton_Click">
 				<Grid>
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="auto" />
 						<ColumnDefinition Width="*" />
 					</Grid.ColumnDefinitions>
-					<Image Grid.RowSpan="2" Source="Assets/faction rebel.png" Width="50" Margin="0,0,10,0"/>
+					<Image
+						Grid.RowSpan="2"
+						Width="50"
+						Margin="0,0,10,0"
+						Source="Assets/faction rebel.png" />
 
 					<Grid Grid.Column="1" Margin="0,10">
 						<Grid.RowDefinitions>
-							<RowDefinition Height="auto"/>
-							<RowDefinition Height="auto"/>
+							<RowDefinition Height="auto" />
+							<RowDefinition Height="auto" />
 						</Grid.RowDefinitions>
 
 						<TextBlock Grid.Column="1" Text="CHARACTER DESIGNER" />
 
-						<TextBlock Grid.Column="1" Grid.Row="1" Text="Create custom Heroes, Allies, Enemies, and Villains." TextWrapping="Wrap"/>
+						<TextBlock
+							Grid.Row="1"
+							Grid.Column="1"
+							Text="Create custom Heroes, Allies, Enemies, and Villains."
+							TextWrapping="Wrap" />
 					</Grid>
 				</Grid>
 			</Button>
 
-			<Button x:Name="packageButton" Click="packageButton_Click" Height="80" Margin="0,10,0,0" HorizontalContentAlignment="Left">
+			<Button
+				x:Name="packageButton"
+				Height="80"
+				Margin="0,10,0,0"
+				HorizontalContentAlignment="Left"
+				Click="packageButton_Click">
 				<Grid>
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="auto" />
 						<ColumnDefinition Width="*" />
 					</Grid.ColumnDefinitions>
-					<Image Grid.RowSpan="2" Source="Assets/package.png" Width="50" Margin="0,0,10,0"/>
+					<Image
+						Grid.RowSpan="2"
+						Width="50"
+						Margin="0,0,10,0"
+						Source="Assets/package.png" />
 
 					<Grid Grid.Column="1" Margin="0,10">
 						<Grid.RowDefinitions>
-							<RowDefinition Height="auto"/>
-							<RowDefinition Height="auto"/>
+							<RowDefinition Height="auto" />
+							<RowDefinition Height="auto" />
 						</Grid.RowDefinitions>
 
 						<TextBlock Grid.Column="1" Text="CAMPAIGN PACKAGER" />
 
-						<TextBlock Grid.Column="1" Grid.Row="1" Text="Arrange Missions and export custom Campaigns." TextWrapping="Wrap"/>
+						<TextBlock
+							Grid.Row="1"
+							Grid.Column="1"
+							Text="Arrange Missions and export custom Campaigns."
+							TextWrapping="Wrap" />
 					</Grid>
 				</Grid>
 			</Button>
 
-			<TextBlock Text="You may also drag and drop Mission files to open them." Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" TextWrapping="Wrap" FontStyle="Italic" Margin="0,15,0,0"/>
+			<TextBlock
+				Margin="0,15,0,0"
+				HorizontalAlignment="Center"
+				VerticalAlignment="Center"
+				FontStyle="Italic"
+				Foreground="White"
+				Text="You may also drag and drop Mission files to open them."
+				TextWrapping="Wrap" />
 		</StackPanel>
 
-		<Grid Grid.Column="1" Grid.Row="3">
+		<Grid Grid.Row="3" Grid.Column="1">
 			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="auto"/>
-				<ColumnDefinition Width="*"/>
-				<ColumnDefinition Width="auto"/>
+				<ColumnDefinition Width="auto" />
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="auto" />
 			</Grid.ColumnDefinitions>
 
-			<TextBlock x:Name="formatVersion" Grid.Column="1" Text="Version: " Foreground="White" VerticalAlignment="Center"/>
+			<TextBlock
+				x:Name="formatVersion"
+				Grid.Column="1"
+				VerticalAlignment="Center"
+				Foreground="White"
+				Text="Version: " />
 
-			<Button x:Name="cancelButton" Grid.Column="2" Width="100" HorizontalAlignment="Right" Click="cancelButton_Click">
-				<TextBlock Text="CANCEL" Margin="0,5"/>
+			<Button
+				x:Name="cancelButton"
+				Grid.Column="2"
+				Width="100"
+				HorizontalAlignment="Right"
+				Click="cancelButton_Click">
+				<TextBlock Margin="0,5" Text="QUIT" />
 			</Button>
 		</Grid>
 
-		<!--recents-->
-		<ListView x:Name="projectLV" BorderThickness="0" Margin="0,0,10,0" SelectionChanged="projectLV_SelectionChanged" HorizontalContentAlignment="Stretch" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.Row="2" Grid.RowSpan="1">
+		<!--  recents  -->
+		<ListView
+			x:Name="projectLV"
+			Grid.Row="2"
+			Grid.RowSpan="1"
+			Margin="0,0,10,0"
+			HorizontalContentAlignment="Stretch"
+			d:ItemsSource="{d:SampleData ItemCount=5}"
+			BorderThickness="0"
+			SelectionChanged="projectLV_SelectionChanged">
 			<ListView.ItemTemplate>
 				<DataTemplate>
 					<Grid Margin="10" HorizontalAlignment="Stretch">
 						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="auto"/>
+							<ColumnDefinition Width="auto" />
 							<!--<ColumnDefinition Width="*"/>-->
-							<ColumnDefinition Width="*"/>
-							<ColumnDefinition Width="auto"/>
+							<ColumnDefinition Width="*" />
+							<ColumnDefinition Width="auto" />
 						</Grid.ColumnDefinitions>
-						<!--Source="{Binding projectType, Converter={StaticResource ptypeConverter}}"-->
+						<!--  Source="{Binding projectType, Converter={StaticResource ptypeConverter}}"  -->
 
-						<!--imperial icon-->
-						<Image Margin="0,5,0,0" VerticalAlignment="Top" Width="50" Source="Assets/imperial.png"/>
+						<!--  imperial icon  -->
+						<Image
+							Width="50"
+							Margin="0,5,0,0"
+							VerticalAlignment="Top"
+							Source="Assets/imperial.png" />
 
-						<!--mission info text-->
-						<Grid Grid.Column="1" Margin="10,0" VerticalAlignment="Center">
+						<!--  mission info text  -->
+						<Grid
+							Grid.Column="1"
+							Margin="10,0"
+							VerticalAlignment="Center">
 							<Grid.RowDefinitions>
 								<RowDefinition Height="*" />
 								<RowDefinition Height="*" />
 								<RowDefinition Height="*" />
 							</Grid.RowDefinitions>
-							<!--mission title-->
-							<TextBlock Text="{Binding Title}" Foreground="White" FontSize="16"/>
-							<!--filename-->
-							<TextBlock Grid.Row="1" Text="{Binding fullPathWithFilename}" Foreground="White" Margin="0,2,0,0" TextWrapping="Wrap" MaxWidth="367" HorizontalAlignment="Left"/>
+							<!--  mission title  -->
+							<TextBlock
+								FontSize="16"
+								Foreground="White"
+								Text="{Binding Title}" />
+							<!--  filename  -->
+							<TextBlock
+								Grid.Row="1"
+								MaxWidth="367"
+								Margin="0,2,0,0"
+								HorizontalAlignment="Left"
+								Foreground="White"
+								Text="{Binding fullPathWithFilename}"
+								TextWrapping="Wrap" />
 							<Grid Grid.Row="2">
 								<Grid.ColumnDefinitions>
-									<ColumnDefinition Width="auto"/>
-									<ColumnDefinition Width="*"/>
+									<ColumnDefinition Width="auto" />
+									<ColumnDefinition Width="*" />
 								</Grid.ColumnDefinitions>
 
-								<!--date-->
-								<TextBlock Grid.Column="0" Text="{Binding Date}" Style="{StaticResource MaterialDesignCaptionTextBlock}" HorizontalAlignment="Right" Foreground="White"/>
+								<!--  date  -->
+								<TextBlock
+									Grid.Column="0"
+									HorizontalAlignment="Right"
+									Foreground="White"
+									Style="{StaticResource MaterialDesignCaptionTextBlock}"
+									Text="{Binding Date}" />
 
-								<!--version-->
-								<StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10,0,0,0">
-									<TextBlock Text="v." Foreground="White" VerticalAlignment="Center"/>
-									<TextBlock Grid.Column="1" Text="{Binding fileVersion}" Foreground="White" FontSize="12" VerticalAlignment="Center"/>
+								<!--  version  -->
+								<StackPanel
+									Grid.Column="1"
+									Margin="10,0,0,0"
+									HorizontalAlignment="Center"
+									Orientation="Horizontal">
+									<TextBlock
+										VerticalAlignment="Center"
+										Foreground="White"
+										Text="v." />
+									<TextBlock
+										Grid.Column="1"
+										VerticalAlignment="Center"
+										FontSize="12"
+										Foreground="White"
+										Text="{Binding fileVersion}" />
 								</StackPanel>
 							</Grid>
 						</Grid>
 
-						<!--remove button-->
-						<Button x:Name="removeButton" Grid.Column="2" Style="{StaticResource MaterialDesignFlatButton}" Click="removeButton_Click" Width="60" Height="60">
-							<Image Source="Assets/remove2.png" Width="20"/>
+						<!--  remove button  -->
+						<Button
+							x:Name="removeButton"
+							Grid.Column="2"
+							Width="60"
+							Height="60"
+							Click="removeButton_Click"
+							Style="{StaticResource MaterialDesignFlatButton}">
+							<Image Width="20" Source="Assets/remove2.png" />
 						</Button>
 
 					</Grid>
@@ -208,38 +380,84 @@
 			</ListView.ItemTemplate>
 		</ListView>
 		<!--</ScrollViewer>-->
-		<UniformGrid Columns="2" Grid.Row="3" Margin="0,0,20,0">
-			<TextBlock x:Name="appVersion" Text="App Version: " Foreground="White" VerticalAlignment="Center"/>
+		<UniformGrid
+			Grid.Row="3"
+			Margin="0,0,20,0"
+			Columns="2">
+			<TextBlock
+				x:Name="appVersion"
+				VerticalAlignment="Center"
+				Foreground="White"
+				Text="App Version: " />
 
 			<StackPanel Orientation="Horizontal">
-				<Image x:Name="busyIcon" VerticalAlignment="Center" Width="26" Source="Assets/imperial.png">
+				<Image
+					x:Name="busyIcon"
+					Width="26"
+					VerticalAlignment="Center"
+					Source="Assets/imperial.png">
 					<Image.RenderTransform>
-						<RotateTransform Angle="0" x:Name="busyrot" CenterX="13" CenterY="13"/>
+						<RotateTransform x:Name="busyrot" Angle="0" CenterX="13" CenterY="13" />
 					</Image.RenderTransform>
 					<Image.Triggers>
 						<EventTrigger RoutedEvent="Loaded">
 							<BeginStoryboard>
 								<Storyboard>
 									<DoubleAnimation
-            Storyboard.TargetProperty="(Rectangle.RenderTransform).(RotateTransform.Angle)"
-            To="-360" Duration="0:0:1" RepeatBehavior="Forever" />
+										RepeatBehavior="Forever"
+										Storyboard.TargetProperty="(Rectangle.RenderTransform).(RotateTransform.Angle)"
+										To="-360"
+										Duration="0:0:1" />
 								</Storyboard>
 							</BeginStoryboard>
 						</EventTrigger>
 					</Image.Triggers>
 				</Image>
-				<Image x:Name="busyIconRed" VerticalAlignment="Center" Width="26" Source="Assets/imperial.png" Visibility="Collapsed"/>
-				<Image x:Name="busyIconGreen" VerticalAlignment="Center" Width="26" Source="Assets/imperial green.png" Visibility="Collapsed"/>
-				<Image x:Name="busyIconYellow" VerticalAlignment="Center" Width="26" Source="Assets/imperial yellow.png" Visibility="Collapsed"/>
+				<Image
+					x:Name="busyIconRed"
+					Width="26"
+					VerticalAlignment="Center"
+					Source="Assets/imperial.png"
+					Visibility="Collapsed" />
+				<Image
+					x:Name="busyIconGreen"
+					Width="26"
+					VerticalAlignment="Center"
+					Source="Assets/imperial green.png"
+					Visibility="Collapsed" />
+				<Image
+					x:Name="busyIconYellow"
+					Width="26"
+					VerticalAlignment="Center"
+					Source="Assets/imperial yellow.png"
+					Visibility="Collapsed" />
 
-				<TextBlock x:Name="busyStatus" Text="Checking..." VerticalAlignment="Center" Foreground="White" Margin="5,0,0,0"/>
+				<TextBlock
+					x:Name="busyStatus"
+					Margin="5,0,0,0"
+					VerticalAlignment="Center"
+					Foreground="White"
+					Text="Checking..." />
 			</StackPanel>
 
 		</UniformGrid>
 
-		<!--DRAG 'N DROP NOTICE-->
-		<Grid Grid.Row="0" Grid.RowSpan="4" Grid.Column="0" Grid.ColumnSpan="2" Background="#EE303030" x:Name="dropNotice" Visibility="Hidden">
-			<TextBlock x:Name="dropStatusText" Text="DRAG AND DROP MISSION FILE" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" Foreground="White"/>
+		<!--  DRAG 'N DROP NOTICE  -->
+		<Grid
+			x:Name="dropNotice"
+			Grid.Row="0"
+			Grid.RowSpan="4"
+			Grid.Column="0"
+			Grid.ColumnSpan="2"
+			Background="#EE303030"
+			Visibility="Hidden">
+			<TextBlock
+				x:Name="dropStatusText"
+				HorizontalAlignment="Center"
+				VerticalAlignment="Center"
+				FontSize="25"
+				Foreground="White"
+				Text="DRAG AND DROP MISSION FILE" />
 		</Grid>
 	</Grid>
 </Window>

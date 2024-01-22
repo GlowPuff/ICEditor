@@ -226,7 +226,7 @@
 							<TextBlock
 								HorizontalAlignment="Center"
 								Style="{StaticResource MaterialDesignTextBlock}"
-								Text="Round Limits" />
+								Text="Round Limit" />
 						</StackPanel>
 					</TabItem.Header>
 

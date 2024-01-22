@@ -16,6 +16,7 @@ namespace Imperial_Commander_Editor
 		string _campaignName, _campaignInstructions, _campaignIconName;
 		BitmapImage _bmpImage;
 
+		public string packageVersion;
 		public Guid GUID;
 		public string campaignName { get => _campaignName; set { SetProperty( ref _campaignName, value ); } }
 		public string campaignInstructions { get => _campaignInstructions; set { SetProperty( ref _campaignInstructions, value ); } }
@@ -30,6 +31,8 @@ namespace Imperial_Commander_Editor
 
 		public CampaignPackage()
 		{
+			packageVersion = "2";
+
 			GUID = Guid.NewGuid();
 			campaignIconName = "none.png";
 			SetDefaultIcon();
@@ -55,7 +58,7 @@ namespace Imperial_Commander_Editor
 
 		public CampaignMissionItem AddMission( Mission mission )
 		{
-			var item = new CampaignMissionItem() { missionName = mission.missionProperties.missionName, missionGUID = mission.missionGUID, mission = mission, GUID = Guid.NewGuid() };
+			var item = new CampaignMissionItem() { missionName = mission.missionProperties.missionName, missionGUID = mission.missionGUID, mission = mission, GUID = Guid.NewGuid(), customMissionIdentifier = mission.missionProperties.customMissionIdentifier };
 			campaignMissionItems.Add( item );
 			return item;
 		}
@@ -76,6 +79,8 @@ namespace Imperial_Commander_Editor
 			cs.projectItem.Title = "Player's Choice";
 			cs.projectItem.missionGUID = Guid.Empty.ToString();
 			cs.expansionCode = "Imported";
+			cs.hasCustomSetNextEventActions = false;
+			cs.mission = null;
 
 			campaignStructure.Add( cs );
 		}
@@ -103,6 +108,7 @@ namespace Imperial_Commander_Editor
 
 		public Guid GUID { get; set; }//GUID of this object, not the mission
 		public Guid missionGUID { get; set; }
+		public string customMissionIdentifier { get; set; } = Guid.Empty.ToString();
 		public string missionName { get => _missionName; set { SetProperty( ref _missionName, value ); } }
 
 		//store the actual mission for packing as an individual file later, but don't serialize it here
@@ -114,7 +120,8 @@ namespace Imperial_Commander_Editor
 	{
 		MissionType _missionType;
 		int _threatLevel;
-		bool _isAgendaMission;
+		bool _isAgendaMission, _hasCustomSetNextEventActions;
+		string _customMissionIdentifier;
 
 		public string missionID;//in ICE, this is the missionGUID of the CampaignMissionItem.mission as a string
 		public string[] itemTier;
@@ -129,6 +136,8 @@ namespace Imperial_Commander_Editor
 		public bool canModify = true;
 		public ProjectItem projectItem { get; set; }
 
+		public string customMissionIdentifier { get => _customMissionIdentifier; set { SetProperty( ref _customMissionIdentifier, value ); } }
+		public bool hasCustomSetNextEventActions { get => _hasCustomSetNextEventActions; set { SetProperty( ref _hasCustomSetNextEventActions, value ); } }
 		public MissionType missionType { get => _missionType; set { SetProperty( ref _missionType, value ); } }
 		public int threatLevel { get => _threatLevel; set { SetProperty( ref _threatLevel, value ); } }
 		public bool isAgendaMission { get => _isAgendaMission; set { SetProperty( ref _isAgendaMission, value ); } }
@@ -143,6 +152,8 @@ namespace Imperial_Commander_Editor
 				SetProperty( ref itemTier, value.Split( (',') ) );
 			}
 		}
+		[JsonIgnore]
+		public Mission mission;
 
 		public CampaignStructure()
 		{
@@ -154,8 +165,11 @@ namespace Imperial_Commander_Editor
 		{
 			projectItem.Title = "Player's Choice";
 			missionID = Guid.Empty.ToString();
+			customMissionIdentifier = Guid.Empty.ToString();
 			missionSource = MissionSource.None;
 			projectItem.missionGUID = Guid.Empty.ToString();
+			hasCustomSetNextEventActions = false;
+			mission = null;
 		}
 	}
 }

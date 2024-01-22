@@ -75,6 +75,7 @@ namespace Imperial_Commander_Editor
 			heroCB.ItemsSource = Utils.heroData;
 			var items = from e in Utils.mainWindow.mission.globalEvents where e.isGlobal select e;
 			eventCB.ItemsSource = Utils.mainWindow.localEvents;
+			eventCBRoundLimit.ItemsSource = Utils.mainWindow.localEvents;
 
 			ciInfo.Text = string.IsNullOrEmpty( Utils.mainWindow.mission.missionProperties.missionInfo ) ? "Text Not Set" : "Text Set";
 			SolidColorBrush brush = new( string.IsNullOrEmpty( Utils.mainWindow.mission.missionProperties.missionInfo ) ? Colors.Red : Colors.LawnGreen );

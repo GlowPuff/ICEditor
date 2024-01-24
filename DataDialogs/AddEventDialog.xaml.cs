@@ -123,6 +123,8 @@ namespace Imperial_Commander_Editor
 			EventActionType.G7 => new TextBoxDialog( dname, et, ea ),
 			EventActionType.G8 => new ActivateEventGroupDialog( dname, et, ea ),
 			EventActionType.G9 => new InputPromptDialog( dname, et, ea ),
+			EventActionType.G10 => new ModifyRoundLimitDialog( dname, et, ea ),
+			EventActionType.G11 => new SetCountdownDialog( dname, et, ea ),
 			EventActionType.D1 => new EnemyDeploymentDialog( dname, et, ea ),
 			EventActionType.D2 => new AllyDeploymentDialog( dname, et, ea ),
 			EventActionType.D3 => new OptionalDeploymentDialog( dname, et, ea ),

@@ -31,8 +31,8 @@ namespace Imperial_Commander_Editor
 					triggersCB.ItemsSource = Utils.mainWindow.activeSection.triggers;
 					eventsCB.ItemsSource = Utils.mainWindow.activeSection.missionEvents;
 				}
-				localText.Visibility = _showGlobal ? Visibility.Collapsed : Visibility.Visible;
-				globalText.Visibility = _showGlobal ? Visibility.Visible : Visibility.Collapsed;
+				//localText.Visibility = _showGlobal ? Visibility.Collapsed : Visibility.Visible;
+				//globalText.Visibility = _showGlobal ? Visibility.Visible : Visibility.Collapsed;
 				triggersCB.SelectedIndex = 0;
 				eventsCB.SelectedIndex = 0;
 				PC();
@@ -49,7 +49,7 @@ namespace Imperial_Commander_Editor
 		{
 			InitializeComponent();
 
-			showGlobalToggle.DataContext = this;
+			//showGlobalToggle.DataContext = this;
 		}
 
 		private void editTriggerButton_Click( object sender, RoutedEventArgs e )

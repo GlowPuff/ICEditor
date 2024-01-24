@@ -117,6 +117,12 @@ namespace Imperial_Commander_Editor
 					case 27:
 						eventActionAction = item.ToObject<CampaignSetNextMission>();
 						break;
+					case 28:
+						eventActionAction = item.ToObject<ModifyRoundLimit>();
+						break;
+					case 29:
+						eventActionAction = item.ToObject<SetCountdown>();
+						break;
 				}
 				eObserver.Add( eventActionAction );
 			}

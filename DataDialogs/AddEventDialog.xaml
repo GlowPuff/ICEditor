@@ -196,6 +196,14 @@
 															Click="MenuItem_Click"
 															Header="Activate Event Group"
 															Tag="G8" />
+														<MenuItem
+															Click="MenuItem_Click"
+															Header="Modify Round Limit"
+															Tag="G10" />
+														<MenuItem
+															Click="MenuItem_Click"
+															Header="Set Countdown"
+															Tag="G11" />
 													</MenuItem>
 													<MenuItem Header="Dialogs">
 														<MenuItem

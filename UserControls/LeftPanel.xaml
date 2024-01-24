@@ -18,18 +18,18 @@
 					<RowDefinition Height="1*" />
 				</Grid.RowDefinitions>
 
-				<materialDesign:Card Grid.Row="0" Background="MediumPurple" Padding="5" Margin="0,0,0,10">
+				<!--<materialDesign:Card Grid.Row="0" Background="MediumPurple" Padding="5" Margin="0,0,0,10">
 					<Grid>
 						<TextBlock x:Name="localText" HorizontalAlignment="Center" FontWeight="Bold" Text="{Binding activeSection.name, StringFormat=Displaying \'{0}\'}" Style="{StaticResource MaterialDesignBody1TextBlock}" Foreground="White" TextWrapping="Wrap"/>
 						<TextBlock x:Name="globalText" HorizontalAlignment="Center" FontWeight="Bold" Style="{StaticResource MaterialDesignBody1TextBlock}" Foreground="White" TextWrapping="Wrap" Visibility="Hidden" Text="Displaying Global Data"/>
 					</Grid>
-				</materialDesign:Card>
+				</materialDesign:Card>-->
 
 				<!--global switch-->
-				<StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
+				<!--<StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
 					<TextBlock Text="Show Global Items" Margin="0,0,10,0" Foreground="White"/>
 					<ToggleButton x:Name="showGlobalToggle" IsChecked="{Binding showGlobal}"/>
-				</StackPanel>
+				</StackPanel>-->
 
 				<Grid Grid.Row="2" >
 					<Grid.RowDefinitions>

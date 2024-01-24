@@ -80,44 +80,69 @@
 					Padding="10"
 					Background="{StaticResource CardBG}">
 					<StackPanel>
-						<UniformGrid Margin="0,0,0,5" Columns="2">
-							<TextBlock HorizontalAlignment="Center" Text="Fire This Trigger:" />
-							<TextBlock HorizontalAlignment="Center" Text="Fire This Event:" />
-						</UniformGrid>
+						<TextBlock
+							Margin="0,0,0,5"
+							HorizontalAlignment="Left"
+							Text="Fire This Trigger:" />
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="*" />
+								<ColumnDefinition Width="auto" />
+							</Grid.ColumnDefinitions>
 
-						<UniformGrid Columns="2">
 							<ComboBox
 								x:Name="triggersCB"
-								Margin="0,0,5,0"
 								DisplayMemberPath="name"
 								ItemsSource="{Binding mainWindow.localTriggers, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
 								SelectedValue="{Binding triggerGUID}"
 								SelectedValuePath="GUID"
 								Style="{StaticResource MaterialDesignOutlinedComboBox}" />
 
+							<Button
+								x:Name="addNewTriggerButton"
+								Grid.Column="2"
+								Width="35"
+								Height="35"
+								Margin="10,0,0,0"
+								Click="addTriggerBtn_Click"
+								Style="{StaticResource MaterialDesignFloatingActionButton}"
+								ToolTip="Add New Trigger">
+								<Image Height="20" Source="/Assets/addtrigger.png" />
+							</Button>
+						</Grid>
+
+						<TextBlock
+							Margin="0,10,0,5"
+							HorizontalAlignment="Left"
+							Text="Fire This Event:" />
+
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="*" />
+								<ColumnDefinition Width="auto" />
+							</Grid.ColumnDefinitions>
+
 							<ComboBox
 								x:Name="eventsCB"
-								Margin="5,0,0,0"
 								DisplayMemberPath="name"
 								ItemsSource="{Binding mainWindow.localEvents, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
 								SelectedValue="{Binding eventGUID}"
 								SelectedValuePath="GUID"
 								Style="{StaticResource MaterialDesignOutlinedComboBox}" />
-						</UniformGrid>
 
-						<UniformGrid Margin="0,10,0,0" Columns="2">
-							<Button
-								x:Name="addTriggerBtn"
-								Margin="0,0,10,0"
-								HorizontalAlignment="Center"
-								Click="addTriggerBtn_Click"
-								Content="ADD NEW TRIGGER..." />
+
 							<Button
 								x:Name="addEventBtn"
-								HorizontalAlignment="Center"
+								Grid.Column="2"
+								Width="35"
+								Height="35"
+								Margin="10,0,0,0"
 								Click="addEventBtn_Click"
-								Content="ADD NEW EVENT..." />
-						</UniformGrid>
+								Style="{StaticResource MaterialDesignFloatingActionButton}"
+								ToolTip="Add New Trigger">
+								<Image Height="20" Source="/Assets/addevent.png" />
+							</Button>
+						</Grid>
 					</StackPanel>
 				</materialDesign:Card>
 			</StackPanel>

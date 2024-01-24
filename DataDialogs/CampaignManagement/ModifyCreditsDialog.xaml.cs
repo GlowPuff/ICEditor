@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 
 namespace Imperial_Commander_Editor
 {
@@ -31,6 +32,13 @@ namespace Imperial_Commander_Editor
 		private void Window_ContentRendered( object sender, System.EventArgs e )
 		{
 			modifyInput.Focus();
+			modifyInput.SelectAll();
+		}
+
+		private void inputChanged_KeyDown( object sender, System.Windows.Input.KeyEventArgs e )
+		{
+			if ( e.Key == System.Windows.Input.Key.Enter )
+				Utils.LoseFocus( sender as Control );
 		}
 	}
 }

@@ -4,24 +4,18 @@ using System.Windows.Controls;
 namespace Imperial_Commander_Editor
 {
 	/// <summary>
-	/// Interaction logic for ModifyFameAwardsDialog.xaml
+	/// Interaction logic for ModifyRoundLimitDialog.xaml
 	/// </summary>
-	public partial class ModifyFameAwardsDialog : Window, IEventActionDialog
+	public partial class ModifyRoundLimitDialog : Window, IEventActionDialog
 	{
 		public IEventAction eventAction { get; set; }
 
-		public ModifyFameAwardsDialog( string dname, EventActionType et, IEventAction ea = null )
+		public ModifyRoundLimitDialog( string dname, EventActionType et, IEventAction ea = null )
 		{
 			InitializeComponent();
 
-			eventAction = ea ?? new CampaignModifyFameAwards( dname, et );
+			eventAction = ea ?? new ModifyRoundLimit( dname, et );
 			DataContext = eventAction;
-		}
-
-		private void Window_ContentRendered( object sender, System.EventArgs e )
-		{
-			modifyInput.Focus();
-			modifyInput.SelectAll();
 		}
 
 		private void Window_MouseDown( object sender, System.Windows.Input.MouseButtonEventArgs e )
@@ -33,6 +27,12 @@ namespace Imperial_Commander_Editor
 		private void okButton_Click( object sender, RoutedEventArgs e )
 		{
 			Close();
+		}
+
+		private void Window_ContentRendered( object sender, System.EventArgs e )
+		{
+			modifyInput.Focus();
+			modifyInput.SelectAll();
 		}
 
 		private void inputChanged_KeyDown( object sender, System.Windows.Input.KeyEventArgs e )

@@ -33,11 +33,11 @@
 								MaxWidth="100"
 								VerticalAlignment="Center"
 								CaretBrush="White"
+								KeyDown="inputChanged_KeyDown"
 								Text="{Binding xpToAdd}" />
 						</UniformGrid>
 
 						<TextBlock
-							Grid.Column="1"
 							Margin="0,5,0,0"
 							VerticalAlignment="Center"
 							FontStyle="Italic"

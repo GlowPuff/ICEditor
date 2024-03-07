@@ -7,7 +7,9 @@ namespace Imperial_Commander_Editor
 		int _countdownTimer;
 		Guid _eventGUID, _triggerGUID;
 		bool _showPlayerCountdown;//whether to show a number in IC2 so players know how many rounds remain
+		string _countdownTimerName;
 
+		public string countdownTimerName { get => _countdownTimerName; set { _countdownTimerName = value; PC(); } }
 		public int countdownTimer { get => _countdownTimer; set { _countdownTimer = value; PC(); } }
 		public Guid eventGUID { get => _eventGUID; set { _eventGUID = value; PC(); } }
 		public Guid triggerGUID { get => _triggerGUID; set { _triggerGUID = value; PC(); } }
@@ -25,6 +27,7 @@ namespace Imperial_Commander_Editor
 			eventGUID = Guid.Empty;
 			triggerGUID = Guid.Empty;
 			showPlayerCountdown = false;
+			countdownTimerName = "Timer1";
 		}
 
 		public BrokenRefInfo NotifyEventRemoved( Guid guid, NotifyMode mode )

@@ -7,7 +7,7 @@
 	xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	Title="Modify Round Limit"
-	Width="500"
+	Width="550"
 	ContentRendered="Window_ContentRendered"
 	MouseDown="Window_MouseDown"
 	SizeToContent="Height"
@@ -19,22 +19,40 @@
 		<GroupBox Header="Modify Round Limit Event Action" Style="{DynamicResource MaterialDesignGroupBox}">
 			<Grid>
 				<Grid.RowDefinitions>
-					<RowDefinition Height="*" />
+					<RowDefinition Height="auto" />
+					<RowDefinition Height="auto" />
+					<RowDefinition Height="auto" />
 					<RowDefinition Height="auto" />
 				</Grid.RowDefinitions>
 
 				<materialDesign:Card Padding="10" Background="{StaticResource CardBG}">
-
 					<StackPanel>
-						<UniformGrid Margin="0,0,0,0" Columns="2">
-							<TextBlock VerticalAlignment="Center" Text="Amount to modify by:" />
+						<UniformGrid Columns="2">
+							<TextBlock VerticalAlignment="Center" Text="Modify the Round Limit:" />
 							<TextBox
 								x:Name="modifyInput"
 								MaxWidth="100"
 								VerticalAlignment="Center"
+								HorizontalContentAlignment="Center"
 								CaretBrush="White"
 								KeyDown="inputChanged_KeyDown"
 								Text="{Binding roundLimitModifier}" />
+						</UniformGrid>
+
+						<UniformGrid Margin="0,10,0,0" Columns="2">
+							<CheckBox
+								Margin="0"
+								Content="Set the Round Limit:"
+								IsChecked="{Binding setRoundLimit}"
+								Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" />
+							<TextBox
+								x:Name="setLimit"
+								MaxWidth="100"
+								VerticalAlignment="Center"
+								HorizontalContentAlignment="Center"
+								CaretBrush="White"
+								KeyDown="inputChanged_KeyDown"
+								Text="{Binding setLimitTo}" />
 						</UniformGrid>
 
 						<TextBlock
@@ -42,20 +60,89 @@
 							VerticalAlignment="Center"
 							FontStyle="Italic"
 							Foreground="Violet"
-							Text="Positive values increase the Round Limit, negative values decrease the Round Limit"
+							Text="The initial Round Limit used at the start of the Mission can be optionally set in Mission Properties."
 							TextWrapping="Wrap" />
 						<TextBlock
-							Margin="0,10,0,0"
+							Margin="0,5,0,0"
 							VerticalAlignment="Center"
 							FontStyle="Italic"
-							Foreground="Red"
-							Text="Set to 0 to deactivate the Round Limit."
+							Foreground="Violet"
+							Text="Positive values increase the Round Limit, negative values decrease the Round Limit. If the Round Limit is DISABLED (-1), this will ENABLE the Round Limit and modify it (-1) by the given amount."
+							TextWrapping="Wrap" />
+						<TextBlock
+							Margin="0,5,0,0"
+							VerticalAlignment="Center"
+							FontStyle="Italic"
+							Foreground="Violet"
+							Text="Instead of MODIFYING the Round Limit, you may SET it directly, instead."
 							TextWrapping="Wrap" />
 					</StackPanel>
-
 				</materialDesign:Card>
 
-				<StackPanel Grid.Row="1" Margin="0,10,0,0">
+				<materialDesign:Card
+					Grid.Row="1"
+					Margin="0,10,0,0"
+					Padding="10"
+					Background="{StaticResource CardBG}">
+					<StackPanel>
+						<TextBlock Text="Change Round Limit Event (Optional):" />
+						<Grid Margin="0,5,0,0">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="*" />
+								<ColumnDefinition Width="auto" />
+							</Grid.ColumnDefinitions>
+
+							<ComboBox
+								x:Name="eventCB"
+								DisplayMemberPath="name"
+								SelectedValue="{Binding eventGUID}"
+								SelectedValuePath="GUID"
+								Style="{StaticResource MaterialDesignOutlinedComboBox}" />
+
+							<Button
+								x:Name="addNewEventButton"
+								Grid.Column="2"
+								Width="35"
+								Height="35"
+								Margin="10,0,0,0"
+								Click="addNewEventButton_Click"
+								Style="{StaticResource MaterialDesignFloatingActionButton}"
+								ToolTip="Add New Event">
+								<Image Height="20" Source="/Assets/addevent.png" />
+							</Button>
+						</Grid>
+
+						<TextBlock
+							Margin="0,5,0,0"
+							VerticalAlignment="Center"
+							FontStyle="Italic"
+							Foreground="Violet"
+							Text="Leave the Event set to 'None' to keep the currently set Event."
+							TextWrapping="Wrap" />
+					</StackPanel>
+				</materialDesign:Card>
+
+				<materialDesign:Card
+					Grid.Row="2"
+					Margin="0,10,0,0"
+					Padding="5"
+					Background="{StaticResource CardBG}">
+					<StackPanel>
+						<CheckBox
+							Margin="0"
+							Content="Disable Round Limit"
+							IsChecked="{Binding disableRoundLimit}"
+							Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" />
+
+						<TextBlock
+							Margin="0,5,0,0"
+							FontStyle="Italic"
+							Foreground="Violet"
+							Text="Disable the Round Limit and set the Round Limit Event to None." />
+					</StackPanel>
+				</materialDesign:Card>
+
+				<StackPanel Grid.Row="3" Margin="0,10,0,0">
 					<Separator Margin="0,0,0,10" />
 					<Button
 						x:Name="okButton"

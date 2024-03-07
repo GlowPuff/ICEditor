@@ -95,6 +95,7 @@ namespace Imperial_Commander_Editor
 			}
 		}
 
+		//the UI for this is collapsed, triggers aren't used in this action
 		private void tCB_GotFocus( object sender, RoutedEventArgs e )
 		{
 			tCB.GotFocus -= tCB_GotFocus;

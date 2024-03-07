@@ -1,22 +1,42 @@
-﻿<Window x:Class="Imperial_Commander_Editor.ModifyVariableDialog"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Imperial_Commander_Editor"
-        mc:Ignorable="d"
-				xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-				Style="{StaticResource dws}"
-        Title="Modify Variables" Width="460" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown" SizeToContent="Height" MaxHeight="500">
+﻿<Window
+	x:Class="Imperial_Commander_Editor.ModifyVariableDialog"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:local="clr-namespace:Imperial_Commander_Editor"
+	xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	Title="Modify Variables"
+	Width="460"
+	MaxHeight="500"
+	MouseDown="Window_MouseDown"
+	SizeToContent="Height"
+	Style="{StaticResource dws}"
+	WindowStartupLocation="CenterScreen"
+	mc:Ignorable="d">
 
 	<Window.Resources>
-		<DataTemplate DataType="{x:Type local:TriggerModifier}" x:Key="k1">
+		<DataTemplate x:Key="k1" DataType="{x:Type local:TriggerModifier}">
 			<UniformGrid Columns="2">
-				<TextBlock Text="{Binding triggerName}" VerticalAlignment="Center"/>
+				<TextBlock VerticalAlignment="Center" Text="{Binding triggerName}" />
 				<UniformGrid Columns="3">
-					<TextBox Text="{Binding setValue}" HorizontalAlignment="Center" Width="50"/>
-					<TextBox Text="{Binding modifyValue}" HorizontalAlignment="Center" Width="50"/>
-					<Button x:Name="remTriggerButton" Content="{materialDesign:PackIcon Kind=RemoveBold}" Foreground="Red" Margin="10,0,0,0" Click="remTriggerButton_Click" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35"/>
+					<TextBox
+						Width="50"
+						HorizontalAlignment="Center"
+						Text="{Binding setValue}" />
+					<TextBox
+						Width="50"
+						HorizontalAlignment="Center"
+						Text="{Binding modifyValue}" />
+					<Button
+						x:Name="remTriggerButton"
+						Width="35"
+						Height="35"
+						Margin="10,0,0,0"
+						Click="remTriggerButton_Click"
+						Content="{materialDesign:PackIcon Kind=RemoveBold}"
+						Foreground="Red"
+						Style="{StaticResource MaterialDesignFloatingActionButton}" />
 				</UniformGrid>
 			</UniformGrid>
 		</DataTemplate>
@@ -26,8 +46,8 @@
 		<GroupBox Header="Modify Variables Event Action" Style="{DynamicResource MaterialDesignGroupBox}">
 			<Grid>
 				<Grid.RowDefinitions>
-					<RowDefinition Height="*"/>
-					<RowDefinition Height="auto"/>
+					<RowDefinition Height="*" />
+					<RowDefinition Height="auto" />
 				</Grid.RowDefinitions>
 
 				<ScrollViewer VerticalScrollBarVisibility="Auto">
@@ -40,38 +60,75 @@
 									<ColumnDefinition Width="auto" />
 								</Grid.ColumnDefinitions>
 
-								<ComboBox x:Name="tlist" Style="{StaticResource MaterialDesignOutlinedComboBox}" ItemsSource="{Binding mainWindow.localTriggers}" SelectedValue="{Binding selectedTrigger}" DisplayMemberPath="name" GotFocus="tlist_GotFocus"/>
+								<ComboBox
+									x:Name="tlist"
+									DisplayMemberPath="name"
+									ItemsSource="{Binding mainWindow.localTriggers}"
+									SelectedValue="{Binding selectedTrigger}"
+									Style="{StaticResource MaterialDesignOutlinedComboBox}" />
 
-								<Button x:Name="addTriggerButton" Content="{materialDesign:PackIcon Kind=AddBold}" Grid.Column="1" Margin="10,0,0,0" Click="addTriggerButton_Click" ToolTip="Add Existing Trigger" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35"/>
-								<Button x:Name="addNewTriggerButton" Grid.Column="2" Margin="10,0,0,0" Click="addNewTriggerButton_Click" ToolTip="Add New Trigger" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35">
-									<Image Source="../../Assets/addtrigger.png" Height="20"/>
+								<Button
+									x:Name="addTriggerButton"
+									Grid.Column="1"
+									Width="35"
+									Height="35"
+									Margin="10,0,0,0"
+									Click="addTriggerButton_Click"
+									Content="{materialDesign:PackIcon Kind=AddBold}"
+									Style="{StaticResource MaterialDesignFloatingActionButton}"
+									ToolTip="Add Existing Trigger" />
+								<Button
+									x:Name="addNewTriggerButton"
+									Grid.Column="2"
+									Width="35"
+									Height="35"
+									Margin="10,0,0,0"
+									Click="addNewTriggerButton_Click"
+									Style="{StaticResource MaterialDesignFloatingActionButton}"
+									ToolTip="Add New Trigger">
+									<Image Height="20" Source="../../Assets/addtrigger.png" />
 								</Button>
 							</Grid>
 						</materialDesign:Card>
 
-						<TextBlock Text="To Set a value, enter a number greater than -1, otherwise the Trigger Variable will be Modified by the +/- value." TextWrapping="Wrap" Margin="0,10,0,0"/>
+						<TextBlock
+							Margin="0,10,0,0"
+							Text="To Set a value, enter a number greater than -1, otherwise the Trigger Variable will be Modified by the +/- value."
+							TextWrapping="Wrap" />
 
-						<materialDesign:Card Background="Purple" Padding="10" Margin="0,10,0,0">
+						<materialDesign:Card
+							Margin="0,10,0,0"
+							Padding="10"
+							Background="Purple">
 							<StackPanel>
 								<UniformGrid Columns="2">
-									<TextBlock Text="Trigger Name"/>
+									<TextBlock Text="Trigger Name" />
 									<UniformGrid Columns="3">
-										<TextBlock Text="Set" HorizontalAlignment="Center"/>
-										<TextBlock Text="+/-" HorizontalAlignment="Center"/>
+										<TextBlock HorizontalAlignment="Center" Text="Set" />
+										<TextBlock HorizontalAlignment="Center" Text="+/-" />
 									</UniformGrid>
 								</UniformGrid>
 
-								<Separator Margin="0,5,0,5"/>
+								<Separator Margin="0,5,0,5" />
 
-								<ListBox HorizontalContentAlignment="Stretch" ItemTemplate="{StaticResource k1}" ItemsSource="{Binding eventAction.triggerList}" d:ItemsSource="{d:SampleData ItemCount=1}"/>
+								<ListBox
+									HorizontalContentAlignment="Stretch"
+									d:ItemsSource="{d:SampleData ItemCount=1}"
+									ItemTemplate="{StaticResource k1}"
+									ItemsSource="{Binding eventAction.triggerList}" />
 							</StackPanel>
 						</materialDesign:Card>
 					</StackPanel>
 				</ScrollViewer>
 
 				<StackPanel Grid.Row="1">
-					<Separator Margin="0,10,0,10"/>
-					<Button x:Name="okButton" Content="ACCEPT" Click="okButton_Click" IsDefault="True" HorizontalAlignment="Right"/>
+					<Separator Margin="0,10,0,10" />
+					<Button
+						x:Name="okButton"
+						HorizontalAlignment="Right"
+						Click="okButton_Click"
+						Content="ACCEPT"
+						IsDefault="True" />
 				</StackPanel>
 			</Grid>
 		</GroupBox>

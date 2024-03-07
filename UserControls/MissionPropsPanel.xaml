@@ -244,7 +244,7 @@
 									Margin="0,5,0,0"
 									FontStyle="Italic"
 									Foreground="Violet"
-									Text="A value of -1 will remove the round limit, even if it's set using an Event Action during the Mission"
+									Text="A value of -1 will remove the round limit, even if it's set using an Event Action during the Mission."
 									TextWrapping="Wrap" />
 							</StackPanel>
 						</GroupBox>
@@ -254,33 +254,42 @@
 							Margin="0,5"
 							Background="#FF503B7C"
 							Header="Round Limit Event">
-							<Grid>
-								<Grid.ColumnDefinitions>
-									<ColumnDefinition Width="*" />
-									<ColumnDefinition Width="auto" />
-								</Grid.ColumnDefinitions>
+							<StackPanel>
+								<Grid>
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="*" />
+										<ColumnDefinition Width="auto" />
+									</Grid.ColumnDefinitions>
 
-								<ComboBox
-									x:Name="eventCBRoundLimit"
-									DisplayMemberPath="name"
-									Foreground="White"
-									GotFocus="eventCBRoundLimit_GotFocus"
-									SelectedValue="{Binding roundLimitEvent}"
-									SelectedValuePath="GUID"
-									Style="{StaticResource MaterialDesignOutlinedComboBox}" />
+									<ComboBox
+										x:Name="eventCBRoundLimit"
+										DisplayMemberPath="name"
+										DropDownOpened="eventCBRoundLimit_DropDownOpened"
+										Foreground="White"
+										SelectedValue="{Binding roundLimitEvent}"
+										SelectedValuePath="GUID"
+										Style="{StaticResource MaterialDesignOutlinedComboBox}" />
 
-								<Button
-									x:Name="addNewEventButtonRoundLimit"
-									Grid.Column="2"
-									Width="35"
-									Height="35"
-									Margin="10,0,0,0"
-									Click="addNewEventButtonRoundLimit_Click"
-									Style="{StaticResource MaterialDesignFloatingActionButton}"
-									ToolTip="Add New Event">
-									<Image Height="20" Source="../Assets/addevent.png" />
-								</Button>
-							</Grid>
+									<Button
+										x:Name="addNewEventButtonRoundLimit"
+										Grid.Column="2"
+										Width="35"
+										Height="35"
+										Margin="10,0,0,0"
+										Click="addNewEventButtonRoundLimit_Click"
+										Style="{StaticResource MaterialDesignFloatingActionButton}"
+										ToolTip="Add New Event">
+										<Image Height="20" Source="../Assets/addevent.png" />
+									</Button>
+								</Grid>
+
+								<TextBlock
+									Margin="0,5,0,0"
+									FontStyle="Italic"
+									Foreground="Violet"
+									Text="This Event will fire at the end of the round set in Round Limit above."
+									TextWrapping="Wrap" />
+							</StackPanel>
 						</GroupBox>
 
 					</StackPanel>
@@ -317,8 +326,8 @@
 								<ComboBox
 									x:Name="eventCB"
 									DisplayMemberPath="name"
+									DropDownOpened="eventCB_DropDownOpened"
 									Foreground="White"
-									GotFocus="eventCB_GotFocus"
 									SelectedValue="{Binding startingEvent}"
 									SelectedValuePath="GUID"
 									Style="{StaticResource MaterialDesignOutlinedComboBox}" />

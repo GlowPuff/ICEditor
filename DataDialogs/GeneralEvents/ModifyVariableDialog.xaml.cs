@@ -75,14 +75,9 @@ namespace Imperial_Commander_Editor
 			{
 				(eventAction as ModifyVariable).triggerList.Add( new TriggerModifier( t ) );
 				selectedTriggers.Add( new TriggerModifier( t ) );
+				tlist.ItemsSource = Utils.mainWindow.localTriggers;
+				tlist.SelectedValue = t;
 			}
-		}
-
-		private void tlist_GotFocus( object sender, RoutedEventArgs e )
-		{
-			tlist.GotFocus -= tlist_GotFocus;
-			tlist.ItemsSource = Utils.mainWindow.localTriggers;
-			tlist.GotFocus += tlist_GotFocus;
 		}
 	}
 }

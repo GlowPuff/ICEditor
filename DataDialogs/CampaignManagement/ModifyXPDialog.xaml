@@ -32,6 +32,7 @@
 								x:Name="xpInput"
 								MaxWidth="100"
 								VerticalAlignment="Center"
+								HorizontalContentAlignment="Center"
 								CaretBrush="White"
 								KeyDown="inputChanged_KeyDown"
 								Text="{Binding xpToAdd}" />

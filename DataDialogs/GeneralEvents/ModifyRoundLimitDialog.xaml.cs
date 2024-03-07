@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System;
+using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace Imperial_Commander_Editor
@@ -16,6 +18,17 @@ namespace Imperial_Commander_Editor
 
 			eventAction = ea ?? new ModifyRoundLimit( dname, et );
 			DataContext = eventAction;
+
+			eventCB.ItemsSource = Utils.mainWindow.localEvents;
+
+			//make sure events still exist
+			List<string> strings = new();
+			var e = Utils.mainWindow.mission.GetEventFromGUID( ((ModifyRoundLimit)eventAction).eventGUID );
+			if ( e == null )
+			{
+				((SetCountdown)eventAction).eventGUID = Guid.Empty;
+				strings.Add( "Missing Event" );
+			}
 		}
 
 		private void Window_MouseDown( object sender, System.Windows.Input.MouseButtonEventArgs e )
@@ -39,6 +52,16 @@ namespace Imperial_Commander_Editor
 		{
 			if ( e.Key == System.Windows.Input.Key.Enter )
 				Utils.LoseFocus( sender as Control );
+		}
+
+		private void addNewEventButton_Click( object sender, RoutedEventArgs e )
+		{
+			MissionEvent me = Utils.mainWindow.leftPanel.AddNewEvent();
+			if ( me != null )
+			{
+				eventCB.ItemsSource = Utils.mainWindow.localEvents;
+				((ModifyRoundLimit)eventAction).eventGUID = me.GUID;
+			}
 		}
 	}
 }

@@ -50,27 +50,19 @@ namespace Imperial_Commander_Editor
 
 		private void okButton_Click( object sender, RoutedEventArgs e )
 		{
-			Close();
+			//trim the value of whitespace
+			(eventAction as SetCountdown).countdownTimerName = (eventAction as SetCountdown).countdownTimerName.Trim();
+
+			if ( string.IsNullOrEmpty( ((SetCountdown)eventAction).countdownTimerName.Trim() ) )
+				MessageBox.Show( "The countdown name is required.", "Missing Countdown Name" );
+			else
+				Close();
 		}
 
 		private void Window_ContentRendered( object sender, System.EventArgs e )
 		{
-			modifyInput.Focus();
-			modifyInput.SelectAll();
-		}
-
-		private void eventCB_GotFocus( object sender, RoutedEventArgs e )
-		{
-			eventCB.GotFocus -= eventCB_GotFocus;
-			eventCB.ItemsSource = Utils.mainWindow.localEvents;
-			eventCB.GotFocus += eventCB_GotFocus;
-		}
-
-		private void triggerCB_GotFocus( object sender, RoutedEventArgs e )
-		{
-			triggerCB.GotFocus -= triggerCB_GotFocus;
-			triggerCB.ItemsSource = Utils.mainWindow.localTriggers;
-			triggerCB.GotFocus += triggerCB_GotFocus;
+			timerNAme.Focus();
+			timerNAme.SelectAll();
 		}
 
 		private void addNewTriggerButton_Click( object sender, RoutedEventArgs e )

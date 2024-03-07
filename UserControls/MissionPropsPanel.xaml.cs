@@ -108,13 +108,6 @@ namespace Imperial_Commander_Editor
 			}
 		}
 
-		private void eventCB_GotFocus( object sender, System.Windows.RoutedEventArgs e )
-		{
-			eventCB.GotFocus -= eventCB_GotFocus;
-			eventCB.ItemsSource = Utils.mainWindow.localEvents;
-			eventCB.GotFocus += eventCB_GotFocus;
-		}
-
 		private void descriptionBtn_Click( object sender, System.Windows.RoutedEventArgs e )
 		{
 			var dlg = new GenericTextDialog( "Mission Description", Utils.mainWindow.mission.missionProperties.missionDescription );
@@ -239,13 +232,6 @@ namespace Imperial_Commander_Editor
 			e.Handled = true;
 		}
 
-		private void eventCBRoundLimit_GotFocus( object sender, System.Windows.RoutedEventArgs e )
-		{
-			eventCBRoundLimit.GotFocus -= eventCBRoundLimit_GotFocus;
-			eventCBRoundLimit.ItemsSource = Utils.mainWindow.localEvents;
-			eventCBRoundLimit.GotFocus += eventCBRoundLimit_GotFocus;
-		}
-
 		private void addNewEventButtonRoundLimit_Click( object sender, System.Windows.RoutedEventArgs e )
 		{
 			MissionEvent me = Utils.mainWindow.leftPanel.AddNewEvent();
@@ -254,6 +240,16 @@ namespace Imperial_Commander_Editor
 				eventCBRoundLimit.ItemsSource = Utils.mainWindow.localEvents;
 				Utils.mainWindow.mission.missionProperties.roundLimitEvent = me.GUID;
 			}
+		}
+
+		private void eventCB_DropDownOpened( object sender, EventArgs e )
+		{
+			eventCB.ItemsSource = Utils.mainWindow.localEvents;
+		}
+
+		private void eventCBRoundLimit_DropDownOpened( object sender, EventArgs e )
+		{
+			eventCBRoundLimit.ItemsSource = Utils.mainWindow.localEvents;
 		}
 	}
 }

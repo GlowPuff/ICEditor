@@ -98,6 +98,7 @@
 							Grid.Row="2"
 							Grid.ColumnSpan="2"
 							Margin="0,10,0,0"
+							Foreground="Violet"
 							Text="Use a Mission ID other than 'Custom' to have the Description filled in automatically by the Saga app."
 							TextWrapping="Wrap" />
 
@@ -178,12 +179,12 @@
 						<CheckBox
 							Content="Imperial"
 							IsChecked="{Binding factionImperial}"
-							Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" />
+							Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" />
 						<CheckBox
 							Margin="10,0"
 							Content="Mercenary"
 							IsChecked="{Binding factionMercenary}"
-							Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" />
+							Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" />
 					</StackPanel>
 				</GroupBox>
 
@@ -208,7 +209,7 @@
 				materialDesign:ColorZoneAssist.Mode="PrimaryMid"
 				materialDesign:NavigationRailAssist.ShowSelectionBackground="True"
 				SelectionChanged="propsTabControl_SelectionChanged"
-				Style="{StaticResource MaterialDesignNavigatilRailTabControl}"
+				Style="{StaticResource MaterialDesignNavigationRailTabControl}"
 				TabStripPlacement="Top">
 				<TabControl.Background>
 					<SolidColorBrush Color="#FF3A3349" />
@@ -368,9 +369,9 @@
 							<!--<materialDesign:Card Background="MediumPurple" Padding="10" Margin="0,5,0,0">
 							<StackPanel Orientation="Horizontal">
 								<TextBlock Text="Placement:" Margin="0,0,10,0" VerticalAlignment="Center"/>
-								<RadioButton Content="Top" GroupName="addto" x:Name="ciTop" IsChecked="{Binding customInstructionType, ConverterParameter={x:Static local:CustomInstructionType.Top}, Converter={StaticResource rbConv}}" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}"/>
-								<RadioButton Content="Bottom" GroupName="addto" x:Name="ciBottom" Margin="10,0" IsChecked="{Binding customInstructionType, ConverterParameter={x:Static local:CustomInstructionType.Bottom}, Converter={StaticResource rbConv}}" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}"/>
-								<RadioButton Content="Replace" GroupName="addto" x:Name="ciReplace" IsChecked="{Binding customInstructionType, ConverterParameter={x:Static local:CustomInstructionType.Replace}, Converter={StaticResource rbConv}}" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}"/>
+								<RadioButton Content="Top" GroupName="addto" x:Name="ciTop" IsChecked="{Binding customInstructionType, ConverterParameter={x:Static local:CustomInstructionType.Top}, Converter={StaticResource rbConv}}" Style="{StaticResource MaterialDesignChoiceChipOutlineRadioButton}"/>
+								<RadioButton Content="Bottom" GroupName="addto" x:Name="ciBottom" Margin="10,0" IsChecked="{Binding customInstructionType, ConverterParameter={x:Static local:CustomInstructionType.Bottom}, Converter={StaticResource rbConv}}" Style="{StaticResource MaterialDesignChoiceChipOutlineRadioButton}"/>
+								<RadioButton Content="Replace" GroupName="addto" x:Name="ciReplace" IsChecked="{Binding customInstructionType, ConverterParameter={x:Static local:CustomInstructionType.Replace}, Converter={StaticResource rbConv}}" Style="{StaticResource MaterialDesignChoiceChipOutlineRadioButton}"/>
 							</StackPanel>
 						</materialDesign:Card>-->
 							<!--</StackPanel>-->
@@ -424,14 +425,14 @@
 									Content="No"
 									GroupName="ally"
 									IsChecked="{Binding useFixedAlly, ConverterParameter={x:Static local:YesNoAll.No}, Converter={StaticResource rbConv}}"
-									Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" />
+									Style="{StaticResource MaterialDesignChoiceChipOutlineRadioButton}" />
 								<StackPanel Orientation="Horizontal">
 									<RadioButton
 										VerticalAlignment="Center"
 										Content="Yes"
 										GroupName="ally"
 										IsChecked="{Binding useFixedAlly, ConverterParameter={x:Static local:YesNoAll.Yes}, Converter={StaticResource rbConv}}"
-										Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" />
+										Style="{StaticResource MaterialDesignChoiceChipOutlineRadioButton}" />
 									<ComboBox
 										x:Name="fixedAllyCB"
 										Margin="10,0,0,0"
@@ -454,12 +455,12 @@
 									Content="All"
 									GroupName="bannedally"
 									IsChecked="{Binding useBannedAlly, ConverterParameter={x:Static local:YesNoAll.All}, Converter={StaticResource rbConv}}"
-									Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" />
+									Style="{StaticResource MaterialDesignChoiceChipOutlineRadioButton}" />
 								<RadioButton
 									Content="None"
 									GroupName="bannedally"
 									IsChecked="{Binding useBannedAlly, ConverterParameter={x:Static local:YesNoAll.No}, Converter={StaticResource rbConv}}"
-									Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" />
+									Style="{StaticResource MaterialDesignChoiceChipOutlineRadioButton}" />
 								<StackPanel Orientation="Horizontal">
 									<RadioButton
 										x:Name="banSingleRB"
@@ -467,7 +468,7 @@
 										Content="Single"
 										GroupName="bannedally"
 										IsChecked="{Binding useBannedAlly, ConverterParameter={x:Static local:YesNoAll.Yes}, Converter={StaticResource rbConv}}"
-										Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" />
+										Style="{StaticResource MaterialDesignChoiceChipOutlineRadioButton}" />
 									<ComboBox
 										x:Name="bannedAllyCB"
 										Margin="10,0,0,0"
@@ -483,7 +484,7 @@
 										Content="Multiple"
 										GroupName="bannedally"
 										IsChecked="{Binding useBannedAlly, ConverterParameter={x:Static local:YesNoAll.Multi}, Converter={StaticResource rbConv}}"
-										Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" />
+										Style="{StaticResource MaterialDesignChoiceChipOutlineRadioButton}" />
 									<Button
 										x:Name="editMultiBanAllyBtn"
 										Margin="10,0"
@@ -616,14 +617,14 @@
 									Content="Any Rebel Figure"
 									GroupName="priority"
 									IsChecked="{Binding priorityTargetType, ConverterParameter={x:Static local:PriorityTargetType.Rebel}, Converter={StaticResource rbConv}}"
-									Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" />
+									Style="{StaticResource MaterialDesignChoiceChipOutlineRadioButton}" />
 								<StackPanel Orientation="Horizontal">
 									<RadioButton
 										VerticalAlignment="Center"
 										Content="Specific Hero"
 										GroupName="priority"
 										IsChecked="{Binding priorityTargetType, ConverterParameter={x:Static local:PriorityTargetType.Hero}, Converter={StaticResource rbConv}}"
-										Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" />
+										Style="{StaticResource MaterialDesignChoiceChipOutlineRadioButton}" />
 									<ComboBox
 										x:Name="heroCB"
 										Margin="10,0,0,0"
@@ -638,7 +639,7 @@
 										Content="Specific Ally"
 										GroupName="priority"
 										IsChecked="{Binding priorityTargetType, ConverterParameter={x:Static local:PriorityTargetType.Ally}, Converter={StaticResource rbConv}}"
-										Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" />
+										Style="{StaticResource MaterialDesignChoiceChipOutlineRadioButton}" />
 									<ComboBox
 										x:Name="allyCB"
 										Margin="10,0,0,0"
@@ -653,7 +654,7 @@
 										Content="Other"
 										GroupName="priority"
 										IsChecked="{Binding priorityTargetType, ConverterParameter={x:Static local:PriorityTargetType.Other}, Converter={StaticResource rbConv}}"
-										Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" />
+										Style="{StaticResource MaterialDesignChoiceChipOutlineRadioButton}" />
 									<TextBox
 										Width="241"
 										Margin="10,0,0,0"

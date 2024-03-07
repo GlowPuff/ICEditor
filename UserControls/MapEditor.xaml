@@ -1,33 +1,43 @@
-﻿<UserControl x:Class="Imperial_Commander_Editor.MapEditor"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Imperial_Commander_Editor"
-             mc:Ignorable="d" 
-						 xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             d:DesignHeight="550" d:DesignWidth="1100" PreviewKeyDown="UserControl_PreviewKeyDown">
+﻿<UserControl
+	x:Class="Imperial_Commander_Editor.MapEditor"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:local="clr-namespace:Imperial_Commander_Editor"
+	xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	d:DesignHeight="550"
+	d:DesignWidth="1100"
+	PreviewKeyDown="UserControl_PreviewKeyDown"
+	mc:Ignorable="d">
 
 	<UserControl.Resources>
-		<Style TargetType="GroupBox" BasedOn="{StaticResource MaterialDesignGroupBox}">
-			<Setter Property="materialDesign:ColorZoneAssist.Mode" Value="Custom"/>
-			<Setter Property="materialDesign:ColorZoneAssist.Background" Value="#FF7952C0"/>
-			<Setter Property="materialDesign:ColorZoneAssist.Foreground" Value="White"/>
+		<Style BasedOn="{StaticResource MaterialDesignGroupBox}" TargetType="GroupBox">
+			<Setter Property="materialDesign:ColorZoneAssist.Mode" Value="Custom" />
+			<Setter Property="materialDesign:ColorZoneAssist.Background" Value="#FF7952C0" />
+			<Setter Property="materialDesign:ColorZoneAssist.Foreground" Value="White" />
 		</Style>
 
-		<local:TileSideConverter x:Key="tsc"/>
+		<local:TileSideConverter x:Key="tsc" />
 	</UserControl.Resources>
 
 	<Grid>
 		<Grid.Background>
-			<SolidColorBrush Color="#FF3A3349" Opacity=".25"/>
+			<SolidColorBrush Opacity=".25" Color="#FF3A3349" />
 		</Grid.Background>
 
-		<DockPanel x:Name="mapContainer" LastChildFill="True" ClipToBounds="True">
-			<!--MAIN PANEL-->
-			<!--Visibility="{Binding showPanel, Converter={StaticResource BooleanToVisibilityConverter}}"-->
-			<ScrollViewer VerticalScrollBarVisibility="Auto" DockPanel.Dock="Right">
-				<Border Width="225" Background="#FF3A3349" BorderThickness="1,0,0,0" BorderBrush="Black">
+		<DockPanel
+			x:Name="mapContainer"
+			ClipToBounds="True"
+			LastChildFill="True">
+			<!--  MAIN PANEL  -->
+			<!--  Visibility="{Binding showPanel, Converter={StaticResource BooleanToVisibilityConverter}}"  -->
+			<ScrollViewer DockPanel.Dock="Right" VerticalScrollBarVisibility="Auto">
+				<Border
+					Width="225"
+					Background="#FF3A3349"
+					BorderBrush="Black"
+					BorderThickness="1,0,0,0">
 					<Grid>
 						<Grid.RowDefinitions>
 							<RowDefinition Height="auto" />
@@ -36,37 +46,98 @@
 							<RowDefinition Height="auto" />
 						</Grid.RowDefinitions>
 						<!--<StackPanel>-->
-						<GroupBox Header="ENTITY ACTIONS" Background="#FF503B7C">
+						<GroupBox Background="#FF503B7C" Header="ENTITY ACTIONS">
 							<StackPanel>
-								<!--DUPLICATE-->
-								<Button x:Name="dupeBtn" Content="ADD DUPLICATE" Click="dupeBtn_Click" IsEnabled="{Binding canDuplicate}"/>
-								<!--SWITCH TO SECTION-->
-								<Button x:Name="switchSectionBtn" Content="SWITCH MAP SECTION" Margin="0,10,0,0" IsEnabled="{Binding entityPropsEnabled}" Click="switchSectionBtn_Click" ToolTip="Switch The Active Map Section To This Entity's Owner"/>
-								<!--REMOVE-->
-								<Button x:Name="removeTileButton" Content="REMOVE SELECTED" Margin="0,10,0,0" Click="removeEntityButton_Click" IsEnabled="{Binding entityPropsEnabled}" Foreground="Red"/>
+								<!--  DUPLICATE  -->
+								<Button
+									x:Name="dupeBtn"
+									Click="dupeBtn_Click"
+									Content="ADD DUPLICATE"
+									IsEnabled="{Binding canDuplicate}" />
+								<!--  SWITCH TO SECTION  -->
+								<Button
+									x:Name="switchSectionBtn"
+									Margin="0,10,0,0"
+									Click="switchSectionBtn_Click"
+									Content="SWITCH MAP SECTION"
+									IsEnabled="{Binding entityPropsEnabled}"
+									ToolTip="Switch The Active Map Section To This Entity's Owner" />
+								<!--  REMOVE  -->
+								<Button
+									x:Name="removeTileButton"
+									Margin="0,10,0,0"
+									Click="removeEntityButton_Click"
+									Content="REMOVE SELECTED"
+									Foreground="Red"
+									IsEnabled="{Binding entityPropsEnabled}" />
 							</StackPanel>
 						</GroupBox>
-						<!--TILE PROPS-->
-						<GroupBox Grid.Row="1" Header="TILES" Background="#FF503B7C" Foreground="White" DataContext="{Binding}" Margin="0,10,0,0">
+						<!--  TILE PROPS  -->
+						<GroupBox
+							Grid.Row="1"
+							Margin="0,10,0,0"
+							Background="#FF503B7C"
+							DataContext="{Binding}"
+							Foreground="White"
+							Header="TILES">
 							<StackPanel>
-								<!--SELECTED TILE-->
-								<CheckBox x:Name="filterTileCheck" Content="Filter By Active Map Section" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" HorizontalAlignment="Center" Margin="4,4,4,5" Click="filterCheck_Click" IsChecked="{Binding filterTilesBySection}"/>
-								<ComboBox x:Name="tileCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" Margin="0,0,0,5" SelectedValue="{Binding selectedEntity}" DisplayMemberPath="name" ItemsSource="{Binding mapTiles}"/>
+								<!--  SELECTED TILE  -->
+								<CheckBox
+									x:Name="filterTileCheck"
+									Margin="4,4,4,5"
+									HorizontalAlignment="Center"
+									Click="filterCheck_Click"
+									Content="Filter By Active Map Section"
+									IsChecked="{Binding filterTilesBySection}"
+									Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" />
+								<ComboBox
+									x:Name="tileCB"
+									Margin="0,0,0,5"
+									DisplayMemberPath="name"
+									ItemsSource="{Binding mapTiles}"
+									SelectedValue="{Binding selectedEntity}"
+									Style="{StaticResource MaterialDesignOutlinedComboBox}" />
 							</StackPanel>
 						</GroupBox>
 
-						<!--ALL ENTITIES-->
-						<GroupBox Grid.Row="2" Header="ENTITIES" Background="#FF503B7C" Foreground="White" Margin="0,10">
+						<!--  ALL ENTITIES  -->
+						<GroupBox
+							Grid.Row="2"
+							Margin="0,10"
+							Background="#FF503B7C"
+							Foreground="White"
+							Header="ENTITIES">
 							<StackPanel>
-								<CheckBox x:Name="filterCheck" Content="Filter By Active Map Section" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" HorizontalAlignment="Center" Margin="4,4,4,5" Click="filterCheck_Click" IsChecked="{Binding filterBySection}"/>
-								<ListBox x:Name="entitiesCB" ItemsSource="{Binding mapEntities}"  SelectedValue="{Binding selectedEntity}" MaxHeight="300" DisplayMemberPath="name" ItemContainerStyle="{StaticResource lbitem}" MouseDoubleClick="entitiesCB_MouseDoubleClick"/>
+								<CheckBox
+									x:Name="filterCheck"
+									Margin="4,4,4,5"
+									HorizontalAlignment="Center"
+									Click="filterCheck_Click"
+									Content="Filter By Active Map Section"
+									IsChecked="{Binding filterBySection}"
+									Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" />
+								<ListBox
+									x:Name="entitiesCB"
+									MaxHeight="300"
+									DisplayMemberPath="name"
+									ItemContainerStyle="{StaticResource lbitem}"
+									ItemsSource="{Binding mapEntities}"
+									MouseDoubleClick="entitiesCB_MouseDoubleClick"
+									SelectedValue="{Binding selectedEntity}" />
 							</StackPanel>
 						</GroupBox>
 
-						<!--SELECTED ENTITY PROPERTIES (crate, token, door, etc)-->
-						<GroupBox Grid.Row="3" Header="SELECTED ENTITY PROPERTIES" Background="#FF503B7C" Foreground="White">
+						<!--  SELECTED ENTITY PROPERTIES (crate, token, door, etc)  -->
+						<GroupBox
+							Grid.Row="3"
+							Background="#FF503B7C"
+							Foreground="White"
+							Header="SELECTED ENTITY PROPERTIES">
 							<StackPanel>
-								<TextBlock Text="Nothing Selected" HorizontalAlignment="Center" Visibility="{Binding nothingSelected,Converter={StaticResource BooleanToVisibilityConverter}}"/>
+								<TextBlock
+									HorizontalAlignment="Center"
+									Text="Nothing Selected"
+									Visibility="{Binding nothingSelected, Converter={StaticResource BooleanToVisibilityConverter}}" />
 								<ContentControl Content="{Binding propModel}" />
 							</StackPanel>
 						</GroupBox>
@@ -75,8 +146,13 @@
 				</Border>
 			</ScrollViewer>
 
-			<!--INFO BAR-->
-			<Border Grid.Row="1" DockPanel.Dock="Bottom" BorderBrush="Black" BorderThickness="0,1,0,0" Background="#FF3A3349">
+			<!--  INFO BAR  -->
+			<Border
+				Grid.Row="1"
+				Background="#FF3A3349"
+				BorderBrush="Black"
+				BorderThickness="0,1,0,0"
+				DockPanel.Dock="Bottom">
 				<StackPanel>
 					<Grid>
 						<Grid.ColumnDefinitions>
@@ -85,98 +161,216 @@
 							<ColumnDefinition Width="auto" />
 						</Grid.ColumnDefinitions>
 
-						<StackPanel Orientation="Horizontal" Margin="10,0">
-							<!--TILE ID-->
+						<StackPanel Margin="10,0" Orientation="Horizontal">
+							<!--  TILE ID  -->
 							<!--<TextBlock Text="{Binding tileNumber, StringFormat=Tile \'{0}\'}" HorizontalAlignment="Center" VerticalAlignment="Center" d:Text="Tile 01" Grid.Column="0"/>-->
-							<materialDesign:PackIcon Kind="Add" VerticalAlignment="Center" Margin="0,0,5,0"/>
-							<!--ADD TILE-->
-							<Button x:Name="addTileButton" Content="{materialDesign:PackIcon Kind=Square}" Margin="5,0" Click="addTileButton_Click" ToolTip="Add a Tile"/>
-							<!--ADD CRATE-->
-							<Button x:Name="addCrateButton" Content="{materialDesign:PackIcon Kind=ShippingPallet}" Margin="5,0" Click="addCrateButton_Click" ToolTip="Add a Crate"/>
-							<!--ADD CONSOLE-->
-							<Button x:Name="addConsoleButton" Content="{materialDesign:PackIcon Kind=ComputerClassic}" Margin="5,0" Click="addConsoleButton_Click" ToolTip="Add a Terminal"/>
-							<!--ADD DOOR-->
-							<Button x:Name="addDoorButton" Content="{materialDesign:PackIcon Kind=Door}" Margin="5,0" Click="addDoorButton_Click" ToolTip="Add a Door"/>
-							<!--ADD DEPLOYMENT POINT-->
-							<Button x:Name="addDeploymentButton" Content="{materialDesign:PackIcon Kind=PeopleAdd}" Margin="5,0" Click="addDeploymentButton_Click" ToolTip="Add a Deployment Point"/>
-							<!--ADD TOKEN-->
-							<Button x:Name="addTokenButton" Content="{materialDesign:PackIcon Kind=PokerChip}" Margin="5,0" Click="addTokenButton_Click" ToolTip="Add a Mission Marker"/>
-							<!--ADD HIGHLIGHT-->
-							<Button x:Name="addHighlightButton" Content="{materialDesign:PackIcon Kind=ExclamationBold}" Margin="5,0" Click="addHighlightButton_Click" ToolTip="Add a Space Highlight"/>
+							<materialDesign:PackIcon
+								Margin="0,0,5,0"
+								VerticalAlignment="Center"
+								Kind="Add" />
+							<!--  ADD TILE  -->
+							<Button
+								x:Name="addTileButton"
+								Width="40"
+								Height="40"
+								Margin="5,0"
+								Click="addTileButton_Click"
+								Content="{materialDesign:PackIcon Kind=Square}"
+								Style="{DynamicResource MaterialDesignFloatingActionButton}"
+								ToolTip="Add a Tile" />
+							<!--  ADD CRATE  -->
+							<Button
+								x:Name="addCrateButton"
+								Width="40"
+								Height="40"
+								Margin="5,0"
+								Click="addCrateButton_Click"
+								Content="{materialDesign:PackIcon Kind=ShippingPallet}"
+								Style="{DynamicResource MaterialDesignFloatingActionButton}"
+								ToolTip="Add a Crate" />
+							<!--  ADD CONSOLE  -->
+							<Button
+								x:Name="addConsoleButton"
+								Width="40"
+								Height="40"
+								Margin="5,0"
+								Click="addConsoleButton_Click"
+								Content="{materialDesign:PackIcon Kind=ComputerClassic}"
+								Style="{DynamicResource MaterialDesignFloatingActionButton}"
+								ToolTip="Add a Terminal" />
+							<!--  ADD DOOR  -->
+							<Button
+								x:Name="addDoorButton"
+								Width="40"
+								Height="40"
+								Margin="5,0"
+								Click="addDoorButton_Click"
+								Content="{materialDesign:PackIcon Kind=Door}"
+								Style="{DynamicResource MaterialDesignFloatingActionButton}"
+								ToolTip="Add a Door" />
+							<!--  ADD DEPLOYMENT POINT  -->
+							<Button
+								x:Name="addDeploymentButton"
+								Width="40"
+								Height="40"
+								Margin="5,0"
+								Click="addDeploymentButton_Click"
+								Content="{materialDesign:PackIcon Kind=PeopleAdd}"
+								Style="{DynamicResource MaterialDesignFloatingActionButton}"
+								ToolTip="Add a Deployment Point" />
+							<!--  ADD TOKEN  -->
+							<Button
+								x:Name="addTokenButton"
+								Width="40"
+								Height="40"
+								Margin="5,0"
+								Click="addTokenButton_Click"
+								Content="{materialDesign:PackIcon Kind=PokerChip}"
+								Style="{DynamicResource MaterialDesignFloatingActionButton}"
+								ToolTip="Add a Mission Marker" />
+							<!--  ADD HIGHLIGHT  -->
+							<Button
+								x:Name="addHighlightButton"
+								Width="40"
+								Height="40"
+								Margin="5,0"
+								Click="addHighlightButton_Click"
+								Content="{materialDesign:PackIcon Kind=ExclamationBold}"
+								Style="{DynamicResource MaterialDesignFloatingActionButton}"
+								ToolTip="Add a Space Highlight" />
 						</StackPanel>
 
-						<!--TOGGLE BUTTON-->
-						<StackPanel Orientation="Horizontal" Grid.Column="2">
-							<Button x:Name="centerButton" Margin="0,5,10,5" Content="{materialDesign:PackIcon Kind=GpsFixed}" Click="centerButton_Click" ToolTip="Center Map"/>
+						<!--  TOGGLE BUTTON  -->
+						<StackPanel Grid.Column="2" Orientation="Horizontal">
+							<Button
+								x:Name="centerButton"
+								Width="40"
+								Height="40"
+								Margin="0,5,10,5"
+								Click="centerButton_Click"
+								Content="{materialDesign:PackIcon Kind=GpsFixed}"
+								Style="{DynamicResource MaterialDesignFloatingActionButton}"
+								ToolTip="Center Map" />
 
-							<Button x:Name="centerSelectedButton" Margin="0,5,10,5" Content="{materialDesign:PackIcon Kind=TagText}" Click="centerSelectedButton_Click" ToolTip="Center Selected Entity"/>
-
-							<!--<Button x:Name="panelToggleButton" Margin="0,5,10,5" Content="{materialDesign:PackIcon Kind=ArrowRight}" Click="panelToggleButton_Click" ToolTip="Show/Hide Properties"/>-->
+							<Button
+								x:Name="centerSelectedButton"
+								Width="40"
+								Height="40"
+								Margin="0,5,10,5"
+								Click="centerSelectedButton_Click"
+								Content="{materialDesign:PackIcon Kind=TagText}"
+								Style="{DynamicResource MaterialDesignFloatingActionButton}"
+								ToolTip="Center Selected Entity" />
 						</StackPanel>
 
 					</Grid>
 					<Border Padding="10,0">
 						<StackPanel Orientation="Horizontal">
-							<TextBlock Text="Add Tile" VerticalAlignment="Center"/>
-							<materialDesign:Chip Content="T" Style="{StaticResource  MaterialDesignFlatSecondaryButton}"/>
+							<TextBlock VerticalAlignment="Center" Text="Add Tile" />
+							<materialDesign:Chip Content="T" Style="{StaticResource MaterialDesignFlatSecondaryButton}" />
 
-							<materialDesign:PackIcon Kind="Dot" VerticalAlignment="Center" Foreground="MediumOrchid"/>
+							<materialDesign:PackIcon
+								VerticalAlignment="Center"
+								Foreground="MediumOrchid"
+								Kind="Dot" />
 
-							<TextBlock Text="Duplicate" VerticalAlignment="Center"/>
-							<materialDesign:Chip Content="D" Style="{StaticResource  MaterialDesignFlatSecondaryButton}"/>
+							<TextBlock VerticalAlignment="Center" Text="Duplicate" />
+							<materialDesign:Chip Content="D" Style="{StaticResource MaterialDesignFlatSecondaryButton}" />
 
-							<materialDesign:PackIcon Kind="Dot" VerticalAlignment="Center" Foreground="MediumOrchid"/>
+							<materialDesign:PackIcon
+								VerticalAlignment="Center"
+								Foreground="MediumOrchid"
+								Kind="Dot" />
 
-							<TextBlock Text="Delete" VerticalAlignment="Center"/>
-							<materialDesign:Chip Content="X" Style="{StaticResource  MaterialDesignFlatSecondaryButton}"/>
+							<TextBlock VerticalAlignment="Center" Text="Delete" />
+							<materialDesign:Chip Content="X" Style="{StaticResource MaterialDesignFlatSecondaryButton}" />
 
-							<materialDesign:PackIcon Kind="Dot" VerticalAlignment="Center" Foreground="MediumOrchid"/>
+							<materialDesign:PackIcon
+								VerticalAlignment="Center"
+								Foreground="MediumOrchid"
+								Kind="Dot" />
 
-							<TextBlock Text="Rotate" VerticalAlignment="Center"/>
-							<materialDesign:Chip Content="[ ], RClick" Style="{StaticResource  MaterialDesignFlatSecondaryButton}"/>
+							<TextBlock VerticalAlignment="Center" Text="Rotate" />
+							<materialDesign:Chip Content="[ ], RClick" Style="{StaticResource MaterialDesignFlatSecondaryButton}" />
 
-							<materialDesign:PackIcon Kind="Dot" VerticalAlignment="Center" Foreground="MediumOrchid"/>
+							<materialDesign:PackIcon
+								VerticalAlignment="Center"
+								Foreground="MediumOrchid"
+								Kind="Dot" />
 
-							<TextBlock Text="Center Map" VerticalAlignment="Center"/>
-							<materialDesign:Chip Content="M" Style="{StaticResource  MaterialDesignFlatSecondaryButton}"/>
+							<TextBlock VerticalAlignment="Center" Text="Center Map" />
+							<materialDesign:Chip Content="M" Style="{StaticResource MaterialDesignFlatSecondaryButton}" />
 
-							<materialDesign:PackIcon Kind="Dot" VerticalAlignment="Center" Foreground="MediumOrchid"/>
+							<materialDesign:PackIcon
+								VerticalAlignment="Center"
+								Foreground="MediumOrchid"
+								Kind="Dot" />
 
-							<TextBlock Text="Center Selected" VerticalAlignment="Center"/>
-							<materialDesign:Chip Content="S" Style="{StaticResource  MaterialDesignFlatSecondaryButton}"/>
+							<TextBlock VerticalAlignment="Center" Text="Center Selected" />
+							<materialDesign:Chip Content="S" Style="{StaticResource MaterialDesignFlatSecondaryButton}" />
 
-							<materialDesign:PackIcon Kind="Dot" VerticalAlignment="Center" Foreground="MediumOrchid"/>
+							<materialDesign:PackIcon
+								VerticalAlignment="Center"
+								Foreground="MediumOrchid"
+								Kind="Dot" />
 
-							<TextBlock Text="Switch Section" VerticalAlignment="Center"/>
-							<materialDesign:Chip Content="W" Style="{StaticResource  MaterialDesignFlatSecondaryButton}"/>
+							<TextBlock VerticalAlignment="Center" Text="Switch Section" />
+							<materialDesign:Chip Content="W" Style="{StaticResource MaterialDesignFlatSecondaryButton}" />
 						</StackPanel>
 					</Border>
 				</StackPanel>
 			</Border>
 
-			<Canvas x:Name="MainCanvas" Width="2000" Height="2000" RenderTransformOrigin="0,0" MouseDown="MainCanvas_MouseDown" MouseUp="MainCanvas_MouseUp" MouseRightButtonDown="MainCanvas_MouseRightButtonDown" MouseMove="MainCanvas_MouseMove" 
-			MouseWheel="MainCanvas_MouseWheel" Panel.ZIndex="-1" ClipToBounds="True">
+			<Canvas
+				x:Name="MainCanvas"
+				Width="2000"
+				Height="2000"
+				Panel.ZIndex="-1"
+				ClipToBounds="True"
+				MouseDown="MainCanvas_MouseDown"
+				MouseMove="MainCanvas_MouseMove"
+				MouseRightButtonDown="MainCanvas_MouseRightButtonDown"
+				MouseUp="MainCanvas_MouseUp"
+				MouseWheel="MainCanvas_MouseWheel"
+				RenderTransformOrigin="0,0">
 				<Canvas.Background>
-					<!--DRAW GRID-->
-					<VisualBrush TileMode="FlipXY"
-                    Viewport="0,0,10,10" ViewportUnits="Absolute" 
-                    Viewbox="0,0,50,50" ViewboxUnits="Absolute">
+					<!--  DRAW GRID  -->
+					<VisualBrush
+						TileMode="FlipXY"
+						Viewbox="0,0,50,50"
+						ViewboxUnits="Absolute"
+						Viewport="0,0,10,10"
+						ViewportUnits="Absolute">
 						<VisualBrush.Visual>
-							<Rectangle Stroke="#3FFFFFFF" StrokeThickness="1" Height="50" Width="50"></Rectangle>
+							<Rectangle
+								Width="50"
+								Height="50"
+								Stroke="#3FFFFFFF"
+								StrokeThickness="1" />
 						</VisualBrush.Visual>
 					</VisualBrush>
 				</Canvas.Background>
 
-				<!--TOOLTIP-->
-				<!--<TextBlock x:Name="myToolTip" ToolTipService.InitialShowDelay="5000" 
-                ToolTipService.ShowDuration="2000" 
-                ToolTipService.BetweenShowDelay="10000" 
+				<!--  TOOLTIP  -->
+				<!--<TextBlock x:Name="myToolTip" ToolTipService.InitialShowDelay="5000"
+                ToolTipService.ShowDuration="2000"
+                ToolTipService.BetweenShowDelay="10000"
                 ToolTip="This is a tool tip." Panel.ZIndex="100" />-->
 
-				<!--center crosshair-->
-				<Rectangle Canvas.Left="999" Canvas.Top="975" Width="2" Height="50" Fill="#2632A0FB"/>
-				<Rectangle Canvas.Left="975" Canvas.Top="999" Width="50" Height="2" Fill="#2632A0FB"/>
-				<!--DEMO SHAPES-->
+				<!--  center crosshair  -->
+				<Rectangle
+					Canvas.Left="999"
+					Canvas.Top="975"
+					Width="2"
+					Height="50"
+					Fill="#2632A0FB" />
+				<Rectangle
+					Canvas.Left="975"
+					Canvas.Top="999"
+					Width="50"
+					Height="2"
+					Fill="#2632A0FB" />
+				<!--  DEMO SHAPES  -->
 				<!--<Rectangle Canvas.Left="500" Canvas.Top="500" Width="50" Height="50" Fill="#FFFB3232" />
 				<Rectangle Canvas.Left="500" Canvas.Top="600" Width="50" Height="50" Fill="#FFFB3232" />
 				<Rectangle Canvas.Left="650" Canvas.Top="500" Width="50" Height="50" Fill="#FFFB3232" />

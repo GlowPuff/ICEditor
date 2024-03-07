@@ -103,7 +103,7 @@
 										Content="Hero"
 										GroupName="ctype"
 										IsChecked="{Binding deploymentCard.characterType, ConverterParameter={x:Static local:CharacterType.Hero}, Converter={StaticResource rbConv}}"
-										Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" />
+										Style="{StaticResource MaterialDesignChoiceChipOutlineRadioButton}" />
 									<RadioButton
 										x:Name="isAllyCheck"
 										MinWidth="75"
@@ -111,7 +111,7 @@
 										Content="Ally"
 										GroupName="ctype"
 										IsChecked="{Binding deploymentCard.characterType, ConverterParameter={x:Static local:CharacterType.Ally}, Converter={StaticResource rbConv}}"
-										Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" />
+										Style="{StaticResource MaterialDesignChoiceChipOutlineRadioButton}" />
 									<RadioButton
 										x:Name="isRebelCheck"
 										MinWidth="75"
@@ -119,7 +119,7 @@
 										Content="Rebel / Neutral"
 										GroupName="ctype"
 										IsChecked="{Binding deploymentCard.characterType, ConverterParameter={x:Static local:CharacterType.Rebel}, Converter={StaticResource rbConv}}"
-										Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" />
+										Style="{StaticResource MaterialDesignChoiceChipOutlineRadioButton}" />
 									<RadioButton
 										x:Name="isEnemyCheck"
 										MinWidth="75"
@@ -127,7 +127,7 @@
 										Content="Enemy Group"
 										GroupName="ctype"
 										IsChecked="{Binding deploymentCard.characterType, ConverterParameter={x:Static local:CharacterType.Imperial}, Converter={StaticResource rbConv}}"
-										Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" />
+										Style="{StaticResource MaterialDesignChoiceChipOutlineRadioButton}" />
 									<RadioButton
 										x:Name="isVillainCheck"
 										MinWidth="75"
@@ -135,7 +135,7 @@
 										Content="Villain"
 										GroupName="ctype"
 										IsChecked="{Binding deploymentCard.characterType, ConverterParameter={x:Static local:CharacterType.Villain}, Converter={StaticResource rbConv}}"
-										Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" />
+										Style="{StaticResource MaterialDesignChoiceChipOutlineRadioButton}" />
 								</WrapPanel>
 								<TextBlock
 									x:Name="setupInfo"
@@ -189,13 +189,13 @@
 										HorizontalAlignment="Stretch"
 										Content="Imperial"
 										IsChecked="{Binding faction, ConverterParameter={x:Static local:Factions.Imperial}, Converter={StaticResource rbConv}}"
-										Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" />
+										Style="{StaticResource MaterialDesignChoiceChipOutlineRadioButton}" />
 
 									<RadioButton
 										HorizontalAlignment="Stretch"
 										Content="Mercenary"
 										IsChecked="{Binding faction, ConverterParameter={x:Static local:Factions.Mercenary}, Converter={StaticResource rbConv}}"
-										Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" />
+										Style="{StaticResource MaterialDesignChoiceChipOutlineRadioButton}" />
 								</UniformGrid>
 
 								<TextBlock
@@ -278,7 +278,7 @@
 					materialDesign:ColorZoneAssist.Mode="PrimaryMid"
 					materialDesign:NavigationRailAssist.ShowSelectionBackground="True"
 					SelectionChanged="toonTabControl_SelectionChanged"
-					Style="{StaticResource MaterialDesignNavigatilRailTabControl}"
+					Style="{StaticResource MaterialDesignNavigationRailTabControl}"
 					TabStripPlacement="Top">
 					<TabControl.Background>
 						<SolidColorBrush Color="#FF3A3349" />
@@ -346,7 +346,7 @@
 										Margin="0,10,4,4"
 										Content="Also Copy Instructions and Bonuses"
 										IsChecked="True"
-										Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" />
+										Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" />
 									<TextBlock
 										Margin="0,10,0,0"
 										FontStyle="Italic"
@@ -375,7 +375,7 @@
 										Click="eliteCheckbox_Click"
 										Content="This Group is Elite"
 										IsChecked="{Binding deploymentCard.isElite}"
-										Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" />
+										Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" />
 									<TextBlock
 										Grid.Column="1"
 										Margin="10,0,0,0"
@@ -472,7 +472,7 @@
 										Margin="0,10,4,0"
 										Content="Multiply Health By Threat Level"
 										IsChecked="{Binding useThreatMultiplier}"
-										Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" />
+										Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" />
 								</StackPanel>
 							</GroupBox>
 
@@ -551,28 +551,28 @@
 										Content="Small 1x1"
 										GroupName="figSizeGrp"
 										IsChecked="{Binding deploymentCard.miniSize, ConverterParameter={x:Static local:FigureSize.Small1x1}, Converter={StaticResource rbConv}}"
-										Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" />
+										Style="{StaticResource MaterialDesignChoiceChipOutlineRadioButton}" />
 
 									<RadioButton
 										Margin="5"
 										Content="Medium 1x2"
 										GroupName="figSizeGrp"
 										IsChecked="{Binding deploymentCard.miniSize, ConverterParameter={x:Static local:FigureSize.Medium1x2}, Converter={StaticResource rbConv}}"
-										Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" />
+										Style="{StaticResource MaterialDesignChoiceChipOutlineRadioButton}" />
 
 									<RadioButton
 										Margin="5"
 										Content="Large 2x2"
 										GroupName="figSizeGrp"
 										IsChecked="{Binding deploymentCard.miniSize, ConverterParameter={x:Static local:FigureSize.Large2x2}, Converter={StaticResource rbConv}}"
-										Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" />
+										Style="{StaticResource MaterialDesignChoiceChipOutlineRadioButton}" />
 
 									<RadioButton
 										Margin="5"
 										Content="Huge 2x3"
 										GroupName="figSizeGrp"
 										IsChecked="{Binding deploymentCard.miniSize, ConverterParameter={x:Static local:FigureSize.Huge2x3}, Converter={StaticResource rbConv}}"
-										Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" />
+										Style="{StaticResource MaterialDesignChoiceChipOutlineRadioButton}" />
 								</WrapPanel>
 							</GroupBox>
 						</StackPanel>
@@ -758,15 +758,15 @@
 										x:Name="canRD"
 										Content="Can Be Redeployed"
 										IsChecked="{Binding canRedeploy}"
-										Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" />
+										Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" />
 									<CheckBox
 										Content="Can Be Reinforced"
 										IsChecked="{Binding canReinforce}"
-										Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" />
+										Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" />
 									<CheckBox
 										Content="Can Be Defeated"
 										IsChecked="{Binding canBeDefeated}"
-										Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" />
+										Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" />
 								</WrapPanel>
 
 								<TextBlock
@@ -834,7 +834,7 @@
 											<RowDefinition Height="1*" />
 										</Grid.RowDefinitions>
 
-										<!--<CheckBox Grid.Row="1" Content="Multiply Health By Threat Level" IsChecked="{Binding useThreatMultiplier}" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" Margin="0,10" Grid.ColumnSpan="2"/>-->
+										<!--<CheckBox Grid.Row="1" Content="Multiply Health By Threat Level" IsChecked="{Binding useThreatMultiplier}" Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" Margin="0,10" Grid.ColumnSpan="2"/>-->
 
 										<TextBlock
 											Grid.Row="2"
@@ -877,12 +877,12 @@
 												HorizontalAlignment="Stretch"
 												Content="Melee"
 												IsChecked="{Binding deploymentCard.attackType, ConverterParameter={x:Static local:AttackType.Melee}, Converter={StaticResource rbConv}}"
-												Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" />
+												Style="{StaticResource MaterialDesignChoiceChipOutlineRadioButton}" />
 											<RadioButton
 												HorizontalAlignment="Stretch"
 												Content="Ranged"
 												IsChecked="{Binding deploymentCard.attackType, ConverterParameter={x:Static local:AttackType.Ranged}, Converter={StaticResource rbConv}}"
-												Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" />
+												Style="{StaticResource MaterialDesignChoiceChipOutlineRadioButton}" />
 										</UniformGrid>
 									</UniformGrid>
 								</StackPanel>

@@ -41,7 +41,6 @@
 							Margin="0,5,0,0"
 							VerticalAlignment="Center"
 							FontStyle="Italic"
-							Foreground="Violet"
 							Text="Positive values add Fame, negative values remove Fame" />
 
 						<UniformGrid Margin="0,15,0,0" Columns="2">
@@ -58,7 +57,6 @@
 							Margin="0,5,0,0"
 							VerticalAlignment="Center"
 							FontStyle="Italic"
-							Foreground="Violet"
 							Text="Positive values add Awards, negative values remove Awards" />
 
 					</StackPanel>

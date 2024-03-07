@@ -33,67 +33,67 @@
 									Margin="4,4,10,4"
 									Content="Brawler"
 									IsChecked="{Binding incBrawler}"
-									Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" />
+									Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" />
 								<CheckBox
 									Margin="4,4,10,4"
 									Content="Creature"
 									IsChecked="{Binding incCreature}"
-									Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" />
+									Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" />
 								<CheckBox
 									Margin="4,4,10,4"
 									Content="Droid"
 									IsChecked="{Binding incDroid}"
-									Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" />
+									Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" />
 								<CheckBox
 									Margin="4,4,10,4"
 									Content="Force User"
 									IsChecked="{Binding incForceUser}"
-									Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" />
+									Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" />
 								<CheckBox
 									Margin="4,4,10,4"
 									Content="Guardian"
 									IsChecked="{Binding incGuardian}"
-									Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" />
+									Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" />
 								<CheckBox
 									Margin="4,4,10,4"
 									Content="Heavy Weapon"
 									IsChecked="{Binding incHeavyWeapon}"
-									Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" />
+									Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" />
 								<CheckBox
 									Margin="4,4,10,4"
 									Content="Hunter"
 									IsChecked="{Binding incHunter}"
-									Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" />
+									Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" />
 								<CheckBox
 									Margin="4,4,10,4"
 									Content="Leader"
 									IsChecked="{Binding incLeader}"
-									Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" />
+									Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" />
 								<CheckBox
 									Margin="4,4,10,4"
 									Content="Smuggler"
 									IsChecked="{Binding incSmuggler}"
-									Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" />
+									Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" />
 								<CheckBox
 									Margin="4,4,10,4"
 									Content="Spy"
 									IsChecked="{Binding incSpy}"
-									Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" />
+									Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" />
 								<CheckBox
 									Margin="4,4,10,4"
 									Content="Trooper"
 									IsChecked="{Binding incTrooper}"
-									Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" />
+									Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" />
 								<CheckBox
 									Margin="4,4,10,4"
 									Content="Wookiee"
 									IsChecked="{Binding incWookiee}"
-									Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" />
+									Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" />
 								<CheckBox
 									Margin="4,4,10,4"
 									Content="Vehicle"
 									IsChecked="{Binding incVehicle}"
-									Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" />
+									Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" />
 							</UniformGrid>
 						</StackPanel>
 					</materialDesign:Card>

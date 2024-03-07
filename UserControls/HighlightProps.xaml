@@ -1,72 +1,146 @@
-﻿<UserControl x:Class="Imperial_Commander_Editor.HighlightProps"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Imperial_Commander_Editor"
-             mc:Ignorable="d" 
-						 xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             d:DesignWidth="200">
+﻿<UserControl
+	x:Class="Imperial_Commander_Editor.HighlightProps"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:local="clr-namespace:Imperial_Commander_Editor"
+	xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	d:DesignWidth="200"
+	mc:Ignorable="d">
 	<Grid Background="#FF503B7C">
 		<StackPanel>
-			<materialDesign:Card Background="{StaticResource CardBG}" Padding="10">
+			<materialDesign:Card Padding="10" Background="{StaticResource CardBG}">
 				<StackPanel>
-					<TextBlock Text="HIGHLIGHT" HorizontalAlignment="Center"/>
-					<TextBox Text="{Binding name}" materialDesign:HintAssist.Hint="Entity Name" Style="{StaticResource MaterialDesignOutlinedTextBox}" Margin="0,10,0,0" CaretBrush="White" KeyDown="TextBox_KeyDown"/>
-					<Button x:Name="ownerChangeBtn" Content="CHANGE OWNER" Margin="0,10,0,0" Click="ownerChangeBtn_Click"/>
-					<TextBlock Text="{Binding ownerName, RelativeSource={RelativeSource AncestorType=local:HighlightProps}}" Margin="0,5,0,0" Foreground="Pink" HorizontalAlignment="Center"/>
+					<TextBlock HorizontalAlignment="Center" Text="HIGHLIGHT" />
+					<TextBox
+						Margin="0,10,0,0"
+						materialDesign:HintAssist.Hint="Entity Name"
+						CaretBrush="White"
+						KeyDown="TextBox_KeyDown"
+						Style="{StaticResource MaterialDesignOutlinedTextBox}"
+						Text="{Binding name}" />
+					<Button
+						x:Name="ownerChangeBtn"
+						Margin="0,10,0,0"
+						Click="ownerChangeBtn_Click"
+						Content="CHANGE OWNER" />
+					<TextBlock
+						Margin="0,5,0,0"
+						HorizontalAlignment="Center"
+						Foreground="DeepPink"
+						Text="{Binding ownerName, RelativeSource={RelativeSource AncestorType=local:HighlightProps}}" />
 				</StackPanel>
 			</materialDesign:Card>
 
-			<!--ACTIVE-->
-			<materialDesign:Card Background="{StaticResource CardBG}" Padding="10" Margin="0,10">
+			<!--  ACTIVE  -->
+			<materialDesign:Card
+				Margin="0,10"
+				Padding="10"
+				Background="{StaticResource CardBG}">
 				<StackPanel>
-					<TextBlock Text="Is Active?" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+					<TextBlock
+						Margin="0,0,0,10"
+						HorizontalAlignment="Center"
+						Text="Is Active?" />
 					<UniformGrid Columns="3">
-						<TextBlock Text="No" HorizontalAlignment="Right"/>
-						<ToggleButton IsChecked="{Binding entityProperties.isActive}"/>
-						<TextBlock Text="Yes"/>
+						<TextBlock
+							HorizontalAlignment="Center"
+							VerticalAlignment="Center"
+							Text="No" />
+						<ToggleButton IsChecked="{Binding entityProperties.isActive}" Style="{DynamicResource MaterialDesignSwitchSecondaryToggleButton}" />
+						<TextBlock
+							HorizontalAlignment="Center"
+							VerticalAlignment="Center"
+							Text="Yes" />
 					</UniformGrid>
 				</StackPanel>
 			</materialDesign:Card>
 
-			<!--size-->
-			<materialDesign:Card Background="{StaticResource CardBG}" Margin="0,0,0,10" Padding="10">
+			<!--  size  -->
+			<materialDesign:Card
+				Margin="0,0,0,10"
+				Padding="10"
+				Background="{StaticResource CardBG}">
 				<StackPanel>
-					<TextBlock Text="Duration In Rounds" HorizontalAlignment="Center"/>
-					<TextBlock Text="(0 = Infinite)" HorizontalAlignment="Center" Margin="0,0,0,10"/>
-					<TextBox x:Name="durationText" Text="{Binding Duration}" Width="50" CaretBrush="White" KeyDown="durationText_KeyDown"/>
+					<TextBlock HorizontalAlignment="Center" Text="Duration In Rounds" />
+					<TextBlock
+						Margin="0,0,0,10"
+						HorizontalAlignment="Center"
+						Text="(0 = Infinite)" />
+					<TextBox
+						x:Name="durationText"
+						Width="50"
+						CaretBrush="White"
+						KeyDown="durationText_KeyDown"
+						Text="{Binding Duration}" />
 				</StackPanel>
 			</materialDesign:Card>
 
-			<!--size-->
-			<materialDesign:Card Background="{StaticResource CardBG}" Padding="10" Margin="0,0,0,10">
+			<!--  size  -->
+			<materialDesign:Card
+				Margin="0,0,0,10"
+				Padding="10"
+				Background="{StaticResource CardBG}">
 				<StackPanel>
-					<TextBlock Text="Size" HorizontalAlignment="Center" Margin="0,0,0,10"/>
-					<UniformGrid Columns="2" Margin="0,0,0,10">
-						<TextBlock Text="Width:" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-						<TextBox HorizontalAlignment="Center" Width="50" Text="{Binding Width}" CaretBrush="White" KeyDown="sizeKeyDown"/>
+					<TextBlock
+						Margin="0,0,0,10"
+						HorizontalAlignment="Center"
+						Text="Size" />
+					<UniformGrid Margin="0,0,0,10" Columns="2">
+						<TextBlock
+							HorizontalAlignment="Center"
+							VerticalAlignment="Center"
+							Text="Width:" />
+						<TextBox
+							Width="50"
+							HorizontalAlignment="Center"
+							CaretBrush="White"
+							KeyDown="sizeKeyDown"
+							Text="{Binding Width}" />
 					</UniformGrid>
-					<UniformGrid Columns="2" Margin="0,0,0,10">
-						<TextBlock Text="Height:" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-						<TextBox HorizontalAlignment="Center" Width="50" Text="{Binding Height}" CaretBrush="White" KeyDown="sizeKeyDown"/>
+					<UniformGrid Margin="0,0,0,10" Columns="2">
+						<TextBlock
+							HorizontalAlignment="Center"
+							VerticalAlignment="Center"
+							Text="Height:" />
+						<TextBox
+							Width="50"
+							HorizontalAlignment="Center"
+							CaretBrush="White"
+							KeyDown="sizeKeyDown"
+							Text="{Binding Height}" />
 					</UniformGrid>
 					<!--<Button Content="APPLY" Name="applyBtn" Click="applyBtn_Click"/>-->
 				</StackPanel>
 			</materialDesign:Card>
 
-			<!--color-->
-			<materialDesign:Card Background="{StaticResource CardBG}" Padding="10" Margin="0,0,0,10">
+			<!--  color  -->
+			<materialDesign:Card
+				Margin="0,0,0,10"
+				Padding="10"
+				Background="{StaticResource CardBG}">
 				<StackPanel>
-					<TextBlock Text="Space Color" HorizontalAlignment="Center" Margin="0,0,0,10"/>
-					<ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectedValue="{Binding deploymentColor}" SelectedValuePath="name" ItemsSource="{Binding deploymentColors, RelativeSource={RelativeSource AncestorType=local:HighlightProps}}" DisplayMemberPath="name"/>
+					<TextBlock
+						Margin="0,0,0,10"
+						HorizontalAlignment="Center"
+						Text="Space Color" />
+					<ComboBox
+						DisplayMemberPath="name"
+						ItemsSource="{Binding deploymentColors, RelativeSource={RelativeSource AncestorType=local:HighlightProps}}"
+						SelectedValue="{Binding deploymentColor}"
+						SelectedValuePath="name"
+						Style="{StaticResource MaterialDesignOutlinedComboBox}" />
 				</StackPanel>
 			</materialDesign:Card>
 
-			<!--ENTITY PROPS-->
-			<materialDesign:Card Background="{StaticResource CardBG}" Padding="10">
+			<!--  ENTITY PROPS  -->
+			<materialDesign:Card Padding="10" Background="{StaticResource CardBG}">
 				<StackPanel>
-					<Button x:Name="editPropsBtn" Click="editPropsBtn_Click" Content="EDIT PROPERTIES"/>
+					<Button
+						x:Name="editPropsBtn"
+						Click="editPropsBtn_Click"
+						Content="EDIT PROPERTIES" />
 				</StackPanel>
 			</materialDesign:Card>
 

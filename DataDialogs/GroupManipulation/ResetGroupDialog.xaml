@@ -49,7 +49,7 @@
 						</StackPanel>
 					</materialDesign:Card>
 
-					<CheckBox x:Name="resetcb" Content="Reset All Groups" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding resetAll}" Margin="4,10,4,0"/>
+					<CheckBox x:Name="resetcb" Content="Reset All Groups" Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" IsChecked="{Binding resetAll}" Margin="4,10,4,0"/>
 
 					<GroupBox Header="Reset Specific Groups" Margin="0,10,0,0" IsEnabled="{Binding ElementName=resetcb, Path=IsChecked, Converter={StaticResource InvertBooleanConverter}}">
 						<StackPanel>

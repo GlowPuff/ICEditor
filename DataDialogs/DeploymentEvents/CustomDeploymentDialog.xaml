@@ -51,14 +51,14 @@
 
 									<TextBlock Text="Deployment Type" HorizontalAlignment="Center" Margin="0,10,0,0"/>
 									<UniformGrid Columns="2" Margin="0,0,0,0">
-										<RadioButton x:Name="rebelCheck" Content="Rebel" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" HorizontalAlignment="Stretch" IsChecked="{Binding customType, ConverterParameter={x:Static local:MarkerType.Rebel}, Converter={StaticResource rbConv}}" GroupName="ctype"/>
-										<RadioButton x:Name="impCheck" Content="Imperial" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" HorizontalAlignment="Stretch" IsChecked="{Binding customType, ConverterParameter={x:Static local:MarkerType.Imperial}, Converter={StaticResource rbConv}}" GroupName="ctype"/>
+										<RadioButton x:Name="rebelCheck" Content="Rebel" Style="{StaticResource MaterialDesignChoiceChipOutlineRadioButton}" HorizontalAlignment="Stretch" IsChecked="{Binding customType, ConverterParameter={x:Static local:MarkerType.Rebel}, Converter={StaticResource rbConv}}" GroupName="ctype"/>
+										<RadioButton x:Name="impCheck" Content="Imperial" Style="{StaticResource MaterialDesignChoiceChipOutlineRadioButton}" HorizontalAlignment="Stretch" IsChecked="{Binding customType, ConverterParameter={x:Static local:MarkerType.Imperial}, Converter={StaticResource rbConv}}" GroupName="ctype"/>
 									</UniformGrid>
 
 									<TextBlock Text="Icon Type" HorizontalAlignment="Center" Margin="0,10,0,0"/>
 									<UniformGrid Columns="2" Margin="0,0,0,0">
-										<RadioButton x:Name="rebelIcon" Grid.Column="1" GroupName="genType" Content="Rebel" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" HorizontalAlignment="Stretch" IsChecked="{Binding iconType, ConverterParameter={x:Static local:MarkerType.Rebel}, Converter={StaticResource rbConv}}"/>
-										<RadioButton x:Name="impIcon" Grid.Column="2" GroupName="genType" Content="Imperial" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" HorizontalAlignment="Stretch" IsChecked="{Binding iconType, ConverterParameter={x:Static local:MarkerType.Imperial}, Converter={StaticResource rbConv}}"/>
+										<RadioButton x:Name="rebelIcon" Grid.Column="1" GroupName="genType" Content="Rebel" Style="{StaticResource MaterialDesignChoiceChipOutlineRadioButton}" HorizontalAlignment="Stretch" IsChecked="{Binding iconType, ConverterParameter={x:Static local:MarkerType.Rebel}, Converter={StaticResource rbConv}}"/>
+										<RadioButton x:Name="impIcon" Grid.Column="2" GroupName="genType" Content="Imperial" Style="{StaticResource MaterialDesignChoiceChipOutlineRadioButton}" HorizontalAlignment="Stretch" IsChecked="{Binding iconType, ConverterParameter={x:Static local:MarkerType.Imperial}, Converter={StaticResource rbConv}}"/>
 									</UniformGrid>
 
 									<UniformGrid Columns="2">
@@ -100,13 +100,13 @@
 									</UniformGrid>
 
 									<materialDesign:Card Background="{StaticResource CardBG}" Padding="10" Margin="0,0,0,0" >
-										<CheckBox x:Name="useGeneric" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" Margin="4,0" Content="Use Generic Thumbnail" IsChecked="{Binding enemyGroupData.useGenericMugshot}"/>
+										<CheckBox x:Name="useGeneric" Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" Margin="4,0" Content="Use Generic Thumbnail" IsChecked="{Binding enemyGroupData.useGenericMugshot}"/>
 									</materialDesign:Card>
 
 									<UniformGrid Columns="2" Margin="0,10,0,0">
 										<!--cost-->
 										<StackPanel Orientation="Horizontal">
-											<CheckBox x:Name="useDeductCost" Content="Use Cost" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding useDeductCost}" Margin="0,4,4,4"/>
+											<CheckBox x:Name="useDeductCost" Content="Use Cost" Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" IsChecked="{Binding useDeductCost}" Margin="0,4,4,4"/>
 											<TextBox Text="{Binding groupCost}"  Margin="10,0" Width="50" KeyDown="nameTB_KeyDown" VerticalContentAlignment="Bottom" VerticalAlignment="Center" CaretBrush="White"/>
 										</StackPanel>
 
@@ -149,9 +149,9 @@
 										<!--DEPLOYMENT POINT-->
 										<GroupBox Header="Deployment Point" Margin="0,10,0,10" Background="#FF503B7C">
 											<StackPanel>
-												<RadioButton GroupName="dpoint" Content="Active Deployment Point" VerticalAlignment="Center" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding Path=deploymentPoint, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:DeploymentSpot.Active}}"/>
+												<RadioButton GroupName="dpoint" Content="Active Deployment Point" VerticalAlignment="Center" Style="{StaticResource MaterialDesignChoiceChipOutlineRadioButton}" IsChecked="{Binding Path=deploymentPoint, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:DeploymentSpot.Active}}"/>
 
-												<RadioButton x:Name="sdp" GroupName="dpoint" Content="Specific Deployment Point:" VerticalAlignment="Center" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding Path=deploymentPoint, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:DeploymentSpot.Specific}}"/>
+												<RadioButton x:Name="sdp" GroupName="dpoint" Content="Specific Deployment Point:" VerticalAlignment="Center" Style="{StaticResource MaterialDesignChoiceChipOutlineRadioButton}" IsChecked="{Binding Path=deploymentPoint, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:DeploymentSpot.Specific}}"/>
 
 												<Grid>
 													<Grid.ColumnDefinitions>
@@ -169,10 +169,10 @@
 										<materialDesign:Card Padding="10" Background="{StaticResource CardBG}">
 											<StackPanel>
 												<WrapPanel>
-													<CheckBox x:Name="canRD" Content="Can Be Redeployed" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding canRedeploy}"/>
-													<!--<CheckBox Content="Reset on Redeployment" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding useResetOnRedeployment}" IsEnabled="{Binding ElementName=canRD, Path=IsChecked}"/>-->
-													<CheckBox Content="Can Be Reinforced" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding canReinforce}"/>
-													<CheckBox Content="Can Be Defeated" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding canBeDefeated}"/>
+													<CheckBox x:Name="canRD" Content="Can Be Redeployed" Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" IsChecked="{Binding canRedeploy}"/>
+													<!--<CheckBox Content="Reset on Redeployment" Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" IsChecked="{Binding useResetOnRedeployment}" IsEnabled="{Binding ElementName=canRD, Path=IsChecked}"/>-->
+													<CheckBox Content="Can Be Reinforced" Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" IsChecked="{Binding canReinforce}"/>
+													<CheckBox Content="Can Be Defeated" Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" IsChecked="{Binding canBeDefeated}"/>
 												</WrapPanel>
 
 												<TextBlock Text="Groups that can't Redeploy are removed from the mission and do not return to the Imperial Hand on defeat, but they can be manually deployed again with new options." TextWrapping="Wrap" FontStyle="Italic" Margin="0,5,0,0"/>
@@ -214,7 +214,7 @@
 													<TextBox Grid.Row="0" Grid.Column="1" Text="{Binding groupHealth}" Width="50" HorizontalContentAlignment="Center" Margin="10,5,0,0" VerticalAlignment="Bottom" KeyDown="nameTB_KeyDown" CaretBrush="White"/>
 												</StackPanel>
 
-												<CheckBox Grid.Row="1" Content="Multiply Health By Threat Level" IsChecked="{Binding useThreatMultiplier}" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" Margin="0,10" Grid.ColumnSpan="2"/>
+												<CheckBox Grid.Row="1" Content="Multiply Health By Threat Level" IsChecked="{Binding useThreatMultiplier}" Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" Margin="0,10" Grid.ColumnSpan="2"/>
 
 												<StackPanel Orientation="Horizontal" Grid.Column="1">
 													<TextBlock Grid.Row="2" Text="Speed" VerticalAlignment="Bottom"/>
@@ -232,8 +232,8 @@
 											<UniformGrid Columns="2" Margin="0,10,0,0">
 												<TextBlock Text="Attack Type" VerticalAlignment="Center"/>
 												<UniformGrid Columns="2">
-													<RadioButton Content="Melee" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" HorizontalAlignment="Stretch" IsChecked="{Binding attackType, ConverterParameter={x:Static local:AttackType.Melee}, Converter={StaticResource rbConv}}"/>
-													<RadioButton Content="Ranged" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" HorizontalAlignment="Stretch" IsChecked="{Binding attackType, ConverterParameter={x:Static local:AttackType.Ranged}, Converter={StaticResource rbConv}}"/>
+													<RadioButton Content="Melee" Style="{StaticResource MaterialDesignChoiceChipOutlineRadioButton}" HorizontalAlignment="Stretch" IsChecked="{Binding attackType, ConverterParameter={x:Static local:AttackType.Melee}, Converter={StaticResource rbConv}}"/>
+													<RadioButton Content="Ranged" Style="{StaticResource MaterialDesignChoiceChipOutlineRadioButton}" HorizontalAlignment="Stretch" IsChecked="{Binding attackType, ConverterParameter={x:Static local:AttackType.Ranged}, Converter={StaticResource rbConv}}"/>
 												</UniformGrid>
 											</UniformGrid>
 										</StackPanel>
@@ -267,7 +267,7 @@
 
 										<GroupBox Header="Priority Target Traits" Margin="0,10,0,0" Background="#FF503B7C">
 											<UniformGrid Columns="2">
-												<CheckBox VerticalAlignment="Center" x:Name="defPriorityCheck" Content="Target All Traits" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding enemyGroupData.groupPriorityTraits.useDefaultPriority}"/>
+												<CheckBox VerticalAlignment="Center" x:Name="defPriorityCheck" Content="Target All Traits" Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" IsChecked="{Binding enemyGroupData.groupPriorityTraits.useDefaultPriority}"/>
 												<Button x:Name="targetBtn" Content="CHANGE TRAITS..." Click="targetBtn_Click" IsEnabled="{Binding Path=IsChecked, ElementName=defPriorityCheck, Converter={StaticResource InvertBooleanConverter}}"/>
 											</UniformGrid>
 										</GroupBox>

@@ -1,13 +1,18 @@
-﻿<Window x:Class="Imperial_Commander_Editor.AllyDeploymentDialog"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Imperial_Commander_Editor"
-        mc:Ignorable="d"
-				Style="{StaticResource dws}"
-				xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="Ally Deployment" Width="600" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown" SizeToContent="Height">
+﻿<Window
+	x:Class="Imperial_Commander_Editor.AllyDeploymentDialog"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:local="clr-namespace:Imperial_Commander_Editor"
+	xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	Title="Ally Deployment"
+	Width="600"
+	MouseDown="Window_MouseDown"
+	SizeToContent="Height"
+	Style="{StaticResource dws}"
+	WindowStartupLocation="CenterScreen"
+	mc:Ignorable="d">
 
 	<Window.Resources>
 		<local:RadioBoolToIntConverter x:Key="rbConv" />
@@ -17,74 +22,152 @@
 		<GroupBox Header="Ally/Rebel Deployment Event Action" Style="{DynamicResource MaterialDesignGroupBox}">
 			<Grid>
 				<Grid.RowDefinitions>
-					<RowDefinition Height="*"/>
-					<RowDefinition Height="auto"/>
+					<RowDefinition Height="*" />
+					<RowDefinition Height="auto" />
 				</Grid.RowDefinitions>
 
 				<UniformGrid Columns="2">
 					<StackPanel Margin="0,0,5,0">
-						<ComboBox x:Name="allyCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectedValue="{Binding allyID}" SelectedValuePath="id" DisplayMemberPath="name"/>
+						<ComboBox
+							x:Name="allyCB"
+							DisplayMemberPath="name"
+							SelectedValue="{Binding allyID}"
+							SelectedValuePath="id"
+							Style="{StaticResource MaterialDesignOutlinedComboBox}" />
 
-						<!--CUSTOM ALLY NAME-->
-						<GroupBox Header="Customize" Margin="0,10" Padding="10" Background="#FF503B7C">
+						<!--  CUSTOM ALLY NAME  -->
+						<GroupBox
+							Margin="0,10"
+							Padding="10"
+							Background="#FF503B7C"
+							Header="Customize">
 							<StackPanel>
-								<TextBox Text="{Binding allyName}" materialDesign:HintAssist.Hint="Custom Name - Blank For Default" Style="{StaticResource MaterialDesignOutlinedTextBox}" CaretBrush="White" KeyDown="TextBox_KeyDown"/>
+								<TextBox
+									materialDesign:HintAssist.Hint="Custom Name - Blank For Default"
+									CaretBrush="White"
+									KeyDown="TextBox_KeyDown"
+									Style="{StaticResource MaterialDesignOutlinedTextBox}"
+									Text="{Binding allyName}" />
 
-								<CheckBox Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" Margin="0,10,0,0" Content="Use Generic Thumbnail" IsChecked="{Binding useGenericMugshot}"/>
+								<CheckBox
+									Margin="0,10,0,0"
+									Content="Use Generic Thumbnail"
+									IsChecked="{Binding useGenericMugshot}"
+									Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" />
 							</StackPanel>
 						</GroupBox>
 
-						<!--ON DEFEAT (TRIGGER)-->
-						<GroupBox Header="On Defeated, Fire This Trigger:" Background="#FF503B7C">
+						<!--  ON DEFEAT (TRIGGER)  -->
+						<GroupBox Background="#FF503B7C" Header="On Defeated, Fire This Trigger:">
 							<Grid>
 								<Grid.ColumnDefinitions>
 									<ColumnDefinition Width="*" />
 									<ColumnDefinition Width="auto" />
 								</Grid.ColumnDefinitions>
 
-								<ComboBox x:Name="triggersCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" DisplayMemberPath="name" SelectedValue="{Binding setTrigger}" SelectedValuePath="GUID"/>
+								<ComboBox
+									x:Name="triggersCB"
+									DisplayMemberPath="name"
+									SelectedValue="{Binding setTrigger}"
+									SelectedValuePath="GUID"
+									Style="{StaticResource MaterialDesignOutlinedComboBox}" />
 
-								<Button x:Name="addNewTriggerButton" Grid.Column="2" Margin="10,0,0,0" Click="addNewTriggerButton_Click" ToolTip="Add New Trigger" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35">
-									<Image Source="../../Assets/addtrigger.png" Height="20"/>
+								<Button
+									x:Name="addNewTriggerButton"
+									Grid.Column="2"
+									Width="35"
+									Height="35"
+									Margin="10,0,0,0"
+									Click="addNewTriggerButton_Click"
+									Style="{StaticResource MaterialDesignFloatingActionButton}"
+									ToolTip="Add New Trigger">
+									<Image Height="20" Source="../../Assets/addtrigger.png" />
 								</Button>
 							</Grid>
 						</GroupBox>
-						<!--ON DEFEAT (EVENT)-->
-						<GroupBox Header="On Defeated, Fire This Event:" Margin="0,10,0,0" Background="#FF503B7C">
+						<!--  ON DEFEAT (EVENT)  -->
+						<GroupBox
+							Margin="0,10,0,0"
+							Background="#FF503B7C"
+							Header="On Defeated, Fire This Event:">
 							<Grid>
 								<Grid.ColumnDefinitions>
 									<ColumnDefinition Width="*" />
 									<ColumnDefinition Width="auto" />
 								</Grid.ColumnDefinitions>
 
-								<ComboBox x:Name="eventsCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" DisplayMemberPath="name" SelectedValue="{Binding setEvent}" SelectedValuePath="GUID"/>
+								<ComboBox
+									x:Name="eventsCB"
+									DisplayMemberPath="name"
+									SelectedValue="{Binding setEvent}"
+									SelectedValuePath="GUID"
+									Style="{StaticResource MaterialDesignOutlinedComboBox}" />
 
-								<Button x:Name="addNewEventButton" Grid.Column="2" Margin="10,0,0,0" Click="addNewEventButton_Click" ToolTip="Add New Event" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35">
-									<Image Source="../../Assets/addevent.png" Height="20"/>
+								<Button
+									x:Name="addNewEventButton"
+									Grid.Column="2"
+									Width="35"
+									Height="35"
+									Margin="10,0,0,0"
+									Click="addNewEventButton_Click"
+									Style="{StaticResource MaterialDesignFloatingActionButton}"
+									ToolTip="Add New Event">
+									<Image Height="20" Source="../../Assets/addevent.png" />
 								</Button>
 							</Grid>
 						</GroupBox>
 					</StackPanel>
 
 					<StackPanel Margin="5,0,0,0">
-						<GroupBox Header="Deployment Point" Background="#FF503B7C">
+						<GroupBox Background="#FF503B7C" Header="Deployment Point">
 							<StackPanel>
-								<RadioButton GroupName="dpoint" Content="Active Deployment Point" VerticalAlignment="Center" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding Path=deploymentPoint, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:DeploymentSpot.Active}}"/>
+								<RadioButton
+									VerticalAlignment="Center"
+									Content="Active Deployment Point"
+									GroupName="dpoint"
+									IsChecked="{Binding Path=deploymentPoint, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:DeploymentSpot.Active}}"
+									Style="{StaticResource MaterialDesignChoiceChipOutlineRadioButton}" />
 
-								<RadioButton x:Name="sdp" GroupName="dpoint" Content="Specific Deployment Point:" VerticalAlignment="Center" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding Path=deploymentPoint, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:DeploymentSpot.Specific}}"/>
+								<RadioButton
+									x:Name="sdp"
+									VerticalAlignment="Center"
+									Content="Specific Deployment Point:"
+									GroupName="dpoint"
+									IsChecked="{Binding Path=deploymentPoint, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:DeploymentSpot.Specific}}"
+									Style="{StaticResource MaterialDesignChoiceChipOutlineRadioButton}" />
 
-								<ComboBox x:Name="dpCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectedValue="{Binding specificDeploymentPoint}" SelectedValuePath="GUID" IsEnabled="{Binding Path=IsChecked, ElementName=sdp}" DisplayMemberPath="name" ItemsSource="{Binding deploymentPoints, RelativeSource={RelativeSource AncestorType=Window}}"/>
+								<ComboBox
+									x:Name="dpCB"
+									DisplayMemberPath="name"
+									IsEnabled="{Binding Path=IsChecked, ElementName=sdp}"
+									ItemsSource="{Binding deploymentPoints, RelativeSource={RelativeSource AncestorType=Window}}"
+									SelectedValue="{Binding specificDeploymentPoint}"
+									SelectedValuePath="GUID"
+									Style="{StaticResource MaterialDesignOutlinedComboBox}" />
 							</StackPanel>
 						</GroupBox>
 
-						<!--MODIFIER-->
-						<materialDesign:Card Background="{StaticResource CardBG}" Padding="10" Margin="0,10,0,0">
+						<!--  MODIFIER  -->
+						<materialDesign:Card
+							Margin="0,10,0,0"
+							Padding="10"
+							Background="{StaticResource CardBG}">
 							<StackPanel>
-								<CheckBox Content="Add This Group's Cost To Threat" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding useThreat}" Margin="0,0,4,4"/>
+								<CheckBox
+									Margin="0,0,4,4"
+									Content="Add This Group's Cost To Threat"
+									IsChecked="{Binding useThreat}"
+									Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" />
 								<StackPanel Orientation="Horizontal">
-									<TextBlock Text="Cost Modifier:" VerticalAlignment="Center"/>
-									<TextBox Text="{Binding threatCost}" Margin="10,0" Width="35"/>
-									<TextBlock Text="+/- Cost" FontStyle="Italic" VerticalAlignment="Center"/>
+									<TextBlock VerticalAlignment="Center" Text="Cost Modifier:" />
+									<TextBox
+										Width="35"
+										Margin="10,0"
+										Text="{Binding threatCost}" />
+									<TextBlock
+										VerticalAlignment="Center"
+										FontStyle="Italic"
+										Text="+/- Cost" />
 								</StackPanel>
 							</StackPanel>
 						</materialDesign:Card>
@@ -92,8 +175,12 @@
 				</UniformGrid>
 
 				<StackPanel Grid.Row="1">
-					<Separator Margin="0,0,0,10"/>
-					<Button x:Name="okButton" Content="ACCEPT" Click="okButton_Click" HorizontalAlignment="Right"/>
+					<Separator Margin="0,0,0,10" />
+					<Button
+						x:Name="okButton"
+						HorizontalAlignment="Right"
+						Click="okButton_Click"
+						Content="ACCEPT" />
 				</StackPanel>
 			</Grid>
 		</GroupBox>

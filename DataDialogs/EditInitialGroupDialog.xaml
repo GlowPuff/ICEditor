@@ -27,7 +27,7 @@
 
 						<materialDesign:Card Background="{StaticResource CardBG}" Padding="10" Margin="0,10,0,0">
 							<StackPanel>
-								<CheckBox Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" Margin="0,0,0,10" Content="Use Generic Thumbnail" IsChecked="{Binding useGenericMugshot}"/>
+								<CheckBox Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" Margin="0,0,0,10" Content="Use Generic Thumbnail" IsChecked="{Binding useGenericMugshot}"/>
 								<TextBlock Text="Forcing the use of a Generic Thumbnail will essentially make this deployment a 'dummy token' when its card is shown in Imperial Commander. All unique data about this group will be set to 0 or empty values, such as health, cost, abilities, bonus text, traits, keywords, attack, and defense." TextWrapping="Wrap"/>
 							</StackPanel>
 						</materialDesign:Card>
@@ -71,11 +71,11 @@
 						<GroupBox Header="Custom Instructions">
 							<StackPanel>
 								<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-									<RadioButton GroupName="coptions" Content="Top" VerticalAlignment="Center" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding Path=customInstructionType, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:CustomInstructionType.Top}}"/>
+									<RadioButton GroupName="coptions" Content="Top" VerticalAlignment="Center" Style="{StaticResource MaterialDesignChoiceChipOutlineRadioButton}" IsChecked="{Binding Path=customInstructionType, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:CustomInstructionType.Top}}"/>
 
-									<RadioButton GroupName="coptions" Content="Bottom" VerticalAlignment="Center" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding Path=customInstructionType, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:CustomInstructionType.Bottom}}" HorizontalAlignment="Center"/>
+									<RadioButton GroupName="coptions" Content="Bottom" VerticalAlignment="Center" Style="{StaticResource MaterialDesignChoiceChipOutlineRadioButton}" IsChecked="{Binding Path=customInstructionType, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:CustomInstructionType.Bottom}}" HorizontalAlignment="Center"/>
 
-									<RadioButton GroupName="coptions" Content="Replace" VerticalAlignment="Center" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding Path=customInstructionType, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:CustomInstructionType.Replace}}" HorizontalAlignment="Right"/>
+									<RadioButton GroupName="coptions" Content="Replace" VerticalAlignment="Center" Style="{StaticResource MaterialDesignChoiceChipOutlineRadioButton}" IsChecked="{Binding Path=customInstructionType, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:CustomInstructionType.Replace}}" HorizontalAlignment="Right"/>
 								</StackPanel>
 
 								<StackPanel Orientation="Horizontal" Margin="0,5,0,0">
@@ -101,7 +101,7 @@
 						<!--PRIORITY TARGET-->
 						<GroupBox Header="Priority Target Traits" Margin="0,10,0,0">
 							<UniformGrid Columns="2">
-								<CheckBox x:Name="defPriorityCheck" Content="Use Group Default" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding groupPriorityTraits.useDefaultPriority}" VerticalAlignment="Center"/>
+								<CheckBox x:Name="defPriorityCheck" Content="Use Group Default" Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" IsChecked="{Binding groupPriorityTraits.useDefaultPriority}" VerticalAlignment="Center"/>
 								<Button x:Name="targetBtn" Content="CHANGE TRAITS..." Click="targetBtn_Click" IsEnabled="{Binding Path=IsChecked, ElementName=defPriorityCheck, Converter={StaticResource InvertBooleanConverter}}"/>
 							</UniformGrid>
 						</GroupBox>

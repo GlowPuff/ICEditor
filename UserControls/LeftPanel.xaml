@@ -1,15 +1,20 @@
-﻿<UserControl x:Class="Imperial_Commander_Editor.LeftPanel"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-						 xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             xmlns:local="clr-namespace:Imperial_Commander_Editor"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="225">
+﻿<UserControl
+	x:Class="Imperial_Commander_Editor.LeftPanel"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:local="clr-namespace:Imperial_Commander_Editor"
+	xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	d:DesignHeight="450"
+	d:DesignWidth="225"
+	mc:Ignorable="d">
 
 	<Grid Background="#FF3A3349">
-		<Border Padding="10" BorderThickness="0,0,1,0" BorderBrush="MediumPurple">
+		<Border
+			Padding="10"
+			BorderBrush="MediumPurple"
+			BorderThickness="0,0,1,0">
 			<!--<ScrollViewer VerticalScrollBarVisibility="Auto">-->
 			<Grid>
 				<Grid.RowDefinitions>
@@ -25,20 +30,25 @@
 					</Grid>
 				</materialDesign:Card>-->
 
-				<!--global switch-->
+				<!--  global switch  -->
 				<!--<StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
 					<TextBlock Text="Show Global Items" Margin="0,0,10,0" Foreground="White"/>
 					<ToggleButton x:Name="showGlobalToggle" IsChecked="{Binding showGlobal}"/>
 				</StackPanel>-->
 
-				<Grid Grid.Row="2" >
+				<Grid Grid.Row="2">
 					<Grid.RowDefinitions>
 						<RowDefinition Height="*" />
 						<RowDefinition Height="*" />
 					</Grid.RowDefinitions>
 
-					<!--triggers-->
-					<GroupBox Header="TRIGGER VARIABLES" Grid.Row="0" Background="#FF7952C0" Padding="10" Margin="0,0,0,10">
+					<!--  triggers  -->
+					<GroupBox
+						Grid.Row="0"
+						Margin="0,0,0,10"
+						Padding="10"
+						Background="#FF7952C0"
+						Header="TRIGGER VARIABLES">
 						<Grid>
 							<Grid.RowDefinitions>
 								<RowDefinition Height="*" />
@@ -47,25 +57,70 @@
 							<!--<TextBlock Grid.Row="0" HorizontalAlignment="Center" Text="Trigger Variables" Foreground="White"/>-->
 							<!--<ComboBox Margin="10,5,10,10" x:Name="triggersCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" DisplayMemberPath="name"/>-->
 							<ScrollViewer Grid.Row="0" PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">
-								<ListBox Grid.Row="1" x:Name="triggersCB" DisplayMemberPath="name" MouseDoubleClick="triggersCB_MouseDoubleClick" ItemContainerStyle="{StaticResource lbitem}"/>
+								<ListBox
+									x:Name="triggersCB"
+									Grid.Row="1"
+									DisplayMemberPath="name"
+									ItemContainerStyle="{StaticResource lbitem}"
+									MouseDoubleClick="triggersCB_MouseDoubleClick" />
 							</ScrollViewer>
 
-							<UniformGrid Grid.Row="1" Columns="3" VerticalAlignment="Bottom">
-								<Button x:Name="addTriggerButton" Grid.Column="0" Click="addTriggerButton_Click">
-									<materialDesign:PackIcon Kind="AddBold" Width="24" Height="24" HorizontalAlignment="Center" Foreground="Lime"/>
+							<UniformGrid
+								Grid.Row="1"
+								VerticalAlignment="Bottom"
+								Columns="3">
+								<Button
+									x:Name="addTriggerButton"
+									Grid.Column="0"
+									Width="40"
+									Height="40"
+									Click="addTriggerButton_Click"
+									Style="{DynamicResource MaterialDesignFloatingActionButton}">
+									<materialDesign:PackIcon
+										Width="24"
+										Height="24"
+										HorizontalAlignment="Center"
+										Foreground="Lime"
+										Kind="AddBold" />
 								</Button>
-								<Button x:Name="remTriggerButton" Grid.Column="1" Margin="5,0" Click="remTriggerButton_Click">
-									<materialDesign:PackIcon Kind="RemoveBold" Width="24" Height="24" HorizontalAlignment="Center" Foreground="Red"/>
+								<Button
+									x:Name="remTriggerButton"
+									Grid.Column="1"
+									Width="40"
+									Height="40"
+									Margin="5,0"
+									Click="remTriggerButton_Click"
+									Style="{DynamicResource MaterialDesignFloatingActionButton}">
+									<materialDesign:PackIcon
+										Width="24"
+										Height="24"
+										HorizontalAlignment="Center"
+										Foreground="Red"
+										Kind="RemoveBold" />
 								</Button>
-								<Button x:Name="editTriggerButton" Grid.Column="3" Click="editTriggerButton_Click">
-									<materialDesign:PackIcon Kind="Settings" Width="24" Height="24" HorizontalAlignment="Center"/>
+								<Button
+									x:Name="editTriggerButton"
+									Grid.Column="3"
+									Width="40"
+									Height="40"
+									Click="editTriggerButton_Click"
+									Style="{DynamicResource MaterialDesignFloatingActionButton}">
+									<materialDesign:PackIcon
+										Width="24"
+										Height="24"
+										HorizontalAlignment="Center"
+										Kind="Settings" />
 								</Button>
 							</UniformGrid>
 						</Grid>
 					</GroupBox>
 
-					<!--events-->
-					<GroupBox Header="EVENTS" Grid.Row="1" Background="#FF7952C0" Padding="10">
+					<!--  events  -->
+					<GroupBox
+						Grid.Row="1"
+						Padding="10"
+						Background="#FF7952C0"
+						Header="EVENTS">
 						<Grid>
 							<Grid.RowDefinitions>
 								<RowDefinition Height="*" />
@@ -76,22 +131,68 @@
 							<!--<TextBlock HorizontalAlignment="Center" Text="Events" Foreground="White"/>-->
 							<!--<ComboBox Margin="10,5,10,10" x:Name="eventsCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" DisplayMemberPath="name"/>-->
 							<ScrollViewer Grid.Row="0" PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">
-								<ListBox Grid.Row="1" x:Name="eventsCB" DisplayMemberPath="name" MouseDoubleClick="eventsCB_MouseDoubleClick" ItemContainerStyle="{StaticResource lbitem}"/>
+								<ListBox
+									x:Name="eventsCB"
+									Grid.Row="1"
+									DisplayMemberPath="name"
+									ItemContainerStyle="{StaticResource lbitem}"
+									MouseDoubleClick="eventsCB_MouseDoubleClick" />
 							</ScrollViewer>
 
-							<UniformGrid Grid.Row="1" Columns="3" VerticalAlignment="Bottom">
-								<Button x:Name="addEventButton" Grid.Column="0" Click="addEventButton_Click">
-									<materialDesign:PackIcon Kind="AddBold" Width="24" Height="24" HorizontalAlignment="Center" Foreground="Lime"/>
+							<UniformGrid
+								Grid.Row="1"
+								VerticalAlignment="Bottom"
+								Columns="3">
+								<Button
+									x:Name="addEventButton"
+									Grid.Column="0"
+									Width="40"
+									Height="40"
+									Click="addEventButton_Click"
+									Style="{DynamicResource MaterialDesignFloatingActionButton}">
+									<materialDesign:PackIcon
+										Width="24"
+										Height="24"
+										HorizontalAlignment="Center"
+										Foreground="Lime"
+										Kind="AddBold" />
 								</Button>
-								<Button x:Name="remEventButton" Grid.Column="1" Margin="5,0" Click="remEventButton_Click">
-									<materialDesign:PackIcon Kind="RemoveBold" Width="24" Height="24" HorizontalAlignment="Center" Foreground="Red"/>
+								<Button
+									x:Name="remEventButton"
+									Grid.Column="1"
+									Width="40"
+									Height="40"
+									Margin="5,0"
+									Click="remEventButton_Click"
+									Style="{DynamicResource MaterialDesignFloatingActionButton}">
+									<materialDesign:PackIcon
+										Width="24"
+										Height="24"
+										HorizontalAlignment="Center"
+										Foreground="Red"
+										Kind="RemoveBold" />
 								</Button>
-								<Button x:Name="editEventButton" Grid.Column="3" Click="editEventButton_Click">
-									<materialDesign:PackIcon Kind="Settings" Width="24" Height="24" HorizontalAlignment="Center"/>
+								<Button
+									x:Name="editEventButton"
+									Grid.Column="3"
+									Width="40"
+									Height="40"
+									Click="editEventButton_Click"
+									Style="{DynamicResource MaterialDesignFloatingActionButton}">
+									<materialDesign:PackIcon
+										Width="24"
+										Height="24"
+										HorizontalAlignment="Center"
+										Kind="Settings" />
 								</Button>
 							</UniformGrid>
 
-							<Button x:Name="dupeEventBtn" Grid.Row="2" Content="DUPLICATE EVENT" Margin="0,5,0,0" Click="dupeEventBtn_Click"/>
+							<Button
+								x:Name="dupeEventBtn"
+								Grid.Row="2"
+								Margin="0,10,0,0"
+								Click="dupeEventBtn_Click"
+								Content="DUPLICATE EVENT" />
 						</Grid>
 					</GroupBox>
 				</Grid>

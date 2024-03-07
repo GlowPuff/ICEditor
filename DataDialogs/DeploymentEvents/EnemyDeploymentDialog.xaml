@@ -42,7 +42,7 @@
 										VerticalAlignment="Center"
 										Click="initialRB_Click"
 										Content="Filter By Reserved"
-										Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" />
+										Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" />
 
 									<TextBox
 										x:Name="filterBox"
@@ -230,7 +230,7 @@
 								x:Name="tabControl2"
 								materialDesign:ColorZoneAssist.Mode="PrimaryMid"
 								materialDesign:NavigationRailAssist.ShowSelectionBackground="True"
-								Style="{StaticResource MaterialDesignNavigatilRailTabControl}"
+								Style="{StaticResource MaterialDesignNavigationRailTabControl}"
 								TabStripPlacement="Top">
 								<TabControl.Background>
 									<SolidColorBrush Color="#FF3A3349" />
@@ -264,7 +264,7 @@
 													Margin="0,4,4,4"
 													Content="Deduct This Group's Cost From Threat"
 													IsChecked="{Binding useThreat}"
-													Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" />
+													Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" />
 												<StackPanel Orientation="Horizontal">
 													<TextBlock VerticalAlignment="Center" Text="Cost Modifier:" />
 													<TextBox
@@ -287,7 +287,7 @@
 														Margin="0,4,4,4"
 														Content="Show Modification"
 														IsChecked="{Binding showMod}"
-														Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" />
+														Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" />
 													<TextBox
 														Grid.Column="1"
 														Margin="10,0,0,0"
@@ -309,7 +309,7 @@
 													VerticalAlignment="Center"
 													Content="Use Group Default"
 													IsChecked="{Binding enemyGroupData.groupPriorityTraits.useDefaultPriority}"
-													Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" />
+													Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" />
 												<Button
 													x:Name="targetBtn"
 													Click="targetBtn_Click"
@@ -372,7 +372,7 @@
 													Content="Active Deployment Point"
 													GroupName="dpoint"
 													IsChecked="{Binding Path=deploymentPoint, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:DeploymentSpot.Active}}"
-													Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" />
+													Style="{StaticResource MaterialDesignChoiceChipOutlineRadioButton}" />
 
 												<RadioButton
 													x:Name="sdp"
@@ -380,7 +380,7 @@
 													Content="Specific Deployment Point:"
 													GroupName="dpoint"
 													IsChecked="{Binding Path=deploymentPoint, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:DeploymentSpot.Specific}}"
-													Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" />
+													Style="{StaticResource MaterialDesignChoiceChipOutlineRadioButton}" />
 
 												<Grid>
 													<Grid.ColumnDefinitions>
@@ -420,20 +420,20 @@
 														x:Name="canRD"
 														Content="Can Be Redeployed"
 														IsChecked="{Binding canRedeploy}"
-														Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" />
+														Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" />
 													<CheckBox
 														Content="Reset on Redeployment"
 														IsChecked="{Binding useResetOnRedeployment}"
 														IsEnabled="{Binding ElementName=canRD, Path=IsChecked}"
-														Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" />
+														Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" />
 													<CheckBox
 														Content="Can Be Reinforced"
 														IsChecked="{Binding canReinforce}"
-														Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" />
+														Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" />
 													<CheckBox
 														Content="Can Be Defeated"
 														IsChecked="{Binding canBeDefeated}"
-														Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" />
+														Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" />
 												</WrapPanel>
 
 												<TextBlock
@@ -474,7 +474,7 @@
 													<CheckBox
 														Content="Use Custom Instructions"
 														IsChecked="{Binding useCustomInstructions}"
-														Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" />
+														Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" />
 													<TextBlock
 														Margin="0,10,0,0"
 														HorizontalAlignment="Center"
@@ -485,21 +485,21 @@
 															Content="Top"
 															GroupName="coptions"
 															IsChecked="{Binding Path=enemyGroupData.customInstructionType, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:CustomInstructionType.Top}}"
-															Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" />
+															Style="{StaticResource MaterialDesignChoiceChipOutlineRadioButton}" />
 
 														<RadioButton
 															VerticalAlignment="Center"
 															Content="Bottom"
 															GroupName="coptions"
 															IsChecked="{Binding Path=enemyGroupData.customInstructionType, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:CustomInstructionType.Bottom}}"
-															Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" />
+															Style="{StaticResource MaterialDesignChoiceChipOutlineRadioButton}" />
 
 														<RadioButton
 															VerticalAlignment="Center"
 															Content="Replace"
 															GroupName="coptions"
 															IsChecked="{Binding Path=enemyGroupData.customInstructionType, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:CustomInstructionType.Replace}}"
-															Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" />
+															Style="{StaticResource MaterialDesignChoiceChipOutlineRadioButton}" />
 													</UniformGrid>
 												</StackPanel>
 											</materialDesign:Card>

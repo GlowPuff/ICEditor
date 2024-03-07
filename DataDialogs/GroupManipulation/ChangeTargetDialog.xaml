@@ -45,25 +45,25 @@
 					<!--LEFT-->
 					<GroupBox Header="New Priority Target" Margin="0,0,5,0" Background="#FF503B7C">
 						<StackPanel>
-							<RadioButton Content="Any Rebel Figure" GroupName="target" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding targetType, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:PriorityTargetType.Rebel}}"/>
+							<RadioButton Content="Any Rebel Figure" GroupName="target" Style="{StaticResource MaterialDesignChoiceChipOutlineRadioButton}" IsChecked="{Binding targetType, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:PriorityTargetType.Rebel}}"/>
 
 							<UniformGrid Columns="2" Margin="0,10">
-								<RadioButton Content="Specific Hero" GroupName="target" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding targetType, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:PriorityTargetType.Hero}}"/>
+								<RadioButton Content="Specific Hero" GroupName="target" Style="{StaticResource MaterialDesignChoiceChipOutlineRadioButton}" IsChecked="{Binding targetType, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:PriorityTargetType.Hero}}"/>
 								<ComboBox x:Name="hCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectedValue="{Binding specificHero}" SelectedValuePath="id" DisplayMemberPath="name"/>
 							</UniformGrid>
 
 							<UniformGrid Columns="2">
-								<RadioButton Content="Specific Ally/Rebel" GroupName="target" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding targetType, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:PriorityTargetType.Ally}}"/>
+								<RadioButton Content="Specific Ally/Rebel" GroupName="target" Style="{StaticResource MaterialDesignChoiceChipOutlineRadioButton}" IsChecked="{Binding targetType, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:PriorityTargetType.Ally}}"/>
 								<ComboBox x:Name="aCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectedValue="{Binding specificAlly}" SelectedValuePath="id" DisplayMemberPath="name"/>
 							</UniformGrid>
 
 							<UniformGrid Columns="2" Margin="0,10,0,10">
-								<RadioButton x:Name="traitsCheck" Content="Specific Target Traits" GroupName="target" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding targetType, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:PriorityTargetType.Trait}}"/>
+								<RadioButton x:Name="traitsCheck" Content="Specific Target Traits" GroupName="target" Style="{StaticResource MaterialDesignChoiceChipOutlineRadioButton}" IsChecked="{Binding targetType, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:PriorityTargetType.Trait}}"/>
 								<Button x:Name="traitsBtn" Content="SELECT TRAITS..." Click="traitsBtn_Click" IsEnabled="{Binding ElementName=traitsCheck, Path=IsChecked}"/>
 							</UniformGrid>
 
 							<UniformGrid Columns="2">
-								<RadioButton Content="Other" GroupName="target" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding targetType, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:PriorityTargetType.Other}}"/>
+								<RadioButton Content="Other" GroupName="target" Style="{StaticResource MaterialDesignChoiceChipOutlineRadioButton}" IsChecked="{Binding targetType, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:PriorityTargetType.Other}}"/>
 								<TextBox Text="{Binding otherTarget}" VerticalAlignment="Center" Style="{StaticResource MaterialDesignOutlinedTextBox}" CaretBrush="White"/>
 							</UniformGrid>
 
@@ -77,14 +77,14 @@
 					<!--RIGHT-->
 					<GroupBox Header="Which Enemy Groups Are Affected By This Override?" Margin="5,0,0,0" Padding="10" Background="#FF503B7C">
 						<StackPanel>
-							<RadioButton Content="All Groups" GroupName="gg" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding groupType, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:GroupType.All}}"/>
+							<RadioButton Content="All Groups" GroupName="gg" Style="{StaticResource MaterialDesignChoiceChipOutlineRadioButton}" IsChecked="{Binding groupType, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:GroupType.All}}"/>
 
 							<Grid>
 								<Grid.ColumnDefinitions>
 									<ColumnDefinition Width="auto" />
 									<ColumnDefinition Width="*" />
 								</Grid.ColumnDefinitions>
-								<RadioButton Content="Specific Groups" GroupName="gg" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" IsChecked="{Binding groupType, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:GroupType.Specific}}" Margin="4,4,10,4"/>
+								<RadioButton Content="Specific Groups" GroupName="gg" Style="{StaticResource MaterialDesignChoiceChipOutlineRadioButton}" IsChecked="{Binding groupType, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:GroupType.Specific}}" Margin="4,4,10,4"/>
 
 								<materialDesign:Card Padding="10" Background="{StaticResource CardBG}" Grid.Column="1">
 									<Grid>

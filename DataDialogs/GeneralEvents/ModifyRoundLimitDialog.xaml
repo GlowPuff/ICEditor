@@ -44,7 +44,7 @@
 								Margin="0"
 								Content="Set the Round Limit:"
 								IsChecked="{Binding setRoundLimit}"
-								Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" />
+								Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" />
 							<TextBox
 								x:Name="setLimit"
 								MaxWidth="100"
@@ -59,21 +59,18 @@
 							Margin="0,5,0,0"
 							VerticalAlignment="Center"
 							FontStyle="Italic"
-							Foreground="Violet"
 							Text="The initial Round Limit used at the start of the Mission can be optionally set in Mission Properties."
 							TextWrapping="Wrap" />
 						<TextBlock
 							Margin="0,5,0,0"
 							VerticalAlignment="Center"
 							FontStyle="Italic"
-							Foreground="Violet"
 							Text="Positive values increase the Round Limit, negative values decrease the Round Limit. If the Round Limit is DISABLED (-1), this will ENABLE the Round Limit and modify it (-1) by the given amount."
 							TextWrapping="Wrap" />
 						<TextBlock
 							Margin="0,5,0,0"
 							VerticalAlignment="Center"
 							FontStyle="Italic"
-							Foreground="Violet"
 							Text="Instead of MODIFYING the Round Limit, you may SET it directly, instead."
 							TextWrapping="Wrap" />
 					</StackPanel>
@@ -116,7 +113,6 @@
 							Margin="0,5,0,0"
 							VerticalAlignment="Center"
 							FontStyle="Italic"
-							Foreground="Violet"
 							Text="Leave the Event set to 'None' to keep the currently set Event."
 							TextWrapping="Wrap" />
 					</StackPanel>
@@ -132,12 +128,11 @@
 							Margin="0"
 							Content="Disable Round Limit"
 							IsChecked="{Binding disableRoundLimit}"
-							Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" />
+							Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" />
 
 						<TextBlock
 							Margin="0,5,0,0"
 							FontStyle="Italic"
-							Foreground="Violet"
 							Text="Disable the Round Limit and set the Round Limit Event to None." />
 					</StackPanel>
 				</materialDesign:Card>

@@ -36,9 +36,18 @@
 					Grid.Column="1"
 					VerticalAlignment="Center"
 					Columns="3">
-					<TextBlock HorizontalAlignment="Right" Text="No" />
-					<ToggleButton Margin="10,0" IsChecked="{Binding entityProperties.isActive}" />
-					<TextBlock HorizontalAlignment="Left" Text="Yes" />
+					<TextBlock
+						HorizontalAlignment="Right"
+						VerticalAlignment="Center"
+						Text="No" />
+					<ToggleButton
+						Margin="10,0"
+						IsChecked="{Binding entityProperties.isActive}"
+						Style="{DynamicResource MaterialDesignSwitchSecondaryToggleButton}" />
+					<TextBlock
+						HorizontalAlignment="Left"
+						VerticalAlignment="Center"
+						Text="Yes" />
 				</UniformGrid>
 
 				<ComboBox

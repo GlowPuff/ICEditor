@@ -29,7 +29,7 @@
 					<materialDesign:Card Background="{StaticResource CardBG}" Margin="0,10,0,0" Padding="10">
 						<StackPanel>
 							<TextBlock Text="Also remove Map Tiles, Entities, Triggers and Events this Section owns?" TextWrapping="Wrap"/>
-							<CheckBox Content="Remove Associated Tiles, Entities, Triggers and Events" IsChecked="{Binding removeChildren}" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" Margin="0,10,4,4"/>
+							<CheckBox Content="Remove Associated Tiles, Entities, Triggers and Events" IsChecked="{Binding removeChildren}" Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" Margin="0,10,4,4"/>
 						</StackPanel>
 					</materialDesign:Card>
 				</StackPanel>

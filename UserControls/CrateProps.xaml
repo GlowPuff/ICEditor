@@ -1,47 +1,89 @@
-﻿<UserControl x:Class="Imperial_Commander_Editor.CrateProps"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Imperial_Commander_Editor"
-						 xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             mc:Ignorable="d" d:DesignWidth="200">
+﻿<UserControl
+	x:Class="Imperial_Commander_Editor.CrateProps"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:local="clr-namespace:Imperial_Commander_Editor"
+	xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	d:DesignWidth="200"
+	mc:Ignorable="d">
 
 	<Grid Background="#FF503B7C">
 		<StackPanel>
-			<materialDesign:Card Background="{StaticResource CardBG}" Padding="10">
+			<materialDesign:Card Padding="10" Background="{StaticResource CardBG}">
 				<StackPanel>
-					<TextBlock Text="CRATE" HorizontalAlignment="Center"/>
-					<TextBox Text="{Binding name}" materialDesign:HintAssist.Hint="Entity Name" Style="{StaticResource MaterialDesignOutlinedTextBox}" Margin="0,10,0,0" CaretBrush="White" KeyDown="TextBox_KeyDown"/>
-					<Button x:Name="ownerChangeBtn" Content="CHANGE OWNER" Margin="0,10,0,0" Click="ownerChangeBtn_Click"/>
-					<TextBlock Text="{Binding ownerName, RelativeSource={RelativeSource AncestorType=local:CrateProps}}" Margin="0,5,0,0" Foreground="Pink" HorizontalAlignment="Center"/>
+					<TextBlock HorizontalAlignment="Center" Text="CRATE" />
+					<TextBox
+						Margin="0,10,0,0"
+						materialDesign:HintAssist.Hint="Entity Name"
+						CaretBrush="White"
+						KeyDown="TextBox_KeyDown"
+						Style="{StaticResource MaterialDesignOutlinedTextBox}"
+						Text="{Binding name}" />
+					<Button
+						x:Name="ownerChangeBtn"
+						Margin="0,10,0,0"
+						Click="ownerChangeBtn_Click"
+						Content="CHANGE OWNER" />
+					<TextBlock
+						Margin="0,5,0,0"
+						HorizontalAlignment="Center"
+						Foreground="DeepPink"
+						Text="{Binding ownerName, RelativeSource={RelativeSource AncestorType=local:CrateProps}}" />
 				</StackPanel>
 			</materialDesign:Card>
 
-			<!--ACTIVE-->
-			<materialDesign:Card Background="{StaticResource CardBG}" Padding="10" Margin="0,10">
+			<!--  ACTIVE  -->
+			<materialDesign:Card
+				Margin="0,10"
+				Padding="10"
+				Background="{StaticResource CardBG}">
 				<StackPanel>
-					<TextBlock Text="Is Active?" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+					<TextBlock
+						Margin="0,0,0,10"
+						HorizontalAlignment="Center"
+						Text="Is Active?" />
 					<UniformGrid Columns="3">
-						<TextBlock Text="No" HorizontalAlignment="Right"/>
-						<ToggleButton IsChecked="{Binding entityProperties.isActive}"/>
-						<TextBlock Text="Yes"/>
+						<TextBlock
+							HorizontalAlignment="Center"
+							VerticalAlignment="Center"
+							Text="No" />
+						<ToggleButton IsChecked="{Binding entityProperties.isActive}" Style="{DynamicResource MaterialDesignSwitchSecondaryToggleButton}" />
+						<TextBlock
+							HorizontalAlignment="Center"
+							VerticalAlignment="Center"
+							Text="Yes" />
 					</UniformGrid>
 				</StackPanel>
 			</materialDesign:Card>
 
-			<!--color-->
-			<materialDesign:Card Background="{StaticResource CardBG}" Padding="10">
+			<!--  color  -->
+			<materialDesign:Card Padding="10" Background="{StaticResource CardBG}">
 				<StackPanel>
-					<TextBlock Text="Deployment Color" HorizontalAlignment="Center" Margin="0,0,0,10"/>
-					<ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectedValue="{Binding deploymentColor}" ItemsSource="{Binding deploymentColors, RelativeSource={RelativeSource AncestorType=local:CrateProps}}" SelectedValuePath="name" DisplayMemberPath="name"/>
+					<TextBlock
+						Margin="0,0,0,10"
+						HorizontalAlignment="Center"
+						Text="Deployment Color" />
+					<ComboBox
+						DisplayMemberPath="name"
+						ItemsSource="{Binding deploymentColors, RelativeSource={RelativeSource AncestorType=local:CrateProps}}"
+						SelectedValue="{Binding deploymentColor}"
+						SelectedValuePath="name"
+						Style="{StaticResource MaterialDesignOutlinedComboBox}" />
 				</StackPanel>
 			</materialDesign:Card>
 
-			<!--ENTITY PROPS-->
-			<materialDesign:Card Background="{StaticResource CardBG}" Padding="10" Margin="0,10,0,0">
+			<!--  ENTITY PROPS  -->
+			<materialDesign:Card
+				Margin="0,10,0,0"
+				Padding="10"
+				Background="{StaticResource CardBG}">
 				<StackPanel>
-					<Button x:Name="editPropsBtn" Click="editPropsBtn_Click" Content="EDIT PROPERTIES"/>
+					<Button
+						x:Name="editPropsBtn"
+						Click="editPropsBtn_Click"
+						Content="EDIT PROPERTIES" />
 				</StackPanel>
 			</materialDesign:Card>
 		</StackPanel>

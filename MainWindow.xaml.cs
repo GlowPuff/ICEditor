@@ -11,7 +11,6 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using CommunityToolkit.Mvvm.Input;
-using MaterialDesignThemes.Wpf;
 using Microsoft.Win32;
 
 namespace Imperial_Commander_Editor
@@ -104,10 +103,10 @@ namespace Imperial_Commander_Editor
 			System.Globalization.CultureInfo.DefaultThreadCurrentCulture = System.Globalization.CultureInfo.InvariantCulture;
 			System.Globalization.CultureInfo.DefaultThreadCurrentUICulture = System.Globalization.CultureInfo.InvariantCulture;
 
-			var paletteHelper = new PaletteHelper();
-			var theme = paletteHelper.GetTheme();
-			theme.SetBaseTheme( Theme.Dark );
-			paletteHelper.SetTheme( theme );
+			//var paletteHelper = new PaletteHelper();
+			//var theme = paletteHelper.GetTheme();
+			//theme.SetBaseTheme( (BaseTheme)Theme.GetSystemTheme() );//.Dark );
+			//paletteHelper.SetTheme( theme );
 
 			SetCommands();
 

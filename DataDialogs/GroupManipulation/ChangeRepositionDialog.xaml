@@ -1,14 +1,20 @@
-﻿<Window x:Class="Imperial_Commander_Editor.ChangeRepositionDialog"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Imperial_Commander_Editor"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        mc:Ignorable="d"
-        xmlns:s="clr-namespace:System;assembly=mscorlib" 
-				Style="{StaticResource dws}"
-        Title="Change Reposition Instructions" Width="500" ContentRendered="Window_ContentRendered" MouseDown="Window_MouseDown" WindowStartupLocation="CenterScreen" SizeToContent="Height">
+﻿<Window
+	x:Class="Imperial_Commander_Editor.ChangeRepositionDialog"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:local="clr-namespace:Imperial_Commander_Editor"
+	xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:s="clr-namespace:System;assembly=mscorlib"
+	Title="Change Reposition Instructions"
+	Width="500"
+	ContentRendered="Window_ContentRendered"
+	MouseDown="Window_MouseDown"
+	SizeToContent="Height"
+	Style="{StaticResource dws}"
+	WindowStartupLocation="CenterScreen"
+	mc:Ignorable="d">
 
 	<Window.Resources>
 		<DataTemplate x:Key="k1" DataType="{x:Type s:String}">
@@ -21,33 +27,68 @@
 				<TextBlock VerticalAlignment="Center">
 					<TextBlock.Text>
 						<MultiBinding StringFormat="{}{0}: {1}">
-							<Binding Path="name"/>
-							<Binding Path="id"/>
+							<Binding Path="name" />
+							<Binding Path="id" />
 						</MultiBinding>
 					</TextBlock.Text>
 				</TextBlock>
 
-				<Button Grid.Column="1" x:Name="remGroupButton" Content="{materialDesign:PackIcon Kind=RemoveBold}" Click="remGroupButton_Click" Style="{StaticResource MaterialDesignFloatingActionButton}" Foreground="Red" Width="35" Height="35"/>
+				<Button
+					x:Name="remGroupButton"
+					Grid.Column="1"
+					Width="35"
+					Height="35"
+					Click="remGroupButton_Click"
+					Content="{materialDesign:PackIcon Kind=RemoveBold}"
+					Foreground="Red"
+					Style="{StaticResource MaterialDesignFloatingActionButton}" />
 			</Grid>
 		</DataTemplate>
 	</Window.Resources>
 
 	<Border BorderBrush="MediumPurple" BorderThickness="2">
-		<GroupBox x:Name="gbox" Header="Change Reposition Instructions" Style="{DynamicResource MaterialDesignGroupBox}">
+		<GroupBox
+			x:Name="gbox"
+			Header="Change Reposition Instructions"
+			Style="{DynamicResource MaterialDesignGroupBox}">
 			<Grid>
 				<Grid.RowDefinitions>
-					<RowDefinition Height="*"/>
-					<RowDefinition Height="*"/>
-					<RowDefinition Height="auto"/>
-					<RowDefinition Height="auto"/>
-					<RowDefinition Height="auto"/>
+					<RowDefinition Height="*" />
+					<RowDefinition Height="*" />
+					<RowDefinition Height="auto" />
+					<RowDefinition Height="auto" />
+					<RowDefinition Height="auto" />
 				</Grid.RowDefinitions>
 
-				<TextBox x:Name="textbox" Grid.Row="0" Margin="0,0,0,10" BorderThickness="2" BorderBrush="MediumPurple" AcceptsReturn="True" Foreground="White" CaretBrush="White" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap" VerticalAlignment="Stretch" Text="{Binding eventAction.theText}" Height="75"/>
+				<TextBox
+					x:Name="textbox"
+					Grid.Row="0"
+					Height="75"
+					Margin="0,0,0,10"
+					VerticalAlignment="Stretch"
+					AcceptsReturn="True"
+					BorderBrush="MediumPurple"
+					BorderThickness="2"
+					CaretBrush="White"
+					Foreground="White"
+					Text="{Binding eventAction.theText}"
+					TextWrapping="Wrap"
+					VerticalScrollBarVisibility="Auto" />
 
-				<materialDesign:Card Grid.Row="1" Background="{StaticResource CardBG}" Padding="10">
+				<materialDesign:Card
+					Grid.Row="1"
+					Padding="10"
+					Background="{StaticResource CardBG}">
 					<StackPanel>
-						<TextBox Grid.Column="1" x:Name="filterBox" Style="{StaticResource MaterialDesignOutlinedTextBox}" materialDesign:HintAssist.Hint="Filter List" KeyDown="filterBox_KeyDown" TextChanged="TextBox_TextChanged" CaretBrush="White" IsEnabled="{Binding ElementName=allToggle, Path=IsChecked}"/>
+						<TextBox
+							x:Name="filterBox"
+							Grid.Column="1"
+							materialDesign:HintAssist.Hint="Filter List"
+							CaretBrush="White"
+							IsEnabled="{Binding ElementName=allToggle, Path=IsChecked}"
+							KeyDown="filterBox_KeyDown"
+							Style="{StaticResource MaterialDesignOutlinedTextBox}"
+							TextChanged="TextBox_TextChanged" />
 
 						<Grid Margin="0,10,0,0">
 							<Grid.ColumnDefinitions>
@@ -57,18 +98,29 @@
 								<ColumnDefinition Width="auto" />
 							</Grid.ColumnDefinitions>
 
-							<TextBlock Text="Apply To All" VerticalAlignment="Center"/>
+							<TextBlock VerticalAlignment="Center" Text="Apply To All" />
 
-							<ToggleButton Grid.Column="1" Margin="20,0" Name="allToggle" IsChecked="{Binding eventAction.useSpecific}"/>
+							<ToggleButton
+								Name="allToggle"
+								Grid.Column="1"
+								Margin="20,0"
+								IsChecked="{Binding eventAction.useSpecific}"
+								Style="{DynamicResource MaterialDesignSwitchSecondaryToggleButton}" />
 
-							<ComboBox Grid.Column="2" x:Name="dpCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectedValuePath="id" IsEnabled="{Binding ElementName=allToggle, Path=IsChecked}" SelectedValue="{Binding selectedGroup}">
+							<ComboBox
+								x:Name="dpCB"
+								Grid.Column="2"
+								IsEnabled="{Binding ElementName=allToggle, Path=IsChecked}"
+								SelectedValue="{Binding selectedGroup}"
+								SelectedValuePath="id"
+								Style="{StaticResource MaterialDesignOutlinedComboBox}">
 								<ComboBox.ItemTemplate>
 									<DataTemplate>
 										<TextBlock>
 											<TextBlock.Text>
 												<MultiBinding StringFormat="{}{0}: {1}">
-													<Binding Path="name"/>
-													<Binding Path="id"/>
+													<Binding Path="name" />
+													<Binding Path="id" />
 												</MultiBinding>
 											</TextBlock.Text>
 										</TextBlock>
@@ -76,16 +128,32 @@
 								</ComboBox.ItemTemplate>
 							</ComboBox>
 
-							<Button x:Name="addGroupBtn" Grid.Column="3" Content="{materialDesign:PackIcon Kind=AddBold}" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35" Margin="10,0,0,0" IsEnabled="{Binding ElementName=allToggle, Path=IsChecked}" Click="addGroupBtn_Click"/>
+							<Button
+								x:Name="addGroupBtn"
+								Grid.Column="3"
+								Width="35"
+								Height="35"
+								Margin="10,0,0,0"
+								Click="addGroupBtn_Click"
+								Content="{materialDesign:PackIcon Kind=AddBold}"
+								IsEnabled="{Binding ElementName=allToggle, Path=IsChecked}"
+								Style="{StaticResource MaterialDesignFloatingActionButton}" />
 						</Grid>
 					</StackPanel>
 				</materialDesign:Card>
 
-				<!--LIST BOX-->
-				<materialDesign:Card Background="Purple" Padding="10" Grid.Row="2" Margin="0,10,0,0">
-					<ListBox ItemsSource="{Binding eventAction.repoGroups}" HorizontalContentAlignment="Stretch" ItemTemplate="{StaticResource k1}">
+				<!--  LIST BOX  -->
+				<materialDesign:Card
+					Grid.Row="2"
+					Margin="0,10,0,0"
+					Padding="10"
+					Background="Purple">
+					<ListBox
+						HorizontalContentAlignment="Stretch"
+						ItemTemplate="{StaticResource k1}"
+						ItemsSource="{Binding eventAction.repoGroups}">
 						<ListBox.ItemContainerStyle>
-							<Style TargetType="ListBoxItem" BasedOn="{StaticResource MaterialDesignListBoxItem}">
+							<Style BasedOn="{StaticResource MaterialDesignListBoxItem}" TargetType="ListBoxItem">
 								<Setter Property="materialDesign:ListBoxItemAssist.ShowSelection" Value="False" />
 							</Style>
 						</ListBox.ItemContainerStyle>
@@ -100,14 +168,36 @@
 						<ColumnDefinition Width="auto" />
 					</Grid.ColumnDefinitions>
 
-					<Button Grid.Column="0" x:Name="infoBtn" Content="SYMBOLS..." Click="infoBtn_Click" Margin="0,10,0,0"/>
-					<Button Grid.Column="1" x:Name="formatBtn" Content="FORMATTING..." Click="formatBtn_Click" Margin="10,10,0,0"/>
-					<Button Grid.Column="3" x:Name="clearButton" Width="100" HorizontalAlignment="Left" Content="CLEAR" Click="clearButton_Click" Margin="0,10,0,0"/>
+					<Button
+						x:Name="infoBtn"
+						Grid.Column="0"
+						Margin="0,10,0,0"
+						Click="infoBtn_Click"
+						Content="SYMBOLS..." />
+					<Button
+						x:Name="formatBtn"
+						Grid.Column="1"
+						Margin="10,10,0,0"
+						Click="formatBtn_Click"
+						Content="FORMATTING..." />
+					<Button
+						x:Name="clearButton"
+						Grid.Column="3"
+						Width="100"
+						Margin="0,10,0,0"
+						HorizontalAlignment="Left"
+						Click="clearButton_Click"
+						Content="CLEAR" />
 				</Grid>
 
 				<StackPanel Grid.Row="4" Margin="0,10,0,0">
-					<Separator Margin="0,0,0,10"/>
-					<Button Grid.Column="1" x:Name="okButton" Content="ACCEPT" Click="okButton_Click" HorizontalAlignment="Right"/>
+					<Separator Margin="0,0,0,10" />
+					<Button
+						x:Name="okButton"
+						Grid.Column="1"
+						HorizontalAlignment="Right"
+						Click="okButton_Click"
+						Content="ACCEPT" />
 				</StackPanel>
 			</Grid>
 		</GroupBox>

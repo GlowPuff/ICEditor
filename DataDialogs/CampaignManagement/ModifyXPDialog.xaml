@@ -42,7 +42,6 @@
 							Margin="0,5,0,0"
 							VerticalAlignment="Center"
 							FontStyle="Italic"
-							Foreground="Violet"
 							Text="Positive values add XP, negative values remove XP" />
 					</StackPanel>
 

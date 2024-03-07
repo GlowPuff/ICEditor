@@ -37,7 +37,7 @@
 						<GroupBox Header="Group Name" Background="#FF503B7C">
 							<StackPanel>
 								<TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}" Text="{Binding entityGroup.name}" CaretBrush="White" KeyDown="TextBox_KeyDown"/>
-								<!--<CheckBox Content="Repeatable" IsChecked="{Binding entityGroup.repeateable}" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" Margin="0,5,4,4"/>-->
+								<!--<CheckBox Content="Repeatable" IsChecked="{Binding entityGroup.repeateable}" Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" Margin="0,5,4,4"/>-->
 							</StackPanel>
 						</GroupBox>
 

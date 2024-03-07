@@ -26,15 +26,15 @@
 
 						<UniformGrid Columns="2">
 							<StackPanel>
-								<CheckBox Content="Increase Round Counter by 1" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding incRoundCounter}"/>
-								<CheckBox Content="Pause Deployment" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding pauseDeployment}"/>
-								<CheckBox Content="Unpause Deployment" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding unpauseDeployment}"/>
+								<CheckBox Content="Increase Round Counter by 1" Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" IsChecked="{Binding incRoundCounter}"/>
+								<CheckBox Content="Pause Deployment" Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" IsChecked="{Binding pauseDeployment}"/>
+								<CheckBox Content="Unpause Deployment" Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" IsChecked="{Binding unpauseDeployment}"/>
 							</StackPanel>
 
 							<StackPanel>
-								<CheckBox Content="Pause Threat Increase" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding pauseThreat}"/>
-								<CheckBox Content="Unpause Threat Increase" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding unpauseThreat}"/>
-								<CheckBox Content="End Mission" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" IsChecked="{Binding endMission}"/>
+								<CheckBox Content="Pause Threat Increase" Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" IsChecked="{Binding pauseThreat}"/>
+								<CheckBox Content="Unpause Threat Increase" Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" IsChecked="{Binding unpauseThreat}"/>
+								<CheckBox Content="End Mission" Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" IsChecked="{Binding endMission}"/>
 							</StackPanel>
 						</UniformGrid>
 

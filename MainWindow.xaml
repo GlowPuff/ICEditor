@@ -190,7 +190,7 @@
 						materialDesign:ColorZoneAssist.Mode="PrimaryMid"
 						materialDesign:NavigationRailAssist.ShowSelectionBackground="True"
 						SelectionChanged="tabControl_SelectionChanged"
-						Style="{StaticResource MaterialDesignNavigatilRailTabControl}"
+						Style="{StaticResource MaterialDesignNavigationRailTabControl}"
 						TabStripPlacement="Top">
 						<TabControl.Background>
 							<SolidColorBrush Color="#FF3A3349" />

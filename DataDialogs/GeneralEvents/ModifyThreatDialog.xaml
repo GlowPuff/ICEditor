@@ -30,9 +30,9 @@
 				<StackPanel>
 					<!--<materialDesign:Card  Background="#FF7952C0" Padding="10">
 						<UniformGrid Columns="2">
-							<RadioButton GroupName="threattype" Content="Add Threat" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" HorizontalAlignment="Center" IsChecked="{Binding Path=eventAction.threatAction, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:ThreatAction.Add}}"/>
+							<RadioButton GroupName="threattype" Content="Add Threat" Style="{StaticResource MaterialDesignChoiceChipOutlineRadioButton}" HorizontalAlignment="Center" IsChecked="{Binding Path=eventAction.threatAction, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:ThreatAction.Add}}"/>
 
-							<RadioButton GroupName="threattype" Content="Remove Threat" Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" HorizontalAlignment="Center" IsChecked="{Binding Path=eventAction.threatAction, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:ThreatAction.Remove}}"/>
+							<RadioButton GroupName="threattype" Content="Remove Threat" Style="{StaticResource MaterialDesignChoiceChipOutlineRadioButton}" HorizontalAlignment="Center" IsChecked="{Binding Path=eventAction.threatAction, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:ThreatAction.Remove}}"/>
 						</UniformGrid>
 					</materialDesign:Card>-->
 
@@ -48,7 +48,7 @@
 									Content="Modified By"
 									GroupName="valuetype"
 									IsChecked="{Binding Path=eventAction.threatModifierType, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:ThreatModifierType.Fixed}}"
-									Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" />
+									Style="{StaticResource MaterialDesignChoiceChipOutlineRadioButton}" />
 								<TextBox
 									MaxWidth="50"
 									VerticalAlignment="Center"
@@ -66,7 +66,7 @@
 									Content="Threat Level Multiplier"
 									GroupName="valuetype"
 									IsChecked="{Binding Path=eventAction.threatModifierType, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:ThreatModifierType.Multiple}}"
-									Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" />
+									Style="{StaticResource MaterialDesignChoiceChipOutlineRadioButton}" />
 								<TextBox
 									MaxWidth="50"
 									VerticalAlignment="Center"

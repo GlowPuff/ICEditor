@@ -1,17 +1,20 @@
-﻿<Window x:Class="Imperial_Commander_Editor.TileGallery"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Imperial_Commander_Editor"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        mc:Ignorable="d"
-		Style="{StaticResource dws}"
-		ResizeMode="CanResize"
-        WindowStyle="None"
-        Title="Tile Gallery" Height="700" Width="950"
-        WindowStartupLocation="CenterScreen" 
-        MouseDown="Window_MouseDown">
+﻿<Window
+	x:Class="Imperial_Commander_Editor.TileGallery"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:local="clr-namespace:Imperial_Commander_Editor"
+	xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	Title="Tile Gallery"
+	Width="950"
+	Height="700"
+	MouseDown="Window_MouseDown"
+	ResizeMode="CanResize"
+	Style="{StaticResource dws}"
+	WindowStartupLocation="CenterScreen"
+	WindowStyle="None"
+	mc:Ignorable="d">
 
 	<Window.Resources>
 		<DataTemplate x:Key="k1">
@@ -28,31 +31,53 @@
 						<ColumnDefinition Width="auto" />
 					</Grid.ColumnDefinitions>
 
-					<TextBlock Text="{Binding selectedExpansion}" VerticalAlignment="Center"/>
-					<TextBlock Grid.Column="1" Text="{Binding tileNumber}" VerticalAlignment="Center"/>
-					<TextBlock Grid.Column="2" Text="{Binding tileSide}" VerticalAlignment="Center"/>
+					<TextBlock VerticalAlignment="Center" Text="{Binding selectedExpansion}" />
+					<TextBlock
+						Grid.Column="1"
+						VerticalAlignment="Center"
+						Text="{Binding tileNumber}" />
+					<TextBlock
+						Grid.Column="2"
+						VerticalAlignment="Center"
+						Text="{Binding tileSide}" />
 				</Grid>
 
-				<Button Grid.Column="1" Name="remQueueBtn" Content="{materialDesign:PackIcon Kind=RemoveBold}" Foreground="Red" Click="remQueueBtn_Click" Margin="10,0,0,0" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="25" Height="25" HorizontalAlignment="Right"/>
+				<Button
+					Name="remQueueBtn"
+					Grid.Column="1"
+					Width="25"
+					Height="25"
+					Margin="10,0,0,0"
+					HorizontalAlignment="Right"
+					Click="remQueueBtn_Click"
+					Content="{materialDesign:PackIcon Kind=RemoveBold}"
+					Foreground="Red"
+					Style="{StaticResource MaterialDesignFloatingActionButton}" />
 			</Grid>
 		</DataTemplate>
 	</Window.Resources>
 
 	<Border BorderBrush="MediumPurple" BorderThickness="2">
-		<GroupBox x:Name="gbox" Header="Tile Gallery" Style="{DynamicResource MaterialDesignGroupBox}">
+		<GroupBox
+			x:Name="gbox"
+			Header="Tile Gallery"
+			Style="{DynamicResource MaterialDesignGroupBox}">
 			<Grid>
 				<Grid.RowDefinitions>
 					<RowDefinition Height="*" />
 					<RowDefinition Height="auto" />
 				</Grid.RowDefinitions>
 				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="*"/>
-					<ColumnDefinition Width="auto"/>
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="auto" />
 				</Grid.ColumnDefinitions>
 
-				<!--TILES-->
-				<ScrollViewer VerticalScrollBarVisibility="Auto" Margin="10">
-					<ItemsControl x:Name="items" Padding="5" ItemsSource="{Binding tileObserverA}">
+				<!--  TILES  -->
+				<ScrollViewer Margin="10" VerticalScrollBarVisibility="Auto">
+					<ItemsControl
+						x:Name="items"
+						Padding="5"
+						ItemsSource="{Binding tileObserverA}">
 						<ItemsControl.ItemsPanel>
 							<ItemsPanelTemplate>
 								<WrapPanel IsItemsHost="True" />
@@ -62,15 +87,28 @@
 						<ItemsControl.ItemTemplate>
 							<DataTemplate>
 								<StackPanel>
-									<!--Background="{Binding selected, Converter={StaticResource b2c}}"-->
-									<Button x:Name="tileButton"  Width="150" Height="150" DataContext="{Binding}" Click="tileButton_Click" MouseDoubleClick="tileButton_MouseDoubleClick" MouseDown="tileButton_MouseDown" ToolTipService.InitialShowDelay="1000" ToolTipService.ShowDuration="20000">
-										<Image Source="{Binding source}" Stretch="Uniform"/>
+									<!--  Background="{Binding selected, Converter={StaticResource b2c}}"  -->
+									<Button
+										x:Name="tileButton"
+										Width="150"
+										Height="150"
+										Click="tileButton_Click"
+										DataContext="{Binding}"
+										MouseDoubleClick="tileButton_MouseDoubleClick"
+										MouseDown="tileButton_MouseDown"
+										ToolTipService.InitialShowDelay="1000"
+										ToolTipService.ShowDuration="20000">
+										<Image Source="{Binding source}" Stretch="Uniform" />
 										<Button.ToolTip>
-											<Image Source="{Binding source}" Width="512" Stretch="Uniform" MaxHeight="512"/>
+											<Image
+												Width="512"
+												MaxHeight="512"
+												Source="{Binding source}"
+												Stretch="Uniform" />
 										</Button.ToolTip>
 									</Button>
 									<StackPanel Margin="0,5,0,10" HorizontalAlignment="Center">
-										<TextBlock Text="{Binding tileNumber, StringFormat=Tile {0}}"/>
+										<TextBlock Text="{Binding tileNumber, StringFormat=Tile {0}}" />
 										<!--<TextBlock Text="{Binding tileSide, StringFormat=Side {0}}"/>-->
 									</StackPanel>
 								</StackPanel>
@@ -79,8 +117,12 @@
 					</ItemsControl>
 				</ScrollViewer>
 
-				<!--PROPS-->
-				<materialDesign:Card Grid.Column="1" Background="MediumPurple" Width="250" Padding="10">
+				<!--  PROPS  -->
+				<materialDesign:Card
+					Grid.Column="1"
+					Width="250"
+					Padding="10"
+					Background="MediumPurple">
 					<Grid>
 						<Grid.RowDefinitions>
 							<RowDefinition Height="auto" />
@@ -88,61 +130,112 @@
 							<RowDefinition Height="auto" />
 						</Grid.RowDefinitions>
 						<StackPanel>
-							<GroupBox Header="Expansion" Background="#FF503B7C">
+							<GroupBox Background="#FF503B7C" Header="Expansion">
 								<StackPanel>
-									<ComboBox x:Name="expansionCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" ItemsSource="{Binding expansionsList}" SelectedValue="{Binding selectedExpansion}"/>
-									<UniformGrid Columns="3" Margin="0,10,0,0">
-										<TextBlock Text="Side B"/>
-										<ToggleButton IsChecked="{Binding selectedTileSideA}"/>
-										<TextBlock Text="Side A" HorizontalAlignment="Right"/>
+									<ComboBox
+										x:Name="expansionCB"
+										ItemsSource="{Binding expansionsList}"
+										SelectedValue="{Binding selectedExpansion}"
+										Style="{StaticResource MaterialDesignOutlinedComboBox}" />
+									<UniformGrid Margin="0,10,0,0" Columns="3">
+										<TextBlock VerticalAlignment="Center" Text="Side B" />
+										<ToggleButton IsChecked="{Binding selectedTileSideA}" Style="{DynamicResource MaterialDesignSwitchSecondaryToggleButton}" />
+										<TextBlock
+											HorizontalAlignment="Right"
+											VerticalAlignment="Center"
+											Text="Side A" />
 									</UniformGrid>
 								</StackPanel>
 							</GroupBox>
 
-							<!--FLIP SIDE-->
-							<GroupBox Header="Selected Tile" Margin="0,10,0,0" Background="#FF503B7C">
+							<!--  FLIP SIDE  -->
+							<GroupBox
+								Margin="0,10,0,0"
+								Background="#FF503B7C"
+								Header="Selected Tile">
 								<StackPanel>
 									<UniformGrid Columns="2">
-										<TextBlock Text="EXPANSION:"/>
-										<TextBlock Text="{Binding selectedTile.selectedExpansion}" HorizontalAlignment="Right"/>
+										<TextBlock Text="EXPANSION:" />
+										<TextBlock HorizontalAlignment="Right" Text="{Binding selectedTile.selectedExpansion}" />
 									</UniformGrid>
 
 									<UniformGrid Columns="2">
-										<TextBlock Text="TILE #:"/>
-										<TextBlock Text="{Binding selectedTile.tileNumber}" HorizontalAlignment="Right"/>
+										<TextBlock Text="TILE #:" />
+										<TextBlock HorizontalAlignment="Right" Text="{Binding selectedTile.tileNumber}" />
 									</UniformGrid>
 
 									<UniformGrid Columns="2">
-										<TextBlock Text="SIDE:"/>
-										<TextBlock Text="{Binding selectedTile.tileSide}" HorizontalAlignment="Right"/>
+										<TextBlock Text="SIDE:" />
+										<TextBlock HorizontalAlignment="Right" Text="{Binding selectedTile.tileSide}" />
 									</UniformGrid>
 								</StackPanel>
 							</GroupBox>
 
-							<Button x:Name="addSelectedBtn" Content="INSERT SELECTED TILE" Click="addSelectedBtn_Click" Margin="0,10,0,0" IsEnabled="{Binding tileIsSelected}" IsDefault="True"/>
+							<Button
+								x:Name="addSelectedBtn"
+								Margin="0,10,0,0"
+								Click="addSelectedBtn_Click"
+								Content="INSERT SELECTED TILE"
+								IsDefault="True"
+								IsEnabled="{Binding tileIsSelected}" />
 
-							<Button x:Name="addToQueueBtn" Content="ADD SELECTED TILE TO QUEUE" Margin="0,10,0,0" IsEnabled="{Binding tileIsSelected}" IsDefault="True" Click="addToQueueBtn_Click"/>
+							<Button
+								x:Name="addToQueueBtn"
+								Margin="0,10,0,0"
+								Click="addToQueueBtn_Click"
+								Content="ADD SELECTED TILE TO QUEUE"
+								IsDefault="True"
+								IsEnabled="{Binding tileIsSelected}" />
 						</StackPanel>
 
-						<GroupBox Grid.Row="1" Header="Tile Queue" Margin="0,10,0,0" VerticalAlignment="Stretch" Background="{StaticResource GroupBG}">
+						<GroupBox
+							Grid.Row="1"
+							Margin="0,10,0,0"
+							VerticalAlignment="Stretch"
+							Background="{StaticResource GroupBG}"
+							Header="Tile Queue">
 							<Grid>
 								<Grid.RowDefinitions>
 									<RowDefinition Height="*" />
 									<RowDefinition Height="auto" />
 								</Grid.RowDefinitions>
-								<ListBox VerticalAlignment="Stretch" ItemsSource="{Binding tileQueue}" ItemTemplate="{StaticResource k1}" HorizontalContentAlignment="Stretch"/>
-								<Button x:Name="insertQueueBtn" Grid.Row="1" Content="INSERT QUEUE" Click="insertQueueBtn_Click" VerticalAlignment="Bottom" IsCancel="True" Margin="0,10,0,0"/>
+								<ListBox
+									VerticalAlignment="Stretch"
+									HorizontalContentAlignment="Stretch"
+									ItemTemplate="{StaticResource k1}"
+									ItemsSource="{Binding tileQueue}" />
+								<Button
+									x:Name="insertQueueBtn"
+									Grid.Row="1"
+									Margin="0,10,0,0"
+									VerticalAlignment="Bottom"
+									Click="insertQueueBtn_Click"
+									Content="INSERT QUEUE"
+									IsCancel="True" />
 							</Grid>
 						</GroupBox>
 
-						<Button x:Name="closeBtn" Grid.Row="2" Content="CANCEL" Click="closeBtn_Click" VerticalAlignment="Bottom" IsCancel="True" Margin="0,10,0,0"/>
+						<Button
+							x:Name="closeBtn"
+							Grid.Row="2"
+							Margin="0,10,0,0"
+							VerticalAlignment="Bottom"
+							Click="closeBtn_Click"
+							Content="CANCEL"
+							IsCancel="True" />
 					</Grid>
 				</materialDesign:Card>
 
-				<Border Grid.Row="1" Grid.ColumnSpan="2"  BorderBrush="Black" BorderThickness="0,1,0,0" Height="30" Background="{StaticResource MaterialDesignDarkBackground}">
-					<UniformGrid Columns="2" HorizontalAlignment="Center">
-						<TextBlock Text="Double Click = Insert Tile" VerticalAlignment="Center"/>
-						<TextBlock Text="Right Click = Add Tile To Queue" VerticalAlignment="Center"/>
+				<Border
+					Grid.Row="1"
+					Grid.ColumnSpan="2"
+					Height="30"
+					Background="{StaticResource MaterialDesignDarkBackground}"
+					BorderBrush="Black"
+					BorderThickness="0,1,0,0">
+					<UniformGrid HorizontalAlignment="Center" Columns="2">
+						<TextBlock VerticalAlignment="Center" Text="Double Click = Insert Tile" />
+						<TextBlock VerticalAlignment="Center" Text="Right Click = Add Tile To Queue" />
 					</UniformGrid>
 				</Border>
 			</Grid>

@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using MaterialDesignThemes.Wpf;
 using Microsoft.Win32;
 using Newtonsoft.Json;
 //using System.Windows.Media;
@@ -53,10 +52,11 @@ namespace Imperial_Commander_Editor
 			formatVersion.Text = "Mission Format: " + Utils.formatVersion;
 			appVersion.Text = "Editor Version: " + Utils.appVersion;
 
-			var paletteHelper = new PaletteHelper();
-			var theme = paletteHelper.GetTheme();
-			theme.SetBaseTheme( Theme.Dark );
-			paletteHelper.SetTheme( theme );
+			//var paletteHelper = new PaletteHelper();
+			//var theme = paletteHelper.GetTheme();
+			////theme.SetBaseTheme( Theme.Dark );
+			//theme.SetBaseTheme( (BaseTheme)Theme.GetSystemTheme() );//.Dark );
+			//paletteHelper.SetTheme( theme );
 
 			busyStatus.Text = "Checking...";
 			if ( NetworkInterface.GetIsNetworkAvailable() )

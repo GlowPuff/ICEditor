@@ -38,7 +38,6 @@
 						<TextBlock
 							Margin="0,5,0,0"
 							FontStyle="Italic"
-							Foreground="Violet"
 							Text="This Mission will be set as the next Story Mission in the Campaign."
 							TextWrapping="Wrap" />
 

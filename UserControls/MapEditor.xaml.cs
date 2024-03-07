@@ -665,6 +665,11 @@ namespace Imperial_Commander_Editor
 				EditEntityProperties dlg = new( selectedEntity.entityProperties );
 				dlg.ShowDialog();
 			}
+			else if ( selectedEntity != null && selectedEntity is DeploymentPoint )
+			{
+				var dlg = new DeploymentPointPropsDialog( (selectedEntity as DeploymentPoint).deploymentPointProps );
+				dlg.ShowDialog();
+			}
 		}
 
 		private void dupeBtn_Click( object sender, RoutedEventArgs e )

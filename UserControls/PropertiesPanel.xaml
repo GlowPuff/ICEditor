@@ -40,12 +40,13 @@
 						<UniformGrid Columns="2">
 							<TextBlock VerticalAlignment="Center" Text="Invisible Until Activated" />
 							<StackPanel Orientation="Horizontal">
-								<TextBlock Text="No" />
+								<TextBlock VerticalAlignment="Center" Text="No" />
 								<ToggleButton
 									x:Name="invisToggle"
 									Margin="10,0"
-									IsChecked="{Binding invisibleUntilActivated}" />
-								<TextBlock Text="Yes" />
+									IsChecked="{Binding invisibleUntilActivated}"
+									Style="{DynamicResource MaterialDesignSwitchSecondaryToggleButton}" />
+								<TextBlock VerticalAlignment="Center" Text="Yes" />
 							</StackPanel>
 						</UniformGrid>
 

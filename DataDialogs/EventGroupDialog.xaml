@@ -42,8 +42,8 @@
 										<ColumnDefinition Width="auto" />
 										<ColumnDefinition Width="*" />
 									</Grid.ColumnDefinitions>
-									<CheckBox x:Name="isrpt" Content="Reset Upon Completion" IsChecked="{Binding eventGroup.repeateable}" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" Margin="0,5,0,0" Click="isrpt_Click"/>
-									<CheckBox Grid.Column="1" Content="Each Event Is Unique" IsChecked="{Binding eventGroup.isUnique}" Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" Margin="0,5,0,0" HorizontalAlignment="Right" IsEnabled="{Binding ElementName=isrpt, Path=IsChecked}"/>
+									<CheckBox x:Name="isrpt" Content="Reset Upon Completion" IsChecked="{Binding eventGroup.repeateable}" Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" Margin="0,5,0,0" Click="isrpt_Click"/>
+									<CheckBox Grid.Column="1" Content="Each Event Is Unique" IsChecked="{Binding eventGroup.isUnique}" Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" Margin="0,5,0,0" HorizontalAlignment="Right" IsEnabled="{Binding ElementName=isrpt, Path=IsChecked}"/>
 								</Grid>
 							</StackPanel>
 						</GroupBox>

@@ -234,7 +234,7 @@
 					materialDesign:ColorZoneAssist.Mode="PrimaryMid"
 					materialDesign:NavigationRailAssist.ShowSelectionBackground="True"
 					SelectionChanged="tabControl_SelectionChanged"
-					Style="{StaticResource MaterialDesignNavigatilRailTabControl}"
+					Style="{StaticResource MaterialDesignNavigationRailTabControl}"
 					TabStripPlacement="Top">
 					<TabControl.Background>
 						<SolidColorBrush Color="#FF3D2C61" />
@@ -282,34 +282,46 @@
 								Orientation="Vertical">
 								<Button
 									x:Name="addStructureBtn"
+									Width="40"
+									Height="40"
 									Margin="0,5"
 									Click="addStructureBtn_Click"
 									Content="{materialDesign:PackIcon Kind=AddBold}"
 									Foreground="Lime"
+									Style="{DynamicResource MaterialDesignFloatingActionButton}"
 									ToolTip="Add Mission Slot" />
 								<Button
 									x:Name="removeStructureBtn"
+									Width="40"
+									Height="40"
 									Margin="0,5"
 									Click="removeStructureBtn_Click"
 									Content="{materialDesign:PackIcon Kind=RemoveBold}"
 									Foreground="Red"
 									IsEnabled="{Binding selectedStructure, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource notNull}}"
+									Style="{DynamicResource MaterialDesignFloatingActionButton}"
 									ToolTip="Remove Mission Slot" />
 
 								<Separator />
 
 								<Button
 									x:Name="upBtn"
+									Width="40"
+									Height="40"
 									Margin="0,5"
 									Click="upBtn_Click"
 									Content="{materialDesign:PackIcon Kind=ChevronUp}"
-									IsEnabled="{Binding selectedStructure, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource notNull}}" />
+									IsEnabled="{Binding selectedStructure, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource notNull}}"
+									Style="{DynamicResource MaterialDesignFloatingActionButton}" />
 								<Button
 									x:Name="downBtn"
+									Width="40"
+									Height="40"
 									Margin="0,5"
 									Click="downBtn_Click"
 									Content="{materialDesign:PackIcon Kind=ChevronDown}"
-									IsEnabled="{Binding selectedStructure, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource notNull}}" />
+									IsEnabled="{Binding selectedStructure, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource notNull}}"
+									Style="{DynamicResource MaterialDesignFloatingActionButton}" />
 							</StackPanel>
 						</Grid>
 					</TabItem>
@@ -427,7 +439,7 @@
 						x:Name="structurePanel"
 						materialDesign:ColorZoneAssist.Mode="PrimaryMid"
 						materialDesign:NavigationRailAssist.ShowSelectionBackground="True"
-						Style="{StaticResource MaterialDesignNavigatilRailTabControl}"
+						Style="{StaticResource MaterialDesignNavigationRailTabControl}"
 						TabStripPlacement="Top"
 						Visibility="Collapsed">
 						<TabControl.Background>
@@ -546,7 +558,7 @@
 											HorizontalAlignment="Center"
 											Content="Agenda Button"
 											IsChecked="{Binding selectedStructure.isAgendaMission, RelativeSource={RelativeSource AncestorType=Window}}"
-											Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" />
+											Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" />
 									</Grid>
 
 									<TextBlock Margin="0,10,0,0" Text="Mission Type:" />

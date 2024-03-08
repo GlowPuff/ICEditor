@@ -619,6 +619,28 @@ namespace Imperial_Commander_Editor
 							}
 						}
 
+						//add the translations
+						var folderEntry = archive.CreateEntry( "Translations/" );//empty folder
+						foreach ( var item in package.campaignTranslationItems )
+						{
+							var translationEntry = archive.CreateEntry( $"Translations/{item.fileName}" );
+							using ( var translationStream = translationEntry.Open() )
+							{
+								using ( var mmStream = new MemoryStream() )
+								{
+									//create the translation .json in memory
+									using ( TextWriter tw = new StreamWriter( mmStream ) )
+									{
+										tw.Write( JsonConvert.SerializeObject( item.translatedMission, Formatting.Indented ) );
+										tw.Flush();
+										mmStream.Position = 0;
+										//copy the memory stream to the archive
+										mmStream.CopyTo( translationStream );
+									}
+								}
+							}
+						}
+
 						//add the icon
 						var iconEntry = archive.CreateEntry( package.campaignIconName );
 						using ( var bmpStream = iconEntry.Open() )
@@ -645,6 +667,24 @@ namespace Imperial_Commander_Editor
 			}
 
 			return false;
+		}
+
+		public static T LoadJSON<T>( string fullPathToFilename ) where T : class
+		{
+			try
+			{
+				string json = "";
+				using ( StreamReader sr = new( fullPathToFilename ) )
+				{
+					json = sr.ReadToEnd();
+				}
+				return JsonConvert.DeserializeObject<T>( json );
+			}
+			catch ( JsonReaderException e )
+			{
+				MessageBox.Show( "LoadJSON()::Error parsing JSON file.\n\nException:\n" + e.Message, "App Exception", MessageBoxButton.OK, MessageBoxImage.Error );
+				return null;
+			}
 		}
 	}
 }

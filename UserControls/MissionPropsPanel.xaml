@@ -98,11 +98,10 @@
 							Grid.Row="2"
 							Grid.ColumnSpan="2"
 							Margin="0,10,0,0"
+							FontStyle="Italic"
 							Foreground="Violet"
 							Text="Use a Mission ID other than 'Custom' to have the Description filled in automatically by the Saga app."
 							TextWrapping="Wrap" />
-
-
 					</Grid>
 				</GroupBox>
 
@@ -123,31 +122,47 @@
 						Margin="0,5"
 						Background="#FF503B7C"
 						Header="Custom Mission Properties">
-						<Grid Grid.Row="3" Grid.ColumnSpan="2">
-							<Grid>
-								<Grid.ColumnDefinitions>
-									<ColumnDefinition Width="*" />
-									<ColumnDefinition Width="auto" />
-								</Grid.ColumnDefinitions>
+						<StackPanel>
+							<Grid Grid.Row="3" Grid.ColumnSpan="2">
+								<Grid>
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="*" />
+										<ColumnDefinition Width="auto" />
+									</Grid.ColumnDefinitions>
 
-								<TextBox
-									Margin="0,0,10,0"
-									materialDesign:HintAssist.Hint="Custom Mission Identifier"
-									CaretBrush="White"
-									KeyDown="Validate_KeyDown"
-									Style="{StaticResource MaterialDesignOutlinedTextBox}"
-									Text="{Binding customMissionIdentifier}" />
-								<Button
-									x:Name="refreshIdentifier"
-									Grid.Column="1"
-									Width="35"
-									Height="35"
-									Click="refreshIdentifier_Click"
-									Content="{materialDesign:PackIcon Kind=Refresh}"
-									Style="{StaticResource MaterialDesignFloatingActionButton}"
-									ToolTip="Create new Custom Mission Identifier" />
+									<TextBox
+										Margin="0,0,10,0"
+										materialDesign:HintAssist.Hint="Custom Mission Identifier"
+										CaretBrush="White"
+										KeyDown="Validate_KeyDown"
+										Style="{StaticResource MaterialDesignOutlinedTextBox}"
+										Text="{Binding customMissionIdentifier}" />
+									<Button
+										x:Name="refreshIdentifier"
+										Grid.Column="1"
+										Width="35"
+										Height="35"
+										Click="refreshIdentifier_Click"
+										Content="{materialDesign:PackIcon Kind=Refresh}"
+										Style="{StaticResource MaterialDesignFloatingActionButton}"
+										ToolTip="Create new Custom Mission Identifier" />
+								</Grid>
 							</Grid>
-						</Grid>
+
+							<TextBlock
+								Margin="0,5,0,0"
+								FontStyle="Italic"
+								Foreground="Violet"
+								Text="The Custom Mission Identifier is used by Custom Campaigns and defaults to a unique number, but you can set it to any text for easier identification. Just make sure it's unique among all the Custom Missions in your Custom Campaign."
+								TextWrapping="Wrap" />
+							<TextBlock
+								Margin="0,5,0,0"
+								FontStyle="Italic"
+								Foreground="Violet"
+								Text="This Identifier is used in the 'Set Next Mission' Event Action to specify which Custom Mission to set next in the Custom Campaign."
+								TextWrapping="Wrap" />
+
+						</StackPanel>
 					</GroupBox>
 				</Grid>
 

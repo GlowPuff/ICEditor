@@ -20,17 +20,19 @@ namespace Imperial_Commander_Editor
 	{
 		//the previous path to saved missions
 		string lastMissionPath = Path.Combine( Environment.GetFolderPath( Environment.SpecialFolder.MyDocuments ), "ImperialCommander" );
+		//the previous path to mission translations
+		string lastTranslationPath = Path.Combine( Environment.GetFolderPath( Environment.SpecialFolder.MyDocuments ), "ImperialCommander", "TranslatedMissions" );
 		string defaultPath = Path.Combine( Environment.GetFolderPath( Environment.SpecialFolder.MyDocuments ), "ImperialCommander" );
-		//string _iconPath;
 
-		//public string iconPath { get => _iconPath; set { _iconPath = value; PC(); } }
 		CampaignPackage _campaignPackage { get; set; } = new();
 		CampaignMissionItem _selectedMissionItem { get; set; } = null;
 		CampaignStructure _selectedStructure { get; set; } = null;
+		CampaignTranslationItem _selectedTranslationItem { get; set; } = null;
 
 		public CampaignPackage campaignPackage { get => _campaignPackage; set { _campaignPackage = value; PC(); } }
 		public CampaignMissionItem selectedMissionItem { get => _selectedMissionItem; set { _selectedMissionItem = value; PC(); } }
 		public CampaignStructure selectedStructure { get => _selectedStructure; set { _selectedStructure = value; PC(); } }
+		public CampaignTranslationItem selectedTranslationItem { get => _selectedTranslationItem; set { _selectedTranslationItem = value; PC(); } }
 
 		public event PropertyChangedEventHandler PropertyChanged;
 		public void PC( [CallerMemberName] string n = "" )
@@ -273,11 +275,19 @@ namespace Imperial_Commander_Editor
 				{
 					structurePanel.Visibility = Visibility.Visible;
 					poolPanel.Visibility = Visibility.Collapsed;
+					translationPanel.Visibility = Visibility.Collapsed;
+				}
+				else if ( ((TabControl)sender).SelectedIndex == 1 )
+				{
+					structurePanel.Visibility = Visibility.Collapsed;
+					poolPanel.Visibility = Visibility.Visible;
+					translationPanel.Visibility = Visibility.Collapsed;
 				}
 				else
 				{
 					structurePanel.Visibility = Visibility.Collapsed;
-					poolPanel.Visibility = Visibility.Visible;
+					poolPanel.Visibility = Visibility.Collapsed;
+					translationPanel.Visibility = Visibility.Visible;
 				}
 			}
 		}
@@ -471,6 +481,87 @@ namespace Imperial_Commander_Editor
 				//otherwise show the selector window so each one can be edited independently
 				var chooser = new ChooseSetNextMissionWindow( selectedStructure.mission.GetAllEvents() );
 				chooser.ShowDialog();
+			}
+		}
+
+		private void addTranslationBtn_Click( object sender, RoutedEventArgs e )
+		{
+			selectedTranslationItem = null;
+
+			OpenFileDialog ofd = new() { Title = "Add a Translation", InitialDirectory = lastTranslationPath, Filter = "Mission Translation (.json)|*.json" };
+			var res = ofd.ShowDialog();
+			if ( res.Value == true )
+			{
+				FileInfo fi = new FileInfo( ofd.FileName );
+				lastTranslationPath = fi.DirectoryName;
+				TranslatedMission tm = FileManager.LoadJSON<TranslatedMission>( ofd.FileName );
+				if ( tm != null )
+				{
+					//verify it's a translation
+					string stringified = File.ReadAllText( fi.FullName );
+					if ( stringified.Contains( "languageID" )
+						&& stringified.Contains( "events" )
+						&& stringified.Contains( "mapEntities" )
+						&& stringified.Contains( "initialGroups" ) )
+					{
+						selectedTranslationItem = campaignPackage.AddTranslation( tm, ofd.SafeFileName );
+						dropTranslationNotice.Visibility = campaignPackage.campaignTranslationItems.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
+					}
+					else
+						MessageBox.Show( "The file doesn't appear to be a Mission Translation.", "App Exception", MessageBoxButton.OK, MessageBoxImage.Error );
+				}
+				else
+					MessageBox.Show( "Loaded Translation is null.", "App Exception", MessageBoxButton.OK, MessageBoxImage.Error );
+			}
+		}
+
+		private void removeTranslationBtn_Click( object sender, RoutedEventArgs e )
+		{
+			if ( selectedTranslationItem != null )
+			{
+				campaignPackage.RemoveTranslation( selectedTranslationItem );
+				selectedTranslationItem = null;
+			}
+			dropTranslationNotice.Visibility = campaignPackage.campaignTranslationItems.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
+		}
+
+		private void translationLV_Drop( object sender, DragEventArgs e )
+		{
+			if ( e.Data.GetDataPresent( DataFormats.FileDrop ) )
+			{
+				//grab the filenames
+				string[] filename = e.Data.GetData( DataFormats.FileDrop ) as string[];
+				try
+				{
+					foreach ( var item in filename )
+					{
+						var translation = FileManager.LoadJSON<TranslatedMission>( item );
+						if ( translation != null )
+						{
+							FileInfo fi = new FileInfo( item );
+							lastTranslationPath = fi.DirectoryName;
+							//verify it's a translation
+							string stringified = File.ReadAllText( fi.FullName );
+							if ( stringified.Contains( "languageID" )
+								&& stringified.Contains( "events" )
+								&& stringified.Contains( "mapEntities" )
+								&& stringified.Contains( "initialGroups" ) )
+							{
+								selectedTranslationItem = campaignPackage.AddTranslation( translation, fi.Name );
+								dropTranslationNotice.Visibility = campaignPackage.campaignTranslationItems.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
+							}
+							else
+								throw new Exception( "The file doesn't appear to be a Mission Translation." );
+						}
+						else
+							throw new( $"Loaded Translation is null.\n{item}" );
+					}
+				}
+				catch ( Exception ee )
+				{
+					MessageBox.Show( $"Could not load the Translation.\n\n{ee.Message}", "App Exception", MessageBoxButton.OK, MessageBoxImage.Error );
+					selectedMissionItem = null;
+				}
 			}
 		}
 	}

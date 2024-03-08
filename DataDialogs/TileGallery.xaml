@@ -10,7 +10,7 @@
 	Width="950"
 	Height="700"
 	MouseDown="Window_MouseDown"
-	ResizeMode="CanResize"
+	ResizeMode="CanResizeWithGrip"
 	Style="{StaticResource dws}"
 	WindowStartupLocation="CenterScreen"
 	WindowStyle="None"

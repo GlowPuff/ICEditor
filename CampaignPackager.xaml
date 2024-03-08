@@ -8,9 +8,9 @@
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	xmlns:sys="clr-namespace:System;assembly=mscorlib"
 	Title="Campaign Packager"
-	Width="825"
+	Width="850"
 	Closing="Window_Closed"
-	ResizeMode="CanResize"
+	ResizeMode="CanResizeWithGrip"
 	SizeToContent="Height"
 	Style="{StaticResource dws}"
 	WindowStartupLocation="CenterScreen"
@@ -241,7 +241,7 @@
 					</TabControl.Background>
 
 					<!--  CAMPAIGN STRUCTURE  -->
-					<TabItem Width="175">
+					<TabItem Width="125">
 						<TabItem.Header>
 							<StackPanel>
 								<materialDesign:PackIcon
@@ -327,7 +327,7 @@
 					</TabItem>
 
 					<!--  MISSION POOL  -->
-					<TabItem Width="175">
+					<TabItem Width="125">
 						<TabItem.Header>
 							<StackPanel>
 								<materialDesign:PackIcon
@@ -375,19 +375,97 @@
 							<StackPanel Grid.Column="1" Orientation="Vertical">
 								<Button
 									x:Name="addMissionBtn"
+									Width="40"
+									Height="40"
 									Margin="0,5"
 									Click="addMissionBtn_Click"
 									Content="{materialDesign:PackIcon Kind=AddBold}"
 									Foreground="Lime"
+									Style="{DynamicResource MaterialDesignFloatingActionButton}"
 									ToolTip="Add Mission to Pool" />
 								<Button
 									x:Name="removeBtn"
+									Width="40"
+									Height="40"
 									Margin="0,5"
 									Click="removeBtn_Click"
 									Content="{materialDesign:PackIcon Kind=RemoveBold}"
 									Foreground="Red"
 									IsEnabled="{Binding selectedMissionItem, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource notNull}}"
+									Style="{DynamicResource MaterialDesignFloatingActionButton}"
 									ToolTip="Remove Mission from Pool" />
+							</StackPanel>
+						</Grid>
+					</TabItem>
+
+					<!--  TRANSLATIONS  -->
+					<TabItem Width="125">
+						<TabItem.Header>
+							<StackPanel>
+								<materialDesign:PackIcon
+									Width="24"
+									Height="24"
+									HorizontalAlignment="Center"
+									Kind="Translate" />
+								<TextBlock
+									HorizontalAlignment="Center"
+									Style="{StaticResource MaterialDesignTextBlock}"
+									Text="Translations" />
+							</StackPanel>
+						</TabItem.Header>
+
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="*" />
+								<ColumnDefinition Width="auto" />
+							</Grid.ColumnDefinitions>
+
+							<materialDesign:Card
+								Margin="0,5,5,0"
+								Padding="5"
+								AllowDrop="True"
+								Background="#FF4C3679"
+								DragEnter="missionLV_DragEnter"
+								Drop="translationLV_Drop">
+								<Grid>
+									<TextBlock
+										x:Name="dropTranslationNotice"
+										HorizontalAlignment="Center"
+										VerticalAlignment="Center"
+										Text="Drag and drop Translations here." />
+
+									<ListView
+										x:Name="translationLV"
+										VerticalAlignment="Top"
+										HorizontalContentAlignment="Stretch"
+										DisplayMemberPath="fileName"
+										ItemsSource="{Binding campaignTranslationItems}"
+										SelectedItem="{Binding selectedTranslationItem, RelativeSource={RelativeSource AncestorType=Window}}" />
+								</Grid>
+							</materialDesign:Card>
+
+							<StackPanel Grid.Column="1" Orientation="Vertical">
+								<Button
+									x:Name="addTranslationBtn"
+									Width="40"
+									Height="40"
+									Margin="0,5"
+									Click="addTranslationBtn_Click"
+									Content="{materialDesign:PackIcon Kind=AddBold}"
+									Foreground="Lime"
+									Style="{DynamicResource MaterialDesignFloatingActionButton}"
+									ToolTip="Add Translation" />
+								<Button
+									x:Name="removeTranslationBtn"
+									Width="40"
+									Height="40"
+									Margin="0,5"
+									Click="removeTranslationBtn_Click"
+									Content="{materialDesign:PackIcon Kind=RemoveBold}"
+									Foreground="Red"
+									IsEnabled="{Binding selectedTranslationItem, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource notNull}}"
+									Style="{DynamicResource MaterialDesignFloatingActionButton}"
+									ToolTip="Remove Translation" />
 							</StackPanel>
 						</Grid>
 					</TabItem>
@@ -406,7 +484,31 @@
 						<StackPanel>
 							<TextBlock
 								FontStyle="Italic"
-								Text="If you received this Package and don't have local copies of the included Missions, you can export a copy of the selected Mission."
+								Text="Custom Mission filenames are recommended to follow this naming convention:"
+								TextWrapping="Wrap" />
+							<TextBlock
+								Margin="0,5,0,0"
+								FontStyle="Italic"
+								Foreground="Violet"
+								Text="SHORT_ID#.json"
+								TextWrapping="Wrap" />
+							<TextBlock
+								Margin="0,5,0,0"
+								FontStyle="Italic"
+								Text="Where 'SHORT_ID' is a simple identifier, and '#' is the Mission number."
+								TextWrapping="Wrap" />
+							<TextBlock
+								Margin="0,5,0,0"
+								FontStyle="Italic"
+								Foreground="Violet"
+								Text="For example, in a Custom Campaign named 'The Return of the Jedi', you could name the Missions JEDI1.json, JEDI2.json, JEDI3.json and so forth."
+								TextWrapping="Wrap" />
+
+							<Separator Margin="0,10" />
+
+							<TextBlock
+								FontStyle="Italic"
+								Text="If you received this Package and wish to have your own local copies of the included Missions, you can export a copy of the selected Mission."
 								TextWrapping="Wrap" />
 							<Button
 								x:Name="exportButton"
@@ -646,6 +748,40 @@
 							</materialDesign:Card>
 						</TabItem>
 					</TabControl>
+
+					<!--  TRANSLATION PANEL  -->
+					<materialDesign:Card
+						x:Name="translationPanel"
+						Margin="5,0,0,0"
+						Padding="10"
+						Background="#FF4C3679"
+						IsEnabled="{Binding selectedTranslationItem, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource notNull}}"
+						Visibility="Visible">
+						<StackPanel>
+							<TextBlock
+								FontStyle="Italic"
+								Text="Required filename convention for Mission Translations:"
+								TextWrapping="Wrap" />
+							<TextBlock
+								Margin="0,5,0,0"
+								FontStyle="Italic"
+								Foreground="Violet"
+								Text="[MISSION-FILENAME]_[LANGUAGE-ID].json"
+								TextWrapping="Wrap" />
+							<TextBlock
+								Margin="0,5,0,0"
+								FontStyle="Italic"
+								Foreground="Red"
+								Text="Mission Translations MUST use the same filename as the Custom Mission it's associated with."
+								TextWrapping="Wrap" />
+							<TextBlock
+								Margin="0,5,0,0"
+								FontStyle="Italic"
+								Foreground="Violet"
+								Text="For example, the German translation for a Mission whose filename is 'JEDI1.json' should be 'JEDI1_DE.json'"
+								TextWrapping="Wrap" />
+						</StackPanel>
+					</materialDesign:Card>
 				</Grid>
 			</UniformGrid>
 		</Grid>

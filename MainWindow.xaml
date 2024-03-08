@@ -14,7 +14,7 @@
 	d:DesignWidth="950"
 	Loaded="Window_Loaded"
 	PreviewKeyDown="Window_PreviewKeyDown"
-	ResizeMode="CanResize"
+	ResizeMode="CanResizeWithGrip"
 	Style="{StaticResource dws}"
 	WindowStartupLocation="CenterScreen"
 	WindowStyle="SingleBorderWindow"

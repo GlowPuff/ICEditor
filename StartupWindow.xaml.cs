@@ -183,12 +183,6 @@ namespace Imperial_Commander_Editor
 			}
 		}
 
-		private void editorButton_Click( object sender, RoutedEventArgs e )
-		{
-			new CampaignEditor().Show();
-			Close();
-		}
-
 		private async Task CheckVersion()
 		{
 			// /repos/{owner}/{repo}/releases

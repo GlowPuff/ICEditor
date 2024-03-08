@@ -25,8 +25,9 @@ namespace Imperial_Commander_Editor
 		public BitmapImage bmpImage { get => _bmpImage; set { SetProperty( ref _bmpImage, value ); } }
 		public ObservableCollection<CampaignMissionItem> campaignMissionItems { get; set; } = new();
 		public ObservableCollection<CampaignStructure> campaignStructure { get; set; } = new();
-		[JsonIgnore]
+		public ObservableCollection<CampaignTranslationItem> campaignTranslationItems { get; set; } = new();
 
+		[JsonIgnore]
 		public byte[] iconBytesBuffer;
 
 		public CampaignPackage()
@@ -90,6 +91,21 @@ namespace Imperial_Commander_Editor
 			campaignStructure.Remove( cs );
 		}
 
+		/// <summary>
+		/// filename = JUST the filename, EXCLUDING the full path
+		/// </summary>
+		public CampaignTranslationItem AddTranslation( TranslatedMission tm, string filename )
+		{
+			var item = new CampaignTranslationItem() { translatedMission = tm, fileName = filename };
+			campaignTranslationItems.Add( item );
+			return item;
+		}
+
+		public void RemoveTranslation( CampaignTranslationItem tm )
+		{
+			campaignTranslationItems.Remove( tm );
+		}
+
 		public void ValidateMissions()
 		{
 			if ( campaignMissionItems.Count == 0 )
@@ -100,6 +116,18 @@ namespace Imperial_Commander_Editor
 				broken.ForEach( x => x.Reset() );
 			}
 		}
+	}
+
+	public class CampaignTranslationItem : ObservableObject
+	{
+		string _fileName;//filename of the translation
+
+		public string fileName { get => _fileName; set => SetProperty( ref _fileName, value ); }
+
+		//store the actual translation for packing as an individual file later, but don't serialize it here
+		[JsonIgnore]
+		public TranslatedMission translatedMission { get; set; }
+
 	}
 
 	public class CampaignMissionItem : ObservableObject

@@ -21,7 +21,7 @@ namespace Imperial_Commander_Editor
 		//the previous path to saved missions
 		string lastMissionPath = Path.Combine( Environment.GetFolderPath( Environment.SpecialFolder.MyDocuments ), "ImperialCommander" );
 		//the previous path to mission translations
-		string lastTranslationPath = Path.Combine( Environment.GetFolderPath( Environment.SpecialFolder.MyDocuments ), "ImperialCommander", "TranslatedMissions" );
+		string lastTranslationPath = Path.Combine( Environment.GetFolderPath( Environment.SpecialFolder.MyDocuments ), "ImperialCommander" );
 		string defaultPath = Path.Combine( Environment.GetFolderPath( Environment.SpecialFolder.MyDocuments ), "ImperialCommander" );
 
 		CampaignPackage _campaignPackage { get; set; } = new();

@@ -483,6 +483,9 @@ namespace Imperial_Commander_Editor
 			try
 			{
 				List<Mission> missionList = new();
+				Dictionary<string, TranslatedMission> missionTranslationList = new();
+				Dictionary<string, string> campaignInstList = new();
+
 				//create the zip file
 				using ( FileStream zipPath = new FileStream( fullFilename, FileMode.Open ) )
 				{
@@ -500,11 +503,28 @@ namespace Imperial_Commander_Editor
 									package = JsonConvert.DeserializeObject<CampaignPackage>( tr.ReadToEnd() );
 								}
 							}
-							else if ( entry.Name.EndsWith( ".json" ) )//deserialize the individual missions
+							//deserialize the individual missions
+							else if ( entry.Name.EndsWith( ".json" ) && entry.FullName.Contains( "Missions/" ) )
 							{
 								using ( TextReader tr = new StreamReader( entry.Open() ) )
 								{
 									missionList.Add( JsonConvert.DeserializeObject<Mission>( tr.ReadToEnd() ) );
+								}
+							}
+							//campaign instruction
+							else if ( entry.FullName.EndsWith( ".txt" ) && entry.FullName.Contains( "Translations/" ) )
+							{
+								using ( TextReader tr = new StreamReader( entry.Open() ) )
+								{
+									campaignInstList.Add( entry.Name, tr.ReadToEnd() );
+								}
+							}
+							//mission translation
+							else if ( entry.Name.EndsWith( ".json" ) && entry.FullName.Contains( "Translations/" ) )
+							{
+								using ( TextReader tr = new StreamReader( entry.Open() ) )
+								{
+									missionTranslationList.Add( entry.Name, JsonConvert.DeserializeObject<TranslatedMission>( tr.ReadToEnd() ) );
 								}
 							}
 							else if ( (entry.Name.EndsWith( ".png" )) )//icon image
@@ -540,7 +560,8 @@ namespace Imperial_Commander_Editor
 							package.SetDefaultIcon();
 						}
 
-						//now add all the missions to the CampaignPackage
+						//now add all the missions and translations to the CampaignPackage
+						//missions
 						foreach ( var item in package.campaignMissionItems )
 						{
 							var m = missionList.Where( x => x.missionGUID == item.missionGUID ).FirstOr( null );
@@ -549,11 +570,19 @@ namespace Imperial_Commander_Editor
 							if ( m != null )
 							{
 								item.mission = m;
-								if ( structure != null )
+								if ( structure != null )//set the Mission object back into structure
 									structure.mission = m;
 							}
 							else
 								throw new( $"Missing Mission in the zip archive:\n{item.missionName}\n{item.missionGUID}" );
+						}
+						//translated missions and instructions
+						foreach ( var item in package.campaignTranslationItems )
+						{
+							if ( item.isInstruction )
+								item.campaignInstructionTranslation = campaignInstList[item.fileName];
+							else
+								item.translatedMission = missionTranslationList[item.fileName];
 						}
 					}
 				}
@@ -599,9 +628,10 @@ namespace Imperial_Commander_Editor
 						}
 
 						//add each mission
+						var folderEntryMission = archive.CreateEntry( "Missions/" );//empty folder
 						foreach ( var item in package.campaignMissionItems )
 						{
-							var missionEntry = archive.CreateEntry( item.missionGUID + ".json" );
+							var missionEntry = archive.CreateEntry( $"Missions/{item.missionGUID}.json" );
 							using ( var missionStream = missionEntry.Open() )
 							{
 								using ( var mmStream = new MemoryStream() )
@@ -619,8 +649,8 @@ namespace Imperial_Commander_Editor
 							}
 						}
 
-						//add the translations
-						var folderEntry = archive.CreateEntry( "Translations/" );//empty folder
+						//add the Mission translations
+						var folderEntryTranslation = archive.CreateEntry( "Translations/" );//empty folder
 						foreach ( var item in package.campaignTranslationItems )
 						{
 							var translationEntry = archive.CreateEntry( $"Translations/{item.fileName}" );
@@ -631,7 +661,10 @@ namespace Imperial_Commander_Editor
 									//create the translation .json in memory
 									using ( TextWriter tw = new StreamWriter( mmStream ) )
 									{
-										tw.Write( JsonConvert.SerializeObject( item.translatedMission, Formatting.Indented ) );
+										if ( !item.isInstruction )
+											tw.Write( JsonConvert.SerializeObject( item.translatedMission, Formatting.Indented ) );
+										else
+											tw.Write( item.campaignInstructionTranslation );
 										tw.Flush();
 										mmStream.Position = 0;
 										//copy the memory stream to the archive
@@ -654,8 +687,6 @@ namespace Imperial_Commander_Editor
 								mmStream.CopyTo( bmpStream );
 							}
 						}
-
-						//return true;
 					}
 				}
 

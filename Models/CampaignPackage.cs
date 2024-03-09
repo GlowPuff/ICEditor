@@ -57,8 +57,14 @@ namespace Imperial_Commander_Editor
 			bmpImage = new( new Uri( filename ) );
 		}
 
-		public CampaignMissionItem AddMission( Mission mission )
+		/// <summary>
+		/// filename does NOT include the full path
+		/// </summary>
+		public CampaignMissionItem AddMission( string filename, Mission mission )
 		{
+			//make sure the Mission's 'filename' property is the same as that of the actual loaded file, because it could have been renamed in the file system by the user
+			mission.fileName = filename;
+
 			var item = new CampaignMissionItem() { missionName = mission.missionProperties.missionName, missionGUID = mission.missionGUID, mission = mission, GUID = Guid.NewGuid(), customMissionIdentifier = mission.missionProperties.customMissionIdentifier };
 			campaignMissionItems.Add( item );
 			return item;
@@ -94,9 +100,16 @@ namespace Imperial_Commander_Editor
 		/// <summary>
 		/// filename = JUST the filename, EXCLUDING the full path
 		/// </summary>
-		public CampaignTranslationItem AddTranslation( TranslatedMission tm, string filename )
+		public CampaignTranslationItem AddMissionTranslation( TranslatedMission tm, string filename )
 		{
-			var item = new CampaignTranslationItem() { translatedMission = tm, fileName = filename };
+			var item = new CampaignTranslationItem() { translatedMission = tm, fileName = filename, isInstruction = false };
+			campaignTranslationItems.Add( item );
+			return item;
+		}
+
+		public CampaignTranslationItem AddCampaignInfoTranslation( string instruction, string filename )
+		{
+			var item = new CampaignTranslationItem() { campaignInstructionTranslation = instruction, fileName = filename, isInstruction = true };
 			campaignTranslationItems.Add( item );
 			return item;
 		}
@@ -121,13 +134,16 @@ namespace Imperial_Commander_Editor
 	public class CampaignTranslationItem : ObservableObject
 	{
 		string _fileName;//filename of the translation
+		bool _isInstruction;
 
 		public string fileName { get => _fileName; set => SetProperty( ref _fileName, value ); }
+		public bool isInstruction { get => _isInstruction; set => SetProperty( ref _isInstruction, value ); }
 
-		//store the actual translation for packing as an individual file later, but don't serialize it here
+		//store the actual translations for packing as individual files later, but don't serialize it here
 		[JsonIgnore]
 		public TranslatedMission translatedMission { get; set; }
-
+		[JsonIgnore]
+		public string campaignInstructionTranslation { get; set; }
 	}
 
 	public class CampaignMissionItem : ObservableObject

@@ -9,9 +9,9 @@
 	xmlns:sys="clr-namespace:System;assembly=mscorlib"
 	Title="Campaign Packager"
 	Width="850"
+	Height="750"
 	Closing="Window_Closed"
 	ResizeMode="CanResizeWithGrip"
-	SizeToContent="Height"
 	Style="{StaticResource dws}"
 	WindowStartupLocation="CenterScreen"
 	WindowStyle="SingleBorderWindow"
@@ -421,18 +421,20 @@
 							</Grid.ColumnDefinitions>
 
 							<materialDesign:Card
+								x:Name="translationDrop"
 								Margin="0,5,5,0"
 								Padding="5"
 								AllowDrop="True"
 								Background="#FF4C3679"
-								DragEnter="missionLV_DragEnter"
+								DragEnter="translationDrop_DragEnter"
 								Drop="translationLV_Drop">
 								<Grid>
 									<TextBlock
 										x:Name="dropTranslationNotice"
 										HorizontalAlignment="Center"
 										VerticalAlignment="Center"
-										Text="Drag and drop Translations here." />
+										Text="Drag and drop translated Missions (.json) and Campaign Instructions (.txt) here."
+										TextWrapping="Wrap" />
 
 									<ListView
 										x:Name="translationLV"
@@ -472,317 +474,344 @@
 				</TabControl>
 
 				<!--  RIGHT  -->
-				<Grid x:Name="rightPanel">
-					<!--  POOL PANEL  -->
-					<materialDesign:Card
-						x:Name="poolPanel"
-						Margin="5,0,0,0"
-						Padding="10"
-						Background="#FF4C3679"
-						IsEnabled="{Binding selectedMissionItem, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource notNull}}"
-						Visibility="Collapsed">
-						<StackPanel>
-							<TextBlock
-								FontStyle="Italic"
-								Text="Custom Mission filenames are recommended to follow this naming convention:"
-								TextWrapping="Wrap" />
-							<TextBlock
-								Margin="0,5,0,0"
-								FontStyle="Italic"
-								Foreground="Violet"
-								Text="SHORT_ID#.json"
-								TextWrapping="Wrap" />
-							<TextBlock
-								Margin="0,5,0,0"
-								FontStyle="Italic"
-								Text="Where 'SHORT_ID' is a simple identifier, and '#' is the Mission number."
-								TextWrapping="Wrap" />
-							<TextBlock
-								Margin="0,5,0,0"
-								FontStyle="Italic"
-								Foreground="Violet"
-								Text="For example, in a Custom Campaign named 'The Return of the Jedi', you could name the Missions JEDI1.json, JEDI2.json, JEDI3.json and so forth."
-								TextWrapping="Wrap" />
+				<ScrollViewer
+					HorizontalScrollBarVisibility="Disabled"
+					Style="{DynamicResource MaterialDesignScrollViewer}"
+					VerticalScrollBarVisibility="Auto">
 
-							<Separator Margin="0,10" />
+					<Grid x:Name="rightPanel">
+						<!--  POOL PANEL  -->
+						<materialDesign:Card
+							x:Name="poolPanel"
+							Margin="5,0,0,0"
+							Padding="10"
+							Background="#FF4C3679"
+							Visibility="Collapsed">
+							<StackPanel>
+								<TextBlock
+									FontStyle="Italic"
+									Text="Custom Mission filenames are recommended to follow this naming convention:"
+									TextWrapping="Wrap" />
+								<TextBlock
+									Margin="0,5,0,0"
+									FontStyle="Italic"
+									Foreground="Violet"
+									Text="SHORT_ID#.json"
+									TextWrapping="Wrap" />
+								<TextBlock
+									Margin="0,5,0,0"
+									FontStyle="Italic"
+									Text="Where 'SHORT_ID' is a simple identifier, and '#' is the Mission number."
+									TextWrapping="Wrap" />
+								<TextBlock
+									Margin="0,5,0,0"
+									FontStyle="Italic"
+									Foreground="Violet"
+									Text="For example, in a Custom Campaign named 'The Return of the Jedi', you could name the Missions JEDI1.json, JEDI2.json, JEDI3.json and so forth."
+									TextWrapping="Wrap" />
 
-							<TextBlock
-								FontStyle="Italic"
-								Text="If you received this Package and wish to have your own local copies of the included Missions, you can export a copy of the selected Mission."
-								TextWrapping="Wrap" />
-							<Button
-								x:Name="exportButton"
-								Margin="0,10,0,0"
-								HorizontalAlignment="Left"
-								Click="exportButton_Click"
-								Content="EXPORT THIS MISSION..." />
+								<Separator Margin="0,10" />
 
-							<Separator Margin="0,10" />
+								<TextBlock
+									FontStyle="Italic"
+									Text="If you received this Package and wish to have your own local copies of the included Missions, you can export a copy of the selected Mission."
+									TextWrapping="Wrap" />
+								<Button
+									x:Name="exportButton"
+									Margin="0,10,0,0"
+									HorizontalAlignment="Left"
+									Click="exportButton_Click"
+									Content="EXPORT THIS MISSION..."
+									IsEnabled="{Binding selectedMissionItem, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource notNull}}" />
 
-							<!--  IDENTIFIER  -->
-							<TextBlock HorizontalAlignment="Center" Text="Selected Item's Custom Mission Identifier:" />
-							<TextBlock
-								x:Name="customMissionPoolIDText"
-								Margin="0,10,0,10"
-								HorizontalAlignment="Center"
-								FontStyle="Italic"
-								Foreground="Violet"
-								Text="{Binding selectedMissionItem.customMissionIdentifier, RelativeSource={RelativeSource AncestorType=Window}}" />
-							<Button
-								x:Name="copyPoolCustomID"
-								Margin="0,10,0,0"
-								Click="copyPoolCustomID_Click"
-								Content="COPY IDENTIFIER" />
-						</StackPanel>
-					</materialDesign:Card>
+								<Separator Margin="0,10" />
 
-					<!--  STRUCTURE PANEL  -->
-					<TabControl
-						x:Name="structurePanel"
-						materialDesign:ColorZoneAssist.Mode="PrimaryMid"
-						materialDesign:NavigationRailAssist.ShowSelectionBackground="True"
-						Style="{StaticResource MaterialDesignNavigationRailTabControl}"
-						TabStripPlacement="Top"
-						Visibility="Collapsed">
-						<TabControl.Background>
-							<SolidColorBrush Color="#FF3D2C61" />
-						</TabControl.Background>
+								<!--  IDENTIFIER  -->
+								<TextBlock HorizontalAlignment="Center" Text="Selected Item's Custom Mission Identifier:" />
+								<TextBlock
+									x:Name="customMissionPoolIDText"
+									Margin="0,10,0,10"
+									HorizontalAlignment="Center"
+									FontStyle="Italic"
+									Foreground="Violet"
+									Text="{Binding selectedMissionItem.customMissionIdentifier, RelativeSource={RelativeSource AncestorType=Window}}" />
+								<Button
+									x:Name="copyPoolCustomID"
+									Margin="0,10,0,0"
+									Click="copyPoolCustomID_Click"
+									Content="COPY IDENTIFIER"
+									IsEnabled="{Binding selectedMissionItem, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource notNull}}" />
+							</StackPanel>
+						</materialDesign:Card>
 
-						<TabItem Width="175">
-							<TabItem.Header>
-								<StackPanel>
-									<materialDesign:PackIcon
-										Width="24"
-										Height="24"
-										HorizontalAlignment="Center"
-										Kind="Settings" />
-									<TextBlock
-										HorizontalAlignment="Center"
-										Style="{StaticResource MaterialDesignTextBlock}"
-										Text="Basic Properties" />
-								</StackPanel>
-							</TabItem.Header>
+						<!--  STRUCTURE PANEL  -->
+						<TabControl
+							x:Name="structurePanel"
+							materialDesign:ColorZoneAssist.Mode="PrimaryMid"
+							materialDesign:NavigationRailAssist.ShowSelectionBackground="True"
+							Style="{StaticResource MaterialDesignNavigationRailTabControl}"
+							TabStripPlacement="Top"
+							Visibility="Collapsed">
+							<TabControl.Background>
+								<SolidColorBrush Color="#FF3D2C61" />
+							</TabControl.Background>
 
-							<materialDesign:Card
-								Margin="5,5,0,0"
-								Padding="10"
-								Background="#FF4C3679"
-								IsEnabled="{Binding selectedStructure, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource notNull}}"
-								Visibility="Visible">
-								<StackPanel>
-									<Grid>
-										<Grid.ColumnDefinitions>
-											<ColumnDefinition Width="*" />
-											<ColumnDefinition Width="auto" />
-											<ColumnDefinition Width="auto" />
-										</Grid.ColumnDefinitions>
-
-										<TextBlock
-											Margin="0,0,10,0"
+							<TabItem Width="175">
+								<TabItem.Header>
+									<StackPanel>
+										<materialDesign:PackIcon
+											Width="24"
+											Height="24"
 											HorizontalAlignment="Center"
-											VerticalAlignment="Center"
-											FontSize="16"
-											FontWeight="Bold"
-											Text="{Binding selectedStructure.projectItem.Title, RelativeSource={RelativeSource AncestorType=Window}}" />
+											Kind="Settings" />
+										<TextBlock
+											HorizontalAlignment="Center"
+											Style="{StaticResource MaterialDesignTextBlock}"
+											Text="Basic Properties" />
+									</StackPanel>
+								</TabItem.Header>
 
-										<materialDesign:PopupBox
-											Grid.Column="1"
-											Width="25"
-											Height="25"
-											Margin="0,0,10,0"
-											StaysOpen="True"
-											ToolTip="Change Mission">
-											<Border MaxHeight="200" Margin="5">
-												<ListBox
-													x:Name="missionsPopupLB"
-													MaxHeight="250"
-													DisplayMemberPath="missionName"
-													ItemsSource="{Binding campaignMissionItems}"
-													SelectionChanged="missionsPopupLB_SelectionChanged" />
-											</Border>
-										</materialDesign:PopupBox>
+								<materialDesign:Card
+									Margin="5,5,0,0"
+									Padding="10"
+									Background="#FF4C3679"
+									IsEnabled="{Binding selectedStructure, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource notNull}}"
+									Visibility="Visible">
+									<StackPanel>
+										<Grid>
+											<Grid.ColumnDefinitions>
+												<ColumnDefinition Width="*" />
+												<ColumnDefinition Width="auto" />
+												<ColumnDefinition Width="auto" />
+											</Grid.ColumnDefinitions>
 
-										<Button
-											x:Name="missionResetBtn"
-											Grid.Column="2"
-											Width="35"
-											Height="35"
-											Click="missionResetBtn_Click"
-											Content="{materialDesign:PackIcon Kind=Refresh}"
-											Style="{StaticResource MaterialDesignFloatingActionButton}"
-											ToolTip="Reset to Player's Choice" />
-									</Grid>
-
-									<Grid Margin="0,10,0,0">
-										<Grid.ColumnDefinitions>
-											<ColumnDefinition Width="auto" />
-											<ColumnDefinition Width="auto" />
-											<ColumnDefinition Width="auto" />
-											<ColumnDefinition Width="auto" />
-										</Grid.ColumnDefinitions>
-
-										<StackPanel Margin="0,0,10,0" Orientation="Horizontal">
 											<TextBlock
 												Margin="0,0,10,0"
-												VerticalAlignment="Center"
-												Text="Tier:" />
-											<ComboBox
-												Margin="0,10"
 												HorizontalAlignment="Center"
-												SelectedValue="{Binding selectedStructure.tier, RelativeSource={RelativeSource AncestorType=Window}}"
-												Style="{StaticResource MaterialDesignOutlinedComboBox}">
-												<ComboBox.ItemsSource>
-													<x:Array Type="{x:Type sys:String}">
-														<sys:String>1</sys:String>
-														<sys:String>2</sys:String>
-														<sys:String>3</sys:String>
-														<sys:String>1,2</sys:String>
-														<sys:String>1,2,3</sys:String>
-														<sys:String>1,3</sys:String>
-														<sys:String>2,3</sys:String>
-													</x:Array>
-												</ComboBox.ItemsSource>
-											</ComboBox>
-										</StackPanel>
+												VerticalAlignment="Center"
+												FontSize="16"
+												FontWeight="Bold"
+												Text="{Binding selectedStructure.projectItem.Title, RelativeSource={RelativeSource AncestorType=Window}}" />
 
-										<TextBox
-											Grid.Column="1"
-											Margin="10,0,10,0"
-											VerticalAlignment="Center"
-											materialDesign:HintAssist.Hint="Threat Level"
-											CaretBrush="White"
-											KeyDown="TB_KeyDown"
-											Style="{StaticResource MaterialDesignOutlinedTextBox}"
-											Text="{Binding selectedStructure.threatLevel, RelativeSource={RelativeSource AncestorType=Window}}" />
+											<materialDesign:PopupBox
+												Grid.Column="1"
+												Width="25"
+												Height="25"
+												Margin="0,0,10,0"
+												StaysOpen="True"
+												ToolTip="Change Mission">
+												<Border MaxHeight="200" Margin="5">
+													<ListBox
+														x:Name="missionsPopupLB"
+														MaxHeight="250"
+														DisplayMemberPath="missionName"
+														ItemsSource="{Binding campaignMissionItems}"
+														SelectionChanged="missionsPopupLB_SelectionChanged" />
+												</Border>
+											</materialDesign:PopupBox>
 
-										<CheckBox
-											Grid.Column="2"
+											<Button
+												x:Name="missionResetBtn"
+												Grid.Column="2"
+												Width="35"
+												Height="35"
+												Click="missionResetBtn_Click"
+												Content="{materialDesign:PackIcon Kind=Refresh}"
+												Style="{StaticResource MaterialDesignFloatingActionButton}"
+												ToolTip="Reset to Player's Choice" />
+										</Grid>
+
+										<Grid Margin="0,10,0,0">
+											<Grid.ColumnDefinitions>
+												<ColumnDefinition Width="auto" />
+												<ColumnDefinition Width="auto" />
+												<ColumnDefinition Width="auto" />
+												<ColumnDefinition Width="auto" />
+											</Grid.ColumnDefinitions>
+
+											<StackPanel Margin="0,0,10,0" Orientation="Horizontal">
+												<TextBlock
+													Margin="0,0,10,0"
+													VerticalAlignment="Center"
+													Text="Tier:" />
+												<ComboBox
+													Margin="0,10"
+													HorizontalAlignment="Center"
+													SelectedValue="{Binding selectedStructure.tier, RelativeSource={RelativeSource AncestorType=Window}}"
+													Style="{StaticResource MaterialDesignOutlinedComboBox}">
+													<ComboBox.ItemsSource>
+														<x:Array Type="{x:Type sys:String}">
+															<sys:String>1</sys:String>
+															<sys:String>2</sys:String>
+															<sys:String>3</sys:String>
+															<sys:String>1,2</sys:String>
+															<sys:String>1,2,3</sys:String>
+															<sys:String>1,3</sys:String>
+															<sys:String>2,3</sys:String>
+														</x:Array>
+													</ComboBox.ItemsSource>
+												</ComboBox>
+											</StackPanel>
+
+											<TextBox
+												Grid.Column="1"
+												Margin="10,0,10,0"
+												VerticalAlignment="Center"
+												materialDesign:HintAssist.Hint="Threat Level"
+												CaretBrush="White"
+												KeyDown="TB_KeyDown"
+												Style="{StaticResource MaterialDesignOutlinedTextBox}"
+												Text="{Binding selectedStructure.threatLevel, RelativeSource={RelativeSource AncestorType=Window}}" />
+
+											<CheckBox
+												Grid.Column="2"
+												HorizontalAlignment="Center"
+												Content="Agenda Button"
+												IsChecked="{Binding selectedStructure.isAgendaMission, RelativeSource={RelativeSource AncestorType=Window}}"
+												Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" />
+										</Grid>
+
+										<TextBlock Margin="0,10,0,0" Text="Mission Type:" />
+										<ComboBox
+											Margin="0,5,0,0"
+											SelectedItem="{Binding selectedStructure.missionType, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource missionTypeConv}}"
+											Style="{StaticResource MaterialDesignOutlinedComboBox}">
+											<ComboBox.ItemsSource>
+												<x:Array Type="{x:Type sys:String}">
+													<sys:String>Introduction</sys:String>
+													<sys:String>Story</sys:String>
+													<sys:String>Side</sys:String>
+													<sys:String>Interlude</sys:String>
+													<sys:String>Finale</sys:String>
+												</x:Array>
+											</ComboBox.ItemsSource>
+										</ComboBox>
+									</StackPanel>
+								</materialDesign:Card>
+							</TabItem>
+
+							<TabItem Width="175">
+								<TabItem.Header>
+									<StackPanel>
+										<materialDesign:PackIcon
+											Width="24"
+											Height="24"
 											HorizontalAlignment="Center"
-											Content="Agenda Button"
-											IsChecked="{Binding selectedStructure.isAgendaMission, RelativeSource={RelativeSource AncestorType=Window}}"
-											Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" />
-									</Grid>
+											Kind="IdentificationCard" />
+										<TextBlock
+											HorizontalAlignment="Center"
+											Style="{StaticResource MaterialDesignTextBlock}"
+											Text="Custom Mission Identifier" />
+									</StackPanel>
+								</TabItem.Header>
 
-									<TextBlock Margin="0,10,0,0" Text="Mission Type:" />
-									<ComboBox
-										Margin="0,5,0,0"
-										SelectedItem="{Binding selectedStructure.missionType, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource missionTypeConv}}"
-										Style="{StaticResource MaterialDesignOutlinedComboBox}">
-										<ComboBox.ItemsSource>
-											<x:Array Type="{x:Type sys:String}">
-												<sys:String>Introduction</sys:String>
-												<sys:String>Story</sys:String>
-												<sys:String>Side</sys:String>
-												<sys:String>Interlude</sys:String>
-												<sys:String>Finale</sys:String>
-											</x:Array>
-										</ComboBox.ItemsSource>
-									</ComboBox>
-								</StackPanel>
-							</materialDesign:Card>
-						</TabItem>
+								<materialDesign:Card
+									x:Name="customCard"
+									Margin="5,5,0,0"
+									Padding="5"
+									Background="#FF4C3679"
+									IsEnabled="{Binding selectedStructure, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource notNull}}">
+									<StackPanel>
+										<TextBlock
+											Margin="0,5,0,0"
+											FontStyle="Italic"
+											Foreground="Violet"
+											Text="A Custom Mission Identifier is the ID that uniquely identifies this Mission among all the others in the Campaign.  It is only used for setting the next Story Mission using the 'Set Next Mission' Event Action within a Mission."
+											TextWrapping="Wrap" />
 
-						<TabItem Width="175">
-							<TabItem.Header>
-								<StackPanel>
-									<materialDesign:PackIcon
-										Width="24"
-										Height="24"
-										HorizontalAlignment="Center"
-										Kind="IdentificationCard" />
-									<TextBlock
-										HorizontalAlignment="Center"
-										Style="{StaticResource MaterialDesignTextBlock}"
-										Text="Custom Mission Identifier" />
-								</StackPanel>
-							</TabItem.Header>
+										<TextBlock
+											Margin="0,10,0,0"
+											HorizontalAlignment="Center"
+											Text="Selected Item's Custom Mission Identifier:" />
+										<TextBlock
+											x:Name="customMissionIDText"
+											Margin="0,10,0,10"
+											HorizontalAlignment="Center"
+											FontStyle="Italic"
+											Foreground="Violet"
+											Text="{Binding selectedStructure.customMissionIdentifier, RelativeSource={RelativeSource AncestorType=Window}}" />
 
-							<materialDesign:Card
-								x:Name="customCard"
-								Margin="5,5,0,0"
-								Padding="5"
-								Background="#FF4C3679"
-								IsEnabled="{Binding selectedStructure, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource notNull}}">
-								<StackPanel>
-									<TextBlock
-										Margin="0,5,0,0"
-										FontStyle="Italic"
-										Foreground="Violet"
-										Text="A Custom Mission Identifier is the ID that uniquely identifies this Mission among all the others in the Campaign.  It is only used for setting the next Story Mission using the 'Set Next Mission' Event Action within a Mission."
-										TextWrapping="Wrap" />
+										<Button
+											x:Name="copyCustomID"
+											Margin="0,10,0,0"
+											Click="copyCustomID_Click"
+											Content="COPY IDENTIFIER" />
 
-									<TextBlock
-										Margin="0,10,0,0"
-										HorizontalAlignment="Center"
-										Text="Selected Item's Custom Mission Identifier:" />
-									<TextBlock
-										x:Name="customMissionIDText"
-										Margin="0,10,0,10"
-										HorizontalAlignment="Center"
-										FontStyle="Italic"
-										Foreground="Violet"
-										Text="{Binding selectedStructure.customMissionIdentifier, RelativeSource={RelativeSource AncestorType=Window}}" />
+										<Separator Margin="0,10" />
 
-									<Button
-										x:Name="copyCustomID"
-										Margin="0,10,0,0"
-										Click="copyCustomID_Click"
-										Content="COPY IDENTIFIER" />
+										<!--  edit 'set next mission' action  -->
+										<Button
+											x:Name="editSetNextBtn"
+											Margin="0,5,0,0"
+											Click="editSetNextBtn_Click"
+											Content="EDIT 'SET NEXT MISSION' EVENT ACTION(S)..."
+											IsEnabled="{Binding selectedStructure.hasCustomSetNextEventActions, RelativeSource={RelativeSource AncestorType=Window}}" />
+										<TextBlock
+											Margin="0,5,0,0"
+											FontStyle="Italic"
+											Foreground="Violet"
+											Text="If the selected Mission has one or more 'Set Next Mission' Event Actions, use this tool to change the Custom Mission they point to."
+											TextWrapping="Wrap" />
+									</StackPanel>
+								</materialDesign:Card>
+							</TabItem>
+						</TabControl>
 
-									<Separator Margin="0,10" />
+						<!--  TRANSLATION PANEL  -->
+						<materialDesign:Card
+							x:Name="translationPanel"
+							Margin="5,0,0,0"
+							Padding="10"
+							Background="#FF4C3679"
+							IsEnabled="{Binding selectedTranslationItem, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource notNull}}"
+							Visibility="Collapsed">
+							<StackPanel>
+								<TextBlock
+									FontStyle="Italic"
+									Text="Required filename convention for Mission Translations:"
+									TextWrapping="Wrap" />
+								<TextBlock
+									Margin="0,5,0,0"
+									FontStyle="Italic"
+									Foreground="Violet"
+									Text="[MISSION-FILENAME]_[LANGUAGE-ID].json"
+									TextWrapping="Wrap" />
+								<TextBlock
+									Margin="0,5,0,0"
+									FontStyle="Italic"
+									Foreground="Red"
+									Text="Mission Translations MUST use the same filename as the Custom Mission it's associated with."
+									TextWrapping="Wrap" />
+								<TextBlock
+									Margin="0,5,0,0"
+									FontStyle="Italic"
+									Foreground="Violet"
+									Text="For example, the German translation for a Mission whose filename is 'JEDI1.json' should be 'JEDI1_DE.json'"
+									TextWrapping="Wrap" />
 
-									<!--  edit 'set next mission' action  -->
-									<Button
-										x:Name="editSetNextBtn"
-										Margin="0,5,0,0"
-										Click="editSetNextBtn_Click"
-										Content="EDIT 'SET NEXT MISSION' EVENT ACTION(S)..."
-										IsEnabled="{Binding selectedStructure.hasCustomSetNextEventActions, RelativeSource={RelativeSource AncestorType=Window}}" />
-									<TextBlock
-										Margin="0,5,0,0"
-										FontStyle="Italic"
-										Foreground="Violet"
-										Text="If the selected Mission has one or more 'Set Next Mission' Event Actions, use this tool to change the Custom Mission they point to."
-										TextWrapping="Wrap" />
-								</StackPanel>
-							</materialDesign:Card>
-						</TabItem>
-					</TabControl>
+								<Separator Margin="0,10" />
 
-					<!--  TRANSLATION PANEL  -->
-					<materialDesign:Card
-						x:Name="translationPanel"
-						Margin="5,0,0,0"
-						Padding="10"
-						Background="#FF4C3679"
-						IsEnabled="{Binding selectedTranslationItem, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource notNull}}"
-						Visibility="Visible">
-						<StackPanel>
-							<TextBlock
-								FontStyle="Italic"
-								Text="Required filename convention for Mission Translations:"
-								TextWrapping="Wrap" />
-							<TextBlock
-								Margin="0,5,0,0"
-								FontStyle="Italic"
-								Foreground="Violet"
-								Text="[MISSION-FILENAME]_[LANGUAGE-ID].json"
-								TextWrapping="Wrap" />
-							<TextBlock
-								Margin="0,5,0,0"
-								FontStyle="Italic"
-								Foreground="Red"
-								Text="Mission Translations MUST use the same filename as the Custom Mission it's associated with."
-								TextWrapping="Wrap" />
-							<TextBlock
-								Margin="0,5,0,0"
-								FontStyle="Italic"
-								Foreground="Violet"
-								Text="For example, the German translation for a Mission whose filename is 'JEDI1.json' should be 'JEDI1_DE.json'"
-								TextWrapping="Wrap" />
-						</StackPanel>
-					</materialDesign:Card>
-				</Grid>
+								<TextBlock
+									FontStyle="Italic"
+									Text="Translated 'Campaign Instructions' are simple text files (.txt). Use the following naming convention:"
+									TextWrapping="Wrap" />
+								<TextBlock
+									Margin="0,5,0,0"
+									FontStyle="Italic"
+									Foreground="Violet"
+									Text="instructions_[LANGUAGE-ID].json"
+									TextWrapping="Wrap" />
+								<TextBlock
+									Margin="0,5,0,0"
+									FontStyle="Italic"
+									Foreground="Violet"
+									Text="For example, a Spanish translation should be named 'instructions_ES.txt'"
+									TextWrapping="Wrap" />
+
+							</StackPanel>
+						</materialDesign:Card>
+					</Grid>
+				</ScrollViewer>
 			</UniformGrid>
 		</Grid>
 

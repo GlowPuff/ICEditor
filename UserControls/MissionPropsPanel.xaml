@@ -262,6 +262,12 @@
 									Foreground="Violet"
 									Text="A value of -1 will remove the round limit, even if it's set using an Event Action during the Mission."
 									TextWrapping="Wrap" />
+								<TextBlock
+									Margin="0,5,0,0"
+									FontStyle="Italic"
+									Foreground="Red"
+									Text="WARNING: The Round Limit can be disabled by the user in the Saga IC2 app."
+									TextWrapping="Wrap" />
 							</StackPanel>
 						</GroupBox>
 
@@ -304,6 +310,12 @@
 									FontStyle="Italic"
 									Foreground="Violet"
 									Text="This Event will fire at the end of the round set in Round Limit above."
+									TextWrapping="Wrap" />
+								<TextBlock
+									Margin="0,5,0,0"
+									FontStyle="Italic"
+									Foreground="Red"
+									Text="WARNING: If the Round Limit is disabled by the user in the Saga IC2 app, this Event will not fire."
 									TextWrapping="Wrap" />
 							</StackPanel>
 						</GroupBox>

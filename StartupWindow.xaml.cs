@@ -142,7 +142,7 @@ namespace Imperial_Commander_Editor
 		{
 			OpenFileDialog od = new();
 			od.InitialDirectory = Path.Combine( Environment.GetFolderPath( Environment.SpecialFolder.MyDocuments ), "ImperialCommander" );
-			od.Filter = "Mission File (*.json)|*.json";
+			od.Filter = "Mission File|*.json";
 			od.Title = "Open Mission";
 			if ( od.ShowDialog() == true )
 			{

@@ -442,7 +442,7 @@ namespace Imperial_Commander_Editor
 			OpenFileDialog openFileDialog = new();
 			openFileDialog.DefaultExt = ".json";
 			openFileDialog.Title = "Import Custom Character";
-			openFileDialog.Filter = "Character File (*.json)|*.json";
+			openFileDialog.Filter = "Character File|*.json";
 			openFileDialog.InitialDirectory = basePath;
 			if ( openFileDialog.ShowDialog() == true )
 			{

@@ -67,7 +67,7 @@ namespace Imperial_Commander_Editor
 		/// </summary>
 		private void loadButton_Click( object sender, RoutedEventArgs e )
 		{
-			OpenFileDialog ofd = new() { Title = "Load Campaign Package", InitialDirectory = defaultPath, Filter = "Campaign Package (.zip)|*.zip" };
+			OpenFileDialog ofd = new() { Title = "Load Campaign Package", InitialDirectory = defaultPath, Filter = "Campaign Package|*.zip" };
 			var res = ofd.ShowDialog();
 			if ( res.Value == true )
 			{
@@ -185,7 +185,7 @@ namespace Imperial_Commander_Editor
 		{
 			selectedMissionItem = null;
 
-			OpenFileDialog ofd = new() { Title = "Add a Mission", InitialDirectory = lastMissionPath, Filter = "IC2 Missions (.json)|*.json" };
+			OpenFileDialog ofd = new() { Title = "Add a Mission", InitialDirectory = lastMissionPath, Filter = "IC2 Missions|*.json" };
 			var res = ofd.ShowDialog();
 			if ( res.Value == true )
 			{
@@ -365,7 +365,7 @@ namespace Imperial_Commander_Editor
 			{
 				Title = "Load Campaign Icon",
 				InitialDirectory = defaultPath,
-				Filter = "PNG Image (.png)|*.png"
+				Filter = "PNG Image|*.png"
 			};
 			var res = ofd.ShowDialog();
 			if ( res.Value == true )
@@ -492,7 +492,7 @@ namespace Imperial_Commander_Editor
 		{
 			selectedTranslationItem = null;
 
-			OpenFileDialog ofd = new() { Title = "Add a Translation", InitialDirectory = lastTranslationPath, Filter = "Mission Translation (.json)|*.json" };
+			OpenFileDialog ofd = new() { Title = "Add a Translation", InitialDirectory = lastTranslationPath, Filter = "Translations|*.json;*.txt" };
 			var res = ofd.ShowDialog();
 			if ( res.Value == true )
 			{

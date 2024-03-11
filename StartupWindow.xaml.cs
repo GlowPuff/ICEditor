@@ -107,25 +107,6 @@ namespace Imperial_Commander_Editor
 			Application.Current.Shutdown();
 		}
 
-		private void ScrollViewer_MouseEnter( object sender, MouseEventArgs e )
-		{
-			scrollVisible = true;
-			PropertyChanged?.Invoke( this, new PropertyChangedEventArgs( nameof( scrollVisible ) ) );
-		}
-
-		private void ScrollViewer_MouseLeave( object sender, MouseEventArgs e )
-		{
-			scrollVisible = false;
-			PropertyChanged?.Invoke( this, new PropertyChangedEventArgs( nameof( scrollVisible ) ) );
-		}
-
-		private void ScrollViewer_PreviewMouseWheel( object sender, MouseWheelEventArgs e )
-		{
-			ScrollViewer scv = (ScrollViewer)sender;
-			scv.ScrollToVerticalOffset( scv.VerticalOffset - e.Delta / 10 );
-			e.Handled = true;
-		}
-
 		private void projectLV_SelectionChanged( object sender, SelectionChangedEventArgs e )
 		{
 			ProjectItem item = ((ListView)e.Source).SelectedItem as ProjectItem;
@@ -368,6 +349,12 @@ namespace Imperial_Commander_Editor
 				dropNotice.Visibility = Visibility.Hidden;
 			}
 			e.Handled = true;
+		}
+
+		private void clearMRUBtn_Click( object sender, RoutedEventArgs e )
+		{
+			FileManager.ClearMRU();
+			PopulateRecents();
 		}
 	}
 }

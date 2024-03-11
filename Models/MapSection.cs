@@ -33,8 +33,12 @@ namespace Imperial_Commander_Editor
 		public bool isActive { get { return _isActive; } set { _isActive = value; PC(); } }
 		public bool invisibleUntilActivated { get { return _invisibleUntilActivated; } set { _invisibleUntilActivated = value; PC(); } }
 
+		//local MapSection triggers and missionEvents are deprecated, they are all global now
+		//Leave the properties here for legacy loading purposes
+		//FileManager converts these to global on Mission Load()
 		public ObservableCollection<Trigger> triggers { get; set; } = new();
 		public ObservableCollection<MissionEvent> missionEvents { get; set; } = new();
+
 		public ObservableCollection<MapTile> mapTiles { get; set; } = new();
 
 		public void PC( [CallerMemberName] string n = "" )

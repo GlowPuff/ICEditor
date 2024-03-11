@@ -82,7 +82,7 @@ namespace Imperial_Commander_Editor
 			get
 			{
 				var trigs = new List<Trigger>();
-				trigs = trigs.Concat( mission.globalTriggers ).ToList();//.Where( x => x.GUID != Guid.Empty ) ).ToList();
+				trigs = trigs.Concat( mission.globalTriggers ).ToList();
 				trigs = trigs.Concat( activeSection.triggers.Where( x => x.GUID != Guid.Empty ) ).ToList();
 				return trigs;
 			}

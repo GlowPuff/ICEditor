@@ -136,8 +136,35 @@ namespace Imperial_Commander_Editor
 				FileInfo fi = new FileInfo( filename );
 				m.fileName = fi.Name;
 				m.fullPathToFile = fi.FullName;
-				//m.relativePath = Path.GetRelativePath( basePath, new DirectoryInfo( filename ).FullName );
 				m.fileVersion = Utils.formatVersion;
+
+				//convert all local triggers/events to global versions
+				int eCount = 0;
+				int tCount = 0;
+				foreach ( MapSection item in m.mapSections )
+				{
+					foreach ( var evnt in item.missionEvents )
+					{
+						if ( evnt.GUID != Guid.Empty )
+						{
+							m.globalEvents.Add( evnt );
+							eCount++;
+						}
+					}
+					foreach ( var trig in item.triggers )
+					{
+						if ( trig.GUID != Guid.Empty )
+						{
+							m.globalTriggers.Add( trig );
+							tCount++;
+						}
+					}
+					//clear them so they aren't used
+					item.missionEvents.Clear();
+					item.triggers.Clear();
+				}
+
+				Utils.Log( $"LoadMission()::Converted [{eCount}] LOCAL Events and [{tCount}] LOCAL Triggers to GLOBAL" );
 
 				//add loaded file to MRU list
 				AddSaveMRU( m.fullPathToFile );
@@ -153,6 +180,8 @@ namespace Imperial_Commander_Editor
 
 		public static Mission LoadMissionFromString( string json )
 		{
+			//called from CreateProjectItem() to show MRU items on Project window
+
 			//make sure it's a mission, simple check for a property in the text
 			if ( !json.Contains( "missionGUID" ) )
 				return null;
@@ -175,6 +204,7 @@ namespace Imperial_Commander_Editor
 		/// </summary>
 		public static ProjectItem CreateProjectItem( string filename )
 		{
+			//called from GetMRUProjects() to populate project list
 			ProjectItem projectItem = new ProjectItem();
 
 			if ( !File.Exists( filename ) )
@@ -195,86 +225,6 @@ namespace Imperial_Commander_Editor
 				return null;
 
 			return projectItem;
-
-			//ProjectItem projectItem = new();
-			//FileInfo fi = new FileInfo( filename );
-			//string basePath = Path.Combine( Environment.GetFolderPath( Environment.SpecialFolder.MyDocuments ), "ImperialCommander" );
-
-			//string[] text = File.ReadAllLines( filename );
-			//foreach ( var line in text )
-			//{
-			//	//manually parse each line
-			//	string[] split = line.Split( ':' );
-			//	if ( split.Length == 2 )
-			//	{
-			//		projectItem.fileName = fi.Name;
-			//		projectItem.relativePath = Path.GetRelativePath( basePath, new DirectoryInfo( filename ).FullName );
-
-			//		split[0] = split[0].Replace( "\"", "" ).Replace( ",", "" ).Trim();
-			//		split[1] = split[1].Replace( "\"", "" ).Replace( ",", "" ).Trim();
-			//		if ( split[0] == "missionName" )
-			//			projectItem.Title = split[1];
-			//		if ( split[0] == "saveDate" )
-			//			projectItem.Date = split[1];
-			//		if ( split[0] == "fileVersion" )
-			//			projectItem.fileVersion = split[1];
-			//		if ( split[0] == "timeTicks" )
-			//			projectItem.timeTicks = long.Parse( split[1] );
-			//	}
-			//	else if ( split.Length > 2 )//mission name with a colon
-			//	{
-			//		for ( int i = 0; i < split.Length; i++ )
-			//			split[i] = split[i].Replace( "\"", "" ).Replace( ",", "" ).Trim();
-			//		if ( split[0] == "missionName" )
-			//		{
-			//			int idx = line.IndexOf( ':' );
-			//			int c = line.LastIndexOf( ',' );
-			//			string mname = line.Substring( idx + 1, c - idx - 1 ).Replace( "\"", "" ).Trim();
-			//			projectItem.Title = mname;
-			//		}
-			//	}
-			//}
-			//return projectItem;
-		}
-
-		/// <summary>
-		/// Return ProjectItem info for missions in Project folder
-		/// </summary>
-		public static IEnumerable<ProjectItem> GetProjects()
-		{
-			string basePath = Path.Combine( Environment.GetFolderPath( Environment.SpecialFolder.MyDocuments ), "ImperialCommander" );
-
-			//make sure the project folder exists
-			if ( !Directory.Exists( basePath ) )
-			{
-				var dinfo = Directory.CreateDirectory( basePath );
-				if ( dinfo == null )
-				{
-					MessageBox.Show( "Could not create the Mission project folder.\r\nTried to create: " + basePath, "App Exception", MessageBoxButton.OK, MessageBoxImage.Error );
-					return null;
-				}
-			}
-
-			List<ProjectItem> items = new();
-			DirectoryInfo di = new( basePath );
-			FileInfo[] files = di.GetFiles().Where( file => file.Extension == ".json" ).ToArray();
-
-			try
-			{
-				//find mission files
-				foreach ( FileInfo fi in files )
-				{
-					var pi = CreateProjectItem( fi.FullName );
-					if ( pi != null )
-						items.Add( pi );
-				}
-				items.Sort();
-				return items;
-			}
-			catch ( Exception )
-			{
-				return null;
-			}
 		}
 
 		/// <summary>
@@ -365,6 +315,12 @@ namespace Imperial_Commander_Editor
 					mru.ForEach( x => fs.WriteLine( x ) );
 				}
 			}
+		}
+
+		public static void ClearMRU()
+		{
+			string basePath = Path.Combine( AppDomain.CurrentDomain.BaseDirectory, "ICEditor_MRU.txt" );
+			File.Delete( basePath );
 		}
 
 		/// <summary>

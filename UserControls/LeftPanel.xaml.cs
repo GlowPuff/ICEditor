@@ -11,33 +11,7 @@ namespace Imperial_Commander_Editor
 	/// </summary>
 	public partial class LeftPanel : UserControl, INotifyPropertyChanged
 	{
-		bool _showGlobal;
-
 		public event PropertyChangedEventHandler PropertyChanged;
-
-		public bool showGlobal
-		{
-			get { return _showGlobal; }
-			set
-			{
-				_showGlobal = value;
-				if ( _showGlobal )
-				{
-					triggersCB.ItemsSource = Utils.mainWindow.mission.globalTriggers;
-					eventsCB.ItemsSource = Utils.mainWindow.mission.globalEvents;
-				}
-				else
-				{
-					triggersCB.ItemsSource = Utils.mainWindow.activeSection.triggers;
-					eventsCB.ItemsSource = Utils.mainWindow.activeSection.missionEvents;
-				}
-				//localText.Visibility = _showGlobal ? Visibility.Collapsed : Visibility.Visible;
-				//globalText.Visibility = _showGlobal ? Visibility.Visible : Visibility.Collapsed;
-				triggersCB.SelectedIndex = 0;
-				eventsCB.SelectedIndex = 0;
-				PC();
-			}
-		}
 
 		public void PC( [CallerMemberName] string n = "" )
 		{
@@ -48,8 +22,17 @@ namespace Imperial_Commander_Editor
 		public LeftPanel()
 		{
 			InitializeComponent();
+		}
 
-			//showGlobalToggle.DataContext = this;
+		/// <summary>
+		/// Called from MainWindow after a Mission has been loaded/created
+		/// </summary>
+		public void SetListSources()
+		{
+			triggersCB.ItemsSource = Utils.mainWindow.mission.globalTriggers;
+			eventsCB.ItemsSource = Utils.mainWindow.mission.globalEvents;
+			triggersCB.SelectedIndex = 0;
+			eventsCB.SelectedIndex = 0;
 		}
 
 		private void editTriggerButton_Click( object sender, RoutedEventArgs e )
@@ -108,6 +91,12 @@ namespace Imperial_Commander_Editor
 			var t = triggersCB.SelectedItem as Trigger;
 			MessageBoxResult res = MessageBoxResult.Yes;
 
+			if ( t.GUID == Guid.Empty )
+			{
+				Utils.mainWindow.SetStatus( "Can't Remove 'None'" );
+				return;
+			}
+
 			var report = HealthReportHelper.CheckAndNotifyTriggerRemoved( t.GUID, NotifyMode.Report, t.name );
 			if ( report.isBroken )
 			{
@@ -119,10 +108,7 @@ namespace Imperial_Commander_Editor
 
 			if ( t.GUID != Guid.Empty )
 			{
-				if ( showGlobal )
-					Utils.mainWindow.mission.globalTriggers.Remove( t );
-				else
-					Utils.mainWindow.activeSection.triggers.Remove( t );
+				Utils.mainWindow.mission.globalTriggers.Remove( t );
 				triggersCB.SelectedIndex = 0;
 				Utils.mainWindow.SetStatus( "Trigger Removed" );
 				//fix the broken references
@@ -154,6 +140,12 @@ namespace Imperial_Commander_Editor
 			var t = eventsCB.SelectedItem as MissionEvent;
 			MessageBoxResult res = MessageBoxResult.Yes;
 
+			if ( t.GUID == Guid.Empty )
+			{
+				Utils.mainWindow.SetStatus( "Can't Remove 'None'" );
+				return;
+			}
+
 			var report = HealthReportHelper.CheckAndNotifyEventRemoved( t.GUID, NotifyMode.Report, t.name );
 			if ( report.isBroken )
 			{
@@ -165,10 +157,7 @@ namespace Imperial_Commander_Editor
 
 			if ( t.GUID != Guid.Empty )
 			{
-				if ( showGlobal )
-					Utils.mainWindow.mission.globalEvents.Remove( t );
-				else
-					Utils.mainWindow.activeSection.missionEvents.Remove( t );
+				Utils.mainWindow.mission.globalEvents.Remove( t );
 				eventsCB.SelectedIndex = 0;
 				Utils.mainWindow.mapEditor.SetSelectedPropertyPanel();
 				Utils.mainWindow.SetStatus( "Event Removed" );
@@ -223,19 +212,13 @@ namespace Imperial_Commander_Editor
 				{
 					Utils.mainWindow.mission.globalTriggers.Add( dlg.trigger );
 					Utils.mainWindow.activeSection.triggers.Remove( dlg.editedTrigger );
-					if ( showGlobal )
-						triggersCB.SelectedItem = dlg.trigger;
-					else
-						triggersCB.SelectedIndex = 0;
+					triggersCB.SelectedItem = dlg.trigger;
 				}
 				else if ( !dlg.trigger.isGlobal && dlg.editedTrigger.isGlobal )
 				{
 					Utils.mainWindow.mission.globalTriggers.Remove( dlg.editedTrigger );
 					Utils.mainWindow.activeSection.triggers.Add( dlg.trigger );
-					if ( showGlobal )
-						triggersCB.SelectedIndex = 0;
-					else
-						triggersCB.SelectedItem = dlg.trigger;
+					triggersCB.SelectedIndex = 0;
 				}
 			}
 		}
@@ -259,19 +242,13 @@ namespace Imperial_Commander_Editor
 				{
 					Utils.mainWindow.mission.globalEvents.Add( dlg.missionEvent );
 					Utils.mainWindow.activeSection.missionEvents.Remove( dlg.missionEvent );
-					if ( showGlobal )
-						eventsCB.SelectedItem = dlg.missionEvent;
-					else
-						eventsCB.SelectedIndex = 0;
+					eventsCB.SelectedItem = dlg.missionEvent;
 				}
 				else if ( !dlg.missionEvent.isGlobal && previousGlobal )
 				{
 					Utils.mainWindow.mission.globalEvents.Remove( dlg.missionEvent );
 					Utils.mainWindow.activeSection.missionEvents.Add( dlg.missionEvent );
-					if ( showGlobal )
-						eventsCB.SelectedIndex = 0;
-					else
-						eventsCB.SelectedItem = dlg.missionEvent;
+					eventsCB.SelectedIndex = 0;
 				}
 				Utils.mainWindow.mapEditor.SetSelectedPropertyPanel();
 			}
@@ -300,14 +277,12 @@ namespace Imperial_Commander_Editor
 
 		public void SelectTrigger( Trigger t )
 		{
-			showGlobal = t.isGlobal;
 			triggersCB.SelectedItem = t;
 			EditTrigger();
 		}
 
 		public void SelectEvent( MissionEvent ev )
 		{
-			showGlobal = ev.isGlobal;
 			eventsCB.SelectedItem = ev;
 			EditEvent();
 		}

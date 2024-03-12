@@ -16,6 +16,7 @@ namespace Imperial_Commander_Editor
 		{
 			//notify all Triggers, Entities, and Event Actions that are IHasEventReference
 			var brokenStartEvent = Guid.Empty;
+			var brokenRoundLimitEvent = Guid.Empty;
 			var brokenEAList = new List<Guid>();
 			var brokenTriggerList = new List<Guid>();
 			var brokenEntityList = new List<Guid>();
@@ -31,11 +32,28 @@ namespace Imperial_Commander_Editor
 				{
 					isBroken = true,
 					topOwnerName = "Mission Properties Tab",
-					itemName = "Mission Properties",
+					itemName = "Mission Start Section",
 					topLevelNotifyType = NotifyType.StartingEvent,
 					brokenGuid = guid,
 					ownerGuid = Guid.Empty,
 					details = "Event from [Starting Event]"
+				};
+				allBrokenList.Add( info );
+			}
+
+			//mission round limit event
+			if ( mainWindow.mission.missionProperties.roundLimitEvent == guid )
+			{
+				brokenRoundLimitEvent = guid;
+				var info = new BrokenRefInfo()
+				{
+					isBroken = true,
+					topOwnerName = "Mission Properties Tab",
+					itemName = "Round Limit Section",
+					topLevelNotifyType = NotifyType.RoundLimitEvent,
+					brokenGuid = guid,
+					ownerGuid = Guid.Empty,
+					details = "Event from [Round Limit Event]"
 				};
 				allBrokenList.Add( info );
 			}
@@ -109,6 +127,8 @@ namespace Imperial_Commander_Editor
 			List<string> infoMsg = new();
 			if ( brokenStartEvent != Guid.Empty )
 				infoMsg.Add( "Found a broken Event reference in the Mission Starting Event." );
+			if ( brokenRoundLimitEvent != Guid.Empty )
+				infoMsg.Add( "Found a broken Event reference in the Mission Round Limit Event." );
 			if ( brokenInitialGroupList.Count > 0 )
 				infoMsg.Add( $"Found {brokenInitialGroupList.Count} broken Event reference(s) in this Mission's Initial Enemy Groups." );
 			if ( brokenEventGroupList.Count > 0 )

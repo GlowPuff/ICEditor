@@ -24,7 +24,7 @@ namespace Imperial_Commander_Editor
 	public enum FigureSize { Small1x1, Medium1x2, Large2x2, Huge2x3 }
 	public enum GroupTraits { Trooper, Leader, HeavyWeapon, Guardian, Brawler, Droid, Vehicle, Hunter, Creature, Smuggler, Spy, ForceUser, Wookiee, Hero }
 	public enum NotifyMode { Report, Fix }
-	public enum NotifyType { Event, Trigger, Entity, StartingEvent, EventGroup, EntityGroup, InitialGroup }
+	public enum NotifyType { Event, Trigger, Entity, StartingEvent, EventGroup, EntityGroup, InitialGroup, RoundLimitEvent }
 	public enum CharacterType { Hero, Ally, Imperial, Villain, Rebel }
 	public enum ThumbType { All, Other, Rebel, Imperial, Mercenary, StockImperial, StockAlly, StockHero, StockVillain }
 	public enum Factions { Imperial, Mercenary }

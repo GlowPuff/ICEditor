@@ -53,6 +53,10 @@ namespace Imperial_Commander_Editor
 				{
 					mainWindow.mission.missionProperties.startingEvent = Guid.Empty;
 				}
+				if ( mainWindow.mission.missionProperties.roundLimitEvent == brokenGUID )
+				{
+					mainWindow.mission.missionProperties.roundLimitEvent = Guid.Empty;
+				}
 				foreach ( var item in mainWindow.mission.eventGroups )
 				{
 					item.NotifyEventRemoved( brokenGUID, NotifyMode.Fix );

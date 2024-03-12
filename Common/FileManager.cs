@@ -164,7 +164,8 @@ namespace Imperial_Commander_Editor
 					item.triggers.Clear();
 				}
 
-				Utils.Log( $"LoadMission()::Converted [{eCount}] LOCAL Events and [{tCount}] LOCAL Triggers to GLOBAL" );
+				if ( eCount > 0 || tCount > 0 )
+					Utils.Log( $"LoadMission()::Converted [{eCount}] LOCAL Events and [{tCount}] LOCAL Triggers to GLOBAL" );
 
 				//add loaded file to MRU list
 				AddSaveMRU( m.fullPathToFile );

@@ -51,13 +51,13 @@ namespace Imperial_Commander_Editor
 				_activeSection.isActive = true;
 				properties.UpdateUI( _activeSection );
 				mapEditor.UpdateUI( _activeSection );
-				if ( !leftPanel.showGlobal )
-				{
-					leftPanel.triggersCB.ItemsSource = activeSection.triggers;
-					leftPanel.triggersCB.SelectedIndex = 0;//first trigger is None
-					leftPanel.eventsCB.ItemsSource = activeSection.missionEvents;
-					leftPanel.eventsCB.SelectedIndex = 0;//first trigger is None
-				}
+				//if ( !leftPanel.showGlobal )
+				//{
+				//	leftPanel.triggersCB.ItemsSource = activeSection.triggers;
+				//	leftPanel.triggersCB.SelectedIndex = 0;//first trigger is None
+				//	leftPanel.eventsCB.ItemsSource = activeSection.missionEvents;
+				//	leftPanel.eventsCB.SelectedIndex = 0;//first trigger is None
+				//}
 				PC();
 			}
 		}
@@ -150,7 +150,8 @@ namespace Imperial_Commander_Editor
 			else
 				detectedLanguage.Text = "Not Specified";
 
-			leftPanel.showGlobal = true;
+			//leftPanel.showGlobal = true;
+			leftPanel.SetListSources();
 		}
 
 		void SetCommands()

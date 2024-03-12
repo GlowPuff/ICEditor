@@ -38,7 +38,7 @@
 						<TextBlock
 							Margin="0,5,0,0"
 							FontStyle="Italic"
-							Text="This Mission will be set as the next Story Mission in the Campaign."
+							Text="This Mission will be set as the next Story Mission in the Campaign. Choose 'Custom' if you're setting a Custom Mission inside a Custom Campaign."
 							TextWrapping="Wrap" />
 
 						<materialDesign:Card Margin="0,10,0,0" Background="{StaticResource GroupBG}">

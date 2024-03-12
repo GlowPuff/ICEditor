@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace Imperial_Commander_Editor
@@ -20,10 +21,8 @@ namespace Imperial_Commander_Editor
 			eventAction = ea ?? new CampaignSetNextMission( dname, et );
 			DataContext = eventAction;
 
-			var custom = new MissionNameData() { id = "Custom", name = "Custom" };
-			var names = Utils.missionNames;
-			names.Insert( 0, custom );
-			missionIDCB.ItemsSource = names;
+			MissionNameData[] sourceArray = { new MissionNameData() { id = "Custom", name = "Custom" } };
+			missionIDCB.ItemsSource = sourceArray.Concat( Utils.missionNames );
 			enabledStatus = !fromPackageManager;
 
 			if ( fromPackageManager )

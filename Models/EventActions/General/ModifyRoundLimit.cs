@@ -2,7 +2,7 @@
 
 namespace Imperial_Commander_Editor
 {
-	public class ModifyRoundLimit : EventAction
+	public class ModifyRoundLimit : EventAction, IHasEventReference
 	{
 		int _roundLimitModifier, _setLimitTo;
 		Guid _eventGUID;
@@ -27,6 +27,41 @@ namespace Imperial_Commander_Editor
 			eventGUID = Guid.Empty;
 			disableRoundLimit = false;
 			setRoundLimit = false;
+		}
+
+		public BrokenRefInfo NotifyEventRemoved( Guid guid, NotifyMode mode )
+		{
+			if ( eventGUID == guid )
+			{
+				if ( mode == NotifyMode.Fix )
+					eventGUID = Guid.Empty;
+				return new()
+				{
+					itemName = displayName,
+					isBroken = true,
+					ownerGuid = GUID,
+					brokenGuid = guid,
+					details = "Fixed 'Round Limit' Event"
+				};
+			}
+			return new() { isBroken = false };
+		}
+
+		public BrokenRefInfo SelfCheckEvents()
+		{
+			if ( !Utils.ValidateEvent( eventGUID ) )
+			{
+				return new()
+				{
+					isBroken = true,
+					topLevelNotifyType = NotifyType.Event,
+					itemName = displayName,
+					ownerGuid = GUID,
+					brokenGuid = eventGUID,
+					details = "Missing 'Round Limit' Event"
+				};
+			}
+			return new() { isBroken = false };
 		}
 	}
 }

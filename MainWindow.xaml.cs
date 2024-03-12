@@ -177,11 +177,19 @@ namespace Imperial_Commander_Editor
 
 		private void infoTimerFunc( Object source, ElapsedEventArgs e )
 		{
-			Dispatcher.Invoke( () =>
+			//if the app is closed in the middle of the timer, an Exception can be raised
+			try
 			{
-				statusColor = new SolidColorBrush( Color.FromRgb( 48, 48, 48 ) );
-			} );
-			infoText = "Status OK";
+				Dispatcher.Invoke( () =>
+				{
+					statusColor = new SolidColorBrush( Color.FromRgb( 48, 48, 48 ) );
+				} );
+				infoText = "Status OK";
+			}
+			catch ( Exception )
+			{
+				//harmless, app was closed in the middle of the timer
+			}
 		}
 
 		private void openMissionButton_Click( object sender, RoutedEventArgs e )

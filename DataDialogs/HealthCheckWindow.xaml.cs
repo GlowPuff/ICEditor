@@ -38,9 +38,6 @@ namespace Imperial_Commander_Editor
 
 		void FindBroken()
 		{
-			//await Task.Run( () =>
-			//{
-			//List<BrokenRefInfo> theList = new();
 			brokenList.Clear();
 
 			//mission starting event
@@ -51,9 +48,23 @@ namespace Imperial_Commander_Editor
 					isBroken = true,
 					topLevelNotifyType = NotifyType.StartingEvent,
 					topOwnerName = "Mission Properties Tab",
-					itemName = "Mission Properties",
+					itemName = "Mission Start Section",
 					ownerGuid = Guid.Empty,
 					details = "Event from Mission 'Starting Event'"
+				};
+				brokenList.Add( info );
+			}
+			//mission round limit event
+			if ( !Utils.ValidateEvent( mainWindow.mission.missionProperties.roundLimitEvent ) )
+			{
+				var info = new BrokenRefInfo()
+				{
+					isBroken = true,
+					topLevelNotifyType = NotifyType.RoundLimitEvent,
+					topOwnerName = "Mission Properties Tab",
+					itemName = "Round Limit Section",
+					ownerGuid = Guid.Empty,
+					details = "Event from Mission 'Round Limit Event'"
 				};
 				brokenList.Add( info );
 			}

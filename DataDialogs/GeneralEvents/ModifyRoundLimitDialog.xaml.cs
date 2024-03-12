@@ -26,7 +26,7 @@ namespace Imperial_Commander_Editor
 			var e = Utils.mainWindow.mission.GetEventFromGUID( ((ModifyRoundLimit)eventAction).eventGUID );
 			if ( e == null )
 			{
-				((SetCountdown)eventAction).eventGUID = Guid.Empty;
+				((ModifyRoundLimit)eventAction).eventGUID = Guid.Empty;
 				strings.Add( "Missing Event" );
 			}
 		}

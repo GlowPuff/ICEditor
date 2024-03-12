@@ -59,10 +59,7 @@ namespace Imperial_Commander_Editor
 			var dlg = new AddTriggerDialog();
 			if ( dlg.ShowDialog().Value )
 			{
-				if ( dlg.trigger.isGlobal )
-					Utils.mainWindow.mission.globalTriggers.Add( dlg.trigger );
-				else
-					Utils.mainWindow.activeSection.triggers.Add( dlg.trigger );
+				Utils.mainWindow.mission.globalTriggers.Add( dlg.trigger );
 				triggersCB.SelectedItem = dlg.trigger;
 				Utils.mainWindow.SetStatus( "Trigger Added" );
 				return dlg.trigger;
@@ -125,10 +122,7 @@ namespace Imperial_Commander_Editor
 			var dlg = new AddEventDialog();
 			if ( dlg.ShowDialog().Value )
 			{
-				if ( dlg.missionEvent.isGlobal )
-					Utils.mainWindow.mission.globalEvents.Add( dlg.missionEvent );
-				else
-					Utils.mainWindow.activeSection.missionEvents.Add( dlg.missionEvent );
+				Utils.mainWindow.mission.globalEvents.Add( dlg.missionEvent );
 				eventsCB.SelectedItem = dlg.missionEvent;
 				Utils.mainWindow.mapEditor.SetSelectedPropertyPanel();
 				Utils.mainWindow.SetStatus( "Event Added" );
@@ -195,31 +189,9 @@ namespace Imperial_Commander_Editor
 			var dlg = new AddTriggerDialog( t );
 			if ( dlg.ShowDialog().Value )
 			{
-				//make sure edited trigger is same TYPE
-				if ( dlg.trigger.isGlobal && dlg.editedTrigger.isGlobal )
-				{
-					var idx = Utils.mainWindow.mission.globalTriggers.IndexOf( dlg.editedTrigger );
-					Utils.mainWindow.mission.globalTriggers[idx] = dlg.trigger;
-					triggersCB.SelectedIndex = index;
-				}
-				else if ( !dlg.trigger.isGlobal && !dlg.editedTrigger.isGlobal )
-				{
-					var idx = Utils.mainWindow.activeSection.triggers.IndexOf( dlg.editedTrigger );
-					Utils.mainWindow.activeSection.triggers[idx] = dlg.trigger;
-					triggersCB.SelectedIndex = index;
-				}
-				else if ( dlg.trigger.isGlobal && !dlg.editedTrigger.isGlobal )
-				{
-					Utils.mainWindow.mission.globalTriggers.Add( dlg.trigger );
-					Utils.mainWindow.activeSection.triggers.Remove( dlg.editedTrigger );
-					triggersCB.SelectedItem = dlg.trigger;
-				}
-				else if ( !dlg.trigger.isGlobal && dlg.editedTrigger.isGlobal )
-				{
-					Utils.mainWindow.mission.globalTriggers.Remove( dlg.editedTrigger );
-					Utils.mainWindow.activeSection.triggers.Add( dlg.trigger );
-					triggersCB.SelectedIndex = 0;
-				}
+				var idx = Utils.mainWindow.mission.globalTriggers.IndexOf( dlg.editedTrigger );
+				Utils.mainWindow.mission.globalTriggers[idx] = dlg.trigger;
+				triggersCB.SelectedIndex = index;
 			}
 		}
 
@@ -229,27 +201,11 @@ namespace Imperial_Commander_Editor
 			if ( t.GUID == Guid.Empty )
 				return;
 
-			bool previousGlobal = t.isGlobal;
 			var index = eventsCB.SelectedIndex;
 			var dlg = new AddEventDialog( t );
 			if ( dlg.ShowDialog().Value )
 			{
-				if ( dlg.missionEvent.isGlobal && previousGlobal )
-				{ eventsCB.SelectedIndex = index; }
-				else if ( !dlg.missionEvent.isGlobal && !previousGlobal )
-				{ eventsCB.SelectedIndex = index; }
-				else if ( dlg.missionEvent.isGlobal && !previousGlobal )
-				{
-					Utils.mainWindow.mission.globalEvents.Add( dlg.missionEvent );
-					Utils.mainWindow.activeSection.missionEvents.Remove( dlg.missionEvent );
-					eventsCB.SelectedItem = dlg.missionEvent;
-				}
-				else if ( !dlg.missionEvent.isGlobal && previousGlobal )
-				{
-					Utils.mainWindow.mission.globalEvents.Remove( dlg.missionEvent );
-					Utils.mainWindow.activeSection.missionEvents.Add( dlg.missionEvent );
-					eventsCB.SelectedIndex = 0;
-				}
+				eventsCB.SelectedIndex = index;
 				Utils.mainWindow.mapEditor.SetSelectedPropertyPanel();
 			}
 		}

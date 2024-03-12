@@ -116,6 +116,8 @@ namespace Imperial_Commander_Editor
 					return new SolidColorBrush( Colors.BlueViolet );
 				case NotifyType.InitialGroup:
 					return new SolidColorBrush( Colors.CornflowerBlue );
+				case NotifyType.RoundLimitEvent:
+					return new SolidColorBrush( Colors.DarkSlateBlue );
 				default:
 					return new SolidColorBrush( (Color)ColorConverter.ConvertFromString( "#FF7952C0" ) );
 			}

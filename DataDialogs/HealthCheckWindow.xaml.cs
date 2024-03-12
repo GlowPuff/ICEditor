@@ -271,6 +271,12 @@ namespace Imperial_Commander_Editor
 						dlg.ShowDialog();
 						break;
 					}
+				case NotifyType.RoundLimitEvent:
+					{
+						mainWindow.tabControl.SelectedIndex = 0;
+						Close();
+						break;
+					}
 			}
 		}
 

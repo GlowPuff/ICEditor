@@ -436,12 +436,18 @@ namespace Imperial_Commander_Editor
 			CampaignPackage package = null;
 			BitmapImage bitmap = null;
 			byte[] iconBytesBuffer = new byte[0];
+			string expectedVersion = @"""packageVersion"": ""2""";
 
 			try
 			{
 				List<Mission> missionList = new();
 				Dictionary<string, TranslatedMission> missionTranslationList = new();
 				Dictionary<string, string> campaignInstList = new();
+
+				//quickly check the version before going through the zip entries, which may be out of order
+				string f = File.ReadAllText( fullFilename );
+				if ( !f.Contains( expectedVersion ) )
+					throw new Exception( $"This Package isn't in the Version [2] format." );
 
 				//create the zip file
 				using ( FileStream zipPath = new FileStream( fullFilename, FileMode.Open ) )
@@ -468,7 +474,7 @@ namespace Imperial_Commander_Editor
 									missionList.Add( JsonConvert.DeserializeObject<Mission>( tr.ReadToEnd() ) );
 								}
 							}
-							//campaign instruction
+							//translated campaign instructions
 							else if ( entry.FullName.EndsWith( ".txt" ) && entry.FullName.Contains( "Translations/" ) )
 							{
 								using ( TextReader tr = new StreamReader( entry.Open() ) )
@@ -476,7 +482,7 @@ namespace Imperial_Commander_Editor
 									campaignInstList.Add( entry.Name, tr.ReadToEnd() );
 								}
 							}
-							//mission translation
+							//translated missions
 							else if ( entry.Name.EndsWith( ".json" ) && entry.FullName.Contains( "Translations/" ) )
 							{
 								using ( TextReader tr = new StreamReader( entry.Open() ) )

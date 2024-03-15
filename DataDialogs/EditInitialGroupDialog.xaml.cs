@@ -50,8 +50,8 @@ namespace Imperial_Commander_Editor
 					deploymentPoints.Add( ee );
 			}
 
-			triggersCB.ItemsSource = Utils.mainWindow.localTriggers;
-			eventsCB.ItemsSource = Utils.mainWindow.localEvents;
+			triggersCB.ItemsSource = Utils.mainWindow.allMissionTriggers;
+			eventsCB.ItemsSource = Utils.mainWindow.allMissionEvents;
 
 			string expectedName = Utils.enemyData.Where( x => x.id == enemyGroupData.cardID ).First().name;
 			if ( !string.IsNullOrEmpty( enemyGroupData.cardName ) && enemyGroupData.cardName != expectedName )
@@ -123,7 +123,7 @@ namespace Imperial_Commander_Editor
 			Trigger t = Utils.mainWindow.leftPanel.addNewTrigger();
 			if ( t != null )
 			{
-				triggersCB.ItemsSource = Utils.mainWindow.localTriggers;
+				triggersCB.ItemsSource = Utils.mainWindow.allMissionTriggers;
 				enemyGroupData.defeatedTrigger = t.GUID;
 			}
 		}
@@ -133,7 +133,7 @@ namespace Imperial_Commander_Editor
 			MissionEvent me = Utils.mainWindow.leftPanel.AddNewEvent();
 			if ( me != null )
 			{
-				eventsCB.ItemsSource = Utils.mainWindow.localEvents;
+				eventsCB.ItemsSource = Utils.mainWindow.allMissionEvents;
 				enemyGroupData.defeatedEvent = me.GUID;
 			}
 		}

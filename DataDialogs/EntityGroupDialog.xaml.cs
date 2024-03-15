@@ -37,7 +37,7 @@ namespace Imperial_Commander_Editor
 			DataContext = this;
 
 			tokensCB.ItemsSource = Utils.mainWindow.mission.mapEntities;
-			tCB.ItemsSource = Utils.mainWindow.localTriggers;
+			tCB.ItemsSource = Utils.mainWindow.allMissionTriggers;
 
 			this.entityGroup = eg ?? new();
 			showCancelBtn = eg == null;
@@ -90,7 +90,7 @@ namespace Imperial_Commander_Editor
 			Trigger t = Utils.mainWindow.leftPanel.addNewTrigger();
 			if ( t != null )
 			{
-				tCB.ItemsSource = Utils.mainWindow.localTriggers;
+				tCB.ItemsSource = Utils.mainWindow.allMissionTriggers;
 				entityGroup.triggerGUID = t.GUID;
 			}
 		}
@@ -99,7 +99,7 @@ namespace Imperial_Commander_Editor
 		private void tCB_GotFocus( object sender, RoutedEventArgs e )
 		{
 			tCB.GotFocus -= tCB_GotFocus;
-			tCB.ItemsSource = Utils.mainWindow.localTriggers;
+			tCB.ItemsSource = Utils.mainWindow.allMissionTriggers;
 			tCB.GotFocus += tCB_GotFocus;
 		}
 

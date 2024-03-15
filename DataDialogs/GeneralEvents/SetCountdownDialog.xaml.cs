@@ -19,8 +19,8 @@ namespace Imperial_Commander_Editor
 			eventAction = ea ?? new SetCountdown( dname, et );
 			DataContext = eventAction;
 
-			eventCB.ItemsSource = Utils.mainWindow.localEvents;
-			triggerCB.ItemsSource = Utils.mainWindow.localTriggers;
+			eventCB.ItemsSource = Utils.mainWindow.allMissionEvents;
+			triggerCB.ItemsSource = Utils.mainWindow.allMissionTriggers;
 
 			//make sure events still exist
 			List<string> strings = new();
@@ -70,7 +70,7 @@ namespace Imperial_Commander_Editor
 			Trigger trigger = Utils.mainWindow.leftPanel.addNewTrigger();
 			if ( trigger != null )
 			{
-				triggerCB.ItemsSource = Utils.mainWindow.localTriggers;
+				triggerCB.ItemsSource = Utils.mainWindow.allMissionTriggers;
 				((SetCountdown)eventAction).triggerGUID = trigger.GUID;
 			}
 		}
@@ -80,7 +80,7 @@ namespace Imperial_Commander_Editor
 			MissionEvent me = Utils.mainWindow.leftPanel.AddNewEvent();
 			if ( me != null )
 			{
-				eventCB.ItemsSource = Utils.mainWindow.localEvents;
+				eventCB.ItemsSource = Utils.mainWindow.allMissionEvents;
 				((SetCountdown)eventAction).eventGUID = me.GUID;
 			}
 		}

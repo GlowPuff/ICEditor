@@ -46,8 +46,8 @@ namespace Imperial_Commander_Editor
 			enemyCB.ItemsSource = Utils.enemyData;
 			allyCB.ItemsSource = Utils.allyData;
 
-			triggersCB.ItemsSource = Utils.mainWindow.localTriggers;
-			eventsCB.ItemsSource = Utils.mainWindow.localEvents;
+			triggersCB.ItemsSource = Utils.mainWindow.allMissionTriggers;
+			eventsCB.ItemsSource = Utils.mainWindow.allMissionEvents;
 
 			deploymentPoints.Add( new() { GUID = Guid.Empty, name = "Active Deployment Point" } );
 			deploymentPoints.Add( new() { GUID = Utils.GUIDOne, name = "None" } );
@@ -186,7 +186,7 @@ namespace Imperial_Commander_Editor
 			Trigger t = Utils.mainWindow.leftPanel.addNewTrigger();
 			if ( t != null )
 			{
-				triggersCB.ItemsSource = Utils.mainWindow.localTriggers;
+				triggersCB.ItemsSource = Utils.mainWindow.allMissionTriggers;
 				(eventAction as CustomEnemyDeployment).enemyGroupData.defeatedTrigger = t.GUID;
 			}
 		}
@@ -196,7 +196,7 @@ namespace Imperial_Commander_Editor
 			MissionEvent me = Utils.mainWindow.leftPanel.AddNewEvent();
 			if ( me != null )
 			{
-				eventsCB.ItemsSource = Utils.mainWindow.localEvents;
+				eventsCB.ItemsSource = Utils.mainWindow.allMissionEvents;
 				(eventAction as CustomEnemyDeployment).enemyGroupData.defeatedEvent = me.GUID;
 			}
 		}

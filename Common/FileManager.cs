@@ -444,11 +444,6 @@ namespace Imperial_Commander_Editor
 				Dictionary<string, TranslatedMission> missionTranslationList = new();
 				Dictionary<string, string> campaignInstList = new();
 
-				//quickly check the version before going through the zip entries, which may be out of order
-				string f = File.ReadAllText( fullFilename );
-				if ( !f.Contains( expectedVersion ) )
-					throw new Exception( $"This Package isn't in the Version [2] format." );
-
 				//create the zip file
 				using ( FileStream zipPath = new FileStream( fullFilename, FileMode.Open ) )
 				{
@@ -463,7 +458,10 @@ namespace Imperial_Commander_Editor
 								//open the package meta file
 								using ( TextReader tr = new StreamReader( entry.Open() ) )
 								{
-									package = JsonConvert.DeserializeObject<CampaignPackage>( tr.ReadToEnd() );
+									string s = tr.ReadToEnd();
+									package = JsonConvert.DeserializeObject<CampaignPackage>( s );
+									if ( !s.Contains( expectedVersion ) )
+										throw new Exception( $"This Package isn't in the Version [2] format." );
 								}
 							}
 							//deserialize the individual missions
@@ -524,14 +522,14 @@ namespace Imperial_Commander_Editor
 						}
 
 						//now add all the missions and translations to the CampaignPackage
-						//missions
 						foreach ( var item in package.campaignMissionItems )
 						{
+							//missions
 							var m = missionList.Where( x => x.missionGUID == item.missionGUID ).FirstOr( null );
 							//find the structure object that uses this Mission, if any
-							var structure = package.campaignStructure.Where( x => x.missionID == m.missionGUID.ToString() ).FirstOr( null );
 							if ( m != null )
 							{
+								var structure = package.campaignStructure.Where( x => x.missionID == m.missionGUID.ToString() ).FirstOr( null );
 								item.mission = m;
 								if ( structure != null )//set the Mission object back into structure
 									structure.mission = m;
@@ -539,9 +537,9 @@ namespace Imperial_Commander_Editor
 							else
 								throw new( $"Missing Mission in the zip archive:\n{item.missionName}\n{item.missionGUID}" );
 						}
-						//translated missions and instructions
 						foreach ( var item in package.campaignTranslationItems )
 						{
+							//translated missions and instructions
 							if ( item.isInstruction )
 								item.campaignInstructionTranslation = campaignInstList[item.fileName];
 							else

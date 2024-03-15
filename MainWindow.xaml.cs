@@ -51,40 +51,27 @@ namespace Imperial_Commander_Editor
 				_activeSection.isActive = true;
 				properties.UpdateUI( _activeSection );
 				mapEditor.UpdateUI( _activeSection );
-				//if ( !leftPanel.showGlobal )
-				//{
-				//	leftPanel.triggersCB.ItemsSource = activeSection.triggers;
-				//	leftPanel.triggersCB.SelectedIndex = 0;//first trigger is None
-				//	leftPanel.eventsCB.ItemsSource = activeSection.missionEvents;
-				//	leftPanel.eventsCB.SelectedIndex = 0;//first trigger is None
-				//}
 				PC();
 			}
 		}
 		/// <summary>
-		/// Returns Events (global and owned)
+		/// Returns all Events
 		/// </summary>
-		public List<MissionEvent> localEvents
+		public List<MissionEvent> allMissionEvents
 		{
 			get
 			{
-				var events = new List<MissionEvent>();
-				events = events.Concat( mission.globalEvents ).ToList();
-				events = events.Concat( activeSection.missionEvents.Where( x => x.GUID != Guid.Empty ) ).ToList();
-				return events;
+				return mission.globalEvents.ToList();
 			}
 		}
 		/// <summary>
-		/// Returns Triggers (global and owned)
+		/// Returns all Triggers
 		/// </summary>
-		public List<Trigger> localTriggers
+		public List<Trigger> allMissionTriggers
 		{
 			get
 			{
-				var trigs = new List<Trigger>();
-				trigs = trigs.Concat( mission.globalTriggers ).ToList();
-				trigs = trigs.Concat( activeSection.triggers.Where( x => x.GUID != Guid.Empty ) ).ToList();
-				return trigs;
+				return mission.globalTriggers.ToList();
 			}
 		}
 		public string mainTitle { get { return _mainTitle; } set { _mainTitle = value; PC(); } }

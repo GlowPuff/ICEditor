@@ -75,7 +75,7 @@ namespace Imperial_Commander_Editor
 			{
 				(eventAction as ModifyVariable).triggerList.Add( new TriggerModifier( t ) );
 				selectedTriggers.Add( new TriggerModifier( t ) );
-				tlist.ItemsSource = Utils.mainWindow.localTriggers;
+				tlist.ItemsSource = Utils.mainWindow.allMissionTriggers;
 				tlist.SelectedValue = t;
 			}
 		}

@@ -74,8 +74,8 @@ namespace Imperial_Commander_Editor
 			bannedAllyCB.ItemsSource = Utils.allyNoCustomData;
 			heroCB.ItemsSource = Utils.heroData;
 			var items = from e in Utils.mainWindow.mission.globalEvents where e.isGlobal select e;
-			eventCB.ItemsSource = Utils.mainWindow.localEvents;
-			eventCBRoundLimit.ItemsSource = Utils.mainWindow.localEvents;
+			eventCB.ItemsSource = Utils.mainWindow.allMissionEvents;
+			eventCBRoundLimit.ItemsSource = Utils.mainWindow.allMissionEvents;
 
 			ciInfo.Text = string.IsNullOrEmpty( Utils.mainWindow.mission.missionProperties.missionInfo ) ? "Text Not Set" : "Text Set";
 			SolidColorBrush brush = new( string.IsNullOrEmpty( Utils.mainWindow.mission.missionProperties.missionInfo ) ? Colors.Red : Colors.LawnGreen );
@@ -217,7 +217,7 @@ namespace Imperial_Commander_Editor
 			MissionEvent me = Utils.mainWindow.leftPanel.AddNewEvent();
 			if ( me != null )
 			{
-				eventCB.ItemsSource = Utils.mainWindow.localEvents;
+				eventCB.ItemsSource = Utils.mainWindow.allMissionEvents;
 				Utils.mainWindow.mission.missionProperties.startingEvent = me.GUID;
 			}
 		}
@@ -237,19 +237,19 @@ namespace Imperial_Commander_Editor
 			MissionEvent me = Utils.mainWindow.leftPanel.AddNewEvent();
 			if ( me != null )
 			{
-				eventCBRoundLimit.ItemsSource = Utils.mainWindow.localEvents;
+				eventCBRoundLimit.ItemsSource = Utils.mainWindow.allMissionEvents;
 				Utils.mainWindow.mission.missionProperties.roundLimitEvent = me.GUID;
 			}
 		}
 
 		private void eventCB_DropDownOpened( object sender, EventArgs e )
 		{
-			eventCB.ItemsSource = Utils.mainWindow.localEvents;
+			eventCB.ItemsSource = Utils.mainWindow.allMissionEvents;
 		}
 
 		private void eventCBRoundLimit_DropDownOpened( object sender, EventArgs e )
 		{
-			eventCBRoundLimit.ItemsSource = Utils.mainWindow.localEvents;
+			eventCBRoundLimit.ItemsSource = Utils.mainWindow.allMissionEvents;
 		}
 	}
 }

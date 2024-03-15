@@ -31,24 +31,23 @@
 					<Grid>
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition Width="auto" />
-							<ColumnDefinition Width="auto" />
 							<ColumnDefinition Width="*" />
-							<ColumnDefinition Width="auto" />
-							<ColumnDefinition Width="auto" />
+							<!--<ColumnDefinition Width="*" />-->
+							<!--<ColumnDefinition Width="auto" />
+							<ColumnDefinition Width="auto" />-->
 						</Grid.ColumnDefinitions>
 
 						<TextBlock VerticalAlignment="Center" Text="Name:" />
 						<TextBox
 							x:Name="nameTB"
 							Grid.Column="1"
-							Width="200"
 							Margin="10,0,10,0"
 							Foreground="White"
 							KeyDown="nameTB_KeyDown"
 							Style="{StaticResource MaterialDesignOutlinedTextBox}"
 							Text="{Binding trigger.name}" />
-						<TextBlock Grid.Column="2" />
-						<TextBlock
+						<!--<TextBlock Grid.Column="2" />-->
+						<!--<TextBlock
 							Grid.Column="3"
 							Margin="0,0,10,0"
 							VerticalAlignment="Center"
@@ -57,7 +56,7 @@
 							x:Name="globalToggle"
 							Grid.Column="4"
 							IsChecked="{Binding trigger.isGlobal}"
-							Style="{DynamicResource MaterialDesignSwitchSecondaryToggleButton}" />
+							Style="{DynamicResource MaterialDesignSwitchSecondaryToggleButton}" />-->
 					</Grid>
 
 					<materialDesign:Card
@@ -160,8 +159,7 @@
 					<Button
 						x:Name="okButton"
 						Click="okButton_Click"
-						Content="ACCEPT"
-						IsDefault="True" />
+						Content="ACCEPT" />
 					<Button
 						x:Name="cancelButton"
 						Margin="10,0,0,0"

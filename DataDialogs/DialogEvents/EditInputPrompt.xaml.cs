@@ -36,7 +36,7 @@ namespace Imperial_Commander_Editor
 			Trigger t = Utils.mainWindow.leftPanel.addNewTrigger();
 			if ( t != null )
 			{
-				triggersCB.ItemsSource = mainWindow.localTriggers;
+				triggersCB.ItemsSource = mainWindow.allMissionTriggers;
 				inputRange.triggerGUID = t.GUID;
 			}
 		}
@@ -46,7 +46,7 @@ namespace Imperial_Commander_Editor
 			MissionEvent me = Utils.mainWindow.leftPanel.AddNewEvent();
 			if ( me != null )
 			{
-				eventsCB.ItemsSource = mainWindow.localEvents;
+				eventsCB.ItemsSource = mainWindow.allMissionEvents;
 				inputRange.eventGUID = me.GUID;
 			}
 		}

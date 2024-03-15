@@ -31,8 +31,8 @@ namespace Imperial_Commander_Editor
 			}
 
 			allyCB.ItemsSource = Utils.allyRebelData;
-			triggersCB.ItemsSource = Utils.mainWindow.localTriggers;
-			eventsCB.ItemsSource = Utils.mainWindow.localEvents;
+			triggersCB.ItemsSource = Utils.mainWindow.allMissionTriggers;
+			eventsCB.ItemsSource = Utils.mainWindow.allMissionEvents;
 
 			//verify trigger and dp still exist
 			bool found = false;
@@ -81,7 +81,7 @@ namespace Imperial_Commander_Editor
 			Trigger t = Utils.mainWindow.leftPanel.addNewTrigger();
 			if ( t != null )
 			{
-				triggersCB.ItemsSource = Utils.mainWindow.localTriggers;
+				triggersCB.ItemsSource = Utils.mainWindow.allMissionTriggers;
 				(eventAction as AllyDeployment).setTrigger = t.GUID;
 			}
 		}
@@ -91,7 +91,7 @@ namespace Imperial_Commander_Editor
 			MissionEvent me = Utils.mainWindow.leftPanel.AddNewEvent();
 			if ( me != null )
 			{
-				eventsCB.ItemsSource = Utils.mainWindow.localEvents;
+				eventsCB.ItemsSource = Utils.mainWindow.allMissionEvents;
 				(eventAction as AllyDeployment).setEvent = me.GUID;
 			}
 		}

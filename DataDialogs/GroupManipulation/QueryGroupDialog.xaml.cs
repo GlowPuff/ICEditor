@@ -38,8 +38,8 @@ namespace Imperial_Commander_Editor
 			dpCBAlly.ItemsSource = Utils.allyRebelHeroData;
 			selectedAllyGroup = Utils.allyRebelHeroData.First( x => x.id == "A001" );
 
-			triggersCB.ItemsSource = Utils.mainWindow.localTriggers;
-			eventsCB.ItemsSource = Utils.mainWindow.localEvents;
+			triggersCB.ItemsSource = Utils.mainWindow.allMissionTriggers;
+			eventsCB.ItemsSource = Utils.mainWindow.allMissionEvents;
 
 			var g = (eventAction as QueryGroup).groupEnemyToQuery;
 			var a = (eventAction as QueryGroup).groupRebelToQuery;
@@ -126,7 +126,7 @@ namespace Imperial_Commander_Editor
 			Trigger t = Utils.mainWindow.leftPanel.addNewTrigger();
 			if ( t != null )
 			{
-				triggersCB.ItemsSource = Utils.mainWindow.localTriggers;
+				triggersCB.ItemsSource = Utils.mainWindow.allMissionTriggers;
 				(eventAction as QueryGroup).foundTrigger = t.GUID;
 			}
 		}
@@ -136,7 +136,7 @@ namespace Imperial_Commander_Editor
 			MissionEvent me = Utils.mainWindow.leftPanel.AddNewEvent();
 			if ( me != null )
 			{
-				eventsCB.ItemsSource = Utils.mainWindow.localEvents;
+				eventsCB.ItemsSource = Utils.mainWindow.allMissionEvents;
 				(eventAction as QueryGroup).foundEvent = me.GUID;
 			}
 		}

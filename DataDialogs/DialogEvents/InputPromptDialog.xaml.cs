@@ -98,8 +98,8 @@ namespace Imperial_Commander_Editor
 		{
 			var dlg = new EditInputPrompt( (sender as FrameworkElement).DataContext as InputRange );
 			dlg.ShowDialog();
-			triggersCB.ItemsSource = mainWindow.localTriggers;
-			eventsCB.ItemsSource = mainWindow.localEvents;
+			triggersCB.ItemsSource = mainWindow.allMissionTriggers;
+			eventsCB.ItemsSource = mainWindow.allMissionEvents;
 		}
 
 		private void editFailBtn_Click( object sender, RoutedEventArgs e )

@@ -46,9 +46,6 @@ namespace Imperial_Commander_Editor
 			//verify triggered event exists
 			if ( !Utils.ValidateEvent( trigger.eventGUID ) )
 				MessageBox.Show( "This Event Action is referencing an Event that no longer exists in the Mission.", "Missing Reference(s) Found" );
-
-			////nameTB.Focus();
-			//nameTB.Select( 0, nameTB.Text.Length );
 		}
 
 		private void Window_MouseDown( object sender, System.Windows.Input.MouseButtonEventArgs e )
@@ -95,7 +92,7 @@ namespace Imperial_Commander_Editor
 			MissionEvent me = Utils.mainWindow.leftPanel.AddNewEvent();
 			if ( me != null )
 			{
-				elist.ItemsSource = Utils.mainWindow.localEvents;
+				elist.ItemsSource = Utils.mainWindow.allMissionEvents;
 				trigger.eventGUID = me.GUID;
 			}
 		}

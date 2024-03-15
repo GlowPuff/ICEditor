@@ -19,7 +19,7 @@ namespace Imperial_Commander_Editor
 			eventAction = ea ?? new ModifyRoundLimit( dname, et );
 			DataContext = eventAction;
 
-			eventCB.ItemsSource = Utils.mainWindow.localEvents;
+			eventCB.ItemsSource = Utils.mainWindow.allMissionEvents;
 
 			//make sure events still exist
 			List<string> strings = new();
@@ -59,7 +59,7 @@ namespace Imperial_Commander_Editor
 			MissionEvent me = Utils.mainWindow.leftPanel.AddNewEvent();
 			if ( me != null )
 			{
-				eventCB.ItemsSource = Utils.mainWindow.localEvents;
+				eventCB.ItemsSource = Utils.mainWindow.allMissionEvents;
 				((ModifyRoundLimit)eventAction).eventGUID = me.GUID;
 			}
 		}

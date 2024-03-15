@@ -43,8 +43,8 @@ namespace Imperial_Commander_Editor
 			InitializeComponent();
 			DataContext = this;
 
-			eventsCB.ItemsSource = Utils.mainWindow.localEvents;
-			tCB.ItemsSource = Utils.mainWindow.localTriggers;
+			eventsCB.ItemsSource = Utils.mainWindow.allMissionEvents;
+			tCB.ItemsSource = Utils.mainWindow.allMissionTriggers;
 
 			this.eventGroup = eg ?? new();
 			showCancelBtn = eg == null;
@@ -121,7 +121,7 @@ namespace Imperial_Commander_Editor
 			Trigger t = Utils.mainWindow.leftPanel.addNewTrigger();
 			if ( t != null )
 			{
-				tCB.ItemsSource = Utils.mainWindow.localTriggers;
+				tCB.ItemsSource = Utils.mainWindow.allMissionTriggers;
 				eventGroup.triggerGUID = t.GUID;
 			}
 		}
@@ -129,7 +129,7 @@ namespace Imperial_Commander_Editor
 		private void tCB_GotFocus( object sender, RoutedEventArgs e )
 		{
 			tCB.GotFocus -= tCB_GotFocus;
-			tCB.ItemsSource = Utils.mainWindow.localTriggers;
+			tCB.ItemsSource = Utils.mainWindow.allMissionTriggers;
 			tCB.GotFocus += tCB_GotFocus;
 		}
 

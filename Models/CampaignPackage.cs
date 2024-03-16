@@ -70,6 +70,34 @@ namespace Imperial_Commander_Editor
 			return item;
 		}
 
+		public CampaignMissionItem ReplaceMission( CampaignMissionItem missionItem, string filename, Mission mission )
+		{
+			//update any structure using this Mission
+			var structure = campaignStructure.Where( x => x.missionID == missionItem.missionGUID.ToString() ).FirstOr( null );
+			if ( structure != null )
+			{
+				structure.missionID = mission.missionGUID.ToString();
+				structure.projectItem.Title = mission.missionProperties.missionName;
+				structure.projectItem.missionGUID = mission.missionGUID.ToString();
+				structure.mission = mission;
+				Utils.Log( $"ReplaceMission()::Mission Structure updated with {mission.missionProperties.missionName}" );
+			}
+			else
+				Utils.Log( $"ReplaceMission()::No Mission Structure found with GUID={mission.missionGUID}" );
+
+			//update the mission pool item itself
+
+			//make sure the Mission's 'filename' property is the same as that of the actual loaded file, because it could have been renamed in the file system by the user
+			mission.fileName = filename;
+
+			missionItem.missionName = mission.missionProperties.missionName;
+			missionItem.missionGUID = mission.missionGUID;
+			missionItem.mission = mission;
+			missionItem.customMissionIdentifier = mission.missionProperties.customMissionIdentifier;
+
+			return missionItem;
+		}
+
 		public void RemoveMission( CampaignMissionItem item )
 		{
 			campaignMissionItems.Remove( item );

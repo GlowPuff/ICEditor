@@ -605,5 +605,23 @@ namespace Imperial_Commander_Editor
 					e.Effects = DragDropEffects.All;
 			}
 		}
+
+		private void updateStructureBtn_Click( object sender, RoutedEventArgs e )
+		{
+			OpenFileDialog ofd = new() { Title = "Update/Replace a Mission", InitialDirectory = lastMissionPath, Filter = "IC2 Missions|*.json" };
+			var res = ofd.ShowDialog();
+			if ( res.Value == true )
+			{
+				lastMissionPath = new FileInfo( ofd.FileName ).DirectoryName;
+				var m = FileManager.LoadMission( ofd.FileName );
+				if ( m != null )
+				{
+					selectedMissionItem = campaignPackage.ReplaceMission( selectedMissionItem, ofd.SafeFileName, m );
+					dropNotice.Visibility = campaignPackage.campaignMissionItems.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
+				}
+				else
+					MessageBox.Show( "Loaded Mission is null.", "App Exception", MessageBoxButton.OK, MessageBoxImage.Error );
+			}
+		}
 	}
 }

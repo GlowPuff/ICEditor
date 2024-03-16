@@ -112,7 +112,7 @@
 				Content="{materialDesign:PackIcon Kind=RemoveBold}"
 				Style="{StaticResource MaterialDesignFloatingActionButton}"
 				ToolTip="Clear List"
-				ToolTipService.InitialShowDelay="0" />
+				ToolTipService.InitialShowDelay="250" />
 		</Grid>
 		<!--  new project  -->
 		<TextBlock

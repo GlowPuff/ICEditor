@@ -289,7 +289,8 @@
 									Content="{materialDesign:PackIcon Kind=AddBold}"
 									Foreground="Lime"
 									Style="{DynamicResource MaterialDesignFloatingActionButton}"
-									ToolTip="Add Mission Slot" />
+									ToolTip="Add Mission Slot"
+									ToolTipService.InitialShowDelay="250" />
 								<Button
 									x:Name="removeStructureBtn"
 									Width="40"
@@ -300,7 +301,8 @@
 									Foreground="Red"
 									IsEnabled="{Binding selectedStructure, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource notNull}}"
 									Style="{DynamicResource MaterialDesignFloatingActionButton}"
-									ToolTip="Remove Mission Slot" />
+									ToolTip="Remove Mission Slot"
+									ToolTipService.InitialShowDelay="250" />
 
 								<Separator />
 
@@ -382,7 +384,8 @@
 									Content="{materialDesign:PackIcon Kind=AddBold}"
 									Foreground="Lime"
 									Style="{DynamicResource MaterialDesignFloatingActionButton}"
-									ToolTip="Add Mission to Pool" />
+									ToolTip="Add Mission to Pool"
+									ToolTipService.InitialShowDelay="250" />
 								<Button
 									x:Name="removeBtn"
 									Width="40"
@@ -393,7 +396,20 @@
 									Foreground="Red"
 									IsEnabled="{Binding selectedMissionItem, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource notNull}}"
 									Style="{DynamicResource MaterialDesignFloatingActionButton}"
-									ToolTip="Remove Mission from Pool" />
+									ToolTip="Remove Mission from Pool"
+									ToolTipService.InitialShowDelay="250" />
+								<Button
+									x:Name="updateStructureBtn"
+									Width="40"
+									Height="40"
+									Margin="0,5"
+									Click="updateStructureBtn_Click"
+									Content="{materialDesign:PackIcon Kind=Update}"
+									Foreground="Orange"
+									IsEnabled="{Binding selectedMissionItem, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource notNull}}"
+									Style="{DynamicResource MaterialDesignFloatingActionButton}"
+									ToolTip="Update/Replace Mission"
+									ToolTipService.InitialShowDelay="250" />
 							</StackPanel>
 						</Grid>
 					</TabItem>
@@ -456,7 +472,8 @@
 									Content="{materialDesign:PackIcon Kind=AddBold}"
 									Foreground="Lime"
 									Style="{DynamicResource MaterialDesignFloatingActionButton}"
-									ToolTip="Add Translation" />
+									ToolTip="Add Translation"
+									ToolTipService.InitialShowDelay="250" />
 								<Button
 									x:Name="removeTranslationBtn"
 									Width="40"
@@ -467,7 +484,8 @@
 									Foreground="Red"
 									IsEnabled="{Binding selectedTranslationItem, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource notNull}}"
 									Style="{DynamicResource MaterialDesignFloatingActionButton}"
-									ToolTip="Remove Translation" />
+									ToolTip="Remove Translation"
+									ToolTipService.InitialShowDelay="250" />
 							</StackPanel>
 						</Grid>
 					</TabItem>
@@ -599,7 +617,8 @@
 												Height="25"
 												Margin="0,0,10,0"
 												StaysOpen="True"
-												ToolTip="Change Mission">
+												ToolTip="Change Mission"
+												ToolTipService.InitialShowDelay="250">
 												<Border MaxHeight="200" Margin="5">
 													<ListBox
 														x:Name="missionsPopupLB"
@@ -618,7 +637,8 @@
 												Click="missionResetBtn_Click"
 												Content="{materialDesign:PackIcon Kind=Refresh}"
 												Style="{StaticResource MaterialDesignFloatingActionButton}"
-												ToolTip="Reset to Player's Choice" />
+												ToolTip="Reset to Player's Choice"
+												ToolTipService.InitialShowDelay="250" />
 										</Grid>
 
 										<Grid Margin="0,10,0,0">

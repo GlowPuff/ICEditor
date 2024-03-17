@@ -22,6 +22,29 @@
 		<local:MissionTypeConverter x:Key="missionTypeConv" />
 		<local:Agenda2Color x:Key="agendaColor" />
 
+		<DataTemplate x:Key="translationItem">
+			<Grid>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="auto" />
+					<RowDefinition Height="auto" />
+				</Grid.RowDefinitions>
+
+				<TextBlock Text="{Binding fileName}" />
+
+				<StackPanel
+					Grid.Row="1"
+					Margin="0,5,0,0"
+					Orientation="Horizontal">
+					<TextBlock Margin="0,0,10,0" Text="Assigned to:" />
+					<TextBlock
+						Grid.Row="1"
+						FontStyle="Italic"
+						Foreground="Violet"
+						Text="{Binding assignedMissionName}" />
+				</StackPanel>
+			</Grid>
+		</DataTemplate>
+
 		<DataTemplate x:Key="structure">
 			<Grid Margin="0,5">
 				<Grid.ColumnDefinitions>
@@ -362,6 +385,7 @@
 										x:Name="dropNotice"
 										HorizontalAlignment="Center"
 										VerticalAlignment="Center"
+										FontStyle="Italic"
 										Text="Drag and drop Missions here." />
 
 									<ListView
@@ -397,6 +421,17 @@
 									IsEnabled="{Binding selectedMissionItem, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource notNull}}"
 									Style="{DynamicResource MaterialDesignFloatingActionButton}"
 									ToolTip="Remove Mission from Pool"
+									ToolTipService.InitialShowDelay="250" />
+								<Button
+									x:Name="assignTranslationBtn"
+									Width="40"
+									Height="40"
+									Margin="0,5"
+									Click="assignTranslationBtn_Click"
+									Content="{materialDesign:PackIcon Kind=Translate}"
+									IsEnabled="{Binding selectedMissionItem, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource notNull}}"
+									Style="{DynamicResource MaterialDesignFloatingActionButton}"
+									ToolTip="Assign Translation"
 									ToolTipService.InitialShowDelay="250" />
 								<Button
 									x:Name="updateStructureBtn"
@@ -445,18 +480,31 @@
 								DragEnter="translationDrop_DragEnter"
 								Drop="translationLV_Drop">
 								<Grid>
-									<TextBlock
+									<StackPanel
 										x:Name="dropTranslationNotice"
 										HorizontalAlignment="Center"
-										VerticalAlignment="Center"
-										Text="Drag and drop translated Missions (.json) and Campaign Instructions (.txt) here."
-										TextWrapping="Wrap" />
+										VerticalAlignment="Center">
+										<TextBlock
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Text="Translations assigned to Missions in the Mission Pool appear here."
+											TextWrapping="Wrap" />
+										<TextBlock
+											Margin="0,10,0,0"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											FontStyle="Italic"
+											Text="Drag and Drop translated Campaign Instructions here."
+											TextWrapping="Wrap" />
+									</StackPanel>
 
+									<!--  DisplayMemberPath="fileName"  -->
 									<ListView
 										x:Name="translationLV"
 										VerticalAlignment="Top"
 										HorizontalContentAlignment="Stretch"
-										DisplayMemberPath="fileName"
+										d:ItemsSource="{d:SampleData ItemCount=1}"
+										ItemTemplate="{StaticResource translationItem}"
 										ItemsSource="{Binding campaignTranslationItems}"
 										SelectedItem="{Binding selectedTranslationItem, RelativeSource={RelativeSource AncestorType=Window}}" />
 								</Grid>
@@ -472,7 +520,7 @@
 									Content="{materialDesign:PackIcon Kind=AddBold}"
 									Foreground="Lime"
 									Style="{DynamicResource MaterialDesignFloatingActionButton}"
-									ToolTip="Add Translation"
+									ToolTip="Add Campaign Instruction Translation"
 									ToolTipService.InitialShowDelay="250" />
 								<Button
 									x:Name="removeTranslationBtn"
@@ -506,7 +554,7 @@
 							Background="#FF4C3679"
 							Visibility="Collapsed">
 							<StackPanel>
-								<TextBlock
+								<!--<TextBlock
 									FontStyle="Italic"
 									Text="Custom Mission filenames are recommended to follow this naming convention:"
 									TextWrapping="Wrap" />
@@ -528,7 +576,7 @@
 									Text="For example, in a Custom Campaign named 'The Return of the Jedi', you could name the Missions JEDI1.json, JEDI2.json, JEDI3.json and so forth."
 									TextWrapping="Wrap" />
 
-								<Separator Margin="0,10" />
+								<Separator Margin="0,10" />-->
 
 								<TextBlock
 									FontStyle="Italic"
@@ -786,30 +834,30 @@
 							IsEnabled="{Binding selectedTranslationItem, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource notNull}}"
 							Visibility="Collapsed">
 							<StackPanel>
-								<TextBlock
+								<!--<TextBlock
 									FontStyle="Italic"
-									Text="Required filename convention for Mission Translations:"
+									Text="Recommended filename convention for Mission Translations:"
 									TextWrapping="Wrap" />
 								<TextBlock
 									Margin="0,5,0,0"
 									FontStyle="Italic"
 									Foreground="Violet"
 									Text="[MISSION-FILENAME]_[LANGUAGE-ID].json"
-									TextWrapping="Wrap" />
-								<TextBlock
+									TextWrapping="Wrap" />-->
+								<!--<TextBlock
 									Margin="0,5,0,0"
 									FontStyle="Italic"
 									Foreground="Red"
 									Text="Mission Translations MUST use the same filename as the Custom Mission it's associated with."
-									TextWrapping="Wrap" />
-								<TextBlock
+									TextWrapping="Wrap" />-->
+								<!--<TextBlock
 									Margin="0,5,0,0"
 									FontStyle="Italic"
 									Foreground="Violet"
 									Text="For example, the German translation for a Mission whose filename is 'JEDI1.json' should be 'JEDI1_DE.json'"
 									TextWrapping="Wrap" />
 
-								<Separator Margin="0,10" />
+								<Separator Margin="0,10" />-->
 
 								<TextBlock
 									FontStyle="Italic"

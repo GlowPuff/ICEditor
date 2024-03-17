@@ -128,9 +128,16 @@ namespace Imperial_Commander_Editor
 		/// <summary>
 		/// filename = JUST the filename, EXCLUDING the full path
 		/// </summary>
-		public CampaignTranslationItem AddMissionTranslation( TranslatedMission tm, string filename )
+		public CampaignTranslationItem AddMissionTranslation( TranslatedMission tm, string filename, CampaignMissionItem missionItem )
 		{
-			var item = new CampaignTranslationItem() { translatedMission = tm, fileName = filename, isInstruction = false };
+			var item = new CampaignTranslationItem()
+			{
+				translatedMission = tm,
+				fileName = filename,
+				isInstruction = false,
+				assignedMissionGUID = missionItem.missionGUID,
+				assignedMissionName = missionItem.missionName
+			};
 			campaignTranslationItems.Add( item );
 			return item;
 		}
@@ -163,9 +170,13 @@ namespace Imperial_Commander_Editor
 	{
 		string _fileName;//filename of the translation
 		bool _isInstruction;
+		Guid _assignedMissionGUID;
+		string _assignedMissionName;
 
 		public string fileName { get => _fileName; set => SetProperty( ref _fileName, value ); }
+		public string assignedMissionName { get => _assignedMissionName; set => SetProperty( ref _assignedMissionName, value ); }
 		public bool isInstruction { get => _isInstruction; set => SetProperty( ref _isInstruction, value ); }
+		public Guid assignedMissionGUID { get => _assignedMissionGUID; set => SetProperty( ref _assignedMissionGUID, value ); }//assigned Mission's GUID
 
 		//store the actual translations for packing as individual files later, but don't serialize it here
 		[JsonIgnore]

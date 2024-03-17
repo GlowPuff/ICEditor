@@ -1,31 +1,48 @@
-﻿<Window x:Class="Imperial_Commander_Editor.SymbolsWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Imperial_Commander_Editor"
-        mc:Ignorable="d"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-				Style="{StaticResource dws}"
-        Title="SymbolsWindow" MouseDown="Window_MouseDown" WindowStartupLocation="CenterScreen" SizeToContent="Height" Width="900">
+﻿<Window
+	x:Class="Imperial_Commander_Editor.SymbolsWindow"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:local="clr-namespace:Imperial_Commander_Editor"
+	xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	Title="SymbolsWindow"
+	Width="900"
+	MouseDown="Window_MouseDown"
+	SizeToContent="Height"
+	Style="{StaticResource dws}"
+	WindowStartupLocation="CenterScreen"
+	mc:Ignorable="d">
 
 	<Border BorderBrush="MediumPurple" BorderThickness="2">
-		<GroupBox x:Name="gbox" Header="SPECIAL SYMBOLS" Style="{DynamicResource MaterialDesignGroupBox}">
+		<GroupBox
+			x:Name="gbox"
+			Header="SPECIAL SYMBOLS"
+			Style="{DynamicResource MaterialDesignGroupBox}">
 			<Grid>
 				<Grid.RowDefinitions>
-					<RowDefinition Height="*"/>
-					<RowDefinition Height="auto"/>
+					<RowDefinition Height="*" />
+					<RowDefinition Height="auto" />
 				</Grid.RowDefinitions>
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="1*" />
 					<ColumnDefinition Width="1*" />
 				</Grid.ColumnDefinitions>
-				<Image Source="/Assets/Symbols1.png"/>
-				<Image Source="/Assets/Symbols2.png" Grid.Column="1"/>
+				<Image Source="/Assets/Symbols1.png" />
+				<Image Grid.Column="1" Source="/Assets/Symbols2.png" />
 
-				<StackPanel Grid.Row="1" Margin="0,10,0,0" Grid.ColumnSpan="2">
-					<Separator Margin="0,0,0,10"/>
-					<Button Grid.Column="1" x:Name="okButton" Content="DONE" Click="okButton_Click" IsDefault="True" HorizontalAlignment="Right"/>
+				<StackPanel
+					Grid.Row="1"
+					Grid.ColumnSpan="2"
+					Margin="0,10,0,0">
+					<Separator Margin="0,0,0,10" />
+					<Button
+						x:Name="okButton"
+						Grid.Column="1"
+						HorizontalAlignment="Right"
+						Click="okButton_Click"
+						Content="DONE"
+						IsDefault="True" />
 				</StackPanel>
 			</Grid>
 		</GroupBox>

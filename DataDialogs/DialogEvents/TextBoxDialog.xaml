@@ -1,24 +1,45 @@
-﻿<Window x:Class="Imperial_Commander_Editor.TextBoxDialog"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Imperial_Commander_Editor"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        mc:Ignorable="d"
-				Style="{StaticResource dws}"
-        Title="TextBoxDialog" Height="450" Width="600" ContentRendered="Window_ContentRendered" MouseDown="Window_MouseDown" WindowStartupLocation="CenterScreen">
+﻿<Window
+	x:Class="Imperial_Commander_Editor.TextBoxDialog"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:local="clr-namespace:Imperial_Commander_Editor"
+	xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	Title="TextBoxDialog"
+	Width="600"
+	Height="450"
+	ContentRendered="Window_ContentRendered"
+	MouseDown="Window_MouseDown"
+	Style="{StaticResource dws}"
+	WindowStartupLocation="CenterScreen"
+	mc:Ignorable="d">
 
 	<Border BorderBrush="MediumPurple" BorderThickness="2">
-		<GroupBox x:Name="gbox" Header="Show Text Event Action" Style="{DynamicResource MaterialDesignGroupBox}">
+		<GroupBox
+			x:Name="gbox"
+			Header="Show Text Event Action"
+			Style="{DynamicResource MaterialDesignGroupBox}">
 			<Grid>
 				<Grid.RowDefinitions>
-					<RowDefinition Height="*"/>
-					<RowDefinition Height="auto"/>
-					<RowDefinition Height="auto"/>
+					<RowDefinition Height="*" />
+					<RowDefinition Height="auto" />
+					<RowDefinition Height="auto" />
 				</Grid.RowDefinitions>
 
-				<TextBox x:Name="textbox" Grid.Row="0" Margin="0,0,0,10" BorderThickness="2" BorderBrush="MediumPurple" AcceptsReturn="True" Foreground="White" CaretBrush="White" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap" VerticalAlignment="Stretch" Text="{Binding eventAction.theText}"/>
+				<TextBox
+					x:Name="textbox"
+					Grid.Row="0"
+					Margin="0,0,0,10"
+					VerticalAlignment="Stretch"
+					AcceptsReturn="True"
+					BorderBrush="MediumPurple"
+					BorderThickness="2"
+					CaretBrush="White"
+					Foreground="White"
+					Text="{Binding eventAction.theText}"
+					TextWrapping="Wrap"
+					VerticalScrollBarVisibility="Auto" />
 
 				<Grid Grid.Row="1">
 					<Grid.ColumnDefinitions>
@@ -28,14 +49,35 @@
 						<ColumnDefinition Width="auto" />
 					</Grid.ColumnDefinitions>
 
-					<Button Grid.Column="0" x:Name="infoBtn" Content="SYMBOLS..." Click="infoBtn_Click"/>
-					<Button Grid.Column="1" x:Name="formatBtn" Content="FORMATTING..." Click="formatBtn_Click" Margin="10,0,0,0"/>
-					<Button Grid.Column="3" x:Name="clearButton" Width="100" HorizontalAlignment="Left" Content="CLEAR" Click="clearButton_Click"/>
+					<Button
+						x:Name="infoBtn"
+						Grid.Column="0"
+						Click="infoBtn_Click"
+						Content="SYMBOLS..." />
+					<Button
+						x:Name="formatBtn"
+						Grid.Column="1"
+						Margin="10,0,0,0"
+						Click="formatBtn_Click"
+						Content="FORMATTING..." />
+					<Button
+						x:Name="clearButton"
+						Grid.Column="3"
+						Width="100"
+						HorizontalAlignment="Left"
+						Click="clearButton_Click"
+						Content="CLEAR" />
 				</Grid>
 
 				<StackPanel Grid.Row="2" Margin="0,10,0,0">
-					<Separator Margin="0,0,0,10"/>
-					<Button Grid.Column="1" x:Name="okButton" Content="ACCEPT" Click="okButton_Click" IsDefault="True" HorizontalAlignment="Right"/>
+					<Separator Margin="0,0,0,10" />
+					<Button
+						x:Name="okButton"
+						Grid.Column="1"
+						HorizontalAlignment="Right"
+						Click="okButton_Click"
+						Content="ACCEPT"
+						IsDefault="True" />
 				</StackPanel>
 			</Grid>
 		</GroupBox>

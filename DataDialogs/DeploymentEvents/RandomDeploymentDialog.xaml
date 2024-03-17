@@ -1,12 +1,18 @@
-﻿<Window x:Class="Imperial_Commander_Editor.RandomDeploymentDialog"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Imperial_Commander_Editor"
-        mc:Ignorable="d"
-        Style="{StaticResource dws}"
-				xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" Title="Random Deployment" Width="550" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown" SizeToContent="Height">
+﻿<Window
+	x:Class="Imperial_Commander_Editor.RandomDeploymentDialog"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:local="clr-namespace:Imperial_Commander_Editor"
+	xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	Title="Random Deployment"
+	Width="550"
+	MouseDown="Window_MouseDown"
+	SizeToContent="Height"
+	Style="{StaticResource dws}"
+	WindowStartupLocation="CenterScreen"
+	mc:Ignorable="d">
 
 	<Window.Resources>
 		<local:RadioBoolToIntConverter x:Key="rbConv" />
@@ -16,42 +22,96 @@
 		<GroupBox Header="Random Deployment Event Action" Style="{DynamicResource MaterialDesignGroupBox}">
 			<Grid>
 				<Grid.RowDefinitions>
-					<RowDefinition Height="*"/>
-					<RowDefinition Height="auto"/>
+					<RowDefinition Height="*" />
+					<RowDefinition Height="auto" />
 				</Grid.RowDefinitions>
 
 				<UniformGrid Columns="2">
-					<!--THREAT LIMIT-->
-					<GroupBox Header="Deployment Cost Limit" Padding="10" Margin="0,0,5,0" Background="#FF503B7C">
+					<!--  THREAT LIMIT  -->
+					<GroupBox
+						Margin="0,0,5,0"
+						Padding="10"
+						Background="#FF503B7C"
+						Header="Deployment Cost Limit">
 						<StackPanel>
 							<StackPanel Orientation="Horizontal">
-								<RadioButton Content="Fixed Value" GroupName="ithreat" VerticalAlignment="Center" Style="{StaticResource MaterialDesignChoiceChipOutlineRadioButton}" IsChecked="{Binding Path=threatType, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:ThreatModifierType.Fixed}}" Margin="0,4,4,4"/>
-								<TextBox Margin="10,0" Width="50" Text="{Binding fixedValue}" VerticalAlignment="Center"/>
+								<RadioButton
+									Margin="0,4,4,4"
+									VerticalAlignment="Center"
+									Content="Fixed Value"
+									GroupName="ithreat"
+									IsChecked="{Binding Path=threatType, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:ThreatModifierType.Fixed}}"
+									Style="{StaticResource MaterialDesignChoiceChipOutlineRadioButton}" />
+								<TextBox
+									Width="50"
+									Margin="10,0"
+									VerticalAlignment="Center"
+									Text="{Binding fixedValue}" />
 							</StackPanel>
 							<StackPanel Orientation="Horizontal">
-								<RadioButton Content="Multiply By Threat Level" GroupName="ithreat" VerticalAlignment="Center" Style="{StaticResource MaterialDesignChoiceChipOutlineRadioButton}" IsChecked="{Binding Path=threatType, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:ThreatModifierType.Multiple}}" Margin="0,4,4,4"/>
-								<TextBox Margin="10,0" Width="50" Text="{Binding threatLevel}" VerticalAlignment="Center"/>
+								<RadioButton
+									Margin="0,4,4,4"
+									VerticalAlignment="Center"
+									Content="Multiply By Threat Level"
+									GroupName="ithreat"
+									IsChecked="{Binding Path=threatType, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:ThreatModifierType.Multiple}}"
+									Style="{StaticResource MaterialDesignChoiceChipOutlineRadioButton}" />
+								<TextBox
+									Width="50"
+									Margin="10,0"
+									VerticalAlignment="Center"
+									Text="{Binding threatLevel}" />
 							</StackPanel>
 
-							<TextBlock Text="Random Deployments don't remove Deployment Cost from Imperial Threat." TextWrapping="Wrap" FontStyle="Italic" Margin="0,10,0,0"/>
+							<TextBlock
+								Margin="0,10,0,0"
+								FontStyle="Italic"
+								Text="Random Deployments don't remove Deployment Cost from Imperial Threat."
+								TextWrapping="Wrap" />
 						</StackPanel>
 					</GroupBox>
 
-					<!--POSITION-->
-					<GroupBox Header="Deployment Point" Margin="5,0,0,0" Background="#FF503B7C">
+					<!--  POSITION  -->
+					<GroupBox
+						Margin="5,0,0,0"
+						Background="#FF503B7C"
+						Header="Deployment Point">
 						<StackPanel>
-							<RadioButton GroupName="dpoint" Content="Active Deployment Point" VerticalAlignment="Center" Style="{StaticResource MaterialDesignChoiceChipOutlineRadioButton}" IsChecked="{Binding Path=deploymentPoint, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:DeploymentSpot.Active}}" Margin="0,4,4,4"/>
+							<RadioButton
+								Margin="0,4,4,4"
+								VerticalAlignment="Center"
+								Content="Active Deployment Point"
+								GroupName="dpoint"
+								IsChecked="{Binding Path=deploymentPoint, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:DeploymentSpot.Active}}"
+								Style="{StaticResource MaterialDesignChoiceChipOutlineRadioButton}" />
 
-							<RadioButton x:Name="sdp" GroupName="dpoint" Content="Specific Deployment Point:" VerticalAlignment="Center" Style="{StaticResource MaterialDesignChoiceChipOutlineRadioButton}" IsChecked="{Binding Path=deploymentPoint, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:DeploymentSpot.Specific}}" Margin="0,4,4,4"/>
+							<RadioButton
+								x:Name="sdp"
+								Margin="0,4,4,4"
+								VerticalAlignment="Center"
+								Content="Specific Deployment Point:"
+								GroupName="dpoint"
+								IsChecked="{Binding Path=deploymentPoint, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:DeploymentSpot.Specific}}"
+								Style="{StaticResource MaterialDesignChoiceChipOutlineRadioButton}" />
 
-							<ComboBox x:Name="dpCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectedValue="{Binding specificDeploymentPoint}" SelectedValuePath="GUID" IsEnabled="{Binding Path=IsChecked, ElementName=sdp}" DisplayMemberPath="name"/>
+							<ComboBox
+								x:Name="dpCB"
+								DisplayMemberPath="name"
+								IsEnabled="{Binding Path=IsChecked, ElementName=sdp}"
+								SelectedValue="{Binding specificDeploymentPoint}"
+								SelectedValuePath="GUID"
+								Style="{StaticResource MaterialDesignOutlinedComboBox}" />
 						</StackPanel>
 					</GroupBox>
 				</UniformGrid>
 
 				<StackPanel Grid.Row="1">
-					<Separator Margin="0,0,0,10"/>
-					<Button x:Name="okButton" Content="ACCEPT" Click="okButton_Click" HorizontalAlignment="Right"/>
+					<Separator Margin="0,0,0,10" />
+					<Button
+						x:Name="okButton"
+						HorizontalAlignment="Right"
+						Click="okButton_Click"
+						Content="ACCEPT" />
 				</StackPanel>
 			</Grid>
 		</GroupBox>

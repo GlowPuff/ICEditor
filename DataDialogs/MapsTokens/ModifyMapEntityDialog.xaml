@@ -69,7 +69,8 @@
 					Content="{materialDesign:PackIcon Kind=Edit}"
 					IsEnabled="{Binding hasProperties}"
 					Style="{StaticResource MaterialDesignFloatingActionButton}"
-					ToolTip="Edit Entity Properties" />
+					ToolTip="Edit Entity Properties"
+					ToolTipService.InitialShowDelay="250" />
 
 				<Button
 					x:Name="remBtn"
@@ -80,7 +81,8 @@
 					Content="{materialDesign:PackIcon Kind=RemoveBold}"
 					Foreground="Red"
 					Style="{StaticResource MaterialDesignFloatingActionButton}"
-					ToolTip="Remove Entity" />
+					ToolTip="Remove Entity"
+					ToolTipService.InitialShowDelay="250" />
 			</Grid>
 		</DataTemplate>
 	</Window.Resources>
@@ -119,7 +121,8 @@
 								Click="addModifyEntityButton_Click"
 								Content="{materialDesign:PackIcon Kind=AddBold}"
 								Style="{StaticResource MaterialDesignFloatingActionButton}"
-								ToolTip="Add Map Entity" />
+								ToolTip="Add Map Entity"
+								ToolTipService.InitialShowDelay="250" />
 						</Grid>
 					</materialDesign:Card>
 

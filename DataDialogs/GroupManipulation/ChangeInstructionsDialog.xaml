@@ -1,14 +1,20 @@
-﻿<Window x:Class="Imperial_Commander_Editor.ChangeInstructionsDialog"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Imperial_Commander_Editor"
-				xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-				Style="{StaticResource dws}"
-        xmlns:s="clr-namespace:System;assembly=mscorlib" 
-				mc:Ignorable="d"
-        Title="Change Instructions" Width="600" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown" SizeToContent="Height" ContentRendered="Window_ContentRendered">
+﻿<Window
+	x:Class="Imperial_Commander_Editor.ChangeInstructionsDialog"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:local="clr-namespace:Imperial_Commander_Editor"
+	xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:s="clr-namespace:System;assembly=mscorlib"
+	Title="Change Instructions"
+	Width="600"
+	ContentRendered="Window_ContentRendered"
+	MouseDown="Window_MouseDown"
+	SizeToContent="Height"
+	Style="{StaticResource dws}"
+	WindowStartupLocation="CenterScreen"
+	mc:Ignorable="d">
 
 	<Window.Resources>
 		<local:RadioBoolToIntConverter x:Key="rbConv" />
@@ -23,13 +29,21 @@
 				<TextBlock VerticalAlignment="Center">
 					<TextBlock.Text>
 						<MultiBinding StringFormat="{}{0}: {1}">
-							<Binding Path="name"/>
-							<Binding Path="id"/>
+							<Binding Path="name" />
+							<Binding Path="id" />
 						</MultiBinding>
 					</TextBlock.Text>
 				</TextBlock>
 
-				<Button Grid.Column="1" x:Name="remGroupButton" Content="{materialDesign:PackIcon Kind=RemoveBold}" Click="remGroupButton_Click" Style="{StaticResource MaterialDesignFloatingActionButton}" Foreground="Red" Width="35" Height="35"/>
+				<Button
+					x:Name="remGroupButton"
+					Grid.Column="1"
+					Width="35"
+					Height="35"
+					Click="remGroupButton_Click"
+					Content="{materialDesign:PackIcon Kind=RemoveBold}"
+					Foreground="Red"
+					Style="{StaticResource MaterialDesignFloatingActionButton}" />
 			</Grid>
 		</DataTemplate>
 	</Window.Resources>
@@ -37,68 +51,107 @@
 	<Border BorderBrush="MediumPurple" BorderThickness="2">
 		<GroupBox Header="Change Group Instructions Event Action" Style="{DynamicResource MaterialDesignGroupBox}">
 			<StackPanel>
-				<materialDesign:Card Background="{StaticResource CardBG}" Padding="10">
+				<materialDesign:Card Padding="10" Background="{StaticResource CardBG}">
 					<StackPanel>
-						<TextBlock Text="Changing Group Instructions will apply to All Groups by default, unless one or more Specific Groups are added." TextWrapping="Wrap"/>
+						<TextBlock Text="Changing Group Instructions will apply to All Groups by default, unless one or more Specific Groups are added." TextWrapping="Wrap" />
 					</StackPanel>
 				</materialDesign:Card>
 
-				<GroupBox Header="Instruction Placement" Background="#FF503B7C" Margin="0,10,0,0">
+				<GroupBox
+					Margin="0,10,0,0"
+					Background="#FF503B7C"
+					Header="Instruction Placement">
 					<StackPanel Orientation="Horizontal">
-						<TextBlock Text="Placement:" Margin="0,0,10,0" VerticalAlignment="Center"/>
-						<RadioButton Content="Top" GroupName="all" IsChecked="{Binding Path=instructionType, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:CustomInstructionType.Top}}" Style="{StaticResource MaterialDesignChoiceChipOutlineRadioButton}"/>
-						<RadioButton Content="Bottom" GroupName="all" Margin="10,0" IsChecked="{Binding Path=instructionType, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:CustomInstructionType.Bottom}}" Style="{StaticResource MaterialDesignChoiceChipOutlineRadioButton}"/>
-						<RadioButton Content="Replace" GroupName="all" IsChecked="{Binding Path=instructionType, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:CustomInstructionType.Replace}}" Style="{StaticResource MaterialDesignChoiceChipOutlineRadioButton}"/>
+						<TextBlock
+							Margin="0,0,10,0"
+							VerticalAlignment="Center"
+							Text="Placement:" />
+						<RadioButton
+							Content="Top"
+							GroupName="all"
+							IsChecked="{Binding Path=instructionType, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:CustomInstructionType.Top}}"
+							Style="{StaticResource MaterialDesignChoiceChipOutlineRadioButton}" />
+						<RadioButton
+							Margin="10,0"
+							Content="Bottom"
+							GroupName="all"
+							IsChecked="{Binding Path=instructionType, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:CustomInstructionType.Bottom}}"
+							Style="{StaticResource MaterialDesignChoiceChipOutlineRadioButton}" />
+						<RadioButton
+							Content="Replace"
+							GroupName="all"
+							IsChecked="{Binding Path=instructionType, Converter={StaticResource rbConv}, ConverterParameter={x:Static local:CustomInstructionType.Replace}}"
+							Style="{StaticResource MaterialDesignChoiceChipOutlineRadioButton}" />
 					</StackPanel>
 				</GroupBox>
 
 				<Grid Margin="-9,10,0,-9">
 					<Grid.RowDefinitions>
-						<RowDefinition Height="*"/>
-						<RowDefinition Height="auto"/>
+						<RowDefinition Height="*" />
+						<RowDefinition Height="auto" />
 					</Grid.RowDefinitions>
 
-					<TabControl x:Name="tabControl"
-  Style="{StaticResource MaterialDesignNavigatilRailTabControl}"
-  materialDesign:ColorZoneAssist.Mode="PrimaryMid"
-  materialDesign:NavigationRailAssist.ShowSelectionBackground="True">
+					<TabControl
+						x:Name="tabControl"
+						materialDesign:ColorZoneAssist.Mode="PrimaryMid"
+						materialDesign:NavigationRailAssist.ShowSelectionBackground="True"
+						Style="{StaticResource MaterialDesignNavigationRailTabControl}">
 						<TabControl.Background>
-							<SolidColorBrush Color="#FF3A3349"/>
+							<SolidColorBrush Color="#FF3A3349" />
 						</TabControl.Background>
 
-						<!--ALL-->
+						<!--  ALL  -->
 						<TabItem Width="110">
 							<TabItem.Header>
-								<TextBlock Text="All Groups" HorizontalAlignment="Center" />
+								<TextBlock HorizontalAlignment="Center" Text="All Groups" />
 							</TabItem.Header>
 							<StackPanel Margin="10,0,10,10">
-								<TextBox x:Name="tb" Margin="0,0,0,10" BorderThickness="2" BorderBrush="MediumPurple" AcceptsReturn="True" Foreground="White" CaretBrush="White" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap" VerticalAlignment="Stretch" Text="{Binding theText}" MinHeight="200"/>
+								<TextBox
+									x:Name="tb"
+									MinHeight="200"
+									Margin="0,0,0,10"
+									VerticalAlignment="Stretch"
+									AcceptsReturn="True"
+									BorderBrush="MediumPurple"
+									BorderThickness="2"
+									CaretBrush="White"
+									Foreground="White"
+									Text="{Binding theText}"
+									TextWrapping="Wrap"
+									VerticalScrollBarVisibility="Auto" />
 							</StackPanel>
 						</TabItem>
 
-						<!--SPECIFIC-->
+						<!--  SPECIFIC  -->
 						<TabItem Width="110">
 							<TabItem.Header>
-								<TextBlock Text="Specific Group" HorizontalAlignment="Center" />
+								<TextBlock HorizontalAlignment="Center" Text="Specific Group" />
 							</TabItem.Header>
 							<StackPanel Margin="10,0,10,10">
 								<!--<TextBlock Text="If no Groups are specified, this Event Action will apply to ALL groups." TextWrapping="Wrap"/>-->
-								<!--ADD GROUP-->
-								<materialDesign:Card Padding="10" Background="{StaticResource CardBG}" Margin="0,0,0,10">
+								<!--  ADD GROUP  -->
+								<materialDesign:Card
+									Margin="0,0,0,10"
+									Padding="10"
+									Background="{StaticResource CardBG}">
 									<Grid>
 										<Grid.ColumnDefinitions>
 											<ColumnDefinition Width="*" />
 											<ColumnDefinition Width="auto" />
 										</Grid.ColumnDefinitions>
 
-										<ComboBox x:Name="dpCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectedValue="{Binding selectedGroup, RelativeSource={RelativeSource AncestorType=Window}}" SelectedValuePath="id">
+										<ComboBox
+											x:Name="dpCB"
+											SelectedValue="{Binding selectedGroup, RelativeSource={RelativeSource AncestorType=Window}}"
+											SelectedValuePath="id"
+											Style="{StaticResource MaterialDesignOutlinedComboBox}">
 											<ComboBox.ItemTemplate>
 												<DataTemplate>
 													<TextBlock>
 														<TextBlock.Text>
 															<MultiBinding StringFormat="{}{0}: {1}">
-																<Binding Path="name"/>
-																<Binding Path="id"/>
+																<Binding Path="name" />
+																<Binding Path="id" />
 															</MultiBinding>
 														</TextBlock.Text>
 													</TextBlock>
@@ -106,29 +159,59 @@
 											</ComboBox.ItemTemplate>
 										</ComboBox>
 
-										<Button x:Name="addGroupButton" Grid.Column="1" Content="{materialDesign:PackIcon Kind=AddBold}" Margin="10,0,0,0" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35" Click="addGroupButton_Click"/>
+										<Button
+											x:Name="addGroupButton"
+											Grid.Column="1"
+											Width="35"
+											Height="35"
+											Margin="10,0,0,0"
+											Click="addGroupButton_Click"
+											Content="{materialDesign:PackIcon Kind=AddBold}"
+											Style="{StaticResource MaterialDesignFloatingActionButton}" />
 									</Grid>
 								</materialDesign:Card>
 
-								<!--LIST BOX-->
-								<materialDesign:Card Background="Purple" Margin="0,0,0,10" Padding="10">
-									<ListBox ItemsSource="{Binding groupsToAdd}" HorizontalContentAlignment="Stretch" ItemTemplate="{StaticResource k1}">
+								<!--  LIST BOX  -->
+								<materialDesign:Card
+									Margin="0,0,0,10"
+									Padding="10"
+									Background="Purple">
+									<ListBox
+										HorizontalContentAlignment="Stretch"
+										ItemTemplate="{StaticResource k1}"
+										ItemsSource="{Binding groupsToAdd}">
 										<ListBox.ItemContainerStyle>
-											<Style TargetType="ListBoxItem" BasedOn="{StaticResource MaterialDesignListBoxItem}">
+											<Style BasedOn="{StaticResource MaterialDesignListBoxItem}" TargetType="ListBoxItem">
 												<Setter Property="materialDesign:ListBoxItemAssist.ShowSelection" Value="False" />
 											</Style>
 										</ListBox.ItemContainerStyle>
 									</ListBox>
 								</materialDesign:Card>
 
-								<TextBox BorderThickness="2" BorderBrush="MediumPurple" AcceptsReturn="True" Foreground="White" CaretBrush="White" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap" VerticalAlignment="Stretch" Text="{Binding theText}" MinHeight="200"/>
+								<TextBox
+									MinHeight="200"
+									VerticalAlignment="Stretch"
+									AcceptsReturn="True"
+									BorderBrush="MediumPurple"
+									BorderThickness="2"
+									CaretBrush="White"
+									Foreground="White"
+									Text="{Binding theText}"
+									TextWrapping="Wrap"
+									VerticalScrollBarVisibility="Auto" />
 							</StackPanel>
 						</TabItem>
 					</TabControl>
 
 					<StackPanel Grid.Row="1">
-						<Separator Margin="0,0,0,10"/>
-						<Button x:Name="okButton" Content="ACCEPT" Click="okButton_Click" IsDefault="True" HorizontalAlignment="Right" Margin="0,0,10,10"/>
+						<Separator Margin="0,0,0,10" />
+						<Button
+							x:Name="okButton"
+							Margin="0,0,10,10"
+							HorizontalAlignment="Right"
+							Click="okButton_Click"
+							Content="ACCEPT"
+							IsDefault="True" />
 					</StackPanel>
 				</Grid>
 			</StackPanel>

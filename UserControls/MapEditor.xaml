@@ -61,7 +61,8 @@
 									Click="switchSectionBtn_Click"
 									Content="SWITCH MAP SECTION"
 									IsEnabled="{Binding entityPropsEnabled}"
-									ToolTip="Switch The Active Map Section To This Entity's Owner" />
+									ToolTip="Switch The Active Map Section To This Entity's Owner"
+									ToolTipService.InitialShowDelay="250" />
 								<!--  REMOVE  -->
 								<Button
 									x:Name="removeTileButton"
@@ -177,7 +178,8 @@
 								Click="addTileButton_Click"
 								Content="{materialDesign:PackIcon Kind=Square}"
 								Style="{DynamicResource MaterialDesignFloatingActionButton}"
-								ToolTip="Add a Tile" />
+								ToolTip="Add a Tile"
+								ToolTipService.InitialShowDelay="250" />
 							<!--  ADD CRATE  -->
 							<Button
 								x:Name="addCrateButton"
@@ -187,7 +189,8 @@
 								Click="addCrateButton_Click"
 								Content="{materialDesign:PackIcon Kind=ShippingPallet}"
 								Style="{DynamicResource MaterialDesignFloatingActionButton}"
-								ToolTip="Add a Crate" />
+								ToolTip="Add a Crate"
+								ToolTipService.InitialShowDelay="250" />
 							<!--  ADD CONSOLE  -->
 							<Button
 								x:Name="addConsoleButton"
@@ -197,7 +200,8 @@
 								Click="addConsoleButton_Click"
 								Content="{materialDesign:PackIcon Kind=ComputerClassic}"
 								Style="{DynamicResource MaterialDesignFloatingActionButton}"
-								ToolTip="Add a Terminal" />
+								ToolTip="Add a Terminal"
+								ToolTipService.InitialShowDelay="250" />
 							<!--  ADD DOOR  -->
 							<Button
 								x:Name="addDoorButton"
@@ -207,7 +211,8 @@
 								Click="addDoorButton_Click"
 								Content="{materialDesign:PackIcon Kind=Door}"
 								Style="{DynamicResource MaterialDesignFloatingActionButton}"
-								ToolTip="Add a Door" />
+								ToolTip="Add a Door"
+								ToolTipService.InitialShowDelay="250" />
 							<!--  ADD DEPLOYMENT POINT  -->
 							<Button
 								x:Name="addDeploymentButton"
@@ -217,7 +222,8 @@
 								Click="addDeploymentButton_Click"
 								Content="{materialDesign:PackIcon Kind=PeopleAdd}"
 								Style="{DynamicResource MaterialDesignFloatingActionButton}"
-								ToolTip="Add a Deployment Point" />
+								ToolTip="Add a Deployment Point"
+								ToolTipService.InitialShowDelay="250" />
 							<!--  ADD TOKEN  -->
 							<Button
 								x:Name="addTokenButton"
@@ -227,7 +233,8 @@
 								Click="addTokenButton_Click"
 								Content="{materialDesign:PackIcon Kind=PokerChip}"
 								Style="{DynamicResource MaterialDesignFloatingActionButton}"
-								ToolTip="Add a Mission Marker" />
+								ToolTip="Add a Mission Marker"
+								ToolTipService.InitialShowDelay="250" />
 							<!--  ADD HIGHLIGHT  -->
 							<Button
 								x:Name="addHighlightButton"
@@ -237,7 +244,8 @@
 								Click="addHighlightButton_Click"
 								Content="{materialDesign:PackIcon Kind=ExclamationBold}"
 								Style="{DynamicResource MaterialDesignFloatingActionButton}"
-								ToolTip="Add a Space Highlight" />
+								ToolTip="Add a Space Highlight"
+								ToolTipService.InitialShowDelay="250" />
 						</StackPanel>
 
 						<!--  TOGGLE BUTTON  -->
@@ -250,7 +258,8 @@
 								Click="centerButton_Click"
 								Content="{materialDesign:PackIcon Kind=GpsFixed}"
 								Style="{DynamicResource MaterialDesignFloatingActionButton}"
-								ToolTip="Center Map" />
+								ToolTip="Center Map"
+								ToolTipService.InitialShowDelay="250" />
 
 							<Button
 								x:Name="centerSelectedButton"
@@ -260,7 +269,8 @@
 								Click="centerSelectedButton_Click"
 								Content="{materialDesign:PackIcon Kind=TagText}"
 								Style="{DynamicResource MaterialDesignFloatingActionButton}"
-								ToolTip="Center Selected Entity" />
+								ToolTip="Center Selected Entity"
+								ToolTipService.InitialShowDelay="250" />
 						</StackPanel>
 
 					</Grid>
@@ -350,12 +360,6 @@
 						</VisualBrush.Visual>
 					</VisualBrush>
 				</Canvas.Background>
-
-				<!--  TOOLTIP  -->
-				<!--<TextBlock x:Name="myToolTip" ToolTipService.InitialShowDelay="5000"
-                ToolTipService.ShowDuration="2000"
-                ToolTipService.BetweenShowDelay="10000"
-                ToolTip="This is a tool tip." Panel.ZIndex="100" />-->
 
 				<!--  center crosshair  -->
 				<Rectangle

@@ -23,19 +23,6 @@
 					<RowDefinition Height="1*" />
 				</Grid.RowDefinitions>
 
-				<!--<materialDesign:Card Grid.Row="0" Background="MediumPurple" Padding="5" Margin="0,0,0,10">
-					<Grid>
-						<TextBlock x:Name="localText" HorizontalAlignment="Center" FontWeight="Bold" Text="{Binding activeSection.name, StringFormat=Displaying \'{0}\'}" Style="{StaticResource MaterialDesignBody1TextBlock}" Foreground="White" TextWrapping="Wrap"/>
-						<TextBlock x:Name="globalText" HorizontalAlignment="Center" FontWeight="Bold" Style="{StaticResource MaterialDesignBody1TextBlock}" Foreground="White" TextWrapping="Wrap" Visibility="Hidden" Text="Displaying Global Data"/>
-					</Grid>
-				</materialDesign:Card>-->
-
-				<!--  global switch  -->
-				<!--<StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
-					<TextBlock Text="Show Global Items" Margin="0,0,10,0" Foreground="White"/>
-					<ToggleButton x:Name="showGlobalToggle" IsChecked="{Binding showGlobal}"/>
-				</StackPanel>-->
-
 				<Grid Grid.Row="2">
 					<Grid.RowDefinitions>
 						<RowDefinition Height="*" />
@@ -54,8 +41,6 @@
 								<RowDefinition Height="*" />
 								<RowDefinition Height="auto" />
 							</Grid.RowDefinitions>
-							<!--<TextBlock Grid.Row="0" HorizontalAlignment="Center" Text="Trigger Variables" Foreground="White"/>-->
-							<!--<ComboBox Margin="10,5,10,10" x:Name="triggersCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" DisplayMemberPath="name"/>-->
 							<ScrollViewer Grid.Row="0" PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">
 								<ListBox
 									x:Name="triggersCB"
@@ -128,8 +113,6 @@
 								<RowDefinition Height="auto" />
 							</Grid.RowDefinitions>
 
-							<!--<TextBlock HorizontalAlignment="Center" Text="Events" Foreground="White"/>-->
-							<!--<ComboBox Margin="10,5,10,10" x:Name="eventsCB" Style="{StaticResource MaterialDesignOutlinedComboBox}" DisplayMemberPath="name"/>-->
 							<ScrollViewer Grid.Row="0" PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">
 								<ListBox
 									x:Name="eventsCB"

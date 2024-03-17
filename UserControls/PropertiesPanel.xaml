@@ -114,7 +114,8 @@
 										Click="newGroupBtn_Click"
 										Content="{materialDesign:PackIcon Kind=AddBold}"
 										Style="{StaticResource MaterialDesignFloatingActionButton}"
-										ToolTip="Create New Event Group" />
+										ToolTip="Create New Event Group"
+										ToolTipService.InitialShowDelay="250" />
 									<Button
 										x:Name="editGroupBtn"
 										Width="35"
@@ -124,7 +125,8 @@
 										Content="{materialDesign:PackIcon Kind=Edit}"
 										IsEnabled="{Binding editEnabled}"
 										Style="{StaticResource MaterialDesignFloatingActionButton}"
-										ToolTip="Edit Event Group" />
+										ToolTip="Edit Event Group"
+										ToolTipService.InitialShowDelay="250" />
 									<Button
 										x:Name="remGroupBtn"
 										Width="35"
@@ -134,7 +136,8 @@
 										Foreground="Red"
 										IsEnabled="{Binding editEnabled}"
 										Style="{StaticResource MaterialDesignFloatingActionButton}"
-										ToolTip="Remove Event Group" />
+										ToolTip="Remove Event Group"
+										ToolTipService.InitialShowDelay="250" />
 								</StackPanel>
 							</Grid>
 						</GroupBox>
@@ -166,7 +169,8 @@
 										Click="newTokenGroupBtn_Click"
 										Content="{materialDesign:PackIcon Kind=AddBold}"
 										Style="{StaticResource MaterialDesignFloatingActionButton}"
-										ToolTip="Create New Event Group" />
+										ToolTip="Create New Event Group"
+										ToolTipService.InitialShowDelay="250" />
 									<Button
 										x:Name="editTokenGroupBtn"
 										Width="35"
@@ -176,7 +180,8 @@
 										Content="{materialDesign:PackIcon Kind=Edit}"
 										IsEnabled="{Binding editEGEnabled}"
 										Style="{StaticResource MaterialDesignFloatingActionButton}"
-										ToolTip="Edit Event Group" />
+										ToolTip="Edit Event Group"
+										ToolTipService.InitialShowDelay="250" />
 									<Button
 										x:Name="remTokenGroupBtn"
 										Width="35"
@@ -186,7 +191,8 @@
 										Foreground="Red"
 										IsEnabled="{Binding editEGEnabled}"
 										Style="{StaticResource MaterialDesignFloatingActionButton}"
-										ToolTip="Remove Event Group" />
+										ToolTip="Remove Event Group"
+										ToolTipService.InitialShowDelay="250" />
 								</StackPanel>
 							</Grid>
 						</GroupBox>

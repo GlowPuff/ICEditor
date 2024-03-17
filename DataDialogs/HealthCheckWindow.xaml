@@ -131,7 +131,8 @@
 							Background="BlueViolet"
 							Click="refreshBtn_Click"
 							Style="{DynamicResource MaterialDesignFloatingActionButton}"
-							ToolTip="Refresh List">
+							ToolTip="Refresh List"
+							ToolTipService.InitialShowDelay="250">
 							<materialDesign:PackIcon
 								Width="24"
 								Height="24"

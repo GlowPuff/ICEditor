@@ -69,7 +69,8 @@
 								Click="recycleGUID_Click"
 								Content="{materialDesign:PackIcon Kind=Refresh}"
 								Style="{StaticResource MaterialDesignFloatingActionButton}"
-								ToolTip="Refresh GUID" />
+								ToolTip="Refresh GUID"
+								ToolTipService.InitialShowDelay="250" />
 						</StackPanel>
 						<TextBlock
 							Margin="0,5,0,0"
@@ -610,24 +611,28 @@
 											x:Name="filterAllButton"
 											Click="filterAllButton_Click"
 											Content="All"
-											ToolTip="Show All Icons" />
+											ToolTip="Show All Icons"
+											ToolTipService.InitialShowDelay="250" />
 										<Button
 											x:Name="filterRebelButton"
 											Margin="10,0"
 											Click="filterRebelButton_Click"
 											Content="Rebel"
-											ToolTip="Show Only Rebel Icons" />
+											ToolTip="Show Only Rebel Icons"
+											ToolTipService.InitialShowDelay="250" />
 										<Button
 											x:Name="filterImperialButton"
 											Click="filterImperialButton_Click"
 											Content="Imperial"
-											ToolTip="Show Only Imperial Icons" />
+											ToolTip="Show Only Imperial Icons"
+											ToolTipService.InitialShowDelay="250" />
 										<Button
 											x:Name="filterMercButton"
 											Margin="10,0"
 											Click="filterMercButton_Click"
 											Content="Mercenary"
-											ToolTip="Show Only Mercenary Icons" />
+											ToolTip="Show Only Mercenary Icons"
+											ToolTipService.InitialShowDelay="250" />
 									</StackPanel>
 
 									<TextBlock
@@ -642,25 +647,29 @@
 											x:Name="filterHeroButton"
 											Click="filterHeroButton_Click"
 											Content="Heroes"
-											ToolTip="Show Only Hero Icons" />
+											ToolTip="Show Only Hero Icons"
+											ToolTipService.InitialShowDelay="250" />
 										<Button
 											x:Name="filterVillainButton"
 											Margin="10,0,0,0"
 											Click="filterVillainButton_Click"
 											Content="Villains"
-											ToolTip="Show Only Stock Villain Icons" />
+											ToolTip="Show Only Stock Villain Icons"
+											ToolTipService.InitialShowDelay="250" />
 										<Button
 											x:Name="filterAllyButton"
 											Margin="10,0,0,0"
 											Click="filterAllyButton_Click"
 											Content="Allies"
-											ToolTip="Show Only Ally Icons" />
+											ToolTip="Show Only Ally Icons"
+											ToolTipService.InitialShowDelay="250" />
 										<Button
 											x:Name="filterStockImperialButton"
 											Margin="10,0,0,0"
 											Click="filterStockImperialButton_Click"
 											Content="Imperials"
-											ToolTip="Show Only Stock Imperial Icons" />
+											ToolTip="Show Only Stock Imperial Icons"
+											ToolTipService.InitialShowDelay="250" />
 									</StackPanel>
 								</StackPanel>
 

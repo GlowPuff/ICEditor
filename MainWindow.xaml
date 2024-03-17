@@ -41,7 +41,8 @@
 					<Button
 						x:Name="projectManagerButton"
 						Click="projectManagerButton_Click"
-						ToolTip="Open Project Manager">
+						ToolTip="Open Project Manager"
+						ToolTipService.InitialShowDelay="250">
 						<Image Height="35" Source="Assets/imperial.png" />
 					</Button>
 					<Separator />
@@ -50,21 +51,24 @@
 					<Button
 						x:Name="openMissionButton"
 						Click="openMissionButton_Click"
-						ToolTip="Open a Mission">
+						ToolTip="Open a Mission"
+						ToolTipService.InitialShowDelay="250">
 						<Image Height="30" Source="Assets/open.png" />
 					</Button>
 					<!--  save  -->
 					<Button
 						x:Name="saveMissionButton"
 						Click="saveMissionButton_Click"
-						ToolTip="Save the Mission">
+						ToolTip="Save the Mission"
+						ToolTipService.InitialShowDelay="250">
 						<Image Height="30" Source="Assets/save.png" />
 					</Button>
 					<!--  save as  -->
 					<Button
 						x:Name="saveMissionAsButton"
 						Click="saveMissionAsButton_Click"
-						ToolTip="Save the Mission As New Mission">
+						ToolTip="Save the Mission As New Mission"
+						ToolTipService.InitialShowDelay="250">
 						<Image Height="30" Source="Assets/saveas.png" />
 					</Button>
 
@@ -75,14 +79,16 @@
 					<Button
 						x:Name="addTriggerButton"
 						Click="addTriggerButton_Click"
-						ToolTip="Add a Trigger">
+						ToolTip="Add a Trigger"
+						ToolTipService.InitialShowDelay="250">
 						<Image Height="30" Source="Assets/addtrigger.png" />
 					</Button>
 					<!--  event  -->
 					<Button
 						x:Name="addEventButton"
 						Click="addEventButton_Click"
-						ToolTip="Add an Event">
+						ToolTip="Add an Event"
+						ToolTipService.InitialShowDelay="250">
 						<Image Height="30" Source="Assets/addevent.png" />
 					</Button>
 
@@ -90,7 +96,8 @@
 					<Button
 						x:Name="addBlockButton"
 						Click="addBlockButton_Click"
-						ToolTip="Add a Map Section">
+						ToolTip="Add a Map Section"
+						ToolTipService.InitialShowDelay="250">
 						<Image Height="30" Source="Assets/addblock.png" />
 					</Button>
 
@@ -100,7 +107,8 @@
 					<Button
 						x:Name="openBrokenRefsWindow"
 						Click="openBrokenRefsWindow_Click"
-						ToolTip="Mission Health Check">
+						ToolTip="Mission Health Check"
+						ToolTipService.InitialShowDelay="250">
 						<Image Height="35" Source="Assets/broken.png" />
 					</Button>
 

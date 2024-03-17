@@ -100,7 +100,8 @@ namespace Imperial_Commander_Editor
 
 		private void removeActionButton_Click( object sender, RoutedEventArgs e )
 		{
-			missionEvent.eventActions.Remove( eventActionsCB.SelectedItem as EventAction );
+
+			missionEvent.eventActions.Remove( (sender as FrameworkElement).DataContext as EventAction );//eventActionsCB.SelectedItem as EventAction );
 			if ( missionEvent.eventActions.Count > 0 )
 				selectedEventAction = missionEvent.eventActions[0];
 			else

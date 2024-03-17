@@ -1,13 +1,14 @@
-﻿<UserControl x:Class="Imperial_Commander_Editor.EncounterPanel"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:s="clr-namespace:System;assembly=mscorlib" 
-             xmlns:local="clr-namespace:Imperial_Commander_Editor"
-             mc:Ignorable="d" 
-						 xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             d:DesignWidth="850">
+﻿<UserControl
+	x:Class="Imperial_Commander_Editor.EncounterPanel"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:local="clr-namespace:Imperial_Commander_Editor"
+	xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:s="clr-namespace:System;assembly=mscorlib"
+	d:DesignWidth="850"
+	mc:Ignorable="d">
 
 	<UserControl.Resources>
 		<local:RadioBoolToIntConverter x:Key="rbConv" />
@@ -23,14 +24,34 @@
 				<TextBlock VerticalAlignment="Center">
 					<TextBlock.Text>
 						<MultiBinding StringFormat="{}{0}: {1}">
-							<Binding Path="cardName"/>
-							<Binding Path="cardID"/>
+							<Binding Path="cardName" />
+							<Binding Path="cardID" />
 						</MultiBinding>
 					</TextBlock.Text>
 				</TextBlock>
 
-				<Button Grid.Column="1" x:Name="editInitialGroup" Content="{materialDesign:PackIcon Kind=Edit}" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35" Click="editInitialGroup_Click" ToolTip="Edit Group"/>
-				<Button Grid.Column="4" x:Name="remInitialGroupButton" Content="{materialDesign:PackIcon Kind=RemoveBold}" Click="remInitialGroupButton_Click" Style="{StaticResource MaterialDesignFloatingActionButton}" Foreground="Red" Width="35" Height="35" Margin="10,0,0,0" ToolTip="Remove Group"/>
+				<Button
+					x:Name="editInitialGroup"
+					Grid.Column="1"
+					Width="35"
+					Height="35"
+					Click="editInitialGroup_Click"
+					Content="{materialDesign:PackIcon Kind=Edit}"
+					Style="{StaticResource MaterialDesignFloatingActionButton}"
+					ToolTip="Edit Group"
+					ToolTipService.InitialShowDelay="250" />
+				<Button
+					x:Name="remInitialGroupButton"
+					Grid.Column="4"
+					Width="35"
+					Height="35"
+					Margin="10,0,0,0"
+					Click="remInitialGroupButton_Click"
+					Content="{materialDesign:PackIcon Kind=RemoveBold}"
+					Foreground="Red"
+					Style="{StaticResource MaterialDesignFloatingActionButton}"
+					ToolTip="Remove Group"
+					ToolTipService.InitialShowDelay="250" />
 			</Grid>
 		</DataTemplate>
 
@@ -47,19 +68,58 @@
 				<TextBlock VerticalAlignment="Center">
 					<TextBlock.Text>
 						<MultiBinding StringFormat="{}{0}: {1}">
-							<Binding Path="cardName"/>
-							<Binding Path="cardID"/>
+							<Binding Path="cardName" />
+							<Binding Path="cardID" />
 						</MultiBinding>
 					</TextBlock.Text>
 				</TextBlock>
 
-				<Button Grid.Column="1" x:Name="editGroup" Content="{materialDesign:PackIcon Kind=GpsFixed}" Click="editGroup_Click" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35" ToolTip="Edit Deployment Points"/>
+				<Button
+					x:Name="editGroup"
+					Grid.Column="1"
+					Width="35"
+					Height="35"
+					Click="editGroup_Click"
+					Content="{materialDesign:PackIcon Kind=GpsFixed}"
+					Style="{StaticResource MaterialDesignFloatingActionButton}"
+					ToolTip="Edit Deployment Points"
+					ToolTipService.InitialShowDelay="250" />
 
-				<Button Grid.Column="2" x:Name="editText" Content="{materialDesign:PackIcon Kind=Edit}" Click="editText_Click" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35" Margin="10,0" ToolTip="Edit Custom Instructions"/>
+				<Button
+					x:Name="editText"
+					Grid.Column="2"
+					Width="35"
+					Height="35"
+					Margin="10,0"
+					Click="editText_Click"
+					Content="{materialDesign:PackIcon Kind=Edit}"
+					Style="{StaticResource MaterialDesignFloatingActionButton}"
+					ToolTip="Edit Custom Instructions"
+					ToolTipService.InitialShowDelay="250" />
 
-				<Button Grid.Column="3" x:Name="editTraits" Content="{materialDesign:PackIcon Kind=Tag}" Click="editTraits_Click" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="35" Height="35" ToolTip="Edit Priority Target Traits"/>
+				<Button
+					x:Name="editTraits"
+					Grid.Column="3"
+					Width="35"
+					Height="35"
+					Click="editTraits_Click"
+					Content="{materialDesign:PackIcon Kind=Tag}"
+					Style="{StaticResource MaterialDesignFloatingActionButton}"
+					ToolTip="Edit Priority Target Traits"
+					ToolTipService.InitialShowDelay="250" />
 
-				<Button Grid.Column="4" x:Name="remInitialGroupButton" Content="{materialDesign:PackIcon Kind=RemoveBold}" Click="remInitialGroupButton_Click" Style="{StaticResource MaterialDesignFloatingActionButton}" Foreground="Red" Width="35" Height="35" Margin="10,0,0,0" ToolTip="Remove Group"/>
+				<Button
+					x:Name="remInitialGroupButton"
+					Grid.Column="4"
+					Width="35"
+					Height="35"
+					Margin="10,0,0,0"
+					Click="remInitialGroupButton_Click"
+					Content="{materialDesign:PackIcon Kind=RemoveBold}"
+					Foreground="Red"
+					Style="{StaticResource MaterialDesignFloatingActionButton}"
+					ToolTip="Remove Group"
+					ToolTipService.InitialShowDelay="250" />
 			</Grid>
 		</DataTemplate>
 
@@ -73,35 +133,55 @@
 				<TextBlock VerticalAlignment="Center">
 					<TextBlock.Text>
 						<MultiBinding StringFormat="{}{0}: {1}">
-							<Binding Path="cardName"/>
-							<Binding Path="cardID"/>
+							<Binding Path="cardName" />
+							<Binding Path="cardID" />
 						</MultiBinding>
 					</TextBlock.Text>
 				</TextBlock>
 
-				<Button Grid.Column="1" x:Name="remReservedGroupButton" Content="{materialDesign:PackIcon Kind=RemoveBold}" Click="remReservedGroupButton_Click" Style="{StaticResource MaterialDesignFloatingActionButton}" Foreground="Red" Width="35" Height="35"/>
+				<Button
+					x:Name="remReservedGroupButton"
+					Grid.Column="1"
+					Width="35"
+					Height="35"
+					Click="remReservedGroupButton_Click"
+					Content="{materialDesign:PackIcon Kind=RemoveBold}"
+					Foreground="Red"
+					Style="{StaticResource MaterialDesignFloatingActionButton}" />
 			</Grid>
 		</DataTemplate>
 	</UserControl.Resources>
 
-	<ScrollViewer VerticalScrollBarVisibility="Auto" Margin="10">
+	<ScrollViewer Margin="10" VerticalScrollBarVisibility="Auto">
 		<StackPanel>
 			<UniformGrid Columns="2">
-				<!--LEFT-->
+				<!--  LEFT  -->
 				<StackPanel Margin="0,0,5,0">
-					<GroupBox Header="Add Initial / Reserved Group" Background="#FF503B7C">
+					<GroupBox Background="#FF503B7C" Header="Add Initial / Reserved Group">
 						<StackPanel>
 							<StackPanel>
-								<TextBox x:Name="filterBox" Style="{StaticResource MaterialDesignOutlinedTextBox}" Margin="0,0,0,10" materialDesign:HintAssist.Hint="Filter List" KeyDown="filterBox_KeyDown" TextChanged="TextBox_TextChanged" CaretBrush="White" IsTabStop="False"/>
+								<TextBox
+									x:Name="filterBox"
+									Margin="0,0,0,10"
+									materialDesign:HintAssist.Hint="Filter List"
+									CaretBrush="White"
+									IsTabStop="False"
+									KeyDown="filterBox_KeyDown"
+									Style="{StaticResource MaterialDesignOutlinedTextBox}"
+									TextChanged="TextBox_TextChanged" />
 
-								<ComboBox x:Name="gCB_initial" Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectedValue="{Binding selectedGroup, RelativeSource={RelativeSource AncestorType=local:EncounterPanel}}" SelectedValuePath="id">
+								<ComboBox
+									x:Name="gCB_initial"
+									SelectedValue="{Binding selectedGroup, RelativeSource={RelativeSource AncestorType=local:EncounterPanel}}"
+									SelectedValuePath="id"
+									Style="{StaticResource MaterialDesignOutlinedComboBox}">
 									<ComboBox.ItemTemplate>
 										<DataTemplate>
 											<TextBlock>
 												<TextBlock.Text>
 													<MultiBinding StringFormat="{}{0}: {1}">
-														<Binding Path="name"/>
-														<Binding Path="id"/>
+														<Binding Path="name" />
+														<Binding Path="id" />
 													</MultiBinding>
 												</TextBlock.Text>
 											</TextBlock>
@@ -110,8 +190,18 @@
 								</ComboBox>
 
 								<UniformGrid Columns="2">
-									<Button x:Name="addInitialGroupButton" Grid.Column="1" Content="ADD INITIAL GROUP" Margin="0,10,10,0" Click="addInitialGroupButton_Click"/>
-									<Button x:Name="addReservedGroupButton" Grid.Column="1" Content="ADD RESERVED GROUP" Margin="10,10,0,0" Click="addReservedGroupButton_Click" />
+									<Button
+										x:Name="addInitialGroupButton"
+										Grid.Column="1"
+										Margin="0,10,10,0"
+										Click="addInitialGroupButton_Click"
+										Content="ADD INITIAL GROUP" />
+									<Button
+										x:Name="addReservedGroupButton"
+										Grid.Column="1"
+										Margin="10,10,0,0"
+										Click="addReservedGroupButton_Click"
+										Content="ADD RESERVED GROUP" />
 								</UniformGrid>
 
 							</StackPanel>
@@ -119,25 +209,36 @@
 					</GroupBox>
 				</StackPanel>
 
-				<!--RIGHT-->
+				<!--  RIGHT  -->
 				<StackPanel Margin="5,0,0,0">
-					<GroupBox Header="Initial Groups" Background="#FF503B7C">
-						<!--INITIAL LIST BOX-->
-						<ListBox ItemsSource="{Binding initialGroups}" HorizontalContentAlignment="Stretch" ItemTemplate="{StaticResource k3}" d:ItemsSource="{d:SampleData ItemCount=2}">
+					<GroupBox Background="#FF503B7C" Header="Initial Groups">
+						<!--  INITIAL LIST BOX  -->
+						<ListBox
+							HorizontalContentAlignment="Stretch"
+							d:ItemsSource="{d:SampleData ItemCount=2}"
+							ItemTemplate="{StaticResource k3}"
+							ItemsSource="{Binding initialGroups}">
 							<ListBox.ItemContainerStyle>
-								<Style TargetType="ListBoxItem" BasedOn="{StaticResource MaterialDesignListBoxItem}">
+								<Style BasedOn="{StaticResource MaterialDesignListBoxItem}" TargetType="ListBoxItem">
 									<Setter Property="materialDesign:ListBoxItemAssist.ShowSelection" Value="False" />
 								</Style>
 							</ListBox.ItemContainerStyle>
 						</ListBox>
 					</GroupBox>
 
-					<GroupBox Header="Reserved Groups" Margin="0,10,0,0" Background="#FF503B7C">
+					<GroupBox
+						Margin="0,10,0,0"
+						Background="#FF503B7C"
+						Header="Reserved Groups">
 						<StackPanel>
-							<!--RESERVED LIST BOX-->
-							<ListBox ItemsSource="{Binding reservedGroups}" HorizontalContentAlignment="Stretch" ItemTemplate="{StaticResource k2}" d:ItemsSource="{d:SampleData ItemCount=2}">
+							<!--  RESERVED LIST BOX  -->
+							<ListBox
+								HorizontalContentAlignment="Stretch"
+								d:ItemsSource="{d:SampleData ItemCount=2}"
+								ItemTemplate="{StaticResource k2}"
+								ItemsSource="{Binding reservedGroups}">
 								<ListBox.ItemContainerStyle>
-									<Style TargetType="ListBoxItem" BasedOn="{StaticResource MaterialDesignListBoxItem}">
+									<Style BasedOn="{StaticResource MaterialDesignListBoxItem}" TargetType="ListBoxItem">
 										<Setter Property="materialDesign:ListBoxItemAssist.ShowSelection" Value="False" />
 									</Style>
 								</ListBox.ItemContainerStyle>

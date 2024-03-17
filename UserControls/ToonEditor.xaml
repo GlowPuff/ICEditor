@@ -64,7 +64,8 @@
 							Content="{materialDesign:PackIcon Kind=ContentCopy}"
 							IsEnabled="{Binding Path=selectedToon, Converter={StaticResource notNull}}"
 							Style="{StaticResource MaterialDesignFloatingActionButton}"
-							ToolTip="Duplicate Character" />
+							ToolTip="Duplicate Character"
+							ToolTipService.InitialShowDelay="250" />
 
 						<Button
 							x:Name="importToonButton"
@@ -74,7 +75,8 @@
 							Click="importToonButton_Click"
 							Content="{materialDesign:PackIcon Kind=Import}"
 							Style="{StaticResource MaterialDesignFloatingActionButton}"
-							ToolTip="Import Character From JSON" />
+							ToolTip="Import Character From JSON"
+							ToolTipService.InitialShowDelay="250" />
 
 						<Button
 							x:Name="exportToonButton"
@@ -85,7 +87,8 @@
 							Content="{materialDesign:PackIcon Kind=Export}"
 							IsEnabled="{Binding Path=selectedToon, Converter={StaticResource notNull}}"
 							Style="{StaticResource MaterialDesignFloatingActionButton}"
-							ToolTip="Export Character To JSON" />
+							ToolTip="Export Character To JSON"
+							ToolTipService.InitialShowDelay="250" />
 
 						<Button
 							x:Name="remToonButton"
@@ -98,7 +101,8 @@
 							Foreground="Red"
 							IsEnabled="{Binding Path=selectedToon, Converter={StaticResource notNull}}"
 							Style="{StaticResource MaterialDesignFloatingActionButton}"
-							ToolTip="Remove Character" />
+							ToolTip="Remove Character"
+							ToolTipService.InitialShowDelay="250" />
 					</StackPanel>
 				</Grid>
 			</GroupBox>

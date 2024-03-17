@@ -80,7 +80,8 @@
 									Margin="10,0,0,0"
 									Click="addNewTriggerButton_Click"
 									Style="{StaticResource MaterialDesignFloatingActionButton}"
-									ToolTip="Add New Trigger">
+									ToolTip="Add New Trigger"
+									ToolTipService.InitialShowDelay="250">
 									<Image Height="20" Source="../../Assets/addtrigger.png" />
 								</Button>
 							</Grid>
@@ -111,7 +112,8 @@
 									Margin="10,0,0,0"
 									Click="addNewEventButton_Click"
 									Style="{StaticResource MaterialDesignFloatingActionButton}"
-									ToolTip="Add New Event">
+									ToolTip="Add New Event"
+									ToolTipService.InitialShowDelay="250">
 									<Image Height="20" Source="../../Assets/addevent.png" />
 								</Button>
 							</Grid>

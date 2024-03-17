@@ -145,7 +145,8 @@
 										Click="refreshIdentifier_Click"
 										Content="{materialDesign:PackIcon Kind=Refresh}"
 										Style="{StaticResource MaterialDesignFloatingActionButton}"
-										ToolTip="Create new Custom Mission Identifier" />
+										ToolTip="Create new Custom Mission Identifier"
+										ToolTipService.InitialShowDelay="250" />
 								</Grid>
 							</Grid>
 
@@ -300,7 +301,8 @@
 										Margin="10,0,0,0"
 										Click="addNewEventButtonRoundLimit_Click"
 										Style="{StaticResource MaterialDesignFloatingActionButton}"
-										ToolTip="Add New Event">
+										ToolTip="Add New Event"
+										ToolTipService.InitialShowDelay="250">
 										<Image Height="20" Source="../Assets/addevent.png" />
 									</Button>
 								</Grid>
@@ -368,7 +370,8 @@
 									Margin="10,0,0,0"
 									Click="addNewEventButton_Click"
 									Style="{StaticResource MaterialDesignFloatingActionButton}"
-									ToolTip="Add New Event">
+									ToolTip="Add New Event"
+									ToolTipService.InitialShowDelay="250">
 									<Image Height="20" Source="../Assets/addevent.png" />
 								</Button>
 							</Grid>
@@ -569,7 +572,8 @@
 										Click="addmBanBtn_Click"
 										Content="{materialDesign:PackIcon Kind=AddBold}"
 										Style="{StaticResource MaterialDesignFloatingActionButton}"
-										ToolTip="Add Group To Banned List." />
+										ToolTip="Add Group To Banned List."
+										ToolTipService.InitialShowDelay="250" />
 								</Grid>
 
 								<TextBlock
@@ -610,7 +614,8 @@
 										Content="{materialDesign:PackIcon Kind=RemoveBold}"
 										Foreground="Red"
 										Style="{StaticResource MaterialDesignFloatingActionButton}"
-										ToolTip="Remove Group From Banned List." />
+										ToolTip="Remove Group From Banned List."
+										ToolTipService.InitialShowDelay="250" />
 								</Grid>
 							</StackPanel>
 						</GroupBox>

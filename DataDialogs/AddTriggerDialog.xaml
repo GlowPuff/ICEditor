@@ -144,7 +144,8 @@
 								Margin="10,0,0,0"
 								Click="addNewEventButton_Click"
 								Style="{StaticResource MaterialDesignFloatingActionButton}"
-								ToolTip="Add New Event">
+								ToolTip="Add New Event"
+								ToolTipService.InitialShowDelay="250">
 								<Image Height="20" Source="../Assets/addevent.png" />
 							</Button>
 						</Grid>

@@ -36,7 +36,9 @@
 						Click="remTriggerButton_Click"
 						Content="{materialDesign:PackIcon Kind=RemoveBold}"
 						Foreground="Red"
-						Style="{StaticResource MaterialDesignFloatingActionButton}" />
+						Style="{StaticResource MaterialDesignFloatingActionButton}"
+						ToolTip="Remove Trigger"
+						ToolTipService.InitialShowDelay="250" />
 				</UniformGrid>
 			</UniformGrid>
 		</DataTemplate>
@@ -76,7 +78,8 @@
 									Click="addTriggerButton_Click"
 									Content="{materialDesign:PackIcon Kind=AddBold}"
 									Style="{StaticResource MaterialDesignFloatingActionButton}"
-									ToolTip="Add Existing Trigger" />
+									ToolTip="Add Existing Trigger"
+									ToolTipService.InitialShowDelay="250" />
 								<Button
 									x:Name="addNewTriggerButton"
 									Grid.Column="2"
@@ -85,7 +88,8 @@
 									Margin="10,0,0,0"
 									Click="addNewTriggerButton_Click"
 									Style="{StaticResource MaterialDesignFloatingActionButton}"
-									ToolTip="Add New Trigger">
+									ToolTip="Add New Trigger"
+									ToolTipService.InitialShowDelay="250">
 									<Image Height="20" Source="../../Assets/addtrigger.png" />
 								</Button>
 							</Grid>

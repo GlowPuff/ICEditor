@@ -1,29 +1,54 @@
-﻿<Window x:Class="Imperial_Commander_Editor.ChangeMissionInfoDialog"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Imperial_Commander_Editor"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        mc:Ignorable="d"
-				Style="{StaticResource dws}"
-        Title="Change Mission Info" Width="500" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown" SizeToContent="Height" ContentRendered="Window_ContentRendered">
+﻿<Window
+	x:Class="Imperial_Commander_Editor.ChangeMissionInfoDialog"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:local="clr-namespace:Imperial_Commander_Editor"
+	xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	Title="Change Mission Info"
+	Width="500"
+	ContentRendered="Window_ContentRendered"
+	MouseDown="Window_MouseDown"
+	SizeToContent="Height"
+	Style="{StaticResource dws}"
+	WindowStartupLocation="CenterScreen"
+	mc:Ignorable="d">
 
 	<Border BorderBrush="MediumPurple" BorderThickness="2">
 		<GroupBox Header="Change Mission Info Event Action" Style="{DynamicResource MaterialDesignGroupBox}">
 			<Grid>
 				<Grid.RowDefinitions>
-					<RowDefinition Height="*"/>
-					<RowDefinition Height="auto"/>
+					<RowDefinition Height="*" />
+					<RowDefinition Height="auto" />
 				</Grid.RowDefinitions>
 
 				<StackPanel>
-					<TextBox x:Name="textbox" Grid.Row="0" Margin="0,0,0,10" BorderThickness="2" BorderBrush="MediumPurple" AcceptsReturn="True" Foreground="White" CaretBrush="White" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap" VerticalAlignment="Stretch" Text="{Binding theText}" MinHeight="200" materialDesign:HintAssist.Hint="This text will replace the current Mission Info."/>
+					<TextBox
+						x:Name="textbox"
+						Grid.Row="0"
+						MinHeight="200"
+						Margin="0,0,0,10"
+						VerticalAlignment="Stretch"
+						materialDesign:HintAssist.Hint="This text will replace the current Mission Info."
+						AcceptsReturn="True"
+						BorderBrush="MediumPurple"
+						BorderThickness="2"
+						CaretBrush="White"
+						Foreground="White"
+						Text="{Binding theText}"
+						TextWrapping="Wrap"
+						VerticalScrollBarVisibility="Auto" />
 				</StackPanel>
 
 				<StackPanel Grid.Row="1">
-					<Separator Margin="0,10,0,10"/>
-					<Button x:Name="okButton" Content="ACCEPT" Click="okButton_Click" IsDefault="True" HorizontalAlignment="Right"/>
+					<Separator Margin="0,10,0,10" />
+					<Button
+						x:Name="okButton"
+						HorizontalAlignment="Right"
+						Click="okButton_Click"
+						Content="ACCEPT"
+						IsDefault="True" />
 				</StackPanel>
 			</Grid>
 		</GroupBox>

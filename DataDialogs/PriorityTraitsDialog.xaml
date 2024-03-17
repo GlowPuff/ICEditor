@@ -1,60 +1,132 @@
-﻿<Window x:Class="Imperial_Commander_Editor.PriorityTraitsDialog"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Imperial_Commander_Editor"
-        mc:Ignorable="d"
-				xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Style="{StaticResource dws}"
-        Title="Change Priority Target Traits" Width="700" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown" SizeToContent="Height">
+﻿<Window
+	x:Class="Imperial_Commander_Editor.PriorityTraitsDialog"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:local="clr-namespace:Imperial_Commander_Editor"
+	xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	Title="Change Priority Target Traits"
+	Width="700"
+	MouseDown="Window_MouseDown"
+	SizeToContent="Height"
+	Style="{StaticResource dws}"
+	WindowStartupLocation="CenterScreen"
+	mc:Ignorable="d">
 
 	<Border BorderBrush="MediumPurple" BorderThickness="2">
 		<GroupBox Header="Change Priority Target Traits" Style="{DynamicResource MaterialDesignGroupBox}">
 			<Grid>
 				<Grid.RowDefinitions>
-					<RowDefinition Height="*"/>
-					<RowDefinition Height="auto"/>
+					<RowDefinition Height="*" />
+					<RowDefinition Height="auto" />
 				</Grid.RowDefinitions>
 
 				<StackPanel>
-					<materialDesign:Card Background="{StaticResource CardBG}" Padding="10" Margin="0,0,0,10">
+					<materialDesign:Card
+						Margin="0,0,0,10"
+						Padding="10"
+						Background="{StaticResource CardBG}">
 						<StackPanel>
-							<TextBlock Text="Priority Target Traits affect which types of Rebel traits this group will prefer first when attacking." TextWrapping="Wrap"/>
+							<TextBlock Text="Priority Target Traits affect which types of Rebel traits this group will prefer first when attacking." TextWrapping="Wrap" />
 						</StackPanel>
 					</materialDesign:Card>
 
-					<materialDesign:Card x:Name="useDefaultCard" Background="{StaticResource CardBG}" Padding="10" Margin="0,0,0,10">
-						<CheckBox x:Name="defCB" Content="Use Group Default" Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" IsChecked="{Binding useDefaultPriority}"/>
+					<materialDesign:Card
+						x:Name="useDefaultCard"
+						Margin="0,0,0,10"
+						Padding="10"
+						Background="{StaticResource CardBG}">
+						<CheckBox
+							x:Name="defCB"
+							Content="Use Group Default"
+							IsChecked="{Binding useDefaultPriority}"
+							Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" />
 					</materialDesign:Card>
 
-					<materialDesign:Card Background="{StaticResource CardBG}" Padding="10" Margin="0,0,0,10" IsEnabled="{Binding ElementName=defCB, Path=IsChecked, Converter={StaticResource InvertBooleanConverter}}">
+					<materialDesign:Card
+						Margin="0,0,0,10"
+						Padding="10"
+						Background="{StaticResource CardBG}"
+						IsEnabled="{Binding ElementName=defCB, Path=IsChecked, Converter={StaticResource InvertBooleanConverter}}">
 						<StackPanel>
 							<UniformGrid Columns="4">
-								<CheckBox Content="Brawler" Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" Margin="4,4,10,4" IsChecked="{Binding incBrawler}"/>
-								<CheckBox Content="Creature" Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" Margin="4,4,10,4" IsChecked="{Binding incCreature}"/>
-								<CheckBox Content="Droid" Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" Margin="4,4,10,4" IsChecked="{Binding incDroid}"/>
-								<CheckBox Content="Force User" Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" Margin="4,4,10,4" IsChecked="{Binding incForceUser}"/>
+								<CheckBox
+									Margin="4,4,10,4"
+									Content="Brawler"
+									IsChecked="{Binding incBrawler}"
+									Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" />
+								<CheckBox
+									Margin="4,4,10,4"
+									Content="Creature"
+									IsChecked="{Binding incCreature}"
+									Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" />
+								<CheckBox
+									Margin="4,4,10,4"
+									Content="Droid"
+									IsChecked="{Binding incDroid}"
+									Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" />
+								<CheckBox
+									Margin="4,4,10,4"
+									Content="Force User"
+									IsChecked="{Binding incForceUser}"
+									Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" />
 							</UniformGrid>
 							<UniformGrid Columns="4">
-								<CheckBox Content="Guardian" Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" Margin="4,4,10,4" IsChecked="{Binding incGuardian}"/>
-								<CheckBox Content="Heavy Weapon" Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" Margin="4,4,10,4" IsChecked="{Binding incHeavyWeapon}"/>
-								<CheckBox Content="Hunter" Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" Margin="4,4,10,4" IsChecked="{Binding incHunter}"/>
-								<CheckBox Content="Leader" Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" Margin="4,4,10,4" IsChecked="{Binding incLeader}"/>
+								<CheckBox
+									Margin="4,4,10,4"
+									Content="Guardian"
+									IsChecked="{Binding incGuardian}"
+									Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" />
+								<CheckBox
+									Margin="4,4,10,4"
+									Content="Heavy Weapon"
+									IsChecked="{Binding incHeavyWeapon}"
+									Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" />
+								<CheckBox
+									Margin="4,4,10,4"
+									Content="Hunter"
+									IsChecked="{Binding incHunter}"
+									Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" />
+								<CheckBox
+									Margin="4,4,10,4"
+									Content="Leader"
+									IsChecked="{Binding incLeader}"
+									Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" />
 							</UniformGrid>
 							<UniformGrid Columns="4">
-								<CheckBox Content="Smuggler" Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" Margin="4,4,10,4" IsChecked="{Binding incSmuggler}"/>
-								<CheckBox Content="Spy" Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" Margin="4,4,10,4" IsChecked="{Binding incSpy}"/>
-								<CheckBox Content="Trooper" Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" Margin="4,4,10,4" IsChecked="{Binding incTrooper}"/>
-								<CheckBox Content="Wookiee" Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" Margin="4,4,10,4" IsChecked="{Binding incWookiee}"/>
-								<CheckBox Content="Vehicle" Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" Margin="4,4,10,4" IsChecked="{Binding incVehicle}"/>
+								<CheckBox
+									Margin="4,4,10,4"
+									Content="Smuggler"
+									IsChecked="{Binding incSmuggler}"
+									Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" />
+								<CheckBox
+									Margin="4,4,10,4"
+									Content="Spy"
+									IsChecked="{Binding incSpy}"
+									Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" />
+								<CheckBox
+									Margin="4,4,10,4"
+									Content="Trooper"
+									IsChecked="{Binding incTrooper}"
+									Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" />
+								<CheckBox
+									Margin="4,4,10,4"
+									Content="Wookiee"
+									IsChecked="{Binding incWookiee}"
+									Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" />
+								<CheckBox
+									Margin="4,4,10,4"
+									Content="Vehicle"
+									IsChecked="{Binding incVehicle}"
+									Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" />
 							</UniformGrid>
 						</StackPanel>
 					</materialDesign:Card>
 				</StackPanel>
 
 				<StackPanel Grid.Row="1" Margin="0,10,0,0">
-					<Separator Margin="0,0,0,10"/>
+					<Separator Margin="0,0,0,10" />
 					<Grid>
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition Width="1*" />
@@ -62,11 +134,24 @@
 						</Grid.ColumnDefinitions>
 
 						<StackPanel Orientation="Horizontal">
-							<Button x:Name="clearBtn" Content="CLEAR ALL" Click="clearBtn_Click"/>
-							<Button x:Name="checkBtn" Content="CHECK ALL" Margin="10,0,0,0" Click="checkBtn_Click"/>
+							<Button
+								x:Name="clearBtn"
+								Click="clearBtn_Click"
+								Content="CLEAR ALL" />
+							<Button
+								x:Name="checkBtn"
+								Margin="10,0,0,0"
+								Click="checkBtn_Click"
+								Content="CHECK ALL" />
 						</StackPanel>
 
-						<Button Grid.Column="1" x:Name="okButton" Content="ACCEPT" Click="okButton_Click" IsDefault="True" HorizontalAlignment="Right"/>
+						<Button
+							x:Name="okButton"
+							Grid.Column="1"
+							HorizontalAlignment="Right"
+							Click="okButton_Click"
+							Content="ACCEPT"
+							IsDefault="True" />
 					</Grid>
 				</StackPanel>
 			</Grid>

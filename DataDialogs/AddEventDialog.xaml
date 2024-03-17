@@ -54,7 +54,7 @@
 
 					<TextBlock VerticalAlignment="Center" Text="{Binding displayName}" />
 
-					<UniformGrid Grid.Column="1" Columns="2">
+					<UniformGrid Grid.Column="1" Columns="3">
 						<Button
 							x:Name="upBtn"
 							Width="25"
@@ -69,6 +69,15 @@
 							Margin="5,0,0,0"
 							Click="downBtn_Click"
 							Content="{materialDesign:PackIcon Kind=ChevronDown}"
+							Style="{StaticResource MaterialDesignFloatingActionButton}" />
+						<Button
+							x:Name="remBtn"
+							Width="25"
+							Height="25"
+							Margin="5,0,0,0"
+							Click="removeActionButton_Click"
+							Content="{materialDesign:PackIcon Kind=RemoveBold}"
+							Foreground="Red"
 							Style="{StaticResource MaterialDesignFloatingActionButton}" />
 					</UniformGrid>
 				</Grid>
@@ -163,7 +172,9 @@
 										Width="35"
 										Height="35"
 										Margin="10,0,0,0"
-										Style="{StaticResource MaterialDesignMultiFloatingActionPopupBox}">
+										Style="{StaticResource MaterialDesignMultiFloatingActionPopupBox}"
+										ToolTip="Add Event Action"
+										ToolTipService.InitialShowDelay="250">
 										<materialDesign:Card
 											MaxHeight="200"
 											Margin="5"
@@ -307,7 +318,7 @@
 											</StackPanel>
 										</materialDesign:Card>
 									</materialDesign:PopupBox>
-									<Button
+									<!--<Button
 										x:Name="removeActionButton"
 										Width="35"
 										Height="35"
@@ -319,7 +330,7 @@
 											Height="20"
 											Foreground="Red"
 											Kind="RemoveBold" />
-									</Button>
+									</Button>-->
 								</StackPanel>
 							</Grid>
 						</GroupBox>
@@ -345,7 +356,8 @@
 											Height="25"
 											Margin="0,0,10,0"
 											StaysOpen="True"
-											ToolTip="Add Existing Trigger">
+											ToolTip="Add Existing Trigger"
+											ToolTipService.InitialShowDelay="250">
 											<Border MaxHeight="200" Margin="5">
 												<ScrollViewer VerticalScrollBarVisibility="Auto">
 													<ListBox
@@ -362,7 +374,8 @@
 											Height="35"
 											Click="addAdditionalTriggerButton_Click"
 											Style="{StaticResource MaterialDesignFloatingActionButton}"
-											ToolTip="Add New Trigger">
+											ToolTip="Add New Trigger"
+											ToolTipService.InitialShowDelay="250">
 											<Image Height="20" Source="../Assets/addtrigger.png" />
 										</Button>
 									</StackPanel>
@@ -637,17 +650,6 @@
 							</Grid>
 						</GroupBox>
 					</StackPanel>
-
-					<!--<materialDesign:PopupBox Style="{StaticResource MaterialDesignMultiFloatingActionPopupBox}"
-  PlacementMode="BottomAndAlignCentres"
-  ToolTipService.Placement="Right"
-  ToolTip="PopupBox, Style MaterialDesignMultiFloatingActionPopupBox">
-					<StackPanel>
-						<Button ToolTip="One" Content="1" />
-						<Button ToolTip="Two" Content="2" />
-						<Button ToolTip="Three" Content="3" />
-					</StackPanel>
-				</materialDesign:PopupBox>-->
 				</UniformGrid>
 
 				<StackPanel Grid.Row="1">

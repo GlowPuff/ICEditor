@@ -257,7 +257,7 @@
 								x:Name="tabControl"
 								materialDesign:ColorZoneAssist.Mode="PrimaryMid"
 								materialDesign:NavigationRailAssist.ShowSelectionBackground="True"
-								Style="{StaticResource MaterialDesignNavigatilRailTabControl}"
+								Style="{StaticResource MaterialDesignNavigationRailTabControl}"
 								TabStripPlacement="Top">
 								<TabControl.Background>
 									<SolidColorBrush Color="#FF3A3349" />

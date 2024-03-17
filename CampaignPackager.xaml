@@ -783,7 +783,6 @@
 										<TextBlock
 											Margin="0,5,0,0"
 											FontStyle="Italic"
-											Foreground="Violet"
 											Text="A Custom Mission Identifier is the ID that uniquely identifies this Mission among all the others in the Campaign.  It is only used for setting the next Story Mission using the 'Set Next Mission' Event Action within a Mission."
 											TextWrapping="Wrap" />
 
@@ -834,30 +833,18 @@
 							IsEnabled="{Binding selectedTranslationItem, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource notNull}}"
 							Visibility="Collapsed">
 							<StackPanel>
-								<!--<TextBlock
+								<TextBlock
+									Margin="0,5,0,0"
 									FontStyle="Italic"
-									Text="Recommended filename convention for Mission Translations:"
+									Text="Make sure your Mission translations have the proper language set."
 									TextWrapping="Wrap" />
 								<TextBlock
 									Margin="0,5,0,0"
 									FontStyle="Italic"
-									Foreground="Violet"
-									Text="[MISSION-FILENAME]_[LANGUAGE-ID].json"
-									TextWrapping="Wrap" />-->
-								<!--<TextBlock
-									Margin="0,5,0,0"
-									FontStyle="Italic"
-									Foreground="Red"
-									Text="Mission Translations MUST use the same filename as the Custom Mission it's associated with."
-									TextWrapping="Wrap" />-->
-								<!--<TextBlock
-									Margin="0,5,0,0"
-									FontStyle="Italic"
-									Foreground="Violet"
-									Text="For example, the German translation for a Mission whose filename is 'JEDI1.json' should be 'JEDI1_DE.json'"
+									Text="Multiple translations can be assigned to a single Mission."
 									TextWrapping="Wrap" />
 
-								<Separator Margin="0,10" />-->
+								<Separator Margin="0,10" />
 
 								<TextBlock
 									FontStyle="Italic"

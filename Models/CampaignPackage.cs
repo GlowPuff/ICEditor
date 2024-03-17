@@ -144,7 +144,13 @@ namespace Imperial_Commander_Editor
 
 		public CampaignTranslationItem AddCampaignInfoTranslation( string instruction, string filename )
 		{
-			var item = new CampaignTranslationItem() { campaignInstructionTranslation = instruction, fileName = filename, isInstruction = true };
+			var item = new CampaignTranslationItem()
+			{
+				campaignInstructionTranslation = instruction,
+				fileName = filename,
+				isInstruction = true,
+				assignedMissionName = "Campaign Instructions"
+			};
 			campaignTranslationItems.Add( item );
 			return item;
 		}

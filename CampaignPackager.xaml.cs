@@ -616,8 +616,10 @@ namespace Imperial_Commander_Editor
 				var m = FileManager.LoadMission( ofd.FileName );
 				if ( m != null )
 				{
+					string oldName = selectedMissionItem.missionName;
 					selectedMissionItem = campaignPackage.ReplaceMission( selectedMissionItem, ofd.SafeFileName, m );
 					dropNotice.Visibility = campaignPackage.campaignMissionItems.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
+					MessageBox.Show( $"Replaced/updated [{oldName}] with [{selectedMissionItem.missionName}]", "Mission Replaced/Updated" );
 				}
 				else
 					MessageBox.Show( "Loaded Mission is null.", "App Exception", MessageBoxButton.OK, MessageBoxImage.Error );

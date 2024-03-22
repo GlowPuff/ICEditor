@@ -261,7 +261,7 @@
 									Margin="0,5,0,0"
 									FontStyle="Italic"
 									Foreground="Violet"
-									Text="A value of -1 will remove the round limit, even if it's set using an Event Action during the Mission."
+									Text="A value of -1 will remove the round limit for this Mission, but it can be set later in the Mission with a 'Modify Round Limit' Event Action."
 									TextWrapping="Wrap" />
 								<TextBlock
 									Margin="0,5,0,0"

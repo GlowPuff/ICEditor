@@ -7,7 +7,7 @@
 	xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	Title="Set Countdown"
-	Width="550"
+	Width="750"
 	ContentRendered="Window_ContentRendered"
 	MouseDown="Window_MouseDown"
 	SizeToContent="Height"
@@ -24,146 +24,180 @@
 					<RowDefinition Height="auto" />
 				</Grid.RowDefinitions>
 
-				<StackPanel>
-					<materialDesign:Card Padding="10" Background="{StaticResource CardBG}">
-						<StackPanel>
-							<Grid>
-								<Grid.ColumnDefinitions>
-									<ColumnDefinition Width="auto" />
-									<ColumnDefinition Width="*" />
-								</Grid.ColumnDefinitions>
-								<TextBlock VerticalAlignment="Center" Text="Timer Name:" />
-								<TextBox
-									x:Name="timerNAme"
-									Grid.Column="1"
-									Margin="10,0,0,0"
-									VerticalAlignment="Center"
-									materialDesign:HintAssist.Hint="Required"
-									CaretBrush="White"
-									KeyDown="inputChanged_KeyDown"
-									Style="{StaticResource MaterialDesignOutlinedTextBox}"
-									Text="{Binding countdownTimerName}" />
-							</Grid>
-							<TextBlock
-								Margin="0,5,0,0"
-								VerticalAlignment="Center"
-								FontStyle="Italic"
-								Text="Giving a name to the Timer allows you to later disable it. The name is case insensitive, so 'MY TIMER' is treated the same as 'my timer'."
-								TextWrapping="Wrap" />
-						</StackPanel>
-					</materialDesign:Card>
+				<UniformGrid Columns="2">
+					<GroupBox
+						Grid.Row="1"
+						Margin="0,0,5,0"
+						Background="#FF503B7C"
+						Header="General Properties">
 
-					<materialDesign:Card
-						Margin="0,10,0,0"
-						Padding="10"
-						Background="{StaticResource CardBG}">
-						<StackPanel>
-							<UniformGrid Margin="0,0,0,0" Columns="2">
-								<TextBlock VerticalAlignment="Center" Text="Timer Value:" />
-								<TextBox
-									x:Name="modifyInput"
-									MaxWidth="100"
-									VerticalAlignment="Center"
-									HorizontalContentAlignment="Center"
-									CaretBrush="White"
-									KeyDown="inputChanged_KeyDown"
-									Text="{Binding countdownTimer}" />
-							</UniformGrid>
+						<StackPanel Margin="0,0,5,0">
+							<materialDesign:Card Padding="10" Background="{StaticResource CardBG}">
+								<StackPanel>
+									<Grid>
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="auto" />
+											<ColumnDefinition Width="*" />
+										</Grid.ColumnDefinitions>
+										<TextBlock VerticalAlignment="Center" Text="Timer Name:" />
+										<TextBox
+											x:Name="timerNAme"
+											Grid.Column="1"
+											Margin="10,0,0,0"
+											VerticalAlignment="Center"
+											materialDesign:HintAssist.Hint="Required"
+											CaretBrush="White"
+											KeyDown="inputChanged_KeyDown"
+											Style="{StaticResource MaterialDesignOutlinedTextBox}"
+											Text="{Binding countdownTimerName}" />
+									</Grid>
+									<TextBlock
+										Margin="0,5,0,0"
+										VerticalAlignment="Center"
+										FontStyle="Italic"
+										Text="Giving a name to the Timer allows you to later disable it. The name is case insensitive, so 'MY TIMER' is treated the same as 'my timer'."
+										TextWrapping="Wrap" />
+								</StackPanel>
+							</materialDesign:Card>
 
-							<TextBlock
-								Margin="0,5,0,0"
-								VerticalAlignment="Center"
-								FontStyle="Italic"
-								Text="Start a countdown of rounds, optionally firing an Event and/or Trigger when it finishes."
-								TextWrapping="Wrap" />
-
-							<TextBlock
-								Margin="0,5,0,0"
-								VerticalAlignment="Center"
-								FontStyle="Italic"
-								Foreground="Red"
-								Text="Set the Timer Value to -1 to DISABLE an existing timer of the same name."
-								TextWrapping="Wrap" />
-
-							<CheckBox
+							<materialDesign:Card
 								Margin="0,10,0,0"
-								Content="Display Countdown in Saga IC2"
-								IsChecked="{Binding showPlayerCountdown}"
-								Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" />
-							<TextBlock
-								Margin="0,5,0,0"
-								VerticalAlignment="Center"
-								FontStyle="Italic"
-								Text="If this is checked, the current countdown value will be displayed in a small UI overlay above the Round number in the IC2 app. Only one timer value can be shown in IC2 at a time, using the one that will expire first."
-								TextWrapping="Wrap" />
+								Padding="10"
+								Background="{StaticResource CardBG}">
+								<StackPanel>
+									<UniformGrid Margin="0,0,0,0" Columns="2">
+										<TextBlock VerticalAlignment="Center" Text="Timer Value:" />
+										<TextBox
+											x:Name="modifyInput"
+											MaxWidth="100"
+											VerticalAlignment="Center"
+											HorizontalContentAlignment="Center"
+											CaretBrush="White"
+											KeyDown="inputChanged_KeyDown"
+											Text="{Binding countdownTimer}" />
+									</UniformGrid>
+
+									<TextBlock
+										Margin="0,5,0,0"
+										VerticalAlignment="Center"
+										FontStyle="Italic"
+										Text="Start a countdown of rounds, optionally firing an Event and/or Trigger when it expires."
+										TextWrapping="Wrap" />
+
+									<TextBlock
+										Margin="0,5,0,0"
+										VerticalAlignment="Center"
+										FontStyle="Italic"
+										Foreground="Orange"
+										Text="Example: A Timer with a value of '2' that is started on Round 1 will finish at the END of Round 3."
+										TextWrapping="Wrap" />
+
+									<TextBlock
+										Margin="0,5,0,0"
+										VerticalAlignment="Center"
+										FontStyle="Italic"
+										Foreground="Red"
+										Text="Set the Timer Value to -1 to DISABLE an existing timer of the same name."
+										TextWrapping="Wrap" />
+								</StackPanel>
+							</materialDesign:Card>
 						</StackPanel>
-					</materialDesign:Card>
-				</StackPanel>
-
-				<GroupBox
-					Grid.Row="1"
-					Margin="0,10,0,0"
-					Background="#FF503B7C"
-					Header="When The Timer Finishes...">
+					</GroupBox>
+					<!--  RIGHT SIDE  -->
 					<StackPanel>
-						<TextBlock Margin="0,0,0,5" Text="Fire this Trigger:" />
-						<Grid>
-							<Grid.ColumnDefinitions>
-								<ColumnDefinition Width="*" />
-								<ColumnDefinition Width="auto" />
-							</Grid.ColumnDefinitions>
+						<GroupBox
+							Grid.Row="1"
+							Margin="5,0,0,0"
+							Background="#FF503B7C"
+							Header="When The Timer Finishes...">
+							<StackPanel>
+								<TextBlock
+									VerticalAlignment="Center"
+									FontStyle="Italic"
+									Text="The Trigger and/or Event is fired at the END of the game round the Timer expires on."
+									TextWrapping="Wrap" />
 
-							<ComboBox
-								x:Name="triggerCB"
-								DisplayMemberPath="name"
-								SelectedValue="{Binding triggerGUID}"
-								SelectedValuePath="GUID"
-								Style="{StaticResource MaterialDesignOutlinedComboBox}" />
+								<TextBlock Margin="0,10,0,5" Text="Fire this Trigger:" />
+								<Grid>
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="*" />
+										<ColumnDefinition Width="auto" />
+									</Grid.ColumnDefinitions>
 
-							<Button
-								x:Name="addNewTriggerButton"
-								Grid.Column="2"
-								Width="35"
-								Height="35"
-								Margin="10,0,0,0"
-								Click="addNewTriggerButton_Click"
-								Style="{StaticResource MaterialDesignFloatingActionButton}"
-								ToolTip="Add New Trigger"
-								ToolTipService.InitialShowDelay="250">
-								<Image Height="20" Source="/Assets/addtrigger.png" />
-							</Button>
-						</Grid>
+									<ComboBox
+										x:Name="triggerCB"
+										DisplayMemberPath="name"
+										SelectedValue="{Binding triggerGUID}"
+										SelectedValuePath="GUID"
+										Style="{StaticResource MaterialDesignOutlinedComboBox}" />
 
-						<TextBlock Margin="0,10,0,5" Text="Fire this Event:" />
-						<Grid>
-							<Grid.ColumnDefinitions>
-								<ColumnDefinition Width="*" />
-								<ColumnDefinition Width="auto" />
-							</Grid.ColumnDefinitions>
+									<Button
+										x:Name="addNewTriggerButton"
+										Grid.Column="2"
+										Width="35"
+										Height="35"
+										Margin="10,0,0,0"
+										Click="addNewTriggerButton_Click"
+										Style="{StaticResource MaterialDesignFloatingActionButton}"
+										ToolTip="Add New Trigger"
+										ToolTipService.InitialShowDelay="250">
+										<Image Height="20" Source="/Assets/addtrigger.png" />
+									</Button>
+								</Grid>
 
-							<ComboBox
-								x:Name="eventCB"
-								DisplayMemberPath="name"
-								Foreground="White"
-								SelectedValue="{Binding eventGUID}"
-								SelectedValuePath="GUID"
-								Style="{StaticResource MaterialDesignOutlinedComboBox}" />
+								<TextBlock Margin="0,10,0,5" Text="Fire this Event:" />
+								<Grid>
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="*" />
+										<ColumnDefinition Width="auto" />
+									</Grid.ColumnDefinitions>
 
-							<Button
-								x:Name="addNewEventButton"
-								Grid.Column="2"
-								Width="35"
-								Height="35"
-								Margin="10,0,0,0"
-								Click="addNewEventButton_Click"
-								Style="{StaticResource MaterialDesignFloatingActionButton}"
-								ToolTip="Add New Event"
-								ToolTipService.InitialShowDelay="250">
-								<Image Height="20" Source="/Assets/addevent.png" />
-							</Button>
-						</Grid>
+									<ComboBox
+										x:Name="eventCB"
+										DisplayMemberPath="name"
+										Foreground="White"
+										SelectedValue="{Binding eventGUID}"
+										SelectedValuePath="GUID"
+										Style="{StaticResource MaterialDesignOutlinedComboBox}" />
+
+									<Button
+										x:Name="addNewEventButton"
+										Grid.Column="2"
+										Width="35"
+										Height="35"
+										Margin="10,0,0,0"
+										Click="addNewEventButton_Click"
+										Style="{StaticResource MaterialDesignFloatingActionButton}"
+										ToolTip="Add New Event"
+										ToolTipService.InitialShowDelay="250">
+										<Image Height="20" Source="/Assets/addevent.png" />
+									</Button>
+								</Grid>
+							</StackPanel>
+						</GroupBox>
+
+						<GroupBox
+							Grid.Row="1"
+							Margin="5,10,0,0"
+							Background="#FF503B7C"
+							Header="In-Game UI">
+
+							<StackPanel>
+								<CheckBox
+									Margin="0,0,0,0"
+									Content="Display Countdown in Saga IC2"
+									IsChecked="{Binding showPlayerCountdown}"
+									Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" />
+								<TextBlock
+									Margin="0,5,0,0"
+									VerticalAlignment="Center"
+									FontStyle="Italic"
+									Text="If this is checked, the current countdown value will be displayed in a small UI overlay above the Round number in the IC2 app. Only one timer value can be shown in IC2 at a time, defaulting to the one that will expire first."
+									TextWrapping="Wrap" />
+							</StackPanel>
+						</GroupBox>
 					</StackPanel>
-				</GroupBox>
+				</UniformGrid>
 
 				<StackPanel Grid.Row="2" Margin="0,10,0,0">
 					<Separator Margin="0,0,0,10" />

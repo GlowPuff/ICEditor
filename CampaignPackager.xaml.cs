@@ -488,6 +488,9 @@ namespace Imperial_Commander_Editor
 			}
 		}
 
+		/// <summary>
+		/// Add Campaign Info translation
+		/// </summary>
 		private void addTranslationBtn_Click( object sender, RoutedEventArgs e )
 		{
 			selectedTranslationItem = null;
@@ -499,27 +502,6 @@ namespace Imperial_Commander_Editor
 				FileInfo fi = new FileInfo( ofd.FileName );
 				lastTranslationPath = fi.DirectoryName;
 
-				//if ( Path.GetExtension( fi.FullName ) == ".json" )//mission translation
-				//{
-				//	TranslatedMission tm = FileManager.LoadJSON<TranslatedMission>( ofd.FileName );
-				//	if ( tm != null )
-				//	{
-				//		//verify it's a translation
-				//		string stringified = File.ReadAllText( fi.FullName );
-				//		if ( stringified.Contains( "languageID" )
-				//			&& stringified.Contains( "events" )
-				//			&& stringified.Contains( "mapEntities" )
-				//			&& stringified.Contains( "initialGroups" ) )
-				//		{
-				//			selectedTranslationItem = campaignPackage.AddMissionTranslation( tm, ofd.SafeFileName );
-				//			dropTranslationNotice.Visibility = campaignPackage.campaignTranslationItems.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
-				//		}
-				//		else
-				//			MessageBox.Show( "The file doesn't appear to be a Mission Translation.", "App Exception", MessageBoxButton.OK, MessageBoxImage.Error );
-				//	}
-				//	else
-				//		MessageBox.Show( "Loaded Translation is null.", "App Exception", MessageBoxButton.OK, MessageBoxImage.Error );
-				//}
 				if ( Path.GetExtension( fi.FullName ) == ".txt" )//campaign instruction
 				{
 					string instructionText = File.ReadAllText( fi.FullName );
@@ -537,6 +519,7 @@ namespace Imperial_Commander_Editor
 				selectedTranslationItem = null;
 			}
 			dropTranslationNotice.Visibility = campaignPackage.campaignTranslationItems.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
+			UpdatePoolTranslationStatus();
 		}
 
 		private void translationLV_Drop( object sender, DragEventArgs e )
@@ -551,28 +534,6 @@ namespace Imperial_Commander_Editor
 					{
 						FileInfo fi = new FileInfo( item );
 
-						//if ( Path.GetExtension( item ) == ".json" )//mission translation
-						//{
-						//	var translation = FileManager.LoadJSON<TranslatedMission>( item );
-						//	if ( translation != null )
-						//	{
-						//		lastTranslationPath = fi.DirectoryName;
-						//		//verify it's a translation
-						//		string stringified = File.ReadAllText( fi.FullName );
-						//		if ( stringified.Contains( "languageID" )
-						//			&& stringified.Contains( "events" )
-						//			&& stringified.Contains( "mapEntities" )
-						//			&& stringified.Contains( "initialGroups" ) )
-						//		{
-						//			selectedTranslationItem = campaignPackage.AddMissionTranslation( translation, fi.Name );
-						//			dropTranslationNotice.Visibility = campaignPackage.campaignTranslationItems.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
-						//		}
-						//		else
-						//			throw new Exception( "The file doesn't appear to be a Mission Translation." );
-						//	}
-						//	else
-						//		throw new( $"Loaded Translation is null.\n{item}" );
-						//}
 						if ( Path.GetExtension( item ) == ".txt" )//campaign instructions
 						{
 							lastTranslationPath = fi.DirectoryName;
@@ -590,6 +551,9 @@ namespace Imperial_Commander_Editor
 			}
 		}
 
+		/// <summary>
+		/// Add Campaign Info translation
+		/// </summary>
 		private void translationDrop_DragEnter( object sender, DragEventArgs e )
 		{
 			if ( e.Data.GetDataPresent( DataFormats.FileDrop ) )
@@ -652,6 +616,7 @@ namespace Imperial_Commander_Editor
 						{
 							selectedTranslationItem = campaignPackage.AddMissionTranslation( tm, ofd.SafeFileName, selectedMissionItem );
 							dropTranslationNotice.Visibility = campaignPackage.campaignTranslationItems.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
+							UpdatePoolTranslationStatus();
 						}
 						else
 							MessageBox.Show( "The file doesn't appear to be a Mission Translation.", "App Exception", MessageBoxButton.OK, MessageBoxImage.Error );
@@ -665,6 +630,14 @@ namespace Imperial_Commander_Editor
 					selectedTranslationItem = campaignPackage.AddCampaignInfoTranslation( instructionText, fi.Name );
 					dropTranslationNotice.Visibility = campaignPackage.campaignTranslationItems.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
 				}
+			}
+		}
+
+		private void UpdatePoolTranslationStatus()
+		{
+			foreach ( var mission in campaignPackage.campaignMissionItems )
+			{
+				mission.hasTranslation = campaignPackage.campaignTranslationItems.Any( x => x.assignedMissionGUID == mission.missionGUID );
 			}
 		}
 	}

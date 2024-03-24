@@ -194,6 +194,7 @@ namespace Imperial_Commander_Editor
 	public class CampaignMissionItem : ObservableObject
 	{
 		string _missionName;
+		bool _hasTranslation;
 
 		public Guid GUID { get; set; }//GUID of this object, not the mission
 		public Guid missionGUID { get; set; }
@@ -203,6 +204,8 @@ namespace Imperial_Commander_Editor
 		//store the actual mission for packing as an individual file later, but don't serialize it here
 		[JsonIgnore]
 		public Mission mission { get; set; }
+		[JsonIgnore]
+		public bool hasTranslation { get => _hasTranslation; set => SetProperty( ref _hasTranslation, value ); }
 	}
 
 	public class CampaignStructure : ObservableObject

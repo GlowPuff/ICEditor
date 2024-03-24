@@ -22,6 +22,22 @@
 		<local:MissionTypeConverter x:Key="missionTypeConv" />
 		<local:Agenda2Color x:Key="agendaColor" />
 
+		<DataTemplate x:Key="poolItem">
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="auto" />
+				</Grid.ColumnDefinitions>
+
+				<TextBlock Text="{Binding missionName}" />
+				<materialDesign:Badged
+					Grid.Column="1"
+					Content="{materialDesign:PackIcon Kind=Translate}"
+					Foreground="Violet"
+					Visibility="{Binding hasTranslation, Converter={StaticResource BooleanToVisibilityConverter}}" />
+			</Grid>
+		</DataTemplate>
+
 		<DataTemplate x:Key="translationItem">
 			<Grid>
 				<Grid.RowDefinitions>
@@ -392,7 +408,8 @@
 										x:Name="missionLV"
 										VerticalAlignment="Top"
 										HorizontalContentAlignment="Stretch"
-										DisplayMemberPath="missionName"
+										d:ItemsSource="{d:SampleData ItemCount=1}"
+										ItemTemplate="{StaticResource poolItem}"
 										ItemsSource="{Binding campaignMissionItems}"
 										SelectedItem="{Binding selectedMissionItem, RelativeSource={RelativeSource AncestorType=Window}}" />
 								</Grid>

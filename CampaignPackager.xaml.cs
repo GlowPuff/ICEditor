@@ -107,6 +107,7 @@ namespace Imperial_Commander_Editor
 
 					instructionBtn.Foreground = string.IsNullOrEmpty( campaignPackage?.campaignInstructions ) ? new SolidColorBrush( Colors.Red ) : new SolidColorBrush( Colors.Lime );
 					DataContext = campaignPackage;
+					UpdatePoolTranslationStatus();
 					MessageBox.Show( $"Package successfully imported.", "Import Successful", MessageBoxButton.OK, MessageBoxImage.Information );
 				}
 				else
@@ -195,6 +196,7 @@ namespace Imperial_Commander_Editor
 				{
 					selectedMissionItem = campaignPackage.AddMission( ofd.SafeFileName, m );
 					dropNotice.Visibility = campaignPackage.campaignMissionItems.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
+					UpdatePoolTranslationStatus();
 				}
 				else
 					MessageBox.Show( "Loaded Mission is null.", "App Exception", MessageBoxButton.OK, MessageBoxImage.Error );
@@ -221,6 +223,7 @@ namespace Imperial_Commander_Editor
 							lastMissionPath = fi.DirectoryName;
 							selectedMissionItem = campaignPackage.AddMission( fi.Name, mission );
 							dropNotice.Visibility = campaignPackage.campaignMissionItems.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
+							UpdatePoolTranslationStatus();
 						}
 						else
 							throw new( $"Loaded Mission is null.\n{item}" );
@@ -584,6 +587,7 @@ namespace Imperial_Commander_Editor
 					selectedMissionItem = campaignPackage.ReplaceMission( selectedMissionItem, ofd.SafeFileName, m );
 					dropNotice.Visibility = campaignPackage.campaignMissionItems.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
 					MessageBox.Show( $"Replaced/updated [{oldName}] with [{selectedMissionItem.missionName}]", "Mission Replaced/Updated" );
+					UpdatePoolTranslationStatus();
 				}
 				else
 					MessageBox.Show( "Loaded Mission is null.", "App Exception", MessageBoxButton.OK, MessageBoxImage.Error );

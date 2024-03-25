@@ -7,8 +7,17 @@ namespace Imperial_Commander_Editor
 	public interface ITranslatedEventAction
 	{
 		public Guid GUID { get; set; }
-		//public string theText { get; set; }
 		public EventActionType eventActionType { get; set; }
+		string eaName { get; set; }
+	}
+
+	public class TranslatedEntityProperties
+	{
+		public string entityName { get; set; }
+		public Guid GUID { get; set; }
+		public string theText { get; set; } = "";
+		public List<TranslatedGUIDText> buttonList { get; set; } = new();
+		public TranslatedEntityProperties() { }
 	}
 
 	/// <summary>
@@ -55,6 +64,7 @@ namespace Imperial_Commander_Editor
 			{
 				var me = new TranslatedMapEntity()
 				{
+					entityName = e.name,
 					GUID = e.GUID,
 					mainText = e.entityProperties.theText
 				};
@@ -68,7 +78,7 @@ namespace Imperial_Commander_Editor
 			//initial groups
 			foreach ( var item in mission.initialDeploymentGroups )
 			{
-				var dg = new TranslatedInitialGroup() { customInstructions = item.customText };
+				var dg = new TranslatedInitialGroup() { customInstructions = item.customText, cardName = item.cardName };
 				translatedMission.initialGroups.Add( dg );
 			}
 
@@ -99,11 +109,13 @@ namespace Imperial_Commander_Editor
 
 	public class TranslatedInitialGroup
 	{
+		public string cardName;
 		public string customInstructions;
 	}
 
 	public class TranslatedMapEntity
 	{
+		public string entityName;
 		public Guid GUID;
 		public string mainText;
 		public List<TranslatedGUIDText> buttonList = new();
@@ -111,6 +123,7 @@ namespace Imperial_Commander_Editor
 
 	public class TranslatedEvent
 	{
+		public string eventName;
 		public Guid GUID;
 		public string eventText;
 		public List<ITranslatedEventAction> eventActions;
@@ -119,6 +132,7 @@ namespace Imperial_Commander_Editor
 
 		public TranslatedEvent( MissionEvent ev )
 		{
+			eventName = ev.name;
 			GUID = ev.GUID;
 			eventText = ev.eventText;
 			eventActions = new();
@@ -162,26 +176,23 @@ namespace Imperial_Commander_Editor
 	}
 
 	#region event action models
-	public class TranslatedModifyMapEntity : ITranslatedEventAction
+	public class TranslatedModifyMapEntity : ITranslatedEventAction//M2
 	{
 		public Guid GUID { get; set; }
-		public EventActionType eventActionType { get; set; }// { get => EventActionType.M2; }
-		public List<TranslatedEntityProperties> translatedEntityProperties = new();
+		public EventActionType eventActionType { get; set; }
+		public string eaName { get; set; }
 
-		public class TranslatedEntityProperties
-		{
-			public Guid GUID;
-			public string theText = "";
-			public List<TranslatedGUIDText> buttonList = new();
-		}
+		public List<TranslatedEntityProperties> translatedEntityProperties = new();
 
 		public TranslatedModifyMapEntity( IEventAction ea )
 		{
+			eaName = ea.displayName;
 			GUID = ea.GUID;
 			eventActionType = ea.eventActionType;
 			foreach ( var item in ((ModifyMapEntity)ea).entitiesToModify )
 			{
 				var tep = new TranslatedEntityProperties();
+				tep.entityName = item.entityProperties.name;
 				tep.GUID = item.GUID;
 				tep.theText = item.entityProperties.theText;
 				foreach ( var btn in item.entityProperties.buttonActions )
@@ -193,16 +204,18 @@ namespace Imperial_Commander_Editor
 		}
 	}
 
-	public class TranslatedEnemyDeployment : ITranslatedEventAction
+	public class TranslatedEnemyDeployment : ITranslatedEventAction//D1
 	{
 		public Guid GUID { get; set; }
-		public EventActionType eventActionType { get; set; }//{ get => EventActionType.D1; }
+		public EventActionType eventActionType { get; set; }
+		public string eaName { get; set; }
 
 		//customText in the JSON is "custom instruction" in the model
 		public string enemyName, customText, modification, repositionInstructions;
 
 		public TranslatedEnemyDeployment( IEventAction ea )
 		{
+			eaName = ea.displayName;
 			GUID = ea.GUID;
 			eventActionType = ea.eventActionType;
 			enemyName = ((EnemyDeployment)ea).enemyName;
@@ -212,16 +225,18 @@ namespace Imperial_Commander_Editor
 		}
 	}
 
-	public class TranslatedInputPrompt : ITranslatedEventAction
+	public class TranslatedInputPrompt : ITranslatedEventAction//G9
 	{
 		public Guid GUID { get; set; }
-		public EventActionType eventActionType { get; set; }//{ get => EventActionType.G9; }
+		public EventActionType eventActionType { get; set; }
+		public string eaName { get; set; }
 
 		public string mainText, failText;
 		public List<TranslatedGUIDText> inputList = new();
 
 		public TranslatedInputPrompt( IEventAction ea )
 		{
+			eaName = ea.displayName;
 			GUID = ea.GUID;
 			eventActionType = ea.eventActionType;
 			mainText = ((InputPrompt)ea).theText;
@@ -237,11 +252,13 @@ namespace Imperial_Commander_Editor
 	{
 		public Guid GUID { get; set; }
 		public EventActionType eventActionType { get; set; }
+		public string eaName { get; set; }
 
 		public string tbText;
 
 		public TranslatedTextBox( IEventAction ea )
 		{
+			eaName = ea.displayName;
 			GUID = ea.GUID;
 			eventActionType = ea.eventActionType;
 			tbText = ((ShowTextBox)ea).theText;
@@ -252,11 +269,13 @@ namespace Imperial_Commander_Editor
 	{
 		public Guid GUID { get; set; }
 		public EventActionType eventActionType { get; set; }
+		public string eaName { get; set; }
 
 		public string theText;
 
 		public TranslatedChangeMissionInfo( IEventAction ea )
 		{
+			eaName = ea.displayName;
 			GUID = ea.GUID;
 			eventActionType = ea.eventActionType;
 			theText = ((ChangeMissionInfo)ea).theText;
@@ -267,11 +286,13 @@ namespace Imperial_Commander_Editor
 	{
 		public Guid GUID { get; set; }
 		public EventActionType eventActionType { get; set; }
+		public string eaName { get; set; }
 
 		public string shortText, longText;
 
 		public TranslatedChangeObjective( IEventAction ea )
 		{
+			eaName = ea.displayName;
 			GUID = ea.GUID;
 			eventActionType = ea.eventActionType;
 			shortText = ((ChangeObjective)ea).theText;
@@ -283,12 +304,14 @@ namespace Imperial_Commander_Editor
 	{
 		public Guid GUID { get; set; }
 		public EventActionType eventActionType { get; set; }
+		public string eaName { get; set; }
 
 		public string mainText;
 		public List<TranslatedGUIDText> buttonList = new();
 
 		public TranslatedQuestionPrompt( IEventAction ea )
 		{
+			eaName = ea.displayName;
 			GUID = ea.GUID;
 			eventActionType = ea.eventActionType;
 			mainText = ((QuestionPrompt)ea).theText;
@@ -303,11 +326,13 @@ namespace Imperial_Commander_Editor
 	{
 		public Guid GUID { get; set; }
 		public EventActionType eventActionType { get; set; }
+		public string eaName { get; set; }
 
 		public string customName;
 
 		public TranslatedAllyDeployment( IEventAction ea )
 		{
+			eaName = ea.displayName;
 			GUID = ea.GUID;
 			eventActionType = ea.eventActionType;
 			customName = ((AllyDeployment)ea).allyName;
@@ -319,11 +344,13 @@ namespace Imperial_Commander_Editor
 	{
 		public Guid GUID { get; set; }
 		public EventActionType eventActionType { get; set; }
+		public string eaName { get; set; }
 
 		public string newInstructions;
 
 		public TranslatedChangeGroupInstructions( IEventAction ea )
 		{
+			eaName = ea.displayName;
 			GUID = ea.GUID;
 			eventActionType = ea.eventActionType;
 			newInstructions = ((ChangeInstructions)ea).theText;
@@ -334,11 +361,13 @@ namespace Imperial_Commander_Editor
 	{
 		public Guid GUID { get; set; }
 		public EventActionType eventActionType { get; set; }
+		public string eaName { get; set; }
 
 		public string repositionText;
 
 		public TranslatedChangeRepositionInstructions( IEventAction ea )
 		{
+			eaName = ea.displayName;
 			GUID = ea.GUID;
 			eventActionType = ea.eventActionType;
 			repositionText = ((ChangeReposition)ea).theText;

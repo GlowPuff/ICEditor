@@ -43,6 +43,14 @@
 							VerticalAlignment="Center"
 							FontStyle="Italic"
 							Text="Positive values add Credits, negative values remove Credits" />
+
+						<Separator Margin="0,10,0,0" />
+
+						<CheckBox
+							Margin="0,10,0,0"
+							IsChecked="{Binding multiplyByHeroCount}"
+							Content="Multiply By Number of Heroes"
+							Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" />
 					</StackPanel>
 
 				</materialDesign:Card>

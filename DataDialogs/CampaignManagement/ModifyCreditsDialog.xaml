@@ -19,11 +19,26 @@
 		<GroupBox Header="Modify Credits Event Action" Style="{DynamicResource MaterialDesignGroupBox}">
 			<Grid>
 				<Grid.RowDefinitions>
+					<RowDefinition Height="auto" />
 					<RowDefinition Height="*" />
 					<RowDefinition Height="auto" />
 				</Grid.RowDefinitions>
 
-				<materialDesign:Card Padding="10" Background="{StaticResource CardBG}">
+				<materialDesign:Card
+					Margin="0,0,0,10"
+					Padding="10"
+					Background="{StaticResource CardBG}">
+					<TextBlock
+						HorizontalAlignment="Center"
+						FontStyle="Italic"
+						Text="Campaign Credits are modified and saved into the Campaign state as soon as this Event Action is fired. It's recommended to use this Event Action after a Mission has ended."
+						TextWrapping="Wrap" />
+				</materialDesign:Card>
+
+				<materialDesign:Card
+					Grid.Row="1"
+					Padding="10"
+					Background="{StaticResource CardBG}">
 
 					<StackPanel>
 						<UniformGrid Margin="0,0,0,0" Columns="2">
@@ -48,14 +63,14 @@
 
 						<CheckBox
 							Margin="0,10,0,0"
-							IsChecked="{Binding multiplyByHeroCount}"
 							Content="Multiply By Number of Heroes"
+							IsChecked="{Binding multiplyByHeroCount}"
 							Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" />
 					</StackPanel>
 
 				</materialDesign:Card>
 
-				<StackPanel Grid.Row="1" Margin="0,10,0,0">
+				<StackPanel Grid.Row="2" Margin="0,10,0,0">
 					<Separator Margin="0,0,0,10" />
 					<Button
 						x:Name="okButton"

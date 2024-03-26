@@ -76,6 +76,8 @@ namespace Imperial_Commander_Editor
 		public static List<CardInstruction> enemyInstructions;
 		public static List<BonusEffect> enemyBonusEffects;
 		public static List<MissionNameData> missionNames;
+		public static List<CampaignItem> campaignItemList;
+		public static List<CampaignReward> campaignRewardsList;
 
 		public static ObservableCollection<DeploymentColor> deploymentColors;
 
@@ -112,6 +114,8 @@ namespace Imperial_Commander_Editor
 			enemyInstructions = FileManager.LoadAsset<List<CardInstruction>>( "instructions.json" );
 			enemyBonusEffects = FileManager.LoadAsset<List<BonusEffect>>( "bonuseffects.json" );
 			thumbnailData = FileManager.LoadAsset<ThumbnailData>( "thumbnails.json" );
+			campaignItemList = FileManager.LoadAsset<List<CampaignItem>>( "items.json" );
+			campaignRewardsList = FileManager.LoadAsset<List<CampaignReward>>( "rewards.json" );
 			//rewrite the mission names with the expansion ID
 			missionNames = LoadMissionNames( "core" )
 				.Concat( LoadMissionNames( "bespin" ) )

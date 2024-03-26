@@ -145,6 +145,7 @@ namespace Imperial_Commander_Editor
 			EventActionType.CM2 => new ModifyCreditsDialog( dname, et, ea ),
 			EventActionType.CM3 => new ModifyFameAwardsDialog( dname, et, ea ),
 			EventActionType.CM4 => new SetNextMissionDialog( dname, et, ea ),
+			EventActionType.CM5 => new AddCampaignRewardDialog( dname, et, ea ),
 			_ => null
 		};
 

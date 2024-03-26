@@ -313,6 +313,10 @@
 															Click="MenuItem_Click"
 															Header="Set Next Mission"
 															Tag="CM4" />
+														<MenuItem
+															Click="MenuItem_Click"
+															Header="Add Campaign Reward"
+															Tag="CM5" />
 													</MenuItem>
 												</Menu>
 											</StackPanel>

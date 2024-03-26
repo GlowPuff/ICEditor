@@ -30,6 +30,7 @@
     <None Remove="Assets\Data\enemies.json" />
     <None Remove="Assets\Data\heroes.json" />
     <None Remove="Assets\Data\instructions.json" />
+    <None Remove="Assets\Data\items.json" />
     <None Remove="Assets\Data\MissionData\bespin.json" />
     <None Remove="Assets\Data\MissionData\core.json" />
     <None Remove="Assets\Data\MissionData\empire.json" />
@@ -38,6 +39,7 @@
     <None Remove="Assets\Data\MissionData\lothal.json" />
     <None Remove="Assets\Data\MissionData\other.json" />
     <None Remove="Assets\Data\MissionData\twin.json" />
+    <None Remove="Assets\Data\rewards.json" />
     <None Remove="Assets\Data\thumbnails.json" />
     <None Remove="Assets\Data\villains.json" />
     <None Remove="Assets\edit.png" />
@@ -1131,6 +1133,7 @@
     <EmbeddedResource Include="Assets\Data\enemies.json" />
     <EmbeddedResource Include="Assets\Data\heroes.json" />
     <EmbeddedResource Include="Assets\Data\instructions.json" />
+    <EmbeddedResource Include="Assets\Data\items.json" />
     <EmbeddedResource Include="Assets\Data\MissionData\bespin.json" />
     <EmbeddedResource Include="Assets\Data\MissionData\core.json" />
     <EmbeddedResource Include="Assets\Data\MissionData\empire.json" />
@@ -1139,6 +1142,7 @@
     <EmbeddedResource Include="Assets\Data\MissionData\lothal.json" />
     <EmbeddedResource Include="Assets\Data\MissionData\other.json" />
     <EmbeddedResource Include="Assets\Data\MissionData\twin.json" />
+    <EmbeddedResource Include="Assets\Data\rewards.json" />
     <EmbeddedResource Include="Assets\Data\thumbnails.json" />
     <EmbeddedResource Include="Assets\Data\villains.json" />
     <EmbeddedResource Include="icon.ico" />

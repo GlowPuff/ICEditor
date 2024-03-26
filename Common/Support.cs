@@ -404,4 +404,21 @@ namespace Imperial_Commander_Editor
 		public string id { get; set; }
 		public string name { get; set; }
 	}
+
+	public class CampaignItem : ObservableObject
+	{
+		public int tier { get; set; }
+		public string id { get; set; }
+		public string name { get; set; }
+		public string type { get; set; }
+		public int cost { get; set; }
+	}
+
+	public class CampaignReward
+	{
+		public string id { get; set; }
+		public string name { get; set; }
+		public RewardType type { get; set; }
+		public string extra { get; set; }
+	}
 }

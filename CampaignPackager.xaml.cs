@@ -479,8 +479,7 @@ namespace Imperial_Commander_Editor
 			//if there is only one 'set next mission' event action, show the edit window directly
 			if ( validActions.Count() == 1 )
 			{
-				var ea = new CampaignSetNextMission() { missionID = "Custom", customMissionID = ((CampaignSetNextMission)validActions[0]).customMissionID };
-				var dlg = new SetNextMissionDialog( "Set Next Mission", EventActionType.CM4, ea, true );
+				var dlg = new SetNextMissionDialog( "Set Next Mission", EventActionType.CM4, (CampaignSetNextMission)validActions[0], true );
 				dlg.ShowDialog();
 			}
 			else if ( validActions.Count() > 1 )

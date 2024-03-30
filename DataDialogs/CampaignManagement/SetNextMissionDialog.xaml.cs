@@ -23,9 +23,9 @@ namespace Imperial_Commander_Editor
 
 			MissionNameData[] sourceArray = { new MissionNameData() { id = "Custom", name = "Custom" } };
 			missionIDCB.ItemsSource = sourceArray.Concat( Utils.missionNames );
-			enabledStatus = !fromPackageManager;
+			enabledStatus = true;//!fromPackageManager;
 
-			if ( fromPackageManager )
+			if ( fromPackageManager && (ea as CampaignSetNextMission).missionID == "Custom" )
 			{
 				instructions.Text = "Copy/Paste the Custom Mission Identifier of the Mission you want to set as the next Story Mission.";
 				customIDTB.Focus();

@@ -14,7 +14,7 @@
 		public CampaignSetNextMission( string dname, EventActionType et ) : base( et, dname )
 		{
 			customMissionID = "";
-			missionID = "Core 1";
+			missionID = "core1";
 		}
 	}
 }

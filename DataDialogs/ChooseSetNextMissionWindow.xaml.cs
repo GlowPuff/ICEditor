@@ -29,7 +29,7 @@ namespace Imperial_Commander_Editor
 					{
 						eventAction = ea as CampaignSetNextMission,
 						eventName = evName,
-						identifier = ((CampaignSetNextMission)ea).customMissionID
+						identifier = ((CampaignSetNextMission)ea).missionID == "Custom" ? ((CampaignSetNextMission)ea).customMissionID : ((CampaignSetNextMission)ea).missionID
 					};
 					eventActionList.Add( ev );
 				}
@@ -62,7 +62,7 @@ namespace Imperial_Commander_Editor
 			var item = ((Button)sender).DataContext as ChooseNextMissionEvent;
 			var dlg = new SetNextMissionDialog( "Set Next Mission", EventActionType.CM4, item.eventAction, true );
 			dlg.ShowDialog();
-			item.identifier = item.eventAction.customMissionID;
+			item.identifier = item.eventAction.missionID == "Custom" ? item.eventAction.customMissionID : item.eventAction.missionID;
 		}
 	}
 

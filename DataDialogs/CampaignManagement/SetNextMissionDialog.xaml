@@ -26,11 +26,11 @@
 					<StackPanel>
 						<TextBlock Text="Select a Mission:" TextWrapping="Wrap" />
 
+						<!--  IsEnabled="{Binding enabledStatus, RelativeSource={RelativeSource AncestorType=Window}}"  -->
 						<ComboBox
 							Name="missionIDCB"
 							Margin="0,5,0,0"
 							DisplayMemberPath="name"
-							IsEnabled="{Binding enabledStatus, RelativeSource={RelativeSource AncestorType=Window}}"
 							SelectedValue="{Binding missionID}"
 							SelectedValuePath="id"
 							Style="{StaticResource MaterialDesignOutlinedComboBox}" />

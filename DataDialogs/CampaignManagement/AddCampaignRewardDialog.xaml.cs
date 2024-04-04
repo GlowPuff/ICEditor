@@ -142,5 +142,11 @@ namespace Imperial_Commander_Editor
 				addedAllies.Add( selectedAlly );
 			}
 		}
+
+		private void inputChanged_KeyDown( object sender, System.Windows.Input.KeyEventArgs e )
+		{
+			if ( e.Key == System.Windows.Input.Key.Enter )
+				Utils.LoseFocus( sender as Control );
+		}
 	}
 }

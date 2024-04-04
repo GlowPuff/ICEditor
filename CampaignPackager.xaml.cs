@@ -326,7 +326,7 @@ namespace Imperial_Commander_Editor
 				var eventActions = ((CampaignMissionItem)e.AddedItems[0]).mission.GetAllEvents().SelectMany( x => x.eventActions );
 
 				selectedStructure.mission = ((CampaignMissionItem)e.AddedItems[0]).mission;
-				selectedStructure.hasCustomSetNextEventActions = eventActions.Any( x => x.eventActionType == EventActionType.CM4 && ((CampaignSetNextMission)x).missionID == "Custom" );
+				selectedStructure.hasCustomSetNextEventActions = eventActions.Any( x => x.eventActionType == EventActionType.CM4 );
 
 				missionsPopupLB.SelectedIndex = -1;
 			}
@@ -582,9 +582,11 @@ namespace Imperial_Commander_Editor
 				var m = FileManager.LoadMission( ofd.FileName );
 				if ( m != null )
 				{
+					selectedStructure = null;
 					string oldName = selectedMissionItem.missionName;
 					selectedMissionItem = campaignPackage.ReplaceMission( selectedMissionItem, ofd.SafeFileName, m );
 					dropNotice.Visibility = campaignPackage.campaignMissionItems.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
+
 					MessageBox.Show( $"Replaced/updated [{oldName}] with [{selectedMissionItem.missionName}]", "Mission Replaced/Updated" );
 					UpdatePoolTranslationStatus();
 				}

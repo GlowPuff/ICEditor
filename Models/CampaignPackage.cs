@@ -80,6 +80,10 @@ namespace Imperial_Commander_Editor
 				structure.projectItem.Title = mission.missionProperties.missionName;
 				structure.projectItem.missionGUID = mission.missionGUID.ToString();
 				structure.mission = mission;
+
+				var eventActions = structure.mission.GetAllEvents().SelectMany( x => x.eventActions );
+				structure.hasCustomSetNextEventActions = eventActions.Any( x => x.eventActionType == EventActionType.CM4 );
+
 				Utils.Log( $"ReplaceMission()::Mission Structure updated with {mission.missionProperties.missionName}" );
 			}
 			else

@@ -93,7 +93,7 @@
 							<ComboBox
 								x:Name="triggersCB"
 								DisplayMemberPath="name"
-								ItemsSource="{Binding mainWindow.localTriggers, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+								ItemsSource="{Binding mainWindow.allMissionTriggers, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
 								SelectedValue="{Binding triggerGUID}"
 								SelectedValuePath="GUID"
 								Style="{StaticResource MaterialDesignOutlinedComboBox}" />
@@ -126,7 +126,7 @@
 							<ComboBox
 								x:Name="eventsCB"
 								DisplayMemberPath="name"
-								ItemsSource="{Binding mainWindow.localEvents, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+								ItemsSource="{Binding mainWindow.allMissionEvents, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
 								SelectedValue="{Binding eventGUID}"
 								SelectedValuePath="GUID"
 								Style="{StaticResource MaterialDesignOutlinedComboBox}" />

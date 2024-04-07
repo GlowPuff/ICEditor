@@ -130,7 +130,7 @@
 								x:Name="elist"
 								Grid.Column="1"
 								DisplayMemberPath="name"
-								ItemsSource="{Binding mainWindow.localEvents}"
+								ItemsSource="{Binding mainWindow.allMissionEvents}"
 								SelectedValue="{Binding trigger.eventGUID}"
 								SelectedValuePath="GUID"
 								Style="{StaticResource MaterialDesignOutlinedComboBox}" />

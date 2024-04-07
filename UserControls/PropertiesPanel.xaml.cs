@@ -99,6 +99,7 @@ namespace Imperial_Commander_Editor
 			{
 				Utils.mainWindow.mission.eventGroups.Add( dlg.eventGroup );
 				selectedEventGroup = dlg.eventGroup;
+				eventGroupCount = $"Event Groups, {Utils.mainWindow.mission.eventGroups.Count()} in Mission";
 			}
 		}
 
@@ -108,6 +109,7 @@ namespace Imperial_Commander_Editor
 				return;
 			Utils.mainWindow.mission.eventGroups.Remove( selectedEventGroup );
 			selectedEventGroup = null;
+			eventGroupCount = $"Event Groups, {Utils.mainWindow.mission.eventGroups.Count()} in Mission";
 		}
 
 		private void remTokenGroupBtn_Click( object sender, System.Windows.RoutedEventArgs e )
@@ -116,6 +118,7 @@ namespace Imperial_Commander_Editor
 				return;
 			Utils.mainWindow.mission.entityGroups.Remove( selectedEntityGroup );
 			selectedEntityGroup = null;
+			entityGroupCount = $"Random Map Entity Groups, {Utils.mainWindow.mission.entityGroups.Count()} in Mission";
 		}
 
 		private void editTokenGroupBtn_Click( object sender, System.Windows.RoutedEventArgs e )
@@ -135,6 +138,7 @@ namespace Imperial_Commander_Editor
 			{
 				Utils.mainWindow.mission.entityGroups.Add( dlg.entityGroup );
 				selectedEntityGroup = dlg.entityGroup;
+				entityGroupCount = $"Random Map Entity Groups, {Utils.mainWindow.mission.entityGroups.Count()} in Mission";
 			}
 		}
 	}

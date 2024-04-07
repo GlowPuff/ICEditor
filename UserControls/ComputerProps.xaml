@@ -86,28 +86,6 @@
 						Content="EDIT PROPERTIES" />
 				</StackPanel>
 			</materialDesign:Card>
-
-			<!--  button text  -->
-			<!--<materialDesign:Card Background="MediumPurple" Margin="0,10" Padding="10">
-				<StackPanel>
-					<TextBox Text="{Binding buttonText}" CharacterCasing="Upper" Style="{StaticResource MaterialDesignOutlinedTextBox}" materialDesign:HintAssist.Hint="Button Text"/>
-				</StackPanel>
-			</materialDesign:Card>-->
-
-			<!--  description  -->
-			<!--<materialDesign:Card Background="MediumPurple" Padding="10">
-				<StackPanel>
-					<TextBlock Text="Description:" HorizontalAlignment="Center" Margin="0,0,0,10"/>
-					<UniformGrid Columns="2">
-						<TextBlock Text="{Binding setInfo}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-						<Button x:Name="setDescButton" Content="SET TEXT" HorizontalAlignment="Center" Click="setDescButton_Click"/>
-					</UniformGrid>
-				</StackPanel>
-			</materialDesign:Card>-->
-
-			<!--  event  -->
-			<!--<TextBlock Text="Fire This Event:" HorizontalAlignment="Center" Margin="0,10"/>
-			<ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectedValue="{Binding missionEvent}" SelectedValuePath="GUID" ItemsSource="{Binding DataContext.localEvents, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" DisplayMemberPath="name"/>-->
 		</StackPanel>
 	</Grid>
 </UserControl>

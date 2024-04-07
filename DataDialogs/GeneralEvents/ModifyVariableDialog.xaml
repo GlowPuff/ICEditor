@@ -65,7 +65,7 @@
 								<ComboBox
 									x:Name="tlist"
 									DisplayMemberPath="name"
-									ItemsSource="{Binding mainWindow.localTriggers}"
+									ItemsSource="{Binding mainWindow.allMissionTriggers}"
 									SelectedValue="{Binding selectedTrigger}"
 									Style="{StaticResource MaterialDesignOutlinedComboBox}" />
 

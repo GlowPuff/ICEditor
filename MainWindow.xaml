@@ -182,7 +182,7 @@
 
 			<Grid>
 				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="235" />
+					<ColumnDefinition Width="235" MinWidth="235" MaxWidth="300"/>
 					<ColumnDefinition Width="auto" />
 					<ColumnDefinition Width="*" />
 				</Grid.ColumnDefinitions>

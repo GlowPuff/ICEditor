@@ -83,7 +83,7 @@ namespace Imperial_Commander_Editor
 
 		public static MainWindow mainWindow
 		{
-			get { return Application.Current.Windows.OfType<MainWindow>().FirstOrDefault(); }
+			get { return Application.Current.Windows.OfType<MainWindow>().LastOrDefault(); }//.FirstOrDefault(); }
 		}
 
 		public static Guid GUIDOne { get { return Guid.Parse( "11111111-1111-1111-1111-111111111111" ); } }

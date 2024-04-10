@@ -88,7 +88,7 @@ namespace Imperial_Commander_Editor
 			var t = triggersCB.SelectedItem as Trigger;
 			MessageBoxResult res = MessageBoxResult.Yes;
 
-			if ( t.GUID == Guid.Empty )
+			if ( t is null || t.GUID == Guid.Empty )
 			{
 				Utils.mainWindow.SetStatus( "Can't Remove 'None'" );
 				return;
@@ -134,7 +134,7 @@ namespace Imperial_Commander_Editor
 			var t = eventsCB.SelectedItem as MissionEvent;
 			MessageBoxResult res = MessageBoxResult.Yes;
 
-			if ( t.GUID == Guid.Empty )
+			if ( t is null || t.GUID == Guid.Empty )
 			{
 				Utils.mainWindow.SetStatus( "Can't Remove 'None'" );
 				return;
@@ -182,7 +182,7 @@ namespace Imperial_Commander_Editor
 		private void EditTrigger()
 		{
 			var t = triggersCB.SelectedItem as Trigger;
-			if ( t.GUID == Guid.Empty )
+			if ( t is null || t.GUID == Guid.Empty )
 				return;
 
 			var index = triggersCB.SelectedIndex;
@@ -198,7 +198,7 @@ namespace Imperial_Commander_Editor
 		private void EditEvent()
 		{
 			var t = eventsCB.SelectedItem as MissionEvent;
-			if ( t.GUID == Guid.Empty )
+			if ( t is null || t.GUID == Guid.Empty )
 				return;
 
 			var index = eventsCB.SelectedIndex;
@@ -220,7 +220,7 @@ namespace Imperial_Commander_Editor
 		private void dupeEventBtn_Click( object sender, RoutedEventArgs e )
 		{
 			var t = eventsCB.SelectedItem as MissionEvent;
-			if ( t.GUID != Guid.Empty )
+			if ( t != null && t.GUID != Guid.Empty )
 			{
 				var clone = t.Clone();
 				if ( t.isGlobal )
@@ -241,6 +241,30 @@ namespace Imperial_Commander_Editor
 		{
 			eventsCB.SelectedItem = ev;
 			EditEvent();
+		}
+
+		private void moveEventDownBtn_Click( object sender, RoutedEventArgs e )
+		{
+			var t = eventsCB.SelectedItem as MissionEvent;
+			if ( t is null || t.GUID == Guid.Empty )
+				return;
+
+			var index = eventsCB.SelectedIndex;
+			Utils.mainWindow.mission.globalEvents.Move( index, Math.Min( index + 1, Utils.mainWindow.mission.globalEvents.Count - 1 ) );
+		}
+
+		private void moveEventUpBtn_Click( object sender, RoutedEventArgs e )
+		{
+			var t = eventsCB.SelectedItem as MissionEvent;
+			if ( t is null || t.GUID == Guid.Empty )
+				return;
+
+			var index = eventsCB.SelectedIndex;
+			//can't move above "None"
+			if ( index == 1 )
+				return;
+
+			Utils.mainWindow.mission.globalEvents.Move( index, Math.Max( 0, index - 1 ) );
 		}
 	}
 }

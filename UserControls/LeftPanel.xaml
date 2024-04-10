@@ -14,7 +14,7 @@
 		<Border
 			Padding="10"
 			BorderBrush="MediumPurple"
-			BorderThickness="0,0,1,0">
+			BorderThickness="0,0,0,0">
 			<!--<ScrollViewer VerticalScrollBarVisibility="Auto">-->
 			<Grid>
 				<Grid.RowDefinitions>
@@ -60,7 +60,9 @@
 									Width="40"
 									Height="40"
 									Click="addTriggerButton_Click"
-									Style="{DynamicResource MaterialDesignFloatingActionButton}">
+									Style="{DynamicResource MaterialDesignFloatingActionButton}"
+									ToolTip="Add New Trigger"
+									ToolTipService.InitialShowDelay="250">
 									<materialDesign:PackIcon
 										Width="24"
 										Height="24"
@@ -75,7 +77,9 @@
 									Height="40"
 									Margin="5,0"
 									Click="remTriggerButton_Click"
-									Style="{DynamicResource MaterialDesignFloatingActionButton}">
+									Style="{DynamicResource MaterialDesignFloatingActionButton}"
+									ToolTip="Remove Trigger"
+									ToolTipService.InitialShowDelay="250">
 									<materialDesign:PackIcon
 										Width="24"
 										Height="24"
@@ -89,7 +93,9 @@
 									Width="40"
 									Height="40"
 									Click="editTriggerButton_Click"
-									Style="{DynamicResource MaterialDesignFloatingActionButton}">
+									Style="{DynamicResource MaterialDesignFloatingActionButton}"
+									ToolTip="Edit Trigger"
+									ToolTipService.InitialShowDelay="250">
 									<materialDesign:PackIcon
 										Width="24"
 										Height="24"
@@ -132,7 +138,9 @@
 									Width="40"
 									Height="40"
 									Click="addEventButton_Click"
-									Style="{DynamicResource MaterialDesignFloatingActionButton}">
+									Style="{DynamicResource MaterialDesignFloatingActionButton}"
+									ToolTip="Add New Event"
+									ToolTipService.InitialShowDelay="250">
 									<materialDesign:PackIcon
 										Width="24"
 										Height="24"
@@ -147,7 +155,9 @@
 									Height="40"
 									Margin="5,0"
 									Click="remEventButton_Click"
-									Style="{DynamicResource MaterialDesignFloatingActionButton}">
+									Style="{DynamicResource MaterialDesignFloatingActionButton}"
+									ToolTip="Remove Event"
+									ToolTipService.InitialShowDelay="250">
 									<materialDesign:PackIcon
 										Width="24"
 										Height="24"
@@ -161,7 +171,9 @@
 									Width="40"
 									Height="40"
 									Click="editEventButton_Click"
-									Style="{DynamicResource MaterialDesignFloatingActionButton}">
+									Style="{DynamicResource MaterialDesignFloatingActionButton}"
+									ToolTip="Edit Event"
+									ToolTipService.InitialShowDelay="250">
 									<materialDesign:PackIcon
 										Width="24"
 										Height="24"
@@ -170,12 +182,57 @@
 								</Button>
 							</UniformGrid>
 
-							<Button
-								x:Name="dupeEventBtn"
+							<UniformGrid
 								Grid.Row="2"
 								Margin="0,10,0,0"
-								Click="dupeEventBtn_Click"
-								Content="DUPLICATE EVENT" />
+								Columns="3">
+								<Button
+									x:Name="dupeEventBtn"
+									Width="30"
+									Height="30"
+									Click="dupeEventBtn_Click"
+									Style="{DynamicResource MaterialDesignFloatingActionButton}"
+									ToolTip="Duplicate Event"
+									ToolTipService.InitialShowDelay="250">
+									<materialDesign:PackIcon
+										Width="24"
+										Height="24"
+										HorizontalAlignment="Center"
+										Kind="ContentDuplicate" />
+								</Button>
+
+								<Button
+									x:Name="moveEventUpBtn"
+									Grid.Column="3"
+									Width="30"
+									Height="30"
+									Click="moveEventUpBtn_Click"
+									Style="{DynamicResource MaterialDesignFloatingActionButton}"
+									ToolTip="Move Event Up"
+									ToolTipService.InitialShowDelay="250">
+									<materialDesign:PackIcon
+										Width="24"
+										Height="24"
+										HorizontalAlignment="Center"
+										Kind="ChevronUp" />
+								</Button>
+
+								<Button
+									x:Name="moveEventDownBtn"
+									Grid.Column="3"
+									Width="30"
+									Height="30"
+									Click="moveEventDownBtn_Click"
+									Style="{DynamicResource MaterialDesignFloatingActionButton}"
+									ToolTip="Move Event Down"
+									ToolTipService.InitialShowDelay="250">
+									<materialDesign:PackIcon
+										Width="24"
+										Height="24"
+										HorizontalAlignment="Center"
+										Kind="ChevronDown" />
+								</Button>
+							</UniformGrid>
 						</Grid>
 					</GroupBox>
 				</Grid>

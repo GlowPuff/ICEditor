@@ -12,7 +12,7 @@ namespace Imperial_Commander_Editor
 	/// </summary>
 	public partial class PropertiesPanel : UserControl, INotifyPropertyChanged
 	{
-		bool _editEnabled, _editEGEnabled;
+		bool _editEnabled, _editEGEnabled, _useAlternateEventSystem;
 		EventGroup _selectedEventGroup;
 		EntityGroup _selectedEntityGroup;
 		int _mapEntityCount;
@@ -22,6 +22,7 @@ namespace Imperial_Commander_Editor
 		public string entityGroupCount { get => _entityGroupCount; set { _entityGroupCount = value; PC(); } }
 		public bool editEnabled { get { return _editEnabled; } set { _editEnabled = value; PC(); } }
 		public bool editEGEnabled { get { return _editEGEnabled; } set { _editEGEnabled = value; PC(); } }
+		public bool useAlternateEventSystem { get { return _useAlternateEventSystem; } set { _useAlternateEventSystem = value; PC(); } }
 		public ObservableCollection<EventGroup> eventGroups { get { return Utils.mainWindow.mission.eventGroups; } }
 		public ObservableCollection<EntityGroup> entityGroups { get { return Utils.mainWindow.mission.entityGroups; } }
 		public int mapEntityCount { get { return _mapEntityCount; } set { _mapEntityCount = value; PC(); } }
@@ -63,11 +64,15 @@ namespace Imperial_Commander_Editor
 		{
 			leftCard.DataContext = ms ?? leftCard.DataContext;
 			meTB.DataContext = Utils.mainWindow.mission;
+			useAlternateEventsCB.DataContext = Utils.mainWindow.mission.missionProperties;
 
 			mapEntityCount = Utils.mainWindow.mission.mapEntities.Where( x => x.mapSectionOwner == Utils.mainWindow.activeSection.GUID ).Count();
 
 			eventGroupCount = $"Event Groups, {Utils.mainWindow.mission.eventGroups.Count()} in Mission";
 			entityGroupCount = $"Random Map Entity Groups, {Utils.mainWindow.mission.entityGroups.Count()} in Mission";
+
+			Utils.Log( Utils.mainWindow.mission.missionProperties.useAlternateEventSystem.ToString() );
+			//useAlternateEventSystem = Utils.mainWindow.mission.missionProperties.useAlternateEventSystem;
 
 			//start section can't be toggled
 			//invisToggle.IsEnabled = Utils.mainWindow.activeSection.GUID != Guid.Parse( "11111111-1111-1111-1111-111111111111" );

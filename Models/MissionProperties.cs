@@ -10,7 +10,7 @@ namespace Imperial_Commander_Editor
 		public event PropertyChangedEventHandler PropertyChanged;
 
 		string _missionName, _missionID, _fixedAlly, _bannedAlly, _missionInfo, _specificAlly, _specificHero, _priorityOther, _missionDescription, _campaignName, _startingObjective, _additionalMissionInfo, _customMissionIdentifier;
-		bool _optionalDeployment, _factionImperial, _factionMercenary;
+		bool _optionalDeployment, _factionImperial, _factionMercenary, _useAlternateEventSystem;
 		int _roundLimit;
 		YesNoAll _useFixedAlly, _useBannedAlly;
 		CustomInstructionType _customInstructionType;
@@ -142,6 +142,11 @@ namespace Imperial_Commander_Editor
 			get { return _roundLimitEvent; }
 			set { _roundLimitEvent = value; PC(); }
 		}
+		public bool useAlternateEventSystem
+		{
+			get { return _useAlternateEventSystem; }
+			set { _useAlternateEventSystem = value; PC(); }
+		}
 
 		public MissionType missionType { get { return _missionType; } set { _missionType = value; PC(); } }
 		public ChangeReposition changeRepositionOverride { get { return _changeRepositionOverride; } set { _changeRepositionOverride = value; PC(); } }
@@ -198,6 +203,7 @@ namespace Imperial_Commander_Editor
 			changeRepositionOverride = null;
 			missionSubType = new();
 			_multipleBannedAllies = new();
+			useAlternateEventSystem = false;
 		}
 	}
 }

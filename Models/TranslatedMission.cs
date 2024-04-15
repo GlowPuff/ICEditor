@@ -170,6 +170,9 @@ namespace Imperial_Commander_Editor
 					case EventActionType.GM4:
 						eventActions.Add( new TranslatedChangeRepositionInstructions( item ) );
 						break;
+					case EventActionType.D6:
+						eventActions.Add( new TranslatedCustomEnemyDeployment( item ) );
+						break;
 				}
 			}
 		}
@@ -371,6 +374,30 @@ namespace Imperial_Commander_Editor
 			GUID = ea.GUID;
 			eventActionType = ea.eventActionType;
 			repositionText = ((ChangeReposition)ea).theText;
+		}
+	}
+
+	public class TranslatedCustomEnemyDeployment : ITranslatedEventAction//D6
+	{
+		public Guid GUID { get; set; }
+		public EventActionType eventActionType { get; set; }
+		public string eaName { get; set; }
+
+		public string repositionInstructions, surges, bonuses, keywords, abilities, customText, cardName;
+
+		public TranslatedCustomEnemyDeployment( IEventAction ea )
+		{
+			eaName = ea.displayName;
+			GUID = ea.GUID;
+			eventActionType = ea.eventActionType;
+
+			repositionInstructions = ((CustomEnemyDeployment)ea).repositionInstructions;
+			cardName = ((CustomEnemyDeployment)ea).enemyGroupData.cardName;
+			surges = ((CustomEnemyDeployment)ea).surges;
+			bonuses = ((CustomEnemyDeployment)ea).bonuses;
+			keywords = ((CustomEnemyDeployment)ea).keywords;
+			abilities = ((CustomEnemyDeployment)ea).abilities;
+			customText = ((CustomEnemyDeployment)ea).enemyGroupData.customText;
 		}
 	}
 	#endregion

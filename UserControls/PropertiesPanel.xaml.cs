@@ -72,7 +72,6 @@ namespace Imperial_Commander_Editor
 			entityGroupCount = $"Random Map Entity Groups, {Utils.mainWindow.mission.entityGroups.Count()} in Mission";
 
 			Utils.Log( Utils.mainWindow.mission.missionProperties.useAlternateEventSystem.ToString() );
-			//useAlternateEventSystem = Utils.mainWindow.mission.missionProperties.useAlternateEventSystem;
 
 			//start section can't be toggled
 			//invisToggle.IsEnabled = Utils.mainWindow.activeSection.GUID != Guid.Parse( "11111111-1111-1111-1111-111111111111" );

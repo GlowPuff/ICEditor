@@ -213,6 +213,7 @@ namespace Imperial_Commander_Editor
 
 		private void saveMissionAsButton_Click( object sender, RoutedEventArgs e )
 		{
+			mission.missionGUID = Guid.NewGuid();
 			if ( FileManager.Save( mission, true ) )
 				mainTitle = $"Imperial Commander Mission Editor - {mission.fullPathToFile}";
 		}

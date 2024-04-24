@@ -443,6 +443,7 @@ namespace Imperial_Commander_Editor
 				List<Mission> missionList = new();
 				Dictionary<string, TranslatedMission> missionTranslationList = new();
 				Dictionary<string, string> campaignInstList = new();
+				List<string> warnings = new();
 
 				//create the zip file
 				using ( FileStream zipPath = new FileStream( fullFilename, FileMode.Open ) )
@@ -477,7 +478,10 @@ namespace Imperial_Commander_Editor
 							{
 								using ( TextReader tr = new StreamReader( entry.Open() ) )
 								{
-									campaignInstList.Add( entry.Name, tr.ReadToEnd() );
+									if ( !campaignInstList.ContainsKey( entry.Name ) )
+										campaignInstList.Add( entry.Name, tr.ReadToEnd() );
+									else
+										warnings.Add( $"Duplicate Instruction translation found: {entry.Name}" );
 								}
 							}
 							//translated missions
@@ -485,7 +489,10 @@ namespace Imperial_Commander_Editor
 							{
 								using ( TextReader tr = new StreamReader( entry.Open() ) )
 								{
-									missionTranslationList.Add( entry.Name, JsonConvert.DeserializeObject<TranslatedMission>( tr.ReadToEnd() ) );
+									if ( !missionTranslationList.ContainsKey( entry.Name ) )
+										missionTranslationList.Add( entry.Name, JsonConvert.DeserializeObject<TranslatedMission>( tr.ReadToEnd() ) );
+									else
+										warnings.Add( $"Duplicate Mission translation found: {entry.Name}" );
 								}
 							}
 							else if ( (entry.Name.EndsWith( ".png" )) )//icon image
@@ -547,6 +554,9 @@ namespace Imperial_Commander_Editor
 						}
 					}
 				}
+
+				if ( warnings.Count > 0 )
+					MessageBox.Show( $"Problems were found in the loaded Campaign and will need to be manually fixed:\n\n{warnings.Aggregate( ( acc, cur ) => acc + cur + "\n" )}", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning );
 
 				return package;
 			}

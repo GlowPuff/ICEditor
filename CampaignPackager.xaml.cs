@@ -506,6 +506,13 @@ namespace Imperial_Commander_Editor
 
 				if ( Path.GetExtension( fi.FullName ) == ".txt" )//campaign instruction
 				{
+					//make sure the file hasn't already been added
+					if ( campaignPackage.HasTranslation( fi.Name ) )
+					{
+						MessageBox.Show( "A translation with this filename has already been added to the Campaign.", "Can't Add Translation", MessageBoxButton.OK, MessageBoxImage.Warning );
+						return;
+					}
+
 					string instructionText = File.ReadAllText( fi.FullName );
 					selectedTranslationItem = campaignPackage.AddCampaignInfoTranslation( instructionText, fi.Name );
 					dropTranslationNotice.Visibility = campaignPackage.campaignTranslationItems.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
@@ -538,6 +545,13 @@ namespace Imperial_Commander_Editor
 
 						if ( Path.GetExtension( item ) == ".txt" )//campaign instructions
 						{
+							//make sure the file hasn't already been added
+							if ( campaignPackage.HasTranslation( fi.Name ) )
+							{
+								MessageBox.Show( "A translation with this filename has already been added to the Campaign.", "Can't Add Translation", MessageBoxButton.OK, MessageBoxImage.Warning );
+								continue;
+							}
+
 							lastTranslationPath = fi.DirectoryName;
 							string instructionText = File.ReadAllText( fi.FullName );
 							selectedTranslationItem = campaignPackage.AddCampaignInfoTranslation( instructionText, fi.Name );
@@ -612,6 +626,13 @@ namespace Imperial_Commander_Editor
 					TranslatedMission tm = FileManager.LoadJSON<TranslatedMission>( ofd.FileName );
 					if ( tm != null )
 					{
+						//make sure the file hasn't already been added
+						if ( campaignPackage.HasTranslation( ofd.SafeFileName ) )
+						{
+							MessageBox.Show( "A translation with this filename has already been added to the Campaign.", "Can't Add Translation", MessageBoxButton.OK, MessageBoxImage.Warning );
+							return;
+						}
+
 						//verify it's a translation
 						string stringified = File.ReadAllText( fi.FullName );
 						if ( stringified.Contains( "languageID" )
@@ -631,6 +652,13 @@ namespace Imperial_Commander_Editor
 				}
 				else if ( Path.GetExtension( fi.FullName ) == ".txt" )//campaign instruction
 				{
+					//make sure the file hasn't already been added
+					if ( campaignPackage.HasTranslation( ofd.SafeFileName ) )
+					{
+						MessageBox.Show( "A translation with this filename has already been added to the Campaign.", "Can't Add Translation", MessageBoxButton.OK, MessageBoxImage.Warning );
+						return;
+					}
+
 					string instructionText = File.ReadAllText( fi.FullName );
 					selectedTranslationItem = campaignPackage.AddCampaignInfoTranslation( instructionText, fi.Name );
 					dropTranslationNotice.Visibility = campaignPackage.campaignTranslationItems.Count == 0 ? Visibility.Visible : Visibility.Collapsed;

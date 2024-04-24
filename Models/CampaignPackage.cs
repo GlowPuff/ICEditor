@@ -39,6 +39,11 @@ namespace Imperial_Commander_Editor
 			SetDefaultIcon();
 		}
 
+		public bool HasTranslation( string filename )
+		{
+			return campaignTranslationItems.Any( x => x.fileName.ToLower() == filename.ToLower() );
+		}
+
 		public void SetDefaultIcon()
 		{
 			bmpImage = new( new Uri( $"pack://application:,,,/{Assembly.GetEntryAssembly().GetName().Name};component/Assets/Thumbnails/Other/none.png" ) );
@@ -70,34 +75,52 @@ namespace Imperial_Commander_Editor
 			return item;
 		}
 
-		public CampaignMissionItem ReplaceMission( CampaignMissionItem missionItem, string filename, Mission mission )
+		public CampaignMissionItem ReplaceMission( CampaignMissionItem missionItem, string filenameOnly, Mission newMission )
 		{
+			//if the new mission's missionGUID is different, it's a different mission. Let user know the translation is no longer valid for it
+			//first check if any translations point to this mission item being replaced or updated
+			if ( campaignTranslationItems.Any( x => x.assignedMissionGUID == missionItem.missionGUID ) )
+			{
+				//then check if the missionGUID is different
+				var translations = campaignTranslationItems.Where( x => x.assignedMissionGUID == missionItem.missionGUID ).ToList();
+				if ( translations[0].assignedMissionGUID != newMission.missionGUID )
+				{
+					MessageBox.Show( $"Found {translations.Count} assigned translation(s) no longer valid for this replaced Mission. Remove the affected translation(s) manually and reassign new ones to this Mission.", "Invalid Translations Found", MessageBoxButton.OK, MessageBoxImage.Warning );
+
+					foreach ( var invalid in translations )
+					{
+						invalid.assignedMissionGUID = Guid.Empty;
+						invalid.assignedMissionName = "Unassigned";
+					}
+				}
+			}
+
 			//update any structure using this Mission
 			var structure = campaignStructure.Where( x => x.missionID == missionItem.missionGUID.ToString() ).FirstOr( null );
 			if ( structure != null )
 			{
-				structure.missionID = mission.missionGUID.ToString();
-				structure.projectItem.Title = mission.missionProperties.missionName;
-				structure.projectItem.missionGUID = mission.missionGUID.ToString();
-				structure.mission = mission;
+				structure.missionID = newMission.missionGUID.ToString();
+				structure.projectItem.Title = newMission.missionProperties.missionName;
+				structure.projectItem.missionGUID = newMission.missionGUID.ToString();
+				structure.mission = newMission;
 
 				var eventActions = structure.mission.GetAllEvents().SelectMany( x => x.eventActions );
 				structure.hasCustomSetNextEventActions = eventActions.Any( x => x.eventActionType == EventActionType.CM4 );
 
-				Utils.Log( $"ReplaceMission()::Mission Structure updated with {mission.missionProperties.missionName}" );
+				Utils.Log( $"ReplaceMission()::Mission Structure updated with {newMission.missionProperties.missionName}" );
 			}
 			else
-				Utils.Log( $"ReplaceMission()::No Mission Structure found with GUID={mission.missionGUID}" );
+				Utils.Log( $"ReplaceMission()::No Mission Structure found with GUID={newMission.missionGUID}" );
 
 			//update the mission pool item itself
 
 			//make sure the Mission's 'filename' property is the same as that of the actual loaded file, because it could have been renamed in the file system by the user
-			mission.fileName = filename;
+			newMission.fileName = filenameOnly;
 
-			missionItem.missionName = mission.missionProperties.missionName;
-			missionItem.missionGUID = mission.missionGUID;
-			missionItem.mission = mission;
-			missionItem.customMissionIdentifier = mission.missionProperties.customMissionIdentifier;
+			missionItem.missionName = newMission.missionProperties.missionName;
+			missionItem.missionGUID = newMission.missionGUID;
+			missionItem.mission = newMission;
+			missionItem.customMissionIdentifier = newMission.missionProperties.customMissionIdentifier;
 
 			return missionItem;
 		}
@@ -146,6 +169,9 @@ namespace Imperial_Commander_Editor
 			return item;
 		}
 
+		/// <summary>
+		/// filename = JUST the filename, EXCLUDING the full path
+		/// </summary>
 		public CampaignTranslationItem AddCampaignInfoTranslation( string instruction, string filename )
 		{
 			var item = new CampaignTranslationItem()
@@ -219,6 +245,9 @@ namespace Imperial_Commander_Editor
 		bool _isAgendaMission, _hasCustomSetNextEventActions;
 		string _customMissionIdentifier;
 
+		/// <summary>
+		/// The missionGUID of a Mission in string form
+		/// </summary>
 		public string missionID;//in ICE, this is the missionGUID of the CampaignMissionItem.mission as a string
 		public string[] itemTier;
 		public string expansionCode;

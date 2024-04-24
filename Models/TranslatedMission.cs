@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json;
 
 namespace Imperial_Commander_Editor
 {
@@ -126,6 +127,7 @@ namespace Imperial_Commander_Editor
 		public string eventName;
 		public Guid GUID;
 		public string eventText;
+		[JsonConverter( typeof( TranslatedEventActionConverter ) )]
 		public List<ITranslatedEventAction> eventActions;
 
 		public TranslatedEvent() { }
@@ -187,6 +189,11 @@ namespace Imperial_Commander_Editor
 
 		public List<TranslatedEntityProperties> translatedEntityProperties = new();
 
+		public TranslatedModifyMapEntity()
+		{
+
+		}
+
 		public TranslatedModifyMapEntity( IEventAction ea )
 		{
 			eaName = ea.displayName;
@@ -216,6 +223,11 @@ namespace Imperial_Commander_Editor
 		//customText in the JSON is "custom instruction" in the model
 		public string enemyName, customText, modification, repositionInstructions;
 
+		public TranslatedEnemyDeployment()
+		{
+
+		}
+
 		public TranslatedEnemyDeployment( IEventAction ea )
 		{
 			eaName = ea.displayName;
@@ -236,6 +248,11 @@ namespace Imperial_Commander_Editor
 
 		public string mainText, failText;
 		public List<TranslatedGUIDText> inputList = new();
+
+		public TranslatedInputPrompt()
+		{
+
+		}
 
 		public TranslatedInputPrompt( IEventAction ea )
 		{
@@ -259,6 +276,11 @@ namespace Imperial_Commander_Editor
 
 		public string tbText;
 
+		public TranslatedTextBox()
+		{
+
+		}
+
 		public TranslatedTextBox( IEventAction ea )
 		{
 			eaName = ea.displayName;
@@ -276,6 +298,11 @@ namespace Imperial_Commander_Editor
 
 		public string theText;
 
+		public TranslatedChangeMissionInfo()
+		{
+
+		}
+
 		public TranslatedChangeMissionInfo( IEventAction ea )
 		{
 			eaName = ea.displayName;
@@ -292,6 +319,11 @@ namespace Imperial_Commander_Editor
 		public string eaName { get; set; }
 
 		public string shortText, longText;
+
+		public TranslatedChangeObjective()
+		{
+
+		}
 
 		public TranslatedChangeObjective( IEventAction ea )
 		{
@@ -311,6 +343,11 @@ namespace Imperial_Commander_Editor
 
 		public string mainText;
 		public List<TranslatedGUIDText> buttonList = new();
+
+		public TranslatedQuestionPrompt()
+		{
+
+		}
 
 		public TranslatedQuestionPrompt( IEventAction ea )
 		{
@@ -333,6 +370,11 @@ namespace Imperial_Commander_Editor
 
 		public string customName;
 
+		public TranslatedAllyDeployment()
+		{
+
+		}
+
 		public TranslatedAllyDeployment( IEventAction ea )
 		{
 			eaName = ea.displayName;
@@ -351,6 +393,11 @@ namespace Imperial_Commander_Editor
 
 		public string newInstructions;
 
+		public TranslatedChangeGroupInstructions()
+		{
+
+		}
+
 		public TranslatedChangeGroupInstructions( IEventAction ea )
 		{
 			eaName = ea.displayName;
@@ -368,6 +415,11 @@ namespace Imperial_Commander_Editor
 
 		public string repositionText;
 
+		public TranslatedChangeRepositionInstructions()
+		{
+
+		}
+
 		public TranslatedChangeRepositionInstructions( IEventAction ea )
 		{
 			eaName = ea.displayName;
@@ -384,6 +436,11 @@ namespace Imperial_Commander_Editor
 		public string eaName { get; set; }
 
 		public string repositionInstructions, surges, bonuses, keywords, abilities, customText, cardName;
+
+		public TranslatedCustomEnemyDeployment()
+		{
+
+		}
 
 		public TranslatedCustomEnemyDeployment( IEventAction ea )
 		{

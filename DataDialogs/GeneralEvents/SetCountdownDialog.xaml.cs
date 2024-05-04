@@ -50,13 +50,14 @@ namespace Imperial_Commander_Editor
 
 		private void okButton_Click( object sender, RoutedEventArgs e )
 		{
-			//trim the value of whitespace
-			(eventAction as SetCountdown).countdownTimerName = (eventAction as SetCountdown).countdownTimerName.Trim();
-
-			if ( string.IsNullOrEmpty( ((SetCountdown)eventAction).countdownTimerName.Trim() ) )
+			if ( string.IsNullOrEmpty( ((SetCountdown)eventAction).countdownTimerName?.Trim() ) )
 				MessageBox.Show( "The countdown name is required.", "Missing Countdown Name" );
 			else
+			{
+				//trim the value of whitespace
+				(eventAction as SetCountdown).countdownTimerName = (eventAction as SetCountdown).countdownTimerName.Trim();
 				Close();
+			}
 		}
 
 		private void Window_ContentRendered( object sender, System.EventArgs e )

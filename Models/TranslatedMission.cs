@@ -175,6 +175,9 @@ namespace Imperial_Commander_Editor
 					case EventActionType.D6:
 						eventActions.Add( new TranslatedCustomEnemyDeployment( item ) );
 						break;
+					case EventActionType.GM2:
+						eventActions.Add(new TranslatedChangeTarget(item));
+						break;
 				}
 			}
 		}
@@ -426,6 +429,28 @@ namespace Imperial_Commander_Editor
 			GUID = ea.GUID;
 			eventActionType = ea.eventActionType;
 			repositionText = ((ChangeReposition)ea).theText;
+		}
+	}
+
+	public class TranslatedChangeTarget : ITranslatedEventAction
+	{
+		public Guid GUID { get; set; }
+		public EventActionType eventActionType { get; set; }
+		public string eaName { get; set; }
+
+		public string otherTarget;
+
+		public TranslatedChangeTarget()
+		{
+
+		}
+
+		public TranslatedChangeTarget(IEventAction ea)
+		{
+			eaName = ea.displayName;
+			GUID = ea.GUID;
+			eventActionType = ea.eventActionType;
+			otherTarget = ((ChangeTarget)ea).otherTarget;
 		}
 	}
 

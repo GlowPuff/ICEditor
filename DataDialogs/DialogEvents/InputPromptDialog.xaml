@@ -176,7 +176,7 @@
 									Margin="30,0,0,0"
 									VerticalAlignment="Center"
 									FontStyle="Italic"
-									Text="When an unhandled value is entered...."
+									Text="When an unhandled value is entered..."
 									TextWrapping="Wrap" />
 							</StackPanel>
 

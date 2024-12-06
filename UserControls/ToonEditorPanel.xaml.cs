@@ -104,7 +104,6 @@ namespace Imperial_Commander_Editor
 			}
 
 			string s = "";
-			List<string> ilist = new();
 			if ( customToon.cardInstruction.content.Count > 0 )
 			{
 				foreach ( var item in customToon.cardInstruction.content )

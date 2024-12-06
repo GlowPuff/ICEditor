@@ -162,12 +162,24 @@ namespace Imperial_Commander_Editor
 				traits = new string[0],
 				surges = new string[] { "{B}: Bleed", "{B}: Focus", "{B}: Pierce 2" },
 				keywords = new string[] { "+2 {H}", "Habitat: Snow" },
-				abilities = new GroupAbility[] { new() { name = "Composite Plating", text = "While defending, if the attacker is 4 or more spaces away, apply +1 {G} to the defense roll.\nEfficient Travel:Snowtroopers (Elite) ignores additional movement point costs for difficult terrain and hostile figures." } },
+				abilities = new GroupAbility[]
+				{
+					new()
+					{
+						name = "Composite Plating",
+						text = "While defending, if the attacker is 4 or more spaces away, apply +1 {G} to the defense roll."
+					},
+					new()
+					{
+						name = "Efficient Travel",
+						text = "Efficient Travel:Snowtroopers (Elite) ignores additional movement point costs for difficult terrain and hostile figures."
+					}
+				},
 				miniSize = FigureSize.Small1x1,//Small1x1, Medium1x2, Large2x2, Huge2x3
 				deploymentOutlineColor = "Gray",
 				mugShotPath = "CardThumbnails/none",
-				groupTraits = new GroupTraits[0],
-				preferredTargets = new GroupTraits[0],
+				groupTraits = Array.Empty<GroupTraits>(),
+				preferredTargets = Array.Empty<GroupTraits>(),
 				characterType = CharacterType.Imperial
 			};
 

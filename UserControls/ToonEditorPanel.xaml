@@ -828,7 +828,7 @@
 									<TextBlock
 										HorizontalAlignment="Center"
 										FontStyle="Italic"
-										Text=" Interprets as 2 Red dice and 1 Green dice"
+										Text="Interprets as 2 Red dice and 1 Green dice"
 										TextWrapping="Wrap" />
 
 									<Grid>

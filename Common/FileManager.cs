@@ -69,7 +69,7 @@ namespace Imperial_Commander_Editor
 			mission.fileName = fi.Name;
 			mission.fullPathToFile = filePath;
 			mission.saveDate = DateTime.Now.ToString( "M/d/yyyy" );
-			mission.timeTicks = DateTime.Now.Ticks;
+			mission.timeTicks = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();//DateTime.Now.Ticks
 			mission.fileVersion = Utils.formatVersion;
 
 			string output = JsonConvert.SerializeObject( mission, Formatting.Indented );

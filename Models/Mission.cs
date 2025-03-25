@@ -64,7 +64,7 @@ namespace Imperial_Commander_Editor
 			fullPathToFile = "";
 			languageID = "English (EN)";
 			saveDate = DateTime.Now.ToString( "M/d/yyyy" );
-			timeTicks = DateTime.Now.Ticks;
+			timeTicks = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();//DateTime.Now.Ticks;
 			missionProperties = new MissionProperties();
 
 			mapSections = new();

@@ -50,6 +50,7 @@ namespace Imperial_Commander_Editor
 			_repositionInstructions = "";
 			_useGenericMugshot = false;
 			_useResetOnRedeployment = false;
+			_modification = "";
 			_thumbnail = Utils.thumbnailData.NoneThumb;
 
 			DeploymentCard card = Utils.enemyData.First( x => x.id == _deploymentGroup );
